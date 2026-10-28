@@ -792,6 +792,19 @@ void ServiceWorker::connectToRouter(const Location& location)
 
     LOG(INFO) << "Connecting to router from" << location;
     router_manager_ = new RouterManager(std::make_unique<DatabaseConfigProvider>(Database::instance()), this);
+    connect(router_manager_, &RouterManager::sig_checkUserSessions, this,
+            [this](const QString& username, bool* result)
+            {
+                *result = false;
+                for (auto* client : clients_)
+                {
+                    if (client && client->userName() == username.toStdString())
+                    {
+                        *result = true;
+                        break;
+                    }
+                }
+            }, Qt::DirectConnection);
 
     connect(router_manager_, &RouterManager::sig_routerStateChanged, user_session_, &UserSession::onRouterStateChanged);
     connect(router_manager_, &RouterManager::sig_credentialsChanged, user_session_, &UserSession::onUpdateCredentials);

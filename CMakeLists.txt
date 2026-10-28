@@ -39,7 +39,7 @@ set(ASPIA_VERSION_PATCH 2)
 # hand with every release. Unlike the number of the commits it does not depend on the depth of
 # the clone, so the packages built from the same sources carry the same number on every
 # machine.
-set(ASPIA_VERSION_BUILD 13)
+set(ASPIA_VERSION_BUILD 14)
 
 # A mark of a build that is not the released one: the version on the screen reads "3.1.1-mod" so
 # that this executable is never mistaken for the stock binary. It is only a suffix of the printed

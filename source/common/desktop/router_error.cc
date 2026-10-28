@@ -53,6 +53,12 @@ QString routerErrorText(std::string_view error_code)
     else if (error_code == proto::router::kErrorKeyPoolEmpty)
         message = QT_TRANSLATE_NOOP(
             "RouterError", "There are no relays available or the key pool is empty.");
+    else if (error_code == "user_has_sessions")
+        message = QT_TRANSLATE_NOOP(
+            "RouterError", "The user has active sessions. Disconnect them first or force the change.");
+    else if (error_code == "last_enabled_user")
+        message = QT_TRANSLATE_NOOP(
+            "RouterError", "Cannot remove or disable the last enabled user.");
     else if (error_code == proto::router::kErrorTooManyRequests)
         message = QT_TRANSLATE_NOOP("RouterError", "Too many connection requests. Try again later.");
     else

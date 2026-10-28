@@ -21,6 +21,7 @@
 
 #include <QQueue>
 
+#include <functional>
 #include <optional>
 
 #include "base/build_config.h"
@@ -94,7 +95,6 @@ public slots:
     void onNewOneTimePassword();
     void onUserSessionAttached();
     void onTelemetryChanged();
-    void setHasActiveSessionsCallback(std::function<bool(const QString&)> callback);
 
 signals:
     void sig_routerStateChanged(const proto::user::RouterState& state);
@@ -102,6 +102,9 @@ signals:
     void sig_clientConnected();
     void sig_removeHost();
     void sig_checkUpdates();
+    // Synchronous check (DirectConnection): returns whether any client session is open under
+    // the given user name. Used by the host-config applicator's active-session guard.
+    void sig_checkUserSessions(const QString& username, bool* result);
 
 private slots:
     void onTcpReady();
@@ -143,7 +146,6 @@ private:
 
     bool telemetry_outdated_ = false;
     TimePoint next_telemetry_time_ = TimePoint::min();
-    std::function<bool(const QString&)> has_active_sessions_;
     int service_start_count_ = 0;
     int successful_login_count_ = 0;
     int failed_login_count_ = 0;

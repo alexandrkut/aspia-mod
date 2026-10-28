@@ -35,11 +35,14 @@ public:
         QJsonObject diff;         // {key: {"old": ..., "new": ...}}
         bool restart_required = false;
         QString snapshot;         // JSON of the previous configuration (for rollback)
+        QString result;           // JSON payload for the router response (applied/diff/snapshot)
     };
 
     // Dispatches by command_name. Unknown command -> "invalid_request".
     // |has_active_sessions| is optional: if provided, user-targeting commands are refused when
     // the target user has live client sessions (unless params contains "force": true).
+    // |database| is optional: defaults to Database::instance() (production). Tests pass a
+    // temporary database.
     static Result apply(const std::string& command_name, const QJsonObject& params,
                        const std::string& initiator,
                        const std::function<bool(const QString&)>& has_active_sessions = nullptr);

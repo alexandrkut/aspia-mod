@@ -34,6 +34,7 @@
 #include "host/host_config_applier.h"
 #include "host/host_storage.h"
 #include "host/system_settings.h"
+#include "version.h"
 #include "proto/key_exchange.h"
 #include "proto/router_constants.h"
 #include "proto/router_host.h"
@@ -307,8 +308,18 @@ void RouterManager::onTcpMessageReceived(quint8 /* channel_id */, const QByteArr
             // Configuration command: apply and reply.
             const std::string params = command.params();
             const std::string initiator = "router";
+
+            // Active-session guard: refuse to modify/remove a user that has live client
+            // sessions, unless the command carries "force": true.
+            auto has_active_sessions = [this](const QString& username) -> bool {
+                bool result = false;
+                emit sig_checkUserSessions(username, &result);
+                return result;
+            };
+
             HostConfigApplier::Result result = HostConfigApplier::apply(
-                command_name, QJsonDocument::fromJson(QByteArray::fromStdString(params)).object(), initiator);
+                command_name, QJsonDocument::fromJson(QByteArray::fromStdString(params)).object(), initiator,
+                has_active_sessions);
             sendHostConfigResult(command_name, result.error_code.toStdString(), result.result.toStdString());
         }
     }
@@ -541,6 +552,7 @@ void RouterManager::sendTelemetry()
 
     QJsonObject telemetry;
     telemetry.insert("version", proto::router::kTelemetryVersion);
+    telemetry.insert("version_string", ASPIA_VERSION_STRING);
     telemetry.insert("general", general);
     telemetry.insert("connects", connects);
     telemetry.insert("router", router);

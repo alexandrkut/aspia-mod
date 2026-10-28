@@ -162,6 +162,7 @@ list(APPEND SOURCE_HOST_TESTS
     database_unittest.cc
     host_storage_unittest.cc
     host_user_list_unittest.cc
+    host_config_applier_unittest.cc
     router_manager_unittest.cc
     scale_reducer_unittest.cc
     screen_capturer_helper_unittest.cc

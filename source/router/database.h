@@ -216,6 +216,10 @@ public:
     // Replaces the telemetry the host reported last.
     bool updateHostTelemetry(HostId host_id, std::string_view telemetry);
 
+    // Updates only the version string of a host (used to store the full version with build number
+    // and mod suffix received via telemetry). Returns false if the host is not found.
+    bool updateHostVersion(HostId host_id, std::string_view version);
+
     // Reads the telemetry the host reported last. Returns kErrorNotFound for an unknown host and
     // kErrorInternalError when the read failed.
     std::string_view hostTelemetry(HostId host_id, std::string* telemetry) const;

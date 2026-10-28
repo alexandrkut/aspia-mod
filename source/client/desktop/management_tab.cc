@@ -1278,6 +1278,21 @@ void ManagementTab::onHostContextMenu(const QPoint& pos, int column)
         menu->addAction(ui->action_host_telemetry);
     menu->addAction(ui->action_host_remove);
 
+    if (is_single)
+    {
+        QAction* action_config = menu->addAction(tr("Host update configuration..."));
+        connect(action_config, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostUpdateConfig();
+        });
+
+        QAction* action_users = menu->addAction(tr("Host users..."));
+        connect(action_users, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostUsers();
+        });
+    }
+
     if (!is_single)
     {
         menu->exec(pos);

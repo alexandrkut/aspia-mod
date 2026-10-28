@@ -53,6 +53,8 @@
 #include "client/desktop/management/drag_and_drop.h"
 #include "client/desktop/management/host_telemetry_dialog.h"
 #include "client/desktop/management/router_host_dialog.h"
+#include "client/desktop/management/router_host_config_dialog.h"
+#include "client/desktop/management/router_host_users_dialog.h"
 #include "client/desktop/management/ui_router_hosts_widget.h"
 #include "common/desktop/icon_text_button.h"
 #include "common/desktop/msg_box.h"
@@ -115,7 +117,7 @@ RouterHostsWidget::RouterHostsWidget(QWidget* parent)
     ui->tree_hosts->header()->resizeSection(model_->sectionOf(HostListModel::Column::COMPUTER_NAME), 110);
     ui->tree_hosts->header()->resizeSection(model_->sectionOf(HostListModel::Column::WORKSPACE), 135);
     ui->tree_hosts->header()->resizeSection(model_->sectionOf(HostListModel::Column::OS), 140);
-    ui->tree_hosts->header()->resizeSection(model_->sectionOf(HostListModel::Column::VERSION), 70);
+    ui->tree_hosts->header()->resizeSection(model_->sectionOf(HostListModel::Column::VERSION), 100);
     ui->tree_hosts->header()->resizeSection(model_->sectionOf(HostListModel::Column::ARCH), 90);
     ui->tree_hosts->header()->resizeSection(model_->sectionOf(HostListModel::Column::LAST_CONNECT), 150);
     ui->tree_hosts->header()->resizeSection(model_->sectionOf(HostListModel::Column::LAST_MODIFY), 150);
@@ -443,6 +445,40 @@ void RouterHostsWidget::onHostTelemetry()
 
     LOG(INFO) << "[ACTION] Host telemetry requested by user";
     AutoQPointer<HostTelemetryDialog> dialog(new HostTelemetryDialog(router_id_, host, this));
+    dialog->exec();
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostsWidget::onHostUpdateConfig()
+{
+    const QList<RouterHost> hosts = selectedHosts();
+    if (hosts.size() != 1)
+    {
+        LOG(INFO) << "No single selected host";
+        return;
+    }
+
+    const RouterHost& host = hosts.front();
+
+    LOG(INFO) << "[ACTION] Host update configuration requested by user";
+    AutoQPointer<RouterHostConfigDialog> dialog(new RouterHostConfigDialog(router_id_, host.host_id, this));
+    dialog->exec();
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostsWidget::onHostUsers()
+{
+    const QList<RouterHost> hosts = selectedHosts();
+    if (hosts.size() != 1)
+    {
+        LOG(INFO) << "No single selected host";
+        return;
+    }
+
+    const RouterHost& host = hosts.front();
+
+    LOG(INFO) << "[ACTION] Host users requested by user";
+    AutoQPointer<RouterHostUsersDialog> dialog(new RouterHostUsersDialog(router_id_, host.host_id, this));
     dialog->exec();
 }
 

@@ -75,6 +75,17 @@ HostConfigApplier::Result HostConfigApplier::apply(const std::string& command_na
         return result;
     }
 
+    // Fill the result payload for the router response if the specific method did not set it.
+    if (result.result.isEmpty())
+    {
+        if (!result.diff.isEmpty())
+            result.result = QString::fromUtf8(QJsonDocument(result.diff).toJson(QJsonDocument::Compact));
+        else if (!result.applied.isEmpty())
+            result.result = QString::fromUtf8(QJsonDocument(result.applied).toJson(QJsonDocument::Compact));
+        else if (!result.snapshot.isEmpty())
+            result.result = result.snapshot;
+    }
+
     audit(initiator, command_name, result);
     return result;
 }
@@ -716,10 +727,11 @@ HostConfigApplier::Result HostConfigApplier::applySetMisc(const QJsonObject& par
         return result;
     }
 
+    SystemSettings settings;
     if (params.contains("preferred_video_capturer"))
-        db.setPreferredVideoCapturer(static_cast<quint32>(params.value("preferred_video_capturer").toInteger()));
+        settings.setPreferredVideoCapturer(static_cast<quint32>(params.value("preferred_video_capturer").toInteger()));
     if (params.contains("application_shutdown_disabled"))
-        db.setApplicationShutdownDisabled(params.value("application_shutdown_disabled").toBool());
+        settings.setApplicationShutdownDisabled(params.value("application_shutdown_disabled").toBool());
 
     result.applied = params;
     result.error_code = kOk;
@@ -944,40 +956,3 @@ HostConfigApplier::Result HostConfigApplier::applyFullConfig(const QJsonObject& 
     return result;
 }
 
-//--------------------------------------------------------------------------------------------------
-HostConfigApplier::Result HostConfigApplier::apply(const std::string& command_name,
-                                                  const QJsonObject& params,
-                                                  const std::string& initiator)
-{
-    // dispatch (already written in the header .cc earlier — redefined here for completeness)
-    Result result;
-
-    if (command_name == "set_update_config")
-        result = applySetUpdateConfig(params, initiator);
-    else if (command_name == "add_user")
-        result = applyAddUser(params, initiator);
-    else if (command_name == "modify_user")
-        result = applyModifyUser(params, initiator);
-    else if (command_name == "remove_user")
-        result = applyRemoveUser(params, initiator);
-    else if (command_name == "get_host_users")
-        result = applyGetHostUsers(params, initiator);
-    else if (command_name == "set_access_config")
-        result = applySetAccessConfig(params, initiator);
-    else if (command_name == "set_onetime_config")
-        result = applySetOnetimeConfig(params, initiator);
-    else if (command_name == "replace_users")
-        result = applyReplaceUsers(params, initiator);
-    else if (command_name == "set_misc")
-        result = applySetMisc(params, initiator);
-    else if (command_name == "apply_full_config")
-        result = applyFullConfig(params, initiator);
-    else
-    {
-        result.error_code = kInvalidRequest;
-        return result;
-    }
-
-    audit(initiator, command_name, result);
-    return result;
-}
