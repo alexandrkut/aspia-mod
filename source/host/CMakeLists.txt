@@ -105,6 +105,8 @@ list(APPEND SOURCE_HOST_CORE
     file_agent.h
     file_client.cc
     file_client.h
+    host_config_applier.cc
+    host_config_applier.h
     host_constants.cc
     host_constants.h
     host_storage.cc

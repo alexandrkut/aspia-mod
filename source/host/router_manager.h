@@ -94,6 +94,7 @@ public slots:
     void onNewOneTimePassword();
     void onUserSessionAttached();
     void onTelemetryChanged();
+    void setHasActiveSessionsCallback(std::function<bool(const QString&)> callback);
 
 signals:
     void sig_routerStateChanged(const proto::user::RouterState& state);
@@ -115,6 +116,8 @@ private:
     void routerStateChanged(proto::user::RouterState::State state);
     void hostIdRequest();
     void sendTelemetry();
+    void sendHostConfigResult(const std::string& command_name, const std::string& error_code,
+                             const std::string& result);
     void readConnectionOffer(const proto::router::ConnectionOffer& offer);
     void renewOneTimePassword();
     User createOneTimeUser() const;
@@ -140,6 +143,7 @@ private:
 
     bool telemetry_outdated_ = false;
     TimePoint next_telemetry_time_ = TimePoint::min();
+    std::function<bool(const QString&)> has_active_sessions_;
     int service_start_count_ = 0;
     int successful_login_count_ = 0;
     int failed_login_count_ = 0;

@@ -120,6 +120,12 @@ public:
     void removeHost(HostId host_id, RouterCallback<proto::router::HostResult> callback);
     void approveHost(HostId host_id, RouterCallback<proto::router::HostResult> callback);
     void checkHostUpdates(HostId host_id, RouterCallback<proto::router::HostResult> callback);
+
+    // Sends a configuration command (name + JSON params) to the host |host_id| and delivers
+    // the host's reply through |callback|. The reply carries the error code and, on success,
+    // the JSON result (applied values, diff or a snapshot for rollback).
+    void setHostConfig(HostId host_id, const std::string& command_name, const std::string& params,
+                       RouterCallback<proto::router::HostResult> callback);
     void requestHostTelemetry(HostId host_id, RouterCallback<proto::router::HostTelemetryResult> callback);
 
     // A record that breaks the protocol bounds is answered with its error code without a request.

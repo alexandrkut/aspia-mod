@@ -188,6 +188,16 @@ void Host::sendUpdateCommand()
 }
 
 //--------------------------------------------------------------------------------------------------
+void Host::sendConfigCommand(const std::string& command_name, const std::string& params)
+{
+    proto::router::RouterToHost message;
+    proto::router::HostCommand* command = message.mutable_host_command();
+    command->set_command_name(command_name);
+    command->set_params(params);
+    sendMessage(0, serialize(message));
+}
+
+//--------------------------------------------------------------------------------------------------
 void Host::onTcpErrorOccurred(TcpChannel::ErrorCode error_code)
 {
     CLOG(INFO) << "Network error:" << error_code;
@@ -211,6 +221,10 @@ void Host::onTcpMessageReceived(quint8 /* channel_id */, const QByteArray& buffe
     else if (message.has_host_telemetry())
     {
         readHostTelemetry(message.host_telemetry(), Clock::now());
+    }
+    else if (message.has_host_config_result())
+    {
+        readHostConfigResult(message.host_config_result());
     }
     else
     {
@@ -337,4 +351,11 @@ void Host::readHostTelemetry(const proto::router::HostTelemetry& host_telemetry,
     }
 
     telemetry_ = telemetry;
+}
+
+//--------------------------------------------------------------------------------------------------
+void Host::readHostConfigResult(const proto::router::HostConfigResult& host_config_result)
+{
+    emit sig_hostConfigResult(host_config_result.command_name(), host_config_result.error_code(),
+                             host_config_result.result());
 }

@@ -31,6 +31,7 @@
 #include "base/peer/server_authenticator.h"
 #include "base/threading/worker.h"
 #include "host/database.h"
+#include "host/host_config_applier.h"
 #include "host/host_storage.h"
 #include "host/system_settings.h"
 #include "proto/key_exchange.h"
@@ -303,7 +304,12 @@ void RouterManager::onTcpMessageReceived(quint8 /* channel_id */, const QByteArr
         }
         else
         {
-            LOG(ERROR) << "Unknown host command:" << QString::fromStdString(command_name);
+            // Configuration command: apply and reply.
+            const std::string params = command.params();
+            const std::string initiator = "router";
+            HostConfigApplier::Result result = HostConfigApplier::apply(
+                command_name, QJsonDocument::fromJson(QByteArray::fromStdString(params)).object(), initiator);
+            sendHostConfigResult(command_name, result.error_code.toStdString(), result.result.toStdString());
         }
     }
     else
@@ -553,6 +559,21 @@ void RouterManager::sendTelemetry()
 
     telemetry_outdated_ = false;
     next_telemetry_time_ = Clock::now() + kTelemetryInterval;
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterManager::sendHostConfigResult(const std::string& command_name, const std::string& error_code,
+                                         const std::string& result)
+{
+    proto::router::HostToRouter message;
+    proto::router::HostConfigResult* config_result = message.mutable_host_config_result();
+    config_result->set_command_name(command_name);
+    config_result->set_error_code(error_code);
+    config_result->set_result(result);
+
+    tcp_channel_->send(0, serialize(message));
+    LOG(INFO) << "Sent host config result for" << QString::fromStdString(command_name)
+              << ":" << QString::fromStdString(error_code);
 }
 
 //--------------------------------------------------------------------------------------------------

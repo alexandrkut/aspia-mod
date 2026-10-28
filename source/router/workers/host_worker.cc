@@ -25,6 +25,7 @@
 #include "base/net/net_utils.h"
 #include "base/net/tcp_channel.h"
 #include "base/net/tcp_server.h"
+#include <QTimer>
 #include "proto/router.h"
 #include "proto/router_constants.h"
 #include "router/database.h"
@@ -84,6 +85,41 @@ void HostWorker::removeHost(HostId host_id, QObject* context, RemoveHostCallback
 void HostWorker::updateHost(HostId host_id, QObject* context, ResultCallback callback)
 {
     request(context, [this, host_id]() { return doUpdateHost(host_id); }, std::move(callback));
+}
+
+//--------------------------------------------------------------------------------------------------
+void HostWorker::setHostConfig(HostId host_id, const std::string& command_name, const std::string& params,
+                              QObject* context, HostConfigCallback callback)
+{
+    post([this, host_id, command_name, params, context, callback = std::move(callback)]()
+    {
+        Host* host = hostByHostId(host_id);
+        if (!host)
+        {
+            QMetaObject::invokeMethod(context, [callback]()
+            {
+                callback(proto::router::kErrorHostOffline, "");
+            }, Qt::QueuedConnection);
+            return;
+        }
+
+        // Store the pending callback keyed by host id. Commands are serialized per host, so a
+        // single pending slot is enough.
+        pending_config_callbacks_[host_id] = {QPointer<QObject>(context), std::move(callback)};
+
+        // Arm a 15-second timeout in case the host never answers.
+        QTimer::singleShot(15000, this, [this, host_id]()
+        {
+            auto it = pending_config_callbacks_.find(host_id);
+            if (it == pending_config_callbacks_.end())
+                return;
+            auto& [ctx, cb] = it->second;
+            QMetaObject::invokeMethod(ctx, [cb]() { cb("timeout", ""); }, Qt::QueuedConnection);
+            pending_config_callbacks_.erase(it);
+        });
+
+        host->sendConfigCommand(command_name, params);
+    });
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -231,6 +267,12 @@ void HostWorker::onNewHostConnection()
         connect(host, &Host::sig_hostIdAssigned, this, &HostWorker::onHostIdAssigned);
         connect(host, &Host::sig_finished, this, &HostWorker::onHostFinished);
         connect(host, &Host::sig_notifyChanged, this, &HostWorker::sig_notify);
+        connect(host, &Host::sig_hostConfigResult, this,
+                [this, host](const std::string& command_name, const std::string& error_code,
+                             const std::string& result)
+        {
+            onHostConfigResult(host, command_name, error_code, result);
+        });
         host->start();
     }
 }
@@ -432,6 +474,26 @@ bool HostWorker::doUpdateHost(HostId host_id)
 
     host->sendUpdateCommand();
     return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void HostWorker::onHostConfigResult(Host* host, const std::string& /*command_name*/,
+                                    const std::string& error_code, const std::string& result)
+{
+    if (!host)
+        return;
+
+    auto it = pending_config_callbacks_.find(host->hostId());
+    if (it == pending_config_callbacks_.end())
+        return;
+
+    auto& [context, callback] = it->second;
+    QMetaObject::invokeMethod(context, [callback, error_code, result]()
+    {
+        callback(error_code, result);
+    }, Qt::QueuedConnection);
+
+    pending_config_callbacks_.erase(it);
 }
 
 //--------------------------------------------------------------------------------------------------

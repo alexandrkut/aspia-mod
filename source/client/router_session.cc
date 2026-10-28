@@ -389,6 +389,20 @@ void RouterSession::checkHostUpdates(HostId host_id, RouterCallback<proto::route
 }
 
 //--------------------------------------------------------------------------------------------------
+void RouterSession::setHostConfig(HostId host_id, const std::string& command_name, const std::string& params,
+                                 RouterCallback<proto::router::HostResult> callback)
+{
+    proto::router::AdminToRouter message;
+    auto* request = message.mutable_host_request();
+    request->set_request_id(rpc_.nextRequestId());
+    request->set_command_name(command_name);
+    request->mutable_host()->set_host_id(host_id);
+    request->set_params(params);
+    rpc_.registerPending(request, std::move(callback));
+    send(proto::router::CHANNEL_ID_ADMIN, message);
+}
+
+//--------------------------------------------------------------------------------------------------
 void RouterSession::requestHostTelemetry(
     HostId host_id, RouterCallback<proto::router::HostTelemetryResult> callback)
 {

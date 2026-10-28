@@ -78,6 +78,18 @@ public:
     // |host_id| is not connected.
     void updateHost(HostId host_id, QObject* context, ResultCallback callback);
 
+    // Sends a configuration command (name + JSON params) to the online host |host_id| and
+    // delivers its reply through |callback|. The callback receives "host_offline" if the host
+    // is not connected, "timeout" if it does not answer within 15 seconds, or the error code
+    // and the JSON result reported by the host.
+    using HostConfigCallback = std::function<void(std::string_view error_code, const std::string& result)>;
+    void setHostConfig(HostId host_id, const std::string& command_name, const std::string& params,
+                       QObject* context, HostConfigCallback callback);
+
+    // Called when a host answers a configuration command.
+    void onHostConfigResult(Host* host, const std::string& command_name, const std::string& error_code,
+                            const std::string& result);
+
     // Approves the temporary host |host_id|: persists its key and drops the temporary connection
     // so the host reconnects and receives its permanent id.
     void approveHost(HostId host_id, QObject* context, ErrorCodeCallback callback);
@@ -89,6 +101,10 @@ public:
 signals:
     // Emitted from the worker thread when host state changes; |flags| are ClientWorker NOTIFY_* bits.
     void sig_notify(quint32 flags);
+
+    // Emitted when a host answers a configuration command. |host| identifies the session.
+    void sig_hostConfigResult(Host* host, const std::string& command_name, const std::string& error_code,
+                              const std::string& result);
 
 protected:
     // Worker implementation.
@@ -126,6 +142,9 @@ private:
     // When the queue of unacknowledged removals is swept next. Starts at the epoch, so the first
     // tick after the router comes up does it.
     TimePoint next_removal_sweep_;
+
+    // Pending configuration-command callbacks, keyed by host id. One command at a time per host.
+    std::unordered_map<HostId, std::pair<QPointer<QObject>, HostConfigCallback>> pending_config_callbacks_;
 
     friend class HostWorkerTestPeer;
     Q_DISABLE_COPY_MOVE(HostWorker)
