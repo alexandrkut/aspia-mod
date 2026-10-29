@@ -18,6 +18,9 @@
 
 #include "router/client_admin.h"
 
+#include <QJsonDocument>
+#include <QJsonObject>
+
 #include "base/core_application.h"
 #include "base/logging.h"
 #include "base/serialization.h"
@@ -269,10 +272,34 @@ void ClientAdmin::doHostRequest(const proto::router::HostRequest& request)
              command_name == proto::router::kCommandHostSetMisc ||
              command_name == proto::router::kCommandHostApplyFullConfig)
     {
-        const std::string params = request.params();
+        // The router is the authority on who ordered the change: it stamps the params with
+        // the name of the authenticated admin session. A client-supplied "initiator" is
+        // replaced, never trusted.
+        QJsonObject params_obj;
+        const QJsonDocument params_doc =
+            QJsonDocument::fromJson(QByteArray::fromStdString(request.params()));
+        if (params_doc.isObject())
+            params_obj = params_doc.object();
+        params_obj["initiator"] = QString::fromStdString(userName());
+        const std::string params = QString::fromUtf8(
+            QJsonDocument(params_obj).toJson(QJsonDocument::Compact)).toStdString();
+
         host_worker->setHostConfig(host_id, command_name, params, this,
-            [this, send_result](std::string_view error_code, const std::string& result)
+            [this, host_id, command_name, send_result](
+                std::string_view error_code, const std::string& result)
             {
+                if (error_code == proto::router::kErrorOk)
+                {
+                    CLOG(INFO) << "Host" << host_id << "config command '"
+                               << QString::fromStdString(command_name)
+                               << "' by" << userName() << ": ok";
+                }
+                else
+                {
+                    CLOG(WARNING) << "Host" << host_id << "config command '"
+                                  << QString::fromStdString(command_name)
+                                  << "' by" << userName() << " failed:" << error_code;
+                }
                 send_result(error_code, result);
             });
     }

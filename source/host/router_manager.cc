@@ -307,7 +307,14 @@ void RouterManager::onTcpMessageReceived(quint8 /* channel_id */, const QByteArr
         {
             // Configuration command: apply and reply.
             const std::string params = command.params();
-            const std::string initiator = "router";
+
+            // The router stamps the params with the name of the admin session that ordered
+            // the change; fall back to "router" for routers that predate the stamp.
+            const QJsonObject params_obj =
+                QJsonDocument::fromJson(QByteArray::fromStdString(params)).object();
+            const QString initiator_q = params_obj.value("initiator").toString();
+            const std::string initiator =
+                initiator_q.isEmpty() ? "router" : initiator_q.toStdString();
 
             // Active-session guard: refuse to modify/remove a user that has live client
             // sessions, unless the command carries "force": true.
