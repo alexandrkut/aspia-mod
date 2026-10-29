@@ -39,6 +39,14 @@ public:
     RouterHostUsersDialog(qint64 router_id, qint64 host_id, QWidget* parent);
     ~RouterHostUsersDialog() final;
 
+    struct UserInfo {
+        qint64 entry_id = 0;
+        QString name;
+        QString group;
+        quint32 sessions = 0;
+        quint32 flags = 0;
+    };
+
 private slots:
     void onAdd();
     void onEdit();
@@ -47,22 +55,12 @@ private slots:
 
 private:
     void fetchUsers();
-    void addUser(const QString& name, const QString& password, quint32 sessions);
-    void editUser(int index, const QString& name, const QString& password, quint32 sessions);
     void removeUser(int index);
     void refreshList();
     void showResult(const proto::router::HostResult& result, const QString& action);
 
     qint64 router_id_ = 0;
     qint64 host_id_ = 0;
-
-    struct UserInfo {
-        qint64 entry_id = 0;
-        QString name;
-        QString group;
-        quint32 sessions = 0;
-        quint32 flags = 0;
-    };
 
     QList<UserInfo> users_;
     QListWidget* list_ = nullptr;

@@ -14,7 +14,6 @@
 #include "client/desktop/management/router_host_users_dialog.h"
 
 #include <QHBoxLayout>
-#include <QInputDialog>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -24,11 +23,14 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 
+#include "base/auto_qpointer.h"
 #include "base/logging.h"
 #include "base/peer/router_user.h"
+#include "client/desktop/management/router_host_user_dialog.h"
 #include "client/router_controller.h"
 #include "client/router_session.h"
 #include "common/desktop/msg_box.h"
+#include "proto/peer.h"
 
 namespace {
 
@@ -43,19 +45,12 @@ QString sessionsToString(quint32 mask)
     return parts.join(",");
 }
 
-quint32 stringToSessions(const QString& s)
+QStringList existingNames(const QList<RouterHostUsersDialog::UserInfo>& users)
 {
-    quint32 mask = 0;
-    const QStringList parts = s.split(',', Qt::SkipEmptyParts);
-    for (const QString& p : parts)
-    {
-        if (p == "D") mask |= 1;
-        else if (p == "F") mask |= 4;
-        else if (p == "I") mask |= 8;
-        else if (p == "C") mask |= 16;
-        else if (p == "T") mask |= 32;
-    }
-    return mask;
+    QStringList names;
+    for (const auto& user : users)
+        names.append(user.name);
+    return names;
 }
 
 } // namespace
@@ -157,39 +152,21 @@ void RouterHostUsersDialog::onUsersReceived(const proto::router::HostResult& res
 //--------------------------------------------------------------------------------------------------
 void RouterHostUsersDialog::onAdd()
 {
-    bool ok = false;
-    const QString name = QInputDialog::getText(this, tr("Add user"), tr("User name:"), QLineEdit::Normal, "", &ok);
-    if (!ok || name.trimmed().isEmpty())
+    AutoQPointer<RouterHostUserDialog> dialog(new RouterHostUserDialog(
+        0, QString(), static_cast<quint32>(proto::peer::SESSION_TYPE_ALL),
+        User::ENABLED, existingNames(users_), this));
+    if (dialog->exec() != QDialog::Accepted)
         return;
 
-    const QString password = QInputDialog::getText(this, tr("Add user"), tr("Password:"), QLineEdit::Password, "", &ok);
-    if (!ok || password.isEmpty())
-        return;
-
-    const QString sessions_str = QInputDialog::getText(this, tr("Add user"),
-        tr("Sessions (D=Desktop, F=File, I=Info, C=Chat, T=Terminal):"), QLineEdit::Normal, "D,F,I,C,T", &ok);
-    if (!ok)
-        return;
-
-    quint32 sessions = stringToSessions(sessions_str);
-    if (sessions == 0)
-        sessions = 63; // SESSION_TYPE_ALL
-
-    addUser(name.trimmed(), password, sessions);
-}
-
-//--------------------------------------------------------------------------------------------------
-void RouterHostUsersDialog::addUser(const QString& name, const QString& password, quint32 sessions)
-{
-    RouterUser user = RouterUser::create(name, SecureString(password));
+    RouterUser user = RouterUser::create(dialog->userName(), dialog->password());
     if (!user.isValid())
     {
         MsgBox::warning(this, tr("Failed to create user credentials."));
         return;
     }
 
-    user.sessions = sessions;
-    user.flags = User::ENABLED;
+    user.sessions = dialog->sessions();
+    user.flags = dialog->flags();
 
     QJsonObject params;
     params["name"] = user.name;
@@ -227,35 +204,20 @@ void RouterHostUsersDialog::onEdit()
 
     const UserInfo& info = users_[idx];
 
-    bool ok = false;
-    const QString name = QInputDialog::getText(this, tr("Edit user"), tr("User name:"),
-        QLineEdit::Normal, info.name, &ok);
-    if (!ok || name.trimmed().isEmpty())
+    AutoQPointer<RouterHostUserDialog> dialog(new RouterHostUserDialog(
+        info.entry_id, info.name, info.sessions, info.flags, existingNames(users_), this));
+    if (dialog->exec() != QDialog::Accepted)
         return;
-
-    const QString password = QInputDialog::getText(this, tr("Edit user"),
-        tr("New password (empty = keep current):"), QLineEdit::Password, "", &ok);
-    if (!ok)
-        return;
-
-    const QString sessions_str = QInputDialog::getText(this, tr("Edit user"),
-        tr("Sessions (D=Desktop, F=File, I=Info, C=Chat, T=Terminal):"),
-        QLineEdit::Normal, sessionsToString(info.sessions), &ok);
-    if (!ok)
-        return;
-
-    quint32 sessions = stringToSessions(sessions_str);
-    if (sessions == 0)
-        sessions = info.sessions;
 
     QJsonObject params;
     params["entry_id"] = info.entry_id;
-    params["name"] = name.trimmed();
-    params["sessions"] = static_cast<qint64>(sessions);
+    params["name"] = dialog->userName();
+    params["sessions"] = static_cast<qint64>(dialog->sessions());
+    params["flags"] = static_cast<qint64>(dialog->flags());
 
-    if (!password.isEmpty())
+    if (dialog->passwordChanged())
     {
-        RouterUser user = RouterUser::create(name.trimmed(), SecureString(password));
+        RouterUser user = RouterUser::create(dialog->userName(), dialog->password());
         if (!user.isValid())
         {
             MsgBox::warning(this, tr("Failed to create user credentials."));
