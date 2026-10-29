@@ -32,6 +32,7 @@
 #include <QKeyEvent>
 #include <QLabel>
 #include <QLineEdit>
+#include <QFileDialog>
 #include <QMenu>
 #include <QMouseEvent>
 #include <QPushButton>
@@ -480,6 +481,65 @@ void RouterHostsWidget::onHostUsers()
     LOG(INFO) << "[ACTION] Host users requested by user";
     AutoQPointer<RouterHostUsersDialog> dialog(new RouterHostUsersDialog(router_id_, host.host_id, this));
     dialog->exec();
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostsWidget::onHostFullConfig()
+{
+    const QList<RouterHost> hosts = selectedHosts();
+    if (hosts.size() != 1)
+    {
+        LOG(INFO) << "No single selected host";
+        return;
+    }
+
+    const RouterHost& host = hosts.front();
+
+    QString file_name = QFileDialog::getOpenFileName(this, tr("Open host configuration file"),
+                                                     QString(), tr("JSON files (*.json);;All files (*)"));
+    if (file_name.isEmpty())
+        return;
+
+    QFile file(file_name);
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        MsgBox::warning(this, tr("Cannot open file: %1").arg(file.errorString()));
+        return;
+    }
+
+    const QByteArray data = file.readAll();
+    file.close();
+
+    QJsonParseError err;
+    QJsonDocument doc = QJsonDocument::fromJson(data, &err);
+    if (err.error != QJsonParseError::NoError || !doc.isObject())
+    {
+        MsgBox::warning(this, tr("Invalid JSON: %1").arg(err.errorString()));
+        return;
+    }
+
+    const QString json = QString::fromUtf8(doc.toJson(QJsonDocument::Compact));
+    RouterSession* session = RouterController::session(router_id_);
+    if (!session)
+    {
+        MsgBox::warning(this, tr("No session to router."));
+        return;
+    }
+
+    QJsonObject params;
+    params["config_json"] = json;
+    params["keep_local"] = QJsonArray();
+    params["dry_run"] = false;
+
+    const QString params_json = QString::fromUtf8(QJsonDocument(params).toJson(QJsonDocument::Compact));
+    session->setHostConfig(host.host_id, "apply_full_config", params_json.toStdString(),
+                          {this, [this](const proto::router::HostResult& result)
+                          {
+                              if (result.error_code() == proto::router::kErrorOk)
+                                  MsgBox::information(this, tr("Configuration applied successfully."));
+                              else
+                                  MsgBox::warning(this, tr("Failed to apply: %1").arg(QString::fromStdString(result.error_code())));
+                          }});
 }
 
 //--------------------------------------------------------------------------------------------------

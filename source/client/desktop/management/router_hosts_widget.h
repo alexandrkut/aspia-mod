@@ -79,6 +79,7 @@ public slots:
     void onHostTelemetry();
     void onHostUpdateConfig();
     void onHostUsers();
+    void onHostFullConfig();
 
 signals:
     void sig_currentChanged();

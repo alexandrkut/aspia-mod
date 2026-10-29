@@ -1291,6 +1291,12 @@ void ManagementTab::onHostContextMenu(const QPoint& pos, int column)
         {
             router_hosts_widget_->onHostUsers();
         });
+
+        QAction* action_full_config = menu->addAction(tr("Host full configuration (from file)..."));
+        connect(action_full_config, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostFullConfig();
+        });
     }
 
     if (!is_single)
