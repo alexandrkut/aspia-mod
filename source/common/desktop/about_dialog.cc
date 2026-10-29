@@ -45,7 +45,7 @@ const char kHomeLink[] = "https://aspia.org";
 const char kGitHubLink[] = "https://github.com/dchapyshev/aspia";
 
 // The page of this fork, where the changes below are described and the sources are.
-const char kModificationsLink[] = "https://github.com/alexandrkut/aspia";
+const char kModificationsLink[] = "https://github.com/alexandrkut/aspia-mod";
 
 const char* kDevelopers[] = { "Dmitry Chapyshev (dmitry@aspia.ru)" };
 
@@ -205,9 +205,9 @@ AboutDialog::AboutDialog(const QString& application_name, const QStringList& mod
 #if defined(GIT_CURRENT_BRANCH) && defined(GIT_COMMIT_HASH)
     service_html += "<p><b>" + tr("Build Information") + "</b><br>"
         + QString("&bull; %1<br>").arg(tr("Git branch: %1")
-            .arg(QString("<a href='%1/tree/%2'>%2</a>").arg(kGitHubLink, GIT_CURRENT_BRANCH)))
+            .arg(QString("<a href='%1/tree/%2'>%2</a>").arg(kModificationsLink, GIT_CURRENT_BRANCH)))
         + QString("&bull; %1").arg(tr("Git commit: %1")
-            .arg(QString("<a href='%1/commit/%2'>%2</a>").arg(kGitHubLink, GIT_COMMIT_HASH)))
+            .arg(QString("<a href='%1/commit/%2'>%2</a>").arg(kModificationsLink, GIT_COMMIT_HASH)))
         + "</p>";
 #endif
 

@@ -892,7 +892,8 @@ void HostWindow::onAbout()
     // router are of no use to the person who uses the host.
     const QStringList modifications =
     {
-        tr("The ability to show several monitors at once")
+        tr("The ability to show several monitors at once"),
+        tr("Remote management of settings and users by the router administrator")
     };
 
     AutoQPointer<AboutDialog> dialog(new AboutDialog(tr("Aspia Host"), modifications, this));

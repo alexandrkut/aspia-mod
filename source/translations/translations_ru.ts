@@ -4090,8 +4090,8 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../host/ui/host_window.ui" line="26"/>
         <location filename="../host/ui/host_window.cc" line="645"/>
-        <location filename="../host/ui/host_window.cc" line="898"/>
-        <location filename="../host/ui/host_window.cc" line="1176"/>
+        <location filename="../host/ui/host_window.cc" line="899"/>
+        <location filename="../host/ui/host_window.cc" line="1177"/>
         <source>Aspia Host</source>
         <translation>Хост Aspia</translation>
     </message>
@@ -4107,7 +4107,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="198"/>
-        <location filename="../host/ui/host_window.cc" line="1128"/>
+        <location filename="../host/ui/host_window.cc" line="1129"/>
         <source>Router is disabled</source>
         <translation>Маршрутизатор отключен</translation>
     </message>
@@ -4220,7 +4220,7 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../host/ui/host_window.cc" line="181"/>
         <location filename="../host/ui/host_window.cc" line="645"/>
-        <location filename="../host/ui/host_window.cc" line="1176"/>
+        <location filename="../host/ui/host_window.cc" line="1177"/>
         <source>Aspia Quick Support</source>
         <translation>Быстрая поддержка Aspia</translation>
     </message>
@@ -4251,47 +4251,52 @@ Credentials replaced: %2</source>
         <translation>Возможность отображения нескольких мониторов одновременно</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="909"/>
+        <location filename="../host/ui/host_window.cc" line="896"/>
+        <source>Remote management of settings and users by the router administrator</source>
+        <translation>Удалённое управление настройками и пользователями администратором роутера</translation>
+    </message>
+    <message>
+        <location filename="../host/ui/host_window.cc" line="910"/>
         <source>Aspia Host will be removed from this computer. The settings of the host will be kept. Do you really want to uninstall the application?</source>
         <translation>Хост Aspia будет удален с этого компьютера. Настройки хоста будут сохранены. Вы действительно хотите удалить приложение?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="921"/>
+        <location filename="../host/ui/host_window.cc" line="922"/>
         <source>Unable to uninstall the application.</source>
         <translation>Не удалось удалить приложение.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="948"/>
+        <location filename="../host/ui/host_window.cc" line="949"/>
         <source>If you exit from Aspia, it will not be possible to connect to this computer until you turn on the computer or Aspia again manually. Do you really want to exit the application?</source>
         <translation>Если вы выйдете из Aspia, то вы не сможете подключиться к этому компьютеру пока вы снова не включите компьютер или Aspia вручную. Вы действительно хотите выйти из приложения?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1120"/>
+        <location filename="../host/ui/host_window.cc" line="1121"/>
         <source>Not connected to service</source>
         <translation>Нет подключения к службе</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1133"/>
+        <location filename="../host/ui/host_window.cc" line="1134"/>
         <source>Connecting to router...</source>
         <translation>Подключение к маршрутизатору...</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1138"/>
+        <location filename="../host/ui/host_window.cc" line="1139"/>
         <source>Connected to router</source>
         <translation>Подключено к маршрутизатору</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1143"/>
+        <location filename="../host/ui/host_window.cc" line="1144"/>
         <source>Connection error</source>
         <translation>Ошибка подключения</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1221"/>
+        <location filename="../host/ui/host_window.cc" line="1222"/>
         <source>IP addresses:</source>
         <translation>IP-адреса:</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1177"/>
+        <location filename="../host/ui/host_window.cc" line="1178"/>
         <source>ID: %1</source>
         <translation></translation>
     </message>
@@ -5004,7 +5009,7 @@ Credentials imported: %5</source>
     </message>
     <message>
         <location filename="../client/desktop/main_window.ui" line="20"/>
-        <location filename="../client/desktop/main_window.cc" line="1005"/>
+        <location filename="../client/desktop/main_window.cc" line="1009"/>
         <source>Aspia Client</source>
         <translation>Клиент Aspia</translation>
     </message>
@@ -5139,22 +5144,42 @@ Credentials imported: %5</source>
         <translation>Значок экрана со всеми мониторами сразу</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1101"/>
+        <location filename="../client/desktop/main_window.cc" line="1003"/>
+        <source>Remote management of host users and update settings</source>
+        <translation>Удалённое управление пользователями и обновлениями хоста</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1004"/>
+        <source>Bulk operations on multiple hosts at once</source>
+        <translation>Массовые операции на группе хостов</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1005"/>
+        <source>Full host configuration from a file</source>
+        <translation>Полный конфиг хоста из файла</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1006"/>
+        <source>The full version with the build number in the host list</source>
+        <translation>Полная версия с номером сборки в списке хостов</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1105"/>
         <source>Connection by ID is specified in the properties of the host, but the router is not configured. Check the parameters of the router in the properties of the host.</source>
         <translation>В свойствах хоста указано подключение по ID, но маршрутизатор не настроен. Проверьте параметры маршрутизатора в свойствах хоста.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1368"/>
+        <location filename="../client/desktop/main_window.cc" line="1372"/>
         <source>Unknown application</source>
         <translation>Неизвестное приложение</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1371"/>
+        <location filename="../client/desktop/main_window.cc" line="1375"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>MCP-коннектор. Подключено: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1372"/>
+        <location filename="../client/desktop/main_window.cc" line="1376"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - ИИ подключен</translation>
     </message>
