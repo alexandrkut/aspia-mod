@@ -1001,8 +1001,8 @@ void MainWindow::onAbout()
         tr("Connect to a host by its ID from the command line"),
         tr("The icon of the screen of all the monitors at once"),
         tr("Remote management of host users and update settings"),
-        tr("Bulk operations on multiple hosts at once"),
-        tr("Full host configuration from a file")
+        tr("Full host configuration from a file"),
+        tr("Bulk operations on multiple hosts at once")
     };
 
     AutoQPointer<AboutDialog> dialog(new AboutDialog(tr("Aspia Client"), modifications, this));
