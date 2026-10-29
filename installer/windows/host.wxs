@@ -125,7 +125,7 @@
 
     <CustomAction Id="ImportSettings" Execute="deferred" Impersonate="no" Return="ignore" FileKey="aspia_host.exe" ExeCommand="--import=&quot;[SourceDir]aspia-host.json&quot; --silent" />
     <InstallExecuteSequence>
-        <Custom Action="ImportSettings" After="InstallFiles">NOT Installed</Custom>
+        <Custom Action="ImportSettings" After="InstallFiles">NOT WIX_UPGRADE_DETECTED</Custom>
     </InstallExecuteSequence>
 
     <!-- UI description -->
