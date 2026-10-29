@@ -23,7 +23,6 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QMessageBox>
-#include <QSpinBox>
 #include <QUrl>
 #include <QVBoxLayout>
 
@@ -83,11 +82,12 @@ RouterHostConfigDialog::RouterHostConfigDialog(qint64 router_id, qint64 host_id,
     check_auto_update_ = new QCheckBox(tr("Auto-update enabled"), this);
     layout->addRow("", check_auto_update_);
 
-    spin_frequency_ = new QSpinBox(this);
-    spin_frequency_->setRange(1, 365);
-    spin_frequency_->setValue(7);
-    spin_frequency_->setSuffix(tr(" days"));
-    layout->addRow(tr("Check frequency:"), spin_frequency_);
+    combo_frequency_ = new QComboBox(this);
+    combo_frequency_->addItem(tr("Once a day"), 1);
+    combo_frequency_->addItem(tr("Once a week"), 7);
+    combo_frequency_->addItem(tr("Once a month"), 30);
+    combo_frequency_->setCurrentIndex(1);
+    layout->addRow(tr("Check frequency:"), combo_frequency_);
 
     label_status_ = new QLabel(tr("Loading current settings..."), this);
     layout->addRow("", label_status_);
@@ -141,7 +141,9 @@ void RouterHostConfigDialog::onTelemetryReceived(const proto::router::HostTeleme
     {
         edit_server_->setText(update.value("address").toString());
         check_auto_update_->setChecked(update.value("auto_update").toBool());
-        spin_frequency_->setValue(update.value("check_frequency").toInt(7));
+        const int frequency_index =
+            combo_frequency_->findData(update.value("check_frequency").toInt(7));
+        combo_frequency_->setCurrentIndex(frequency_index >= 0 ? frequency_index : 1);
         combo_channel_->setCurrentText(update.value("channel").toString("stable"));
         const QString key = update.value("public_key").toString();
         if (!key.isEmpty())
@@ -185,7 +187,7 @@ void RouterHostConfigDialog::onApply()
     params["update_public_key"] = edit_public_key_->text().trimmed();
     params["update_channel"] = combo_channel_->currentText();
     params["auto_update_enabled"] = check_auto_update_->isChecked();
-    params["update_check_frequency"] = spin_frequency_->value();
+    params["update_check_frequency"] = combo_frequency_->currentData().toInt();
 
     const QString json = QString::fromUtf8(QJsonDocument(params).toJson(QJsonDocument::Compact));
     session->setHostConfig(host_id_, "set_update_config", json.toStdString(),

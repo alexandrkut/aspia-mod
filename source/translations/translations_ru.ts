@@ -7008,54 +7008,64 @@ Credentials imported: %5</source>
 <context>
     <name>RouterHostBulkConfigDialog</name>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="54"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="53"/>
         <source>Update configuration on hosts</source>
         <translation>Настройка обновлений на хостах</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="66"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="65"/>
         <source>Update server:</source>
         <translation>Сервер обновлений:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="68"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="67"/>
         <source>https://... (empty = default)</source>
         <translation>https://... (пусто — по умолчанию)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="71"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="70"/>
         <source>Public key:</source>
         <translation>Публичный ключ:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="73"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="72"/>
         <source>32 bytes hex (empty = default)</source>
         <translation>32 байта hex (пусто — по умолчанию)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="76"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="75"/>
         <source>Channel:</source>
         <translation>Канал:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="83"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="82"/>
         <source>Auto-update:</source>
         <translation>Автообновление:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="84"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="83"/>
         <source>Enabled</source>
         <translation>Включено</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="87"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="86"/>
         <source>Check frequency:</source>
         <translation>Частота проверки:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="91"/>
-        <source> days</source>
-        <translation> дней</translation>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="88"/>
+        <source>Once a day</source>
+        <translation>Раз в день</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="89"/>
+        <source>Once a week</source>
+        <translation>Раз в неделю</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="90"/>
+        <source>Once a month</source>
+        <translation>Раз в месяц</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="95"/>
@@ -7224,44 +7234,54 @@ Credentials imported: %5</source>
 <context>
     <name>RouterHostConfigDialog</name>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="64"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="63"/>
         <source>Host update configuration</source>
         <translation>Настройка обновлений хоста</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="70"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="69"/>
         <source>https://... (empty = default)</source>
         <translation>https://... (пусто — по умолчанию)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="71"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="70"/>
         <source>Update server:</source>
         <translation>Сервер обновлений:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="74"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="73"/>
         <source>32 bytes hex (empty = default)</source>
         <translation>32 байта hex (пусто — по умолчанию)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="75"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="74"/>
         <source>Public key:</source>
         <translation>Публичный ключ:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="81"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="80"/>
         <source>Channel:</source>
         <translation>Канал:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="83"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="82"/>
         <source>Auto-update enabled</source>
         <translation>Включить автообновление</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="89"/>
-        <source> days</source>
-        <translation> дней</translation>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="86"/>
+        <source>Once a day</source>
+        <translation>Раз в день</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="87"/>
+        <source>Once a week</source>
+        <translation>Раз в неделю</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="88"/>
+        <source>Once a month</source>
+        <translation>Раз в месяц</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_config_dialog.cc" line="90"/>
@@ -7275,7 +7295,7 @@ Credentials imported: %5</source>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_config_dialog.cc" line="115"/>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="179"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="181"/>
         <source>No session to router.</source>
         <translation>Нет подключения к роутеру.</translation>
     </message>
@@ -7290,27 +7310,27 @@ Credentials imported: %5</source>
         <translation>Телеметрия — не JSON.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="151"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="153"/>
         <source>Current settings loaded.</source>
         <translation>Текущие настройки загружены.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="159"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="161"/>
         <source>Invalid server URL.</source>
         <translation>Некорректный адрес сервера.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="164"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="166"/>
         <source>Invalid public key (must be 32 bytes hex).</source>
         <translation>Некорректный публичный ключ (нужно 32 байта hex).</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="203"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="205"/>
         <source>Configuration applied successfully.</source>
         <translation>Настройки успешно применены.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="208"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="210"/>
         <source>Failed to apply: %1</source>
         <translation>Не удалось применить: %1</translation>
     </message>

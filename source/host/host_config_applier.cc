@@ -199,6 +199,13 @@ HostConfigApplier::Result HostConfigApplier::applySetUpdateConfig(const QJsonObj
     const bool auto_update = params.value("auto_update_enabled").toBool(settings.isAutoUpdateEnabled());
     const int freq = params.value("update_check_frequency").toInt(settings.updateCheckFrequency());
 
+    // The host offers only day/week/month; anything else is rejected.
+    if (freq != 1 && freq != 7 && freq != 30)
+    {
+        result.error_code = kInvalidData;
+        return result;
+    }
+
     if (!validateUrl(server))
     {
         result.error_code = kInvalidData;
@@ -931,7 +938,15 @@ HostConfigApplier::Result HostConfigApplier::applyFullConfig(const QJsonObject& 
         if (sys.contains("auto_update_enabled"))
             settings.setAutoUpdateEnabled(sys["auto_update_enabled"].toBool());
         if (sys.contains("update_check_frequency"))
-            settings.setUpdateCheckFrequency(sys["update_check_frequency"].toInt());
+        {
+            const int freq = sys["update_check_frequency"].toInt();
+            if (freq != 1 && freq != 7 && freq != 30)
+            {
+                result.error_code = kInvalidData;
+                return result;
+            }
+            settings.setUpdateCheckFrequency(freq);
+        }
         if (sys.contains("update_server"))
         {
             const QString server = sys["update_server"].toString().trimmed();

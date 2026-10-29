@@ -28,7 +28,7 @@ class HostTelemetryResult;
 class QComboBox;
 class QLineEdit;
 class QCheckBox;
-class QSpinBox;
+class QComboBox;
 class QLabel;
 
 class RouterHostConfigDialog final : public QDialog
@@ -55,7 +55,7 @@ private:
     QLineEdit* edit_public_key_ = nullptr;
     QComboBox* combo_channel_ = nullptr;
     QCheckBox* check_auto_update_ = nullptr;
-    QSpinBox* spin_frequency_ = nullptr;
+    QComboBox* combo_frequency_ = nullptr;
     QLabel* label_status_ = nullptr;
 };
 

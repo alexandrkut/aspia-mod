@@ -20,7 +20,7 @@ class QAbstractButton;
 class QCheckBox;
 class QComboBox;
 class QLineEdit;
-class QSpinBox;
+class QComboBox;
 
 // Bulk update-server settings: uniform values for the fleet, but every field has its own
 // "change" checkbox. Unchecked fields are omitted from the params, so hosts keep them.
@@ -59,7 +59,7 @@ private:
     QCheckBox* check_auto_ = nullptr;
     QCheckBox* edit_auto_ = nullptr;
     QCheckBox* check_frequency_ = nullptr;
-    QSpinBox* spin_frequency_ = nullptr;
+    QComboBox* combo_frequency_ = nullptr;
 
     Q_DISABLE_COPY_MOVE(RouterHostBulkConfigDialog)
 };

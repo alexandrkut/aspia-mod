@@ -20,7 +20,6 @@
 #include <QFormLayout>
 #include <QLabel>
 #include <QLineEdit>
-#include <QSpinBox>
 #include <QUrl>
 #include <QVBoxLayout>
 
@@ -85,11 +84,12 @@ RouterHostBulkConfigDialog::RouterHostBulkConfigDialog(const QString& fleet_summ
     form->addRow(check_auto_, edit_auto_);
 
     check_frequency_ = new QCheckBox(tr("Check frequency:"), this);
-    spin_frequency_ = new QSpinBox(this);
-    spin_frequency_->setRange(1, 365);
-    spin_frequency_->setValue(7);
-    spin_frequency_->setSuffix(tr(" days"));
-    form->addRow(check_frequency_, spin_frequency_);
+    combo_frequency_ = new QComboBox(this);
+    combo_frequency_->addItem(tr("Once a day"), 1);
+    combo_frequency_->addItem(tr("Once a week"), 7);
+    combo_frequency_->addItem(tr("Once a month"), 30);
+    combo_frequency_->setCurrentIndex(1);
+    form->addRow(check_frequency_, combo_frequency_);
 
     auto* hint = new QLabel(
         tr("Unchecked fields are left unchanged on every host. "
@@ -129,7 +129,7 @@ QString RouterHostBulkConfigDialog::channel() const { return combo_channel_->cur
 bool RouterHostBulkConfigDialog::changeAutoUpdate() const { return check_auto_->isChecked(); }
 bool RouterHostBulkConfigDialog::autoUpdate() const { return edit_auto_->isChecked(); }
 bool RouterHostBulkConfigDialog::changeFrequency() const { return check_frequency_->isChecked(); }
-int RouterHostBulkConfigDialog::frequency() const { return spin_frequency_->value(); }
+int RouterHostBulkConfigDialog::frequency() const { return combo_frequency_->currentData().toInt(); }
 
 //--------------------------------------------------------------------------------------------------
 void RouterHostBulkConfigDialog::onButtonClicked(QAbstractButton* button)
@@ -154,7 +154,7 @@ void RouterHostBulkConfigDialog::updateEditors()
     edit_key_->setEnabled(check_key_->isChecked());
     combo_channel_->setEnabled(check_channel_->isChecked());
     edit_auto_->setEnabled(check_auto_->isChecked());
-    spin_frequency_->setEnabled(check_frequency_->isChecked());
+    combo_frequency_->setEnabled(check_frequency_->isChecked());
 }
 
 //--------------------------------------------------------------------------------------------------
