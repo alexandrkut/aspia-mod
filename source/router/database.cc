@@ -1649,6 +1649,7 @@ bool Database::updateHostVersion(HostId host_id, std::string_view version)
 
     return db_.changes() > 0;
 }
+std::string_view Database::hostTelemetry(HostId host_id, std::string* telemetry) const
 {
     CHECK(telemetry);
 
