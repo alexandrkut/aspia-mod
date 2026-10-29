@@ -305,19 +305,7 @@ HostConfigApplier::Result HostConfigApplier::applyAddUser(const QJsonObject& par
     {
         result.error_code = kInvalidData;
         return result;
-    }","oldString">
-    const QByteArray salt = QByteArray::fromHex(salt_hex.toLatin1());
-    const QByteArray verifier = QByteArray::fromHex(verifier_hex.toLatin1());
-    if (salt.size() != 16 || verifier.size() != 256) // SRP verifier is 256 bytes for group 8192
-    {
-        result.error_code = kInvalidData;
-        return result;
     }
-    if (salt.toHex() != salt_hex.toLatin1() || verifier.toHex() != verifier_hex.toLatin1())
-    {
-        result.error_code = kInvalidData;
-        return result;
-    }","path":"C:\\Projects\\aspia-mod\\aspia\\source\\host\\host_config_applier.cc"}
 
     // Duplicate name check
     for (const User& u : db.userList())
@@ -484,30 +472,7 @@ HostConfigApplier::Result HostConfigApplier::applyModifyUser(const QJsonObject& 
             return result;
         }
         target.verifier = verifier;
-    }","oldString">
-    if (params.contains("salt"))
-    {
-        const QString salt_hex = params.value("salt").toString().trimmed().toLower();
-        const QByteArray salt = QByteArray::fromHex(salt_hex.toLatin1());
-        if (salt.size() != 16 || salt.toHex() != salt_hex.toLatin1())
-        {
-            result.error_code = kInvalidData;
-            return result;
-        }
-        target.salt = salt;
     }
-
-    if (params.contains("verifier"))
-    {
-        const QString ver_hex = params.value("verifier").toString().trimmed().toLower();
-        const QByteArray verifier = QByteArray::fromHex(ver_hex.toLatin1());
-        if (verifier.size() != 256 || verifier.toHex() != ver_hex.toLatin1())
-        {
-            result.error_code = kInvalidData;
-            return result;
-        }
-        target.verifier = verifier;
-    }","path":"C:\\Projects\\aspia-mod\\aspia\\source\\host\\host_config_applier.cc"}
 
     if (params.contains("sessions"))
     {
