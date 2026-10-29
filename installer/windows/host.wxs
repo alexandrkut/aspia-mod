@@ -16,7 +16,8 @@
 
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
 
-    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeErrorMessage)" Schedule="afterInstallExecuteAgain" AllowDowngrades="no" AllowSameVersionUpgrades="yes" Disallow="no" />
+    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeErrorMessage)" Schedule="afterInstallInitialize" AllowDowngrades="no" AllowSameVersionUpgrades="yes" Disallow="no" />
+    <Property Id="REINSTALLMODE" Value="amus" />
 
     <!-- Windows version checking -->
     <Condition Message="This application is only supported on Windows 7, Windows Server 2008 R2, or higher.">
@@ -124,10 +125,8 @@
     <WixVariable Id="WixUILicenseRtf" Value="resources/license.rtf" />
 
     <CustomAction Id="ImportSettings" Execute="deferred" Impersonate="no" Return="ignore" FileKey="aspia_host.exe" ExeCommand="--import=&quot;[SourceDir]aspia-host.json&quot; --silent" />
-    <CustomAction Id="StartHostService" Execute="deferred" Impersonate="no" Return="ignore" Directory="TARGETDIR" ExeCommand="cmd.exe /c net start aspia-host-service" />
     <InstallExecuteSequence>
         <Custom Action="ImportSettings" After="InstallFiles">NOT WIX_UPGRADE_DETECTED</Custom>
-        <Custom Action="StartHostService" After="InstallFinalize" />
     </InstallExecuteSequence>
 
     <!-- UI description -->
