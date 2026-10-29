@@ -288,17 +288,38 @@ void ClientAdmin::doHostRequest(const proto::router::HostRequest& request)
             [this, host_id, command_name, send_result](
                 std::string_view error_code, const std::string& result)
             {
+                // Reads (get_*) are routine, especially under bulk runs: keep them at TRACE
+                // so they don't flood the log. Mutations stay loud.
+                const bool is_read = command_name.rfind("get_", 0) == 0;
                 if (error_code == proto::router::kErrorOk)
                 {
-                    CLOG(INFO) << "Host" << host_id << "config command '"
-                               << QString::fromStdString(command_name)
-                               << "' by" << userName() << ": ok";
+                    if (is_read)
+                    {
+                        CLOG(TRACE) << "Host" << host_id << "config command '"
+                                    << QString::fromStdString(command_name)
+                                    << "' by" << userName() << ": ok";
+                    }
+                    else
+                    {
+                        CLOG(INFO) << "Host" << host_id << "config command '"
+                                   << QString::fromStdString(command_name)
+                                   << "' by" << userName() << ": ok";
+                    }
                 }
                 else
                 {
-                    CLOG(WARNING) << "Host" << host_id << "config command '"
-                                  << QString::fromStdString(command_name)
-                                  << "' by" << userName() << " failed:" << error_code;
+                    if (is_read)
+                    {
+                        CLOG(TRACE) << "Host" << host_id << "config command '"
+                                    << QString::fromStdString(command_name)
+                                    << "' by" << userName() << " failed:" << error_code;
+                    }
+                    else
+                    {
+                        CLOG(WARNING) << "Host" << host_id << "config command '"
+                                      << QString::fromStdString(command_name)
+                                      << "' by" << userName() << " failed:" << error_code;
+                    }
                 }
                 send_result(error_code, result);
             });

@@ -171,9 +171,19 @@ QJsonObject HostConfigApplier::snapshotConfig()
 //--------------------------------------------------------------------------------------------------
 void HostConfigApplier::audit(const std::string& initiator, const std::string& command, const Result& result)
 {
-    LOG(INFO) << "Host config command '" << command << "' from '" << initiator
-              << "': " << result.error_code.toStdString()
-              << (result.restart_required ? " (restart required)" : "");
+    // Reads (get_*) are routine, especially under bulk runs: keep them at TRACE
+    // so they don't flood the log. Mutations stay loud.
+    if (command.rfind("get_", 0) == 0)
+    {
+        LOG(TRACE) << "Host config command '" << command << "' from '" << initiator
+                   << "': " << result.error_code.toStdString();
+    }
+    else
+    {
+        LOG(INFO) << "Host config command '" << command << "' from '" << initiator
+                  << "': " << result.error_code.toStdString()
+                  << (result.restart_required ? " (restart required)" : "");
+    }
 }
 
 //--------------------------------------------------------------------------------------------------

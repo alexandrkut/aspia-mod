@@ -596,8 +596,16 @@ void RouterManager::sendHostConfigResult(const std::string& command_name, const 
     config_result->set_result(result);
 
     tcp_channel_->send(0, serialize(message));
-    LOG(INFO) << "Sent host config result for" << QString::fromStdString(command_name)
-              << ":" << QString::fromStdString(error_code);
+    if (command_name.rfind("get_", 0) == 0)
+    {
+        LOG(TRACE) << "Sent host config result for" << QString::fromStdString(command_name)
+                   << ":" << QString::fromStdString(error_code);
+    }
+    else
+    {
+        LOG(INFO) << "Sent host config result for" << QString::fromStdString(command_name)
+                  << ":" << QString::fromStdString(error_code);
+    }
 }
 
 //--------------------------------------------------------------------------------------------------
