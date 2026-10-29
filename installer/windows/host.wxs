@@ -124,8 +124,10 @@
     <WixVariable Id="WixUILicenseRtf" Value="resources/license.rtf" />
 
     <CustomAction Id="ImportSettings" Execute="deferred" Impersonate="no" Return="ignore" FileKey="aspia_host.exe" ExeCommand="--import=&quot;[SourceDir]aspia-host.json&quot; --silent" />
+    <CustomAction Id="StartHostService" Execute="deferred" Impersonate="no" Return="ignore" Directory="TARGETDIR" ExeCommand="cmd.exe /c net start aspia-host-service" />
     <InstallExecuteSequence>
         <Custom Action="ImportSettings" After="InstallFiles">NOT WIX_UPGRADE_DETECTED</Custom>
+        <Custom Action="StartHostService" After="InstallFinalize" />
     </InstallExecuteSequence>
 
     <!-- UI description -->
