@@ -286,7 +286,7 @@ HostConfigApplier::Result HostConfigApplier::applyAddUser(const QJsonObject& par
     }
     const QByteArray salt = QByteArray::fromHex(salt_hex.toLatin1());
     const QByteArray verifier = QByteArray::fromHex(verifier_hex.toLatin1());
-    if (salt.size() != 16 || verifier.size() != 256) // SRP verifier is 256 bytes for group 8192
+    if (salt.size() != 64 || verifier.isEmpty() || verifier.size() > 1024) // salt is 64 bytes; verifier size depends on group
     {
         result.error_code = kInvalidData;
         return result;
@@ -296,6 +296,26 @@ HostConfigApplier::Result HostConfigApplier::applyAddUser(const QJsonObject& par
         result.error_code = kInvalidData;
         return result;
     }
+
+    // Verify the verifier is valid for the chosen group.
+    std::optional<SrpMath::NgPair> ng = SrpMath::pairByGroup(group);
+    if (!ng.has_value() || !SrpMath::verify_v(BigNum::fromByteArray(verifier), BigNum::fromStdString(ng->first)))
+    {
+        result.error_code = kInvalidData;
+        return result;
+    }","oldString">
+    const QByteArray salt = QByteArray::fromHex(salt_hex.toLatin1());
+    const QByteArray verifier = QByteArray::fromHex(verifier_hex.toLatin1());
+    if (salt.size() != 16 || verifier.size() != 256) // SRP verifier is 256 bytes for group 8192
+    {
+        result.error_code = kInvalidData;
+        return result;
+    }
+    if (salt.toHex() != salt_hex.toLatin1() || verifier.toHex() != verifier_hex.toLatin1())
+    {
+        result.error_code = kInvalidData;
+        return result;
+    }","path":"C:\\Projects\\aspia-mod\\aspia\\source\\host\\host_config_applier.cc"}
 
     // Duplicate name check
     for (const User& u : db.userList())
@@ -444,6 +464,29 @@ HostConfigApplier::Result HostConfigApplier::applyModifyUser(const QJsonObject& 
     {
         const QString salt_hex = params.value("salt").toString().trimmed().toLower();
         const QByteArray salt = QByteArray::fromHex(salt_hex.toLatin1());
+        if (salt.size() != 64 || salt.toHex() != salt_hex.toLatin1())
+        {
+            result.error_code = kInvalidData;
+            return result;
+        }
+        target.salt = salt;
+    }
+
+    if (params.contains("verifier"))
+    {
+        const QString ver_hex = params.value("verifier").toString().trimmed().toLower();
+        const QByteArray verifier = QByteArray::fromHex(ver_hex.toLatin1());
+        if (verifier.isEmpty() || verifier.size() > 1024 || verifier.toHex() != ver_hex.toLatin1())
+        {
+            result.error_code = kInvalidData;
+            return result;
+        }
+        target.verifier = verifier;
+    }","oldString">
+    if (params.contains("salt"))
+    {
+        const QString salt_hex = params.value("salt").toString().trimmed().toLower();
+        const QByteArray salt = QByteArray::fromHex(salt_hex.toLatin1());
         if (salt.size() != 16 || salt.toHex() != salt_hex.toLatin1())
         {
             result.error_code = kInvalidData;
@@ -462,7 +505,7 @@ HostConfigApplier::Result HostConfigApplier::applyModifyUser(const QJsonObject& 
             return result;
         }
         target.verifier = verifier;
-    }
+    }","path":"C:\\Projects\\aspia-mod\\aspia\\source\\host\\host_config_applier.cc"}
 
     if (params.contains("sessions"))
     {
