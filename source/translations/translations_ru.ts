@@ -5009,7 +5009,7 @@ Credentials imported: %5</source>
     </message>
     <message>
         <location filename="../client/desktop/main_window.ui" line="20"/>
-        <location filename="../client/desktop/main_window.cc" line="1009"/>
+        <location filename="../client/desktop/main_window.cc" line="1008"/>
         <source>Aspia Client</source>
         <translation>Клиент Aspia</translation>
     </message>
@@ -5146,40 +5146,35 @@ Credentials imported: %5</source>
     <message>
         <location filename="../client/desktop/main_window.cc" line="1003"/>
         <source>Remote management of host users and update settings</source>
-        <translation>Удалённое управление пользователями и обновлениями хоста</translation>
+        <translation>Удалённое управление пользователями и настройками обновления хоста</translation>
     </message>
     <message>
         <location filename="../client/desktop/main_window.cc" line="1004"/>
         <source>Bulk operations on multiple hosts at once</source>
-        <translation>Массовые операции на группе хостов</translation>
+        <translation>Массовые операции на группе хостов с вышеуказанными возможностями</translation>
     </message>
     <message>
         <location filename="../client/desktop/main_window.cc" line="1005"/>
         <source>Full host configuration from a file</source>
-        <translation>Полный конфиг хоста из файла</translation>
+        <translation>Удалённая загрузка полного конфига хоста из файла</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1006"/>
-        <source>The full version with the build number in the host list</source>
-        <translation>Полная версия с номером сборки в списке хостов</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="1105"/>
+        <location filename="../client/desktop/main_window.cc" line="1104"/>
         <source>Connection by ID is specified in the properties of the host, but the router is not configured. Check the parameters of the router in the properties of the host.</source>
         <translation>В свойствах хоста указано подключение по ID, но маршрутизатор не настроен. Проверьте параметры маршрутизатора в свойствах хоста.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1372"/>
+        <location filename="../client/desktop/main_window.cc" line="1371"/>
         <source>Unknown application</source>
         <translation>Неизвестное приложение</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1375"/>
+        <location filename="../client/desktop/main_window.cc" line="1374"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>MCP-коннектор. Подключено: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1376"/>
+        <location filename="../client/desktop/main_window.cc" line="1375"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - ИИ подключен</translation>
     </message>
