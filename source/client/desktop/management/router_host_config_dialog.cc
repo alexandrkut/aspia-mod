@@ -92,7 +92,7 @@ RouterHostConfigDialog::RouterHostConfigDialog(qint64 router_id, qint64 host_id,
     label_status_ = new QLabel(tr("Loading current settings..."), this);
     layout->addRow("", label_status_);
 
-    auto* buttons = new QDialogButtonBox(QDialogButtonBox::Apply | QDialogButtonBox::Cancel, this);
+    auto* buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     connect(buttons, &QDialogButtonBox::accepted, this, &RouterHostConfigDialog::onApply);
     connect(buttons, &QDialogButtonBox::rejected, this, &QDialog::reject);
     layout->addRow(buttons);
