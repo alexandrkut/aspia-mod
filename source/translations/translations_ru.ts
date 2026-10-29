@@ -8041,14 +8041,10 @@ Sections: %2. Users in file: %3.</source>
         <source>users: %1 -&gt; %2</source>
         <translation>юзеры: %1 → %2</translation>
     </message>
-    <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1597"/>
-        <source>system: %n field(s) differ.</source>
-        <translation>
-            <numerusform>system: отличается %n поле.</numerusform>
-            <numerusform>system: отличаются %n поля.</numerusform>
-            <numerusform>system: отличаются %n полей.</numerusform>
-        </translation>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1598"/>
+        <source>system: %1</source>
+        <translation>system: %1</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="1603"/>

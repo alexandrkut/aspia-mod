@@ -1594,8 +1594,8 @@ void RouterHostsWidget::onHostsFullConfig()
                 }
                 if (diff.contains("system"))
                 {
-                    parts.append(tr("system: %n field(s) differ.",
-                                     "", diff["system"].toObject().size()));
+                    const QStringList fields = diff["system"].toObject().keys();
+                    parts.append(tr("system: %1").arg(fields.join(", ")));
                 }
             }
             row.will_run = true;
