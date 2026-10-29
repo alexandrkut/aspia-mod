@@ -234,6 +234,8 @@ HostConfigApplier::Result HostConfigApplier::applySetUpdateConfig(const QJsonObj
     settings.setAutoUpdateEnabled(auto_update);
     settings.setUpdateCheckFrequency(freq);
     settings.sync();
+    LOG(INFO) << "Update config applied: server=" << server << " channel=" << channel
+              << " auto=" << auto_update << " freq=" << freq << " file=" << settings.filePath();
 
     result.applied = QJsonObject{
         {"update_server", server},
