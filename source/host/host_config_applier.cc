@@ -237,6 +237,22 @@ HostConfigApplier::Result HostConfigApplier::applySetUpdateConfig(const QJsonObj
     LOG(INFO) << "Update config applied: server=" << server << " channel=" << channel
               << " auto=" << auto_update << " freq=" << freq << " file=" << settings.filePath();
 
+    // Read back to prove the write stuck (independent of telemetry caching). A mismatch means
+    // the settings could not be persisted.
+    {
+        SystemSettings check;
+        if (check.updateServer() != server ||
+            check.updateChannel() != channel ||
+            check.isAutoUpdateEnabled() != auto_update ||
+            check.updateCheckFrequency() != freq ||
+            (!key_hex.isEmpty() && check.updatePublicKey().toHex() != key_hex.toLatin1()))
+        {
+            LOG(ERROR) << "Update config read-back mismatch";
+            result.error_code = "sync_failed";
+            return result;
+        }
+    }
+
     result.applied = QJsonObject{
         {"update_server", server},
         {"update_public_key", key_hex},
@@ -766,14 +782,48 @@ HostConfigApplier::Result HostConfigApplier::applyFullConfig(const QJsonObject& 
 
     const bool dry_run = params.value("dry_run").toBool(false);
 
+    // The config arrives in the "config_json" envelope (a JSON string or object), per the
+    // apply_full_config{config_json, keep_local[], dry_run} contract. Top-level "system" /
+    // "database" are accepted as a fallback.
+    QJsonObject cfg;
+    const QJsonValue config_json = params.value("config_json");
+    if (config_json.isString())
+    {
+        QJsonParseError parse_error;
+        QJsonDocument config_doc = QJsonDocument::fromJson(config_json.toString().toUtf8(), &parse_error);
+        if (parse_error.error != QJsonParseError::NoError || !config_doc.isObject())
+        {
+            result.error_code = kInvalidData;
+            return result;
+        }
+        cfg = config_doc.object();
+    }
+    else if (config_json.isObject())
+    {
+        cfg = config_json.toObject();
+    }
+    else
+    {
+        if (cfg.contains("system") && cfg["system"].isObject())
+            cfg["system"] = params["system"].toObject();
+        if (cfg.contains("database") && cfg["database"].isObject())
+            cfg["database"] = params["database"].toObject();
+    }
+
+    if (cfg.isEmpty())
+    {
+        result.error_code = kInvalidData;
+        return result;
+    }
+
     // Snapshot before any write
     result.snapshot = QString::fromUtf8(QJsonDocument(snapshotConfig()).toJson(QJsonDocument::Compact));
 
     // Validate first (before any write)
     // Users
-    if (!keep.contains("users") && params.contains("database") && params["database"].isObject())
+    if (!keep.contains("users") && cfg.contains("database") && cfg["database"].isObject())
     {
-        const QJsonObject db_obj = params["database"].toObject();
+        const QJsonObject db_obj = cfg["database"].toObject();
         if (db_obj.contains("users"))
         {
             const QJsonArray arr = db_obj["users"].toArray();
@@ -821,9 +871,9 @@ HostConfigApplier::Result HostConfigApplier::applyFullConfig(const QJsonObject& 
         // Compute diff
         QJsonObject diff;
         // System settings diff
-        if (!keep.contains("system") && params.contains("system") && params["system"].isObject())
+        if (!keep.contains("system") && cfg.contains("system") && cfg["system"].isObject())
         {
-            const QJsonObject sys = params["system"].toObject();
+            const QJsonObject sys = cfg["system"].toObject();
             SystemSettings settings;
             QJsonObject sys_diff;
             if (sys.contains("update_server") && sys["update_server"].toString() != settings.updateServer())
@@ -842,9 +892,9 @@ HostConfigApplier::Result HostConfigApplier::applyFullConfig(const QJsonObject& 
                 diff["system"] = sys_diff;
         }
         // Users diff (counts only for simplicity)
-        if (!keep.contains("users") && params.contains("database") && params["database"].isObject())
+        if (!keep.contains("users") && cfg.contains("database") && cfg["database"].isObject())
         {
-            const QJsonObject db_obj = params["database"].toObject();
+            const QJsonObject db_obj = cfg["database"].toObject();
             if (db_obj.contains("users"))
             {
                 const int old_count = db.userList().size();
@@ -858,9 +908,9 @@ HostConfigApplier::Result HostConfigApplier::applyFullConfig(const QJsonObject& 
     }
 
     // Apply: system settings
-    if (!keep.contains("system") && params.contains("system") && params["system"].isObject())
+    if (!keep.contains("system") && cfg.contains("system") && cfg["system"].isObject())
     {
-        const QJsonObject sys = params["system"].toObject();
+        const QJsonObject sys = cfg["system"].toObject();
         SystemSettings settings;
         if (sys.contains("update_channel"))
             settings.setUpdateChannel(sys["update_channel"].toString());
@@ -887,9 +937,9 @@ HostConfigApplier::Result HostConfigApplier::applyFullConfig(const QJsonObject& 
     }
 
     // Apply: database settings (except users)
-    if (!keep.contains("database") && params.contains("database") && params["database"].isObject())
+    if (!keep.contains("database") && cfg.contains("database") && cfg["database"].isObject())
     {
-        const QJsonObject db_obj = params["database"].toObject();
+        const QJsonObject db_obj = cfg["database"].toObject();
         Database& db = Database::instance();
         if (db_obj.contains("tcp_port"))
             db.setTcpPort(static_cast<quint16>(db_obj["tcp_port"].toInt()));
@@ -916,9 +966,9 @@ HostConfigApplier::Result HostConfigApplier::applyFullConfig(const QJsonObject& 
     }
 
     // Apply: users
-    if (!keep.contains("users") && params.contains("database") && params["database"].isObject())
+    if (!keep.contains("users") && cfg.contains("database") && cfg["database"].isObject())
     {
-        const QJsonObject db_obj = params["database"].toObject();
+        const QJsonObject db_obj = cfg["database"].toObject();
         if (db_obj.contains("users"))
         {
             const QJsonArray arr = db_obj["users"].toArray();
