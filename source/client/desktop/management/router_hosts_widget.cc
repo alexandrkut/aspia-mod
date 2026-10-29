@@ -35,7 +35,10 @@
 #include <QFileDialog>
 #include <QMenu>
 #include <QMouseEvent>
+#include <QEventLoop>
+#include <QProgressDialog>
 #include <QPushButton>
+#include <QUuid>
 #include <QRegularExpressionValidator>
 #include <QSaveFile>
 #include <QSignalBlocker>
@@ -46,6 +49,7 @@
 
 #include "base/auto_qpointer.h"
 #include "base/logging.h"
+#include "base/peer/router_user.h"
 #include "base/shared_pointer.h"
 #include "base/time_types.h"
 #include "base/peer/host_id.h"
@@ -54,7 +58,10 @@
 #include "client/desktop/management/drag_and_drop.h"
 #include "client/desktop/management/host_telemetry_dialog.h"
 #include "client/desktop/management/router_host_dialog.h"
+#include "client/desktop/management/router_host_bulk.h"
+#include "client/desktop/management/router_host_bulk_config_dialog.h"
 #include "client/desktop/management/router_host_config_dialog.h"
+#include "client/desktop/management/router_host_user_dialog.h"
 #include "client/desktop/management/router_host_users_dialog.h"
 #include "client/desktop/management/ui_router_hosts_widget.h"
 #include "common/desktop/icon_text_button.h"
@@ -1030,4 +1037,588 @@ void RouterHostsWidget::sendHostRequests(const QList<RouterHost>& hosts, HostReq
             fetchHosts();
         }});
     }
+}
+
+namespace {
+
+// Display label for a host in bulk tables.
+QString bulkHostLabel(const RouterHost& host)
+{
+    if (!host.display_name.isEmpty() && !host.computer_name.isEmpty())
+        return host.display_name + " (" + host.computer_name + ")";
+    if (!host.display_name.isEmpty())
+        return host.display_name;
+    if (!host.computer_name.isEmpty())
+        return host.computer_name;
+    return QString::number(host.host_id);
+}
+
+QString newBulkId()
+{
+    return "bulk-" + QUuid::createUuid().toString(QUuid::WithoutBraces);
+}
+
+// Runs a fetch runner to completion under a modal progress dialog.
+QList<RouterHostBulkResult> execFetchBulk(RouterHostBulkRunner* runner,
+                                         const QString& label,
+                                         QWidget* parent)
+{
+    QProgressDialog progress(
+        label, RouterHostsWidget::tr("Cancel"), 0, runner->targetCount(), parent);
+    progress.setWindowModality(Qt::WindowModal);
+    progress.setMinimumDuration(0);
+    progress.setValue(0);
+
+    QEventLoop loop;
+    QObject::connect(runner, &RouterHostBulkRunner::resultReady,
+                     &progress, [&](int index)
+                     {
+                         progress.setValue(index + 1);
+                         if (progress.wasCanceled())
+                             runner->cancel();
+                     });
+    QObject::connect(runner, &RouterHostBulkRunner::finished, &loop, &QEventLoop::quit);
+    runner->start();
+    loop.exec();
+    progress.setValue(runner->targetCount());
+    return runner->results();
+}
+
+struct BulkTeleInfo
+{
+    bool ok = false;
+    QString channel;
+    QString address;
+    QString key;
+    bool auto_update = false;
+    int frequency = 7;
+};
+
+// Telemetry is served from the router database cache, so this is fast and never blocks.
+QMap<HostId, BulkTeleInfo> fetchBulkTelemetries(qint64 router_id,
+                                               const QList<RouterHost>& hosts,
+                                               QWidget* parent)
+{
+    QMap<HostId, BulkTeleInfo> out;
+
+    RouterSession* session = RouterController::session(router_id);
+    if (!session || hosts.isEmpty())
+        return out;
+
+    int pending = hosts.size();
+    QEventLoop loop;
+    QTimer::singleShot(15000, &loop, &QEventLoop::quit);
+
+    for (const RouterHost& host : hosts)
+    {
+        session->requestHostTelemetry(
+            host.host_id,
+            {parent, [&, host_id = host.host_id](const proto::router::HostTelemetryResult& result)
+             {
+                 BulkTeleInfo info;
+                 if (result.error_code() == proto::router::kErrorOk)
+                 {
+                     QJsonDocument doc =
+                         QJsonDocument::fromJson(QByteArray::fromStdString(result.json()));
+                     if (doc.isObject())
+                     {
+                         const QJsonObject update = doc.object().value("update").toObject();
+                         info.ok = true;
+                         info.channel = update.value("channel").toString();
+                         info.address = update.value("address").toString();
+                         info.key = update.value("public_key").toString();
+                         info.auto_update = update.value("auto_update").toBool();
+                         info.frequency = update.value("check_frequency").toInt(7);
+                     }
+                 }
+                 out[host_id] = info;
+                 if (--pending <= 0)
+                     loop.quit();
+             }});
+    }
+    loop.exec();
+    return out;
+}
+
+} // namespace
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostsWidget::onHostsAddUser()
+{
+    const QList<RouterHost> hosts = selectedHosts();
+    if (hosts.isEmpty())
+        return;
+
+    AutoQPointer<RouterHostUserDialog> input(new RouterHostUserDialog(
+        0, QString(), static_cast<quint32>(proto::peer::SESSION_TYPE_ALL),
+        User::ENABLED, QStringList(), this));
+    if (input->exec() != QDialog::Accepted)
+        return;
+
+    RouterUser user = RouterUser::create(input->userName(), input->password());
+    if (!user.isValid())
+    {
+        MsgBox::warning(this, tr("Failed to create user credentials."));
+        return;
+    }
+    user.sessions = input->sessions();
+    user.flags = input->flags();
+
+    const QString bulk_id = newBulkId();
+    QJsonObject user_params;
+    user_params["name"] = user.name;
+    user_params["group"] = user.group;
+    user_params["salt"] = QString::fromLatin1(user.salt.toHex());
+    user_params["verifier"] = QString::fromLatin1(user.verifier.toHex());
+    user_params["sessions"] = static_cast<qint64>(user.sessions);
+    user_params["flags"] = static_cast<qint64>(user.flags);
+    user_params["bulk_id"] = bulk_id;
+
+    QList<RouterHostBulkTarget> targets;
+    for (const RouterHost& host : hosts)
+        targets.append({host.host_id, bulkHostLabel(host)});
+
+    AutoQPointer<RouterHostBulkRunner> fetch(new RouterHostBulkRunner(
+        router_id_, targets, "get_host_users",
+        [](HostId) { return QJsonObject(); }, this));
+    const QList<RouterHostBulkResult> fetched =
+        execFetchBulk(fetch, tr("Reading user lists..."), this);
+
+    QList<RouterHostBulkTarget> apply_targets;
+    QList<RouterHostBulkPreviewRow> preview;
+    for (int i = 0; i < hosts.size() && i < fetched.size(); ++i)
+    {
+        RouterHostBulkPreviewRow row;
+        row.host = bulkHostLabel(hosts[i]);
+        row.action = tr("Add user \"%1\"").arg(user.name);
+        const RouterHostBulkResult& f = fetched[i];
+        if (f.status != "ok")
+        {
+            row.will_run = true;
+            row.target_index = apply_targets.size();
+            row.detail = tr("List unreadable (%1), will try anyway.").arg(f.detail);
+            apply_targets.append(targets[i]);
+        }
+        else
+        {
+            bool exists = false;
+            QJsonDocument doc = QJsonDocument::fromJson(f.raw.toUtf8());
+            if (doc.isArray())
+            {
+                for (const QJsonValue& v : doc.array())
+                {
+                    if (v.toObject().value("name").toString().compare(
+                            user.name, Qt::CaseInsensitive) == 0)
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+            }
+            if (exists)
+            {
+                row.will_run = false;
+                row.detail = tr("Already exists, skipped.");
+            }
+            else
+            {
+                row.will_run = true;
+                row.target_index = apply_targets.size();
+                apply_targets.append(targets[i]);
+            }
+        }
+        preview.append(row);
+    }
+
+    AutoQPointer<RouterHostBulkRunner> runner(new RouterHostBulkRunner(
+        router_id_, apply_targets, "add_user",
+        [user_params](HostId) { return user_params; }, this));
+    AutoQPointer<RouterHostBulkDialog> dialog(
+        new RouterHostBulkDialog(tr("Add user on hosts"), this));
+    dialog->execBulk(runner, preview);
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostsWidget::onHostsRemoveUser()
+{
+    const QList<RouterHost> hosts = selectedHosts();
+    if (hosts.isEmpty())
+        return;
+
+    AutoQPointer<RouterHostBulkRemoveDialog> input(new RouterHostBulkRemoveDialog(this));
+    if (input->exec() != QDialog::Accepted)
+        return;
+
+    const QString name = input->userName();
+    const bool force = input->force();
+    const QString bulk_id = newBulkId();
+
+    QList<RouterHostBulkTarget> targets;
+    for (const RouterHost& host : hosts)
+        targets.append({host.host_id, bulkHostLabel(host)});
+
+    AutoQPointer<RouterHostBulkRunner> fetch(new RouterHostBulkRunner(
+        router_id_, targets, "get_host_users",
+        [](HostId) { return QJsonObject(); }, this));
+    const QList<RouterHostBulkResult> fetched =
+        execFetchBulk(fetch, tr("Reading user lists..."), this);
+
+    QList<RouterHostBulkTarget> apply_targets;
+    QMap<HostId, qint64> entry_by_host;
+    QList<RouterHostBulkPreviewRow> preview;
+    for (int i = 0; i < hosts.size() && i < fetched.size(); ++i)
+    {
+        RouterHostBulkPreviewRow row;
+        row.host = bulkHostLabel(hosts[i]);
+        row.action = tr("Remove user \"%1\"").arg(name);
+        const RouterHostBulkResult& f = fetched[i];
+        if (f.status != "ok")
+        {
+            row.will_run = true;
+            row.target_index = apply_targets.size();
+            row.detail = tr("List unreadable (%1), will try anyway.").arg(f.detail);
+            apply_targets.append(targets[i]);
+        }
+        else
+        {
+            qint64 entry_id = -1;
+            bool enabled = false;
+            int enabled_total = 0;
+            QJsonDocument doc = QJsonDocument::fromJson(f.raw.toUtf8());
+            if (doc.isArray())
+            {
+                for (const QJsonValue& v : doc.array())
+                {
+                    const QJsonObject o = v.toObject();
+                    if (o.value("flags").toInteger() & User::ENABLED)
+                        ++enabled_total;
+                    if (o.value("name").toString().compare(name, Qt::CaseInsensitive) == 0)
+                    {
+                        entry_id = o.value("entry_id").toInteger(-1);
+                        enabled = o.value("flags").toInteger() & User::ENABLED;
+                    }
+                }
+            }
+            if (entry_id < 0)
+            {
+                row.will_run = false;
+                row.detail = tr("No such user, skipped.");
+            }
+            else
+            {
+                row.will_run = true;
+                row.target_index = apply_targets.size();
+                if (enabled && enabled_total <= 1)
+                    row.detail = tr("Last enabled user, the host will refuse.");
+                apply_targets.append(targets[i]);
+                entry_by_host[hosts[i].host_id] = entry_id;
+            }
+        }
+        preview.append(row);
+    }
+
+    AutoQPointer<RouterHostBulkRunner> runner(new RouterHostBulkRunner(
+        router_id_, apply_targets, "remove_user",
+        [&](HostId host_id)
+        {
+            QJsonObject params;
+            if (entry_by_host.contains(host_id))
+                params["entry_id"] = entry_by_host[host_id];
+            params["name"] = name;
+            if (force)
+                params["force"] = true;
+            params["bulk_id"] = bulk_id;
+            return params;
+        }, this));
+    AutoQPointer<RouterHostBulkDialog> dialog(
+        new RouterHostBulkDialog(tr("Remove user from hosts"), this));
+    dialog->execBulk(runner, preview);
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostsWidget::onHostsUpdateConfig()
+{
+    const QList<RouterHost> hosts = selectedHosts();
+    if (hosts.isEmpty())
+        return;
+
+    const QMap<HostId, BulkTeleInfo> telemetries = fetchBulkTelemetries(router_id_, hosts, this);
+
+    QSet<QString> channels, servers;
+    int auto_on = 0, auto_known = 0;
+    QSet<int> freqs;
+    for (const RouterHost& host : hosts)
+    {
+        const BulkTeleInfo info = telemetries.value(host.host_id);
+        if (!info.ok)
+            continue;
+        channels.insert(info.channel.isEmpty() ? tr("(unknown)") : info.channel);
+        servers.insert(info.address.isEmpty() ? tr("(default)") : info.address);
+        ++auto_known;
+        if (info.auto_update)
+            ++auto_on;
+        freqs.insert(info.frequency);
+    }
+    QStringList channel_list(channels.values());
+    channel_list.sort();
+    QStringList server_list(servers.values());
+    server_list.sort();
+    QStringList freq_list;
+    for (int freq : freqs)
+        freq_list.append(QString::number(freq));
+    freq_list.sort();
+    const QString summary = tr("Hosts in run: %1. Channels: %2. Servers: %3. "
+                               "Auto-update on: %4 of %5. Frequencies (days): %6.")
+        .arg(hosts.size())
+        .arg(channels.isEmpty() ? tr("(unknown)") : channel_list.join(", "))
+        .arg(servers.isEmpty() ? tr("(unknown)") : server_list.join(", "))
+        .arg(auto_on).arg(auto_known)
+        .arg(freqs.isEmpty() ? tr("(unknown)") : freq_list.join(", "));
+
+    AutoQPointer<RouterHostBulkConfigDialog> input(
+        new RouterHostBulkConfigDialog(summary, this));
+    if (input->exec() != QDialog::Accepted)
+        return;
+
+    QJsonObject wanted;
+    if (input->changeServer())
+        wanted["update_server"] = input->server();
+    if (input->changePublicKey())
+        wanted["update_public_key"] = input->publicKey();
+    if (input->changeChannel())
+        wanted["update_channel"] = input->channel();
+    if (input->changeAutoUpdate())
+        wanted["auto_update_enabled"] = input->autoUpdate();
+    if (input->changeFrequency())
+        wanted["update_check_frequency"] = input->frequency();
+
+    if (wanted.isEmpty())
+    {
+        MsgBox::information(this, tr("No fields selected, nothing to do."));
+        return;
+    }
+
+    const QString bulk_id = newBulkId();
+
+    QList<RouterHostBulkTarget> apply_targets;
+    QList<RouterHostBulkPreviewRow> preview;
+    for (const RouterHost& host : hosts)
+    {
+        RouterHostBulkPreviewRow row;
+        row.host = bulkHostLabel(host);
+        const BulkTeleInfo info = telemetries.value(host.host_id);
+        if (!info.ok)
+        {
+            row.will_run = true;
+            row.target_index = apply_targets.size();
+            row.action = tr("Set selected fields (current settings unknown).");
+            apply_targets.append({host.host_id, row.host});
+            preview.append(row);
+            continue;
+        }
+
+        QStringList changes;
+        if (wanted.contains("update_server") &&
+            wanted["update_server"].toString() != info.address)
+        {
+            changes.append(tr("server: %1 -> %2")
+                .arg(info.address.isEmpty() ? tr("(default)") : info.address,
+                     wanted["update_server"].toString().isEmpty() ?
+                         tr("(default)") : wanted["update_server"].toString()));
+        }
+        if (wanted.contains("update_public_key") &&
+            wanted["update_public_key"].toString().toLower() != info.key.toLower())
+        {
+            changes.append(tr("public key: %1 -> %2")
+                .arg(info.key.isEmpty() ? tr("(default)") : tr("(set)"),
+                     wanted["update_public_key"].toString().isEmpty() ?
+                         tr("(default)") : tr("(set)")));
+        }
+        if (wanted.contains("update_channel") &&
+            wanted["update_channel"].toString() != info.channel)
+        {
+            changes.append(tr("channel: %1 -> %2").arg(info.channel, wanted["update_channel"].toString()));
+        }
+        if (wanted.contains("auto_update_enabled") &&
+            wanted["auto_update_enabled"].toBool() != info.auto_update)
+        {
+            changes.append(tr("auto-update: %1 -> %2")
+                .arg(info.auto_update ? tr("on") : tr("off"),
+                     wanted["auto_update_enabled"].toBool() ? tr("on") : tr("off")));
+        }
+        if (wanted.contains("update_check_frequency") &&
+            wanted["update_check_frequency"].toInt() != info.frequency)
+        {
+            changes.append(tr("frequency: %1 -> %2")
+                .arg(info.frequency).arg(wanted["update_check_frequency"].toInt()));
+        }
+
+        if (changes.isEmpty())
+        {
+            row.will_run = false;
+            row.action = tr("No changes.");
+            row.detail = tr("Already matching, skipped.");
+        }
+        else
+        {
+            row.will_run = true;
+            row.target_index = apply_targets.size();
+            row.action = changes.join("; ");
+            apply_targets.append({host.host_id, row.host});
+        }
+        preview.append(row);
+    }
+
+    AutoQPointer<RouterHostBulkRunner> runner(new RouterHostBulkRunner(
+        router_id_, apply_targets, "set_update_config",
+        [wanted, bulk_id](HostId)
+        {
+            QJsonObject params = wanted;
+            params["bulk_id"] = bulk_id;
+            return params;
+        }, this));
+    AutoQPointer<RouterHostBulkDialog> dialog(
+        new RouterHostBulkDialog(tr("Update configuration on hosts"), this));
+    dialog->execBulk(runner, preview);
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostsWidget::onHostsFullConfig()
+{
+    const QList<RouterHost> hosts = selectedHosts();
+    if (hosts.isEmpty())
+        return;
+
+    const QString file_name = QFileDialog::getOpenFileName(this, tr("Open host configuration file"),
+                                                           QString(),
+                                                           tr("JSON files (*.json);;All files (*)"));
+    if (file_name.isEmpty())
+        return;
+
+    QFile file(file_name);
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        MsgBox::warning(this, tr("Cannot open file: %1").arg(file.errorString()));
+        return;
+    }
+    const QByteArray data = file.readAll();
+    file.close();
+
+    QJsonParseError parse_error;
+    QJsonDocument doc = QJsonDocument::fromJson(data, &parse_error);
+    if (parse_error.error != QJsonParseError::NoError || !doc.isObject())
+    {
+        MsgBox::warning(this, tr("Invalid JSON: %1").arg(parse_error.errorString()));
+        return;
+    }
+    const QJsonObject cfg = doc.object();
+    if (cfg.isEmpty() || (!cfg.contains("system") && !cfg.contains("database")))
+    {
+        MsgBox::warning(this, tr("Not a host configuration file (no system/database sections)."));
+        return;
+    }
+
+    int file_users = -1;
+    if (cfg.contains("database") && cfg["database"].isObject() &&
+        cfg["database"].toObject().contains("users"))
+    {
+        file_users = cfg["database"].toObject()["users"].toArray().size();
+    }
+    QStringList file_sections;
+    if (cfg.contains("system"))
+        file_sections.append("system");
+    if (cfg.contains("database"))
+        file_sections.append("database");
+
+    AutoQPointer<RouterHostBulkFullConfigDialog> input(new RouterHostBulkFullConfigDialog(
+        tr("File: %1\nSections: %2. Users in file: %3.")
+            .arg(file_name, file_sections.join(", "),
+                 file_users < 0 ? tr("(kept)") : QString::number(file_users)),
+        this));
+    if (input->exec() != QDialog::Accepted)
+        return;
+
+    QJsonArray keep_local;
+    if (input->keepRouter())
+        keep_local.append("database");
+
+    const QString bulk_id = newBulkId();
+    const QString config_json =
+        QString::fromUtf8(QJsonDocument(cfg).toJson(QJsonDocument::Compact));
+
+    QList<RouterHostBulkTarget> targets;
+    for (const RouterHost& host : hosts)
+        targets.append({host.host_id, bulkHostLabel(host)});
+
+    AutoQPointer<RouterHostBulkRunner> dry(new RouterHostBulkRunner(
+        router_id_, targets, "apply_full_config",
+        [&](HostId)
+        {
+            QJsonObject params;
+            params["config_json"] = config_json;
+            params["keep_local"] = keep_local;
+            params["dry_run"] = true;
+            params["bulk_id"] = bulk_id;
+            return params;
+        }, this));
+    const QList<RouterHostBulkResult> dried =
+        execFetchBulk(dry, tr("Dry run on hosts..."), this);
+
+    QList<RouterHostBulkTarget> apply_targets;
+    QList<RouterHostBulkPreviewRow> preview;
+    for (int i = 0; i < hosts.size() && i < dried.size(); ++i)
+    {
+        RouterHostBulkPreviewRow row;
+        row.host = bulkHostLabel(hosts[i]);
+        const RouterHostBulkResult& d = dried[i];
+        if (d.status != "ok")
+        {
+            row.will_run = true;
+            row.target_index = apply_targets.size();
+            row.action = tr("Apply full config (dry run %1, will try anyway).").arg(d.detail);
+            apply_targets.append(targets[i]);
+        }
+        else
+        {
+            QJsonDocument diff_doc = QJsonDocument::fromJson(d.raw.toUtf8());
+            QStringList parts;
+            if (diff_doc.isObject())
+            {
+                const QJsonObject diff = diff_doc.object();
+                if (diff.contains("users"))
+                {
+                    const QJsonObject users = diff["users"].toObject();
+                    parts.append(tr("users: %1 -> %2")
+                        .arg(users.value("old_count").toInteger())
+                        .arg(users.value("new_count").toInteger()));
+                }
+                if (diff.contains("system"))
+                {
+                    parts.append(tr("system: %n field(s) differ.",
+                                     "", diff["system"].toObject().size()));
+                }
+            }
+            row.will_run = true;
+            row.target_index = apply_targets.size();
+            row.action = parts.isEmpty() ? tr("Apply full config (no visible diff).")
+                                         : parts.join("; ");
+            apply_targets.append(targets[i]);
+        }
+        preview.append(row);
+    }
+
+    AutoQPointer<RouterHostBulkRunner> runner(new RouterHostBulkRunner(
+        router_id_, apply_targets, "apply_full_config",
+        [&](HostId)
+        {
+            QJsonObject params;
+            params["config_json"] = config_json;
+            params["keep_local"] = keep_local;
+            params["dry_run"] = false;
+            params["bulk_id"] = bulk_id;
+            return params;
+        }, this));
+    AutoQPointer<RouterHostBulkDialog> dialog(
+        new RouterHostBulkDialog(tr("Full configuration on hosts"), this));
+    dialog->execBulk(runner, preview);
 }

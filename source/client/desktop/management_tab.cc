@@ -1301,6 +1301,32 @@ void ManagementTab::onHostContextMenu(const QPoint& pos, int column)
 
     if (!is_single)
     {
+        menu->addSeparator();
+
+        QAction* bulk_add = menu->addAction(tr("Bulk add user..."));
+        connect(bulk_add, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostsAddUser();
+        });
+
+        QAction* bulk_remove = menu->addAction(tr("Bulk remove user..."));
+        connect(bulk_remove, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostsRemoveUser();
+        });
+
+        QAction* bulk_config = menu->addAction(tr("Bulk update configuration..."));
+        connect(bulk_config, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostsUpdateConfig();
+        });
+
+        QAction* bulk_full = menu->addAction(tr("Bulk full configuration (from file)..."));
+        connect(bulk_full, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostsFullConfig();
+        });
+
         menu->exec(pos);
         return;
     }
