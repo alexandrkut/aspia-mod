@@ -321,6 +321,10 @@ void RouterManager::onTcpMessageReceived(quint8 /* channel_id */, const QByteArr
                 command_name, QJsonDocument::fromJson(QByteArray::fromStdString(params)).object(), initiator,
                 has_active_sessions);
             sendHostConfigResult(command_name, result.error_code.toStdString(), result.result.toStdString());
+
+            // Trigger a telemetry update so the client sees the new settings immediately.
+            if (result.error_code == proto::router::kErrorOk)
+                sendTelemetry();
         }
     }
     else
