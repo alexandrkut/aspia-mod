@@ -23,6 +23,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QProgressDialog>
+#include <QPlainTextEdit>
 #include <QPushButton>
 #include <QTableWidget>
 #include <QVBoxLayout>
@@ -191,8 +192,20 @@ RouterHostBulkDialog::RouterHostBulkDialog(const QString& title, QWidget* parent
     table_->horizontalHeader()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
     table_->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
     table_->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    table_->setSelectionMode(QAbstractItemView::NoSelection);
+    table_->setSelectionBehavior(QAbstractItemView::SelectRows);
+    table_->setSelectionMode(QAbstractItemView::SingleSelection);
     layout->addWidget(table_);
+
+    auto* detail_label = new QLabel(tr("Details:"), this);
+    layout->addWidget(detail_label);
+
+    detail_view_ = new QPlainTextEdit(this);
+    detail_view_->setReadOnly(true);
+    detail_view_->setMaximumHeight(90);
+    layout->addWidget(detail_view_);
+
+    connect(table_, &QTableWidget::itemSelectionChanged,
+            this, &RouterHostBulkDialog::onSelectionChanged);
 
     buttons_ = new QDialogButtonBox(this);
     apply_button_ = buttons_->addButton(tr("Apply"), QDialogButtonBox::ActionRole);
@@ -210,22 +223,29 @@ int RouterHostBulkDialog::execBulk(RouterHostBulkRunner* runner,
     runner_ = runner;
     row_of_target_.clear();
 
+    auto set_cell = [this](int row, int column, const QString& text)
+    {
+        auto* item = new QTableWidgetItem(text);
+        item->setToolTip(text);
+        table_->setItem(row, column, item);
+    };
+
     table_->setRowCount(preview.size());
     for (int i = 0; i < preview.size(); ++i)
     {
-        table_->setItem(i, 0, new QTableWidgetItem(preview[i].host));
-        table_->setItem(i, 1, new QTableWidgetItem(preview[i].action));
+        set_cell(i, 0, preview[i].host);
+        set_cell(i, 1, preview[i].action);
         if (preview[i].will_run)
         {
             row_of_target_.append(i);
-            table_->setItem(i, 2, new QTableWidgetItem(tr("Pending")));
-            table_->setItem(i, 3, new QTableWidgetItem(QString()));
+            set_cell(i, 2, tr("Pending"));
+            set_cell(i, 3, QString());
         }
         else
         {
             row_of_target_.append(-1);
-            table_->setItem(i, 2, new QTableWidgetItem(statusText("skipped")));
-            table_->setItem(i, 3, new QTableWidgetItem(preview[i].detail));
+            set_cell(i, 2, statusText("skipped"));
+            set_cell(i, 3, preview[i].detail);
         }
     }
 
@@ -336,8 +356,38 @@ void RouterHostBulkDialog::onFinished()
 //--------------------------------------------------------------------------------------------------
 void RouterHostBulkDialog::setRowResult(int row, const QString& status, const QString& detail)
 {
-    table_->setItem(row, 2, new QTableWidgetItem(statusText(status)));
-    table_->setItem(row, 3, new QTableWidgetItem(detail));
+    const QString status_text = statusText(status);
+    auto* status_item = new QTableWidgetItem(status_text);
+    status_item->setToolTip(status_text);
+    table_->setItem(row, 2, status_item);
+
+    auto* detail_item = new QTableWidgetItem(detail);
+    detail_item->setToolTip(detail);
+    table_->setItem(row, 3, detail_item);
+
+    if (table_->currentRow() == row)
+        onSelectionChanged();
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostBulkDialog::onSelectionChanged()
+{
+    const int row = table_->currentRow();
+    if (row < 0 || row >= table_->rowCount())
+    {
+        detail_view_->clear();
+        return;
+    }
+
+    const QString host = table_->item(row, 0) ? table_->item(row, 0)->toolTip() : QString();
+    const QString action = table_->item(row, 1) ? table_->item(row, 1)->toolTip() : QString();
+    const QString result = table_->item(row, 2) ? table_->item(row, 2)->toolTip() : QString();
+    const QString detail = table_->item(row, 3) ? table_->item(row, 3)->toolTip() : QString();
+
+    QString text = tr("Host: %1\nPlanned: %2\nResult: %3").arg(host, action, result);
+    if (!detail.isEmpty())
+        text += tr("\nDetail: %1").arg(detail);
+    detail_view_->setPlainText(text);
 }
 
 //--------------------------------------------------------------------------------------------------

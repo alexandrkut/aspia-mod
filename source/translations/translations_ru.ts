@@ -7091,72 +7091,77 @@ Credentials imported: %5</source>
 <context>
     <name>RouterHostBulkDialog</name>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="42"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="43"/>
         <source>Done</source>
         <translation>Готово</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="44"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="45"/>
         <source>Skipped</source>
         <translation>Пропущено</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="46"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="47"/>
         <source>Failed</source>
         <translation>Не удалось</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="48"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="49"/>
         <source>Offline</source>
         <translation>Офлайн</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="50"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="51"/>
         <source>Cancelled</source>
         <translation>Отменено</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="52"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="53"/>
         <source>Running...</source>
         <translation>Выполняется...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="188"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="189"/>
         <source>Host</source>
         <translation>Хост</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="188"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="189"/>
         <source>Planned action</source>
         <translation>Запланировано</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="188"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="189"/>
         <source>Result</source>
         <translation>Результат</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="188"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="189"/>
         <source>Detail</source>
         <translation>Подробности</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="198"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="199"/>
+        <source>Details:</source>
+        <translation>Подробности:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="211"/>
         <source>Apply</source>
         <translation>Применить</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="221"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="241"/>
         <source>Pending</source>
         <translation>Ожидание</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="241"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="261"/>
         <source>Nothing to do.</source>
         <translation>Нечего делать.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="246"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="266"/>
         <source>%n host(s) selected.</source>
         <translation>
             <numerusform>Выбран %n хост.</numerusform>
@@ -7165,45 +7170,61 @@ Credentials imported: %5</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="251"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="271"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="280"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="300"/>
         <source>Cancelling, waiting for the current host...</source>
         <translation>Отмена, ждём текущий хост...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="301"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="321"/>
         <source>%1 of %2 done.</source>
         <translation>Выполнено %1 из %2.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="330"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="350"/>
         <source>Done: %1, failed: %2, offline: %3, skipped: %4, cancelled: %5.</source>
         <translation>Готово: %1, не удалось: %2, офлайн: %3, пропущено: %4, отменено: %5.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="332"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="352"/>
         <source>Close</source>
         <translation>Закрыть</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="387"/>
+        <source>Host: %1
+Planned: %2
+Result: %3</source>
+        <translation>Хост: %1
+Запланировано: %2
+Результат: %3</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="389"/>
+        <source>
+Detail: %1</source>
+        <translation>
+Подробности: %1</translation>
     </message>
 </context>
 <context>
     <name>RouterHostBulkFullConfigDialog</name>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="348"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="398"/>
         <source>Full configuration on hosts</source>
         <translation>Полный конфиг на хостах</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="358"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="408"/>
         <source>Warning: without the checkbox below, every host switches to the router, port and access settings from the file. Make sure the file comes from a host of this router.</source>
         <translation>Внимание: без галочки ниже каждый хост перейдёт на роутер, порт и настройки доступа из файла. Убедитесь, что файл от хоста этого роутера.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="366"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="416"/>
         <source>Keep router connection, port and access settings (apply only system settings and users)</source>
         <translation>Сохранить подключение к роутеру, порт и доступ (применить только system и юзеров)</translation>
     </message>
@@ -7211,22 +7232,22 @@ Credentials imported: %5</source>
 <context>
     <name>RouterHostBulkRemoveDialog</name>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="399"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="449"/>
         <source>Remove user from hosts</source>
         <translation>Удаление юзера на хостах</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="405"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="455"/>
         <source>User name:</source>
         <translation>Имя пользователя:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="408"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="458"/>
         <source>Force (remove even with live sessions, last enabled user is still protected)</source>
         <translation>Принудительно (удалить даже при живых сессиях; последнего включённого всё равно защитит хост)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="442"/>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="492"/>
         <source>Enter a user name.</source>
         <translation>Введите имя пользователя.</translation>
     </message>

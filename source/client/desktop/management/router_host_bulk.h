@@ -25,6 +25,7 @@
 class QAbstractButton;
 class QDialogButtonBox;
 class QLineEdit;
+class QPlainTextEdit;
 class QCheckBox;
 class QLabel;
 class QTableWidget;
@@ -114,11 +115,13 @@ private slots:
     void onButtonClicked(QAbstractButton* button);
     void onResultReady(int index);
     void onFinished();
+    void onSelectionChanged();
 
 private:
     void setRowResult(int row, const QString& status, const QString& detail);
 
     QTableWidget* table_ = nullptr;
+    QPlainTextEdit* detail_view_ = nullptr;
     QDialogButtonBox* buttons_ = nullptr;
     QPushButton* apply_button_ = nullptr;
     QPushButton* cancel_button_ = nullptr;
