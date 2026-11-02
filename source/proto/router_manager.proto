@@ -41,9 +41,16 @@ message HostRequest
     //                only an admin moves a host between workspaces.
     // "update"     - Force the host to check for updates immediately. Only host.host_id is read;
     //                the host must be online. Admin-only.
+    // "set_*"      - Apply a host configuration change. host.host_id selects the target;
+    //                params carries a JSON object with the new values (and, for user commands,
+    //                the pre-built SRP salt/verifier). The host answers with HostResult.result
+    //                (JSON: applied values, diff or a snapshot for rollback). Admin-only.
+    // "get_host_users" - Return the host's user list (names, session masks, flags; no secrets).
+    //                    Admin-only.
     int64 request_id    = 1;
     string command_name = 2;
     Host host           = 3;
+    string params       = 5;
 }
 
 message HostResult
@@ -51,7 +58,9 @@ message HostResult
     int64 request_id    = 1;
     string command_name = 2; // Same as request command_name.
     string error_code   = 3; // "ok" | "invalid_request" | "invalid_data" | "invalid_entry_id" |
-                             // "access_denied" | "not_found" | "conflict" | "internal_error"
+                             // "access_denied" | "not_found" | "conflict" | "internal_error" |
+                             // "user_has_sessions" | "last_enabled_user" | "not_supported"
+    string result       = 4; // JSON payload for config commands; empty otherwise.
 }
 
 message GroupRequest
