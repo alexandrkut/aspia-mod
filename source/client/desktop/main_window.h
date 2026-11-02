@@ -23,7 +23,10 @@
 #include <QMainWindow>
 #include <QPointer>
 
+#include <functional>
 #include <memory>
+
+#include "base/peer/host_id.h"
 
 #include "client/desktop/tab.h"
 #include "client/mcp/mcp_controller.h"
@@ -43,6 +46,7 @@ class ManagementTab;
 class SearchDialog;
 class QLineEdit;
 class HostConfig;
+class LocalHostConfig;
 
 class MainWindow final
     : public QMainWindow,
@@ -60,9 +64,68 @@ public slots:
     void showAndActivate();
     void connectToUrl(const QString& url);
 
+    // Connects to the address book record |identifier| names, which is a record ID (digits) or the
+    // ID of a host, or to the host |identifier| names by its address, which is connected to
+    // directly. Called for the --connect argument of the command line, both for the instance
+    // that was started with it and for the one another instance forwarded the request to. The
+    // credentials of the record are used unless |username| and |password| carry a pair of their
+    // own, which is what --username and --password produce. A host named by its address has no
+    // record and no stored credentials, so the pair is required for it. |session_type| is a
+    // proto::peer::SessionType value.
+    void connectToLocalHost(const QString& identifier, int session_type, const QString& username,
+                            const QString& password);
+
 signals:
     // The state of the window is saved by then, and the window is expected to be destroyed.
     void sig_lockRequested();
+
+private:
+    // What an identifier of the command line was resolved to: a record of the local address book,
+    // a host that lives only in the book of a router and has no record of its own here, or a host
+    // that is in no book at all and is named by its address.
+    struct ConnectTarget
+    {
+        qint64 entry_id = 0;
+        qint64 router_id = 0;
+        HostId host_id = kInvalidHostId;
+        QString name;
+
+        // The address of a host that is connected to directly. Empty when the identifier named
+        // a record or a host of a router.
+        QString address;
+    };
+
+    // Finds what |identifier| names, looking first for a record ID of the address book and then
+    // for a host ID - in the local book first and in the books of the routers after it. An
+    // identifier that is an address names a host that is in no book and is connected to directly.
+    bool resolveTarget(const QString& identifier, ConnectTarget* target) const;
+
+    // Asks the routers whether one of them has a host with the ID of the command line, and opens
+    // the session through the one that does. Used when nothing stored here knows the ID: the
+    // address book only holds the hosts of a router that were fetched into it at some point.
+    void connectToRouterHost(const QString& identifier, proto::peer::SessionType session_type,
+                             const QString& username, const SecureString& password);
+
+    // The message of a host that is nowhere to be found. |router_offline| tells that the router
+    // that could have had it did not come online, so the host is not known to be missing there.
+    void reportUnknownHost(const QString& identifier, bool router_offline = false);
+
+    // Runs |action| once the router is online, or right away when it already is or when the host
+    // needs no router at all. A request from the command line arrives before any router connection
+    // exists, and a session opened then is only told the router is offline. |on_timeout| is called
+    // when the router does not come online in time: the request is left without an answer then,
+    // and the caller is told about it.
+    void runWhenRouterOnline(qint64 router_id, std::function<void()> action,
+                             std::function<void()> on_timeout = std::function<void()>());
+
+    // How long a connection asked for on the command line waits for the router of the host before
+    // it is given up on.
+    static constexpr int kRouterWaitTimeout = 60000;
+
+    // How long a router is given to answer whether it has the host that was asked for. A router
+    // that says nothing is counted as one that has no host, for a request of the command line is
+    // not to hang with nothing to report.
+    static constexpr int kRouterSearchTimeout = 30000;
 
 protected:
     // QMainWindow implementation.

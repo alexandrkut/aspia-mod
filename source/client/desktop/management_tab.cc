@@ -511,6 +511,13 @@ void ManagementTab::reloadRouters()
 //--------------------------------------------------------------------------------------------------
 void ManagementTab::connectLocalHost(qint64 entry_id, proto::peer::SessionType session_type)
 {
+    connectLocalHost(entry_id, session_type, QString(), SecureString());
+}
+
+//--------------------------------------------------------------------------------------------------
+void ManagementTab::connectLocalHost(qint64 entry_id, proto::peer::SessionType session_type,
+                                     const QString& username, const SecureString& password)
+{
     LocalHostConfig entry;
     if (!readLocalHost(entry_id, &entry))
         return;
@@ -519,6 +526,17 @@ void ManagementTab::connectLocalHost(qint64 entry_id, proto::peer::SessionType s
     if (!validateHostForConnect(host))
         return;
 
+    // Credentials of the caller. They replace the ones of the record, and the flag keeps the
+    // session from putting the stored ones back on top of them.
+    if (!username.isEmpty())
+    {
+        LOG(INFO) << "Using the credentials given on the command line for host" << entry_id;
+
+        host.setUsername(username);
+        host.setPassword(password);
+        host.setForcedCredentials(true);
+    }
+
     setHostConnectTime(entry_id);
     emit sig_connectRequested(host, session_type);
 }
@@ -526,6 +544,15 @@ void ManagementTab::connectLocalHost(qint64 entry_id, proto::peer::SessionType s
 //--------------------------------------------------------------------------------------------------
 void ManagementTab::connectRouterHost(const HostConfig& host, proto::peer::SessionType session_type)
 {
+    if (validateHostForConnect(host))
+        emit sig_connectRequested(host, session_type);
+}
+
+//--------------------------------------------------------------------------------------------------
+void ManagementTab::connectDirectHost(const HostConfig& host, proto::peer::SessionType session_type)
+{
+    // A host that is in no book and is named by its address: there is no record of it, and so
+    // there is no connect time to remember either.
     if (validateHostForConnect(host))
         emit sig_connectRequested(host, session_type);
 }

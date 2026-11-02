@@ -33,6 +33,7 @@
 
 #include "client/android/main_window.h"
 #else
+#include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QDir>
 #include <QTimer>
@@ -41,9 +42,11 @@
 
 #include "base/auto_qpointer.h"
 #include "base/crypto/secure_string.h"
+#include "client/connect_request.h"
 #include "client/database.h"
 #include "client/host_url.h"
 #include "client/master_password.h"
+#include "client/settings.h"
 #include "client/system_settings.h"
 #include "client/desktop/app_lock.h"
 #include "client/desktop/main_window.h"
@@ -51,6 +54,7 @@
 #include "client/mcp/mcp_worker.h"
 #include "common/desktop/credentials_dialog.h"
 #include "common/desktop/msg_box.h"
+#include "proto/peer.h"
 #include "common/desktop/update_dialog.h"
 #endif // defined(Q_OS_ANDROID)
 
@@ -287,18 +291,86 @@ int main(int argc, char* argv[])
 
     return application.exec();
 #else
+    const QCommandLineOption connect_option(
+        { QStringLiteral("connect"), QStringLiteral("c") },
+        QApplication::translate("Client",
+            "Connect to the host of the address book with this record ID or host ID, using the "
+            "login and the password stored in it, or connect directly to a host by its address, "
+            "which needs the login and the password given with --username and --password."),
+        QApplication::translate("Client", "id"));
+
+    const QCommandLineOption session_type_option(
+        QStringLiteral("session-type"),
+        QApplication::translate("Client",
+            "Kind of the session to open: desktop, file, info, chat or terminal "
+            "(default: the one from the settings of the application)."),
+        QApplication::translate("Client", "type"));
+
+    const QCommandLineOption username_option(
+        { QStringLiteral("username"), QStringLiteral("u") },
+        QApplication::translate("Client",
+            "Log in with this user name instead of the one stored in the host. "
+            "Requires --password."),
+        QApplication::translate("Client", "name"));
+
+    const QCommandLineOption password_option(
+        QStringLiteral("password"),
+        QApplication::translate("Client",
+            "Log in with this password instead of the stored one. Requires --username. "
+            "A password on a command line is visible to the other users of the machine."),
+        QApplication::translate("Client", "password"));
+
     QCommandLineParser parser;
     parser.setApplicationDescription(QApplication::translate("Client", "Aspia Client"));
     parser.addHelpOption();
     parser.addVersionOption();
+    parser.addOption(connect_option);
+    parser.addOption(session_type_option);
+    parser.addOption(username_option);
+    parser.addOption(password_option);
     parser.addPositionalArgument("url",
         QApplication::translate("Client", "An aspia:// link to connect to a host."), "[url]");
     parser.process(application);
 
+    // What the command line asks for: a record of the address book to connect to, an aspia:// link,
+    // or neither. Nothing else is taken from the command line - the login and the password are the
+    // ones stored in the record, so a script that starts the client carries no credentials.
+    ConnectRequest connect_request;
     QString start_url;
-    QStringList positional_arguments = parser.positionalArguments();
-    if (!positional_arguments.isEmpty() && HostUrl::isHostUrl(positional_arguments.front()))
-        start_url = positional_arguments.front();
+    QString parse_error;
+
+    if (!ConnectRequest::parse(application.arguments().mid(1), &connect_request, &start_url,
+                                &parse_error))
+    {
+        LOG(ERROR) << "Invalid command line:" << parse_error;
+        MsgBox::warning(nullptr, parse_error);
+        return 2;
+    }
+
+    if (!connect_request.isEmpty() &&
+        connect_request.sessionType() == proto::peer::SESSION_TYPE_UNKNOWN)
+    {
+        // No --session-type: the kind the application is configured to open. The settings are the
+        // only source of a default, so a value stored there that names no session falls back to
+        // the desktop rather than leaving the request with nothing to open.
+        connect_request.setSessionType(Settings().sessionType());
+
+        if (connect_request.sessionType() == proto::peer::SESSION_TYPE_UNKNOWN)
+            connect_request.setSessionType(proto::peer::SESSION_TYPE_DESKTOP);
+    }
+
+    if (!connect_request.isEmpty())
+    {
+        LOG(INFO) << "Command line asks for host" << connect_request.identifier()
+                  << "with session type" << connect_request.sessionType()
+                  << (connect_request.hasCredentials() ?
+                         ", credentials given on the command line" : "");
+    }
+
+    // Set once the request is made and cleared when a window has taken it, so that a request that
+    // arrives between two windows (the lock destroys the one that exists) is not lost.
+    bool connect_request_pending = !connect_request.isEmpty();
+
 
     // A link can arrive before the main window exists: forwarded by a second instance or
     // delivered by a URL open event while the master password dialog is still on the screen.
@@ -307,12 +379,36 @@ int main(int argc, char* argv[])
     QMetaObject::Connection pending_url_connection = QObject::connect(
         &application, &Application::sig_urlOpened, &application, remember_url);
 
+    // The same for a connection asked for on the command line of a second instance: it is held
+    // until the window that can open it exists, which spans the unlock of a master password and
+    // the lock and unlock that destroys and recreates the window.
+    auto remember_host = [&connect_request, &connect_request_pending](const QString& identifier,
+                                                                  int session_type,
+                                                                  const QString& username,
+                                                                  const QString& password)
+    {
+        connect_request = ConnectRequest();
+        connect_request.setIdentifier(identifier);
+        connect_request.setSessionType(static_cast<proto::peer::SessionType>(session_type));
+        connect_request.setCredentials(username, SecureString(password));
+        connect_request_pending = true;
+    };
+    QMetaObject::Connection pending_connect_connection = QObject::connect(
+        &application, &Application::sig_hostOpened, &application, remember_host);
+
     if (application.isRunning())
     {
         if (!start_url.isEmpty())
         {
             LOG(INFO) << "Another instance is already running, forwarding URL to it";
             application.openUrl(start_url);
+        }
+        else if (!connect_request.isEmpty())
+        {
+            LOG(INFO) << "Another instance is already running, forwarding host to it";
+            application.openHost(connect_request.identifier(), connect_request.sessionType(),
+                                 connect_request.username(),
+                                 connect_request.password().toString());
         }
         else
         {
@@ -365,12 +461,25 @@ int main(int argc, char* argv[])
         main_window = std::make_unique<MainWindow>();
 
         QObject::disconnect(pending_url_connection);
+        QObject::disconnect(pending_connect_connection);
 
         QObject::connect(&application, &Application::sig_windowActivated,
                          main_window.get(), &MainWindow::showAndActivate);
-        QObject::connect(&application, &Application::sig_urlOpened,
+QObject::connect(&application, &Application::sig_urlOpened,
                          main_window.get(), &MainWindow::connectToUrl);
-        QObject::connect(main_window.get(), &MainWindow::sig_lockRequested, &application, [&]()
+
+        // The window is the context of the connection, so the link dies with it; the lambda takes
+        // the arguments of the signal alone and reaches the window through the captured pointer.
+        // A lambda whose first parameter is the context object would ask the compiler to guess the
+        // slot signature out of a functor, which it does not manage here.
+        MainWindow* window = main_window.get();
+        QObject::connect(&application, &Application::sig_hostOpened, window,
+                         [window](const QString& identifier, int session_type,
+                                  const QString& username, const QString& password)
+        {
+            window->connectToLocalHost(identifier, session_type, username, password);
+        });
+                QObject::connect(main_window.get(), &MainWindow::sig_lockRequested, &application, [&]()
         {
             // Until the new window there is no window on the screen, and closing the unlock dialog
             // would otherwise quit the application.
@@ -380,6 +489,8 @@ int main(int argc, char* argv[])
             main_window.reset();
             pending_url_connection = QObject::connect(
                 &application, &Application::sig_urlOpened, &application, remember_url);
+            pending_connect_connection = QObject::connect(
+                &application, &Application::sig_hostOpened, &application, remember_host);
 
             if (AppLock::unlock(false) != AppLock::Result::UNLOCKED)
             {
@@ -402,6 +513,21 @@ int main(int argc, char* argv[])
                 window->connectToUrl(start_url);
             });
             start_url.clear();
+        }
+
+if (connect_request_pending)
+        {
+            // The same for a host named on the command line. The window is not on the screen yet
+            // at this point, so the request waits for the event loop the way a link does.
+            const ConnectRequest request = connect_request;
+            connect_request_pending = false;
+
+            QTimer::singleShot(MilliSeconds(0), main_window.get(), [window = main_window.get(), request]()
+            {
+                window->connectToLocalHost(request.identifier(), request.sessionType(),
+                                          request.username(),
+                                          request.password().toString());
+            });
         }
     };
 

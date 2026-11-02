@@ -123,7 +123,8 @@ bool ClientWindow::connectToHost(HostConfig host, const QString& display_name)
     LOG(INFO) << "Connecting to host";
     setClientTitle(host, session_type_);
 
-    std::optional<std::pair<QString, SecureString>> credentials = storedCredentials(host);
+    std::optional<std::pair<QString, SecureString>> credentials =
+        host.hasForcedCredentials() ? std::nullopt : storedCredentials(host);
     if (credentials.has_value())
     {
         LOG(INFO) << "Using stored credentials of host" << host.address();
@@ -506,8 +507,11 @@ bool ClientWindow::askCredentials(HostConfig* host)
 
     AutoQPointer<AuthorizationDialog> auth_dialog(new AuthorizationDialog(this));
 
+    // A Quick Support host may have a user of its own: the mod exports the users of the host
+    // with the package, and such a host is entered with a login and a password. The one-time
+    // password stays the way in that is offered first, but the other ways are not taken away.
     auth_dialog->setOneTimePasswordEnabled(host->routerId() > 0);
-    auth_dialog->setOneTimePasswordOnly(host->isPortable());
+    auth_dialog->setOneTimePasswordPreferred(host->isPortable());
     auth_dialog->setSaveCredentialsVisible(can_save_credentials);
     auth_dialog->setUserName(host->username());
     auth_dialog->setPassword(host->password());
@@ -541,6 +545,11 @@ bool ClientWindow::askCredentials(HostConfig* host)
 void ClientWindow::askCredentialsAgain()
 {
     HostConfig host = session_state_->host();
+
+    // Credentials given on the command line are not stored anywhere, so there is nothing to ask
+    // about: they are the ones the session was started with.
+    if (host.hasForcedCredentials())
+        return;
 
     // Stored credentials are changed in the host editor, not here.
     if (storedCredentials(host).has_value())
