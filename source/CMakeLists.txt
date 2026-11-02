@@ -50,21 +50,34 @@ add_definitions(#-DQT_NO_CAST_FROM_ASCII
                 -DQT_NO_CAST_FROM_BYTEARRAY
                 -DQT_USE_QSTRINGBUILDER)
 
-set(QT_COMMON_LIBS
+# The parts of Qt that every component needs, and the parts that only the ones with a
+# window need. The router draws nothing, so it is built with the first list alone, and
+# then QtGui is not built at all.
+set(QT_CORE_LIBS
     Qt6::Core
+    Qt6::Network)
+
+set(QT_GUI_LIBS
     Qt6::Gui
-    Qt6::Network
     Qt6::Widgets
     Qt6::Svg
     Qt6::Xml)
 
+set(QT_COMMON_LIBS ${QT_CORE_LIBS})
+
+if (NOT ASPIA_ROUTER_ONLY)
+    list(APPEND QT_COMMON_LIBS ${QT_GUI_LIBS})
+endif()
+
 if (NOT ANDROID)
-    list(APPEND QT_COMMON_LIBS
-        Qt6::DeviceDiscoverySupportPrivate
-        Qt6::FbSupportPrivate
-        Qt6::QICOPlugin
-        Qt6::PrintSupport Qt6::PrintSupport_resources_1 Qt6::PrintSupport_resources_2
-        Qt6::Widgets_resources_1 Qt6::Widgets_resources_2)
+    if (NOT ASPIA_ROUTER_ONLY)
+        list(APPEND QT_COMMON_LIBS
+            Qt6::DeviceDiscoverySupportPrivate
+            Qt6::FbSupportPrivate
+            Qt6::QICOPlugin
+            Qt6::PrintSupport Qt6::PrintSupport_resources_1 Qt6::PrintSupport_resources_2
+            Qt6::Widgets_resources_1 Qt6::Widgets_resources_2)
+    endif()
 endif()
 
 if (WIN32)
@@ -72,9 +85,13 @@ if (WIN32)
 endif()
 
 if (LINUX)
-    set(QT_PLATFORM_LIBS
-        Qt6::XcbQpaPrivate
-        Qt6::DBus)
+    if (ASPIA_ROUTER_ONLY)
+        set(QT_PLATFORM_LIBS Qt6::DBus)
+    else()
+        set(QT_PLATFORM_LIBS
+            Qt6::XcbQpaPrivate
+            Qt6::DBus)
+    endif()
 endif()
 
 if (APPLE)
@@ -83,23 +100,31 @@ if (APPLE)
         Qt6::QMacStylePlugin)
 endif()
 
+# The libraries that every component needs. The router speaks the protocol, keeps the
+# database and talks to the system, and needs nothing that carries a picture or a sound.
 set(THIRD_PARTY_LIBS
     CURL::libcurl
     protobuf::libprotobuf-lite
     zstd::libzstd_static
     OpenSSL::Crypto
     OpenSSL::SSL
-    Opus::opus
-    unofficial::libwebm::libwebm
-    unofficial::libvpx::libvpx
     enet
-    miniupnpc::miniupnpc
-    unofficial::nayuki-qr-code-generator::nayuki-qr-code-generator
-    unofficial::sqlite3::sqlite3
-    vterm
-    yuv)
+    unofficial::sqlite3::sqlite3)
+
+if (NOT ASPIA_ROUTER_ONLY)
+    # The picture, the sound and the terminal. Only the host and the client have them.
+    list(APPEND THIRD_PARTY_LIBS
+        Opus::opus
+        unofficial::libwebm::libwebm
+        unofficial::libvpx::libvpx
+        miniupnpc::miniupnpc
+        unofficial::nayuki-qr-code-generator::nayuki-qr-code-generator
+        vterm
+        yuv)
+endif()
 
 if (LINUX OR APPLE)
+    # The database folds the strings it looks for, and the folding comes from ICU.
     list(APPEND THIRD_PARTY_LIBS ICU::uc)
 endif()
 
@@ -224,23 +249,31 @@ endif()
 
 add_subdirectory(tools)
 add_subdirectory(base)
-add_subdirectory(common)
-add_subdirectory(proto)
-add_subdirectory(third_party)
 
-if (NOT ASPIA_HOST_ONLY)
-    add_subdirectory(client)
-endif()
-
-if (NOT ANDROID)
-    add_subdirectory(drivers)
+if (ASPIA_ROUTER_ONLY)
+    # The router and what it needs. Nothing else: the host and the client have windows,
+    # and the relay is a separate program.
+    add_subdirectory(proto)
+    add_subdirectory(router)
+else()
+    add_subdirectory(common)
+    add_subdirectory(proto)
+    add_subdirectory(third_party)
 
     if (NOT ASPIA_HOST_ONLY)
-        add_subdirectory(relay)
-        add_subdirectory(router)
+        add_subdirectory(client)
     endif()
-endif()
 
-if (WIN32 OR LINUX OR APPLE OR ANDROID)
-    add_subdirectory(host)
+    if (NOT ANDROID)
+        add_subdirectory(drivers)
+
+        if (NOT ASPIA_HOST_ONLY)
+            add_subdirectory(relay)
+            add_subdirectory(router)
+        endif()
+    endif()
+
+    if (WIN32 OR LINUX OR APPLE OR ANDROID)
+        add_subdirectory(host)
+    endif()
 endif()
