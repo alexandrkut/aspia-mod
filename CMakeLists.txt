@@ -33,6 +33,8 @@ endif()
 set(ASPIA_VERSION_MAJOR 3)
 set(ASPIA_VERSION_MINOR 2)
 set(ASPIA_VERSION_PATCH 2)
+set(ASPIA_VERSION_BUILD 1)
+set(ASPIA_VERSION_SUFFIX "-mod")
 
 # On CI installed dir could be outside of vcpkg root
 if ("$ENV{VCPKG_INSTALLED_DIR}" STREQUAL "")
@@ -48,7 +50,10 @@ message(STATUS "VCPKG_HOST_TRIPLET: ${VCPKG_HOST_TRIPLET}")
 
 add_definitions(-DASPIA_VERSION_MAJOR=${ASPIA_VERSION_MAJOR}
                 -DASPIA_VERSION_MINOR=${ASPIA_VERSION_MINOR}
-                -DASPIA_VERSION_PATCH=${ASPIA_VERSION_PATCH})
+                -DASPIA_VERSION_PATCH=${ASPIA_VERSION_PATCH}
+                -DASPIA_VERSION_BUILD=${ASPIA_VERSION_BUILD})
+# The suffix is a string, so the quotes are part of the definition.
+add_definitions(-DASPIA_VERSION_SUFFIX=\"${ASPIA_VERSION_SUFFIX}\")
 
 if (ANDROID)
     message(STATUS "Android detected")
