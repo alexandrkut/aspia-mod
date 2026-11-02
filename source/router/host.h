@@ -95,6 +95,7 @@ private:
     void sendMessage(quint8 channel_id, const QByteArray& message);
     void readHostIdRequest(const proto::router::HostIdRequest& host_id_request);
     void readHostTelemetry(const proto::router::HostTelemetry& host_telemetry, TimePoint now);
+    void readHostConfigResult(const proto::router::HostConfigResult& host_config_result);
 
     Database& database_;
     const qint64 session_id_;
