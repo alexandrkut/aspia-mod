@@ -636,7 +636,10 @@ void ServiceWorker::startConfirmation(PendingConfirmation& pending)
     tcp_channel->setParent(this);
 
     const QVersionNumber& host_version = kCurrentVersion;
-    if (host_version > tcp_channel->peerVersion())
+
+    // The number of the build of the line of the versions tells nothing about the compatibility,
+    // so the versions are compared by the three numbers that matter.
+    if (compatibilityVersion(host_version) > compatibilityVersion(tcp_channel->peerVersion()))
     {
         LOG(ERROR) << "Version mismatch (host:" << host_version << "client:"
                    << tcp_channel->peerVersion() << ")";

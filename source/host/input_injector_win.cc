@@ -347,6 +347,10 @@ void InputInjectorWin::injectMouseEvent(const proto::input::MouseEvent& event)
     // Translate the coordinates of the cursor into the coordinates of the virtual screen. The client
     // coordinates are untrusted; clamp them into the screen and compute in 64-bit so the intermediate
     // multiply by 65535 cannot overflow a signed int.
+    //
+    // The offset of the screen is counted from the top left of the virtual screen, the same as the
+    // coordinates of the client are counted from the top left of the captured frame, so the sum is
+    // the place on the virtual screen.
     const qint64 max_x = screen_size_.width() - 1;
     const qint64 max_y = screen_size_.height() - 1;
 

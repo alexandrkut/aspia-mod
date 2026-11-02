@@ -64,6 +64,15 @@ QVersionNumber parse(const proto::peer::Version& version)
 }
 
 //--------------------------------------------------------------------------------------------------
+QString versionToString(const proto::peer::Version& version)
+{
+    return QString("%1.%2.%3")
+        .arg(version.major())
+        .arg(version.minor())
+        .arg(version.patch());
+}
+
+//--------------------------------------------------------------------------------------------------
 proto::screen::Point serialize(const QPoint& point)
 {
     proto::screen::Point result;

@@ -35,6 +35,7 @@
 
 #include "base/auto_qpointer.h"
 #include "base/logging.h"
+#include "base/serialization.h"
 #include "base/shared_pointer.h"
 #include "client/router_controller.h"
 #include "client/desktop/file_dialog.h"
@@ -263,8 +264,7 @@ void RouterRelaysWidget::save()
         relay_object.insert("ip_address", QString::fromStdString(info.ip_address()));
         relay_object.insert("architecture", QString::fromStdString(info.architecture()));
 
-        QString version = QString("%1.%2.%3")
-            .arg(info.version().major()).arg(info.version().minor()).arg(info.version().patch());
+        QString version = versionToString(info.version());
         relay_object.insert("version", version);
 
         QString time = QLocale::system().toString(QDateTime::fromSecsSinceEpoch(

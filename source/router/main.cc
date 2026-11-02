@@ -371,6 +371,15 @@ int createConfig(QTextStream& out)
     settings.setRelayPrivateKey(relay_private_key);
     settings.setSeedKey(seed_key);
 
+    // The second factor is written out by reset() along with everything else, but nothing about
+    // it is visible to whoever runs this command: the file would carry three keys that nobody
+    // asked for and nobody has heard of. Spelled out here, since a deployment that has no way to
+    // let a role in without a code - one that carries the second factor somewhere the router
+    // cannot see - has to be able to find the switch.
+    settings.setTwoFactorForAdmin(true);
+    settings.setTwoFactorForManager(true);
+    settings.setTwoFactorForOperator(true);
+
     if (!settings.sync())
     {
         out << "Failed to write the configuration (check permissions on the config directory)."
@@ -381,6 +390,11 @@ int createConfig(QTextStream& out)
     out << "Configuration successfully created." << Qt::endl;
     out << "Host public key file: " << host_public_key_file << Qt::endl;
     out << "Relay public key file: " << relay_public_key_file << Qt::endl;
+    out << "Second factor: required for administrators, managers and operators." << Qt::endl;
+    out << "To let a role in with its password alone, set the matching key in the [router] "
+           "section of the configuration file to false: two_factor_admin, two_factor_manager, "
+           "two_factor_operator." << Qt::endl;
+    out << "Any other value, a misspelt key included, keeps the second factor required." << Qt::endl;
     out << Qt::endl;
     out << "==================== LOGIN CREDENTIALS ====================" << Qt::endl;
     out << "User name: " << kUserName << Qt::endl;

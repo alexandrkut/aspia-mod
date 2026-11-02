@@ -130,7 +130,10 @@ void SystemSettings::setApplicationShutdownDisabled(bool value)
 //--------------------------------------------------------------------------------------------------
 bool SystemSettings::isAutoUpdateEnabled() const
 {
-    return settings_.value(kUpdateAutoUpdate, true).toBool();
+    // The update server of the upstream knows nothing about the builds of the mod, so the check
+    // is off until the user turns it on. With it on, the check offers the builds of the
+    // upstream, and installing one of them takes the changes of the mod away.
+    return settings_.value(kUpdateAutoUpdate, false).toBool();
 }
 
 //--------------------------------------------------------------------------------------------------

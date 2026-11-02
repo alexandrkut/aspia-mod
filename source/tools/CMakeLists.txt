@@ -52,6 +52,6 @@ if (WIN32)
     add_subdirectory(sha256)
 endif()
 
-if (NOT ANDROID AND NOT ASPIA_HOST_ONLY)
+if (NOT ANDROID AND NOT ASPIA_HOST_ONLY AND NOT ASPIA_ROUTER_ONLY)
     add_subdirectory(signer)
 endif()

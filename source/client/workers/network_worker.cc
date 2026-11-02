@@ -518,7 +518,10 @@ void NetworkWorker::tcpChannelReady()
     session_state_->setHostVersion(host_version);
 
     const QVersionNumber& client_version = kCurrentVersion;
-    if (host_version > client_version)
+
+    // The number of the build of the line of the versions tells nothing about the compatibility,
+    // so the versions are compared by the three numbers that matter.
+    if (compatibilityVersion(host_version) > compatibilityVersion(client_version))
     {
         LOG(ERROR) << "Version mismatch. Host:" << host_version << "Client:" << client_version;
         emit sig_statusChanged(Status::VERSION_MISMATCH);
