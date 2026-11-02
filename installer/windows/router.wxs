@@ -11,12 +11,12 @@
 <?define ServiceDescription="Assigns identifiers to peers and routes traffic to bypass NAT."?>
 
 <!-- Product description -->
-<Product Id="*" Name="!(loc.ProductName)" Language="1033" Version="$(var.Version)" Manufacturer="$(var.Manufacturer)" UpgradeCode="{45182562-182B-44E9-ACFD-698062C06E54}">
+<Product Id="*" Name="!(loc.ProductName)" Language="$(var.Language)" Version="$(var.Version)" Manufacturer="$(var.Manufacturer)" UpgradeCode="{45182562-182B-44E9-ACFD-698062C06E54}">
     <Package Id="*" InstallerVersion="405" Compressed="yes" Manufacturer="$(var.Manufacturer)" InstallPrivileges="elevated" InstallScope="perMachine" />
 
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
 
-    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeErrorMessage)" Schedule="afterInstallInitialize" AllowDowngrades="no" AllowSameVersionUpgrades="no" Disallow="no" />
+    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeErrorMessage)" Schedule="afterInstallInitialize" AllowDowngrades="no" AllowSameVersionUpgrades="yes" Disallow="no" />
 
     <!-- Windows version checking -->
     <Condition Message="This application is only supported on Windows 7, Windows Server 2008 R2, or higher.">
@@ -32,6 +32,13 @@
 
     <Icon Id="aspia.ico" SourceFile="resources/aspia.ico" />
     <Property Id="ARPPRODUCTICON" Value="aspia.ico" />
+
+    <!-- The router may be running when it is removed, and a running program keeps its image
+         on the disk: the file is left behind until the machine is restarted. Closing the
+         program before the removal takes the file with it. -->
+    <util:CloseApplication Id="CloseRouterOnRemove" Target="aspia_router.exe"
+                           ElevatedEndSessionMessage="yes" Timeout="5" TerminateProcess="0"
+                           RebootPrompt="no" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">
         <Directory Id="$(var.Program_Files)">

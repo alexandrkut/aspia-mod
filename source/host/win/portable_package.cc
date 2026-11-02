@@ -20,6 +20,7 @@
 
 #include <QCoreApplication>
 #include <QFile>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <qt_windows.h>
@@ -36,6 +37,14 @@ const char kQuickSupportIcon[] = ":/img/aspia-qs.ico";
 
 const char kRouterAddress[] = "router_address";
 const char kRouterPublicKey[] = "router_public_key";
+
+const char kUsers[] = "users";
+const char kUserName[] = "name";
+const char kUserGroup[] = "group";
+const char kUserSalt[] = "salt";
+const char kUserVerifier[] = "verifier";
+const char kUserFlags[] = "flags";
+const char kUserSessions[] = "sessions";
 
 const qsizetype kRouterPublicKeySize = 32;
 
@@ -79,6 +88,34 @@ bool isValidSettings(const PortablePackage::Settings& settings)
 {
     return settings.router_address.isValid() &&
            settings.router_public_key.size() == kRouterPublicKeySize;
+}
+
+//--------------------------------------------------------------------------------------------------
+QJsonObject userToJson(const User& user)
+{
+    QJsonObject object;
+    object[kUserName] = user.name;
+    object[kUserGroup] = user.group;
+    object[kUserSalt] = QString::fromLatin1(user.salt.toHex());
+    object[kUserVerifier] = QString::fromLatin1(user.verifier.toHex());
+    object[kUserFlags] = static_cast<int>(user.flags);
+    object[kUserSessions] = static_cast<int>(user.sessions);
+
+    return object;
+}
+
+//--------------------------------------------------------------------------------------------------
+User userFromJson(const QJsonObject& object)
+{
+    User user;
+    user.name = object.value(kUserName).toString();
+    user.group = object.value(kUserGroup).toString();
+    user.salt = QByteArray::fromHex(object.value(kUserSalt).toString().toLatin1());
+    user.verifier = QByteArray::fromHex(object.value(kUserVerifier).toString().toLatin1());
+    user.flags = static_cast<quint32>(object.value(kUserFlags).toInt());
+    user.sessions = static_cast<quint32>(object.value(kUserSessions).toInt());
+
+    return user;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -183,7 +220,7 @@ bool updateResources(const QString& file_path, const QByteArray& data)
 
 //--------------------------------------------------------------------------------------------------
 // static
-PortablePackage::Result PortablePackage::exportWithSettings(const QString& file_path)
+PortablePackage::Result PortablePackage::exportWithSettings(const QString& file_path, bool with_users)
 {
     Database& db = Database::instance();
 
@@ -197,9 +234,28 @@ PortablePackage::Result PortablePackage::exportWithSettings(const QString& file_
         return Result::NO_ROUTER;
     }
 
+    if (with_users)
+    {
+        settings.users = db.userList();
+
+        if (settings.users.isEmpty())
+        {
+            LOG(WARNING) << "The host has no users to export";
+        }
+    }
+
     QJsonObject object;
     object[kRouterAddress] = settings.router_address.toString();
     object[kRouterPublicKey] = QString::fromLatin1(settings.router_public_key.toHex());
+
+    if (!settings.users.isEmpty())
+    {
+        QJsonArray users;
+        for (const User& user : settings.users)
+            users.append(userToJson(user));
+
+        object[kUsers] = users;
+    }
 
     const QString executable_path = QCoreApplication::applicationFilePath();
 
@@ -256,6 +312,20 @@ std::optional<PortablePackage::Settings> PortablePackage::builtInSettings()
     settings.router_address =
         Address::fromString(object[kRouterAddress].toString(), kDefaultRouterHostTcpPort);
     settings.router_public_key = QByteArray::fromHex(object[kRouterPublicKey].toString().toLatin1());
+
+    const QJsonArray users = object.value(kUsers).toArray();
+    for (const QJsonValue& value : users)
+    {
+        const User user = userFromJson(value.toObject());
+
+        if (!user.isValid())
+        {
+            LOG(ERROR) << "Invalid user in the built-in settings";
+            continue;
+        }
+
+        settings.users.append(user);
+    }
 
     if (!isValidSettings(settings))
     {

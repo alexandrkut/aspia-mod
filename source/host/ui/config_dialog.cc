@@ -18,6 +18,7 @@
 
 #include "host/ui/config_dialog.h"
 
+#include <QCheckBox>
 #include <QCollator>
 #include <QDir>
 #include <QFileDialog>
@@ -620,7 +621,30 @@ void ConfigDialog::onExportInstaller()
     arch = "x86_64";
 #endif
 
-    const QString default_name = QString("aspia-host-%1-%2.msi").arg(ASPIA_VERSION_SHORT_STRING).arg(arch);
+    const QString default_name = QString("aspia-host-%1-%2.msi").arg(ASPIA_VERSION_STRING).arg(arch);
+
+    // The exported installer carries the settings of the host: the connection to the router and
+    // the users. By default they are imported on the first installation only, so the data of a
+    // host that is already installed is left alone. With the box ticked the settings are
+    // imported on every installation, and the data of the installed host is overwritten.
+    MsgBox box(MsgBox::Question, tr("Export Installer"),
+               tr("The exported installer carries the settings of this host: the connection to "
+                  "the router and the users. By default they are imported on the first "
+                  "installation only, and the data of a host that is already installed is left "
+                  "alone."),
+               MsgBox::Yes | MsgBox::No, this);
+
+    QCheckBox* check_box = new QCheckBox(tr("Overwrite the old data on install"), &box);
+    box.setCheckBox(check_box);
+
+    if (box.exec() != MsgBox::Yes)
+    {
+        LOG(INFO) << "The export is rejected by the user";
+        return;
+    }
+
+    const bool overwrite_data = check_box->isChecked();
+
     QString file_path = QFileDialog::getSaveFileName(
         this, tr("Export"), desktopPath(default_name), tr("MSI-files (*.msi)"));
     if (file_path.isEmpty())
@@ -629,7 +653,7 @@ void ConfigDialog::onExportInstaller()
         return;
     }
 
-    switch (MsiPackage::exportWithSettings(file_path))
+    switch (MsiPackage::exportWithSettings(file_path, overwrite_data))
     {
         case MsiPackage::Result::SUCCESS:
             MsgBox::information(this, tr("The installer was successfully exported."));
@@ -656,6 +680,27 @@ void ConfigDialog::onExportPortable()
 #if defined(Q_OS_WINDOWS)
     LOG(INFO) << "[ACTION] Export portable";
 
+    // The exported package always accepts the one-time password. The users of the host can be
+    // exported as well: they will be able to connect to the exported host with their own login
+    // and password, and the passwords themselves are not in the package - only the salt and the
+    // verifier of every user.
+    MsgBox box(MsgBox::Question, tr("Export Quick Support"),
+               tr("The exported package connects to the same router as this host and accepts the "
+                  "one-time password. The users of this host can be exported with it: they will "
+                  "be able to connect to the exported host with their own login and password."),
+               MsgBox::Yes | MsgBox::No, this);
+
+    QCheckBox* check_box = new QCheckBox(tr("Export the users of this host"), &box);
+    box.setCheckBox(check_box);
+
+    if (box.exec() != MsgBox::Yes)
+    {
+        LOG(INFO) << "The export is rejected by the user";
+        return;
+    }
+
+    const bool with_users = check_box->isChecked();
+
     QString file_path = QFileDialog::getSaveFileName(
         this, tr("Export"), desktopPath("aspia-quick-support.exe"), tr("Executable files (*.exe)"));
     if (file_path.isEmpty())
@@ -664,7 +709,7 @@ void ConfigDialog::onExportPortable()
         return;
     }
 
-    switch (PortablePackage::exportWithSettings(file_path))
+    switch (PortablePackage::exportWithSettings(file_path, with_users))
     {
         case PortablePackage::Result::SUCCESS:
             MsgBox::information(this, tr("The portable version was successfully exported."));

@@ -9,12 +9,12 @@
 <?define Executable="aspia_client.exe"?>
 
 <!-- Product description -->
-<Product Id="*" Name="!(loc.ProductName)" Language="1033" Version="$(var.Version)" Manufacturer="$(var.Manufacturer)" UpgradeCode="{33B57F67-C531-4713-B29B-06796E5BACD6}">
+<Product Id="*" Name="!(loc.ProductName)" Language="$(var.Language)" Version="$(var.Version)" Manufacturer="$(var.Manufacturer)" UpgradeCode="{33B57F67-C531-4713-B29B-06796E5BACD6}">
     <Package Id="*" InstallerVersion="405" Compressed="yes" Manufacturer="$(var.Manufacturer)" InstallPrivileges="elevated" InstallScope="perMachine" />
 
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
 
-    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeErrorMessage)" Schedule="afterInstallInitialize" AllowDowngrades="no" AllowSameVersionUpgrades="no" Disallow="no" />
+    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeErrorMessage)" Schedule="afterInstallInitialize" AllowDowngrades="no" AllowSameVersionUpgrades="yes" Disallow="no" />
 
     <!-- Windows version checking -->
     <Condition Message="This application is only supported on Windows 7, Windows Server 2008 R2, or higher.">
@@ -30,6 +30,13 @@
 
     <Icon Id="aspia.ico" SourceFile="resources/aspia.ico" />
     <Property Id="ARPPRODUCTICON" Value="aspia.ico" />
+
+    <!-- The client may be running when it is removed, and a running program keeps its image
+         on the disk: the file is left behind until the machine is restarted. Closing the
+         program before the removal takes the file with it. -->
+    <util:CloseApplication Id="CloseClientOnRemove" Target="aspia_client.exe"
+                           ElevatedEndSessionMessage="yes" Timeout="5" TerminateProcess="0"
+                           RebootPrompt="no" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">
         <Directory Id="$(var.Program_Files)">
@@ -49,7 +56,11 @@
             <Condition>STARTMENU_SHORTCUT</Condition>
             <Shortcut Id="ProgramMenuShortcut" Name="!(loc.ShortcutName)" WorkingDirectory="InstallLocation" Target="[InstallLocation]$(var.Executable)" />
             <RemoveFolder Id="ApplicationMenuFolder" On="uninstall" />
-            <RegistryValue Root="HKCU" Key="SOFTWARE\$(var.ProductName)" Type="string" Value="" KeyPath="yes" />
+            <!-- The package is installed for the machine, and the shortcut of the program
+                 belongs to it as well. A key in the profile of the user makes the component a
+                 per-user one, and the removal of such a component is skipped when the machine
+                 is cleaned up, which leaves the shortcut behind. -->
+            <RegistryValue Root="HKLM" Key="SOFTWARE\$(var.ProductName)" Type="string" Value="" KeyPath="yes" />
         </Component>
     </DirectoryRef>
 
@@ -58,7 +69,7 @@
         <Component Id="DesktopShortcut" Guid="{56EADCC0-CF88-4230-9736-7479E9BC94A8}">
             <Condition>DESKTOP_SHORTCUT</Condition>
             <Shortcut Id="DesktopShortcut" Name="!(loc.ShortcutName)" WorkingDirectory="InstallLocation" Target="[InstallLocation]$(var.Executable)" />
-            <RegistryValue Root="HKCU" Key="SOFTWARE\$(var.ProductName)" Type="string" Value="" KeyPath="yes" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\$(var.ProductName)" Type="string" Value="" KeyPath="yes" />
         </Component>
     </DirectoryRef>
 

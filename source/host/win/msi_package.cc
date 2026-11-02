@@ -594,6 +594,13 @@ bool replaceCabinet(MSIHANDLE database, const QString& cabinet_path)
 //--------------------------------------------------------------------------------------------------
 bool updatePackageCode(MSIHANDLE database)
 {
+    // The exported package has other contents than the package of the installed host: the
+    // settings of the host are added to it and the cabinet with the files is replaced. A package
+    // that shares the code of the package of the installed host is taken by the installer for
+    // that very package, and the installation of it ends with the error that the data of the
+    // product is invalid.
+    //
+    // The code of the package is in the summary information of the package.
     ScopedMsiHandle summary;
     UINT error = pfn_MsiGetSummaryInformationW(database, nullptr, 1, summary.receive());
     if (error != ERROR_SUCCESS)
@@ -604,7 +611,8 @@ bool updatePackageCode(MSIHANDLE database)
 
     const QString package_code = QUuid::createUuid().toString(QUuid::WithBraces).toUpper();
 
-    error = pfn_MsiSummaryInfoSetPropertyW(summary, PID_REVNUMBER, VT_LPSTR, 0, nullptr, qUtf16Printable(package_code));
+    error = pfn_MsiSummaryInfoSetPropertyW(summary, PID_REVNUMBER, VT_LPSTR, 0, nullptr,
+        qUtf16Printable(package_code));
     if (error != ERROR_SUCCESS)
     {
         LOG(ERROR) << "MsiSummaryInfoSetPropertyW failed:" << SystemError::toString(error);
@@ -622,8 +630,24 @@ bool updatePackageCode(MSIHANDLE database)
 }
 
 //--------------------------------------------------------------------------------------------------
+bool updateProductCode(MSIHANDLE database)
+{
+    // The exported package is installed as an upgrade of the host: the code of the product is
+    // changed, so the installer does not take the exported package for a repair of the installed
+    // host and does not ask whether the host is to be repaired or to be removed. The code of the
+    // upgrade is left alone, so the installer finds the installed host and replaces it.
+    ScopedMsiHandle record(pfn_MsiCreateRecord(1));
+    const QString product_code = QUuid::createUuid().toString(QUuid::WithBraces).toUpper();
+    setRecordString(record, 1, product_code);
+
+    return executeQuery(database,
+        QString("UPDATE `Property` SET `Value`=? WHERE `Property`='ProductCode'"), record);
+}
+
+
+//--------------------------------------------------------------------------------------------------
 MsiPackage::Result embedSettings(const QString& package_path, const QString& settings_path,
-    const QString& cabinet_path)
+    const QString& cabinet_path, bool overwrite_data)
 {
     ScopedMsiHandle database;
     UINT error = pfn_MsiOpenDatabaseW(qUtf16Printable(package_path), MSIDBOPEN_TRANSACT, database.receive());
@@ -652,13 +676,39 @@ MsiPackage::Result embedSettings(const QString& package_path, const QString& set
     ScopedMsiHandle size_row(pfn_MsiCreateRecord(1));
     pfn_MsiRecordSetInteger(size_row, 1, static_cast<int>(QFileInfo(settings_path).size()));
 
-    // A package with other contents must not share the package code of the installed one.
+    // The package gets a code of its own, both the code of the package and the code of the
+    // product, and it is installed over the host as an update of it. The code of the upgrade is
+    // left alone, so the installer finds the installed host and replaces it, instead of asking
+    // whether the host is to be repaired or to be removed.
     if (!executeQuery(database,
             QString("UPDATE `File` SET `FileSize`=? WHERE `File`='%1'").arg(kSettingsFile), size_row) ||
-        !replaceCabinet(database, cabinet_path) || !updatePackageCode(database))
+        !replaceCabinet(database, cabinet_path) || !updateProductCode(database))
     {
         return MsiPackage::Result::FAILED;
     }
+
+    // The action that imports the settings runs on the first installation only, so the data of
+    // a host that is already installed is left alone. The exported package is installed as an
+    // update of the host, and the action sees that there is nothing installed yet, so the
+    // condition of the action is changed: the settings are imported when there is no host to
+    // replace, and when the data of the host is to be overwritten.
+    {
+        ScopedMsiHandle condition_row(pfn_MsiCreateRecord(1));
+        setRecordString(condition_row, 1,
+            overwrite_data ? QStringLiteral("1") : QStringLiteral("NOT WIX_UPGRADE_DETECTED"));
+
+        if (!executeQuery(database,
+                QString("UPDATE `InstallExecuteSequence` SET `Condition`=? WHERE `Action`='%1'")
+                    .arg(kImportAction), condition_row))
+        {
+            return MsiPackage::Result::FAILED;
+        }
+    }
+
+    // The code of the package is written last: the summary information is a separate part of the
+    // package, and the commit writes the file with the changes of the tables and with it.
+    if (!updatePackageCode(database))
+        return MsiPackage::Result::FAILED;
 
     error = pfn_MsiDatabaseCommit(database);
     if (error != ERROR_SUCCESS)
@@ -674,7 +724,7 @@ MsiPackage::Result embedSettings(const QString& package_path, const QString& set
 
 //--------------------------------------------------------------------------------------------------
 // static
-MsiPackage::Result MsiPackage::exportWithSettings(const QString& file_path)
+MsiPackage::Result MsiPackage::exportWithSettings(const QString& file_path, bool overwrite_data)
 {
     if (!loadFunctions())
         return Result::FAILED;
@@ -710,7 +760,7 @@ MsiPackage::Result MsiPackage::exportWithSettings(const QString& file_path)
         return Result::FAILED;
     }
 
-    const Result result = embedSettings(file_path, settings_path, cabinet_path);
+    const Result result = embedSettings(file_path, settings_path, cabinet_path, overwrite_data);
     if (result != Result::SUCCESS)
         QFile::remove(file_path);
 
