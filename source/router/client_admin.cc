@@ -198,6 +198,8 @@ void ClientAdmin::doHostRequest(const proto::router::HostRequest& request)
         host_result->set_error_code(error_code);
         if (!result.empty())
             host_result->set_result(result);
+        sendMessage(proto::router::CHANNEL_ID_ADMIN, serialize(message));
+    };
 
     if (command_name == proto::router::kCommandHostDisconnect)
     {
