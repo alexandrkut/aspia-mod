@@ -90,6 +90,7 @@ Application::Application(int& argc, char* argv[])
         else if (message.startsWith(kOpenUrl))
         {
             emit sig_urlOpened(QString::fromUtf8(message.mid(static_cast<qsizetype>(qstrlen(kOpenUrl)))));
+        }
         else if (message.startsWith(kOpenHost))
         {
             // "<base64 identifier>:<session_type>:<base64 user name>:<base64 password>". The
@@ -138,7 +139,6 @@ Application::Application(int& argc, char* argv[])
                       << ")";
 
             emit sig_hostOpened(identifier, session_type, username, password);
-        }
         }
         else
         {
