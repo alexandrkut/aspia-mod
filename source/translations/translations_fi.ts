@@ -29,117 +29,127 @@
         <translation>Sulje</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="104"/>
+        <location filename="../common/desktop/about_dialog.cc" line="127"/>
         <source>Version: %1 (%2)</source>
         <translation>Versio: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="109"/>
+        <location filename="../common/desktop/about_dialog.cc" line="132"/>
         <source>Aspia is free software released under GNU General Public License 3.</source>
         <translation>Aspia on vapaa ohjelmisto, joka on julkaistu GNU General Public License 3 -lisenssillä.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="110"/>
+        <location filename="../common/desktop/about_dialog.cc" line="133"/>
         <source>You can get a copy of license here:</source>
         <translation>Voit hakea lisenssin kopion täältä:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="115"/>
+        <location filename="../common/desktop/about_dialog.cc" line="138"/>
         <source>You can also get a translation of GNU GPL license here:</source>
         <translation>Voit myös hakea GNU GPL -lisenssin käännöksen täältä:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="119"/>
+        <location filename="../common/desktop/about_dialog.cc" line="142"/>
         <source>Links</source>
         <translation>Linkit</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="120"/>
+        <location filename="../common/desktop/about_dialog.cc" line="143"/>
         <source>Home page:</source>
         <translation>Kotisivu:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="121"/>
+        <location filename="../common/desktop/about_dialog.cc" line="144"/>
         <source>GitHub page:</source>
         <translation>GitHub-sivu:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="124"/>
+        <location filename="../common/desktop/about_dialog.cc" line="153"/>
+        <source>Modifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../common/desktop/about_dialog.cc" line="155"/>
+        <source>The changes and the sources:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../common/desktop/about_dialog.cc" line="159"/>
         <source>Developers</source>
         <translation>Kehittäjät</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="126"/>
+        <location filename="../common/desktop/about_dialog.cc" line="161"/>
         <source>Translators</source>
         <translation>Kääntäjät</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="128"/>
+        <location filename="../common/desktop/about_dialog.cc" line="163"/>
         <source>Third-party components</source>
         <translation>Kolmannen osapuolen komponentit</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="130"/>
+        <location filename="../common/desktop/about_dialog.cc" line="165"/>
         <source>Graphics and images</source>
         <translation>Grafiikka ja kuvat</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="131"/>
+        <location filename="../common/desktop/about_dialog.cc" line="166"/>
         <source>Icons by %1</source>
         <translation>Kuvakkeet: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="158"/>
+        <location filename="../common/desktop/about_dialog.cc" line="196"/>
         <source>Application</source>
         <translation>Sovellus</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="159"/>
+        <location filename="../common/desktop/about_dialog.cc" line="197"/>
         <source>Path: %1</source>
         <translation>Polku: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="160"/>
+        <location filename="../common/desktop/about_dialog.cc" line="198"/>
         <source>Logging directory: %1</source>
         <translation>Lokihakemisto: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="162"/>
+        <location filename="../common/desktop/about_dialog.cc" line="200"/>
         <source>Logging file: %1</source>
         <translation>Lokitiedosto: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="167"/>
+        <location filename="../common/desktop/about_dialog.cc" line="205"/>
         <source>Build Information</source>
         <translation>Koontiversion tiedot</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="168"/>
+        <location filename="../common/desktop/about_dialog.cc" line="206"/>
         <source>Git branch: %1</source>
         <translation>Git-haara: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="170"/>
+        <location filename="../common/desktop/about_dialog.cc" line="208"/>
         <source>Git commit: %1</source>
         <translation>Git-commit: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="175"/>
+        <location filename="../common/desktop/about_dialog.cc" line="213"/>
         <source>Compilation</source>
         <translation>Käännös</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="176"/>
+        <location filename="../common/desktop/about_dialog.cc" line="214"/>
         <source>Compilation date: %1</source>
         <translation>Käännöspäivä: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="177"/>
+        <location filename="../common/desktop/about_dialog.cc" line="215"/>
         <source>Compilation time: %1</source>
         <translation>Käännösaika: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="206"/>
+        <location filename="../common/desktop/about_dialog.cc" line="244"/>
         <source>Version Information</source>
         <translation>Versiotiedot</translation>
     </message>
@@ -592,13 +602,13 @@ Nollataanko tietokanta?</translation>
         <translation>Tallenna sisäänkirjautumistiedot</translation>
     </message>
     <message>
-        <location filename="../client/desktop/authorization_dialog.cc" line="216"/>
-        <location filename="../client/desktop/authorization_dialog.cc" line="232"/>
+        <location filename="../client/desktop/authorization_dialog.cc" line="227"/>
+        <location filename="../client/desktop/authorization_dialog.cc" line="243"/>
         <source>Password cannot be empty.</source>
         <translation>Salasana ei voi olla tyhjä.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/authorization_dialog.cc" line="225"/>
+        <location filename="../client/desktop/authorization_dialog.cc" line="236"/>
         <source>User name cannot be empty.</source>
         <translation>Käyttäjänimi ei voi olla tyhjä.</translation>
     </message>
@@ -1029,22 +1039,22 @@ Nollataanko tietokanta?</translation>
 <context>
     <name>Client</name>
     <message>
-        <location filename="../client/main.cc" line="82"/>
+        <location filename="../client/main.cc" line="86"/>
         <source>Unable to create a backup. Some records of the database are damaged. Fix or delete them.</source>
         <translation>Varmuuskopion luominen epäonnistui. Jotkin tietokannan tietueet ovat vioittuneet. Korjaa tai poista ne.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="98"/>
+        <location filename="../client/main.cc" line="102"/>
         <source>Set Master Password</source>
         <translation>Aseta pääsalasana</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="100"/>
+        <location filename="../client/main.cc" line="104"/>
         <source>Set a master password required to unlock the application.</source>
         <translation>Aseta pääsalasana, joka vaaditaan sovelluksen lukituksen avaamiseen.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/main.cc" line="108"/>
+        <location filename="../client/main.cc" line="112"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>Salasana ei saa olla lyhyempi kuin %n merkki.</numerusform>
@@ -1052,12 +1062,12 @@ Nollataanko tietokanta?</translation>
         </translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="116"/>
+        <location filename="../client/main.cc" line="120"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>Syöttämäsi salasana ei täytä turvallisuusvaatimuksia!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/main.cc" line="118"/>
+        <location filename="../client/main.cc" line="122"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>Salasanassa on oltava pieniä ja isoja kirjaimia sekä numeroita, eikä se saa olla lyhyempi kuin %n merkki.</numerusform>
@@ -1065,70 +1075,160 @@ Nollataanko tietokanta?</translation>
         </translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="122"/>
+        <location filename="../client/main.cc" line="126"/>
         <source>Do you want to enter a different password?</source>
         <translation>Haluatko syöttää toisen salasanan?</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="132"/>
+        <location filename="../client/main.cc" line="136"/>
         <source>Unable to set master password.</source>
         <translation>Pääsalasanaa ei voi asettaa.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="76"/>
+        <location filename="../client/main.cc" line="80"/>
         <source>Unable to create a backup in the directory &quot;%1&quot;.</source>
         <translation>Varmuuskopion luominen kansioon &quot;%1&quot; epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="88"/>
+        <location filename="../client/main.cc" line="92"/>
         <source>Unable to create a backup.</source>
         <translation>Varmuuskopion luominen epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="295"/>
+        <location filename="../client/main.cc" line="296"/>
+        <source>Connect to the host of the address book with this record ID or host ID, using the login and the password stored in it, or connect directly to a host by its address, which needs the login and the password given with --username and --password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="300"/>
+        <source>id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="304"/>
+        <source>Kind of the session to open: desktop, file, info, chat or terminal (default: the one from the settings of the application).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="307"/>
+        <source>type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="311"/>
+        <source>Log in with this user name instead of the one stored in the host. Requires --password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="314"/>
+        <source>name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="318"/>
+        <source>Log in with this password instead of the stored one. Requires --username. A password on a command line is visible to the other users of the machine.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="321"/>
+        <source>password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="332"/>
         <source>An aspia:// link to connect to a host.</source>
         <translation>aspia://-linkki yhteyden muodostamiseen isäntään.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="291"/>
+        <location filename="../client/main.cc" line="324"/>
         <source>Aspia Client</source>
         <translation>Aspia Client</translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="151"/>
+        <source>&quot;%1&quot; is neither a host ID nor a record ID nor a host address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="154"/>
+        <source>The host ID of --connect is missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="176"/>
+        <source>&quot;%1&quot; is not a valid session type. Use desktop, file, info, chat or terminal.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="179"/>
+        <source>The session type of --session-type is missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="196"/>
+        <source>The user name of --username is missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="212"/>
+        <source>The password of --password is missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="242"/>
+        <source>&quot;%1&quot; is neither an aspia:// link nor a host ID nor a host address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="261"/>
+        <source>--username requires --password as well.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="263"/>
+        <source>--password requires --username as well.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="274"/>
+        <source>--username and --password need a host to connect to (--connect or an aspia:// link).</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ClientListModel</name>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="141"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="142"/>
         <source>Computer Name</source>
         <translation>Tietokoneen nimi</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="144"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="145"/>
         <source>User Name</source>
         <translation>Käyttäjänimi</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="147"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="148"/>
         <source>IP Address</source>
         <translation>IP-osoite</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="150"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="151"/>
         <source>Connect Time</source>
         <translation>Yhdistämisaika</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="153"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="154"/>
         <source>Version</source>
         <translation>Versio</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="156"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="157"/>
         <source>Architecture</source>
         <translation>Arkkitehtuuri</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="159"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="160"/>
         <source>Operating System</source>
         <translation>Käyttöjärjestelmä</translation>
     </message>
@@ -1136,37 +1236,37 @@ Nollataanko tietokanta?</translation>
 <context>
     <name>ClientWindow</name>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="278"/>
+        <location filename="../client/desktop/client_window.cc" line="279"/>
         <source>Session started.</source>
         <translation>Istunto aloitettu.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="592"/>
+        <location filename="../client/desktop/client_window.cc" line="601"/>
         <source>The specified router is unavailable.</source>
         <translation>Määritetty reititin ei ole käytettävissä.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="594"/>
+        <location filename="../client/desktop/client_window.cc" line="603"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>Reitittimen tiedot ovat vioittuneet. Muokkaa reititintä ja syötä ne uudelleen.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="596"/>
+        <location filename="../client/desktop/client_window.cc" line="605"/>
         <source>The specified router is offline.</source>
         <translation>Määritetty reititin on offline-tilassa.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="290"/>
+        <location filename="../client/desktop/client_window.cc" line="291"/>
         <source>Connecting to host %1...</source>
         <translation>Yhdistetään isäntään %1...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="294"/>
+        <location filename="../client/desktop/client_window.cc" line="295"/>
         <source>Connecting to host %1:%2...</source>
         <translation>Yhdistetään isäntään %1:%2...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="330"/>
+        <location filename="../client/desktop/client_window.cc" line="331"/>
         <source>Host is unavailable yet. Waiting to reconnect...</source>
         <translation>Isäntä ei ole vielä käytettävissä. Odotetaan yhteyden palautumista...</translation>
     </message>
@@ -1176,22 +1276,22 @@ Nollataanko tietokanta?</translation>
         <translation>Aikakatkaisu odotettaessa yhteyden palautumista isäntään.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="350"/>
+        <location filename="../client/desktop/client_window.cc" line="351"/>
         <source>The Host version is newer than the Client version (%1 &gt; %2). Please update the application.</source>
         <translation>Isännän versio on uudempi kuin asiakkaan versio (%1 &gt; %2). Päivitä sovellus.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="603"/>
+        <location filename="../client/desktop/client_window.cc" line="612"/>
         <source>Requesting connection to the host...</source>
         <translation>Pyydetään yhteyttä isäntään...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="611"/>
+        <location filename="../client/desktop/client_window.cc" line="620"/>
         <source>Connection offer received.</source>
         <translation>Yhteystarjous vastaanotettu.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="628"/>
+        <location filename="../client/desktop/client_window.cc" line="637"/>
         <source>Error requesting connection via router.</source>
         <translation>Virhe pyydettäessä yhteyttä reitittimen kautta.</translation>
     </message>
@@ -1201,7 +1301,7 @@ Nollataanko tietokanta?</translation>
     <message>
         <location filename="../host/ui/config_dialog.ui" line="14"/>
         <location filename="../host/ui/config_dialog.ui" line="185"/>
-        <location filename="../host/ui/config_dialog.cc" line="136"/>
+        <location filename="../host/ui/config_dialog.cc" line="137"/>
         <source>Settings</source>
         <translation>Asetukset</translation>
     </message>
@@ -1429,258 +1529,288 @@ Nollataanko tietokanta?</translation>
         <translation>Päivitysten tarkistusväli:</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="138"/>
+        <location filename="../host/ui/config_dialog.cc" line="139"/>
         <source>Installer</source>
         <translation>Asennusohjelma</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="140"/>
+        <location filename="../host/ui/config_dialog.cc" line="141"/>
         <source>Quick Support</source>
         <translation>Quick Support</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="147"/>
+        <location filename="../host/ui/config_dialog.cc" line="148"/>
         <source>Once a day</source>
         <translation>Kerran päivässä</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="148"/>
+        <location filename="../host/ui/config_dialog.cc" line="149"/>
         <source>Once a week</source>
         <translation>Kerran viikossa</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="149"/>
+        <location filename="../host/ui/config_dialog.cc" line="150"/>
         <source>Once a month</source>
         <translation>Kerran kuukaudessa</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="151"/>
+        <location filename="../host/ui/config_dialog.cc" line="152"/>
         <source>Stable</source>
         <translation>Vakaa</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="152"/>
+        <location filename="../host/ui/config_dialog.cc" line="153"/>
         <source>Beta</source>
         <translation>Beeta</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="153"/>
+        <location filename="../host/ui/config_dialog.cc" line="154"/>
         <source>Alpha</source>
         <translation>Alfa</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="188"/>
+        <location filename="../host/ui/config_dialog.cc" line="189"/>
         <source>Default</source>
         <translation>Oletus</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="222"/>
+        <location filename="../host/ui/config_dialog.cc" line="223"/>
         <source>No proxy</source>
         <translation>Ei proxy-palvelinta</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="259"/>
+        <location filename="../host/ui/config_dialog.cc" line="260"/>
         <source>On reboot</source>
         <translation>Uudelleenkäynnistettäessä</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="260"/>
+        <location filename="../host/ui/config_dialog.cc" line="261"/>
         <source>Every 5 minutes</source>
         <translation>5 minuutin välein</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="261"/>
+        <location filename="../host/ui/config_dialog.cc" line="262"/>
         <source>Every 30 minutes</source>
         <translation>30 minuutin välein</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="262"/>
+        <location filename="../host/ui/config_dialog.cc" line="263"/>
         <source>Every 1 hour</source>
         <translation>Tunnin välein</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="263"/>
+        <location filename="../host/ui/config_dialog.cc" line="264"/>
         <source>Every 6 hours</source>
         <translation>6 tunnin välein</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="264"/>
+        <location filename="../host/ui/config_dialog.cc" line="265"/>
         <source>Every 12 hours</source>
         <translation>12 tunnin välein</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="272"/>
+        <location filename="../host/ui/config_dialog.cc" line="273"/>
         <source>Letters and digits</source>
         <translation>Kirjaimet ja numerot</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="275"/>
+        <location filename="../host/ui/config_dialog.cc" line="276"/>
         <source>Letters</source>
         <translation>Kirjaimet</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="277"/>
+        <location filename="../host/ui/config_dialog.cc" line="278"/>
         <source>Digits</source>
         <translation>Numerot</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="294"/>
+        <location filename="../host/ui/config_dialog.cc" line="295"/>
         <source>Never</source>
         <translation>Ei koskaan</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="295"/>
+        <location filename="../host/ui/config_dialog.cc" line="296"/>
         <source>15 seconds</source>
         <translation>15 sekuntia</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="296"/>
+        <location filename="../host/ui/config_dialog.cc" line="297"/>
         <source>30 seconds</source>
         <translation>30 sekuntia</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="297"/>
+        <location filename="../host/ui/config_dialog.cc" line="298"/>
         <source>45 seconds</source>
         <translation>45 sekuntia</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="298"/>
+        <location filename="../host/ui/config_dialog.cc" line="299"/>
         <source>60 seconds</source>
         <translation>60 sekuntia</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="306"/>
+        <location filename="../host/ui/config_dialog.cc" line="307"/>
         <source>Accept connection</source>
         <translation>Hyväksy yhteys</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="307"/>
+        <location filename="../host/ui/config_dialog.cc" line="308"/>
         <source>Reject connection</source>
         <translation>Hylkää yhteys</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="507"/>
+        <location filename="../host/ui/config_dialog.cc" line="508"/>
         <source>Are you sure you want to delete user &quot;%1&quot;?</source>
         <translation>Haluatko varmasti poistaa käyttäjän &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="535"/>
-        <location filename="../host/ui/config_dialog.cc" line="569"/>
+        <location filename="../host/ui/config_dialog.cc" line="536"/>
+        <location filename="../host/ui/config_dialog.cc" line="570"/>
         <source>An error occurred while processing the password.</source>
         <translation>Salasanan käsittelyssä tapahtui virhe.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="552"/>
+        <location filename="../host/ui/config_dialog.cc" line="553"/>
         <source>Settings storage is unavailable.</source>
         <translation>Asetusten tallennustila ei ole käytettävissä.</translation>
     </message>
     <message>
+        <location filename="../host/ui/config_dialog.cc" line="630"/>
+        <source>Export Installer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/config_dialog.cc" line="631"/>
+        <source>The exported installer carries the settings of this host: the connection to the router and the users. By default they are imported on the first installation only, and the data of a host that is already installed is left alone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/config_dialog.cc" line="637"/>
+        <source>Overwrite the old data on install</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../host/ui/config_dialog.ui" line="204"/>
-        <location filename="../host/ui/config_dialog.cc" line="583"/>
+        <location filename="../host/ui/config_dialog.cc" line="584"/>
         <source>Import</source>
         <translation>Tuo</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="583"/>
-        <location filename="../host/ui/config_dialog.cc" line="600"/>
+        <location filename="../host/ui/config_dialog.cc" line="584"/>
+        <location filename="../host/ui/config_dialog.cc" line="601"/>
         <source>JSON-files (*.json)</source>
         <translation>JSON-tiedostot (*.json)</translation>
     </message>
     <message>
         <location filename="../host/ui/config_dialog.ui" line="211"/>
-        <location filename="../host/ui/config_dialog.cc" line="600"/>
-        <location filename="../host/ui/config_dialog.cc" line="625"/>
-        <location filename="../host/ui/config_dialog.cc" line="660"/>
+        <location filename="../host/ui/config_dialog.cc" line="601"/>
+        <location filename="../host/ui/config_dialog.cc" line="649"/>
+        <location filename="../host/ui/config_dialog.cc" line="705"/>
         <source>Export</source>
         <translation>Vie</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="625"/>
+        <location filename="../host/ui/config_dialog.cc" line="649"/>
         <source>MSI-files (*.msi)</source>
         <translation>MSI-tiedostot (*.msi)</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="635"/>
+        <location filename="../host/ui/config_dialog.cc" line="659"/>
         <source>The installer was successfully exported.</source>
         <translation>Asennusohjelman vienti onnistui.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="639"/>
+        <location filename="../host/ui/config_dialog.cc" line="663"/>
         <source>The installed host package was not found.</source>
         <translation>Isännän asennettua pakettia ei löytynyt.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="643"/>
+        <location filename="../host/ui/config_dialog.cc" line="667"/>
         <source>The installed version of the host does not support exporting the installer.</source>
         <translation>Isännän asennettu versio ei tue asennusohjelman vientiä.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="647"/>
+        <location filename="../host/ui/config_dialog.cc" line="671"/>
         <source>Unable to export the installer.</source>
         <translation>Asennusohjelmaa ei voi viedä.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="660"/>
+        <location filename="../host/ui/config_dialog.cc" line="687"/>
+        <source>Export Quick Support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/config_dialog.cc" line="688"/>
+        <source>The exported package connects to the same router as this host and accepts the one-time password. The users of this host can be exported with it: they will be able to connect to the exported host with their own login and password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/config_dialog.cc" line="693"/>
+        <source>Export the users of this host</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/config_dialog.cc" line="705"/>
         <source>Executable files (*.exe)</source>
         <translation>Suoritettavat tiedostot (*.exe)</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="670"/>
+        <location filename="../host/ui/config_dialog.cc" line="715"/>
         <source>The portable version was successfully exported.</source>
         <translation>Kannettavan version vienti onnistui.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="674"/>
+        <location filename="../host/ui/config_dialog.cc" line="719"/>
         <source>The portable version works only through a router. Set up the connection to the router and save the settings.</source>
         <translation>Kannettava versio toimii vain reitittimen kautta. Määritä yhteys reitittimeen ja tallenna asetukset.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="678"/>
+        <location filename="../host/ui/config_dialog.cc" line="723"/>
         <source>Unable to export the portable version.</source>
         <translation>Kannettavaa versiota ei voi viedä.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="699"/>
+        <location filename="../host/ui/config_dialog.cc" line="744"/>
         <source>The configuration can not be written. Make sure that you have sufficient rights to write.</source>
         <translation>Määrityksiä ei voitu kirjoittaa. Varmista, että sinulla on riittävät kirjoitusoikeudet.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="715"/>
+        <location filename="../host/ui/config_dialog.cc" line="760"/>
         <source>An invalid update server address was entered.</source>
         <translation>Syötetty päivityspalvelimen osoite on virheellinen.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="723"/>
+        <location filename="../host/ui/config_dialog.cc" line="768"/>
         <source>Enter the update server address.</source>
         <translation>Syötä päivityspalvelimen osoite.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="733"/>
+        <location filename="../host/ui/config_dialog.cc" line="778"/>
         <source>An invalid public key was entered.</source>
         <translation>Syötetty julkinen avain on virheellinen.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="752"/>
+        <location filename="../host/ui/config_dialog.cc" line="797"/>
         <source>Incorrect proxy address entered.</source>
         <translation>Syötetty proxy-palvelimen osoite on virheellinen.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="764"/>
+        <location filename="../host/ui/config_dialog.cc" line="809"/>
         <source>Incorrect router address entered.</source>
         <translation>Syötetty reitittimen osoite on virheellinen.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="774"/>
+        <location filename="../host/ui/config_dialog.cc" line="819"/>
         <source>Incorrect router public key entered.</source>
         <translation>Syötetty reitittimen julkinen avain on virheellinen.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="946"/>
+        <location filename="../host/ui/config_dialog.cc" line="991"/>
         <source>Install</source>
         <translation>Asenna</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="951"/>
+        <location filename="../host/ui/config_dialog.cc" line="996"/>
         <source>Remove</source>
         <translation>Poista</translation>
     </message>
@@ -2818,32 +2948,32 @@ Korvattuja kirjautumistietoja: %2</translation>
 <context>
     <name>DesktopWidget</name>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="633"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="638"/>
         <source>The session was paused by a remote user</source>
         <translation>Etäkäyttäjä keskeytti istunnon</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="636"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="641"/>
         <source>The session is temporarily unavailable</source>
         <translation>Istunto on tilapäisesti poissa käytöstä</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="639"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="644"/>
         <source>The session is permanently unavailable</source>
         <translation>Istunto on pysyvästi poissa käytöstä</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="642"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="647"/>
         <source>Waiting for the remote user to confirm screen capture</source>
         <translation>Odotetaan, että etäkäyttäjä vahvistaa näytön kaappauksen</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="645"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="650"/>
         <source>The remote device screen is locked</source>
         <translation>Etälaitteen näyttö on lukittu</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="648"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="653"/>
         <source>Error while receiving video stream: %1</source>
         <translation>Virhe videovirran vastaanotossa: %1</translation>
     </message>
@@ -2851,37 +2981,37 @@ Korvattuja kirjautumistietoja: %2</translation>
 <context>
     <name>DesktopWindow</name>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1123"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1132"/>
         <source>Save File</source>
         <translation>Tallenna tiedosto</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1124"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1133"/>
         <source>PNG Image (*.png);;BMP Image (*.bmp)</source>
         <translation>PNG-kuva (*.png);;BMP-kuva (*.bmp)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1155"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1164"/>
         <source>Could not save image</source>
         <translation>Kuvaa ei voitu tallentaa</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1405"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1414"/>
         <source>Invalid user name or password.</source>
         <translation>Väärä käyttäjänimi tai salasana.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1408"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1417"/>
         <source>The password has expired.</source>
         <translation>Salasana on vanhentunut.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1411"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1420"/>
         <source>The account is locked out.</source>
         <translation>Tili on lukittu.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1414"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1423"/>
         <source>The account is disabled.</source>
         <translation>Tili on poistettu käytöstä.</translation>
     </message>
@@ -4057,9 +4187,9 @@ Korvattuja kirjautumistietoja: %2</translation>
     <name>HostWindow</name>
     <message>
         <location filename="../host/ui/host_window.ui" line="26"/>
-        <location filename="../host/ui/host_window.cc" line="644"/>
-        <location filename="../host/ui/host_window.cc" line="889"/>
-        <location filename="../host/ui/host_window.cc" line="1167"/>
+        <location filename="../host/ui/host_window.cc" line="645"/>
+        <location filename="../host/ui/host_window.cc" line="898"/>
+        <location filename="../host/ui/host_window.cc" line="1176"/>
         <source>Aspia Host</source>
         <translation>Aspia Host</translation>
     </message>
@@ -4075,7 +4205,7 @@ Korvattuja kirjautumistietoja: %2</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="198"/>
-        <location filename="../host/ui/host_window.cc" line="1119"/>
+        <location filename="../host/ui/host_window.cc" line="1128"/>
         <source>Router is disabled</source>
         <translation>Reititin on poissa käytöstä</translation>
     </message>
@@ -4146,7 +4276,7 @@ Korvattuja kirjautumistietoja: %2</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="335"/>
-        <location filename="../host/ui/host_window.cc" line="850"/>
+        <location filename="../host/ui/host_window.cc" line="851"/>
         <source>Hide</source>
         <translation>Piilota</translation>
     </message>
@@ -4186,75 +4316,85 @@ Korvattuja kirjautumistietoja: %2</translation>
         <translation>Näytä keskustelu</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="180"/>
-        <location filename="../host/ui/host_window.cc" line="644"/>
-        <location filename="../host/ui/host_window.cc" line="1167"/>
+        <location filename="../host/ui/host_window.cc" line="181"/>
+        <location filename="../host/ui/host_window.cc" line="645"/>
+        <location filename="../host/ui/host_window.cc" line="1176"/>
         <source>Aspia Quick Support</source>
         <translation>Aspia Quick Support</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="339"/>
-        <location filename="../host/ui/host_window.cc" line="845"/>
+        <location filename="../host/ui/host_window.cc" line="340"/>
+        <location filename="../host/ui/host_window.cc" line="846"/>
         <source>Show</source>
         <translation>Näytä</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="633"/>
+        <location filename="../host/ui/host_window.cc" line="634"/>
         <source>Screen recording has started.</source>
         <translation>Näytön tallennus on alkanut.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="635"/>
+        <location filename="../host/ui/host_window.cc" line="636"/>
         <source>Screen recording stopped.</source>
         <translation>Näytön tallennus pysäytetty.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="834"/>
+        <location filename="../host/ui/host_window.cc" line="835"/>
         <source>Settings storage is unavailable.</source>
         <translation>Asetusten tallennustila ei ole käytettävissä.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="900"/>
+        <location filename="../host/ui/host_window.cc" line="894"/>
+        <source>The ability to show several monitors at once</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/host_window.cc" line="895"/>
+        <source>Remote management of settings and users by the router administrator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/host_window.cc" line="909"/>
         <source>Aspia Host will be removed from this computer. The settings of the host will be kept. Do you really want to uninstall the application?</source>
         <translation>Aspia Host poistetaan tästä tietokoneesta. Isännän asetukset säilytetään. Haluatko varmasti poistaa sovelluksen asennuksen?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="912"/>
+        <location filename="../host/ui/host_window.cc" line="921"/>
         <source>Unable to uninstall the application.</source>
         <translation>Sovelluksen asennusta ei voi poistaa.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="939"/>
+        <location filename="../host/ui/host_window.cc" line="948"/>
         <source>If you exit from Aspia, it will not be possible to connect to this computer until you turn on the computer or Aspia again manually. Do you really want to exit the application?</source>
         <translation>Jos lopetat Aspian, tähän tietokoneeseen ei voi muodostaa yhteyttä ennen kuin käynnistät tietokoneen tai Aspian uudelleen manuaalisesti. Haluatko varmasti lopettaa sovelluksen?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1111"/>
+        <location filename="../host/ui/host_window.cc" line="1120"/>
         <source>Not connected to service</source>
         <translation>Ei yhteyttä palveluun</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1124"/>
+        <location filename="../host/ui/host_window.cc" line="1133"/>
         <source>Connecting to router...</source>
         <translation>Yhdistetään reitittimeen...</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1129"/>
+        <location filename="../host/ui/host_window.cc" line="1138"/>
         <source>Connected to router</source>
         <translation>Yhdistetty reitittimeen</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1134"/>
+        <location filename="../host/ui/host_window.cc" line="1143"/>
         <source>Connection error</source>
         <translation>Yhteysvirhe</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1212"/>
+        <location filename="../host/ui/host_window.cc" line="1221"/>
         <source>IP addresses:</source>
         <translation>IP-osoitteet:</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1168"/>
+        <location filename="../host/ui/host_window.cc" line="1177"/>
         <source>ID: %1</source>
         <translation>ID: %1</translation>
     </message>
@@ -4959,7 +5099,7 @@ Tuotuja kirjautumistietoja: %5</translation>
     </message>
     <message>
         <location filename="../client/desktop/main_window.ui" line="20"/>
-        <location filename="../client/desktop/main_window.cc" line="633"/>
+        <location filename="../client/desktop/main_window.cc" line="1007"/>
         <source>Aspia Client</source>
         <translation>Aspia Client</translation>
     </message>
@@ -5034,88 +5174,128 @@ Tuotuja kirjautumistietoja: %5</translation>
         <translation>Aina päällimmäisenä</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="127"/>
+        <location filename="../client/desktop/main_window.cc" line="130"/>
         <source>Search...</source>
         <translation>Hae...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="215"/>
+        <location filename="../client/desktop/main_window.cc" line="218"/>
         <source>Unable to turn on the MCP connector.</source>
         <translation>MCP-liitintä ei voi ottaa käyttöön.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="233"/>
+        <location filename="../client/desktop/main_window.cc" line="236"/>
         <source>Management</source>
         <translation>Hallinta</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="279"/>
+        <location filename="../client/desktop/main_window.cc" line="282"/>
         <source>Invalid link &quot;%1&quot;.</source>
         <translation>Virheellinen linkki &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="302"/>
+        <location filename="../client/desktop/main_window.cc" line="305"/>
         <source>The router referenced by the link is not among the saved routers.</source>
         <translation>Linkin viittaamaa reititintä ei ole tallennettujen reitittimien joukossa.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="351"/>
+        <location filename="../client/desktop/main_window.cc" line="354"/>
         <source>The host referenced by the link is not among the saved hosts.</source>
         <translation>Linkin viittaamaa isäntää ei ole tallennettujen isäntien joukossa.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="609"/>
+        <location filename="../client/desktop/main_window.cc" line="419"/>
+        <source>A host named by its address has no record of it in the address book, and there are no stored credentials to use. Give the user name and the password with --username and --password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="681"/>
+        <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="687"/>
+        <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="974"/>
         <source>Close all sessions to lock the application.</source>
         <translation>Sulje kaikki istunnot, jotta sovellus voidaan lukita.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="615"/>
+        <location filename="../client/desktop/main_window.cc" line="980"/>
         <source>Close all dialogs to lock the application.</source>
         <translation>Sulje kaikki valintaikkunat, jotta sovellus voidaan lukita.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="730"/>
+        <location filename="../client/desktop/main_window.cc" line="1000"/>
+        <source>Connect to a host by its ID from the command line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1001"/>
+        <source>The icon of the screen of all the monitors at once</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1002"/>
+        <source>Remote management of host users and update settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1003"/>
+        <source>Full host configuration from a file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1004"/>
+        <source>Bulk operations on multiple hosts at once</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1104"/>
         <source>Connection by ID is specified in the properties of the host, but the router is not configured. Check the parameters of the router in the properties of the host.</source>
         <translation>Isännän ominaisuuksissa on määritetty yhteys ID:llä, mutta reititintä ei ole määritetty. Tarkista reitittimen asetukset isännän ominaisuuksista.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="997"/>
+        <location filename="../client/desktop/main_window.cc" line="1371"/>
         <source>Unknown application</source>
         <translation>Tuntematon sovellus</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1000"/>
+        <location filename="../client/desktop/main_window.cc" line="1374"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>MCP-liitin. Yhdistetty: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1001"/>
+        <location filename="../client/desktop/main_window.cc" line="1375"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - tekoäly on yhdistetty</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="363"/>
+        <location filename="../client/desktop/main_window.cc" line="366"/>
         <source>The router associated with this host has been deleted. Edit the host to select another router or switch to direct connection.</source>
         <translation>Tähän isäntään liitetty reititin on poistettu. Muokkaa isäntää valitaksesi toisen reitittimen tai siirry suoraan yhteyteen.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="310"/>
-        <location filename="../client/desktop/main_window.cc" line="362"/>
+        <location filename="../client/desktop/main_window.cc" line="313"/>
+        <location filename="../client/desktop/main_window.cc" line="365"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>Reitittimen tiedot ovat vioittuneet. Muokkaa reititintä ja syötä ne uudelleen.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="350"/>
+        <location filename="../client/desktop/main_window.cc" line="353"/>
         <source>The data of the host is damaged. Edit the host and enter it again.</source>
         <translation>Isännän tiedot ovat vioittuneet. Muokkaa isäntää ja syötä ne uudelleen.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="568"/>
+        <location filename="../client/desktop/main_window.cc" line="933"/>
         <source>Credentials</source>
         <translation>Kirjautumistiedot</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="599"/>
+        <location filename="../client/desktop/main_window.cc" line="964"/>
         <source>Settings</source>
         <translation>Asetukset</translation>
     </message>
@@ -5169,7 +5349,7 @@ Tuotuja kirjautumistietoja: %5</translation>
     </message>
     <message>
         <location filename="../client/desktop/management_tab.ui" line="137"/>
-        <location filename="../client/desktop/management_tab.cc" line="2048"/>
+        <location filename="../client/desktop/management_tab.cc" line="2122"/>
         <source>Delete Host</source>
         <translation>Poista isäntä</translation>
     </message>
@@ -5306,34 +5486,34 @@ Tuotuja kirjautumistietoja: %5</translation>
         <translation>Päivitä tila automaattisesti</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1137"/>
+        <location filename="../client/desktop/management_tab.cc" line="1164"/>
         <source>(copy)</source>
         <translation>(kopio)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1105"/>
-        <location filename="../client/desktop/management_tab.cc" line="1182"/>
-        <location filename="../client/desktop/management_tab.cc" line="2333"/>
+        <location filename="../client/desktop/management_tab.cc" line="1132"/>
+        <location filename="../client/desktop/management_tab.cc" line="1209"/>
+        <location filename="../client/desktop/management_tab.cc" line="2407"/>
         <source>Failed to retrieve host information from the local database.</source>
         <translation>Isännän tietojen noutaminen paikallisesta tietokannasta epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="911"/>
+        <location filename="../client/desktop/management_tab.cc" line="938"/>
         <source>The &quot;%1&quot; session type is not available for Quick Support.</source>
         <translation>Istuntotyyppi &quot;%1&quot; ei ole käytettävissä Quick Supportissa.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1142"/>
+        <location filename="../client/desktop/management_tab.cc" line="1169"/>
         <source>Failed to add the host to the local database.</source>
         <translation>Isännän lisääminen paikalliseen tietokantaan epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1200"/>
+        <location filename="../client/desktop/management_tab.cc" line="1227"/>
         <source>Are you sure you want to delete host &quot;%1&quot;?</source>
         <translation>Haluatko varmasti poistaa isännän &quot;%1&quot;?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management_tab.cc" line="1202"/>
+        <location filename="../client/desktop/management_tab.cc" line="1229"/>
         <source>Are you sure you want to delete %n hosts?</source>
         <translation>
             <numerusform>Haluatko varmasti poistaa %n isännän?</numerusform>
@@ -5341,12 +5521,12 @@ Tuotuja kirjautumistietoja: %5</translation>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1228"/>
+        <location filename="../client/desktop/management_tab.cc" line="1255"/>
         <source>Unable to remove host</source>
         <translation>Isäntää ei voi poistaa</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management_tab.cc" line="1230"/>
+        <location filename="../client/desktop/management_tab.cc" line="1257"/>
         <source>Failed to delete %n of the selected hosts.</source>
         <translation>
             <numerusform>%n valitun isännän poistaminen epäonnistui.</numerusform>
@@ -5354,111 +5534,146 @@ Tuotuja kirjautumistietoja: %5</translation>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1298"/>
-        <location filename="../client/desktop/management_tab.cc" line="1375"/>
-        <location filename="../client/desktop/management_tab.cc" line="1408"/>
-        <location filename="../client/desktop/management_tab.cc" line="1431"/>
+        <location filename="../client/desktop/management_tab.cc" line="1307"/>
+        <source>Host update configuration...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1313"/>
+        <source>Host users...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1319"/>
+        <source>Host full configuration (from file)...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1330"/>
+        <source>Bulk add user...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1336"/>
+        <source>Bulk remove user...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1342"/>
+        <source>Bulk update configuration...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1348"/>
+        <source>Bulk full configuration (from file)...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1372"/>
+        <location filename="../client/desktop/management_tab.cc" line="1449"/>
+        <location filename="../client/desktop/management_tab.cc" line="1482"/>
+        <location filename="../client/desktop/management_tab.cc" line="1505"/>
         <source>Copy Row</source>
         <translation>Kopioi rivi</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1299"/>
-        <location filename="../client/desktop/management_tab.cc" line="1376"/>
-        <location filename="../client/desktop/management_tab.cc" line="1409"/>
-        <location filename="../client/desktop/management_tab.cc" line="1432"/>
+        <location filename="../client/desktop/management_tab.cc" line="1373"/>
+        <location filename="../client/desktop/management_tab.cc" line="1450"/>
+        <location filename="../client/desktop/management_tab.cc" line="1483"/>
+        <location filename="../client/desktop/management_tab.cc" line="1506"/>
         <source>Copy Value</source>
         <translation>Kopioi arvo</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1673"/>
+        <location filename="../client/desktop/management_tab.cc" line="1747"/>
         <source>Failed to delete the group.</source>
         <translation>Ryhmän poistaminen epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1712"/>
-        <location filename="../client/desktop/management_tab.cc" line="1769"/>
+        <location filename="../client/desktop/management_tab.cc" line="1786"/>
+        <location filename="../client/desktop/management_tab.cc" line="1843"/>
         <source>The database is not available.</source>
         <translation>Tietokanta ei ole käytettävissä.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1718"/>
+        <location filename="../client/desktop/management_tab.cc" line="1792"/>
         <source>Create Backup</source>
         <translation>Luo varmuuskopio</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1735"/>
+        <location filename="../client/desktop/management_tab.cc" line="1809"/>
         <source>There is nothing to save.</source>
         <translation>Tallennettavaa ei ole.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2107"/>
+        <location filename="../client/desktop/management_tab.cc" line="2181"/>
         <source>Delete Hosts</source>
         <translation>Poista isännät</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2328"/>
+        <location filename="../client/desktop/management_tab.cc" line="2402"/>
         <source>The data of the host is damaged. Edit the host and enter it again.</source>
         <translation>Isännän tiedot ovat vioittuneet. Muokkaa isäntää ja syötä ne uudelleen.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2349"/>
+        <location filename="../client/desktop/management_tab.cc" line="2423"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>Reitittimen tiedot ovat vioittuneet. Muokkaa reititintä ja syötä ne uudelleen.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1747"/>
+        <location filename="../client/desktop/management_tab.cc" line="1821"/>
         <source>Failed to create the backup.</source>
         <translation>Varmuuskopion luominen epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1775"/>
-        <location filename="../client/desktop/management_tab.cc" line="1801"/>
+        <location filename="../client/desktop/management_tab.cc" line="1849"/>
+        <location filename="../client/desktop/management_tab.cc" line="1875"/>
         <source>Restore from Backup</source>
         <translation>Palauta varmuuskopiosta</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1784"/>
+        <location filename="../client/desktop/management_tab.cc" line="1858"/>
         <source>Everything stored now is deleted and replaced with what the backup holds. Continue?</source>
         <translation>Kaikki nykyinen sisältö poistetaan ja korvataan varmuuskopion sisällöllä. Jatketaanko?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1803"/>
+        <location filename="../client/desktop/management_tab.cc" line="1877"/>
         <source>The backup was made on another installation. Enter the master password used there.</source>
         <translation>Varmuuskopio on tehty toisessa asennuksessa. Syötä siinä käytetty pääsalasana.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1828"/>
+        <location filename="../client/desktop/management_tab.cc" line="1902"/>
         <source>The backup carries no data, so nothing was changed.</source>
         <translation>Varmuuskopio ei sisällä tietoja, joten mitään ei muutettu.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1836"/>
+        <location filename="../client/desktop/management_tab.cc" line="1910"/>
         <source>The file is not a valid backup.</source>
         <translation>Tiedosto ei ole kelvollinen varmuuskopio.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1840"/>
+        <location filename="../client/desktop/management_tab.cc" line="1914"/>
         <source>Failed to restore from the backup.</source>
         <translation>Palauttaminen varmuuskopiosta epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1719"/>
-        <location filename="../client/desktop/management_tab.cc" line="1776"/>
+        <location filename="../client/desktop/management_tab.cc" line="1793"/>
+        <location filename="../client/desktop/management_tab.cc" line="1850"/>
         <source>Aspia Backup (*.aspia-backup);;All files (*)</source>
         <translation>Aspia-varmuuskopio (*.aspia-backup);;Kaikki tiedostot (*)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1739"/>
+        <location filename="../client/desktop/management_tab.cc" line="1813"/>
         <source>Unable to write the file.</source>
         <translation>Tiedostoa ei voi kirjoittaa.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1832"/>
+        <location filename="../client/desktop/management_tab.cc" line="1906"/>
         <source>Unable to read the file.</source>
         <translation>Tiedostoa ei voi lukea.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1752"/>
+        <location filename="../client/desktop/management_tab.cc" line="1826"/>
         <source>Export completed successfully.
 Routers exported: %1
 Groups exported: %2
@@ -5473,37 +5688,37 @@ Vietyjä tallennettuja salasanoja: %4
 Vietyjä kirjautumistietoja: %5</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1533"/>
+        <location filename="../client/desktop/management_tab.cc" line="1607"/>
         <source>Are you sure you want to delete space &quot;%1&quot;?</source>
         <translation>Haluatko varmasti poistaa alueen &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1553"/>
+        <location filename="../client/desktop/management_tab.cc" line="1627"/>
         <source>Failed to delete the space.</source>
         <translation>Alueen poistaminen epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1655"/>
+        <location filename="../client/desktop/management_tab.cc" line="1729"/>
         <source>Are you sure you want to delete the group &quot;%1&quot;? Hosts assigned to this group or its subgroups will be moved to the space root.</source>
         <translation>Haluatko varmasti poistaa ryhmän &quot;%1&quot;? Tähän ryhmään tai sen aliryhmiin kuuluvat isännät siirretään alueen juureen.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1743"/>
+        <location filename="../client/desktop/management_tab.cc" line="1817"/>
         <source>Some records of the database are damaged. Fix or delete them and try again.</source>
         <translation>Jotkin tietokannan tietueet ovat vioittuneet. Korjaa tai poista ne ja yritä uudelleen.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1820"/>
+        <location filename="../client/desktop/management_tab.cc" line="1894"/>
         <source>Unable to decrypt the file with the specified password.</source>
         <translation>Tiedoston salausta ei voi purkaa annetulla salasanalla.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1824"/>
+        <location filename="../client/desktop/management_tab.cc" line="1898"/>
         <source>Unsupported file format version.</source>
         <translation>Tiedostomuodon versiota ei tueta.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1845"/>
+        <location filename="../client/desktop/management_tab.cc" line="1919"/>
         <source>Import completed successfully.
 Routers imported: %1
 Groups imported: %2
@@ -5518,29 +5733,29 @@ Tuotuja tallennettuja salasanoja: %4
 Tuotuja kirjautumistietoja: %5</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2256"/>
-        <location filename="../client/desktop/management_tab.cc" line="2287"/>
+        <location filename="../client/desktop/management_tab.cc" line="2330"/>
+        <location filename="../client/desktop/management_tab.cc" line="2361"/>
         <source>Copy Link</source>
         <translation>Kopioi linkki</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2275"/>
-        <location filename="../client/desktop/management_tab.cc" line="2309"/>
+        <location filename="../client/desktop/management_tab.cc" line="2349"/>
+        <location filename="../client/desktop/management_tab.cc" line="2383"/>
         <source>Unable to create a link for this host.</source>
         <translation>Tälle isännälle ei voi luoda linkkiä.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2350"/>
+        <location filename="../client/desktop/management_tab.cc" line="2424"/>
         <source>The router associated with this host has been deleted. Edit the host to select another router or switch to direct connection.</source>
         <translation>Tähän isäntään liitetty reititin on poistettu. Muokkaa isäntää valitaksesi toisen reitittimen tai siirry suoraan yhteyteen.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2357"/>
+        <location filename="../client/desktop/management_tab.cc" line="2431"/>
         <source>The host has an invalid host ID.</source>
         <translation>Isännän ID on virheellinen.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2366"/>
+        <location filename="../client/desktop/management_tab.cc" line="2440"/>
         <source>The host has an incorrect address.</source>
         <translation>Isännän osoite on virheellinen.</translation>
     </message>
@@ -6325,37 +6540,37 @@ Tuotuja kirjautumistietoja: %5</translation>
 <context>
     <name>RelayListModel</name>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="141"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="142"/>
         <source>Address</source>
         <translation>Osoite</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="144"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="145"/>
         <source>Connect Time</source>
         <translation>Yhdistämisaika</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="147"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="148"/>
         <source>Pool Size</source>
         <translation>Varannon koko</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="150"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="151"/>
         <source>Version</source>
         <translation>Versio</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="153"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="154"/>
         <source>Computer Name</source>
         <translation>Tietokoneen nimi</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="156"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="157"/>
         <source>Architecture</source>
         <translation>Arkkitehtuuri</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="159"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="160"/>
         <source>Operating System</source>
         <translation>Käyttöjärjestelmä</translation>
     </message>
@@ -6518,17 +6733,17 @@ Tuotuja kirjautumistietoja: %5</translation>
 <context>
     <name>RouterClientsWidget</name>
     <message>
-        <location filename="../client/desktop/management/router_clients_widget.cc" line="226"/>
+        <location filename="../client/desktop/management/router_clients_widget.cc" line="227"/>
         <source>Save File</source>
         <translation>Tallenna tiedosto</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_clients_widget.cc" line="226"/>
+        <location filename="../client/desktop/management/router_clients_widget.cc" line="227"/>
         <source>JSON files (*.json)</source>
         <translation>JSON-tiedostot (*.json)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_clients_widget.cc" line="237"/>
+        <location filename="../client/desktop/management/router_clients_widget.cc" line="238"/>
         <source>Could not open file for writing.</source>
         <translation>Tiedostoa ei voitu avata kirjoittamista varten.</translation>
     </message>
@@ -6885,11 +7100,21 @@ Tuotuja kirjautumistietoja: %5</translation>
     </message>
     <message>
         <location filename="../common/desktop/router_error.cc" line="57"/>
+        <source>The user has active sessions. Disconnect them first or force the change.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../common/desktop/router_error.cc" line="60"/>
+        <source>Cannot remove or disable the last enabled user.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../common/desktop/router_error.cc" line="63"/>
         <source>Too many connection requests. Try again later.</source>
         <translation>Liian monta yhteyspyyntöä. Yritä myöhemmin uudelleen.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/router_error.cc" line="59"/>
+        <location filename="../common/desktop/router_error.cc" line="65"/>
         <source>Unknown error type.</source>
         <translation>Tuntematon virhetyyppi.</translation>
     </message>
@@ -6981,6 +7206,353 @@ Tuotuja kirjautumistietoja: %5</translation>
         <location filename="../client/desktop/management/router_group_widget.ui" line="88"/>
         <source>Items per page:</source>
         <translation>Kohteita sivulla:</translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostBulkConfigDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="53"/>
+        <source>Update configuration on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="65"/>
+        <source>Update server:</source>
+        <translation type="unfinished">Päivityspalvelin:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="67"/>
+        <source>https://... (empty = default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="70"/>
+        <source>Public key:</source>
+        <translation type="unfinished">Julkinen avain:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="72"/>
+        <source>32 bytes hex (empty = default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="75"/>
+        <source>Channel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="82"/>
+        <source>Auto-update:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="83"/>
+        <source>Enabled</source>
+        <translation type="unfinished">Käytössä</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="86"/>
+        <source>Check frequency:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="88"/>
+        <source>Once a day</source>
+        <translation type="unfinished">Kerran päivässä</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="89"/>
+        <source>Once a week</source>
+        <translation type="unfinished">Kerran viikossa</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="90"/>
+        <source>Once a month</source>
+        <translation type="unfinished">Kerran kuukaudessa</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="95"/>
+        <source>Unchecked fields are left unchanged on every host. A checked field with an empty value resets it to the default.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="166"/>
+        <source>Invalid server URL.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="172"/>
+        <source>Invalid public key (must be 32 bytes hex).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="180"/>
+        <source>A public key without a server is not allowed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostBulkDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="43"/>
+        <source>Done</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="45"/>
+        <source>Skipped</source>
+        <translation type="unfinished">Ohitettu</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="47"/>
+        <source>Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="49"/>
+        <source>Offline</source>
+        <translation type="unfinished">Offline</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="51"/>
+        <source>Cancelled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="53"/>
+        <source>Running...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="189"/>
+        <source>Host</source>
+        <translation type="unfinished">Isäntä</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="189"/>
+        <source>Planned action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="189"/>
+        <source>Result</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="189"/>
+        <source>Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="199"/>
+        <source>Details:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="211"/>
+        <source>Apply</source>
+        <translation type="unfinished">Käytä</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="241"/>
+        <source>Pending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="261"/>
+        <source>Nothing to do.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="266"/>
+        <source>%n host(s) selected.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="271"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Peruuta</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="300"/>
+        <source>Cancelling, waiting for the current host...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="321"/>
+        <source>%1 of %2 done.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="350"/>
+        <source>Done: %1, failed: %2, offline: %3, skipped: %4, cancelled: %5.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="352"/>
+        <source>Close</source>
+        <translation type="unfinished">Sulje</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="387"/>
+        <source>Host: %1
+Planned: %2
+Result: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="389"/>
+        <source>
+Detail: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostBulkFullConfigDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="398"/>
+        <source>Full configuration on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="408"/>
+        <source>Warning: without the checkbox below, every host switches to the router, port and access settings from the file. Make sure the file comes from a host of this router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="416"/>
+        <source>Keep router connection, port and access settings (apply only system settings and users)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostBulkRemoveDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="449"/>
+        <source>Remove user from hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="455"/>
+        <source>User name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="458"/>
+        <source>Force (remove even with live sessions, last enabled user is still protected)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="492"/>
+        <source>Enter a user name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostConfigDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="63"/>
+        <source>Host update configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="69"/>
+        <source>https://... (empty = default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="70"/>
+        <source>Update server:</source>
+        <translation type="unfinished">Päivityspalvelin:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="73"/>
+        <source>32 bytes hex (empty = default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="74"/>
+        <source>Public key:</source>
+        <translation type="unfinished">Julkinen avain:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="80"/>
+        <source>Channel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="82"/>
+        <source>Auto-update enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="86"/>
+        <source>Once a day</source>
+        <translation type="unfinished">Kerran päivässä</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="87"/>
+        <source>Once a week</source>
+        <translation type="unfinished">Kerran viikossa</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="88"/>
+        <source>Once a month</source>
+        <translation type="unfinished">Kerran kuukaudessa</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="90"/>
+        <source>Check frequency:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="92"/>
+        <source>Loading current settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="115"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="181"/>
+        <source>No session to router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="127"/>
+        <source>Failed to read telemetry: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="135"/>
+        <source>Telemetry is not JSON.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="153"/>
+        <source>Current settings loaded.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="161"/>
+        <source>Invalid server URL.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="166"/>
+        <source>Invalid public key (must be 32 bytes hex).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="205"/>
+        <source>Configuration applied successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="210"/>
+        <source>Failed to apply: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7135,6 +7707,184 @@ Tuotuja kirjautumistietoja: %5</translation>
     </message>
 </context>
 <context>
+    <name>RouterHostUserDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="71"/>
+        <source>User Properties</source>
+        <translation type="unfinished">Käyttäjän ominaisuudet</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="78"/>
+        <source>User Name:</source>
+        <translation type="unfinished">Käyttäjänimi:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="81"/>
+        <source>Password:</source>
+        <translation type="unfinished">Salasana:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="84"/>
+        <source>Password (repeat):</source>
+        <translation type="unfinished">Salasana (toista):</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="86"/>
+        <source>Disable User Account</source>
+        <translation type="unfinished">Poista käyttäjätili käytöstä</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="92"/>
+        <source>Allowed Session Types:</source>
+        <translation type="unfinished">Sallitut istuntotyypit:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="96"/>
+        <source>Check all</source>
+        <translation type="unfinished">Valitse kaikki</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="97"/>
+        <source>Uncheck all</source>
+        <translation type="unfinished">Poista kaikki valinnat</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="252"/>
+        <source>The user name can not be empty and can contain only alphabet characters, numbers and _, -, ., @ characters. It can not consist of digits only.</source>
+        <translation type="unfinished">Käyttäjänimi ei voi olla tyhjä ja voi sisältää vain kirjaimia, numeroita sekä merkkejä _, -, . ja @. Se ei voi koostua pelkistä numeroista.</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="269"/>
+        <source>The username you entered already exists.</source>
+        <translation type="unfinished">Syöttämäsi käyttäjänimi on jo olemassa.</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="277"/>
+        <source>The passwords you entered do not match.</source>
+        <translation type="unfinished">Syöttämäsi salasanat eivät täsmää.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="286"/>
+        <source>The password can not be shorter than %n characters.</source>
+        <translation type="unfinished">
+            <numerusform>Salasana ei saa olla lyhyempi kuin %n merkki.</numerusform>
+            <numerusform>Salasana ei saa olla lyhyempi kuin %n merkkiä.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="288"/>
+        <source>The password can not be longer than %n characters.</source>
+        <translation type="unfinished">
+            <numerusform>Salasana ei saa olla pidempi kuin %n merkki.</numerusform>
+            <numerusform>Salasana ei saa olla pidempi kuin %n merkkiä.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="300"/>
+        <source>Password you entered does not meet the security requirements!</source>
+        <translation type="unfinished">Syöttämäsi salasana ei täytä turvallisuusvaatimuksia!</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="303"/>
+        <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
+        <translation type="unfinished">
+            <numerusform>Salasanassa on oltava pieniä ja isoja kirjaimia sekä numeroita, eikä se saa olla lyhyempi kuin %n merkki.</numerusform>
+            <numerusform>Salasanassa on oltava pieniä ja isoja kirjaimia sekä numeroita, eikä se saa olla lyhyempi kuin %n merkkiä.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="307"/>
+        <source>Do you want to enter a different password?</source>
+        <translation type="unfinished">Haluatko syöttää toisen salasanan?</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="310"/>
+        <source>Warning</source>
+        <translation type="unfinished">Varoitus</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="349"/>
+        <source>Double-click to change</source>
+        <translation type="unfinished">Muuta kaksoisnapsauttamalla</translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostUsersDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="64"/>
+        <source>Host users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="73"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="190"/>
+        <source>Add</source>
+        <translation type="unfinished">Lisää</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="74"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="242"/>
+        <source>Edit</source>
+        <translation type="unfinished">Muokkaa</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="75"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="276"/>
+        <source>Remove</source>
+        <translation type="unfinished">Poista</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="76"/>
+        <source>Close</source>
+        <translation type="unfinished">Sulje</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="105"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="182"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="234"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="268"/>
+        <source>No session to router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="121"/>
+        <source>Failed to get users: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="146"/>
+        <source> (disabled)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="164"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="223"/>
+        <source>Failed to create user credentials.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="201"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="253"/>
+        <source>Select a user first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="259"/>
+        <source>Remove user &quot;%1&quot;?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="286"/>
+        <source>%1: success.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="290"/>
+        <source>%1 failed: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RouterHostsWidget</name>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.ui" line="56"/>
@@ -7197,22 +7947,22 @@ Tuotuja kirjautumistietoja: %5</translation>
         <translation>Kohteita sivulla:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="148"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="158"/>
         <source>All spaces</source>
         <translation>Kaikki alueet</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="149"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="159"/>
         <source>Not in any space</source>
         <translation>Ilman aluetta</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="368"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="378"/>
         <source>Are you sure you want to disconnect host &quot;%1&quot;?</source>
         <translation>Haluatko varmasti katkaista isännän &quot;%1&quot; yhteyden?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="370"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="380"/>
         <source>Are you sure you want to disconnect %n hosts?</source>
         <translation>
             <numerusform>Haluatko varmasti katkaista %n isännän yhteyden?</numerusform>
@@ -7220,7 +7970,7 @@ Tuotuja kirjautumistietoja: %5</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="381"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="391"/>
         <source>Failed to disconnect %n of the selected hosts.</source>
         <translation>
             <numerusform>%n valitun isännän yhteyden katkaiseminen epäonnistui.</numerusform>
@@ -7228,12 +7978,12 @@ Tuotuja kirjautumistietoja: %5</translation>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="397"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="407"/>
         <source>Deleting a host will result in all its configuration for connecting to the router being deleted, and the application will be uninstalled on the host. This operation is irreversible. Are you sure you want to do this?</source>
         <translation>Isännän poistaminen poistaa kaikki sen reititinyhteyden määritykset, ja sovellus poistetaan isännältä. Toimintoa ei voi perua. Haluatko varmasti tehdä tämän?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="402"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="412"/>
         <source>%n hosts will be deleted.</source>
         <translation>
             <numerusform>%n isäntä poistetaan.</numerusform>
@@ -7241,7 +7991,7 @@ Tuotuja kirjautumistietoja: %5</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="413"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="423"/>
         <source>Failed to remove %n of the selected hosts.</source>
         <translation>
             <numerusform>%n valitun isännän poistaminen epäonnistui.</numerusform>
@@ -7249,15 +7999,54 @@ Tuotuja kirjautumistietoja: %5</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="430"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="440"/>
         <source>Failed to check for updates on %n of the selected hosts.</source>
         <translation>
             <numerusform>%n valitun isännän päivitysten tarkistaminen epäonnistui.</numerusform>
             <numerusform>%n valitun isännän päivitysten tarkistaminen epäonnistui.</numerusform>
         </translation>
     </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="506"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1493"/>
+        <source>Open host configuration file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="507"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1495"/>
+        <source>JSON files (*.json);;All files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="514"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1502"/>
+        <source>Cannot open file: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="525"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1512"/>
+        <source>Invalid JSON: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="533"/>
+        <source>No session to router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="547"/>
+        <source>Configuration applied successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="549"/>
+        <source>Failed to apply: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="763"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="865"/>
         <source>%n host(s)</source>
         <translation>
             <numerusform>%n isäntä</numerusform>
@@ -7265,40 +8054,233 @@ Tuotuja kirjautumistietoja: %5</translation>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="827"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="929"/>
         <source>Save File</source>
         <translation>Tallenna tiedosto</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="827"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="929"/>
         <source>JSON files (*.json)</source>
         <translation>JSON-tiedostot (*.json)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="838"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="940"/>
         <source>Could not open file for writing.</source>
         <translation>Tiedostoa ei voitu avata kirjoittamista varten.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="885"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="987"/>
         <source>Unable to write file.</source>
         <translation>Tiedostoa ei voi kirjoittaa.</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1068"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Peruuta</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1162"/>
+        <source>Failed to create user credentials.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1186"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1265"/>
+        <source>Reading user lists...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1194"/>
+        <source>Add user &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1200"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1280"/>
+        <source>List unreadable (%1), will try anyway.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1222"/>
+        <source>Already exists, skipped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1238"/>
+        <source>Add user on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1274"/>
+        <source>Remove user &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1306"/>
+        <source>No such user, skipped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1313"/>
+        <source>Last enabled user, the host will refuse.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1335"/>
+        <source>Remove user from hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1356"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1374"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1375"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1377"/>
+        <source>(unknown)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1357"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1426"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1428"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1434"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1436"/>
+        <source>(default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1371"/>
+        <source>Hosts in run: %1. Channels: %2. Servers: %3. Auto-update on: %4 of %5. Frequencies (days): %6.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1398"/>
+        <source>No fields selected, nothing to do.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1415"/>
+        <source>Set selected fields (current settings unknown).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1425"/>
+        <source>server: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1433"/>
+        <source>public key: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1434"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1436"/>
+        <source>(set)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1441"/>
+        <source>channel: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1446"/>
+        <source>auto-update: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1447"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1448"/>
+        <source>on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1447"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1448"/>
+        <source>off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1453"/>
+        <source>frequency: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1460"/>
+        <source>No changes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1461"/>
+        <source>Already matching, skipped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1482"/>
+        <source>Update configuration on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1518"/>
+        <source>Not a host configuration file (no system/database sections).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1535"/>
+        <source>File: %1
+Sections: %2. Users in file: %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1537"/>
+        <source>(kept)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1566"/>
+        <source>Dry run on hosts...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1579"/>
+        <source>Apply full config (dry run %1, will try anyway).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1592"/>
+        <source>users: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1599"/>
+        <source>system: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1604"/>
+        <source>Apply full config (no visible diff).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1623"/>
+        <source>Full configuration on hosts</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RouterRelaysWidget</name>
     <message>
-        <location filename="../client/desktop/management/router_relays_widget.cc" line="238"/>
+        <location filename="../client/desktop/management/router_relays_widget.cc" line="239"/>
         <source>Save File</source>
         <translation>Tallenna tiedosto</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_relays_widget.cc" line="238"/>
+        <location filename="../client/desktop/management/router_relays_widget.cc" line="239"/>
         <source>JSON files (*.json)</source>
         <translation>JSON-tiedostot (*.json)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_relays_widget.cc" line="249"/>
+        <location filename="../client/desktop/management/router_relays_widget.cc" line="250"/>
         <source>Could not open file for writing.</source>
         <translation>Tiedostoa ei voitu avata kirjoittamista varten.</translation>
     </message>
