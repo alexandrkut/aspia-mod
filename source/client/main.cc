@@ -515,7 +515,7 @@ QObject::connect(&application, &Application::sig_urlOpened,
             start_url.clear();
         }
 
-if (connect_request_pending)
+        if (connect_request_pending)
         {
             // The same for a host named on the command line. The window is not on the screen yet
             // at this point, so the request waits for the event loop the way a link does.

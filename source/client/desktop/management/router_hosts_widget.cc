@@ -458,6 +458,7 @@ void RouterHostsWidget::onHostTelemetry()
     dialog->exec();
 }
 
+//--------------------------------------------------------------------------------------------------
 void RouterHostsWidget::onHostUpdateConfig()
 {
     const QList<RouterHost> hosts = selectedHosts();
