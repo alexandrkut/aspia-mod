@@ -28,6 +28,7 @@
 #include <QNetworkInterface>
 #include <QProcess>
 #include <QShowEvent>
+#include <QStringList>
 #include <QTimer>
 #include <QUrl>
 

@@ -1273,3 +1273,57 @@ TEST_F(TwoFactorHandlerTest, ClockJumpBackDoesNotStretchTheBlock)
     TwoFactorHandler after;
     EXPECT_EQ(start(after, jumped_back + full).challenge.blocked_seconds, 0);
 }
+
+TEST_F(TwoFactorHandlerTest, DisabledRolePassesWithoutAChallenge)
+{
+    TwoFactorHandler handler;
+
+    const TwoFactorHandler::Result result = handler.start(db_, caller_, kNow, false);
+
+    EXPECT_EQ(result.action, TwoFactorHandler::Action::ACCEPT);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Nothing is issued to a session that never answered a code: a device token is what tells the
+// next login that the second factor was passed, and a session that skipped it has no business
+// carrying one.
+TEST_F(TwoFactorHandlerTest, DisabledRoleIsIssuedNoToken)
+{
+    TwoFactorHandler handler;
+
+    const TwoFactorHandler::Result result = handler.start(db_, caller_, kNow, false);
+
+    EXPECT_TRUE(result.new_token.empty());
+    EXPECT_EQ(result.token_id, 0);
+}
+
+//--------------------------------------------------------------------------------------------------
+// The state the user has left behind is not consumed by a session that skipped the stage: a
+// refused code from earlier must still be reported to the next session that does answer one,
+// otherwise switching the role off and on again would quietly wash the refusal away.
+TEST_F(TwoFactorHandlerTest, DisabledRoleLeavesTheStoredStateAlone)
+{
+    TwoFactorHandler handler;
+
+    handler.start(db_, caller_, kNow, false);
+
+    // The stage did not run, so nothing was enrolled: the user still has no secret.
+    RouterUser user;
+    ASSERT_EQ(db_.findUser(caller_.user_id, &user), proto::router::kErrorOk);
+    EXPECT_TRUE(user.otp_secret.isEmpty());
+}
+
+//--------------------------------------------------------------------------------------------------
+// The default is the one that keeps the account protected. Every existing test calls start()
+// without the flag and expects a challenge; a change of that default would have turned them all
+// into tests of the opposite behaviour, so the default is spelled out here as well.
+TEST_F(TwoFactorHandlerTest, TheStageIsOpenedUnlessItIsToldNotTo)
+{
+    TwoFactorHandler handler;
+
+    const TwoFactorHandler::Result result = handler.start(db_, caller_, kNow);
+
+    EXPECT_EQ(result.action, TwoFactorHandler::Action::SEND_CHALLENGE);
+    EXPECT_EQ(result.challenge.mode, proto::router::TWO_FACTOR_MODE_ENROLL);
+    EXPECT_FALSE(result.challenge.otpauth_uri.empty());
+}
