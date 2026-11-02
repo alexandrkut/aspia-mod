@@ -33,6 +33,8 @@ list(APPEND SOURCE_CLIENT_CORE
     database.h
     config.cc
     config.h
+    connect_request.cc
+    connect_request.h
     credential_file.cc
     credential_file.h
     file_error_code.cc
@@ -87,6 +89,7 @@ list(APPEND SOURCE_CLIENT_TESTS
     auto_backup_unittest.cc
     backup_unittest.cc
     config_unittest.cc
+    connect_request_unittest.cc
     credential_file_unittest.cc
     database_unittest.cc
     desktop/authorization_dialog_unittest.cc
@@ -254,7 +257,7 @@ if (ANDROID)
         QT_ANDROID_APP_NAME "Aspia Client"
         QT_ANDROID_APP_ICON "@mipmap/ic_launcher"
         QT_ANDROID_VERSION_CODE ${GIT_COMMIT_COUNT}
-        QT_ANDROID_VERSION_NAME "${ASPIA_VERSION_MAJOR}.${ASPIA_VERSION_MINOR}.${ASPIA_VERSION_PATCH}.${GIT_COMMIT_COUNT}"
+        QT_ANDROID_VERSION_NAME "${ASPIA_VERSION_MAJOR}.${ASPIA_VERSION_MINOR}.${ASPIA_VERSION_PATCH}.${ASPIA_VERSION_BUILD}"
         QT_ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android/packaging")
 endif()
 

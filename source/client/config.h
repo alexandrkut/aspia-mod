@@ -348,6 +348,12 @@ public:
     const SecureString& password() const { return password_; }
     void setPassword(const SecureString& value) { password_ = value; }
 
+    // The credentials above were given by whoever started the connection (the command line), not
+    // read from the address book. The stored ones must not replace them: a script that passes a
+    // login of its own means it.
+    bool hasForcedCredentials() const { return forced_credentials_; }
+    void setForcedCredentials(bool forced) { forced_credentials_ = forced; }
+
     bool isPortable() const { return portable_; }
     void setPortable(bool portable) { portable_ = portable; }
 
@@ -358,6 +364,7 @@ private:
     QString name_;
     QString username_;
     SecureString password_;
+    bool forced_credentials_ = false;
     bool portable_ = false;
 };
 

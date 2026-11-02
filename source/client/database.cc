@@ -1945,7 +1945,12 @@ bool Database::isCheckUpdatesEnabled() const
 {
     QString value = readSetting(kSettingCheckUpdates);
     if (value.isEmpty())
-        return true;
+    {
+        // The update server of the upstream knows nothing about the builds of the mod, so the
+        // check is off until the user turns it on. With it on, the check offers the builds of
+        // the upstream, and installing one of them takes the changes of the mod away.
+        return false;
+    }
     return value == "1";
 }
 
