@@ -293,6 +293,13 @@ void ClientOperator::applyTwoFactorResult(TwoFactorHandler::Result&& result)
             // token, a code issues a fresh one, an enrollment stores the secret. The user lists
             // an administrator watches (devices, the OTP state) change with it.
             emit sig_notifyChanged(ClientWorker::NOTIFY_USERS);
+
+            // The pause goes out with the challenge on the path that asks for it. A login let
+            // in without the second factor sends no question, so the pause the channel inherited
+            // from the finished handshake is lowered here, or the client would hold an open
+            // session that never reads a thing but its own login result.
+            tcp_channel_->setPaused(false);
+
             completeTwoFactor(std::move(result.new_token));
             if (two_factor_completed_)
                 sendTwoFactorEmail(result);
