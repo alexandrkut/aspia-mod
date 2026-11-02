@@ -34,6 +34,7 @@ namespace proto::router {
 class ConnectionOffer;
 class HostIdRequest;
 class HostTelemetry;
+class HostConfigResult;
 } // namespace proto::router
 
 class Host final : public QObject
@@ -72,12 +73,19 @@ public:
     void sendRemoveCommand();
     // Sends the "update" host command, asking the host to check for updates immediately.
     void sendUpdateCommand();
+    // Sends a configuration command (name + JSON params) to the host. The host applies it
+    // and replies with a HostConfigResult, delivered through sig_hostConfigResult.
+    void sendConfigCommand(const std::string& command_name, const std::string& params);
 
 signals:
     void sig_started(qint64 session_id);
     void sig_finished(qint64 session_id);
     void sig_notifyChanged(quint32 flags);
     void sig_hostIdAssigned(HostId host_id);
+
+    // Emitted when the host answers a configuration command sent through sendConfigCommand.
+    void sig_hostConfigResult(const std::string& command_name, const std::string& error_code,
+                              const std::string& result);
 
 private slots:
     void onTcpErrorOccurred(TcpChannel::ErrorCode error_code);

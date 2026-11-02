@@ -19,6 +19,7 @@
 #ifndef ROUTER_WORKERS_HOST_WORKER_H
 #define ROUTER_WORKERS_HOST_WORKER_H
 
+#include <QPointer>
 #include <QString>
 
 #include <functional>
@@ -78,6 +79,14 @@ public:
     // |host_id| is not connected.
     void updateHost(HostId host_id, QObject* context, ResultCallback callback);
 
+    // Sends a configuration command (name + JSON params) to the online host |host_id| and
+    // delivers its reply through |callback|. The callback receives "host_offline" if the host
+    // is not connected, "timeout" if it does not answer within 15 seconds, or the error code
+    // and the JSON result reported by the host.
+    using HostConfigCallback = std::function<void(std::string_view error_code, const std::string& result)>;
+    void setHostConfig(HostId host_id, const std::string& command_name, const std::string& params,
+                       QObject* context, HostConfigCallback callback);
+
     // Approves the temporary host |host_id|: persists its key and drops the temporary connection
     // so the host reconnects and receives its permanent id.
     void approveHost(HostId host_id, QObject* context, ErrorCodeCallback callback);
@@ -89,6 +98,10 @@ public:
 signals:
     // Emitted from the worker thread when host state changes; |flags| are ClientWorker NOTIFY_* bits.
     void sig_notify(quint32 flags);
+
+    // Emitted when the host answers a configuration command sent through sendConfigCommand.
+    void sig_hostConfigResult(Host* host, const std::string& command_name, const std::string& error_code,
+                              const std::string& result);
 
 protected:
     // Worker implementation.
@@ -117,6 +130,9 @@ private:
 
     ScopedQPointer<TcpServer> server_;
     std::vector<Host*> hosts_;
+
+    // Pending configuration-command callbacks, keyed by host id. One command at a time per host.
+    std::unordered_map<HostId, std::pair<QPointer<QObject>, HostConfigCallback>> pending_config_callbacks_;
 
     // The holder of each assigned host id. At most one holder per id at any moment; a reconnecting
     // host displaces its stale predecessor. Kept next to |hosts_| so that lookups and duplicate
