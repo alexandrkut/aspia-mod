@@ -87,6 +87,10 @@ public:
     void setHostConfig(HostId host_id, const std::string& command_name, const std::string& params,
                        QObject* context, HostConfigCallback callback);
 
+    // Called when a host answers a configuration command.
+    void onHostConfigResult(Host* host, const std::string& command_name, const std::string& error_code,
+                            const std::string& result);
+
     // Approves the temporary host |host_id|: persists its key and drops the temporary connection
     // so the host reconnects and receives its permanent id.
     void approveHost(HostId host_id, QObject* context, ErrorCodeCallback callback);
