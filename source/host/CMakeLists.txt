@@ -109,6 +109,8 @@ list(APPEND SOURCE_HOST_CORE
     file_agent.h
     file_client.cc
     file_client.h
+    host_config_applier.cc
+    host_config_applier.h
     host_constants.cc
     host_constants.h
     host_storage.cc
@@ -165,6 +167,7 @@ list(APPEND SOURCE_HOST_TESTS
     capture_scheduler_unittest.cc
     database_unittest.cc
     host_storage_unittest.cc
+    host_config_applier_unittest.cc
     host_user_list_unittest.cc
     router_manager_unittest.cc
     scale_reducer_unittest.cc

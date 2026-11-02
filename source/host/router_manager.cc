@@ -31,8 +31,10 @@
 #include "base/peer/server_authenticator.h"
 #include "base/threading/worker.h"
 #include "host/database.h"
+#include "host/host_config_applier.h"
 #include "host/host_storage.h"
 #include "host/system_settings.h"
+#include "version.h"
 #include "proto/key_exchange.h"
 #include "proto/router_constants.h"
 #include "proto/router_host.h"
@@ -303,7 +305,33 @@ void RouterManager::onTcpMessageReceived(quint8 /* channel_id */, const QByteArr
         }
         else
         {
-            LOG(ERROR) << "Unknown host command:" << QString::fromStdString(command_name);
+            // Configuration command: apply and reply.
+            const std::string params = command.params();
+
+            // The router stamps the params with the name of the admin session that ordered
+            // the change; fall back to "router" for routers that predate the stamp.
+            const QJsonObject params_obj =
+                QJsonDocument::fromJson(QByteArray::fromStdString(params)).object();
+            const QString initiator_q = params_obj.value("initiator").toString();
+            const std::string initiator =
+                initiator_q.isEmpty() ? "router" : initiator_q.toStdString();
+
+            // Active-session guard: refuse to modify/remove a user that has live client
+            // sessions, unless the command carries "force": true.
+            auto has_active_sessions = [this](const QString& username) -> bool {
+                bool result = false;
+                emit sig_checkUserSessions(username, &result);
+                return result;
+            };
+
+            HostConfigApplier::Result result = HostConfigApplier::apply(
+                command_name, QJsonDocument::fromJson(QByteArray::fromStdString(params)).object(), initiator,
+                has_active_sessions);
+            sendHostConfigResult(command_name, result.error_code.toStdString(), result.result.toStdString());
+
+            // Trigger a telemetry update so the client sees the new settings immediately.
+            if (result.error_code == proto::router::kErrorOk)
+                sendTelemetry();
         }
     }
     else
@@ -502,6 +530,7 @@ void RouterManager::sendTelemetry()
     QJsonObject update;
     update.insert("channel", settings.updateChannel());
     update.insert("address", settings.updateServer());
+    update.insert("public_key", QString::fromLatin1(settings.updatePublicKey().toHex()));
 #if !defined(Q_OS_ANDROID)
     // The mobile host checks for updates only on request.
     update.insert("auto_update", settings.isAutoUpdateEnabled());
@@ -535,6 +564,7 @@ void RouterManager::sendTelemetry()
 
     QJsonObject telemetry;
     telemetry.insert("version", proto::router::kTelemetryVersion);
+    telemetry.insert("version_string", ASPIA_VERSION_STRING);
     telemetry.insert("general", general);
     telemetry.insert("connects", connects);
     telemetry.insert("router", router);
@@ -553,6 +583,29 @@ void RouterManager::sendTelemetry()
 
     telemetry_outdated_ = false;
     next_telemetry_time_ = Clock::now() + kTelemetryInterval;
+}
+
+ //--------------------------------------------------------------------------------------------------
+void RouterManager::sendHostConfigResult(const std::string& command_name, const std::string& error_code,
+                                         const std::string& result)
+{
+    proto::router::HostToRouter message;
+    proto::router::HostConfigResult* config_result = message.mutable_host_config_result();
+    config_result->set_command_name(command_name);
+    config_result->set_error_code(error_code);
+    config_result->set_result(result);
+
+    tcp_channel_->send(0, serialize(message));
+    if (command_name.rfind("get_", 0) == 0)
+    {
+        LOG(TRACE) << "Sent host config result for" << QString::fromStdString(command_name)
+                   << ":" << QString::fromStdString(error_code);
+    }
+    else
+    {
+        LOG(INFO) << "Sent host config result for" << QString::fromStdString(command_name)
+                  << ":" << QString::fromStdString(error_code);
+    }
 }
 
 //--------------------------------------------------------------------------------------------------

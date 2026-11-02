@@ -21,6 +21,7 @@
 
 #include <QQueue>
 
+#include <functional>
 #include <optional>
 
 #include "base/build_config.h"
@@ -101,6 +102,9 @@ signals:
     void sig_clientConnected();
     void sig_removeHost();
     void sig_checkUpdates();
+    // Synchronous check (DirectConnection): returns whether any client session is open under
+    // the given user name. Used by the host-config applicator active-session guard.
+    void sig_checkUserSessions(const QString& username, bool* result);
 
 private slots:
     void onTcpReady();
@@ -115,6 +119,8 @@ private:
     void routerStateChanged(proto::user::RouterState::State state);
     void hostIdRequest();
     void sendTelemetry();
+    void sendHostConfigResult(const std::string& command_name, const std::string& error_code,
+                              const std::string& result);
     void readConnectionOffer(const proto::router::ConnectionOffer& offer);
     void renewOneTimePassword();
     User createOneTimeUser() const;
