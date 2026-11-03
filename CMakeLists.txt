@@ -131,7 +131,12 @@ if (ANDROID)
 endif()
 
 if (LINUX)
-    find_package(Qt6XcbQpaPrivate CONFIG REQUIRED)
+    # The private classes of the XCB platform plugin are for the windows of the client and of
+    # the host. A router that draws nothing has no window to put on an X server.
+    if (NOT ASPIA_ROUTER_ONLY)
+        find_package(Qt6XcbQpaPrivate CONFIG REQUIRED)
+    endif()
+
     find_package(Qt6DBus CONFIG REQUIRED)
     find_package(ICU REQUIRED COMPONENTS uc)
 endif()
