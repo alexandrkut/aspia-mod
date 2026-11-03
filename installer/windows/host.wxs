@@ -83,10 +83,12 @@
         </Component>
     </DirectoryRef>
 
-    <!-- Desktop Shortcut -->
+    <!-- Desktop Shortcut. The icon is not created unless it is asked for: the host is a
+         service, and an icon of it on the desktop of the user who installed it is a thing
+         most installations do not want. The box in the dialog is ticked by nobody. -->
     <DirectoryRef Id="DesktopFolder">
         <Component Id="DesktopShortcut" Guid="{6463EBB6-56AC-4FA7-9262-37BBC43435D5}">
-            <Condition>DESKTOP_SHORTCUT</Condition>
+            <Condition>DESKTOP_SHORTCUT = "1"</Condition>
             <Shortcut Id="ConfigDesktopShortcut" Name="!(loc.ProductName)" WorkingDirectory="InstallLocation" Target="[InstallLocation]aspia_host.exe"/>
             <RegistryValue Root="HKLM" Key="SOFTWARE\$(var.ProductName)" Type="string" Value="" KeyPath="yes" />
         </Component>
@@ -169,7 +171,7 @@
         </Dialog>
 
         <Property Id="STARTMENU_SHORTCUT" Value="1"></Property>
-        <Property Id="DESKTOP_SHORTCUT" Value="1"></Property>
+        <Property Id="DESKTOP_SHORTCUT" Value="0"></Property>
 
         <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="ShortcutsDlg" Order="10">LicenseAccepted = "1"</Publish>
         <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="ShortcutsDlg" Order="10">NOT Installed</Publish>
