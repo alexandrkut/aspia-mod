@@ -157,8 +157,34 @@ try
     # The version of the package stays a number. The mark of a modified build is not written into
     # it: the installer compares the versions of the packages, and a version with letters in it is
     # not compared at all - the package stops being recognised as a predecessor of the next one,
-    # and the next one is installed beside it instead of replacing it. The mark stays in the name
-    # of the file, in the window "About" and in the list of the installed programs it is not shown.
+    # and the next one is installed beside it instead of replacing it. The mark goes into the name
+    # of the product instead, which is what the list of the installed programs shows, so that a
+    # package of the mod is told from a package of the original.
+    if ($Suffix)
+    {
+        $mark = $Suffix.TrimStart('-')
+
+        $installer = New-Object -ComObject WindowsInstaller.Installer
+        $database = $installer.OpenDatabase($msi, 1)
+
+        $view = $database.OpenView("SELECT ``Value`` FROM ``Property`` WHERE ``Property``='ProductName'")
+        $view.Execute()
+        $record = $view.Fetch()
+        if (-not $record) { throw "the package has no ProductName" }
+        $name = [string]$record.StringData(1)
+        $view.Close()
+
+        $view = $database.OpenView("UPDATE ``Property`` SET ``Value``='$name ($mark)' WHERE ``Property``='ProductName'")
+        $view.Execute()
+        $view.Close()
+
+        $database.Commit()
+
+        [System.Runtime.InteropServices.Marshal]::ReleaseComObject($database) | Out-Null
+        [System.Runtime.InteropServices.Marshal]::ReleaseComObject($installer) | Out-Null
+
+        Write-Host "  Name       : $name ($mark)"
+    }
 }
 finally
 {
