@@ -7,8 +7,11 @@
       "name": "curl",
       "default-features": false,
       "features": [
-        "non-http",
-        "openssl"
+        "openssl",
+        {
+          "name": "sspi",
+          "platform": "windows & !uwp"
+        }
       ]
     },
     {
@@ -22,7 +25,6 @@
     },
     "openssl",
     "protobuf",
-    "enet",
     "sqlite3",
     {
       "name": "sqlite3",
@@ -37,13 +39,19 @@
       "platform": "!android",
       "default-features": false,
       "features": [
-        "dbus",
         "doubleconversion",
-        "icu",
         "network",
         "pcre2",
         "thread",
-        "zstd"
+        "zstd",
+        {
+          "name": "dbus",
+          "platform": "linux"
+        },
+        {
+          "name": "icu",
+          "platform": "linux | osx"
+        }
       ]
     }
   ]
