@@ -25,8 +25,14 @@
                         Property="WIX_UPGRADE_DETECTED" />
     </Upgrade>
 
+    <!-- A package that finds this very product already installed was started to install it
+         again: the files of the product are written anew rather than the maintenance screen
+         with its "Change, repair or remove" question being shown. -->
+    <CustomAction Id="SetReinstallAll" Property="REINSTALL" Value="ALL" />
+
     <InstallExecuteSequence>
         <RemoveExistingProducts After="InstallInitialize" />
+        <Custom Action="SetReinstallAll" Before="InstallValidate">Installed</Custom>
     </InstallExecuteSequence>
 
     <!-- Windows version checking -->
@@ -47,7 +53,6 @@
     <!-- The installer always overwrites: a package that finds the files of an older copy
          must not fall into the maintenance mode with its "Repair" question, and the files
          that are already there are rewritten rather than kept. -->
-    <Property Id="ARPNOREPAIR" Value="1" />
     <Property Id="REINSTALLMODE" Value="amus" />
 
     <!-- The router may be running when it is removed, and a running program keeps its image
@@ -113,6 +118,11 @@
     <UI Id="InstallerUI">
         <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg" Order="10">LicenseAccepted = "1"</Publish>
         <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="LicenseAgreementDlg" Order="10">NOT Installed</Publish>
+
+        <!-- The same for the wizard: the page that asks whether to change, repair or remove
+             is skipped, and the wizard goes straight to the confirmation of the install. -->
+        <Publish Dialog="MaintenanceWelcomeDlg" Control="Next" Event="NewDialog"
+                 Value="VerifyReadyDlg" Order="2" />
 
         <Property Id="WIXUI_INSTALLDIR" Value="InstallLocation" />
         <UIRef Id="WixUI_InstallDir" />

@@ -160,12 +160,12 @@ try
     # and the next one is installed beside it instead of replacing it. The mark goes into the name
     # of the product instead, which is what the list of the installed programs shows, so that a
     # package of the mod is told from a package of the original.
+    $installer = New-Object -ComObject WindowsInstaller.Installer
+    $database = $installer.OpenDatabase($msi, 1)
+
     if ($Suffix)
     {
         $mark = $Suffix.TrimStart('-')
-
-        $installer = New-Object -ComObject WindowsInstaller.Installer
-        $database = $installer.OpenDatabase($msi, 1)
 
         $view = $database.OpenView("SELECT ``Value`` FROM ``Property`` WHERE ``Property``='ProductName'")
         $view.Execute()
@@ -178,13 +178,25 @@ try
         $view.Execute()
         $view.Close()
 
-        $database.Commit()
-
-        [System.Runtime.InteropServices.Marshal]::ReleaseComObject($database) | Out-Null
-        [System.Runtime.InteropServices.Marshal]::ReleaseComObject($installer) | Out-Null
-
         Write-Host "  Name       : $name ($mark)"
     }
+
+    # The package replaces and reinstalls, so the page that asks whether to change, repair or
+    # remove the product is not wanted: the transition from the maintenance welcome page to it is
+    # removed, and the wizard goes to the confirmation of the install instead (the wxs files
+    # publish it). Windows Installer keeps the first dialog it is told to show only after all the
+    # events of the control are published, and two of them make the result depend on the order
+    # the rows happen to be stored in - so the stock row is deleted rather than overridden.
+    $view = $database.OpenView(
+        "DELETE FROM ``ControlEvent`` WHERE ``Dialog_``='MaintenanceWelcomeDlg' AND ``Control_``='Next' " +
+        "AND ``Event``='NewDialog' AND ``Argument``='MaintenanceTypeDlg'")
+    $view.Execute()
+    $view.Close()
+
+    $database.Commit()
+
+    [System.Runtime.InteropServices.Marshal]::ReleaseComObject($database) | Out-Null
+    [System.Runtime.InteropServices.Marshal]::ReleaseComObject($installer) | Out-Null
 }
 finally
 {
