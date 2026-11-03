@@ -16,7 +16,18 @@
 
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
 
-    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeErrorMessage)" Schedule="afterInstallInitialize" AllowDowngrades="no" AllowSameVersionUpgrades="yes" Disallow="no" />
+    <!-- Any installed copy of this program, whatever its version, is an older one: the
+         package replaces it. The version of the package is compared only by the list of the
+         installed programs, and a build of another line or of the upstream carries a version
+         the plain MajorUpgrade rule would not recognise as a predecessor. -->
+    <Upgrade Id="{B460F717-1546-4FFC-9EDE-B21FD07E07CB}">
+        <UpgradeVersion Minimum="0.0.0" IncludeMinimum="yes" OnlyDetect="no"
+                        Property="WIX_UPGRADE_DETECTED" />
+    </Upgrade>
+
+    <InstallExecuteSequence>
+        <RemoveExistingProducts After="InstallInitialize" />
+    </InstallExecuteSequence>
 
     <!-- Windows version checking -->
     <Condition Message="This application is only supported on Windows 7, Windows Server 2008 R2, or higher.">
@@ -32,6 +43,12 @@
 
     <Icon Id="aspia.ico" SourceFile="resources/aspia.ico" />
     <Property Id="ARPPRODUCTICON" Value="aspia.ico" />
+
+    <!-- The installer always overwrites: a package that finds the files of an older copy
+         must not fall into the maintenance mode with its "Repair" question, and the files
+         that are already there are rewritten rather than kept. -->
+    <Property Id="ARPNOREPAIR" Value="1" />
+    <Property Id="REINSTALLMODE" Value="amus" />
 
     <!-- The host may be running when it is removed, and a running program keeps its image on
          the disk: the file is left behind until the machine is restarted. Closing the program
