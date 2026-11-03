@@ -81,7 +81,10 @@ if (NOT ANDROID)
 endif()
 
 if (WIN32)
-    set(QT_PLATFORM_LIBS Qt6::QWindowsIntegrationPlugin)
+    # The platform plugin of Qt puts a window on the screen; a router has none.
+    if (NOT ASPIA_ROUTER_ONLY)
+        set(QT_PLATFORM_LIBS Qt6::QWindowsIntegrationPlugin)
+    endif()
 endif()
 
 if (LINUX)
@@ -95,9 +98,11 @@ if (LINUX)
 endif()
 
 if (APPLE)
-    set(QT_PLATFORM_LIBS
-        Qt6::OpenGL
-        Qt6::QMacStylePlugin)
+    if (NOT ASPIA_ROUTER_ONLY)
+        set(QT_PLATFORM_LIBS
+            Qt6::OpenGL
+            Qt6::QMacStylePlugin)
+    endif()
 endif()
 
 # The libraries that every component needs. The router speaks the protocol, keeps the
