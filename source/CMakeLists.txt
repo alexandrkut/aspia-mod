@@ -257,7 +257,10 @@ add_subdirectory(base)
 
 if (ASPIA_ROUTER_ONLY)
     # The router and what it needs. Nothing else: the host and the client have windows,
-    # and the relay is a separate program.
+    # and the relay is a separate program. Of the vendored libraries only ENet is taken:
+    # the UDP channels of the base library are built on it, and the terminal and the
+    # picture libraries are not.
+    add_subdirectory(third_party/enet)
     add_subdirectory(proto)
     add_subdirectory(router)
 else()
