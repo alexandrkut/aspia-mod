@@ -45,7 +45,9 @@
 namespace {
 
 constexpr MilliSeconds kDragPollInterval{ 50 };
-const Seconds kReconnectRetryDelay { 5 };
+const Seconds kConnectionAttemptTimeout{ 20 };
+const Seconds kReconnectDelay{ 10 };
+const Seconds kReconnectRetryDelay{ 10 };
 const Minutes kReconnectBudget { 5 };
 
 //--------------------------------------------------------------------------------------------------
@@ -84,7 +86,9 @@ ClientWindow::ClientWindow(proto::peer::SessionType session_type, QWidget* paren
       client_id_(nextClientId()),
       session_type_(session_type),
       drag_poll_timer_(new QTimer(this)),
-      reconnect_timeout_timer_(new QTimer(this))
+      reconnect_timeout_timer_(new QTimer(this)),
+      connection_timeout_timer_(new QTimer(this)),
+      reconnect_delay_timer_(new QTimer(this))
 {
     LOG(INFO) << "Ctor";
 
@@ -107,6 +111,12 @@ ClientWindow::ClientWindow(proto::peer::SessionType session_type, QWidget* paren
         session_state_->setAutoReconnect(false);
         onErrorOccurred(tr("Timeout waiting for reconnection to host."));
     });
+
+    connection_timeout_timer_->setSingleShot(true);
+    connect(connection_timeout_timer_, &QTimer::timeout, this, &ClientWindow::onConnectionAttemptTimedOut);
+
+    reconnect_delay_timer_->setSingleShot(true);
+    connect(reconnect_delay_timer_, &QTimer::timeout, this, &ClientWindow::onReconnectDelayElapsed);
 
     createSessionConnectActions();
 }
@@ -193,6 +203,7 @@ void ClientWindow::onReconnectRequested()
     if (session_state_->isReconnecting() || reconnect_timeout_timer_->isActive())
         return;
 
+    reconnect_delay_timer_->stop();
     status_overlay_->setProgress(tr("Connecting to host..."));
     session_state_->setReconnecting(true);
 
@@ -200,6 +211,33 @@ void ClientWindow::onReconnectRequested()
         QTimer::singleShot(0, this, &ClientWindow::fetchConnectionOffer);
     else
         QTimer::singleShot(0, this, &ClientWindow::startNewSession);
+}
+
+//--------------------------------------------------------------------------------------------------
+void ClientWindow::onConnectionAttemptTimedOut()
+{
+    LOG(INFO) << "Connection attempt timed out";
+
+    if (!session_state_)
+        return;
+
+    session_state_->setReconnecting(true);
+    onErrorOccurred(tr("Timeout waiting for reconnection to host."));
+
+    if (!reconnect_delay_timer_->isActive())
+        reconnect_delay_timer_->start(kReconnectDelay);
+}
+
+//--------------------------------------------------------------------------------------------------
+void ClientWindow::onReconnectDelayElapsed()
+{
+    if (!session_state_)
+        return;
+
+    if (session_state_->isConnectionByHostId())
+        fetchConnectionOffer();
+    else
+        startNewSession();
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -265,6 +303,9 @@ void ClientWindow::setOsCredentialId(qint64 credential_id)
 void ClientWindow::closeEvent(QCloseEvent* /* event */)
 {
     LOG(INFO) << "Close event";
+    connection_timeout_timer_->stop();
+    reconnect_delay_timer_->stop();
+    reconnect_timeout_timer_->stop();
     drag_poll_timer_->stop();
     worker_manager_.reset();
 }
@@ -354,14 +395,8 @@ void ClientWindow::onStatusChanged(NetworkWorker::Status status, const QVariant&
                 break;
             // First disconnect in this auto-reconnect cycle: arm the overall timeout. Subsequent
             // WAIT_FOR_HOST signals during the same cycle keep the deadline rolling.
-            if (!reconnect_timeout_timer_->isActive())
-                reconnect_timeout_timer_->start(kReconnectBudget);
-            // Relay path fetches a fresh ConnectionOffer (which then starts the session).
-            // Direct path doesn't need an offer - just rebuild the session after the same delay.
-            if (session_state_->isConnectionByHostId())
-                QTimer::singleShot(kReconnectRetryDelay, this, &ClientWindow::fetchConnectionOffer);
-            else
-                QTimer::singleShot(kReconnectRetryDelay, this, &ClientWindow::startNewSession);
+            if (!reconnect_delay_timer_->isActive())
+                reconnect_delay_timer_->start(kReconnectDelay);
             break;
 
         case NetworkWorker::Status::VERSION_MISMATCH:
@@ -404,7 +439,20 @@ void ClientWindow::onNetworkStatusChanged(NetworkWorker::Status status, const QV
     onStatusChanged(status, data);
 
     if (status == NetworkWorker::Status::HOST_CONNECTED)
+    {
+        connection_timeout_timer_->stop();
+        reconnect_delay_timer_->stop();
+        session_state_->setReconnecting(false);
         onNetworkConnected();
+    }
+    else if (status == NetworkWorker::Status::HOST_DISCONNECTED)
+    {
+        connection_timeout_timer_->stop();
+        if (session_state_)
+            session_state_->setReconnecting(true);
+        if (!reconnect_delay_timer_->isActive())
+            reconnect_delay_timer_->start(kReconnectDelay);
+    }
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -599,6 +647,7 @@ void ClientWindow::startConnection(HostConfig host, const QString& display_name)
     session_state_ = std::make_shared<SessionState>(host, session_type_, display_name);
 
     LOG(INFO) << "Start client";
+    connection_timeout_timer_->start(kConnectionAttemptTimeout);
     if (session_state_->isConnectionByHostId())
         fetchConnectionOffer();
     else
@@ -651,7 +700,8 @@ void ClientWindow::fetchConnectionOffer()
             // Host is offline - wait a few seconds and try again. Client's internal
             // timeout_timer will eventually flip isAutoReconnect to false;
             // fetchConnectionOffer() guards on that.
-            QTimer::singleShot(kReconnectRetryDelay, this, &ClientWindow::fetchConnectionOffer);
+            if (!reconnect_delay_timer_->isActive())
+                reconnect_delay_timer_->start(kReconnectDelay);
             return;
         }
 
@@ -663,6 +713,8 @@ void ClientWindow::fetchConnectionOffer()
 //--------------------------------------------------------------------------------------------------
 void ClientWindow::startNewSession()
 {
+    connection_timeout_timer_->start(kConnectionAttemptTimeout);
+
     if (!session_keeper_)
         session_keeper_ = SessionKeeper::create(this);
 
