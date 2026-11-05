@@ -1236,67 +1236,69 @@ Vil du nulstille databasen?</translation>
 <context>
     <name>ClientWindow</name>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="300"/>
+        <location filename="../client/desktop/client_window.cc" line="394"/>
         <source>Session started.</source>
         <translation>Sessionen er startet.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="622"/>
+        <location filename="../client/desktop/client_window.cc" line="736"/>
         <source>The specified router is unavailable.</source>
         <translation>Den angivne router er ikke tilgængelig.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="624"/>
+        <location filename="../client/desktop/client_window.cc" line="738"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>Dataene for routeren er beskadigede. Rediger routeren, og indtast dem igen.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="626"/>
+        <location filename="../client/desktop/client_window.cc" line="740"/>
         <source>The specified router is offline.</source>
         <translation>Den angivne router er offline.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="312"/>
+        <location filename="../client/desktop/client_window.cc" line="406"/>
         <source>Connecting to host %1...</source>
         <translation>Opretter forbindelse til værten %1...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="316"/>
+        <location filename="../client/desktop/client_window.cc" line="410"/>
         <source>Connecting to host %1:%2...</source>
         <translation>Opretter forbindelse til værten %1:%2...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="352"/>
+        <location filename="../client/desktop/client_window.cc" line="446"/>
         <source>Host is unavailable yet. Waiting to reconnect...</source>
         <translation>Værten er ikke tilgængelig endnu. Venter på at oprette forbindelse igen...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="108"/>
+        <location filename="../client/desktop/client_window.cc" line="113"/>
+        <location filename="../client/desktop/client_window.cc" line="233"/>
         <source>Timeout waiting for reconnection to host.</source>
         <translation>Timeout under ventning på genoprettelse af forbindelse til værten.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="196"/>
+        <location filename="../client/desktop/client_window.cc" line="213"/>
+        <location filename="../client/desktop/client_window.cc" line="247"/>
         <source>Connecting to host...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="372"/>
+        <location filename="../client/desktop/client_window.cc" line="462"/>
         <source>The Host version is newer than the Client version (%1 &gt; %2). Please update the application.</source>
         <translation>Værtsversionen er nyere end klientversionen (%1 &gt; %2). Opdater venligst programmet.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="633"/>
+        <location filename="../client/desktop/client_window.cc" line="750"/>
         <source>Requesting connection to the host...</source>
         <translation>Anmoder om forbindelse til værten...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="641"/>
+        <location filename="../client/desktop/client_window.cc" line="758"/>
         <source>Connection offer received.</source>
         <translation>Forbindelsestilbud modtaget.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="658"/>
+        <location filename="../client/desktop/client_window.cc" line="778"/>
         <source>Error requesting connection via router.</source>
         <translation>Fejl ved anmodning om forbindelse via routeren.</translation>
     </message>
@@ -10135,13 +10137,23 @@ Sections: %2. Users in file: %3.</source>
 <context>
     <name>StatusOverlay</name>
     <message>
-        <location filename="../client/desktop/status_overlay.cc" line="47"/>
+        <location filename="../client/desktop/status_overlay.cc" line="51"/>
         <source>Close</source>
         <translation>Luk</translation>
     </message>
     <message>
-        <location filename="../client/desktop/status_overlay.cc" line="50"/>
+        <location filename="../client/desktop/status_overlay.cc" line="54"/>
         <source>Reconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="140"/>
+        <source>Retry in: %1 s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="141"/>
+        <source>Time left: %1 s</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

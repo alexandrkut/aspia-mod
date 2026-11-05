@@ -88,7 +88,8 @@ ClientWindow::ClientWindow(proto::peer::SessionType session_type, QWidget* paren
       drag_poll_timer_(new QTimer(this)),
       reconnect_timeout_timer_(new QTimer(this)),
       connection_timeout_timer_(new QTimer(this)),
-      reconnect_delay_timer_(new QTimer(this))
+      reconnect_delay_timer_(new QTimer(this)),
+      countdown_timer_(new QTimer(this))
 {
     LOG(INFO) << "Ctor";
 
@@ -117,6 +118,9 @@ ClientWindow::ClientWindow(proto::peer::SessionType session_type, QWidget* paren
 
     reconnect_delay_timer_->setSingleShot(true);
     connect(reconnect_delay_timer_, &QTimer::timeout, this, &ClientWindow::onReconnectDelayElapsed);
+
+    countdown_timer_->setInterval(1000);
+    connect(countdown_timer_, &QTimer::timeout, this, &ClientWindow::updateCountdown);
 
     createSessionConnectActions();
 }
@@ -207,6 +211,8 @@ void ClientWindow::onReconnectRequested()
 
     reconnect_delay_timer_->stop();
     status_overlay_->setProgress(tr("Connecting to host..."));
+    if (!countdown_timer_->isActive())
+        countdown_timer_->start();
     session_state_->setReconnecting(true);
 
     if (session_state_->isConnectionByHostId())
@@ -228,6 +234,8 @@ void ClientWindow::onConnectionAttemptTimedOut()
 
     if (!reconnect_delay_timer_->isActive())
         reconnect_delay_timer_->start(kReconnectDelay);
+    if (!countdown_timer_->isActive())
+        countdown_timer_->start();
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -237,11 +245,51 @@ void ClientWindow::onReconnectDelayElapsed()
         return;
 
     status_overlay_->setProgress(tr("Connecting to host..."));
+    if (!countdown_timer_->isActive())
+        countdown_timer_->start();
 
     if (session_state_->isConnectionByHostId())
         fetchConnectionOffer();
     else
         startNewSession();
+}
+
+//--------------------------------------------------------------------------------------------------
+void ClientWindow::updateCountdown()
+{
+    int seconds = 0;
+    bool retry = false;
+    bool active = false;
+
+    if (connection_timeout_timer_->isActive())
+    {
+        int ms = connection_timeout_timer_->remainingTime();
+        if (ms < 0)
+            ms = 0;
+        seconds = (ms + 999) / 1000;
+        active = true;
+        retry = false;
+    }
+    else if (reconnect_delay_timer_->isActive())
+    {
+        int ms = reconnect_delay_timer_->remainingTime();
+        if (ms < 0)
+            ms = 0;
+        seconds = (ms + 999) / 1000;
+        active = true;
+        retry = true;
+    }
+
+    if (!active || seconds <= 0)
+    {
+        status_overlay_->setCountdown(0, false);
+        if (!connection_timeout_timer_->isActive() && !reconnect_delay_timer_->isActive())
+            countdown_timer_->stop();
+    }
+    else
+    {
+        status_overlay_->setCountdown(seconds, retry);
+    }
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -309,6 +357,7 @@ void ClientWindow::closeEvent(QCloseEvent* /* event */)
     LOG(INFO) << "Close event";
     connection_timeout_timer_->stop();
     reconnect_delay_timer_->stop();
+    countdown_timer_->stop();
     reconnect_timeout_timer_->stop();
     drag_poll_timer_->stop();
     worker_manager_.reset();
@@ -401,6 +450,8 @@ void ClientWindow::onStatusChanged(NetworkWorker::Status status, const QVariant&
             // WAIT_FOR_HOST signals during the same cycle keep the deadline rolling.
             if (!reconnect_delay_timer_->isActive())
                 reconnect_delay_timer_->start(kReconnectDelay);
+            if (!countdown_timer_->isActive())
+                countdown_timer_->start();
             break;
 
         case NetworkWorker::Status::VERSION_MISMATCH:
@@ -446,6 +497,8 @@ void ClientWindow::onNetworkStatusChanged(NetworkWorker::Status status, const QV
     {
         connection_timeout_timer_->stop();
         reconnect_delay_timer_->stop();
+        countdown_timer_->stop();
+        status_overlay_->setCountdown(0, false);
         session_state_->setReconnecting(false);
         onNetworkConnected();
     }
@@ -456,6 +509,8 @@ void ClientWindow::onNetworkStatusChanged(NetworkWorker::Status status, const QV
             session_state_->setReconnecting(true);
         if (!reconnect_delay_timer_->isActive())
             reconnect_delay_timer_->start(kReconnectDelay);
+        if (!countdown_timer_->isActive())
+            countdown_timer_->start();
     }
 }
 
@@ -652,6 +707,8 @@ void ClientWindow::startConnection(HostConfig host, const QString& display_name)
 
     LOG(INFO) << "Start client";
     connection_timeout_timer_->start(kConnectionAttemptTimeout);
+    if (!countdown_timer_->isActive())
+        countdown_timer_->start();
     if (session_state_->isConnectionByHostId())
         fetchConnectionOffer();
     else
@@ -665,6 +722,10 @@ void ClientWindow::fetchConnectionOffer()
     if (session_state_->isReconnecting() && !session_state_->isAutoReconnect())
         return;
 
+    connection_timeout_timer_->start(kConnectionAttemptTimeout);
+    if (!countdown_timer_->isActive())
+        countdown_timer_->start();
+
     RouterSession* session = RouterController::session(session_state_->routerId());
     if (!session)
     {
@@ -677,6 +738,10 @@ void ClientWindow::fetchConnectionOffer()
             onErrorOccurred(tr("The data of the router is damaged. Edit the router and enter it again."));
         else
             onErrorOccurred(tr("The specified router is offline."));
+
+        connection_timeout_timer_->stop();
+        if (!connection_timeout_timer_->isActive() && !reconnect_delay_timer_->isActive())
+            countdown_timer_->stop();
         return;
     }
 
@@ -705,6 +770,8 @@ void ClientWindow::fetchConnectionOffer()
             // fetchConnectionOffer() guards on that.
             if (!reconnect_delay_timer_->isActive())
                 reconnect_delay_timer_->start(kReconnectDelay);
+            if (!countdown_timer_->isActive())
+                countdown_timer_->start();
             return;
         }
 
@@ -717,6 +784,8 @@ void ClientWindow::fetchConnectionOffer()
 void ClientWindow::startNewSession()
 {
     connection_timeout_timer_->start(kConnectionAttemptTimeout);
+    if (!countdown_timer_->isActive())
+        countdown_timer_->start();
 
     if (!session_keeper_)
         session_keeper_ = SessionKeeper::create(this);

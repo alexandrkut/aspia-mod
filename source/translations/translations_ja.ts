@@ -1233,67 +1233,69 @@ Reset the database?</source>
 <context>
     <name>ClientWindow</name>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="108"/>
+        <location filename="../client/desktop/client_window.cc" line="113"/>
+        <location filename="../client/desktop/client_window.cc" line="233"/>
         <source>Timeout waiting for reconnection to host.</source>
         <translation>ホストへの再接続の待機がタイムアウトしました。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="196"/>
+        <location filename="../client/desktop/client_window.cc" line="213"/>
+        <location filename="../client/desktop/client_window.cc" line="247"/>
         <source>Connecting to host...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="300"/>
+        <location filename="../client/desktop/client_window.cc" line="394"/>
         <source>Session started.</source>
         <translation>セッションが開始されました。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="312"/>
+        <location filename="../client/desktop/client_window.cc" line="406"/>
         <source>Connecting to host %1...</source>
         <translation>ホスト %1 に接続しています...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="316"/>
+        <location filename="../client/desktop/client_window.cc" line="410"/>
         <source>Connecting to host %1:%2...</source>
         <translation>ホスト %1:%2 に接続しています...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="352"/>
+        <location filename="../client/desktop/client_window.cc" line="446"/>
         <source>Host is unavailable yet. Waiting to reconnect...</source>
         <translation>ホストはまだ利用できません。再接続を待機しています...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="372"/>
+        <location filename="../client/desktop/client_window.cc" line="462"/>
         <source>The Host version is newer than the Client version (%1 &gt; %2). Please update the application.</source>
         <translation>ホストのバージョンがクライアントのバージョンより新しいです (%1 &gt; %2)。アプリケーションを更新してください。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="622"/>
+        <location filename="../client/desktop/client_window.cc" line="736"/>
         <source>The specified router is unavailable.</source>
         <translation>指定されたルーターは利用できません。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="624"/>
+        <location filename="../client/desktop/client_window.cc" line="738"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>ルーターのデータが破損しています。ルーターを編集してもう一度入力してください。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="626"/>
+        <location filename="../client/desktop/client_window.cc" line="740"/>
         <source>The specified router is offline.</source>
         <translation>指定されたルーターはオフラインです。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="633"/>
+        <location filename="../client/desktop/client_window.cc" line="750"/>
         <source>Requesting connection to the host...</source>
         <translation>ホストへの接続を要求しています...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="641"/>
+        <location filename="../client/desktop/client_window.cc" line="758"/>
         <source>Connection offer received.</source>
         <translation>接続オファーを受信しました。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="658"/>
+        <location filename="../client/desktop/client_window.cc" line="778"/>
         <source>Error requesting connection via router.</source>
         <translation>ルーター経由の接続要求でエラーが発生しました。</translation>
     </message>
@@ -10075,13 +10077,23 @@ Sections: %2. Users in file: %3.</source>
 <context>
     <name>StatusOverlay</name>
     <message>
-        <location filename="../client/desktop/status_overlay.cc" line="47"/>
+        <location filename="../client/desktop/status_overlay.cc" line="51"/>
         <source>Close</source>
         <translation>閉じる</translation>
     </message>
     <message>
-        <location filename="../client/desktop/status_overlay.cc" line="50"/>
+        <location filename="../client/desktop/status_overlay.cc" line="54"/>
         <source>Reconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="140"/>
+        <source>Retry in: %1 s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="141"/>
+        <source>Time left: %1 s</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

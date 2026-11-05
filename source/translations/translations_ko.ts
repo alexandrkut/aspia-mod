@@ -1233,67 +1233,69 @@ Reset the database?</source>
 <context>
     <name>ClientWindow</name>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="108"/>
+        <location filename="../client/desktop/client_window.cc" line="113"/>
+        <location filename="../client/desktop/client_window.cc" line="233"/>
         <source>Timeout waiting for reconnection to host.</source>
         <translation>호스트 다시 연결 대기 시간이 초과되었습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="196"/>
+        <location filename="../client/desktop/client_window.cc" line="213"/>
+        <location filename="../client/desktop/client_window.cc" line="247"/>
         <source>Connecting to host...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="300"/>
+        <location filename="../client/desktop/client_window.cc" line="394"/>
         <source>Session started.</source>
         <translation>세션이 시작되었습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="312"/>
+        <location filename="../client/desktop/client_window.cc" line="406"/>
         <source>Connecting to host %1...</source>
         <translation>%1 호스트에 연결하는 중...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="316"/>
+        <location filename="../client/desktop/client_window.cc" line="410"/>
         <source>Connecting to host %1:%2...</source>
         <translation>%1:%2 호스트에 연결하는 중...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="352"/>
+        <location filename="../client/desktop/client_window.cc" line="446"/>
         <source>Host is unavailable yet. Waiting to reconnect...</source>
         <translation>호스트를 아직 사용할 수 없습니다. 다시 연결을 기다리는 중...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="372"/>
+        <location filename="../client/desktop/client_window.cc" line="462"/>
         <source>The Host version is newer than the Client version (%1 &gt; %2). Please update the application.</source>
         <translation>호스트 버전이 클라이언트 버전보다 최신입니다(%1 &gt; %2). 응용 프로그램을 업데이트하십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="622"/>
+        <location filename="../client/desktop/client_window.cc" line="736"/>
         <source>The specified router is unavailable.</source>
         <translation>지정한 라우터를 사용할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="624"/>
+        <location filename="../client/desktop/client_window.cc" line="738"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>라우터의 데이터가 손상되었습니다. 라우터를 편집하여 다시 입력하십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="626"/>
+        <location filename="../client/desktop/client_window.cc" line="740"/>
         <source>The specified router is offline.</source>
         <translation>지정한 라우터가 오프라인 상태입니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="633"/>
+        <location filename="../client/desktop/client_window.cc" line="750"/>
         <source>Requesting connection to the host...</source>
         <translation>호스트에 연결을 요청하는 중...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="641"/>
+        <location filename="../client/desktop/client_window.cc" line="758"/>
         <source>Connection offer received.</source>
         <translation>연결 제안을 받았습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="658"/>
+        <location filename="../client/desktop/client_window.cc" line="778"/>
         <source>Error requesting connection via router.</source>
         <translation>라우터를 통한 연결을 요청하는 동안 오류가 발생했습니다.</translation>
     </message>
@@ -10075,13 +10077,23 @@ Sections: %2. Users in file: %3.</source>
 <context>
     <name>StatusOverlay</name>
     <message>
-        <location filename="../client/desktop/status_overlay.cc" line="47"/>
+        <location filename="../client/desktop/status_overlay.cc" line="51"/>
         <source>Close</source>
         <translation>닫기</translation>
     </message>
     <message>
-        <location filename="../client/desktop/status_overlay.cc" line="50"/>
+        <location filename="../client/desktop/status_overlay.cc" line="54"/>
         <source>Reconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="140"/>
+        <source>Retry in: %1 s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="141"/>
+        <source>Time left: %1 s</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

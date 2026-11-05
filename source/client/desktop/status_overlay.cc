@@ -39,6 +39,10 @@ StatusOverlay::StatusOverlay(QWidget* parent)
     message_label_->setAlignment(Qt::AlignCenter);
     message_label_->setWordWrap(true);
 
+    countdown_label_ = new QLabel(this);
+    countdown_label_->setAlignment(Qt::AlignCenter);
+    countdown_label_->hide();
+
     busy_bar_ = new QProgressBar(this);
     busy_bar_->setRange(0, 0);
     busy_bar_->setTextVisible(false);
@@ -60,6 +64,7 @@ StatusOverlay::StatusOverlay(QWidget* parent)
     layout->setSpacing(12);
     layout->addStretch();
     layout->addWidget(message_label_);
+    layout->addWidget(countdown_label_, 0, Qt::AlignHCenter);
     layout->addWidget(busy_bar_, 0, Qt::AlignHCenter);
     layout->addLayout(buttons_layout);
     layout->addStretch();
@@ -117,6 +122,24 @@ void StatusOverlay::showMessage(const QString& message, bool busy)
     busy_bar_->setVisible(busy);
     close_button_->setVisible(true);
     reconnect_button_->setVisible(!busy);
+    countdown_label_->hide();
     show();
     raise();
+}
+
+//--------------------------------------------------------------------------------------------------
+void StatusOverlay::setCountdown(int seconds, bool retry)
+{
+    if (seconds <= 0)
+    {
+        countdown_label_->hide();
+        return;
+    }
+
+    const QString text = retry
+        ? tr("Retry in: %1 s").arg(seconds)
+        : tr("Time left: %1 s").arg(seconds);
+
+    countdown_label_->setText(text);
+    countdown_label_->show();
 }

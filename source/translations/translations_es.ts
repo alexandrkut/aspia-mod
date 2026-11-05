@@ -1236,67 +1236,69 @@ Reset the database?</source>
 <context>
     <name>ClientWindow</name>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="300"/>
+        <location filename="../client/desktop/client_window.cc" line="394"/>
         <source>Session started.</source>
         <translation>Sesión iniciada.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="622"/>
+        <location filename="../client/desktop/client_window.cc" line="736"/>
         <source>The specified router is unavailable.</source>
         <translation>El router especificado no está disponible.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="624"/>
+        <location filename="../client/desktop/client_window.cc" line="738"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>Los datos del router están dañados. Edite el router e introdúzcalos de nuevo.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="626"/>
+        <location filename="../client/desktop/client_window.cc" line="740"/>
         <source>The specified router is offline.</source>
         <translation>El router especificado está desconectado.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="312"/>
+        <location filename="../client/desktop/client_window.cc" line="406"/>
         <source>Connecting to host %1...</source>
         <translation>Conectando al host %1...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="316"/>
+        <location filename="../client/desktop/client_window.cc" line="410"/>
         <source>Connecting to host %1:%2...</source>
         <translation>Conectando al host %1:%2...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="352"/>
+        <location filename="../client/desktop/client_window.cc" line="446"/>
         <source>Host is unavailable yet. Waiting to reconnect...</source>
         <translation>El host aún no está disponible. Esperando para reconectar...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="108"/>
+        <location filename="../client/desktop/client_window.cc" line="113"/>
+        <location filename="../client/desktop/client_window.cc" line="233"/>
         <source>Timeout waiting for reconnection to host.</source>
         <translation>Se agotó el tiempo de espera para reconectar con el host.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="196"/>
+        <location filename="../client/desktop/client_window.cc" line="213"/>
+        <location filename="../client/desktop/client_window.cc" line="247"/>
         <source>Connecting to host...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="372"/>
+        <location filename="../client/desktop/client_window.cc" line="462"/>
         <source>The Host version is newer than the Client version (%1 &gt; %2). Please update the application.</source>
         <translation>La versión del host es más reciente que la del cliente (%1 &gt; %2). Actualice la aplicación.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="633"/>
+        <location filename="../client/desktop/client_window.cc" line="750"/>
         <source>Requesting connection to the host...</source>
         <translation>Solicitando conexión con el host...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="641"/>
+        <location filename="../client/desktop/client_window.cc" line="758"/>
         <source>Connection offer received.</source>
         <translation>Oferta de conexión recibida.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="658"/>
+        <location filename="../client/desktop/client_window.cc" line="778"/>
         <source>Error requesting connection via router.</source>
         <translation>Error al solicitar la conexión a través del router.</translation>
     </message>
@@ -10135,13 +10137,23 @@ Sections: %2. Users in file: %3.</source>
 <context>
     <name>StatusOverlay</name>
     <message>
-        <location filename="../client/desktop/status_overlay.cc" line="47"/>
+        <location filename="../client/desktop/status_overlay.cc" line="51"/>
         <source>Close</source>
         <translation>Cerrar</translation>
     </message>
     <message>
-        <location filename="../client/desktop/status_overlay.cc" line="50"/>
+        <location filename="../client/desktop/status_overlay.cc" line="54"/>
         <source>Reconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="140"/>
+        <source>Retry in: %1 s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="141"/>
+        <source>Time left: %1 s</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
