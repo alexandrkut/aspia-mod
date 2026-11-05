@@ -18,6 +18,7 @@
 
 #include "client/desktop/status_overlay.h"
 
+#include <QHBoxLayout>
 #include <QEvent>
 #include <QLabel>
 #include <QProgressBar>
@@ -46,12 +47,21 @@ StatusOverlay::StatusOverlay(QWidget* parent)
     close_button_ = new QPushButton(tr("Close"), this);
     connect(close_button_, &QPushButton::clicked, this, &StatusOverlay::sig_closeRequested);
 
+    reconnect_button_ = new QPushButton(tr("Reconnect"), this);
+    connect(reconnect_button_, &QPushButton::clicked, this, &StatusOverlay::sig_reconnectRequested);
+
+    QHBoxLayout* buttons_layout = new QHBoxLayout();
+    buttons_layout->addStretch();
+    buttons_layout->addWidget(close_button_);
+    buttons_layout->addWidget(reconnect_button_);
+    buttons_layout->addStretch();
+
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->setSpacing(12);
     layout->addStretch();
     layout->addWidget(message_label_);
     layout->addWidget(busy_bar_, 0, Qt::AlignHCenter);
-    layout->addWidget(close_button_, 0, Qt::AlignHCenter);
+    layout->addLayout(buttons_layout);
     layout->addStretch();
 
     // Track the parent to always cover it entirely and stay on top of siblings created later.
@@ -105,6 +115,8 @@ void StatusOverlay::showMessage(const QString& message, bool busy)
 {
     message_label_->setText(message);
     busy_bar_->setVisible(busy);
+    close_button_->setVisible(true);
+    reconnect_button_->setVisible(!busy);
     show();
     raise();
 }

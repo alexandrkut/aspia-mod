@@ -57,6 +57,10 @@ public:
                  const QString& package, const ProxySettings& proxy, Action action, QWidget* parent = nullptr);
     ~UpdateDialog() final;
 
+    // Enables an automatic restart of the current application after a successful update
+    // installation. Used by the client GUI; disabled by default (host and CLI flows).
+    void setRestartAfterInstall(bool enable) { restart_after_install_ = enable; }
+
     // QDialog implementation.
     void done(int result) final;
 
@@ -81,6 +85,7 @@ private:
     void setDownloading(bool downloading);
     void setError(const QString& text);
     void destroyChecker();
+    void scheduleRestart();
 
     std::unique_ptr<Ui::UpdateDialog> ui;
     const QString channel_;
@@ -93,6 +98,8 @@ private:
     ScopedQPointer<UpdateInstaller> installer_;
     ScopedQPointer<HttpFileDownloader> downloader_;
     ScopedQPointer<ElevateUtil> elevate_util_;
+
+    bool restart_after_install_ = false;
 
     Q_DISABLE_COPY_MOVE(UpdateDialog)
 };

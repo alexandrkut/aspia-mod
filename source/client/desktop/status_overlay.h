@@ -45,6 +45,9 @@ signals:
     // Emitted when the user clicks the close button to cancel the connection or dismiss an error.
     void sig_closeRequested();
 
+    // Emitted when the user clicks the reconnect button on an error screen.
+    void sig_reconnectRequested();
+
 protected:
     // QObject implementation.
     bool eventFilter(QObject* object, QEvent* event) final;
@@ -55,6 +58,7 @@ private:
     QLabel* message_label_ = nullptr;
     QProgressBar* busy_bar_ = nullptr;
     QPushButton* close_button_ = nullptr;
+    QPushButton* reconnect_button_ = nullptr;
 
     Q_DISABLE_COPY_MOVE(StatusOverlay)
 };

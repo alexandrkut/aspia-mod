@@ -1236,62 +1236,67 @@ Reset the database?</source>
 <context>
     <name>ClientWindow</name>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="279"/>
+        <location filename="../client/desktop/client_window.cc" line="300"/>
         <source>Session started.</source>
         <translation>ההפעלה החלה.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="601"/>
+        <location filename="../client/desktop/client_window.cc" line="622"/>
         <source>The specified router is unavailable.</source>
         <translation>הנתב שצוין אינו זמין.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="603"/>
+        <location filename="../client/desktop/client_window.cc" line="624"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>נתוני הנתב פגומים. ערוך את הנתב והזן אותם מחדש.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="605"/>
+        <location filename="../client/desktop/client_window.cc" line="626"/>
         <source>The specified router is offline.</source>
         <translation>הנתב שצוין אינו מקוון.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="291"/>
+        <location filename="../client/desktop/client_window.cc" line="312"/>
         <source>Connecting to host %1...</source>
         <translation>מתחבר למארח %1...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="295"/>
+        <location filename="../client/desktop/client_window.cc" line="316"/>
         <source>Connecting to host %1:%2...</source>
         <translation>מתחבר למארח %1:%2...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="331"/>
+        <location filename="../client/desktop/client_window.cc" line="352"/>
         <source>Host is unavailable yet. Waiting to reconnect...</source>
         <translation>המארח עדיין אינו זמין. ממתין לחיבור מחדש...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="105"/>
+        <location filename="../client/desktop/client_window.cc" line="108"/>
         <source>Timeout waiting for reconnection to host.</source>
         <translation>תם הזמן הקצוב להמתנה לחיבור מחדש למארח.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="351"/>
+        <location filename="../client/desktop/client_window.cc" line="196"/>
+        <source>Connecting to host...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/client_window.cc" line="372"/>
         <source>The Host version is newer than the Client version (%1 &gt; %2). Please update the application.</source>
         <translation>גרסת המארח חדשה מגרסת הלקוח (%1 &gt; %2). נא לעדכן את היישום.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="612"/>
+        <location filename="../client/desktop/client_window.cc" line="633"/>
         <source>Requesting connection to the host...</source>
         <translation>מבקש חיבור למארח...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="620"/>
+        <location filename="../client/desktop/client_window.cc" line="641"/>
         <source>Connection offer received.</source>
         <translation>התקבלה הצעת חיבור.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="637"/>
+        <location filename="../client/desktop/client_window.cc" line="658"/>
         <source>Error requesting connection via router.</source>
         <translation>שגיאה בבקשת חיבור דרך הנתב.</translation>
     </message>
@@ -5099,7 +5104,7 @@ Credentials imported: %5</source>
     </message>
     <message>
         <location filename="../client/desktop/main_window.ui" line="20"/>
-        <location filename="../client/desktop/main_window.cc" line="1007"/>
+        <location filename="../client/desktop/main_window.cc" line="1019"/>
         <source>Aspia Client</source>
         <translation>Aspia Client</translation>
     </message>
@@ -5179,123 +5184,133 @@ Credentials imported: %5</source>
         <translation>חיפוש...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="218"/>
+        <location filename="../client/desktop/main_window.cc" line="219"/>
         <source>Unable to turn on the MCP connector.</source>
         <translation>לא ניתן להפעיל את מחבר ה-MCP.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="236"/>
+        <location filename="../client/desktop/main_window.cc" line="237"/>
         <source>Management</source>
         <translation>ניהול</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="282"/>
+        <location filename="../client/desktop/main_window.cc" line="283"/>
         <source>Invalid link &quot;%1&quot;.</source>
         <translation>קישור לא חוקי &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="305"/>
+        <location filename="../client/desktop/main_window.cc" line="306"/>
         <source>The router referenced by the link is not among the saved routers.</source>
         <translation>הנתב שאליו מפנה הקישור אינו נמצא בין הנתבים השמורים.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="354"/>
+        <location filename="../client/desktop/main_window.cc" line="355"/>
         <source>The host referenced by the link is not among the saved hosts.</source>
         <translation>המארח שאליו מפנה הקישור אינו נמצא בין המארחים השמורים.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="419"/>
+        <location filename="../client/desktop/main_window.cc" line="420"/>
         <source>A host named by its address has no record of it in the address book, and there are no stored credentials to use. Give the user name and the password with --username and --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="681"/>
+        <location filename="../client/desktop/main_window.cc" line="682"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="687"/>
+        <location filename="../client/desktop/main_window.cc" line="688"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="974"/>
+        <location filename="../client/desktop/main_window.cc" line="747"/>
+        <source>Close the client?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="749"/>
+        <source>Open connections will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="986"/>
         <source>Close all sessions to lock the application.</source>
         <translation>סגור את כל ההפעלות כדי לנעול את היישום.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="980"/>
+        <location filename="../client/desktop/main_window.cc" line="992"/>
         <source>Close all dialogs to lock the application.</source>
         <translation>סגור את כל תיבות הדו-שיח כדי לנעול את היישום.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1000"/>
+        <location filename="../client/desktop/main_window.cc" line="1012"/>
         <source>Connect to a host by its ID from the command line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1001"/>
+        <location filename="../client/desktop/main_window.cc" line="1013"/>
         <source>The icon of the screen of all the monitors at once</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1002"/>
+        <location filename="../client/desktop/main_window.cc" line="1014"/>
         <source>Remote management of host users and update settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1003"/>
+        <location filename="../client/desktop/main_window.cc" line="1015"/>
         <source>Full host configuration from a file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1004"/>
+        <location filename="../client/desktop/main_window.cc" line="1016"/>
         <source>Bulk operations on multiple hosts at once</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1104"/>
+        <location filename="../client/desktop/main_window.cc" line="1116"/>
         <source>Connection by ID is specified in the properties of the host, but the router is not configured. Check the parameters of the router in the properties of the host.</source>
         <translation>במאפייני המארח צוין חיבור לפי ID, אך הנתב אינו מוגדר. בדוק את פרמטרי הנתב במאפייני המארח.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1371"/>
+        <location filename="../client/desktop/main_window.cc" line="1383"/>
         <source>Unknown application</source>
         <translation>יישום לא ידוע</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1374"/>
+        <location filename="../client/desktop/main_window.cc" line="1386"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>מחבר MCP. יישומים מחוברים: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1375"/>
+        <location filename="../client/desktop/main_window.cc" line="1387"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - בינה מלאכותית מחוברת</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="366"/>
+        <location filename="../client/desktop/main_window.cc" line="367"/>
         <source>The router associated with this host has been deleted. Edit the host to select another router or switch to direct connection.</source>
         <translation>הנתב המשויך למארח זה נמחק. ערוך את המארח כדי לבחור נתב אחר או לעבור לחיבור ישיר.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="313"/>
-        <location filename="../client/desktop/main_window.cc" line="365"/>
+        <location filename="../client/desktop/main_window.cc" line="314"/>
+        <location filename="../client/desktop/main_window.cc" line="366"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>נתוני הנתב פגומים. ערוך את הנתב והזן אותם מחדש.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="353"/>
+        <location filename="../client/desktop/main_window.cc" line="354"/>
         <source>The data of the host is damaged. Edit the host and enter it again.</source>
         <translation>נתוני המארח פגומים. ערוך את המארח והזן אותם מחדש.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="933"/>
+        <location filename="../client/desktop/main_window.cc" line="945"/>
         <source>Credentials</source>
         <translation>פרטי כניסה</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="964"/>
+        <location filename="../client/desktop/main_window.cc" line="976"/>
         <source>Settings</source>
         <translation>הגדרות</translation>
     </message>
@@ -8007,46 +8022,46 @@ Detail: %1</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="506"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1493"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="507"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1494"/>
         <source>Open host configuration file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="507"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1495"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="508"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1496"/>
         <source>JSON files (*.json);;All files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="514"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1502"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="515"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1503"/>
         <source>Cannot open file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="525"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1512"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="526"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1513"/>
         <source>Invalid JSON: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="533"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="534"/>
         <source>No session to router.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="547"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="548"/>
         <source>Configuration applied successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="549"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="550"/>
         <source>Failed to apply: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="865"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="866"/>
         <source>%n host(s)</source>
         <translation>
             <numerusform>%n מארח</numerusform>
@@ -8054,215 +8069,215 @@ Detail: %1</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="929"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="930"/>
         <source>Save File</source>
         <translation>שמירת קובץ</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="929"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="930"/>
         <source>JSON files (*.json)</source>
         <translation>קובצי JSON (*.json)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="940"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="941"/>
         <source>Could not open file for writing.</source>
         <translation>לא ניתן לפתוח קובץ לכתיבה.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="987"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="988"/>
         <source>Unable to write file.</source>
         <translation>לא ניתן לכתוב את הקובץ.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1068"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1069"/>
         <source>Cancel</source>
         <translation type="unfinished">ביטול</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1162"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1163"/>
         <source>Failed to create user credentials.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1186"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1265"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1187"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1266"/>
         <source>Reading user lists...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1194"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1195"/>
         <source>Add user &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1200"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1280"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1201"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1281"/>
         <source>List unreadable (%1), will try anyway.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1222"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1223"/>
         <source>Already exists, skipped.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1238"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1239"/>
         <source>Add user on hosts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1274"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1275"/>
         <source>Remove user &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1306"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1307"/>
         <source>No such user, skipped.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1313"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1314"/>
         <source>Last enabled user, the host will refuse.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1335"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1336"/>
         <source>Remove user from hosts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1356"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1374"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1357"/>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="1375"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1377"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1376"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1378"/>
         <source>(unknown)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1357"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1426"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1428"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1434"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1436"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1358"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1427"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1429"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1435"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1437"/>
         <source>(default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1371"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1372"/>
         <source>Hosts in run: %1. Channels: %2. Servers: %3. Auto-update on: %4 of %5. Frequencies (days): %6.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1398"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1399"/>
         <source>No fields selected, nothing to do.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1415"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1416"/>
         <source>Set selected fields (current settings unknown).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1425"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1426"/>
         <source>server: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1433"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1434"/>
         <source>public key: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1434"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1436"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1435"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1437"/>
         <source>(set)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1441"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1442"/>
         <source>channel: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1446"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1447"/>
         <source>auto-update: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1447"/>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="1448"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1449"/>
         <source>on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1447"/>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="1448"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1449"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1453"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1454"/>
         <source>frequency: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1460"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1461"/>
         <source>No changes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1461"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1462"/>
         <source>Already matching, skipped.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1482"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1483"/>
         <source>Update configuration on hosts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1518"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1519"/>
         <source>Not a host configuration file (no system/database sections).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1535"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1536"/>
         <source>File: %1
 Sections: %2. Users in file: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1537"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1538"/>
         <source>(kept)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1566"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1567"/>
         <source>Dry run on hosts...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1579"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1580"/>
         <source>Apply full config (dry run %1, will try anyway).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1592"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1593"/>
         <source>users: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1599"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1600"/>
         <source>system: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1604"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1605"/>
         <source>Apply full config (no visible diff).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1623"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1624"/>
         <source>Full configuration on hosts</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9517,37 +9532,37 @@ Sections: %2. Users in file: %3.</source>
         <translation>לא ניתן לקרוא את הגדרות שרת הפרוקסי.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="890"/>
+        <location filename="../client/desktop/settings_tab.cc" line="891"/>
         <source>The key of the database will be stored on this computer. Any program running under your account will be able to read it, even when the application is not running.</source>
         <translation>מפתח מסד הנתונים יישמר במחשב זה. כל תוכנית הפועלת תחת החשבון שלך תוכל לקרוא אותו, גם כאשר היישום אינו פועל.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="893"/>
+        <location filename="../client/desktop/settings_tab.cc" line="894"/>
         <source>Do you want to continue?</source>
         <translation>האם ברצונך להמשיך?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="904"/>
+        <location filename="../client/desktop/settings_tab.cc" line="905"/>
         <source>Unlock Automatically</source>
         <translation>ביטול נעילה אוטומטי</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="906"/>
+        <location filename="../client/desktop/settings_tab.cc" line="907"/>
         <source>Enter the master password to unlock the application automatically on startup.</source>
         <translation>הזן את הסיסמה הראשית כדי לבטל את נעילת היישום אוטומטית בעת ההפעלה.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="916"/>
+        <location filename="../client/desktop/settings_tab.cc" line="917"/>
         <source>Invalid master password.</source>
         <translation>הסיסמה הראשית שגויה.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="920"/>
+        <location filename="../client/desktop/settings_tab.cc" line="921"/>
         <source>Unable to unlock the database.</source>
         <translation>לא ניתן לבטל את נעילת מסד הנתונים.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="934"/>
+        <location filename="../client/desktop/settings_tab.cc" line="935"/>
         <source>Unable to turn on the automatic unlock.</source>
         <translation>לא ניתן להפעיל את ביטול הנעילה האוטומטי.</translation>
     </message>
@@ -10120,9 +10135,14 @@ Sections: %2. Users in file: %3.</source>
 <context>
     <name>StatusOverlay</name>
     <message>
-        <location filename="../client/desktop/status_overlay.cc" line="46"/>
+        <location filename="../client/desktop/status_overlay.cc" line="47"/>
         <source>Close</source>
         <translation>סגור</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="50"/>
+        <source>Reconnect</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14489,7 +14509,7 @@ Sections: %2. Users in file: %3.</source>
         <translation>עדכון</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="374"/>
+        <location filename="../common/desktop/update_dialog.cc" line="407"/>
         <source>Checking for updates</source>
         <translation>בודק עדכונים</translation>
     </message>
@@ -14524,85 +14544,85 @@ Sections: %2. Users in file: %3.</source>
         <translation>עדכן עכשיו!</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="379"/>
+        <location filename="../common/desktop/update_dialog.cc" line="412"/>
         <source>Close</source>
         <translation>סגור</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="72"/>
+        <location filename="../common/desktop/update_dialog.cc" line="74"/>
         <source>Receiving information...</source>
         <translation>מקבל מידע...</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="158"/>
+        <location filename="../common/desktop/update_dialog.cc" line="160"/>
         <source>Install the update yourself: %1</source>
         <translation>התקן את העדכון בעצמך: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="164"/>
+        <location filename="../common/desktop/update_dialog.cc" line="166"/>
         <source>An update will be downloaded. After the download is complete, the application will automatically close.</source>
         <translation>תתבצע הורדה של העדכון. לאחר השלמת ההורדה, היישום ייסגר אוטומטית.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="166"/>
+        <location filename="../common/desktop/update_dialog.cc" line="168"/>
         <source>All connected sessions will be terminated. You cannot establish a connection until the update is complete.</source>
         <translation>כל ההפעלות המחוברות יופסקו. לא ניתן ליצור חיבור עד להשלמת העדכון.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="168"/>
+        <location filename="../common/desktop/update_dialog.cc" line="170"/>
         <source>All unsaved data will be lost.</source>
         <translation>כל הנתונים שלא נשמרו יאבדו.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="169"/>
+        <location filename="../common/desktop/update_dialog.cc" line="171"/>
         <source>Continue?</source>
         <translation>להמשיך?</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="199"/>
-        <location filename="../common/desktop/update_dialog.cc" line="220"/>
-        <location filename="../common/desktop/update_dialog.cc" line="245"/>
-        <location filename="../common/desktop/update_dialog.cc" line="341"/>
+        <location filename="../common/desktop/update_dialog.cc" line="201"/>
+        <location filename="../common/desktop/update_dialog.cc" line="222"/>
+        <location filename="../common/desktop/update_dialog.cc" line="250"/>
+        <location filename="../common/desktop/update_dialog.cc" line="349"/>
         <source>An error occurred while installing the update.</source>
         <translation>אירעה שגיאה בעת התקנת העדכון.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="314"/>
+        <location filename="../common/desktop/update_dialog.cc" line="319"/>
         <source>An error occurred while downloading the update: %1</source>
         <translation>אירעה שגיאה בעת הורדת העדכון: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="339"/>
+        <location filename="../common/desktop/update_dialog.cc" line="347"/>
         <source>The downloaded file is damaged.</source>
         <translation>הקובץ שהורד פגום.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="374"/>
+        <location filename="../common/desktop/update_dialog.cc" line="407"/>
         <source>Downloading the update</source>
         <translation>מוריד את העדכון</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="379"/>
+        <location filename="../common/desktop/update_dialog.cc" line="412"/>
         <source>Cancel</source>
         <translation>ביטול</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="291"/>
+        <location filename="../common/desktop/update_dialog.cc" line="296"/>
         <source>Unknown</source>
         <translation>לא ידוע</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="292"/>
+        <location filename="../common/desktop/update_dialog.cc" line="297"/>
         <source>Error retrieving update information.</source>
         <translation>שגיאה באחזור פרטי העדכון.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="349"/>
+        <location filename="../common/desktop/update_dialog.cc" line="382"/>
         <source>Installing the update. Please wait.</source>
         <translation>מתקין את העדכון. נא להמתין.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="267"/>
+        <location filename="../common/desktop/update_dialog.cc" line="272"/>
         <source>No updates available.</source>
         <translation>אין עדכונים זמינים.</translation>
     </message>

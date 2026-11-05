@@ -94,6 +94,9 @@ ClientWindow::ClientWindow(proto::peer::SessionType session_type, QWidget* paren
     // Closing the status overlay closes the session window.
     connect(status_overlay_, &StatusOverlay::sig_closeRequested, this, &ClientWindow::close);
 
+    // Reconnecting from the status overlay reuses the existing connection path.
+    connect(status_overlay_, &StatusOverlay::sig_reconnectRequested, this, &ClientWindow::onReconnectRequested);
+
     drag_poll_timer_->setInterval(kDragPollInterval);
     connect(drag_poll_timer_, &QTimer::timeout, this, &ClientWindow::onDragPoll);
 
@@ -179,6 +182,24 @@ void ClientWindow::onErrorOccurred(const QString& message)
 {
     onInternalReset();
     status_overlay_->setError(message);
+}
+
+//--------------------------------------------------------------------------------------------------
+void ClientWindow::onReconnectRequested()
+{
+    LOG(INFO) << "Reconnect requested";
+
+    // Guard against parallel attempts while an auto-reconnect cycle is already running.
+    if (session_state_->isReconnecting() || reconnect_timeout_timer_->isActive())
+        return;
+
+    status_overlay_->setProgress(tr("Connecting to host..."));
+    session_state_->setReconnecting(true);
+
+    if (session_state_->isConnectionByHostId())
+        QTimer::singleShot(0, this, &ClientWindow::fetchConnectionOffer);
+    else
+        QTimer::singleShot(0, this, &ClientWindow::startNewSession);
 }
 
 //--------------------------------------------------------------------------------------------------

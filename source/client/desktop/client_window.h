@@ -154,6 +154,7 @@ private slots:
     void onDragPoll();
     void onNetworkStatusChanged(NetworkWorker::Status status, const QVariant& data);
     void onNetworkConnected();
+    void onReconnectRequested();
 
 private:
     void saveHostCredentials(const HostConfig& host, qint64 credential_id);

@@ -207,6 +207,7 @@ MainWindow::MainWindow(QWidget* parent)
         AutoQPointer<UpdateDialog> dialog(new UpdateDialog(
             settings.updateServer(), settings.updatePublicKey(), db.updateChannel(), "client",
             proxy.settings(), UpdateDialog::Action::ASK, this));
+        dialog->setRestartAfterInstall(true);
         dialog->exec();
     }, Qt::QueuedConnection);
 
@@ -739,10 +740,21 @@ void MainWindow::runWhenRouterOnline(qint64 router_id, std::function<void()> act
 
 
 //--------------------------------------------------------------------------------------------------
-void MainWindow::closeEvent(QCloseEvent* /* event */)
+void MainWindow::closeEvent(QCloseEvent* event)
 {
     LOG(INFO) << "Close event detected";
 
+    QString text = tr("Close the client?");
+    if (ui->tabs->count() > 0)
+        text += "\n" + tr("Open connections will be terminated.");
+
+    if (MsgBox::question(this, text) != QMessageBox::Yes)
+    {
+        event->ignore();
+        return;
+    }
+
+    event->accept();
     saveWindowState();
     QApplication::quit();
 }
