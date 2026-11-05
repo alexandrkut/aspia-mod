@@ -4,7 +4,7 @@ Remote desktop, file transfer and system information tool.
 
 Этот форк
 ---------
-
+Телеграмм канал:
 https://t.me/aspia_mod
 
 Хосты версии 2.7 подключаются только через роутер и relay линейки 3.0
