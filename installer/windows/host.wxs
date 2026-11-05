@@ -176,10 +176,6 @@
         </Dialog>
 
         <Property Id="STARTMENU_SHORTCUT" Value="1"></Property>
-        <!-- The desktop shortcut is not offered as checked out of the box: a check box of
-             Windows Installer is ticked when its property is defined at all, so the property
-             is left unset until the box is ticked. -->
-        <Property Id="DESKTOP_SHORTCUT"></Property>
 
         <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="ShortcutsDlg" Order="10">LicenseAccepted = "1"</Publish>
         <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="ShortcutsDlg" Order="10">NOT Installed</Publish>
