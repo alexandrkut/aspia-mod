@@ -199,8 +199,10 @@ void ClientWindow::onReconnectRequested()
 {
     LOG(INFO) << "Reconnect requested";
 
-    // Guard against parallel attempts while an auto-reconnect cycle is already running.
-    if (session_state_->isReconnecting() || reconnect_timeout_timer_->isActive())
+    // Guard against a connection attempt already in flight. Waiting for the retry delay
+    // (reconnect_delay_timer_) is not "in flight" - the manual button must be able to
+    // pre-empt that wait.
+    if (connection_timeout_timer_->isActive())
         return;
 
     reconnect_delay_timer_->stop();
@@ -233,6 +235,8 @@ void ClientWindow::onReconnectDelayElapsed()
 {
     if (!session_state_)
         return;
+
+    status_overlay_->setProgress(tr("Connecting to host..."));
 
     if (session_state_->isConnectionByHostId())
         fetchConnectionOffer();
@@ -678,8 +682,7 @@ void ClientWindow::fetchConnectionOffer()
 
     session_state_->setRouterVersion(session->version());
 
-    if (!session_state_->isReconnecting())
-        status_overlay_->setProgress(tr("Requesting connection to the host..."));
+    status_overlay_->setProgress(tr("Requesting connection to the host..."));
 
     session->requestConnection(session_state_->hostId(), session_state_->sessionType(), { this,
         [this](const proto::router::ConnectionOffer& offer)
