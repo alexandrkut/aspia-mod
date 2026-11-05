@@ -5,6 +5,8 @@ Remote desktop, file transfer and system information tool.
 Этот форк
 ---------
 
+https://t.me/aspia_mod
+
 Хосты версии 2.7 подключаются только через роутер и relay линейки 3.0
 (`Aspia Router 3.0.37.2-mod`): роутер версии 3.1.* такие хосты не принимает, relay
 версии 3.1.* их не понимает.
