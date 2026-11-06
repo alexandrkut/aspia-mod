@@ -33,7 +33,7 @@ endif()
 set(ASPIA_VERSION_MAJOR 3)
 set(ASPIA_VERSION_MINOR 2)
 set(ASPIA_VERSION_PATCH 2)
-set(ASPIA_VERSION_BUILD 4)
+set(ASPIA_VERSION_BUILD 5)
 set(ASPIA_VERSION_SUFFIX "-mod")
 
 # On CI installed dir could be outside of vcpkg root
