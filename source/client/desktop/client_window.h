@@ -157,6 +157,7 @@ private slots:
     void onReconnectRequested();
     void onConnectionAttemptTimedOut();
     void onReconnectDelayElapsed();
+    void armReconnectDelay();
     void updateCountdown();
 
 private:

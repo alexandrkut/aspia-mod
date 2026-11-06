@@ -210,6 +210,11 @@ void ClientWindow::onReconnectRequested()
         return;
 
     reconnect_delay_timer_->stop();
+    if (session_state_)
+    {
+        session_state_->setAutoReconnect(true);
+        session_state_->setReconnecting(true);
+    }
     status_overlay_->setProgress(tr("Connecting to host..."));
     if (!countdown_timer_->isActive())
         countdown_timer_->start();
@@ -232,10 +237,7 @@ void ClientWindow::onConnectionAttemptTimedOut()
     session_state_->setReconnecting(true);
     onErrorOccurred(tr("Timeout waiting for reconnection to host."));
 
-    if (!reconnect_delay_timer_->isActive())
-        reconnect_delay_timer_->start(kReconnectDelay);
-    if (!countdown_timer_->isActive())
-        countdown_timer_->start();
+    armReconnectDelay();
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -243,6 +245,8 @@ void ClientWindow::onReconnectDelayElapsed()
 {
     if (!session_state_)
         return;
+
+    LOG(INFO) << "Reconnect delay elapsed, starting attempt";
 
     status_overlay_->setProgress(tr("Connecting to host..."));
     if (!countdown_timer_->isActive())
@@ -290,6 +294,24 @@ void ClientWindow::updateCountdown()
     {
         status_overlay_->setCountdown(seconds, retry);
     }
+}
+
+//--------------------------------------------------------------------------------------------------
+void ClientWindow::armReconnectDelay()
+{
+    LOG(INFO) << "Arming reconnect delay";
+
+    if (session_state_)
+    {
+        session_state_->setAutoReconnect(true);
+        session_state_->setReconnecting(true);
+    }
+
+    if (!reconnect_delay_timer_->isActive())
+        reconnect_delay_timer_->start(kReconnectDelay);
+
+    if (!countdown_timer_->isActive())
+        countdown_timer_->start();
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -444,14 +466,7 @@ void ClientWindow::onStatusChanged(NetworkWorker::Status status, const QVariant&
 
         case NetworkWorker::Status::WAIT_FOR_HOST:
             onErrorOccurred(tr("Host is unavailable yet. Waiting to reconnect..."));
-            if (!session_state_->isAutoReconnect())
-                break;
-            // First disconnect in this auto-reconnect cycle: arm the overall timeout. Subsequent
-            // WAIT_FOR_HOST signals during the same cycle keep the deadline rolling.
-            if (!reconnect_delay_timer_->isActive())
-                reconnect_delay_timer_->start(kReconnectDelay);
-            if (!countdown_timer_->isActive())
-                countdown_timer_->start();
+            armReconnectDelay();
             break;
 
         case NetworkWorker::Status::VERSION_MISMATCH:
@@ -506,11 +521,20 @@ void ClientWindow::onNetworkStatusChanged(NetworkWorker::Status status, const QV
     {
         connection_timeout_timer_->stop();
         if (session_state_)
-            session_state_->setReconnecting(true);
-        if (!reconnect_delay_timer_->isActive())
-            reconnect_delay_timer_->start(kReconnectDelay);
-        if (!countdown_timer_->isActive())
-            countdown_timer_->start();
+        {
+            const bool access_denied = data.canConvert<TcpChannel::ErrorCode>() &&
+                data.value<TcpChannel::ErrorCode>() == TcpChannel::ErrorCode::ACCESS_DENIED;
+
+            if (access_denied)
+            {
+                session_state_->setReconnecting(false);
+                session_state_->setAutoReconnect(false);
+            }
+            else
+            {
+                armReconnectDelay();
+            }
+        }
     }
 }
 
@@ -768,10 +792,7 @@ void ClientWindow::fetchConnectionOffer()
             // Host is offline - wait a few seconds and try again. Client's internal
             // timeout_timer will eventually flip isAutoReconnect to false;
             // fetchConnectionOffer() guards on that.
-            if (!reconnect_delay_timer_->isActive())
-                reconnect_delay_timer_->start(kReconnectDelay);
-            if (!countdown_timer_->isActive())
-                countdown_timer_->start();
+            armReconnectDelay();
             return;
         }
 
