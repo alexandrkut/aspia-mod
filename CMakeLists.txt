@@ -48,7 +48,10 @@ message(STATUS "VCPKG_HOST_TRIPLET: ${VCPKG_HOST_TRIPLET}")
 
 add_definitions(-DASPIA_VERSION_MAJOR=${ASPIA_VERSION_MAJOR}
                 -DASPIA_VERSION_MINOR=${ASPIA_VERSION_MINOR}
-                -DASPIA_VERSION_PATCH=${ASPIA_VERSION_PATCH})
+                -DASPIA_VERSION_PATCH=${ASPIA_VERSION_PATCH}
+                -DASPIA_VERSION_BUILD=${ASPIA_VERSION_BUILD})
+# The suffix is a string, so the quotes are part of the definition.
+add_definitions(-DASPIA_VERSION_SUFFIX=\"${ASPIA_VERSION_SUFFIX}\")
 
 if (ANDROID)
     message(STATUS "Android detected")
@@ -73,22 +76,35 @@ endif()
 
 set(CMAKE_SKIP_BUILD_RPATH ON)
 
-find_package(Qt6 CONFIG REQUIRED Core Gui Network PrintSupport Test Widgets Xml LinguistTools Svg)
-find_package(Qt6DeviceDiscoverySupportPrivate CONFIG REQUIRED)
-find_package(Qt6FbSupportPrivate CONFIG REQUIRED)
+if (ASPIA_ROUTER_ONLY)
+    # The router keeps the protocol, the database and the sockets. It draws nothing, shows no
+    # translations and runs no tests, so the parts of Qt and of the other libraries that carry
+    # a picture, a sound or a terminal are not looked for at all - they are not installed by
+    # the manifest of the router either.
+    if (LINUX)
+        find_package(Qt6 CONFIG REQUIRED Core Network DBus)
+    else()
+        find_package(Qt6 CONFIG REQUIRED Core Network)
+    endif()
+else()
+    find_package(Qt6 CONFIG REQUIRED Core Gui Network PrintSupport Test Widgets Xml LinguistTools Svg)
+    find_package(Qt6DeviceDiscoverySupportPrivate CONFIG REQUIRED)
+    find_package(Qt6FbSupportPrivate CONFIG REQUIRED)
+
+    find_package(GTest CONFIG REQUIRED)
+    find_package(JPEG REQUIRED)
+    find_package(libyuv CONFIG REQUIRED)
+    find_package(miniupnpc CONFIG REQUIRED)
+    find_package(Opus CONFIG REQUIRED)
+    find_package(unofficial-libvpx CONFIG REQUIRED)
+    find_package(unofficial-libwebm CONFIG REQUIRED)
+    find_package(unofficial-nayuki-qr-code-generator CONFIG REQUIRED)
+endif()
 
 find_package(asio CONFIG REQUIRED)
 find_package(CURL CONFIG REQUIRED)
-find_package(GTest CONFIG REQUIRED)
-find_package(JPEG REQUIRED)
-find_package(libyuv CONFIG REQUIRED)
-find_package(miniupnpc CONFIG REQUIRED)
 find_package(OpenSSL REQUIRED)
-find_package(Opus CONFIG REQUIRED)
 find_package(protobuf CONFIG REQUIRED)
-find_package(unofficial-libvpx CONFIG REQUIRED)
-find_package(unofficial-libwebm CONFIG REQUIRED)
-find_package(unofficial-nayuki-qr-code-generator CONFIG REQUIRED)
 find_package(unofficial-sqlite3 CONFIG REQUIRED)
 find_package(zstd CONFIG REQUIRED)
 
@@ -113,7 +129,12 @@ if (ANDROID)
 endif()
 
 if (LINUX)
-    find_package(Qt6XcbQpaPrivate CONFIG REQUIRED)
+    # The private classes of the XCB platform plugin are for the windows of the client and of
+    # the host. A router that draws nothing has no window to put on an X server.
+    if (NOT ASPIA_ROUTER_ONLY)
+        find_package(Qt6XcbQpaPrivate CONFIG REQUIRED)
+    endif()
+
     find_package(Qt6DBus CONFIG REQUIRED)
     find_package(ICU REQUIRED COMPONENTS uc)
 endif()
@@ -156,33 +177,37 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-# libwebm headers cross-include via "common/webmids.h", so we need
-# <prefix>/include/webm on the search path in addition to <prefix>/include.
-get_target_property(_libwebm_inc_dirs unofficial::libwebm::libwebm INTERFACE_INCLUDE_DIRECTORIES)
-set(_libwebm_extra_includes)
-foreach(_dir IN LISTS _libwebm_inc_dirs)
-    list(APPEND _libwebm_extra_includes "${_dir}/webm")
-endforeach()
-set_property(TARGET unofficial::libwebm::libwebm APPEND PROPERTY
-             INTERFACE_INCLUDE_DIRECTORIES ${_libwebm_extra_includes})
+if (NOT ASPIA_ROUTER_ONLY)
+    # libwebm headers cross-include via "common/webmids.h", so we need
+    # <prefix>/include/webm on the search path in addition to <prefix>/include.
+    get_target_property(_libwebm_inc_dirs unofficial::libwebm::libwebm INTERFACE_INCLUDE_DIRECTORIES)
+    set(_libwebm_extra_includes)
+    foreach(_dir IN LISTS _libwebm_inc_dirs)
+        list(APPEND _libwebm_extra_includes "${_dir}/webm")
+    endforeach()
+    set_property(TARGET unofficial::libwebm::libwebm APPEND PROPERTY
+                 INTERFACE_INCLUDE_DIRECTORIES ${_libwebm_extra_includes})
+endif()
 
 enable_testing()
 add_subdirectory(source)
 
-file(GLOB TS_FILES_LIST "source/translations/*.ts")
-get_target_property(LUPDATE_PATH Qt::lupdate IMPORTED_LOCATION)
-set(SOURCE_FILES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/source")
+if (NOT ASPIA_ROUTER_ONLY)
+    file(GLOB TS_FILES_LIST "source/translations/*.ts")
+    get_target_property(LUPDATE_PATH Qt::lupdate IMPORTED_LOCATION)
+    set(SOURCE_FILES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/source")
 
-add_custom_target(update_translations
-    COMMAND ${LUPDATE_PATH} -I ${SOURCE_FILES_DIR} -extensions ui,cc,cpp,h ${SOURCE_FILES_DIR} -ts ${TS_FILES_LIST}
-    WORKING_DIRECTORY "${SOURCE_FILES_DIR}"
-    SOURCES ${TS_FILES_LIST}
-    VERBATIM
-    COMMAND_EXPAND_LISTS)
+    add_custom_target(update_translations
+        COMMAND ${LUPDATE_PATH} -I ${SOURCE_FILES_DIR} -extensions ui,cc,cpp,h ${SOURCE_FILES_DIR} -ts ${TS_FILES_LIST}
+        WORKING_DIRECTORY "${SOURCE_FILES_DIR}"
+        SOURCES ${TS_FILES_LIST}
+        VERBATIM
+        COMMAND_EXPAND_LISTS)
 
-qt_add_translation(QM_FILES_LIST ${TS_FILES_LIST})
-qt_add_resources(aspia_common "common_translations" PREFIX "tr" BASE "${CMAKE_CURRENT_BINARY_DIR}" FILES "${QM_FILES_LIST}")
+    qt_add_translation(QM_FILES_LIST ${TS_FILES_LIST})
+    qt_add_resources(aspia_common "common_translations" PREFIX "tr" BASE "${CMAKE_CURRENT_BINARY_DIR}" FILES "${QM_FILES_LIST}")
 
-message(STATUS "Source files: ${SOURCE_FILES_DIR}")
-message(STATUS "TS files: ${TS_FILES_LIST}")
-message(STATUS "QM files: ${QM_FILES_LIST}")
+    message(STATUS "Source files: ${SOURCE_FILES_DIR}")
+    message(STATUS "TS files: ${TS_FILES_LIST}")
+    message(STATUS "QM files: ${QM_FILES_LIST}")
+endif()

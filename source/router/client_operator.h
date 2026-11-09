@@ -53,7 +53,12 @@ public:
     // |database| is the connection of the thread the session runs in; it outlives every session
     // of that thread. Passing it instead of reaching for the per-thread singleton is what lets a
     // session be driven against a temporary database in a test.
-    ClientOperator(Database& database, AccessLog& access_log, TcpChannel* channel, QObject* parent);
+    // |two_factor_required| says whether the role this session opened as has to answer a code
+    // on top of the password. It defaults to true so that every other caller - the tests, and
+    // any session this build opens without asking - keeps the second factor rather than losing
+    // it by omission.
+    ClientOperator(Database& database, AccessLog& access_log, TcpChannel* channel, QObject* parent,
+                   bool two_factor_required = true);
     virtual ~ClientOperator() override;
 
     void start();
@@ -146,6 +151,7 @@ private:
 
     TwoFactorHandler two_factor_;
     bool two_factor_completed_ = false;
+    bool two_factor_required_ = true;
     qint64 token_id_ = 0;
 
     TimePoint offer_window_start_;

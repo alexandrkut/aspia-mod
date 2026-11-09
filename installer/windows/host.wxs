@@ -11,12 +11,29 @@
 <?define ServiceDescription="Accepts incoming remote desktop connections to this computer."?>
 
 <!-- Product description -->
-<Product Id="*" Name="!(loc.ProductName)" Language="1033" Version="$(var.Version)" Manufacturer="$(var.Manufacturer)" UpgradeCode="{B460F717-1546-4FFC-9EDE-B21FD07E07CB}">
+<Product Id="*" Name="!(loc.ProductName)" Language="$(var.Language)" Version="$(var.Version)" Manufacturer="$(var.Manufacturer)" UpgradeCode="{B460F717-1546-4FFC-9EDE-B21FD07E07CB}">
     <Package Id="*" InstallerVersion="405" Compressed="yes" Manufacturer="$(var.Manufacturer)" InstallPrivileges="elevated" InstallScope="perMachine" />
 
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
 
-    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeErrorMessage)" Schedule="afterInstallInitialize" AllowDowngrades="no" AllowSameVersionUpgrades="no" Disallow="no" />
+    <!-- Any installed copy of this program, whatever its version, is an older one: the
+         package replaces it. The version of the package is compared only by the list of the
+         installed programs, and a build of another line or of the upstream carries a version
+         the plain MajorUpgrade rule would not recognise as a predecessor. -->
+    <Upgrade Id="{B460F717-1546-4FFC-9EDE-B21FD07E07CB}">
+        <UpgradeVersion Minimum="0.0.0" IncludeMinimum="yes" OnlyDetect="no"
+                        Property="WIX_UPGRADE_DETECTED" />
+    </Upgrade>
+
+    <!-- A package that finds this very product already installed was started to install it
+         again: the files of the product are written anew rather than the maintenance screen
+         with its "Change, repair or remove" question being shown. -->
+    <CustomAction Id="SetReinstallAll" Property="REINSTALL" Value="ALL" />
+
+    <InstallExecuteSequence>
+        <RemoveExistingProducts After="InstallInitialize" />
+        <Custom Action="SetReinstallAll" Before="InstallValidate">Installed</Custom>
+    </InstallExecuteSequence>
 
     <!-- Windows version checking -->
     <Condition Message="This application is only supported on Windows 7, Windows Server 2008 R2, or higher.">
@@ -32,6 +49,18 @@
 
     <Icon Id="aspia.ico" SourceFile="resources/aspia.ico" />
     <Property Id="ARPPRODUCTICON" Value="aspia.ico" />
+
+    <!-- The installer always overwrites: a package that finds the files of an older copy
+         must not fall into the maintenance mode with its "Repair" question, and the files
+         that are already there are rewritten rather than kept. -->
+    <Property Id="REINSTALLMODE" Value="amus" />
+
+    <!-- The host may be running when it is removed, and a running program keeps its image on
+         the disk: the file is left behind until the machine is restarted. Closing the program
+         before the removal takes the file with it. -->
+    <util:CloseApplication Id="CloseHostOnRemove" Target="aspia_host.exe"
+                           ElevatedEndSessionMessage="yes" Timeout="5" TerminateProcess="0"
+                           RebootPrompt="no" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">
         <Directory Id="$(var.Program_Files)">
@@ -51,16 +80,22 @@
             <Condition>STARTMENU_SHORTCUT</Condition>
             <Shortcut Id="ConfigProgramMenuShortcut" Name="!(loc.ProductName)" WorkingDirectory="InstallLocation" Target="[InstallLocation]aspia_host.exe"/>
             <RemoveFolder Id="ApplicationMenuFolder" On="uninstall" />
-            <RegistryValue Root="HKCU" Key="SOFTWARE\$(var.ProductName)" Type="string" Value="" KeyPath="yes" />
+            <!-- The package is installed for the machine, and the shortcut of the program
+                 belongs to it as well. A key in the profile of the user makes the component a
+                 per-user one, and the removal of such a component is skipped when the machine
+                 is cleaned up, which leaves the shortcut behind. -->
+            <RegistryValue Root="HKLM" Key="SOFTWARE\$(var.ProductName)" Type="string" Value="" KeyPath="yes" />
         </Component>
     </DirectoryRef>
 
-    <!-- Desktop Shortcut -->
+    <!-- Desktop Shortcut. The icon is not created unless it is asked for: the host is a
+         service, and an icon of it on the desktop of the user who installed it is a thing
+         most installations do not want. The box in the dialog is ticked by nobody. -->
     <DirectoryRef Id="DesktopFolder">
         <Component Id="DesktopShortcut" Guid="{6463EBB6-56AC-4FA7-9262-37BBC43435D5}">
-            <Condition>DESKTOP_SHORTCUT</Condition>
+            <Condition>DESKTOP_SHORTCUT = "1"</Condition>
             <Shortcut Id="ConfigDesktopShortcut" Name="!(loc.ProductName)" WorkingDirectory="InstallLocation" Target="[InstallLocation]aspia_host.exe"/>
-            <RegistryValue Root="HKCU" Key="SOFTWARE\$(var.ProductName)" Type="string" Value="" KeyPath="yes" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\$(var.ProductName)" Type="string" Value="" KeyPath="yes" />
         </Component>
     </DirectoryRef>
 
@@ -141,10 +176,14 @@
         </Dialog>
 
         <Property Id="STARTMENU_SHORTCUT" Value="1"></Property>
-        <Property Id="DESKTOP_SHORTCUT" Value="1"></Property>
 
         <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="ShortcutsDlg" Order="10">LicenseAccepted = "1"</Publish>
         <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="ShortcutsDlg" Order="10">NOT Installed</Publish>
+
+        <!-- The same for the wizard: the page that asks whether to change, repair or remove
+             is skipped, and the wizard goes straight to the confirmation of the install. -->
+        <Publish Dialog="MaintenanceWelcomeDlg" Control="Next" Event="NewDialog"
+                 Value="VerifyReadyDlg" Order="2" />
 
         <Property Id="WIXUI_INSTALLDIR" Value="InstallLocation" />
 

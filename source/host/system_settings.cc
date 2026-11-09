@@ -130,7 +130,11 @@ void SystemSettings::setApplicationShutdownDisabled(bool value)
 //--------------------------------------------------------------------------------------------------
 bool SystemSettings::isAutoUpdateEnabled() const
 {
-    return settings_.value(kUpdateAutoUpdate, true).toBool();
+    // Default on: the mod ships its own update server now. An explicit "false" stored by the
+    // user (contains() is true) is respected and stays off.
+    if (!settings_.contains(kUpdateAutoUpdate))
+        return true;
+    return settings_.value(kUpdateAutoUpdate).toBool();
 }
 
 //--------------------------------------------------------------------------------------------------

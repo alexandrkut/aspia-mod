@@ -21,11 +21,13 @@
 
 #include <QByteArray>
 #include <QString>
+#include <QVector>
 
 #include <optional>
 
 #include "base/build_config.h"
 #include "base/net/address.h"
+#include "base/peer/user.h"
 
 class PortablePackage
 {
@@ -41,11 +43,16 @@ public:
     {
         Address router_address { kDefaultRouterHostTcpPort };
         QByteArray router_public_key;
+
+        // The users of the host that exported the package. The exported host accepts them
+        // along with the one-time password.
+        QVector<User> users;
     };
 
     // Saves a copy of the host executable to |file_path| with the router settings of the host
-    // built in.
-    static Result exportWithSettings(const QString& file_path);
+    // built in. With |with_users| the users of the host are built in as well: the exported
+    // host accepts their logins and passwords along with the one-time password.
+    static Result exportWithSettings(const QString& file_path, bool with_users);
 
     // Returns the settings built into the executable of the current process, if there are any.
     static std::optional<Settings> builtInSettings();

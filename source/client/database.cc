@@ -1918,7 +1918,11 @@ bool Database::isCheckUpdatesEnabled() const
 {
     QString value = readSetting(kSettingCheckUpdates);
     if (value.isEmpty())
+    {
+        // The mod ships its own update server now, so the check is on by default. A user who
+        // explicitly turned it off keeps "0" in the setting and stays off.
         return true;
+    }
     return value == "1";
 }
 

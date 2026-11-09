@@ -154,6 +154,11 @@ private slots:
     void onDragPoll();
     void onNetworkStatusChanged(NetworkWorker::Status status, const QVariant& data);
     void onNetworkConnected();
+    void onReconnectRequested();
+    void onConnectionAttemptTimedOut();
+    void onReconnectDelayElapsed();
+    void armReconnectDelay();
+    void updateCountdown();
 
 private:
     void saveHostCredentials(const HostConfig& host, qint64 credential_id);
@@ -174,6 +179,9 @@ private:
     StatusOverlay* status_overlay_ = nullptr;
     QTimer* drag_poll_timer_ = nullptr;
     QTimer* reconnect_timeout_timer_ = nullptr;
+    QTimer* connection_timeout_timer_ = nullptr;
+    QTimer* reconnect_delay_timer_ = nullptr;
+    QTimer* countdown_timer_ = nullptr;
     QList<QAction*> session_connect_actions_;
 
     std::unique_ptr<WorkerManager> worker_manager_;

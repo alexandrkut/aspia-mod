@@ -38,8 +38,6 @@ list(APPEND SOURCE_BASE
     edid.h
     event_enumerator.cc
     event_enumerator.h
-    gui_application.cc
-    gui_application.h
     ini_file.cc
     ini_file.h
     location.cc
@@ -83,6 +81,14 @@ list(APPEND SOURCE_BASE
     time_types.h
     version_constants.cc
     version_constants.h)
+
+if (NOT ASPIA_ROUTER_ONLY)
+    # The application with a window. It is a QApplication, so it needs QtGui, and a router
+    # that draws nothing has no use for it.
+    list(APPEND SOURCE_BASE
+        gui_application.cc
+        gui_application.h)
+endif()
 
 if (WIN32)
     list(APPEND SOURCE_BASE
@@ -147,9 +153,15 @@ list(APPEND SOURCE_BASE_TESTS
     string_util_unittest.cc
     tests_main.cc)
 
-include(codec/sources.cmake)
+if (NOT ASPIA_ROUTER_ONLY)
+    # The picture and the sound: the codecs, and the difference between two pictures.
+    # Only the host and the client have them, and they bring the libraries that carry
+    # the frames and the samples.
+    include(codec/sources.cmake)
+    include(desktop/sources.cmake)
+endif()
+
 include(crypto/sources.cmake)
-include(desktop/sources.cmake)
 include(files/sources.cmake)
 include(ipc/sources.cmake)
 include(net/sources.cmake)
@@ -168,6 +180,16 @@ endif()
 
 if (APPLE)
     include(mac/sources.cmake)
+endif()
+
+if (ASPIA_ROUTER_ONLY)
+    # The mapping of the ports of the router onto the network is done by the host, and the
+    # clipboard of the desktop is read by the client. Neither is here, and neither is the
+    # library that maps the ports.
+    list(FILTER SOURCE_BASE_NET EXCLUDE REGEX "port_mapper")
+
+    # The X server is not needed either: the files that talk to it are for the desktop.
+    list(FILTER SOURCE_BASE_LINUX EXCLUDE REGEX "x_server_clipboard|x11_headers")
 endif()
 
 source_group("" FILES ${SOURCE_BASE} ${SOURCE_BASE_TESTS})
@@ -222,12 +244,14 @@ endif()
 if (LINUX)
     set(BASE_PLATFORM_LIBS stdc++fs ${CMAKE_DL_LIBS})
 
-    # Xlib and the extensions (DAMAGE/SHM/XFIXES/RANDR/XTEST) are linked directly from the static vcpkg
-    # ports (base/linux/libx11.cc etc. call them straight, no more dlopen). The same static archives back
-    # Qt's xcb platform plugin, so the linker pulls one copy and there is no duplicate-libX11 state.
-    find_package(X11 REQUIRED)
-    list(APPEND BASE_PLATFORM_LIBS
-        X11::X11 X11::Xext X11::Xdamage X11::Xfixes X11::Xi X11::Xrandr X11::Xtst)
+    if (NOT ASPIA_ROUTER_ONLY)
+        # Xlib and the extensions (DAMAGE/SHM/XFIXES/RANDR/XTEST) are linked directly from the static vcpkg
+        # ports (base/linux/libx11.cc etc. call them straight, no more dlopen). The same static archives back
+        # Qt's xcb platform plugin, so the linker pulls one copy and there is no duplicate-libX11 state.
+        find_package(X11 REQUIRED)
+        list(APPEND BASE_PLATFORM_LIBS
+            X11::X11 X11::Xext X11::Xdamage X11::Xfixes X11::Xi X11::Xrandr X11::Xtst)
+    endif()
 endif()
 
 if (ANDROID)
@@ -256,30 +280,34 @@ if (APPLE)
     set(BASE_TESTS_PLATFORM_LIBS ${FOUNDATION_LIB})
 endif()
 
-add_executable(aspia_base_tests
-    ${SOURCE_BASE_TESTS}
-    ${SOURCE_BASE_CODEC_TESTS}
-    ${SOURCE_BASE_CRYPTO_TESTS}
-    ${SOURCE_BASE_DESKTOP_TESTS}
-    ${SOURCE_BASE_FILES_TESTS}
-    ${SOURCE_BASE_NET_TESTS}
-    ${SOURCE_BASE_PEER_TESTS}
-    ${SOURCE_BASE_SQL_TESTS}
-    ${SOURCE_BASE_THREADING_TESTS}
-    ${SOURCE_BASE_UPDATE_TESTS}
-    ${SOURCE_BASE_WIN_TESTS})
-target_link_libraries(aspia_base_tests PRIVATE
-    aspia_base
-    aspia_proto
-    GTest::gtest
-    Qt6::Test
-    ${BASE_TESTS_PLATFORM_LIBS}
-    ${THIRD_PARTY_LIBS}
-    ${QT_COMMON_LIBS}
-    ${QT_PLATFORM_LIBS})
-set_property(TARGET aspia_base_tests PROPERTY AUTOMOC ON)
-set_property(TARGET aspia_base_tests PROPERTY AUTOUIC ON)
-set_property(TARGET aspia_base_tests PROPERTY AUTORCC ON)
-qt_import_plugins(aspia_base_tests INCLUDE "" EXCLUDE "" INCLUDE_BY_TYPE "" EXCLUDE_BY_TYPE imageformats)
+if (NOT ASPIA_ROUTER_ONLY)
+    # The tests need the test framework of Qt and of Google, and they cover the parts of
+    # the code that a router alone does not have.
+    add_executable(aspia_base_tests
+        ${SOURCE_BASE_TESTS}
+        ${SOURCE_BASE_CODEC_TESTS}
+        ${SOURCE_BASE_CRYPTO_TESTS}
+        ${SOURCE_BASE_DESKTOP_TESTS}
+        ${SOURCE_BASE_FILES_TESTS}
+        ${SOURCE_BASE_NET_TESTS}
+        ${SOURCE_BASE_PEER_TESTS}
+        ${SOURCE_BASE_SQL_TESTS}
+        ${SOURCE_BASE_THREADING_TESTS}
+        ${SOURCE_BASE_UPDATE_TESTS}
+        ${SOURCE_BASE_WIN_TESTS})
+    target_link_libraries(aspia_base_tests PRIVATE
+        aspia_base
+        aspia_proto
+        GTest::gtest
+        Qt6::Test
+        ${BASE_TESTS_PLATFORM_LIBS}
+        ${THIRD_PARTY_LIBS}
+        ${QT_COMMON_LIBS}
+        ${QT_PLATFORM_LIBS})
+    set_property(TARGET aspia_base_tests PROPERTY AUTOMOC ON)
+    set_property(TARGET aspia_base_tests PROPERTY AUTOUIC ON)
+    set_property(TARGET aspia_base_tests PROPERTY AUTORCC ON)
+    qt_import_plugins(aspia_base_tests INCLUDE "" EXCLUDE "" INCLUDE_BY_TYPE "" EXCLUDE_BY_TYPE imageformats)
 
-add_test(NAME aspia_base_tests COMMAND aspia_base_tests)
+    add_test(NAME aspia_base_tests COMMAND aspia_base_tests)
+endif()

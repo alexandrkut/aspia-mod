@@ -37,8 +37,8 @@ const int kSeedKeySize = 64;
 class PortableUserList final : public UserList
 {
 public:
-    PortableUserList()
-        : seed_key_(Random::byteArray(kSeedKeySize))
+    explicit PortableUserList(const QVector<User>& users)
+        : seed_key_(Random::byteArray(kSeedKeySize)), users_(users)
     {
         // Nothing
     }
@@ -46,6 +46,14 @@ public:
     // UserList implementation.
     User find(const QString& username) const final
     {
+        // The users of the host that exported the package come first: a stored user wins over
+        // the one-time one, the same as in the host itself.
+        for (const User& user : users_)
+        {
+            if (user.name.compare(username, Qt::CaseInsensitive) == 0)
+                return user;
+        }
+
         if (one_time_user_.isValid() &&
             one_time_user_.name.compare(username, Qt::CaseInsensitive) == 0)
         {
@@ -61,6 +69,7 @@ public:
 
 private:
     QByteArray seed_key_;
+    QVector<User> users_;
     User one_time_user_;
 };
 
@@ -232,7 +241,7 @@ bool PortableConfigProvider::setHostKey(const QByteArray& /* key */)
 //--------------------------------------------------------------------------------------------------
 QVector<User> PortableConfigProvider::userList() const
 {
-    return QVector<User>();
+    return settings_.users;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -244,6 +253,6 @@ Database::PasswordProtection PortableConfigProvider::passwordProtectionState() c
 //--------------------------------------------------------------------------------------------------
 SharedPointer<UserList> PortableConfigProvider::createUserList() const
 {
-    return SharedPointer<UserList>(new PortableUserList());
+    return SharedPointer<UserList>(new PortableUserList(settings_.users));
 }
 #endif // defined(Q_OS_WINDOWS)

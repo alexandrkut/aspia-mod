@@ -20,6 +20,7 @@
 #define COMMON_DESKTOP_ABOUT_DIALOG_H
 
 #include <QDialog>
+#include <QStringList>
 
 #include <memory>
 
@@ -32,7 +33,12 @@ class AboutDialog final : public QDialog
     Q_OBJECT
 
 public:
-    explicit AboutDialog(const QString& application_name, QWidget* parent = nullptr);
+    // |modifications| are the changes of this fork that concern the program the dialog
+    // belongs to: the client knows nothing of the router, and the router knows nothing of
+    // the client. The list is empty for a program that was not changed, and the dialog says
+    // nothing then.
+    explicit AboutDialog(const QString& application_name, const QStringList& modifications,
+                         QWidget* parent = nullptr);
     ~AboutDialog() final;
 
 private:

@@ -102,7 +102,13 @@ public:
     // Opens the stage. Called on a fresh connection and again when a presented device token is
     // rejected, because the stored state may have changed since the challenge was sent. |now| is
     // the wall clock in seconds; the challenge carries the time left in a running block.
-    Result start(Database& database, const RequestCaller& caller, qint64 now);
+    // |required| says whether the role of the caller has to answer a code at all. When it
+    // does not, the stage is passed at once: no challenge goes out, and nothing is asked
+    // of the client. The caller passes what the configuration says about the role rather
+    // than the handler reading the configuration itself, so the decision is visible where
+    // the role is known and the handler stays free of where the router keeps its settings.
+    Result start(Database& database, const RequestCaller& caller, qint64 now,
+                 bool required = true);
 
     // Handles the answer of the client. |now| is the wall clock in seconds - the TOTP step comes
     // from it - and |address| is stored with the issued device token.

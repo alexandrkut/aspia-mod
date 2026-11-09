@@ -76,7 +76,7 @@ if (ANDROID)
         QT_ANDROID_APP_NAME "Aspia Host"
         QT_ANDROID_APP_ICON "@mipmap/ic_launcher"
         QT_ANDROID_VERSION_CODE ${GIT_COMMIT_COUNT}
-        QT_ANDROID_VERSION_NAME "${ASPIA_VERSION_MAJOR}.${ASPIA_VERSION_MINOR}.${ASPIA_VERSION_PATCH}.${GIT_COMMIT_COUNT}"
+        QT_ANDROID_VERSION_NAME "${ASPIA_VERSION_MAJOR}.${ASPIA_VERSION_MINOR}.${ASPIA_VERSION_PATCH}.${ASPIA_VERSION_BUILD}"
         QT_ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android/packaging")
 
     return()
@@ -116,6 +116,8 @@ list(APPEND SOURCE_HOST_CORE
     file_agent.h
     file_client.cc
     file_client.h
+    host_config_applier.cc
+    host_config_applier.h
     host_constants.cc
     host_constants.h
     host_storage.cc
@@ -174,6 +176,7 @@ list(APPEND SOURCE_HOST_TESTS
     capture_scheduler_unittest.cc
     database_unittest.cc
     host_storage_unittest.cc
+    host_config_applier_unittest.cc
     host_user_list_unittest.cc
     input_injector_unittest.cc
     router_manager_unittest.cc

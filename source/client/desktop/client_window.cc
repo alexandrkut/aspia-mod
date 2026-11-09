@@ -45,7 +45,9 @@
 namespace {
 
 constexpr MilliSeconds kDragPollInterval{ 50 };
-const Seconds kReconnectRetryDelay { 5 };
+const Seconds kConnectionAttemptTimeout{ 20 };
+const Seconds kReconnectDelay{ 10 };
+const Seconds kReconnectRetryDelay{ 10 };
 const Minutes kReconnectBudget { 5 };
 
 //--------------------------------------------------------------------------------------------------
@@ -84,7 +86,10 @@ ClientWindow::ClientWindow(proto::peer::SessionType session_type, QWidget* paren
       client_id_(nextClientId()),
       session_type_(session_type),
       drag_poll_timer_(new QTimer(this)),
-      reconnect_timeout_timer_(new QTimer(this))
+      reconnect_timeout_timer_(new QTimer(this)),
+      connection_timeout_timer_(new QTimer(this)),
+      reconnect_delay_timer_(new QTimer(this)),
+      countdown_timer_(new QTimer(this))
 {
     LOG(INFO) << "Ctor";
 
@@ -93,6 +98,9 @@ ClientWindow::ClientWindow(proto::peer::SessionType session_type, QWidget* paren
 
     // Closing the status overlay closes the session window.
     connect(status_overlay_, &StatusOverlay::sig_closeRequested, this, &ClientWindow::close);
+
+    // Reconnecting from the status overlay reuses the existing connection path.
+    connect(status_overlay_, &StatusOverlay::sig_reconnectRequested, this, &ClientWindow::onReconnectRequested);
 
     drag_poll_timer_->setInterval(kDragPollInterval);
     connect(drag_poll_timer_, &QTimer::timeout, this, &ClientWindow::onDragPoll);
@@ -104,6 +112,15 @@ ClientWindow::ClientWindow(proto::peer::SessionType session_type, QWidget* paren
         session_state_->setAutoReconnect(false);
         onErrorOccurred(tr("Timeout waiting for reconnection to host."));
     });
+
+    connection_timeout_timer_->setSingleShot(true);
+    connect(connection_timeout_timer_, &QTimer::timeout, this, &ClientWindow::onConnectionAttemptTimedOut);
+
+    reconnect_delay_timer_->setSingleShot(true);
+    connect(reconnect_delay_timer_, &QTimer::timeout, this, &ClientWindow::onReconnectDelayElapsed);
+
+    countdown_timer_->setInterval(1000);
+    connect(countdown_timer_, &QTimer::timeout, this, &ClientWindow::updateCountdown);
 
     createSessionConnectActions();
 }
@@ -123,7 +140,8 @@ bool ClientWindow::connectToHost(HostConfig host, const QString& display_name)
     LOG(INFO) << "Connecting to host";
     setClientTitle(host, session_type_);
 
-    std::optional<std::pair<QString, SecureString>> credentials = storedCredentials(host);
+    std::optional<std::pair<QString, SecureString>> credentials =
+        host.hasForcedCredentials() ? std::nullopt : storedCredentials(host);
     if (credentials.has_value())
     {
         LOG(INFO) << "Using stored credentials of host" << host.address();
@@ -178,6 +196,122 @@ void ClientWindow::onErrorOccurred(const QString& message)
 {
     onInternalReset();
     status_overlay_->setError(message);
+}
+
+//--------------------------------------------------------------------------------------------------
+void ClientWindow::onReconnectRequested()
+{
+    LOG(INFO) << "Reconnect requested";
+
+    // Guard against a connection attempt already in flight. Waiting for the retry delay
+    // (reconnect_delay_timer_) is not "in flight" - the manual button must be able to
+    // pre-empt that wait.
+    if (connection_timeout_timer_->isActive())
+        return;
+
+    reconnect_delay_timer_->stop();
+    if (session_state_)
+    {
+        session_state_->setAutoReconnect(true);
+        session_state_->setReconnecting(true);
+    }
+    status_overlay_->setProgress(tr("Connecting to host..."));
+    if (!countdown_timer_->isActive())
+        countdown_timer_->start();
+    session_state_->setReconnecting(true);
+
+    if (session_state_->isConnectionByHostId())
+        QTimer::singleShot(0, this, &ClientWindow::fetchConnectionOffer);
+    else
+        QTimer::singleShot(0, this, &ClientWindow::startNewSession);
+}
+
+//--------------------------------------------------------------------------------------------------
+void ClientWindow::onConnectionAttemptTimedOut()
+{
+    LOG(INFO) << "Connection attempt timed out";
+
+    if (!session_state_)
+        return;
+
+    session_state_->setReconnecting(true);
+    onErrorOccurred(tr("Timeout waiting for reconnection to host."));
+
+    armReconnectDelay();
+}
+
+//--------------------------------------------------------------------------------------------------
+void ClientWindow::onReconnectDelayElapsed()
+{
+    if (!session_state_)
+        return;
+
+    LOG(INFO) << "Reconnect delay elapsed, starting attempt";
+
+    status_overlay_->setProgress(tr("Connecting to host..."));
+    if (!countdown_timer_->isActive())
+        countdown_timer_->start();
+
+    if (session_state_->isConnectionByHostId())
+        fetchConnectionOffer();
+    else
+        startNewSession();
+}
+
+//--------------------------------------------------------------------------------------------------
+void ClientWindow::updateCountdown()
+{
+    int seconds = 0;
+    bool retry = false;
+    bool active = false;
+
+    if (connection_timeout_timer_->isActive())
+    {
+        int ms = connection_timeout_timer_->remainingTime();
+        if (ms < 0)
+            ms = 0;
+        seconds = (ms + 999) / 1000;
+        active = true;
+        retry = false;
+    }
+    else if (reconnect_delay_timer_->isActive())
+    {
+        int ms = reconnect_delay_timer_->remainingTime();
+        if (ms < 0)
+            ms = 0;
+        seconds = (ms + 999) / 1000;
+        active = true;
+        retry = true;
+    }
+
+    if (!active || seconds <= 0)
+    {
+        status_overlay_->setCountdown(0, false);
+        if (!connection_timeout_timer_->isActive() && !reconnect_delay_timer_->isActive())
+            countdown_timer_->stop();
+    }
+    else
+    {
+        status_overlay_->setCountdown(seconds, retry);
+    }
+}
+
+//--------------------------------------------------------------------------------------------------
+void ClientWindow::armReconnectDelay()
+{
+    LOG(INFO) << "Arming reconnect delay";
+
+    if (session_state_)
+    {
+        session_state_->setAutoReconnect(true);
+        session_state_->setReconnecting(true);
+    }
+
+    if (!reconnect_delay_timer_->isActive())
+        reconnect_delay_timer_->start(kReconnectDelay);
+
+    if (!countdown_timer_->isActive())
+        countdown_timer_->start();
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -243,6 +377,10 @@ void ClientWindow::setOsCredentialId(qint64 credential_id)
 void ClientWindow::closeEvent(QCloseEvent* /* event */)
 {
     LOG(INFO) << "Close event";
+    connection_timeout_timer_->stop();
+    reconnect_delay_timer_->stop();
+    countdown_timer_->stop();
+    reconnect_timeout_timer_->stop();
     drag_poll_timer_->stop();
     worker_manager_.reset();
 }
@@ -328,18 +466,7 @@ void ClientWindow::onStatusChanged(NetworkWorker::Status status, const QVariant&
 
         case NetworkWorker::Status::WAIT_FOR_HOST:
             onErrorOccurred(tr("Host is unavailable yet. Waiting to reconnect..."));
-            if (!session_state_->isAutoReconnect())
-                break;
-            // First disconnect in this auto-reconnect cycle: arm the overall timeout. Subsequent
-            // WAIT_FOR_HOST signals during the same cycle keep the deadline rolling.
-            if (!reconnect_timeout_timer_->isActive())
-                reconnect_timeout_timer_->start(kReconnectBudget);
-            // Relay path fetches a fresh ConnectionOffer (which then starts the session).
-            // Direct path doesn't need an offer - just rebuild the session after the same delay.
-            if (session_state_->isConnectionByHostId())
-                QTimer::singleShot(kReconnectRetryDelay, this, &ClientWindow::fetchConnectionOffer);
-            else
-                QTimer::singleShot(kReconnectRetryDelay, this, &ClientWindow::startNewSession);
+            armReconnectDelay();
             break;
 
         case NetworkWorker::Status::VERSION_MISMATCH:
@@ -382,7 +509,33 @@ void ClientWindow::onNetworkStatusChanged(NetworkWorker::Status status, const QV
     onStatusChanged(status, data);
 
     if (status == NetworkWorker::Status::HOST_CONNECTED)
+    {
+        connection_timeout_timer_->stop();
+        reconnect_delay_timer_->stop();
+        countdown_timer_->stop();
+        status_overlay_->setCountdown(0, false);
+        session_state_->setReconnecting(false);
         onNetworkConnected();
+    }
+    else if (status == NetworkWorker::Status::HOST_DISCONNECTED)
+    {
+        connection_timeout_timer_->stop();
+        if (session_state_)
+        {
+            const bool access_denied = data.canConvert<TcpChannel::ErrorCode>() &&
+                data.value<TcpChannel::ErrorCode>() == TcpChannel::ErrorCode::ACCESS_DENIED;
+
+            if (access_denied)
+            {
+                session_state_->setReconnecting(false);
+                session_state_->setAutoReconnect(false);
+            }
+            else
+            {
+                armReconnectDelay();
+            }
+        }
+    }
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -506,8 +659,11 @@ bool ClientWindow::askCredentials(HostConfig* host)
 
     AutoQPointer<AuthorizationDialog> auth_dialog(new AuthorizationDialog(this));
 
+    // A Quick Support host may have a user of its own: the mod exports the users of the host
+    // with the package, and such a host is entered with a login and a password. The one-time
+    // password stays the way in that is offered first, but the other ways are not taken away.
     auth_dialog->setOneTimePasswordEnabled(host->routerId() > 0);
-    auth_dialog->setOneTimePasswordOnly(host->isPortable());
+    auth_dialog->setOneTimePasswordPreferred(host->isPortable());
     auth_dialog->setSaveCredentialsVisible(can_save_credentials);
     auth_dialog->setUserName(host->username());
     auth_dialog->setPassword(host->password());
@@ -542,6 +698,11 @@ void ClientWindow::askCredentialsAgain()
 {
     HostConfig host = session_state_->host();
 
+    // Credentials given on the command line are not stored anywhere, so there is nothing to ask
+    // about: they are the ones the session was started with.
+    if (host.hasForcedCredentials())
+        return;
+
     // Stored credentials are changed in the host editor, not here.
     if (storedCredentials(host).has_value())
         return;
@@ -569,6 +730,9 @@ void ClientWindow::startConnection(HostConfig host, const QString& display_name)
     session_state_ = std::make_shared<SessionState>(host, session_type_, display_name);
 
     LOG(INFO) << "Start client";
+    connection_timeout_timer_->start(kConnectionAttemptTimeout);
+    if (!countdown_timer_->isActive())
+        countdown_timer_->start();
     if (session_state_->isConnectionByHostId())
         fetchConnectionOffer();
     else
@@ -582,6 +746,10 @@ void ClientWindow::fetchConnectionOffer()
     if (session_state_->isReconnecting() && !session_state_->isAutoReconnect())
         return;
 
+    connection_timeout_timer_->start(kConnectionAttemptTimeout);
+    if (!countdown_timer_->isActive())
+        countdown_timer_->start();
+
     RouterSession* session = RouterController::session(session_state_->routerId());
     if (!session)
     {
@@ -594,13 +762,16 @@ void ClientWindow::fetchConnectionOffer()
             onErrorOccurred(tr("The data of the router is damaged. Edit the router and enter it again."));
         else
             onErrorOccurred(tr("The specified router is offline."));
+
+        connection_timeout_timer_->stop();
+        if (!connection_timeout_timer_->isActive() && !reconnect_delay_timer_->isActive())
+            countdown_timer_->stop();
         return;
     }
 
     session_state_->setRouterVersion(session->version());
 
-    if (!session_state_->isReconnecting())
-        status_overlay_->setProgress(tr("Requesting connection to the host..."));
+    status_overlay_->setProgress(tr("Requesting connection to the host..."));
 
     session->requestConnection(session_state_->hostId(), session_state_->sessionType(), { this,
         [this](const proto::router::ConnectionOffer& offer)
@@ -621,7 +792,7 @@ void ClientWindow::fetchConnectionOffer()
             // Host is offline - wait a few seconds and try again. Client's internal
             // timeout_timer will eventually flip isAutoReconnect to false;
             // fetchConnectionOffer() guards on that.
-            QTimer::singleShot(kReconnectRetryDelay, this, &ClientWindow::fetchConnectionOffer);
+            armReconnectDelay();
             return;
         }
 
@@ -633,6 +804,10 @@ void ClientWindow::fetchConnectionOffer()
 //--------------------------------------------------------------------------------------------------
 void ClientWindow::startNewSession()
 {
+    connection_timeout_timer_->start(kConnectionAttemptTimeout);
+    if (!countdown_timer_->isActive())
+        countdown_timer_->start();
+
     if (!session_keeper_)
         session_keeper_ = SessionKeeper::create(this);
 

@@ -26,6 +26,16 @@ const char* const kCommandHostModify     = "modify";
 const char* const kCommandHostUpdate     = "update";
 const char* const kCommandHostApprove    = "approve";
 const char* const kCommandHostTelemetry  = "telemetry";
+const char* const kCommandHostSetUpdateConfig = "set_update_config";
+const char* const kCommandHostAddUser        = "add_user";
+const char* const kCommandHostModifyUser     = "modify_user";
+const char* const kCommandHostRemoveUser     = "remove_user";
+const char* const kCommandHostGetUsers       = "get_host_users";
+const char* const kCommandHostSetAccessConfig = "set_access_config";
+const char* const kCommandHostSetOnetimeConfig = "set_onetime_config";
+const char* const kCommandHostReplaceUsers    = "replace_users";
+const char* const kCommandHostSetMisc         = "set_misc";
+const char* const kCommandHostApplyFullConfig = "apply_full_config";
 
 const char* const kCommandRelayDisconnect = "disconnect";
 

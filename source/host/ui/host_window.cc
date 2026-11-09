@@ -28,6 +28,7 @@
 #include <QNetworkInterface>
 #include <QProcess>
 #include <QShowEvent>
+#include <QStringList>
 #include <QTimer>
 #include <QUrl>
 
@@ -886,7 +887,15 @@ void HostWindow::onAboutSystem()
 void HostWindow::onAbout()
 {
     LOG(INFO) << "[ACTION] About";
-    AutoQPointer<AboutDialog> dialog(new AboutDialog(tr("Aspia Host"), this));
+    // The changes of this fork that concern the host. The changes of the client and the
+    // router are of no use to the person who uses the host.
+    const QStringList modifications =
+    {
+        tr("The ability to show several monitors at once"),
+        tr("Remote management of settings and users by the router administrator")
+    };
+
+    AutoQPointer<AboutDialog> dialog(new AboutDialog(tr("Aspia Host"), modifications, this));
     dialog->exec();
 }
 

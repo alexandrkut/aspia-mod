@@ -636,7 +636,10 @@ void ServiceWorker::startConfirmation(PendingConfirmation& pending)
     tcp_channel->setParent(this);
 
     const QVersionNumber& host_version = kCurrentVersion;
-    if (host_version > tcp_channel->peerVersion())
+
+    // The number of the build of the line of the versions tells nothing about the compatibility,
+    // so the versions are compared by the three numbers that matter.
+    if (compatibilityVersion(host_version) > compatibilityVersion(tcp_channel->peerVersion()))
     {
         LOG(ERROR) << "Version mismatch (host:" << host_version << "client:"
                    << tcp_channel->peerVersion() << ")";
@@ -787,6 +790,19 @@ void ServiceWorker::connectToRouter(const Location& location)
 
     LOG(INFO) << "Connecting to router from" << location;
     router_manager_ = new RouterManager(std::make_unique<DatabaseConfigProvider>(Database::instance()), this);
+    connect(router_manager_, &RouterManager::sig_checkUserSessions, this,
+        [this](const QString& username, bool* result)
+        {
+            *result = false;
+            for (auto* client : clients_)
+            {
+                if (client && client->userName() == username.toStdString())
+                {
+                    *result = true;
+                    break;
+                }
+            }
+        }, Qt::DirectConnection);
 
     connect(router_manager_, &RouterManager::sig_routerStateChanged, user_session_, &UserSession::onRouterStateChanged);
     connect(router_manager_, &RouterManager::sig_credentialsChanged, user_session_, &UserSession::onUpdateCredentials);

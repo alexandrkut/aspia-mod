@@ -21,6 +21,9 @@
 #include <set>
 
 #include "base/serialization.h"
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QRegularExpression>
 #include "base/crypto/generic_hash.h"
 #include "base/crypto/random.h"
 #include "base/threading/worker.h"
@@ -188,6 +191,16 @@ void Host::sendUpdateCommand()
 }
 
 //--------------------------------------------------------------------------------------------------
+void Host::sendConfigCommand(const std::string& command_name, const std::string& params)
+{
+    proto::router::RouterToHost message;
+    proto::router::HostCommand* command = message.mutable_host_command();
+    command->set_command_name(command_name);
+    command->set_params(params);
+    sendMessage(0, serialize(message));
+}
+
+//--------------------------------------------------------------------------------------------------
 void Host::onTcpErrorOccurred(TcpChannel::ErrorCode error_code)
 {
     CLOG(INFO) << "Network error:" << error_code;
@@ -211,6 +224,10 @@ void Host::onTcpMessageReceived(quint8 /* channel_id */, const QByteArray& buffe
     else if (message.has_host_telemetry())
     {
         readHostTelemetry(message.host_telemetry(), Clock::now());
+    }
+    else if (message.has_host_config_result())
+    {
+        readHostConfigResult(message.host_config_result());
     }
     else
     {
@@ -336,5 +353,31 @@ void Host::readHostTelemetry(const proto::router::HostTelemetry& host_telemetry,
         return;
     }
 
+    // The host reports its full version string (with the build number and the mod mark) in the
+    // telemetry JSON. Store it in the "version" column so the admin console shows it, while the
+    // handshake version (three numbers) stays untouched and keeps driving every comparison.
+    QJsonDocument json_doc = QJsonDocument::fromJson(QByteArray::fromStdString(telemetry));
+    if (json_doc.isObject())
+    {
+        const QJsonObject obj = json_doc.object();
+        const QString version_string = obj.value("version_string").toString();
+        if (!version_string.isEmpty() && version_string.size() <= 32)
+        {
+            static const QRegularExpression pattern(R"(^\d+\.\d+\.\d+(\.\d+)?(-mod)?$)");
+            if (pattern.match(version_string).hasMatch())
+            {
+                database_.updateHostVersion(host_id_, version_string.toStdString());
+                emit sig_notifyChanged(ClientWorker::NOTIFY_HOSTS);
+            }
+        }
+    }
+
     telemetry_ = telemetry;
+}
+
+//--------------------------------------------------------------------------------------------------
+void Host::readHostConfigResult(const proto::router::HostConfigResult& host_config_result)
+{
+    emit sig_hostConfigResult(host_config_result.command_name(), host_config_result.error_code(),
+                              host_config_result.result());
 }

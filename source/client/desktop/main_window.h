@@ -23,7 +23,10 @@
 #include <QMainWindow>
 #include <QPointer>
 
+#include <functional>
 #include <memory>
+
+#include "base/peer/host_id.h"
 
 #include "client/desktop/tab.h"
 #include "client/mcp/mcp_controller.h"
@@ -43,6 +46,7 @@ class ManagementTab;
 class SearchDialog;
 class QLineEdit;
 class HostConfig;
+class LocalHostConfig;
 
 class MainWindow final
     : public QMainWindow,

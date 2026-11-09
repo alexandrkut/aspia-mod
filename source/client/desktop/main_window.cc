@@ -200,6 +200,7 @@ MainWindow::MainWindow(QWidget* parent)
         AutoQPointer<UpdateDialog> dialog(new UpdateDialog(
             settings.updateServer(), settings.updatePublicKey(), db.updateChannel(), "client",
             proxy.settings(), UpdateDialog::Action::ASK, this));
+        dialog->setRestartAfterInstall(true);
         dialog->exec();
     }, Qt::QueuedConnection);
 
@@ -533,7 +534,16 @@ void MainWindow::onHelp()
 void MainWindow::onAbout()
 {
     LOG(INFO) << "[ACTION] About clicked";
-    AutoQPointer<AboutDialog> dialog(new AboutDialog(tr("Aspia Client"), this));
+    const QStringList modifications =
+    {
+        tr("Connect to a host by its ID from the command line"),
+        tr("The icon of the screen of all the monitors at once"),
+        tr("Remote management of host users and update settings"),
+        tr("Full host configuration from a file"),
+        tr("Bulk operations on multiple hosts at once")
+    };
+
+    AutoQPointer<AboutDialog> dialog(new AboutDialog(tr("Aspia Client"), modifications, this));
     dialog->exec();
 }
 

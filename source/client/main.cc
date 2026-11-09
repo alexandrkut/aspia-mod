@@ -49,6 +49,7 @@
 #include "client/mcp/mcp_worker.h"
 #include "common/desktop/credentials_dialog.h"
 #include "common/desktop/msg_box.h"
+#include "proto/peer.h"
 #include "common/desktop/update_dialog.h"
 #endif // defined(Q_OS_ANDROID)
 

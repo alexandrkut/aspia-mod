@@ -41,7 +41,17 @@
 
 #include <algorithm>
 
-#include <drm/drm.h>
+// The headers of DRM are in a directory of their own, and the name of that directory is
+// not the same on every distribution: some put them in <drm/>, others in <libdrm/>. A
+// machine that has neither gets no information about the driver of the card, which is
+// the one thing that is read through these headers.
+#if __has_include(<drm/drm.h>)
+#  include <drm/drm.h>
+#  define ASPIA_HAS_DRM 1
+#elif __has_include(<libdrm/drm.h>)
+#  include <libdrm/drm.h>
+#  define ASPIA_HAS_DRM 1
+#endif
 #include <fcntl.h>
 #include <grp.h>
 #include <lastlog.h>
@@ -289,6 +299,7 @@ QHash<QString, PciDevice> pciDevices()
 
 //--------------------------------------------------------------------------------------------------
 // Reads the DRM driver version, date and description of a card via the DRM_IOCTL_VERSION ioctl.
+#if ASPIA_HAS_DRM
 DrmVersion readDrmVersion(const QString& node)
 {
     DrmVersion result;
@@ -322,6 +333,7 @@ DrmVersion readDrmVersion(const QString& node)
     close(fd);
     return result;
 }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 QString readSysAttribute(const QString& path)
@@ -1522,6 +1534,7 @@ QList<SysInfo::VideoAdapter> SysInfo::videoAdapters()
         adapter.adapter_string = display.device;
         adapter.driver_provider = display.vendor;
 
+#if ASPIA_HAS_DRM
         const DrmVersion drm = readDrmVersion(QString("/dev/dri/%1").arg(card));
         adapter.driver_version = drm.version;
         adapter.chip_type = drm.desc;
@@ -1529,6 +1542,7 @@ QList<SysInfo::VideoAdapter> SysInfo::videoAdapters()
         // Modern DRM drivers report a placeholder date of "0"; treat it as unset.
         if (drm.date != "0")
             adapter.driver_date = drm.date;
+#endif
 
         // The VBIOS version and the memory counters (in bytes) are exposed by amdgpu. Its video
         // memory is what the card owns, the translation table is the system memory it is allowed

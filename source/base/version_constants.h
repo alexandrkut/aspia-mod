@@ -25,7 +25,19 @@ extern const QVersionNumber kCurrentVersion;
 extern const QVersionNumber kMinimumSupportedVersion;
 extern const QVersionNumber kVersion_3_0_0;
 extern const QVersionNumber kVersion_3_0_34;
+
+// Returns the version as the three numbers that tell whether the programs of two builds are
+// compatible with each other. The fourth number is the number of the build of the line of the
+// versions, and it tells nothing about the compatibility: the builds of the same line of the
+// versions work with each other.
+QVersionNumber compatibilityVersion(const QVersionNumber& version);
 extern const QVersionNumber kVersion_3_2_0;
+
+// Returns the version as the three numbers that tell whether the programs of two builds are
+// compatible with each other. The fourth number is the number of the build of the line of the
+// versions, and it tells nothing about the compatibility: the builds of the same line of the
+// versions work with each other.
+QVersionNumber compatibilityVersion(const QVersionNumber& version);
 extern const QVersionNumber kVersion_3_3_0;
 
 #endif // BASE_VERSION_CONSTANTS_H
