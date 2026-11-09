@@ -31,10 +31,12 @@
 #endif // !defined(Q_OS_ANDROID)
 
 #include <QIcon>
+#include <QList>
 
 namespace {
 
 const char kActivateWindow[] = "activate_window";
+const char kOpenHost[] = "open_host:";
 
 } // namespace
 
@@ -56,6 +58,49 @@ Application::Application(int& argc, char* argv[])
         if (message.startsWith(kActivateWindow))
         {
             emit sig_windowActivated();
+        }
+        else if (message.startsWith(kOpenHost))
+        {
+            const QByteArray payload = message.mid(static_cast<qsizetype>(qstrlen(kOpenHost)));
+            const QList<QByteArray> fields = payload.split(':');
+
+            if (fields.size() != 4)
+            {
+                LOG(ERROR) << "Malformed open host message:" << payload;
+                return;
+            }
+
+            bool type_ok = false;
+            const int session_type = fields.at(1).toInt(&type_ok);
+            const QString identifier = QString::fromUtf8(QByteArray::fromBase64(fields.at(0)));
+
+            if (!type_ok || identifier.isEmpty())
+            {
+                LOG(ERROR) << "Malformed open host message:" << payload;
+                return;
+            }
+
+            QString username;
+            QString password;
+
+            if (!fields.at(2).isEmpty())
+                username = QString::fromUtf8(QByteArray::fromBase64(fields.at(2)));
+
+            if (!fields.at(3).isEmpty())
+                password = QString::fromUtf8(QByteArray::fromBase64(fields.at(3)));
+
+            if (username.isEmpty() != password.isEmpty())
+            {
+                LOG(ERROR) << "Open host message with half a pair of credentials";
+                return;
+            }
+
+            LOG(INFO) << "Connect to host requested from the command line:" << identifier
+                      << "(session type:" << session_type
+                      << (username.isEmpty() ? ", credentials of the record" : ", credentials given")
+                      << ")";
+
+            emit sig_hostOpened(identifier, session_type, username, password);
         }
         else
         {
@@ -95,6 +140,19 @@ Application::~Application()
 Application* Application::instance()
 {
     return static_cast<Application*>(QApplication::instance());
+}
+
+//--------------------------------------------------------------------------------------------------
+void Application::openHost(const QString& identifier, int session_type, const QString& username,
+                           const QString& password)
+{
+    const QByteArray payload =
+        identifier.toUtf8().toBase64() + ':' +
+        QByteArray::number(session_type) + ':' +
+        username.toUtf8().toBase64() + ':' +
+        password.toUtf8().toBase64();
+
+    sendMessage(kOpenHost + payload);
 }
 
 //--------------------------------------------------------------------------------------------------

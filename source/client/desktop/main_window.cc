@@ -97,7 +97,13 @@ QString dialogText(const QDialog* dialog)
     return message_box ? message_box->text() : dialog->windowTitle();
 }
 
-} // namespace
+void MainWindow::connectToLocalHost(const QString& identifier, int session_type, const QString& username,
+                                    const QString& password)
+{
+    LOG(INFO) << "Connect to host requested:" << identifier << session_type
+              << (username.isEmpty() ? "credentials of the record" : "credentials given");
+    Q_UNUSED(password);
+}
 
 //--------------------------------------------------------------------------------------------------
 MainWindow::MainWindow(QWidget* parent)

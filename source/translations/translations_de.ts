@@ -559,13 +559,13 @@ Datenbank zurücksetzen?</translation>
         <translation>Zugangsdaten speichern</translation>
     </message>
     <message>
-        <location filename="../client/desktop/authorization_dialog.cc" line="227"/>
-        <location filename="../client/desktop/authorization_dialog.cc" line="243"/>
+        <location filename="../client/desktop/authorization_dialog.cc" line="216"/>
+        <location filename="../client/desktop/authorization_dialog.cc" line="232"/>
         <source>Password cannot be empty.</source>
         <translation>Das Kennwort darf nicht leer sein.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/authorization_dialog.cc" line="236"/>
+        <location filename="../client/desktop/authorization_dialog.cc" line="225"/>
         <source>User name cannot be empty.</source>
         <translation>Der Benutzername darf nicht leer sein.</translation>
     </message>
@@ -1163,7 +1163,7 @@ Datenbank zurücksetzen?</translation>
     <message>
         <location filename="../host/ui/config_dialog.ui" line="14"/>
         <location filename="../host/ui/config_dialog.ui" line="185"/>
-        <location filename="../host/ui/config_dialog.cc" line="137"/>
+        <location filename="../host/ui/config_dialog.cc" line="136"/>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
@@ -4019,9 +4019,9 @@ Ersetzte Anmeldedaten: %2</translation>
     <name>HostWindow</name>
     <message>
         <location filename="../host/ui/host_window.ui" line="26"/>
-        <location filename="../host/ui/host_window.cc" line="645"/>
-        <location filename="../host/ui/host_window.cc" line="898"/>
-        <location filename="../host/ui/host_window.cc" line="1176"/>
+        <location filename="../host/ui/host_window.cc" line="644"/>
+        <location filename="../host/ui/host_window.cc" line="889"/>
+        <location filename="../host/ui/host_window.cc" line="1167"/>
         <source>Aspia Host</source>
         <translation>Aspia Host</translation>
     </message>
@@ -4037,7 +4037,7 @@ Ersetzte Anmeldedaten: %2</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="198"/>
-        <location filename="../host/ui/host_window.cc" line="1128"/>
+        <location filename="../host/ui/host_window.cc" line="1119"/>
         <source>Router is disabled</source>
         <translation>Router ist deaktiviert</translation>
     </message>
@@ -4108,7 +4108,7 @@ Ersetzte Anmeldedaten: %2</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="335"/>
-        <location filename="../host/ui/host_window.cc" line="851"/>
+        <location filename="../host/ui/host_window.cc" line="850"/>
         <source>Hide</source>
         <translation>Ausblenden</translation>
     </message>
@@ -6908,353 +6908,6 @@ Importierte Anmeldedaten: %5</translation>
     </message>
 </context>
 <context>
-    <name>RouterHostBulkConfigDialog</name>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="53"/>
-        <source>Update configuration on hosts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="65"/>
-        <source>Update server:</source>
-        <translation type="unfinished">Updateserver:</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="67"/>
-        <source>https://... (empty = default)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="70"/>
-        <source>Public key:</source>
-        <translation type="unfinished">├Цffentlicher Schl├╝ssel:</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="72"/>
-        <source>32 bytes hex (empty = default)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="75"/>
-        <source>Channel:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="82"/>
-        <source>Auto-update:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="83"/>
-        <source>Enabled</source>
-        <translation type="unfinished">Aktiviert</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="86"/>
-        <source>Check frequency:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="88"/>
-        <source>Once a day</source>
-        <translation type="unfinished">Einmal t├дglich</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="89"/>
-        <source>Once a week</source>
-        <translation type="unfinished">Einmal w├╢chentlich</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="90"/>
-        <source>Once a month</source>
-        <translation type="unfinished">Einmal monatlich</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="95"/>
-        <source>Unchecked fields are left unchanged on every host. A checked field with an empty value resets it to the default.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="166"/>
-        <source>Invalid server URL.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="172"/>
-        <source>Invalid public key (must be 32 bytes hex).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="180"/>
-        <source>A public key without a server is not allowed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>RouterHostBulkDialog</name>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="43"/>
-        <source>Done</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="45"/>
-        <source>Skipped</source>
-        <translation type="unfinished">├Ьbersprungen</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="47"/>
-        <source>Failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="49"/>
-        <source>Offline</source>
-        <translation type="unfinished">Offline</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="51"/>
-        <source>Cancelled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="53"/>
-        <source>Running...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="189"/>
-        <source>Host</source>
-        <translation type="unfinished">Host</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="189"/>
-        <source>Planned action</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="189"/>
-        <source>Result</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="189"/>
-        <source>Detail</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="199"/>
-        <source>Details:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="211"/>
-        <source>Apply</source>
-        <translation type="unfinished">├Ьbernehmen</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="241"/>
-        <source>Pending</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="261"/>
-        <source>Nothing to do.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message numerus="yes">
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="266"/>
-        <source>%n host(s) selected.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="271"/>
-        <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="300"/>
-        <source>Cancelling, waiting for the current host...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="321"/>
-        <source>%1 of %2 done.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="350"/>
-        <source>Done: %1, failed: %2, offline: %3, skipped: %4, cancelled: %5.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="352"/>
-        <source>Close</source>
-        <translation type="unfinished">Schlie├Яen</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="387"/>
-        <source>Host: %1
-Planned: %2
-Result: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="389"/>
-        <source>
-Detail: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>RouterHostBulkFullConfigDialog</name>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="398"/>
-        <source>Full configuration on hosts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="408"/>
-        <source>Warning: without the checkbox below, every host switches to the router, port and access settings from the file. Make sure the file comes from a host of this router.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="416"/>
-        <source>Keep router connection, port and access settings (apply only system settings and users)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>RouterHostBulkRemoveDialog</name>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="449"/>
-        <source>Remove user from hosts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="455"/>
-        <source>User name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="458"/>
-        <source>Force (remove even with live sessions, last enabled user is still protected)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_bulk.cc" line="492"/>
-        <source>Enter a user name.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>RouterHostConfigDialog</name>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="63"/>
-        <source>Host update configuration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="69"/>
-        <source>https://... (empty = default)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="70"/>
-        <source>Update server:</source>
-        <translation type="unfinished">Updateserver:</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="73"/>
-        <source>32 bytes hex (empty = default)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="74"/>
-        <source>Public key:</source>
-        <translation type="unfinished">├Цffentlicher Schl├╝ssel:</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="80"/>
-        <source>Channel:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="82"/>
-        <source>Auto-update enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="86"/>
-        <source>Once a day</source>
-        <translation type="unfinished">Einmal t├дglich</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="87"/>
-        <source>Once a week</source>
-        <translation type="unfinished">Einmal w├╢chentlich</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="88"/>
-        <source>Once a month</source>
-        <translation type="unfinished">Einmal monatlich</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="90"/>
-        <source>Check frequency:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="92"/>
-        <source>Loading current settings...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="115"/>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="181"/>
-        <source>No session to router.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="127"/>
-        <source>Failed to read telemetry: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="135"/>
-        <source>Telemetry is not JSON.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="153"/>
-        <source>Current settings loaded.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="161"/>
-        <source>Invalid server URL.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="166"/>
-        <source>Invalid public key (must be 32 bytes hex).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="205"/>
-        <source>Configuration applied successfully.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="210"/>
-        <source>Failed to apply: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>RouterHostDialog</name>
     <message>
         <location filename="../client/desktop/management/router_host_dialog.ui" line="14"/>
@@ -7403,184 +7056,6 @@ Detail: %1</source>
         <location filename="../client/android/router_host_editor.cc" line="216"/>
         <source>Enter both the user name and the password, or leave both empty.</source>
         <translation>Geben Sie sowohl den Benutzernamen als auch das Kennwort ein oder lassen Sie beide Felder leer.</translation>
-    </message>
-</context>
-<context>
-    <name>RouterHostUserDialog</name>
-    <message>
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="71"/>
-        <source>User Properties</source>
-        <translation type="unfinished">Benutzereigenschaften</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="78"/>
-        <source>User Name:</source>
-        <translation type="unfinished">Benutzername:</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="81"/>
-        <source>Password:</source>
-        <translation type="unfinished">Kennwort:</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="84"/>
-        <source>Password (repeat):</source>
-        <translation type="unfinished">Kennwort (wiederholen):</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="86"/>
-        <source>Disable User Account</source>
-        <translation type="unfinished">Benutzerkonto deaktivieren</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="92"/>
-        <source>Allowed Session Types:</source>
-        <translation type="unfinished">Erlaubte Sitzungsarten:</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="96"/>
-        <source>Check all</source>
-        <translation type="unfinished">Alle ausw├дhlen</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="97"/>
-        <source>Uncheck all</source>
-        <translation type="unfinished">Alle abw├дhlen</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="252"/>
-        <source>The user name can not be empty and can contain only alphabet characters, numbers and _, -, ., @ characters. It can not consist of digits only.</source>
-        <translation type="unfinished">Der Benutzername darf nicht leer sein und darf nur Buchstaben, Ziffern sowie die Zeichen _, -, ., @ enthalten. Er darf nicht nur aus Ziffern bestehen.</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="269"/>
-        <source>The username you entered already exists.</source>
-        <translation type="unfinished">Der eingegebene Benutzername existiert bereits.</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="277"/>
-        <source>The passwords you entered do not match.</source>
-        <translation type="unfinished">Die von Ihnen eingegebenen Kennw├╢rter stimmen nicht ├╝berein.</translation>
-    </message>
-    <message numerus="yes">
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="286"/>
-        <source>The password can not be shorter than %n characters.</source>
-        <translation type="unfinished">
-            <numerusform>Das Kennwort darf nicht k├╝rzer als %n Zeichen sein.</numerusform>
-            <numerusform>Das Kennwort darf nicht k├╝rzer als %n Zeichen sein.</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="288"/>
-        <source>The password can not be longer than %n characters.</source>
-        <translation type="unfinished">
-            <numerusform>Das Kennwort darf nicht l├дnger als %n Zeichen sein.</numerusform>
-            <numerusform>Das Kennwort darf nicht l├дnger als %n Zeichen sein.</numerusform>
-        </translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="300"/>
-        <source>Password you entered does not meet the security requirements!</source>
-        <translation type="unfinished">Das eingegebene Kennwort erf├╝llt nicht die Sicherheitsanforderungen!</translation>
-    </message>
-    <message numerus="yes">
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="303"/>
-        <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
-        <translation type="unfinished">
-            <numerusform>Das Kennwort muss Klein- und Gro├Яbuchstaben sowie Ziffern enthalten und darf nicht k├╝rzer als %n Zeichen sein.</numerusform>
-            <numerusform>Das Kennwort muss Klein- und Gro├Яbuchstaben sowie Ziffern enthalten und darf nicht k├╝rzer als %n Zeichen sein.</numerusform>
-        </translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="307"/>
-        <source>Do you want to enter a different password?</source>
-        <translation type="unfinished">M├╢chten Sie ein anderes Kennwort eingeben?</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="310"/>
-        <source>Warning</source>
-        <translation type="unfinished">Warnung</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="349"/>
-        <source>Double-click to change</source>
-        <translation type="unfinished">Zum ├Дndern doppelklicken</translation>
-    </message>
-</context>
-<context>
-    <name>RouterHostUsersDialog</name>
-    <message>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="64"/>
-        <source>Host users</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="73"/>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="190"/>
-        <source>Add</source>
-        <translation type="unfinished">Hinzuf├╝gen</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="74"/>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="242"/>
-        <source>Edit</source>
-        <translation type="unfinished">Bearbeiten</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="75"/>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="276"/>
-        <source>Remove</source>
-        <translation type="unfinished">Entfernen</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="76"/>
-        <source>Close</source>
-        <translation type="unfinished">Schlie├Яen</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="105"/>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="182"/>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="234"/>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="268"/>
-        <source>No session to router.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="121"/>
-        <source>Failed to get users: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="146"/>
-        <source> (disabled)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="164"/>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="223"/>
-        <source>Failed to create user credentials.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="201"/>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="253"/>
-        <source>Select a user first.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="259"/>
-        <source>Remove user &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="286"/>
-        <source>%1: success.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="290"/>
-        <source>%1 failed: %2</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14012,7 +13487,7 @@ Detail: %1</source>
         <translation>Aktualisieren</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="407"/>
+        <location filename="../common/desktop/update_dialog.cc" line="374"/>
         <source>Checking for updates</source>
         <translation>Suche nach Updates</translation>
     </message>
