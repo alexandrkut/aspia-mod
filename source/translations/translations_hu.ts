@@ -29,117 +29,127 @@
         <translation>Bezárás</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="104"/>
+        <location filename="../common/desktop/about_dialog.cc" line="136"/>
         <source>Version: %1 (%2)</source>
         <translation>Verzió: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="109"/>
+        <location filename="../common/desktop/about_dialog.cc" line="141"/>
         <source>Aspia is free software released under GNU General Public License 3.</source>
         <translation>Az Aspia szabad szoftver, amely a GNU General Public License 3 feltételei szerint jelent meg.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="110"/>
+        <location filename="../common/desktop/about_dialog.cc" line="142"/>
         <source>You can get a copy of license here:</source>
         <translation>A licenc másolata itt érhető el:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="115"/>
+        <location filename="../common/desktop/about_dialog.cc" line="147"/>
         <source>You can also get a translation of GNU GPL license here:</source>
         <translation>A GNU GPL licenc fordítása itt is elérhető:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="119"/>
+        <location filename="../common/desktop/about_dialog.cc" line="151"/>
         <source>Links</source>
         <translation>Hivatkozások</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="120"/>
+        <location filename="../common/desktop/about_dialog.cc" line="152"/>
         <source>Home page:</source>
         <translation>Honlap:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="121"/>
+        <location filename="../common/desktop/about_dialog.cc" line="153"/>
         <source>GitHub page:</source>
         <translation>GitHub-oldal:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="124"/>
+        <location filename="../common/desktop/about_dialog.cc" line="162"/>
+        <source>Modifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../common/desktop/about_dialog.cc" line="164"/>
+        <source>The changes and the sources:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../common/desktop/about_dialog.cc" line="168"/>
         <source>Developers</source>
         <translation>Fejlesztők</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="126"/>
+        <location filename="../common/desktop/about_dialog.cc" line="170"/>
         <source>Translators</source>
         <translation>Fordítók</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="128"/>
+        <location filename="../common/desktop/about_dialog.cc" line="172"/>
         <source>Third-party components</source>
         <translation>Külső összetevők</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="130"/>
+        <location filename="../common/desktop/about_dialog.cc" line="174"/>
         <source>Graphics and images</source>
         <translation>Grafika és képek</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="131"/>
+        <location filename="../common/desktop/about_dialog.cc" line="175"/>
         <source>Icons by %1</source>
         <translation>Ikonok: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="158"/>
+        <location filename="../common/desktop/about_dialog.cc" line="205"/>
         <source>Application</source>
         <translation>Alkalmazás</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="159"/>
+        <location filename="../common/desktop/about_dialog.cc" line="206"/>
         <source>Path: %1</source>
         <translation>Útvonal: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="160"/>
+        <location filename="../common/desktop/about_dialog.cc" line="207"/>
         <source>Logging directory: %1</source>
         <translation>Naplózási könyvtár: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="162"/>
+        <location filename="../common/desktop/about_dialog.cc" line="209"/>
         <source>Logging file: %1</source>
         <translation>Naplófájl: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="167"/>
+        <location filename="../common/desktop/about_dialog.cc" line="214"/>
         <source>Build Information</source>
         <translation>Build-információk</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="168"/>
+        <location filename="../common/desktop/about_dialog.cc" line="215"/>
         <source>Git branch: %1</source>
         <translation>Git-ág: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="170"/>
+        <location filename="../common/desktop/about_dialog.cc" line="217"/>
         <source>Git commit: %1</source>
         <translation>Git-commit: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="175"/>
+        <location filename="../common/desktop/about_dialog.cc" line="222"/>
         <source>Compilation</source>
         <translation>Fordítás</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="176"/>
+        <location filename="../common/desktop/about_dialog.cc" line="223"/>
         <source>Compilation date: %1</source>
         <translation>Fordítás dátuma: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="177"/>
+        <location filename="../common/desktop/about_dialog.cc" line="224"/>
         <source>Compilation time: %1</source>
         <translation>Fordítás ideje: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="206"/>
+        <location filename="../common/desktop/about_dialog.cc" line="253"/>
         <source>Version Information</source>
         <translation>Verzióinformációk</translation>
     </message>
@@ -147,69 +157,69 @@
 <context>
     <name>AboutWidget</name>
     <message>
-        <location filename="../common/android/about_widget.cc" line="131"/>
-        <location filename="../common/android/about_widget.cc" line="135"/>
-        <location filename="../common/android/about_widget.cc" line="139"/>
+        <location filename="../common/android/about_widget.cc" line="136"/>
+        <location filename="../common/android/about_widget.cc" line="140"/>
+        <location filename="../common/android/about_widget.cc" line="144"/>
         <source>Logs</source>
         <translation>Naplók</translation>
     </message>
     <message>
-        <location filename="../common/android/about_widget.cc" line="131"/>
+        <location filename="../common/android/about_widget.cc" line="136"/>
         <source>The logs are saved to &quot;%1&quot;.</source>
         <translation>A naplók ide lettek mentve: &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../common/android/about_widget.cc" line="135"/>
+        <location filename="../common/android/about_widget.cc" line="140"/>
         <source>There are no logs to save.</source>
         <translation>Nincs menthető napló.</translation>
     </message>
     <message>
-        <location filename="../common/android/about_widget.cc" line="139"/>
+        <location filename="../common/android/about_widget.cc" line="144"/>
         <source>Unable to save the logs.</source>
         <translation>Nem lehet menteni a naplókat.</translation>
     </message>
     <message>
-        <location filename="../common/android/about_widget.cc" line="148"/>
+        <location filename="../common/android/about_widget.cc" line="153"/>
         <source>Version: %1 (%2)</source>
         <translation>Verzió: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../common/android/about_widget.cc" line="151"/>
+        <location filename="../common/android/about_widget.cc" line="156"/>
         <source>Aspia is free software released under GNU General Public License 3.</source>
         <translation>Az Aspia szabad szoftver, amely a GNU General Public License 3 feltételei szerint jelent meg.</translation>
     </message>
     <message>
-        <location filename="../common/android/about_widget.cc" line="152"/>
+        <location filename="../common/android/about_widget.cc" line="157"/>
         <source>You can get a copy of license here:</source>
         <translation>A licenc másolata itt érhető el:</translation>
     </message>
     <message>
-        <location filename="../common/android/about_widget.cc" line="155"/>
+        <location filename="../common/android/about_widget.cc" line="160"/>
         <source>Links</source>
         <translation>Hivatkozások</translation>
     </message>
     <message>
-        <location filename="../common/android/about_widget.cc" line="155"/>
+        <location filename="../common/android/about_widget.cc" line="160"/>
         <source>Home page:</source>
         <translation>Honlap:</translation>
     </message>
     <message>
-        <location filename="../common/android/about_widget.cc" line="155"/>
+        <location filename="../common/android/about_widget.cc" line="160"/>
         <source>GitHub page:</source>
         <translation>GitHub-oldal:</translation>
     </message>
     <message>
-        <location filename="../common/android/about_widget.cc" line="162"/>
+        <location filename="../common/android/about_widget.cc" line="167"/>
         <source>Developers</source>
         <translation>Fejlesztők</translation>
     </message>
     <message>
-        <location filename="../common/android/about_widget.cc" line="163"/>
+        <location filename="../common/android/about_widget.cc" line="168"/>
         <source>Translators</source>
         <translation>Fordítók</translation>
     </message>
     <message>
-        <location filename="../common/android/about_widget.cc" line="164"/>
+        <location filename="../common/android/about_widget.cc" line="169"/>
         <source>Third-party components</source>
         <translation>Külső összetevők</translation>
     </message>
@@ -559,13 +569,13 @@ Alaphelyzetbe állítja az adatbázist?</translation>
         <translation>Bejelentkezési adatok mentése</translation>
     </message>
     <message>
-        <location filename="../client/desktop/authorization_dialog.cc" line="216"/>
-        <location filename="../client/desktop/authorization_dialog.cc" line="232"/>
+        <location filename="../client/desktop/authorization_dialog.cc" line="227"/>
+        <location filename="../client/desktop/authorization_dialog.cc" line="243"/>
         <source>Password cannot be empty.</source>
         <translation>A jelszó nem lehet üres.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/authorization_dialog.cc" line="225"/>
+        <location filename="../client/desktop/authorization_dialog.cc" line="236"/>
         <source>User name cannot be empty.</source>
         <translation>A felhasználónév nem lehet üres.</translation>
     </message>
@@ -995,99 +1005,189 @@ Alaphelyzetbe állítja az adatbázist?</translation>
 <context>
     <name>Client</name>
     <message>
-        <location filename="../client/main.cc" line="80"/>
+        <location filename="../client/main.cc" line="84"/>
         <source>Unable to create a backup. Some records of the database are damaged. Fix or delete them.</source>
         <translation>Nem sikerült létrehozni a biztonsági mentést. Az adatbázis néhány rekordja sérült. Javítsa vagy törölje őket.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="96"/>
+        <location filename="../client/main.cc" line="100"/>
         <source>Set Master Password</source>
         <translation>Mesterjelszó beállítása</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="98"/>
+        <location filename="../client/main.cc" line="102"/>
         <source>Set a master password required to unlock the application.</source>
         <translation>Állítson be egy mesterjelszót, amely az alkalmazás feloldásához szükséges.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/main.cc" line="106"/>
+        <location filename="../client/main.cc" line="110"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>A jelszó nem lehet rövidebb %n karakternél.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="114"/>
+        <location filename="../client/main.cc" line="118"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>A megadott jelszó nem felel meg a biztonsági követelményeknek!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/main.cc" line="116"/>
+        <location filename="../client/main.cc" line="120"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>A jelszónak tartalmaznia kell kisbetűket és nagybetűket, számokat, és nem lehet rövidebb %n karakternél.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="120"/>
+        <location filename="../client/main.cc" line="124"/>
         <source>Do you want to enter a different password?</source>
         <translation>Szeretne másik jelszót megadni?</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="130"/>
+        <location filename="../client/main.cc" line="134"/>
         <source>Unable to set master password.</source>
         <translation>Nem lehet beállítani a mesterjelszót.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="74"/>
+        <location filename="../client/main.cc" line="299"/>
+        <source>Connect to the host of the address book with this record ID or host ID, using the login and the password stored in it, or connect directly to a host by its address, which needs the login and the password given with --username and --password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="303"/>
+        <source>id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="307"/>
+        <source>Kind of the session to open: desktop, file, info, chat or terminal (default: the one from the settings of the application).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="310"/>
+        <source>type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="314"/>
+        <source>Log in with this user name instead of the one stored in the host. Requires --password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="317"/>
+        <source>name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="321"/>
+        <source>Log in with this password instead of the stored one. Requires --username. A password on a command line is visible to the other users of the machine.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="324"/>
+        <source>password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="78"/>
         <source>Unable to create a backup in the directory &quot;%1&quot;.</source>
         <translation>Nem sikerült létrehozni a biztonsági mentést a(z) &quot;%1&quot; könyvtárban.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="86"/>
+        <location filename="../client/main.cc" line="90"/>
         <source>Unable to create a backup.</source>
         <translation>Nem sikerült létrehozni a biztonsági mentést.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="289"/>
+        <location filename="../client/main.cc" line="293"/>
         <source>Aspia Client</source>
         <translation>Aspia kliens</translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="150"/>
+        <source>&quot;%1&quot; is neither a host ID nor a record ID nor a host address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="153"/>
+        <source>The host ID of --connect is missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="175"/>
+        <source>&quot;%1&quot; is not a valid session type. Use desktop, file, info, chat or terminal.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="178"/>
+        <source>The session type of --session-type is missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="195"/>
+        <source>The user name of --username is missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="211"/>
+        <source>The password of --password is missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="241"/>
+        <source>&quot;%1&quot; is neither an aspia:// link nor a host ID nor a host address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="260"/>
+        <source>--username requires --password as well.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="262"/>
+        <source>--password requires --username as well.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="273"/>
+        <source>--username and --password need a host to connect to (--connect or an aspia:// link).</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ClientListModel</name>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="141"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="142"/>
         <source>Computer Name</source>
         <translation>Számítógép neve</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="144"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="145"/>
         <source>User Name</source>
         <translation>Felhasználónév</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="147"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="148"/>
         <source>IP Address</source>
         <translation>IP-cím</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="150"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="151"/>
         <source>Connect Time</source>
         <translation>Csatlakozás ideje</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="153"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="154"/>
         <source>Version</source>
         <translation>Verzió</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="156"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="157"/>
         <source>Architecture</source>
         <translation>Architektúra</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="159"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="160"/>
         <source>Operating System</source>
         <translation>Operációs rendszer</translation>
     </message>
@@ -1095,62 +1195,69 @@ Alaphelyzetbe állítja az adatbázist?</translation>
 <context>
     <name>ClientWindow</name>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="278"/>
+        <location filename="../client/desktop/client_window.cc" line="416"/>
         <source>Session started.</source>
         <translation>A munkamenet elindult.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="592"/>
+        <location filename="../client/desktop/client_window.cc" line="760"/>
         <source>The specified router is unavailable.</source>
         <translation>A megadott útválasztó nem érhető el.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="594"/>
+        <location filename="../client/desktop/client_window.cc" line="762"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>Az útválasztó adatai sérültek. Szerkessze az útválasztót, és adja meg újra az adatokat.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="596"/>
+        <location filename="../client/desktop/client_window.cc" line="764"/>
         <source>The specified router is offline.</source>
         <translation>A megadott útválasztó offline.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="290"/>
+        <location filename="../client/desktop/client_window.cc" line="428"/>
         <source>Connecting to host %1...</source>
         <translation>Csatlakozás a(z) %1 gazdagéphez...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="294"/>
+        <location filename="../client/desktop/client_window.cc" line="432"/>
         <source>Connecting to host %1:%2...</source>
         <translation>Csatlakozás a(z) %1:%2 gazdagéphez...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="330"/>
+        <location filename="../client/desktop/client_window.cc" line="468"/>
         <source>Host is unavailable yet. Waiting to reconnect...</source>
         <translation>A gazdagép még nem érhető el. Várakozás az újracsatlakozásra...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="105"/>
+        <location filename="../client/desktop/client_window.cc" line="113"/>
+        <location filename="../client/desktop/client_window.cc" line="238"/>
         <source>Timeout waiting for reconnection to host.</source>
         <translation>Időtúllépés a gazdagéphez való újracsatlakozásra várakozás közben.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="350"/>
+        <location filename="../client/desktop/client_window.cc" line="218"/>
+        <location filename="../client/desktop/client_window.cc" line="251"/>
+        <source>Connecting to host...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/client_window.cc" line="477"/>
         <source>The Host version is newer than the Client version (%1 &gt; %2). Please update the application.</source>
         <translation>A gazdagép verziója újabb, mint a kliens verziója (%1 &gt; %2). Kérjük, frissítse az alkalmazást.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="603"/>
+        <location filename="../client/desktop/client_window.cc" line="774"/>
         <source>Requesting connection to the host...</source>
         <translation>Kapcsolat kérése a gazdagéphez...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="611"/>
+        <location filename="../client/desktop/client_window.cc" line="782"/>
         <source>Connection offer received.</source>
         <translation>Kapcsolati ajánlat érkezett.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="628"/>
+        <location filename="../client/desktop/client_window.cc" line="799"/>
         <source>Error requesting connection via router.</source>
         <translation>Hiba az útválasztón keresztüli kapcsolat kérésekor.</translation>
     </message>
@@ -1160,7 +1267,7 @@ Alaphelyzetbe állítja az adatbázist?</translation>
     <message>
         <location filename="../host/ui/config_dialog.ui" line="14"/>
         <location filename="../host/ui/config_dialog.ui" line="185"/>
-        <location filename="../host/ui/config_dialog.cc" line="136"/>
+        <location filename="../host/ui/config_dialog.cc" line="137"/>
         <source>Settings</source>
         <translation>Beállítások</translation>
     </message>
@@ -1388,258 +1495,288 @@ Alaphelyzetbe állítja az adatbázist?</translation>
         <translation>Frissítések keresése:</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="138"/>
+        <location filename="../host/ui/config_dialog.cc" line="139"/>
         <source>Installer</source>
         <translation>Telepítő</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="140"/>
+        <location filename="../host/ui/config_dialog.cc" line="141"/>
         <source>Quick Support</source>
         <translation>Quick Support</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="147"/>
+        <location filename="../host/ui/config_dialog.cc" line="148"/>
         <source>Once a day</source>
         <translation>Naponta egyszer</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="148"/>
+        <location filename="../host/ui/config_dialog.cc" line="149"/>
         <source>Once a week</source>
         <translation>Hetente egyszer</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="149"/>
+        <location filename="../host/ui/config_dialog.cc" line="150"/>
         <source>Once a month</source>
         <translation>Havonta egyszer</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="151"/>
+        <location filename="../host/ui/config_dialog.cc" line="152"/>
         <source>Stable</source>
         <translation>Stabil</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="152"/>
+        <location filename="../host/ui/config_dialog.cc" line="153"/>
         <source>Beta</source>
         <translation>Béta</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="153"/>
+        <location filename="../host/ui/config_dialog.cc" line="154"/>
         <source>Alpha</source>
         <translation>Alfa</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="188"/>
+        <location filename="../host/ui/config_dialog.cc" line="189"/>
         <source>Default</source>
         <translation>Alapértelmezett</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="222"/>
+        <location filename="../host/ui/config_dialog.cc" line="223"/>
         <source>No proxy</source>
         <translation>Nincs proxykiszolgáló</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="259"/>
+        <location filename="../host/ui/config_dialog.cc" line="260"/>
         <source>On reboot</source>
         <translation>Újraindításkor</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="260"/>
+        <location filename="../host/ui/config_dialog.cc" line="261"/>
         <source>Every 5 minutes</source>
         <translation>5 percenként</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="261"/>
+        <location filename="../host/ui/config_dialog.cc" line="262"/>
         <source>Every 30 minutes</source>
         <translation>30 percenként</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="262"/>
+        <location filename="../host/ui/config_dialog.cc" line="263"/>
         <source>Every 1 hour</source>
         <translation>Óránként</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="263"/>
+        <location filename="../host/ui/config_dialog.cc" line="264"/>
         <source>Every 6 hours</source>
         <translation>6 óránként</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="264"/>
+        <location filename="../host/ui/config_dialog.cc" line="265"/>
         <source>Every 12 hours</source>
         <translation>12 óránként</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="272"/>
+        <location filename="../host/ui/config_dialog.cc" line="273"/>
         <source>Letters and digits</source>
         <translation>Betűk és számjegyek</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="275"/>
+        <location filename="../host/ui/config_dialog.cc" line="276"/>
         <source>Letters</source>
         <translation>Betűk</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="277"/>
+        <location filename="../host/ui/config_dialog.cc" line="278"/>
         <source>Digits</source>
         <translation>Számjegyek</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="294"/>
+        <location filename="../host/ui/config_dialog.cc" line="295"/>
         <source>Never</source>
         <translation>Soha</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="295"/>
+        <location filename="../host/ui/config_dialog.cc" line="296"/>
         <source>15 seconds</source>
         <translation>15 másodperc</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="296"/>
+        <location filename="../host/ui/config_dialog.cc" line="297"/>
         <source>30 seconds</source>
         <translation>30 másodperc</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="297"/>
+        <location filename="../host/ui/config_dialog.cc" line="298"/>
         <source>45 seconds</source>
         <translation>45 másodperc</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="298"/>
+        <location filename="../host/ui/config_dialog.cc" line="299"/>
         <source>60 seconds</source>
         <translation>60 másodperc</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="306"/>
+        <location filename="../host/ui/config_dialog.cc" line="307"/>
         <source>Accept connection</source>
         <translation>Kapcsolat elfogadása</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="307"/>
+        <location filename="../host/ui/config_dialog.cc" line="308"/>
         <source>Reject connection</source>
         <translation>Kapcsolat elutasítása</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="507"/>
+        <location filename="../host/ui/config_dialog.cc" line="508"/>
         <source>Are you sure you want to delete user &quot;%1&quot;?</source>
         <translation>Biztosan törli a(z) &quot;%1&quot; felhasználót?</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="535"/>
-        <location filename="../host/ui/config_dialog.cc" line="569"/>
+        <location filename="../host/ui/config_dialog.cc" line="536"/>
+        <location filename="../host/ui/config_dialog.cc" line="570"/>
         <source>An error occurred while processing the password.</source>
         <translation>Hiba történt a jelszó feldolgozása közben.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="552"/>
+        <location filename="../host/ui/config_dialog.cc" line="553"/>
         <source>Settings storage is unavailable.</source>
         <translation>A beállítástároló nem érhető el.</translation>
     </message>
     <message>
+        <location filename="../host/ui/config_dialog.cc" line="630"/>
+        <source>Export Installer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/config_dialog.cc" line="631"/>
+        <source>The exported installer carries the settings of this host: the connection to the router and the users. By default they are imported on the first installation only, and the data of a host that is already installed is left alone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/config_dialog.cc" line="637"/>
+        <source>Overwrite the old data on install</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../host/ui/config_dialog.ui" line="204"/>
-        <location filename="../host/ui/config_dialog.cc" line="583"/>
+        <location filename="../host/ui/config_dialog.cc" line="584"/>
         <source>Import</source>
         <translation>Importálás</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="583"/>
-        <location filename="../host/ui/config_dialog.cc" line="600"/>
+        <location filename="../host/ui/config_dialog.cc" line="584"/>
+        <location filename="../host/ui/config_dialog.cc" line="601"/>
         <source>JSON-files (*.json)</source>
         <translation>JSON-fájlok (*.json)</translation>
     </message>
     <message>
         <location filename="../host/ui/config_dialog.ui" line="211"/>
-        <location filename="../host/ui/config_dialog.cc" line="600"/>
-        <location filename="../host/ui/config_dialog.cc" line="625"/>
-        <location filename="../host/ui/config_dialog.cc" line="660"/>
+        <location filename="../host/ui/config_dialog.cc" line="601"/>
+        <location filename="../host/ui/config_dialog.cc" line="649"/>
+        <location filename="../host/ui/config_dialog.cc" line="705"/>
         <source>Export</source>
         <translation>Exportálás</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="625"/>
+        <location filename="../host/ui/config_dialog.cc" line="649"/>
         <source>MSI-files (*.msi)</source>
         <translation>MSI-fájlok (*.msi)</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="635"/>
+        <location filename="../host/ui/config_dialog.cc" line="659"/>
         <source>The installer was successfully exported.</source>
         <translation>A telepítő sikeresen exportálva.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="639"/>
+        <location filename="../host/ui/config_dialog.cc" line="663"/>
         <source>The installed host package was not found.</source>
         <translation>A gazdagép telepített csomagja nem található.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="643"/>
+        <location filename="../host/ui/config_dialog.cc" line="667"/>
         <source>The installed version of the host does not support exporting the installer.</source>
         <translation>A gazdagép telepített verziója nem támogatja a telepítő exportálását.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="647"/>
+        <location filename="../host/ui/config_dialog.cc" line="671"/>
         <source>Unable to export the installer.</source>
         <translation>Nem lehet exportálni a telepítőt.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="660"/>
+        <location filename="../host/ui/config_dialog.cc" line="687"/>
+        <source>Export Quick Support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/config_dialog.cc" line="688"/>
+        <source>The exported package connects to the same router as this host and accepts the one-time password. The users of this host can be exported with it: they will be able to connect to the exported host with their own login and password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/config_dialog.cc" line="693"/>
+        <source>Export the users of this host</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/config_dialog.cc" line="705"/>
         <source>Executable files (*.exe)</source>
         <translation>Végrehajtható fájlok (*.exe)</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="670"/>
+        <location filename="../host/ui/config_dialog.cc" line="715"/>
         <source>The portable version was successfully exported.</source>
         <translation>A hordozható verzió sikeresen exportálva.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="674"/>
+        <location filename="../host/ui/config_dialog.cc" line="719"/>
         <source>The portable version works only through a router. Set up the connection to the router and save the settings.</source>
         <translation>A hordozható verzió csak útválasztón keresztül működik. Állítsa be a kapcsolatot az útválasztóval, és mentse a beállításokat.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="678"/>
+        <location filename="../host/ui/config_dialog.cc" line="723"/>
         <source>Unable to export the portable version.</source>
         <translation>Nem lehet exportálni a hordozható verziót.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="699"/>
+        <location filename="../host/ui/config_dialog.cc" line="744"/>
         <source>The configuration can not be written. Make sure that you have sufficient rights to write.</source>
         <translation>A konfiguráció nem írható. Győződjön meg arról, hogy rendelkezik megfelelő írási jogokkal.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="715"/>
+        <location filename="../host/ui/config_dialog.cc" line="760"/>
         <source>An invalid update server address was entered.</source>
         <translation>Érvénytelen frissítési kiszolgálócím lett megadva.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="723"/>
+        <location filename="../host/ui/config_dialog.cc" line="768"/>
         <source>Enter the update server address.</source>
         <translation>Adja meg a frissítési kiszolgáló címét.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="733"/>
+        <location filename="../host/ui/config_dialog.cc" line="778"/>
         <source>An invalid public key was entered.</source>
         <translation>Érvénytelen nyilvános kulcs lett megadva.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="752"/>
+        <location filename="../host/ui/config_dialog.cc" line="797"/>
         <source>Incorrect proxy address entered.</source>
         <translation>Hibás proxykiszolgáló-cím lett megadva.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="764"/>
+        <location filename="../host/ui/config_dialog.cc" line="809"/>
         <source>Incorrect router address entered.</source>
         <translation>Hibás útválasztócím lett megadva.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="774"/>
+        <location filename="../host/ui/config_dialog.cc" line="819"/>
         <source>Incorrect router public key entered.</source>
         <translation>Hibás nyilvános kulcs lett megadva az útválasztóhoz.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="946"/>
+        <location filename="../host/ui/config_dialog.cc" line="991"/>
         <source>Install</source>
         <translation>Telepítés</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="951"/>
+        <location filename="../host/ui/config_dialog.cc" line="996"/>
         <source>Remove</source>
         <translation>Eltávolítás</translation>
     </message>
@@ -2769,32 +2906,32 @@ Lecserélt hitelesítő adatok: %2</translation>
 <context>
     <name>DesktopWidget</name>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="635"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="627"/>
         <source>The session was paused by a remote user</source>
         <translation>A munkamenetet egy távoli felhasználó szüneteltette</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="638"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="630"/>
         <source>The session is temporarily unavailable</source>
         <translation>A munkamenet átmenetileg nem érhető el</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="641"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="633"/>
         <source>The session is permanently unavailable</source>
         <translation>A munkamenet véglegesen nem érhető el</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="644"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="636"/>
         <source>Waiting for the remote user to confirm screen capture</source>
         <translation>Várakozás arra, hogy a távoli felhasználó megerősítse a képernyőrögzítést</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="647"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="639"/>
         <source>The remote device screen is locked</source>
         <translation>A távoli eszköz képernyője zárolva van</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="650"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="642"/>
         <source>Error while receiving video stream: %1</source>
         <translation>Hiba a videofolyam fogadása közben: %1</translation>
     </message>
@@ -2802,37 +2939,37 @@ Lecserélt hitelesítő adatok: %2</translation>
 <context>
     <name>DesktopWindow</name>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1138"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1149"/>
         <source>Save File</source>
         <translation>Fájl mentése</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1139"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1150"/>
         <source>PNG Image (*.png);;BMP Image (*.bmp)</source>
         <translation>PNG-kép (*.png);;BMP-kép (*.bmp)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1170"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1181"/>
         <source>Could not save image</source>
         <translation>Nem sikerült menteni a képet</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1423"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1434"/>
         <source>Invalid user name or password.</source>
         <translation>Hibás felhasználónév vagy jelszó.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1426"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1437"/>
         <source>The password has expired.</source>
         <translation>A jelszó lejárt.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1429"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1440"/>
         <source>The account is locked out.</source>
         <translation>A fiók zárolva van.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1432"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1443"/>
         <source>The account is disabled.</source>
         <translation>A fiók le van tiltva.</translation>
     </message>
@@ -4004,9 +4141,9 @@ Lecserélt hitelesítő adatok: %2</translation>
     <name>HostWindow</name>
     <message>
         <location filename="../host/ui/host_window.ui" line="26"/>
-        <location filename="../host/ui/host_window.cc" line="644"/>
-        <location filename="../host/ui/host_window.cc" line="889"/>
-        <location filename="../host/ui/host_window.cc" line="1167"/>
+        <location filename="../host/ui/host_window.cc" line="645"/>
+        <location filename="../host/ui/host_window.cc" line="898"/>
+        <location filename="../host/ui/host_window.cc" line="1176"/>
         <source>Aspia Host</source>
         <translation>Aspia Host</translation>
     </message>
@@ -4022,7 +4159,7 @@ Lecserélt hitelesítő adatok: %2</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="198"/>
-        <location filename="../host/ui/host_window.cc" line="1119"/>
+        <location filename="../host/ui/host_window.cc" line="1128"/>
         <source>Router is disabled</source>
         <translation>Az útválasztó le van tiltva</translation>
     </message>
@@ -4093,7 +4230,7 @@ Lecserélt hitelesítő adatok: %2</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="335"/>
-        <location filename="../host/ui/host_window.cc" line="850"/>
+        <location filename="../host/ui/host_window.cc" line="851"/>
         <source>Hide</source>
         <translation>Elrejtés</translation>
     </message>
@@ -4133,75 +4270,85 @@ Lecserélt hitelesítő adatok: %2</translation>
         <translation>Csevegés megjelenítése</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="180"/>
-        <location filename="../host/ui/host_window.cc" line="644"/>
-        <location filename="../host/ui/host_window.cc" line="1167"/>
+        <location filename="../host/ui/host_window.cc" line="181"/>
+        <location filename="../host/ui/host_window.cc" line="645"/>
+        <location filename="../host/ui/host_window.cc" line="1176"/>
         <source>Aspia Quick Support</source>
         <translation>Aspia Quick Support</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="339"/>
-        <location filename="../host/ui/host_window.cc" line="845"/>
+        <location filename="../host/ui/host_window.cc" line="340"/>
+        <location filename="../host/ui/host_window.cc" line="846"/>
         <source>Show</source>
         <translation>Megjelenítés</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="633"/>
+        <location filename="../host/ui/host_window.cc" line="634"/>
         <source>Screen recording has started.</source>
         <translation>A képernyőfelvétel elindult.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="635"/>
+        <location filename="../host/ui/host_window.cc" line="636"/>
         <source>Screen recording stopped.</source>
         <translation>A képernyőfelvétel leállt.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="834"/>
+        <location filename="../host/ui/host_window.cc" line="835"/>
         <source>Settings storage is unavailable.</source>
         <translation>A beállítástároló nem érhető el.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="900"/>
+        <location filename="../host/ui/host_window.cc" line="894"/>
+        <source>The ability to show several monitors at once</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/host_window.cc" line="895"/>
+        <source>Remote management of settings and users by the router administrator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/host_window.cc" line="909"/>
         <source>Aspia Host will be removed from this computer. The settings of the host will be kept. Do you really want to uninstall the application?</source>
         <translation>Az Aspia Host el lesz távolítva erről a számítógépről. A gazdagép beállításai megmaradnak. Valóban eltávolítja az alkalmazást?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="912"/>
+        <location filename="../host/ui/host_window.cc" line="921"/>
         <source>Unable to uninstall the application.</source>
         <translation>Nem lehet eltávolítani az alkalmazást.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="939"/>
+        <location filename="../host/ui/host_window.cc" line="948"/>
         <source>If you exit from Aspia, it will not be possible to connect to this computer until you turn on the computer or Aspia again manually. Do you really want to exit the application?</source>
         <translation>Ha kilép az Aspiából, nem lehet csatlakozni ehhez a számítógéphez, amíg kézzel újra be nem kapcsolja a számítógépet vagy az Aspiát. Valóban kilép az alkalmazásból?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1111"/>
+        <location filename="../host/ui/host_window.cc" line="1120"/>
         <source>Not connected to service</source>
         <translation>Nincs kapcsolat a szolgáltatással</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1124"/>
+        <location filename="../host/ui/host_window.cc" line="1133"/>
         <source>Connecting to router...</source>
         <translation>Csatlakozás az útválasztóhoz...</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1129"/>
+        <location filename="../host/ui/host_window.cc" line="1138"/>
         <source>Connected to router</source>
         <translation>Csatlakoztatva az útválasztóhoz</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1134"/>
+        <location filename="../host/ui/host_window.cc" line="1143"/>
         <source>Connection error</source>
         <translation>Kapcsolati hiba</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1212"/>
+        <location filename="../host/ui/host_window.cc" line="1221"/>
         <source>IP addresses:</source>
         <translation>IP-címek:</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1168"/>
+        <location filename="../host/ui/host_window.cc" line="1177"/>
         <source>ID: %1</source>
         <translation>ID: %1</translation>
     </message>
@@ -4898,7 +5045,7 @@ Importált hitelesítő adatok: %5</translation>
     </message>
     <message>
         <location filename="../client/desktop/main_window.ui" line="20"/>
-        <location filename="../client/desktop/main_window.cc" line="536"/>
+        <location filename="../client/desktop/main_window.cc" line="546"/>
         <source>Aspia Client</source>
         <translation>Aspia kliens</translation>
     </message>
@@ -4978,57 +5125,82 @@ Importált hitelesítő adatok: %5</translation>
         <translation>Keresés...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="211"/>
+        <location filename="../client/desktop/main_window.cc" line="212"/>
         <source>Unable to turn on the MCP connector.</source>
         <translation>Nem lehet bekapcsolni az MCP-összekötőt.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="234"/>
+        <location filename="../client/desktop/main_window.cc" line="235"/>
         <source>Management</source>
         <translation>Kezelés</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="277"/>
+        <location filename="../client/desktop/main_window.cc" line="278"/>
         <source>Are you sure you want to close the application?</source>
         <translation>Biztosan bezárja az alkalmazást?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="512"/>
+        <location filename="../client/desktop/main_window.cc" line="513"/>
         <source>Close all sessions to lock the application.</source>
         <translation>Zárja be az összes munkamenetet az alkalmazás zárolásához.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="518"/>
+        <location filename="../client/desktop/main_window.cc" line="519"/>
         <source>Close all dialogs to lock the application.</source>
         <translation>Zárja be az összes párbeszédablakot az alkalmazás zárolásához.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="633"/>
+        <location filename="../client/desktop/main_window.cc" line="539"/>
+        <source>Connect to a host by its ID from the command line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="540"/>
+        <source>The icon of the screen of all the monitors at once</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="541"/>
+        <source>Remote management of host users and update settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="542"/>
+        <source>Full host configuration from a file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="543"/>
+        <source>Bulk operations on multiple hosts at once</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="643"/>
         <source>Connection by ID is specified in the properties of the host, but the router is not configured. Check the parameters of the router in the properties of the host.</source>
         <translation>A gazdagép tulajdonságaiban ID szerinti kapcsolat van megadva, de az útválasztó nincs konfigurálva. Ellenőrizze az útválasztó paramétereit a gazdagép tulajdonságaiban.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="900"/>
+        <location filename="../client/desktop/main_window.cc" line="910"/>
         <source>Unknown application</source>
         <translation>Ismeretlen alkalmazás</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="903"/>
+        <location filename="../client/desktop/main_window.cc" line="913"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>MCP-összekötő. Csatlakoztatva: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="904"/>
+        <location filename="../client/desktop/main_window.cc" line="914"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - MI csatlakoztatva</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="471"/>
+        <location filename="../client/desktop/main_window.cc" line="472"/>
         <source>Credentials</source>
         <translation>Hitelesítő adatok</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="502"/>
+        <location filename="../client/desktop/main_window.cc" line="503"/>
         <source>Settings</source>
         <translation>Beállítások</translation>
     </message>
@@ -5082,7 +5254,7 @@ Importált hitelesítő adatok: %5</translation>
     </message>
     <message>
         <location filename="../client/desktop/management_tab.ui" line="137"/>
-        <location filename="../client/desktop/management_tab.cc" line="2019"/>
+        <location filename="../client/desktop/management_tab.cc" line="2093"/>
         <source>Delete Host</source>
         <translation>Gazdagép törlése</translation>
     </message>
@@ -5219,157 +5391,192 @@ Importált hitelesítő adatok: %5</translation>
         <translation>Állapot automatikus frissítése</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1109"/>
+        <location filename="../client/desktop/management_tab.cc" line="1136"/>
         <source>(copy)</source>
         <translation>(másolat)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1077"/>
-        <location filename="../client/desktop/management_tab.cc" line="1154"/>
-        <location filename="../client/desktop/management_tab.cc" line="2239"/>
+        <location filename="../client/desktop/management_tab.cc" line="1104"/>
+        <location filename="../client/desktop/management_tab.cc" line="1181"/>
+        <location filename="../client/desktop/management_tab.cc" line="2313"/>
         <source>Failed to retrieve host information from the local database.</source>
         <translation>Nem sikerült lekérni a gazdagép adatait a helyi adatbázisból.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="908"/>
+        <location filename="../client/desktop/management_tab.cc" line="935"/>
         <source>The &quot;%1&quot; session type is not available for Quick Support.</source>
         <translation>A(z) &quot;%1&quot; munkamenet-típus nem érhető el a Quick Support számára.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1114"/>
+        <location filename="../client/desktop/management_tab.cc" line="1141"/>
         <source>Failed to add the host to the local database.</source>
         <translation>Nem sikerült hozzáadni a gazdagépet a helyi adatbázishoz.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1172"/>
+        <location filename="../client/desktop/management_tab.cc" line="1199"/>
         <source>Are you sure you want to delete host &quot;%1&quot;?</source>
         <translation>Biztosan törli a(z) &quot;%1&quot; gazdagépet?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management_tab.cc" line="1174"/>
+        <location filename="../client/desktop/management_tab.cc" line="1201"/>
         <source>Are you sure you want to delete %n hosts?</source>
         <translation>
             <numerusform>Biztosan töröl %n gazdagépet?</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1200"/>
+        <location filename="../client/desktop/management_tab.cc" line="1227"/>
         <source>Unable to remove host</source>
         <translation>Nem lehet eltávolítani a gazdagépet</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management_tab.cc" line="1202"/>
+        <location filename="../client/desktop/management_tab.cc" line="1229"/>
         <source>Failed to delete %n of the selected hosts.</source>
         <translation>
             <numerusform>A kijelölt gazdagépek közül %n gazdagépet nem sikerült törölni.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1268"/>
-        <location filename="../client/desktop/management_tab.cc" line="1345"/>
-        <location filename="../client/desktop/management_tab.cc" line="1378"/>
-        <location filename="../client/desktop/management_tab.cc" line="1401"/>
+        <location filename="../client/desktop/management_tab.cc" line="1279"/>
+        <source>Host update configuration...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1285"/>
+        <source>Host users...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1291"/>
+        <source>Host full configuration (from file)...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1302"/>
+        <source>Bulk add user...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1308"/>
+        <source>Bulk remove user...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1314"/>
+        <source>Bulk update configuration...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1320"/>
+        <source>Bulk full configuration (from file)...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1342"/>
+        <location filename="../client/desktop/management_tab.cc" line="1419"/>
+        <location filename="../client/desktop/management_tab.cc" line="1452"/>
+        <location filename="../client/desktop/management_tab.cc" line="1475"/>
         <source>Copy Row</source>
         <translation>Sor másolása</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1269"/>
-        <location filename="../client/desktop/management_tab.cc" line="1346"/>
-        <location filename="../client/desktop/management_tab.cc" line="1379"/>
-        <location filename="../client/desktop/management_tab.cc" line="1402"/>
+        <location filename="../client/desktop/management_tab.cc" line="1343"/>
+        <location filename="../client/desktop/management_tab.cc" line="1420"/>
+        <location filename="../client/desktop/management_tab.cc" line="1453"/>
+        <location filename="../client/desktop/management_tab.cc" line="1476"/>
         <source>Copy Value</source>
         <translation>Érték másolása</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1644"/>
+        <location filename="../client/desktop/management_tab.cc" line="1718"/>
         <source>Failed to delete the group.</source>
         <translation>Nem sikerült törölni a csoportot.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1683"/>
-        <location filename="../client/desktop/management_tab.cc" line="1740"/>
+        <location filename="../client/desktop/management_tab.cc" line="1757"/>
+        <location filename="../client/desktop/management_tab.cc" line="1814"/>
         <source>The database is not available.</source>
         <translation>Az adatbázis nem érhető el.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1689"/>
+        <location filename="../client/desktop/management_tab.cc" line="1763"/>
         <source>Create Backup</source>
         <translation>Biztonsági mentés készítése</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1706"/>
+        <location filename="../client/desktop/management_tab.cc" line="1780"/>
         <source>There is nothing to save.</source>
         <translation>Nincs mit menteni.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2078"/>
+        <location filename="../client/desktop/management_tab.cc" line="2152"/>
         <source>Delete Hosts</source>
         <translation>Gazdagépek törlése</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2234"/>
+        <location filename="../client/desktop/management_tab.cc" line="2308"/>
         <source>The data of the host is damaged. Edit the host and enter it again.</source>
         <translation>A gazdagép adatai sérültek. Szerkessze a gazdagépet, és adja meg újra az adatokat.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2255"/>
+        <location filename="../client/desktop/management_tab.cc" line="2329"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>Az útválasztó adatai sérültek. Szerkessze az útválasztót, és adja meg újra az adatokat.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1718"/>
+        <location filename="../client/desktop/management_tab.cc" line="1792"/>
         <source>Failed to create the backup.</source>
         <translation>Nem sikerült létrehozni a biztonsági mentést.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1746"/>
-        <location filename="../client/desktop/management_tab.cc" line="1772"/>
+        <location filename="../client/desktop/management_tab.cc" line="1820"/>
+        <location filename="../client/desktop/management_tab.cc" line="1846"/>
         <source>Restore from Backup</source>
         <translation>Visszaállítás biztonsági mentésből</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1755"/>
+        <location filename="../client/desktop/management_tab.cc" line="1829"/>
         <source>Everything stored now is deleted and replaced with what the backup holds. Continue?</source>
         <translation>Minden jelenleg tárolt adat törlődik, és a biztonsági mentés tartalmára cserélődik. Folytatja?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1774"/>
+        <location filename="../client/desktop/management_tab.cc" line="1848"/>
         <source>The backup was made on another installation. Enter the master password used there.</source>
         <translation>A biztonsági mentés egy másik telepítésen készült. Adja meg az ott használt mesterjelszót.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1799"/>
+        <location filename="../client/desktop/management_tab.cc" line="1873"/>
         <source>The backup carries no data, so nothing was changed.</source>
         <translation>A biztonsági mentés nem tartalmaz adatokat, ezért semmi sem változott.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1807"/>
+        <location filename="../client/desktop/management_tab.cc" line="1881"/>
         <source>The file is not a valid backup.</source>
         <translation>A fájl nem érvényes biztonsági mentés.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1811"/>
+        <location filename="../client/desktop/management_tab.cc" line="1885"/>
         <source>Failed to restore from the backup.</source>
         <translation>Nem sikerült visszaállítani a biztonsági mentésből.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1690"/>
-        <location filename="../client/desktop/management_tab.cc" line="1747"/>
+        <location filename="../client/desktop/management_tab.cc" line="1764"/>
+        <location filename="../client/desktop/management_tab.cc" line="1821"/>
         <source>Aspia Backup (*.aspia-backup);;All files (*)</source>
         <translation>Aspia biztonsági mentés (*.aspia-backup);;Minden fájl (*)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1710"/>
+        <location filename="../client/desktop/management_tab.cc" line="1784"/>
         <source>Unable to write the file.</source>
         <translation>Nem lehet írni a fájlt.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1803"/>
+        <location filename="../client/desktop/management_tab.cc" line="1877"/>
         <source>Unable to read the file.</source>
         <translation>Nem lehet olvasni a fájlt.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1723"/>
+        <location filename="../client/desktop/management_tab.cc" line="1797"/>
         <source>Export completed successfully.
 Routers exported: %1
 Groups exported: %2
@@ -5384,37 +5591,37 @@ Exportált mentett jelszavak: %4
 Exportált hitelesítő adatok: %5</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1504"/>
+        <location filename="../client/desktop/management_tab.cc" line="1578"/>
         <source>Are you sure you want to delete space &quot;%1&quot;?</source>
         <translation>Biztosan törli a(z) &quot;%1&quot; teret?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1524"/>
+        <location filename="../client/desktop/management_tab.cc" line="1598"/>
         <source>Failed to delete the space.</source>
         <translation>Nem sikerült törölni a teret.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1626"/>
+        <location filename="../client/desktop/management_tab.cc" line="1700"/>
         <source>Are you sure you want to delete the group &quot;%1&quot;? Hosts assigned to this group or its subgroups will be moved to the space root.</source>
         <translation>Biztosan törli a(z) &quot;%1&quot; csoportot? A csoporthoz vagy alcsoportjaihoz rendelt gazdagépek a tér gyökerébe kerülnek.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1714"/>
+        <location filename="../client/desktop/management_tab.cc" line="1788"/>
         <source>Some records of the database are damaged. Fix or delete them and try again.</source>
         <translation>Az adatbázis néhány rekordja sérült. Javítsa vagy törölje őket, majd próbálja újra.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1791"/>
+        <location filename="../client/desktop/management_tab.cc" line="1865"/>
         <source>Unable to decrypt the file with the specified password.</source>
         <translation>A fájl nem fejthető vissza a megadott jelszóval.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1795"/>
+        <location filename="../client/desktop/management_tab.cc" line="1869"/>
         <source>Unsupported file format version.</source>
         <translation>Nem támogatott fájlformátum-verzió.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1816"/>
+        <location filename="../client/desktop/management_tab.cc" line="1890"/>
         <source>Import completed successfully.
 Routers imported: %1
 Groups imported: %2
@@ -5429,17 +5636,17 @@ Importált mentett jelszavak: %4
 Importált hitelesítő adatok: %5</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2256"/>
+        <location filename="../client/desktop/management_tab.cc" line="2330"/>
         <source>The router associated with this host has been deleted. Edit the host to select another router or switch to direct connection.</source>
         <translation>A gazdagéphez tartozó útválasztó törölve lett. Szerkessze a gazdagépet másik útválasztó kiválasztásához, vagy váltson közvetlen kapcsolatra.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2263"/>
+        <location filename="../client/desktop/management_tab.cc" line="2337"/>
         <source>The host has an invalid host ID.</source>
         <translation>A gazdagép ID-ja érvénytelen.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2272"/>
+        <location filename="../client/desktop/management_tab.cc" line="2346"/>
         <source>The host has an incorrect address.</source>
         <translation>A gazdagép címe hibás.</translation>
     </message>
@@ -6222,37 +6429,37 @@ Importált hitelesítő adatok: %5</translation>
 <context>
     <name>RelayListModel</name>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="141"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="142"/>
         <source>Address</source>
         <translation>Cím</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="144"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="145"/>
         <source>Connect Time</source>
         <translation>Csatlakozás ideje</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="147"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="148"/>
         <source>Pool Size</source>
         <translation>Kulcskészlet mérete</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="150"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="151"/>
         <source>Version</source>
         <translation>Verzió</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="153"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="154"/>
         <source>Computer Name</source>
         <translation>Számítógép neve</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="156"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="157"/>
         <source>Architecture</source>
         <translation>Architektúra</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="159"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="160"/>
         <source>Operating System</source>
         <translation>Operációs rendszer</translation>
     </message>
@@ -6360,32 +6567,32 @@ Importált hitelesítő adatok: %5</translation>
         <translation>Elemek oldalanként:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_access_log_widget.cc" line="118"/>
+        <location filename="../client/desktop/management/router_access_log_widget.cc" line="119"/>
         <source>All Session Types</source>
         <translation>Összes munkamenet-típus</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_access_log_widget.cc" line="281"/>
+        <location filename="../client/desktop/management/router_access_log_widget.cc" line="282"/>
         <source>Save File</source>
         <translation>Fájl mentése</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_access_log_widget.cc" line="281"/>
+        <location filename="../client/desktop/management/router_access_log_widget.cc" line="282"/>
         <source>JSON files (*.json)</source>
         <translation>JSON-fájlok (*.json)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_access_log_widget.cc" line="292"/>
+        <location filename="../client/desktop/management/router_access_log_widget.cc" line="293"/>
         <source>Could not open file for writing.</source>
         <translation>Nem sikerült megnyitni a fájlt írásra.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_access_log_widget.cc" line="327"/>
+        <location filename="../client/desktop/management/router_access_log_widget.cc" line="328"/>
         <source>Unable to write file.</source>
         <translation>Nem lehet írni a fájlt.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_access_log_widget.cc" line="537"/>
+        <location filename="../client/desktop/management/router_access_log_widget.cc" line="538"/>
         <source>%n entry(s)</source>
         <translation>
             <numerusform>%n bejegyzés</numerusform>
@@ -6414,17 +6621,17 @@ Importált hitelesítő adatok: %5</translation>
 <context>
     <name>RouterClientsWidget</name>
     <message>
-        <location filename="../client/desktop/management/router_clients_widget.cc" line="226"/>
+        <location filename="../client/desktop/management/router_clients_widget.cc" line="227"/>
         <source>Save File</source>
         <translation>Fájl mentése</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_clients_widget.cc" line="226"/>
+        <location filename="../client/desktop/management/router_clients_widget.cc" line="227"/>
         <source>JSON files (*.json)</source>
         <translation>JSON-fájlok (*.json)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_clients_widget.cc" line="237"/>
+        <location filename="../client/desktop/management/router_clients_widget.cc" line="238"/>
         <source>Could not open file for writing.</source>
         <translation>Nem sikerült megnyitni a fájlt írásra.</translation>
     </message>
@@ -6776,11 +6983,21 @@ Importált hitelesítő adatok: %5</translation>
     </message>
     <message>
         <location filename="../common/desktop/router_error.cc" line="57"/>
+        <source>The user has active sessions. Disconnect them first or force the change.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../common/desktop/router_error.cc" line="60"/>
+        <source>Cannot remove or disable the last enabled user.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../common/desktop/router_error.cc" line="63"/>
         <source>Too many connection requests. Try again later.</source>
         <translation>Túl sok csatlakozási kérés. Próbálja újra később.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/router_error.cc" line="59"/>
+        <location filename="../common/desktop/router_error.cc" line="65"/>
         <source>Unknown error type.</source>
         <translation>Ismeretlen hibatípus.</translation>
     </message>
@@ -6871,6 +7088,352 @@ Importált hitelesítő adatok: %5</translation>
         <location filename="../client/desktop/management/router_group_widget.ui" line="97"/>
         <source>Items per page:</source>
         <translation>Elemek oldalanként:</translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostBulkConfigDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="53"/>
+        <source>Update configuration on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="65"/>
+        <source>Update server:</source>
+        <translation type="unfinished">Frissítési kiszolgáló:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="67"/>
+        <source>https://... (empty = default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="70"/>
+        <source>Public key:</source>
+        <translation type="unfinished">Nyilvános kulcs:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="72"/>
+        <source>32 bytes hex (empty = default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="75"/>
+        <source>Channel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="82"/>
+        <source>Auto-update:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="83"/>
+        <source>Enabled</source>
+        <translation type="unfinished">Engedélyezve</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="86"/>
+        <source>Check frequency:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="88"/>
+        <source>Once a day</source>
+        <translation type="unfinished">Naponta egyszer</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="89"/>
+        <source>Once a week</source>
+        <translation type="unfinished">Hetente egyszer</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="90"/>
+        <source>Once a month</source>
+        <translation type="unfinished">Havonta egyszer</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="95"/>
+        <source>Unchecked fields are left unchanged on every host. A checked field with an empty value resets it to the default.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="166"/>
+        <source>Invalid server URL.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="172"/>
+        <source>Invalid public key (must be 32 bytes hex).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="180"/>
+        <source>A public key without a server is not allowed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostBulkDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="43"/>
+        <source>Done</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="45"/>
+        <source>Skipped</source>
+        <translation type="unfinished">Kihagyva</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="47"/>
+        <source>Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="49"/>
+        <source>Offline</source>
+        <translation type="unfinished">Offline</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="51"/>
+        <source>Cancelled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="53"/>
+        <source>Running...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="189"/>
+        <source>Host</source>
+        <translation type="unfinished">Gazdagép</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="189"/>
+        <source>Planned action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="189"/>
+        <source>Result</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="189"/>
+        <source>Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="199"/>
+        <source>Details:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="211"/>
+        <source>Apply</source>
+        <translation type="unfinished">Alkalmaz</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="241"/>
+        <source>Pending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="261"/>
+        <source>Nothing to do.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="266"/>
+        <source>%n host(s) selected.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="271"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Mégse</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="300"/>
+        <source>Cancelling, waiting for the current host...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="321"/>
+        <source>%1 of %2 done.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="350"/>
+        <source>Done: %1, failed: %2, offline: %3, skipped: %4, cancelled: %5.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="352"/>
+        <source>Close</source>
+        <translation type="unfinished">Bezárás</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="387"/>
+        <source>Host: %1
+Planned: %2
+Result: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="389"/>
+        <source>
+Detail: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostBulkFullConfigDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="398"/>
+        <source>Full configuration on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="408"/>
+        <source>Warning: without the checkbox below, every host switches to the router, port and access settings from the file. Make sure the file comes from a host of this router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="416"/>
+        <source>Keep router connection, port and access settings (apply only system settings and users)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostBulkRemoveDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="449"/>
+        <source>Remove user from hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="455"/>
+        <source>User name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="458"/>
+        <source>Force (remove even with live sessions, last enabled user is still protected)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="492"/>
+        <source>Enter a user name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostConfigDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="63"/>
+        <source>Host update configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="69"/>
+        <source>https://... (empty = default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="70"/>
+        <source>Update server:</source>
+        <translation type="unfinished">Frissítési kiszolgáló:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="73"/>
+        <source>32 bytes hex (empty = default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="74"/>
+        <source>Public key:</source>
+        <translation type="unfinished">Nyilvános kulcs:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="80"/>
+        <source>Channel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="82"/>
+        <source>Auto-update enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="86"/>
+        <source>Once a day</source>
+        <translation type="unfinished">Naponta egyszer</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="87"/>
+        <source>Once a week</source>
+        <translation type="unfinished">Hetente egyszer</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="88"/>
+        <source>Once a month</source>
+        <translation type="unfinished">Havonta egyszer</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="90"/>
+        <source>Check frequency:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="92"/>
+        <source>Loading current settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="115"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="181"/>
+        <source>No session to router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="127"/>
+        <source>Failed to read telemetry: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="135"/>
+        <source>Telemetry is not JSON.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="153"/>
+        <source>Current settings loaded.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="161"/>
+        <source>Invalid server URL.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="166"/>
+        <source>Invalid public key (must be 32 bytes hex).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="205"/>
+        <source>Configuration applied successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="210"/>
+        <source>Failed to apply: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7025,6 +7588,181 @@ Importált hitelesítő adatok: %5</translation>
     </message>
 </context>
 <context>
+    <name>RouterHostUserDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="71"/>
+        <source>User Properties</source>
+        <translation type="unfinished">Felhasználó tulajdonságai</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="78"/>
+        <source>User Name:</source>
+        <translation type="unfinished">Felhasználónév:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="81"/>
+        <source>Password:</source>
+        <translation type="unfinished">Jelszó:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="84"/>
+        <source>Password (repeat):</source>
+        <translation type="unfinished">Jelszó (ismét):</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="86"/>
+        <source>Disable User Account</source>
+        <translation type="unfinished">Felhasználói fiók letiltása</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="92"/>
+        <source>Allowed Session Types:</source>
+        <translation type="unfinished">Engedélyezett munkamenet-típusok:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="96"/>
+        <source>Check all</source>
+        <translation type="unfinished">Összes bejelölése</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="97"/>
+        <source>Uncheck all</source>
+        <translation type="unfinished">Összes jelölés törlése</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="252"/>
+        <source>The user name can not be empty and can contain only alphabet characters, numbers and _, -, ., @ characters. It can not consist of digits only.</source>
+        <translation type="unfinished">A felhasználónév nem lehet üres, és csak betűket, számokat, valamint _, -, ., @ karaktereket tartalmazhat. Nem állhat csak számjegyekből.</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="269"/>
+        <source>The username you entered already exists.</source>
+        <translation type="unfinished">A megadott felhasználónév már létezik.</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="277"/>
+        <source>The passwords you entered do not match.</source>
+        <translation type="unfinished">A megadott jelszavak nem egyeznek.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="286"/>
+        <source>The password can not be shorter than %n characters.</source>
+        <translation type="unfinished">
+            <numerusform>A jelszó nem lehet rövidebb %n karakternél.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="288"/>
+        <source>The password can not be longer than %n characters.</source>
+        <translation type="unfinished">
+            <numerusform>A jelszó nem haladhatja meg a %n karaktert.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="300"/>
+        <source>Password you entered does not meet the security requirements!</source>
+        <translation type="unfinished">A megadott jelszó nem felel meg a biztonsági követelményeknek!</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="303"/>
+        <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
+        <translation type="unfinished">
+            <numerusform>A jelszónak tartalmaznia kell kisbetűket és nagybetűket, számokat, és nem lehet rövidebb %n karakternél.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="307"/>
+        <source>Do you want to enter a different password?</source>
+        <translation type="unfinished">Szeretne másik jelszót megadni?</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="310"/>
+        <source>Warning</source>
+        <translation type="unfinished">Figyelmeztetés</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="349"/>
+        <source>Double-click to change</source>
+        <translation type="unfinished">Módosításhoz kattintson duplán</translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostUsersDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="64"/>
+        <source>Host users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="73"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="190"/>
+        <source>Add</source>
+        <translation type="unfinished">Hozzáadás</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="74"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="242"/>
+        <source>Edit</source>
+        <translation type="unfinished">Szerkesztés</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="75"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="276"/>
+        <source>Remove</source>
+        <translation type="unfinished">Eltávolítás</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="76"/>
+        <source>Close</source>
+        <translation type="unfinished">Bezárás</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="105"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="182"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="234"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="268"/>
+        <source>No session to router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="121"/>
+        <source>Failed to get users: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="146"/>
+        <source> (disabled)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="164"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="223"/>
+        <source>Failed to create user credentials.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="201"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="253"/>
+        <source>Select a user first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="259"/>
+        <source>Remove user &quot;%1&quot;?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="286"/>
+        <source>%1: success.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="290"/>
+        <source>%1 failed: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RouterHostsWidget</name>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.ui" line="65"/>
@@ -7087,102 +7825,334 @@ Importált hitelesítő adatok: %5</translation>
         <translation>Elemek oldalanként:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="147"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="156"/>
         <source>All spaces</source>
         <translation>Összes tér</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="148"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="157"/>
         <source>Not in any space</source>
         <translation>Tér nélkül</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="367"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="376"/>
         <source>Are you sure you want to disconnect host &quot;%1&quot;?</source>
         <translation>Biztosan leválasztja a(z) &quot;%1&quot; gazdagépet?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="369"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="378"/>
         <source>Are you sure you want to disconnect %n hosts?</source>
         <translation>
             <numerusform>Biztosan leválaszt %n gazdagépet?</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="380"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="389"/>
         <source>Failed to disconnect %n of the selected hosts.</source>
         <translation>
             <numerusform>A kijelölt gazdagépek közül %n gazdagépet nem sikerült leválasztani.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="396"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="405"/>
         <source>Deleting a host will result in all its configuration for connecting to the router being deleted, and the application will be uninstalled on the host. This operation is irreversible. Are you sure you want to do this?</source>
         <translation>A gazdagép törlésével az útválasztóhoz való csatlakozás összes beállítása törlődik, és az alkalmazás el lesz távolítva a gazdagépről. Ez a művelet visszafordíthatatlan. Biztosan folytatja?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="401"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="410"/>
         <source>%n hosts will be deleted.</source>
         <translation>
             <numerusform>%n gazdagép törlődik.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="412"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="421"/>
         <source>Failed to remove %n of the selected hosts.</source>
         <translation>
             <numerusform>A kijelölt gazdagépek közül %n gazdagépet nem sikerült törölni.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="429"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="438"/>
         <source>Failed to check for updates on %n of the selected hosts.</source>
         <translation>
             <numerusform>A kijelölt gazdagépek közül %n gazdagépen nem sikerült frissítéseket keresni.</numerusform>
         </translation>
     </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="505"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1492"/>
+        <source>Open host configuration file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="506"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1494"/>
+        <source>JSON files (*.json);;All files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="513"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1501"/>
+        <source>Cannot open file: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="524"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1511"/>
+        <source>Invalid JSON: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="532"/>
+        <source>No session to router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="546"/>
+        <source>Configuration applied successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="548"/>
+        <source>Failed to apply: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="762"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="864"/>
         <source>%n host(s)</source>
         <translation>
             <numerusform>%n gazdagép</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="826"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="928"/>
         <source>Save File</source>
         <translation>Fájl mentése</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="826"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="928"/>
         <source>JSON files (*.json)</source>
         <translation>JSON-fájlok (*.json)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="837"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="939"/>
         <source>Could not open file for writing.</source>
         <translation>Nem sikerült megnyitni a fájlt írásra.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="884"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="986"/>
         <source>Unable to write file.</source>
         <translation>Nem lehet írni a fájlt.</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1067"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Mégse</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1161"/>
+        <source>Failed to create user credentials.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1185"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1264"/>
+        <source>Reading user lists...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1193"/>
+        <source>Add user &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1199"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1279"/>
+        <source>List unreadable (%1), will try anyway.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1221"/>
+        <source>Already exists, skipped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1237"/>
+        <source>Add user on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1273"/>
+        <source>Remove user &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1305"/>
+        <source>No such user, skipped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1312"/>
+        <source>Last enabled user, the host will refuse.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1334"/>
+        <source>Remove user from hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1355"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1373"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1374"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1376"/>
+        <source>(unknown)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1356"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1425"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1427"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1433"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1435"/>
+        <source>(default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1370"/>
+        <source>Hosts in run: %1. Channels: %2. Servers: %3. Auto-update on: %4 of %5. Frequencies (days): %6.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1397"/>
+        <source>No fields selected, nothing to do.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1414"/>
+        <source>Set selected fields (current settings unknown).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1424"/>
+        <source>server: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1432"/>
+        <source>public key: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1433"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1435"/>
+        <source>(set)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1440"/>
+        <source>channel: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1445"/>
+        <source>auto-update: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1446"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1447"/>
+        <source>on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1446"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1447"/>
+        <source>off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1452"/>
+        <source>frequency: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1459"/>
+        <source>No changes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1460"/>
+        <source>Already matching, skipped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1481"/>
+        <source>Update configuration on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1517"/>
+        <source>Not a host configuration file (no system/database sections).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1534"/>
+        <source>File: %1
+Sections: %2. Users in file: %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1536"/>
+        <source>(kept)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1565"/>
+        <source>Dry run on hosts...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1578"/>
+        <source>Apply full config (dry run %1, will try anyway).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1591"/>
+        <source>users: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1598"/>
+        <source>system: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1603"/>
+        <source>Apply full config (no visible diff).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1622"/>
+        <source>Full configuration on hosts</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RouterRelaysWidget</name>
     <message>
-        <location filename="../client/desktop/management/router_relays_widget.cc" line="238"/>
+        <location filename="../client/desktop/management/router_relays_widget.cc" line="239"/>
         <source>Save File</source>
         <translation>Fájl mentése</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_relays_widget.cc" line="238"/>
+        <location filename="../client/desktop/management/router_relays_widget.cc" line="239"/>
         <source>JSON files (*.json)</source>
         <translation>JSON-fájlok (*.json)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_relays_widget.cc" line="249"/>
+        <location filename="../client/desktop/management/router_relays_widget.cc" line="250"/>
         <source>Could not open file for writing.</source>
         <translation>Nem sikerült megnyitni a fájlt írásra.</translation>
     </message>
@@ -8439,37 +9409,37 @@ Importált hitelesítő adatok: %5</translation>
         <translation>Nem lehet olvasni a proxykiszolgáló beállításait.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="910"/>
+        <location filename="../client/desktop/settings_tab.cc" line="911"/>
         <source>The key of the database will be stored on this computer. Any program running under your account will be able to read it, even when the application is not running.</source>
         <translation>Az adatbázis kulcsa ezen a számítógépen lesz tárolva. Az Ön fiókja alatt futó bármely program elolvashatja, még akkor is, amikor az alkalmazás nem fut.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="913"/>
+        <location filename="../client/desktop/settings_tab.cc" line="914"/>
         <source>Do you want to continue?</source>
         <translation>Folytatja?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="924"/>
+        <location filename="../client/desktop/settings_tab.cc" line="925"/>
         <source>Unlock Automatically</source>
         <translation>Automatikus feloldás</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="926"/>
+        <location filename="../client/desktop/settings_tab.cc" line="927"/>
         <source>Enter the master password to unlock the application automatically on startup.</source>
         <translation>Adja meg a mesterjelszót az alkalmazás indításkori automatikus feloldásához.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="936"/>
+        <location filename="../client/desktop/settings_tab.cc" line="937"/>
         <source>Invalid master password.</source>
         <translation>Érvénytelen mesterjelszó.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="940"/>
+        <location filename="../client/desktop/settings_tab.cc" line="941"/>
         <source>Unable to unlock the database.</source>
         <translation>Nem lehet feloldani az adatbázist.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="954"/>
+        <location filename="../client/desktop/settings_tab.cc" line="955"/>
         <source>Unable to turn on the automatic unlock.</source>
         <translation>Nem lehet bekapcsolni az automatikus feloldást.</translation>
     </message>
@@ -9039,7 +10009,7 @@ Importált hitelesítő adatok: %5</translation>
     <name>StatisticsDialog</name>
     <message>
         <location filename="../client/desktop/desktop/statistics_dialog.ui" line="14"/>
-        <location filename="../client/android/statistics_dialog.cc" line="177"/>
+        <location filename="../client/android/statistics_dialog.cc" line="192"/>
         <source>Statistics</source>
         <translation>Statisztika</translation>
     </message>
@@ -9054,7 +10024,7 @@ Importált hitelesítő adatok: %5</translation>
         <translation>Érték</translation>
     </message>
     <message>
-        <location filename="../client/android/statistics_dialog.cc" line="214"/>
+        <location filename="../client/android/statistics_dialog.cc" line="229"/>
         <source>Close</source>
         <translation>Bezárás</translation>
     </message>
@@ -9062,9 +10032,24 @@ Importált hitelesítő adatok: %5</translation>
 <context>
     <name>StatusOverlay</name>
     <message>
-        <location filename="../client/desktop/status_overlay.cc" line="46"/>
+        <location filename="../client/desktop/status_overlay.cc" line="51"/>
         <source>Close</source>
         <translation>Bezárás</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="54"/>
+        <source>Reconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="140"/>
+        <source>Retry in: %1 s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="141"/>
+        <source>Time left: %1 s</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13430,7 +14415,7 @@ Importált hitelesítő adatok: %5</translation>
         <translation>Frissítés</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="374"/>
+        <location filename="../common/desktop/update_dialog.cc" line="407"/>
         <source>Checking for updates</source>
         <translation>Frissítések keresése</translation>
     </message>
@@ -13465,85 +14450,85 @@ Importált hitelesítő adatok: %5</translation>
         <translation>Frissítés most!</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="379"/>
+        <location filename="../common/desktop/update_dialog.cc" line="412"/>
         <source>Close</source>
         <translation>Bezárás</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="72"/>
+        <location filename="../common/desktop/update_dialog.cc" line="74"/>
         <source>Receiving information...</source>
         <translation>Információk fogadása...</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="158"/>
+        <location filename="../common/desktop/update_dialog.cc" line="160"/>
         <source>Install the update yourself: %1</source>
         <translation>Telepítse a frissítést kézzel: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="164"/>
+        <location filename="../common/desktop/update_dialog.cc" line="166"/>
         <source>An update will be downloaded. After the download is complete, the application will automatically close.</source>
         <translation>A frissítés letöltésre kerül. A letöltés befejezése után az alkalmazás automatikusan bezárul.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="166"/>
+        <location filename="../common/desktop/update_dialog.cc" line="168"/>
         <source>All connected sessions will be terminated. You cannot establish a connection until the update is complete.</source>
         <translation>Minden csatlakoztatott munkamenet megszakad. A frissítés befejezéséig nem létesíthet kapcsolatot.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="168"/>
+        <location filename="../common/desktop/update_dialog.cc" line="170"/>
         <source>All unsaved data will be lost.</source>
         <translation>Minden nem mentett adat elvész.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="169"/>
+        <location filename="../common/desktop/update_dialog.cc" line="171"/>
         <source>Continue?</source>
         <translation>Folytatja?</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="199"/>
-        <location filename="../common/desktop/update_dialog.cc" line="220"/>
-        <location filename="../common/desktop/update_dialog.cc" line="245"/>
-        <location filename="../common/desktop/update_dialog.cc" line="341"/>
+        <location filename="../common/desktop/update_dialog.cc" line="201"/>
+        <location filename="../common/desktop/update_dialog.cc" line="222"/>
+        <location filename="../common/desktop/update_dialog.cc" line="250"/>
+        <location filename="../common/desktop/update_dialog.cc" line="349"/>
         <source>An error occurred while installing the update.</source>
         <translation>Hiba történt a frissítés telepítése közben.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="314"/>
+        <location filename="../common/desktop/update_dialog.cc" line="319"/>
         <source>An error occurred while downloading the update: %1</source>
         <translation>Hiba történt a frissítés letöltése közben: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="339"/>
+        <location filename="../common/desktop/update_dialog.cc" line="347"/>
         <source>The downloaded file is damaged.</source>
         <translation>A letöltött fájl sérült.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="374"/>
+        <location filename="../common/desktop/update_dialog.cc" line="407"/>
         <source>Downloading the update</source>
         <translation>Frissítés letöltése</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="379"/>
+        <location filename="../common/desktop/update_dialog.cc" line="412"/>
         <source>Cancel</source>
         <translation>Mégse</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="291"/>
+        <location filename="../common/desktop/update_dialog.cc" line="296"/>
         <source>Unknown</source>
         <translation>Ismeretlen</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="292"/>
+        <location filename="../common/desktop/update_dialog.cc" line="297"/>
         <source>Error retrieving update information.</source>
         <translation>Hiba a frissítési információk lekérésekor.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="349"/>
+        <location filename="../common/desktop/update_dialog.cc" line="382"/>
         <source>Installing the update. Please wait.</source>
         <translation>Frissítés telepítése. Kérjük, várjon.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="267"/>
+        <location filename="../common/desktop/update_dialog.cc" line="272"/>
         <source>No updates available.</source>
         <translation>Nincs elérhető frissítés.</translation>
     </message>
@@ -14028,17 +15013,17 @@ Importált hitelesítő adatok: %5</translation>
 <context>
     <name>VideoWorker</name>
     <message>
-        <location filename="../client/workers/video_worker.cc" line="45"/>
+        <location filename="../client/workers/video_worker.cc" line="44"/>
         <source>Unable to create the directory for the recording.</source>
         <translation>Nem lehet létrehozni a felvétel könyvtárát.</translation>
     </message>
     <message>
-        <location filename="../client/workers/video_worker.cc" line="47"/>
+        <location filename="../client/workers/video_worker.cc" line="46"/>
         <source>Unable to create the file for the recording.</source>
         <translation>Nem lehet létrehozni a felvétel fájlját.</translation>
     </message>
     <message>
-        <location filename="../client/workers/video_worker.cc" line="49"/>
+        <location filename="../client/workers/video_worker.cc" line="48"/>
         <source>An error occurred while writing the recording.</source>
         <translation>Hiba történt a felvétel írása közben.</translation>
     </message>
