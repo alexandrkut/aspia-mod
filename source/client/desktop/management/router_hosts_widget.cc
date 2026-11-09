@@ -24,6 +24,8 @@
 #include <QDataStream>
 #include <QDateTime>
 #include <QEvent>
+#include <QFileDialog>
+#include <QFile>
 #include <QHeaderView>
 #include <QIODevice>
 #include <QJsonArray>
@@ -33,6 +35,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QMenu>
+#include <QProgressDialog>
 #include <QMouseEvent>
 #include <QRegularExpressionValidator>
 #include <QSaveFile>

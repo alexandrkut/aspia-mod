@@ -26,7 +26,6 @@
 #include "base/build_config.h"
 #include "base/crypto/secure_string.h"
 #include "base/net/address.h"
-#include "client/host_url.h"
 
 namespace {
 
@@ -228,7 +227,7 @@ bool ConnectRequest::parse(const QStringList& arguments, ConnectRequest* request
         }
 
         // What is left is a link or a bare identifier. A link wins: it names a host of its own.
-        if (HostUrl::isHostUrl(argument))
+        if (argument.startsWith(u"aspia://", Qt::CaseInsensitive))
         {
             start_url = argument;
             continue;
@@ -342,4 +341,4 @@ proto::peer::SessionType ConnectRequest::sessionTypeFromName(const QString& name
     }
 
     return proto::peer::SESSION_TYPE_UNKNOWN;
-}
+}

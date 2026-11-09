@@ -97,13 +97,7 @@ QString dialogText(const QDialog* dialog)
     return message_box ? message_box->text() : dialog->windowTitle();
 }
 
-void MainWindow::connectToLocalHost(const QString& identifier, int session_type, const QString& username,
-                                    const QString& password)
-{
-    LOG(INFO) << "Connect to host requested:" << identifier << session_type
-              << (username.isEmpty() ? "credentials of the record" : "credentials given");
-    Q_UNUSED(password);
-}
+} // namespace
 
 //--------------------------------------------------------------------------------------------------
 MainWindow::MainWindow(QWidget* parent)
@@ -1352,4 +1346,13 @@ QMenu* MainWindow::menuForActionGroup(Tab::ActionRole group) const
         default:
             return nullptr;
     }
+}
+
+//--------------------------------------------------------------------------------------------------
+void MainWindow::connectToLocalHost(const QString& identifier, int session_type, const QString& username,
+                                    const QString& password)
+{
+    LOG(INFO) << "Connect to host requested:" << identifier << session_type
+              << (username.isEmpty() ? "credentials of the record" : "credentials given");
+    Q_UNUSED(password);
 }
