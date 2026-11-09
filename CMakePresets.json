@@ -66,20 +66,6 @@
       }
     },
     {
-      "name": "local-linux-x64-router",
-      "inherits": [
-        "base"
-      ],
-      "cacheVariables": {
-        "VCPKG_TARGET_TRIPLET": "x64-linux",
-        "ASPIA_ROUTER_ONLY": "ON",
-        "VCPKG_MANIFEST_DIR": "${sourceDir}/router-manifest"
-      },
-      "environment": {
-        "VCPKG_TRIPLET": "x64-linux"
-      }
-    },
-    {
       "name": "local-linux-arm64",
       "inherits": [
         "base"
