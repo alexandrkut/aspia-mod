@@ -74,10 +74,24 @@ done
 #--------------------------------------------------------------------------------------------------
 # Version and architecture.
 #--------------------------------------------------------------------------------------------------
-version_part() { sed -n "s/^set(ASPIA_VERSION_$1 \([0-9][0-9]*\))/\1/p" "$SOURCE_ROOT/CMakeLists.txt"; }
+version_part() { sed -n "s/^set(ASPIA_VERSION_$1 \([^)]*\))/\1/p" "$SOURCE_ROOT/CMakeLists.txt" | tr -d '\r'; }
 
-VERSION="$(version_part MAJOR).$(version_part MINOR).$(version_part PATCH)"
+# The version of the package is the version of the program: the three numbers of the sources
+# and the number of the build of this line of the versions, which is the fourth number of the
+# version the program shows in the window "About". The package of the same version replaces
+# the old one, so the number is raised by hand with every release.
+VERSION="$(version_part MAJOR).$(version_part MINOR).$(version_part PATCH).$(version_part BUILD)"
+
+# The mark of a modified build goes into the version of the package, so that it is seen in the
+# list of the installed packages. The version of the binary carries it too.
+VERSION_SUFFIX="$(version_part SUFFIX)"
+VERSION_SUFFIX="${VERSION_SUFFIX//\"/}"
 [ "$VERSION" != ".." ] || die "no version in $SOURCE_ROOT/CMakeLists.txt"
+
+# The version of a Debian package is the version of the program and the revision of the package,
+# and the two are separated by a hyphen. The mark of a modified build is the revision here: it
+# is a part of the version, and the version of the package is newer than the one without it.
+DEB_VERSION="$VERSION$VERSION_SUFFIX"
 
 MACHINE="$(uname -m)"
 case "$MACHINE" in
@@ -177,6 +191,7 @@ deb_depends()
             libgcc_s.so.1)  package="libgcc-s1 | libgcc1" ;;
             libdbus-1.so.3) package="libdbus-1-3" ;;
             libpam.so.0)    package="libpam0g" ;;
+            libsystemd.so.0) package="libsystemd0" ;;
             libm.so.6|librt.so.1|libpthread.so.0|libdl.so.2|libutil.so.1|ld-linux-*) continue ;;
             *) die "no Debian package known for $soname, add it to deb_depends" ;;
         esac
@@ -196,7 +211,7 @@ build_deb()
     local component="$1"
     local name="aspia-$component"
     local root="$WORK_DIR/deb/$component"
-    local output="$OUTPUT_DIR/$name-$VERSION-$MACHINE.deb"
+    local output="$OUTPUT_DIR/$name-$VERSION$VERSION_SUFFIX-$MACHINE.deb"
     local script
 
     stage_payload "$component" "$root"
@@ -212,7 +227,7 @@ build_deb()
 
     cat > "$root/DEBIAN/control" <<CONTROL
 Package: $name
-Version: $VERSION
+Version: $DEB_VERSION
 Architecture: $DEB_ARCH
 Maintainer: $MAINTAINER
 Homepage: $HOMEPAGE
@@ -252,13 +267,16 @@ build_rpm()
     local spec="$WORK_DIR/$name.spec"
     local top="$WORK_DIR/rpmbuild"
     local log="$WORK_DIR/$name-rpmbuild.log"
-    local output="$OUTPUT_DIR/$name-$VERSION-$MACHINE.rpm"
+    local output="$OUTPUT_DIR/$name-$VERSION$VERSION_SUFFIX-$MACHINE.rpm"
     local dir
 
     stage_payload "$component" "$root"
 
     {
         echo "Name:      $name"
+        # The version of an RPM package cannot carry the mark of a modified build: a hyphen
+        # separates the version from the release there, and is not allowed in either of them.
+        # The mark of the mod is in the name of the file then.
         echo "Version:   $VERSION"
         echo "Release:   1"
         echo "Summary:   $(summary_of "$component")"
@@ -324,7 +342,12 @@ for component in "${COMPONENTS[@]}"; do
 
     # The version of the binary is what the package claims to hold, so a build left over from an
     # earlier version is not packaged under the current one.
-    built="$(grep -ao "$VERSION\.[0-9][0-9]*" "$binary" | head -1 || true)"
+    built="$(grep -aoE "${VERSION//./\\.}\.[0-9]+${VERSION_SUFFIX}" "$binary" | head -1 || true)"
+
+    if [ -z "$built" ]; then
+        built="$(grep -aoF "${VERSION}${VERSION_SUFFIX}" "$binary" | head -1 || true)"
+    fi
+
     [ -n "$built" ] || die "$binary does not carry version $VERSION"
 
     echo "$component $built"

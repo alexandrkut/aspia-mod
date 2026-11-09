@@ -52,6 +52,20 @@
       }
     },
     {
+      "name": "local-linux-x64-router",
+      "inherits": [
+        "base"
+      ],
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-linux",
+        "ASPIA_ROUTER_ONLY": "ON",
+        "VCPKG_MANIFEST_DIR": "${sourceDir}/router-manifest"
+      },
+      "environment": {
+        "VCPKG_TRIPLET": "x64-linux"
+      }
+    },
+    {
       "name": "local-linux-arm64",
       "inherits": [
         "base"
@@ -227,6 +241,16 @@
   ],
   "buildPresets": [
     {
+      "name": "local-linux-x64",
+      "configurePreset": "local-linux-x64",
+      "configuration": "Release"
+    },
+    {
+      "name": "local-linux-x64-router",
+      "configurePreset": "local-linux-x64-router",
+      "configuration": "Release"
+    },
+    {
       "name": "ci-release",
       "configurePreset": "ci",
       "configuration": "Release"
@@ -253,12 +277,12 @@
   ],
   "testPresets": [
     {
-      "name": "ci-release", 
+      "name": "ci-release",
       "configurePreset": "ci",
       "configuration": "Release"
     },
     {
-      "name": "ci-debug", 
+      "name": "ci-debug",
       "configurePreset": "ci",
       "configuration": "Debug"
     }

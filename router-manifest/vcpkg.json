@@ -1,0 +1,58 @@
+{
+  "name": "aspia-router",
+  "version-string": "latest",
+  "dependencies": [
+    "asio",
+    {
+      "name": "curl",
+      "default-features": false,
+      "features": [
+        "openssl",
+        {
+          "name": "sspi",
+          "platform": "windows & !uwp"
+        }
+      ]
+    },
+    {
+      "name": "dbus",
+      "default-features": false,
+      "platform": "linux"
+    },
+    {
+      "name": "icu",
+      "platform": "linux | osx"
+    },
+    "openssl",
+    "protobuf",
+    "sqlite3",
+    {
+      "name": "sqlite3",
+      "features": [
+        "unicode"
+      ],
+      "platform": "linux | osx"
+    },
+    "zstd",
+    {
+      "name": "qtbase",
+      "platform": "!android",
+      "default-features": false,
+      "features": [
+        "doubleconversion",
+        "network",
+        "pcre2",
+        "thread",
+        "zstd",
+        {
+          "name": "dbus",
+          "platform": "linux"
+        },
+        {
+          "name": "icu",
+          "platform": "linux | osx"
+        }
+      ]
+    }
+  ]
+}
