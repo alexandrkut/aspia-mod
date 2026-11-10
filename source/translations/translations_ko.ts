@@ -2724,7 +2724,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="233"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1022"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1036"/>
         <source>Scale</source>
         <translation>배율</translation>
     </message>
@@ -2814,7 +2814,7 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="435"/>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="438"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="610"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="624"/>
         <source>Start recording</source>
         <translation>녹화 시작</translation>
     </message>
@@ -2836,69 +2836,75 @@ Credentials replaced: %2</source>
         <translation>세션 전환</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="397"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="100"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="104"/>
+        <source>View only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="411"/>
         <source>Resolution selection</source>
         <translation>해상도 선택</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="510"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="524"/>
         <source>Scripts</source>
         <translation>스크립트</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="573"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="587"/>
         <source>Are you sure you want to run &quot;%1&quot; on the remote computer?</source>
         <translation>원격 컴퓨터에서 &quot;%1&quot; 스크립트를 실행하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="605"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="619"/>
         <source>Stop recording</source>
         <translation>녹화 중지</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="837"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="851"/>
         <source>Are you sure you want to shutdown the remote computer?</source>
         <translation>원격 컴퓨터를 종료하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="852"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="885"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="866"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="899"/>
         <source>Confirmation</source>
         <translation>확인</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="853"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="867"/>
         <source>Are you sure you want to reboot the remote computer?</source>
         <translation>원격 컴퓨터를 다시 시작하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="861"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="894"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="875"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="908"/>
         <source>Wait for host</source>
         <translation>호스트 대기</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="886"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="900"/>
         <source>Are you sure you want to reboot the remote computer in Safe Mode?</source>
         <translation>원격 컴퓨터를 안전 모드로 다시 시작하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="918"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="932"/>
         <source>Are you sure you want to end the user session on the remote computer?</source>
         <translation>원격 컴퓨터의 사용자 세션을 끝내시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="933"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="947"/>
         <source>Are you sure you want to lock the user session on the remote computer?</source>
         <translation>원격 컴퓨터의 사용자 세션을 잠그시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1197"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1211"/>
         <source>Session %1</source>
         <translation>세션 %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1197"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1211"/>
         <source>Session %1 (%2)</source>
         <translation>세션 %1 (%2)</translation>
     </message>
@@ -3090,37 +3096,37 @@ Credentials replaced: %2</source>
         <translation>예</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1149"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1160"/>
         <source>Save File</source>
         <translation>파일 저장</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1150"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1161"/>
         <source>PNG Image (*.png);;BMP Image (*.bmp)</source>
         <translation>PNG 이미지 (*.png);;BMP 이미지 (*.bmp)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1181"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1192"/>
         <source>Could not save image</source>
         <translation>이미지를 저장할 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1434"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1448"/>
         <source>Invalid user name or password.</source>
         <translation>사용자 이름 또는 암호가 잘못되었습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1437"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1451"/>
         <source>The password has expired.</source>
         <translation>암호가 만료되었습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1440"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1454"/>
         <source>The account is locked out.</source>
         <translation>계정이 잠겨 있습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1443"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1457"/>
         <source>The account is disabled.</source>
         <translation>계정이 사용 안 함 상태입니다.</translation>
     </message>
@@ -4141,9 +4147,9 @@ Credentials replaced: %2</source>
     <name>HostWindow</name>
     <message>
         <location filename="../host/ui/host_window.ui" line="26"/>
-        <location filename="../host/ui/host_window.cc" line="645"/>
-        <location filename="../host/ui/host_window.cc" line="898"/>
-        <location filename="../host/ui/host_window.cc" line="1176"/>
+        <location filename="../host/ui/host_window.cc" line="663"/>
+        <location filename="../host/ui/host_window.cc" line="916"/>
+        <location filename="../host/ui/host_window.cc" line="1194"/>
         <source>Aspia Host</source>
         <translation>Aspia 호스트</translation>
     </message>
@@ -4159,7 +4165,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="198"/>
-        <location filename="../host/ui/host_window.cc" line="1128"/>
+        <location filename="../host/ui/host_window.cc" line="1146"/>
         <source>Router is disabled</source>
         <translation>라우터 사용 안 함</translation>
     </message>
@@ -4230,7 +4236,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="335"/>
-        <location filename="../host/ui/host_window.cc" line="851"/>
+        <location filename="../host/ui/host_window.cc" line="869"/>
         <source>Hide</source>
         <translation>숨기기</translation>
     </message>
@@ -4271,84 +4277,84 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../host/ui/host_window.cc" line="181"/>
-        <location filename="../host/ui/host_window.cc" line="645"/>
-        <location filename="../host/ui/host_window.cc" line="1176"/>
+        <location filename="../host/ui/host_window.cc" line="663"/>
+        <location filename="../host/ui/host_window.cc" line="1194"/>
         <source>Aspia Quick Support</source>
         <translation>Aspia 빠른 지원</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.cc" line="340"/>
-        <location filename="../host/ui/host_window.cc" line="846"/>
+        <location filename="../host/ui/host_window.cc" line="864"/>
         <source>Show</source>
         <translation>표시</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="634"/>
+        <location filename="../host/ui/host_window.cc" line="652"/>
         <source>Screen recording has started.</source>
         <translation>화면 녹화가 시작되었습니다.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="636"/>
+        <location filename="../host/ui/host_window.cc" line="654"/>
         <source>Screen recording stopped.</source>
         <translation>화면 녹화가 중지되었습니다.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="835"/>
+        <location filename="../host/ui/host_window.cc" line="853"/>
         <source>Settings storage is unavailable.</source>
         <translation>설정 저장소를 사용할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="894"/>
+        <location filename="../host/ui/host_window.cc" line="912"/>
         <source>The ability to show several monitors at once</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="895"/>
+        <location filename="../host/ui/host_window.cc" line="913"/>
         <source>Remote management of settings and users by the router administrator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="909"/>
+        <location filename="../host/ui/host_window.cc" line="927"/>
         <source>Aspia Host will be removed from this computer. The settings of the host will be kept. Do you really want to uninstall the application?</source>
         <translation>Aspia 호스트가 이 컴퓨터에서 제거됩니다. 호스트의 설정은 유지됩니다. 응용 프로그램을 제거하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="921"/>
+        <location filename="../host/ui/host_window.cc" line="939"/>
         <source>Unable to uninstall the application.</source>
         <translation>응용 프로그램을 제거할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="948"/>
+        <location filename="../host/ui/host_window.cc" line="966"/>
         <source>If you exit from Aspia, it will not be possible to connect to this computer until you turn on the computer or Aspia again manually. Do you really want to exit the application?</source>
         <translation>Aspia를 끝내면 컴퓨터 또는 Aspia를 다시 수동으로 켤 때까지 이 컴퓨터에 연결할 수 없습니다. 응용 프로그램을 끝내시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1120"/>
+        <location filename="../host/ui/host_window.cc" line="1138"/>
         <source>Not connected to service</source>
         <translation>서비스에 연결되지 않음</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1133"/>
+        <location filename="../host/ui/host_window.cc" line="1151"/>
         <source>Connecting to router...</source>
         <translation>라우터에 연결하는 중...</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1138"/>
+        <location filename="../host/ui/host_window.cc" line="1156"/>
         <source>Connected to router</source>
         <translation>라우터에 연결됨</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1143"/>
+        <location filename="../host/ui/host_window.cc" line="1161"/>
         <source>Connection error</source>
         <translation>연결 오류</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1221"/>
+        <location filename="../host/ui/host_window.cc" line="1239"/>
         <source>IP addresses:</source>
         <translation>IP 주소:</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1177"/>
+        <location filename="../host/ui/host_window.cc" line="1195"/>
         <source>ID: %1</source>
         <translation>ID: %1</translation>
     </message>
@@ -5180,32 +5186,32 @@ Credentials imported: %5</source>
         <translation>호스트 속성에 ID로 연결하도록 지정되어 있지만 라우터가 구성되지 않았습니다. 호스트 속성에서 라우터 설정을 확인하십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="914"/>
+        <location filename="../client/desktop/main_window.cc" line="927"/>
         <source>Unknown application</source>
         <translation>알 수 없는 응용 프로그램</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="917"/>
+        <location filename="../client/desktop/main_window.cc" line="930"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>MCP 커넥터. 연결됨: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="918"/>
+        <location filename="../client/desktop/main_window.cc" line="931"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - AI 연결됨</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1394"/>
+        <location filename="../client/desktop/main_window.cc" line="1407"/>
         <source>A host named by its address has no record of it in the address book, and there are no stored credentials to use. Give the user name and the password with --username and --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1656"/>
+        <location filename="../client/desktop/main_window.cc" line="1669"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1662"/>
+        <location filename="../client/desktop/main_window.cc" line="1675"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5269,7 +5275,7 @@ Credentials imported: %5</source>
     </message>
     <message>
         <location filename="../client/desktop/management_tab.ui" line="137"/>
-        <location filename="../client/desktop/management_tab.cc" line="2093"/>
+        <location filename="../client/desktop/management_tab.cc" line="2110"/>
         <source>Delete Host</source>
         <translation>호스트 삭제</translation>
     </message>
@@ -5406,133 +5412,133 @@ Credentials imported: %5</source>
         <translation>상태 자동 새로 고침</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1104"/>
-        <location filename="../client/desktop/management_tab.cc" line="1181"/>
-        <location filename="../client/desktop/management_tab.cc" line="2313"/>
+        <location filename="../client/desktop/management_tab.cc" line="1105"/>
+        <location filename="../client/desktop/management_tab.cc" line="1182"/>
+        <location filename="../client/desktop/management_tab.cc" line="2330"/>
         <source>Failed to retrieve host information from the local database.</source>
         <translation>로컬 데이터베이스에서 호스트 정보를 가져오지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1136"/>
+        <location filename="../client/desktop/management_tab.cc" line="1137"/>
         <source>(copy)</source>
         <translation>(복사본)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1141"/>
+        <location filename="../client/desktop/management_tab.cc" line="1142"/>
         <source>Failed to add the host to the local database.</source>
         <translation>로컬 데이터베이스에 호스트를 추가하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1199"/>
+        <location filename="../client/desktop/management_tab.cc" line="1200"/>
         <source>Are you sure you want to delete host &quot;%1&quot;?</source>
         <translation>&quot;%1&quot; 호스트를 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1227"/>
+        <location filename="../client/desktop/management_tab.cc" line="1228"/>
         <source>Unable to remove host</source>
         <translation>호스트를 제거할 수 없음</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1342"/>
-        <location filename="../client/desktop/management_tab.cc" line="1419"/>
-        <location filename="../client/desktop/management_tab.cc" line="1452"/>
-        <location filename="../client/desktop/management_tab.cc" line="1475"/>
+        <location filename="../client/desktop/management_tab.cc" line="1359"/>
+        <location filename="../client/desktop/management_tab.cc" line="1436"/>
+        <location filename="../client/desktop/management_tab.cc" line="1469"/>
+        <location filename="../client/desktop/management_tab.cc" line="1492"/>
         <source>Copy Row</source>
         <translation>행 복사</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1343"/>
-        <location filename="../client/desktop/management_tab.cc" line="1420"/>
-        <location filename="../client/desktop/management_tab.cc" line="1453"/>
-        <location filename="../client/desktop/management_tab.cc" line="1476"/>
+        <location filename="../client/desktop/management_tab.cc" line="1360"/>
+        <location filename="../client/desktop/management_tab.cc" line="1437"/>
+        <location filename="../client/desktop/management_tab.cc" line="1470"/>
+        <location filename="../client/desktop/management_tab.cc" line="1493"/>
         <source>Copy Value</source>
         <translation>값 복사</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1718"/>
+        <location filename="../client/desktop/management_tab.cc" line="1735"/>
         <source>Failed to delete the group.</source>
         <translation>그룹을 삭제하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1757"/>
-        <location filename="../client/desktop/management_tab.cc" line="1814"/>
+        <location filename="../client/desktop/management_tab.cc" line="1774"/>
+        <location filename="../client/desktop/management_tab.cc" line="1831"/>
         <source>The database is not available.</source>
         <translation>데이터베이스를 사용할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1763"/>
+        <location filename="../client/desktop/management_tab.cc" line="1780"/>
         <source>Create Backup</source>
         <translation>백업 만들기</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1780"/>
+        <location filename="../client/desktop/management_tab.cc" line="1797"/>
         <source>There is nothing to save.</source>
         <translation>저장할 항목이 없습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2308"/>
+        <location filename="../client/desktop/management_tab.cc" line="2325"/>
         <source>The data of the host is damaged. Edit the host and enter it again.</source>
         <translation>호스트의 데이터가 손상되었습니다. 호스트를 편집하여 다시 입력하십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2329"/>
+        <location filename="../client/desktop/management_tab.cc" line="2346"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>라우터의 데이터가 손상되었습니다. 라우터를 편집하여 다시 입력하십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1792"/>
+        <location filename="../client/desktop/management_tab.cc" line="1809"/>
         <source>Failed to create the backup.</source>
         <translation>백업을 만들지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1820"/>
-        <location filename="../client/desktop/management_tab.cc" line="1846"/>
+        <location filename="../client/desktop/management_tab.cc" line="1837"/>
+        <location filename="../client/desktop/management_tab.cc" line="1863"/>
         <source>Restore from Backup</source>
         <translation>백업에서 복원</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1829"/>
+        <location filename="../client/desktop/management_tab.cc" line="1846"/>
         <source>Everything stored now is deleted and replaced with what the backup holds. Continue?</source>
         <translation>현재 저장된 모든 내용이 삭제되고 백업에 있는 내용으로 바뀝니다. 계속하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1848"/>
+        <location filename="../client/desktop/management_tab.cc" line="1865"/>
         <source>The backup was made on another installation. Enter the master password used there.</source>
         <translation>백업이 다른 설치본에서 만들어졌습니다. 해당 설치본의 마스터 암호를 입력하십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1873"/>
+        <location filename="../client/desktop/management_tab.cc" line="1890"/>
         <source>The backup carries no data, so nothing was changed.</source>
         <translation>백업에 데이터가 없으므로 아무것도 변경되지 않았습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1881"/>
+        <location filename="../client/desktop/management_tab.cc" line="1898"/>
         <source>The file is not a valid backup.</source>
         <translation>파일이 올바른 백업이 아닙니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1885"/>
+        <location filename="../client/desktop/management_tab.cc" line="1902"/>
         <source>Failed to restore from the backup.</source>
         <translation>백업에서 복원하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1764"/>
-        <location filename="../client/desktop/management_tab.cc" line="1821"/>
+        <location filename="../client/desktop/management_tab.cc" line="1781"/>
+        <location filename="../client/desktop/management_tab.cc" line="1838"/>
         <source>Aspia Backup (*.aspia-backup);;All files (*)</source>
         <translation>Aspia 백업 (*.aspia-backup);;모든 파일 (*)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1784"/>
+        <location filename="../client/desktop/management_tab.cc" line="1801"/>
         <source>Unable to write the file.</source>
         <translation>파일을 쓸 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1877"/>
+        <location filename="../client/desktop/management_tab.cc" line="1894"/>
         <source>Unable to read the file.</source>
         <translation>파일을 읽을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1797"/>
+        <location filename="../client/desktop/management_tab.cc" line="1814"/>
         <source>Export completed successfully.
 Routers exported: %1
 Groups exported: %2
@@ -5547,91 +5553,96 @@ Credentials exported: %5</source>
 내보낸 자격 증명: %5</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="935"/>
+        <location filename="../client/desktop/management_tab.cc" line="936"/>
         <source>The &quot;%1&quot; session type is not available for Quick Support.</source>
         <translation>&quot;%1&quot; 세션 유형은 빠른 지원에서 사용할 수 없습니다.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management_tab.cc" line="1201"/>
+        <location filename="../client/desktop/management_tab.cc" line="1202"/>
         <source>Are you sure you want to delete %n hosts?</source>
         <translation>
             <numerusform>호스트 %n개를 삭제하시겠습니까?</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management_tab.cc" line="1229"/>
+        <location filename="../client/desktop/management_tab.cc" line="1230"/>
         <source>Failed to delete %n of the selected hosts.</source>
         <translation>
             <numerusform>선택한 호스트 중 %n개를 삭제하지 못했습니다.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1279"/>
+        <location filename="../client/desktop/management_tab.cc" line="1280"/>
         <source>Host update configuration...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1285"/>
+        <location filename="../client/desktop/management_tab.cc" line="1286"/>
         <source>Host users...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1291"/>
+        <location filename="../client/desktop/management_tab.cc" line="1292"/>
         <source>Host full configuration (from file)...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1302"/>
+        <location filename="../client/desktop/management_tab.cc" line="1303"/>
         <source>Bulk add user...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1308"/>
+        <location filename="../client/desktop/management_tab.cc" line="1309"/>
         <source>Bulk remove user...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1314"/>
+        <location filename="../client/desktop/management_tab.cc" line="1315"/>
         <source>Bulk update configuration...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1320"/>
+        <location filename="../client/desktop/management_tab.cc" line="1321"/>
         <source>Bulk full configuration (from file)...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1578"/>
+        <location filename="../client/desktop/management_tab.cc" line="1347"/>
+        <source>Connect for viewing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1595"/>
         <source>Are you sure you want to delete space &quot;%1&quot;?</source>
         <translation>&quot;%1&quot; 스페이스를 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1598"/>
+        <location filename="../client/desktop/management_tab.cc" line="1615"/>
         <source>Failed to delete the space.</source>
         <translation>스페이스를 삭제하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1700"/>
+        <location filename="../client/desktop/management_tab.cc" line="1717"/>
         <source>Are you sure you want to delete the group &quot;%1&quot;? Hosts assigned to this group or its subgroups will be moved to the space root.</source>
         <translation>&quot;%1&quot; 그룹을 삭제하시겠습니까? 이 그룹 또는 하위 그룹에 할당된 호스트는 스페이스 루트로 이동됩니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1788"/>
+        <location filename="../client/desktop/management_tab.cc" line="1805"/>
         <source>Some records of the database are damaged. Fix or delete them and try again.</source>
         <translation>데이터베이스의 일부 레코드가 손상되었습니다. 해당 레코드를 수정하거나 삭제한 후 다시 시도하십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1865"/>
+        <location filename="../client/desktop/management_tab.cc" line="1882"/>
         <source>Unable to decrypt the file with the specified password.</source>
         <translation>지정한 암호로 파일의 암호를 해독할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1869"/>
+        <location filename="../client/desktop/management_tab.cc" line="1886"/>
         <source>Unsupported file format version.</source>
         <translation>지원되지 않는 파일 형식 버전입니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1890"/>
+        <location filename="../client/desktop/management_tab.cc" line="1907"/>
         <source>Import completed successfully.
 Routers imported: %1
 Groups imported: %2
@@ -5646,22 +5657,22 @@ Credentials imported: %5</source>
 가져온 자격 증명: %5</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2152"/>
+        <location filename="../client/desktop/management_tab.cc" line="2169"/>
         <source>Delete Hosts</source>
         <translation>호스트 삭제</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2330"/>
+        <location filename="../client/desktop/management_tab.cc" line="2347"/>
         <source>The router associated with this host has been deleted. Edit the host to select another router or switch to direct connection.</source>
         <translation>이 호스트에 연결된 라우터가 삭제되었습니다. 호스트를 편집하여 다른 라우터를 선택하거나 직접 연결로 전환하십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2337"/>
+        <location filename="../client/desktop/management_tab.cc" line="2354"/>
         <source>The host has an invalid host ID.</source>
         <translation>호스트의 호스트 ID가 잘못되었습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2346"/>
+        <location filename="../client/desktop/management_tab.cc" line="2363"/>
         <source>The host has an incorrect address.</source>
         <translation>호스트의 주소가 잘못되었습니다.</translation>
     </message>
@@ -5920,7 +5931,7 @@ Credentials imported: %5</source>
 <context>
     <name>NetworkWorker</name>
     <message>
-        <location filename="../client/workers/network_worker.cc" line="384"/>
+        <location filename="../client/workers/network_worker.cc" line="388"/>
         <source>Failed to connect to the relay server</source>
         <translation>릴레이 서버에 연결하지 못했습니다</translation>
     </message>
@@ -7504,43 +7515,58 @@ Detail: %1</source>
         <translation>메모:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="135"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="78"/>
+        <source>Notify about viewing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="79"/>
+        <source>Notify about control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="80"/>
+        <source>Notify about files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="169"/>
         <source>Failed to get list of spaces.</source>
         <translation>스페이스 목록을 가져오지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="143"/>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="187"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="177"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="221"/>
         <source>Not assigned</source>
         <translation>할당되지 않음</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="172"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="206"/>
         <source>Failed to get list of groups.</source>
         <translation>그룹 목록을 가져오지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="246"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="280"/>
         <source>Enter both the user name and the password, or leave both empty.</source>
         <translation>사용자 이름과 암호를 모두 입력하거나 둘 다 비워 두십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="261"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="295"/>
         <source>Failed to save the credentials.</source>
         <translation>자격 증명을 저장하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="292"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="345"/>
         <source>Failed to read the list of credentials.</source>
         <translation>자격 증명 목록을 읽지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="338"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="391"/>
         <source>Failed to read the credentials of the host.</source>
         <translation>호스트의 자격 증명을 읽지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="343"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="396"/>
         <source>The credentials of the host are damaged. Enter them again.</source>
         <translation>호스트의 자격 증명이 손상되었습니다. 다시 입력하십시오.</translation>
     </message>

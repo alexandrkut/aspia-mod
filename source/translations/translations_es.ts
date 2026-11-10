@@ -2735,7 +2735,7 @@ Credenciales reemplazadas: %2</translation>
     </message>
     <message>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="233"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1022"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1036"/>
         <source>Scale</source>
         <translation>Escala</translation>
     </message>
@@ -2825,7 +2825,7 @@ Credenciales reemplazadas: %2</translation>
     <message>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="435"/>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="438"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="610"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="624"/>
         <source>Start recording</source>
         <translation>Iniciar grabación</translation>
     </message>
@@ -2847,69 +2847,75 @@ Credenciales reemplazadas: %2</translation>
         <translation>Cambiar de sesión</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="397"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="411"/>
         <source>Resolution selection</source>
         <translation>Selección de resolución</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1197"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1211"/>
         <source>Session %1</source>
         <translation>Sesión %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1197"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1211"/>
         <source>Session %1 (%2)</source>
         <translation>Sesión %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="605"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="619"/>
         <source>Stop recording</source>
         <translation>Detener grabación</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="510"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="100"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="104"/>
+        <source>View only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="524"/>
         <source>Scripts</source>
         <translation>Scripts</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="573"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="587"/>
         <source>Are you sure you want to run &quot;%1&quot; on the remote computer?</source>
         <translation>¿Seguro que desea ejecutar el script &quot;%1&quot; en el equipo remoto?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="837"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="851"/>
         <source>Are you sure you want to shutdown the remote computer?</source>
         <translation>¿Seguro que desea apagar el equipo remoto?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="852"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="885"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="866"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="899"/>
         <source>Confirmation</source>
         <translation>Confirmación</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="853"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="867"/>
         <source>Are you sure you want to reboot the remote computer?</source>
         <translation>¿Seguro que desea reiniciar el equipo remoto?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="861"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="894"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="875"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="908"/>
         <source>Wait for host</source>
         <translation>Esperar al host</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="886"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="900"/>
         <source>Are you sure you want to reboot the remote computer in Safe Mode?</source>
         <translation>¿Seguro que desea reiniciar el equipo remoto en modo seguro?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="918"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="932"/>
         <source>Are you sure you want to end the user session on the remote computer?</source>
         <translation>¿Seguro que desea finalizar la sesión del usuario en el equipo remoto?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="933"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="947"/>
         <source>Are you sure you want to lock the user session on the remote computer?</source>
         <translation>¿Seguro que desea bloquear la sesión del usuario en el equipo remoto?</translation>
     </message>
@@ -2950,37 +2956,37 @@ Credenciales reemplazadas: %2</translation>
 <context>
     <name>DesktopWindow</name>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1149"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1160"/>
         <source>Save File</source>
         <translation>Guardar archivo</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1150"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1161"/>
         <source>PNG Image (*.png);;BMP Image (*.bmp)</source>
         <translation>Imagen PNG (*.png);;Imagen BMP (*.bmp)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1181"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1192"/>
         <source>Could not save image</source>
         <translation>No se pudo guardar la imagen</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1434"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1448"/>
         <source>Invalid user name or password.</source>
         <translation>Nombre de usuario o contraseña incorrectos.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1437"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1451"/>
         <source>The password has expired.</source>
         <translation>La contraseña ha expirado.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1440"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1454"/>
         <source>The account is locked out.</source>
         <translation>La cuenta está bloqueada.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1443"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1457"/>
         <source>The account is disabled.</source>
         <translation>La cuenta está deshabilitada.</translation>
     </message>
@@ -4156,9 +4162,9 @@ Credenciales reemplazadas: %2</translation>
     <name>HostWindow</name>
     <message>
         <location filename="../host/ui/host_window.ui" line="26"/>
-        <location filename="../host/ui/host_window.cc" line="645"/>
-        <location filename="../host/ui/host_window.cc" line="898"/>
-        <location filename="../host/ui/host_window.cc" line="1176"/>
+        <location filename="../host/ui/host_window.cc" line="663"/>
+        <location filename="../host/ui/host_window.cc" line="916"/>
+        <location filename="../host/ui/host_window.cc" line="1194"/>
         <source>Aspia Host</source>
         <translation>Aspia Host</translation>
     </message>
@@ -4174,7 +4180,7 @@ Credenciales reemplazadas: %2</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="198"/>
-        <location filename="../host/ui/host_window.cc" line="1128"/>
+        <location filename="../host/ui/host_window.cc" line="1146"/>
         <source>Router is disabled</source>
         <translation>El router está deshabilitado</translation>
     </message>
@@ -4245,7 +4251,7 @@ Credenciales reemplazadas: %2</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="335"/>
-        <location filename="../host/ui/host_window.cc" line="851"/>
+        <location filename="../host/ui/host_window.cc" line="869"/>
         <source>Hide</source>
         <translation>Ocultar</translation>
     </message>
@@ -4286,84 +4292,84 @@ Credenciales reemplazadas: %2</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.cc" line="181"/>
-        <location filename="../host/ui/host_window.cc" line="645"/>
-        <location filename="../host/ui/host_window.cc" line="1176"/>
+        <location filename="../host/ui/host_window.cc" line="663"/>
+        <location filename="../host/ui/host_window.cc" line="1194"/>
         <source>Aspia Quick Support</source>
         <translation>Aspia Quick Support</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.cc" line="340"/>
-        <location filename="../host/ui/host_window.cc" line="846"/>
+        <location filename="../host/ui/host_window.cc" line="864"/>
         <source>Show</source>
         <translation>Mostrar</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="634"/>
+        <location filename="../host/ui/host_window.cc" line="652"/>
         <source>Screen recording has started.</source>
         <translation>La grabación de pantalla ha comenzado.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="636"/>
+        <location filename="../host/ui/host_window.cc" line="654"/>
         <source>Screen recording stopped.</source>
         <translation>La grabación de pantalla se ha detenido.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="835"/>
+        <location filename="../host/ui/host_window.cc" line="853"/>
         <source>Settings storage is unavailable.</source>
         <translation>El almacenamiento de configuración no está disponible.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="894"/>
+        <location filename="../host/ui/host_window.cc" line="912"/>
         <source>The ability to show several monitors at once</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="895"/>
+        <location filename="../host/ui/host_window.cc" line="913"/>
         <source>Remote management of settings and users by the router administrator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="909"/>
+        <location filename="../host/ui/host_window.cc" line="927"/>
         <source>Aspia Host will be removed from this computer. The settings of the host will be kept. Do you really want to uninstall the application?</source>
         <translation>Aspia Host se eliminará de este equipo. La configuración del host se conservará. ¿Realmente desea desinstalar la aplicación?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="921"/>
+        <location filename="../host/ui/host_window.cc" line="939"/>
         <source>Unable to uninstall the application.</source>
         <translation>No se pudo desinstalar la aplicación.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="948"/>
+        <location filename="../host/ui/host_window.cc" line="966"/>
         <source>If you exit from Aspia, it will not be possible to connect to this computer until you turn on the computer or Aspia again manually. Do you really want to exit the application?</source>
         <translation>Si sale de Aspia, no será posible conectarse a este equipo hasta que encienda el equipo o inicie Aspia de nuevo manualmente. ¿Realmente desea salir de la aplicación?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1120"/>
+        <location filename="../host/ui/host_window.cc" line="1138"/>
         <source>Not connected to service</source>
         <translation>No conectado al servicio</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1133"/>
+        <location filename="../host/ui/host_window.cc" line="1151"/>
         <source>Connecting to router...</source>
         <translation>Conectando al router...</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1138"/>
+        <location filename="../host/ui/host_window.cc" line="1156"/>
         <source>Connected to router</source>
         <translation>Conectado al router</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1143"/>
+        <location filename="../host/ui/host_window.cc" line="1161"/>
         <source>Connection error</source>
         <translation>Error de conexión</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1221"/>
+        <location filename="../host/ui/host_window.cc" line="1239"/>
         <source>IP addresses:</source>
         <translation>Direcciones IP:</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1177"/>
+        <location filename="../host/ui/host_window.cc" line="1195"/>
         <source>ID: %1</source>
         <translation>ID: %1</translation>
     </message>
@@ -5203,32 +5209,32 @@ Credenciales importadas: %5</translation>
         <translation>La conexión por ID está especificada en las propiedades del host, pero el router no está configurado. Compruebe los parámetros del router en las propiedades del host.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="914"/>
+        <location filename="../client/desktop/main_window.cc" line="927"/>
         <source>Unknown application</source>
         <translation>Aplicación desconocida</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="917"/>
+        <location filename="../client/desktop/main_window.cc" line="930"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>Conector MCP. Conectadas: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="918"/>
+        <location filename="../client/desktop/main_window.cc" line="931"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - IA conectada</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1394"/>
+        <location filename="../client/desktop/main_window.cc" line="1407"/>
         <source>A host named by its address has no record of it in the address book, and there are no stored credentials to use. Give the user name and the password with --username and --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1656"/>
+        <location filename="../client/desktop/main_window.cc" line="1669"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1662"/>
+        <location filename="../client/desktop/main_window.cc" line="1675"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5292,7 +5298,7 @@ Credenciales importadas: %5</translation>
     </message>
     <message>
         <location filename="../client/desktop/management_tab.ui" line="137"/>
-        <location filename="../client/desktop/management_tab.cc" line="2093"/>
+        <location filename="../client/desktop/management_tab.cc" line="2110"/>
         <source>Delete Host</source>
         <translation>Eliminar host</translation>
     </message>
@@ -5429,34 +5435,34 @@ Credenciales importadas: %5</translation>
         <translation>Actualizar estado automáticamente</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1136"/>
+        <location filename="../client/desktop/management_tab.cc" line="1137"/>
         <source>(copy)</source>
         <translation>(copia)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1104"/>
-        <location filename="../client/desktop/management_tab.cc" line="1181"/>
-        <location filename="../client/desktop/management_tab.cc" line="2313"/>
+        <location filename="../client/desktop/management_tab.cc" line="1105"/>
+        <location filename="../client/desktop/management_tab.cc" line="1182"/>
+        <location filename="../client/desktop/management_tab.cc" line="2330"/>
         <source>Failed to retrieve host information from the local database.</source>
         <translation>No se pudo obtener la información del host de la base de datos local.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="935"/>
+        <location filename="../client/desktop/management_tab.cc" line="936"/>
         <source>The &quot;%1&quot; session type is not available for Quick Support.</source>
         <translation>El tipo de sesión &quot;%1&quot; no está disponible para Quick Support.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1141"/>
+        <location filename="../client/desktop/management_tab.cc" line="1142"/>
         <source>Failed to add the host to the local database.</source>
         <translation>No se pudo añadir el host a la base de datos local.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1199"/>
+        <location filename="../client/desktop/management_tab.cc" line="1200"/>
         <source>Are you sure you want to delete host &quot;%1&quot;?</source>
         <translation>¿Seguro que desea eliminar el host &quot;%1&quot;?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management_tab.cc" line="1201"/>
+        <location filename="../client/desktop/management_tab.cc" line="1202"/>
         <source>Are you sure you want to delete %n hosts?</source>
         <translation>
             <numerusform>¿Seguro que desea eliminar %n host?</numerusform>
@@ -5464,12 +5470,12 @@ Credenciales importadas: %5</translation>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1227"/>
+        <location filename="../client/desktop/management_tab.cc" line="1228"/>
         <source>Unable to remove host</source>
         <translation>No se pudo eliminar el host</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management_tab.cc" line="1229"/>
+        <location filename="../client/desktop/management_tab.cc" line="1230"/>
         <source>Failed to delete %n of the selected hosts.</source>
         <translation>
             <numerusform>No se pudo eliminar %n de los hosts seleccionados.</numerusform>
@@ -5477,146 +5483,151 @@ Credenciales importadas: %5</translation>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1279"/>
+        <location filename="../client/desktop/management_tab.cc" line="1280"/>
         <source>Host update configuration...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1285"/>
+        <location filename="../client/desktop/management_tab.cc" line="1286"/>
         <source>Host users...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1291"/>
+        <location filename="../client/desktop/management_tab.cc" line="1292"/>
         <source>Host full configuration (from file)...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1302"/>
+        <location filename="../client/desktop/management_tab.cc" line="1303"/>
         <source>Bulk add user...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1308"/>
+        <location filename="../client/desktop/management_tab.cc" line="1309"/>
         <source>Bulk remove user...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1314"/>
+        <location filename="../client/desktop/management_tab.cc" line="1315"/>
         <source>Bulk update configuration...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1320"/>
+        <location filename="../client/desktop/management_tab.cc" line="1321"/>
         <source>Bulk full configuration (from file)...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1342"/>
-        <location filename="../client/desktop/management_tab.cc" line="1419"/>
-        <location filename="../client/desktop/management_tab.cc" line="1452"/>
-        <location filename="../client/desktop/management_tab.cc" line="1475"/>
+        <location filename="../client/desktop/management_tab.cc" line="1347"/>
+        <source>Connect for viewing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1359"/>
+        <location filename="../client/desktop/management_tab.cc" line="1436"/>
+        <location filename="../client/desktop/management_tab.cc" line="1469"/>
+        <location filename="../client/desktop/management_tab.cc" line="1492"/>
         <source>Copy Row</source>
         <translation>Copiar fila</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1343"/>
-        <location filename="../client/desktop/management_tab.cc" line="1420"/>
-        <location filename="../client/desktop/management_tab.cc" line="1453"/>
-        <location filename="../client/desktop/management_tab.cc" line="1476"/>
+        <location filename="../client/desktop/management_tab.cc" line="1360"/>
+        <location filename="../client/desktop/management_tab.cc" line="1437"/>
+        <location filename="../client/desktop/management_tab.cc" line="1470"/>
+        <location filename="../client/desktop/management_tab.cc" line="1493"/>
         <source>Copy Value</source>
         <translation>Copiar valor</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1718"/>
+        <location filename="../client/desktop/management_tab.cc" line="1735"/>
         <source>Failed to delete the group.</source>
         <translation>No se pudo eliminar el grupo.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1757"/>
-        <location filename="../client/desktop/management_tab.cc" line="1814"/>
+        <location filename="../client/desktop/management_tab.cc" line="1774"/>
+        <location filename="../client/desktop/management_tab.cc" line="1831"/>
         <source>The database is not available.</source>
         <translation>La base de datos no está disponible.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1763"/>
+        <location filename="../client/desktop/management_tab.cc" line="1780"/>
         <source>Create Backup</source>
         <translation>Crear copia de seguridad</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1780"/>
+        <location filename="../client/desktop/management_tab.cc" line="1797"/>
         <source>There is nothing to save.</source>
         <translation>No hay nada que guardar.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2152"/>
+        <location filename="../client/desktop/management_tab.cc" line="2169"/>
         <source>Delete Hosts</source>
         <translation>Eliminar hosts</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2308"/>
+        <location filename="../client/desktop/management_tab.cc" line="2325"/>
         <source>The data of the host is damaged. Edit the host and enter it again.</source>
         <translation>Los datos del host están dañados. Edite el host e introdúzcalos de nuevo.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2329"/>
+        <location filename="../client/desktop/management_tab.cc" line="2346"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>Los datos del router están dañados. Edite el router e introdúzcalos de nuevo.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1792"/>
+        <location filename="../client/desktop/management_tab.cc" line="1809"/>
         <source>Failed to create the backup.</source>
         <translation>No se pudo crear la copia de seguridad.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1820"/>
-        <location filename="../client/desktop/management_tab.cc" line="1846"/>
+        <location filename="../client/desktop/management_tab.cc" line="1837"/>
+        <location filename="../client/desktop/management_tab.cc" line="1863"/>
         <source>Restore from Backup</source>
         <translation>Restaurar desde copia de seguridad</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1829"/>
+        <location filename="../client/desktop/management_tab.cc" line="1846"/>
         <source>Everything stored now is deleted and replaced with what the backup holds. Continue?</source>
         <translation>Todo lo almacenado ahora se eliminará y se reemplazará por lo que contiene la copia de seguridad. ¿Continuar?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1848"/>
+        <location filename="../client/desktop/management_tab.cc" line="1865"/>
         <source>The backup was made on another installation. Enter the master password used there.</source>
         <translation>La copia de seguridad se creó en otra instalación. Introduzca la contraseña maestra utilizada allí.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1873"/>
+        <location filename="../client/desktop/management_tab.cc" line="1890"/>
         <source>The backup carries no data, so nothing was changed.</source>
         <translation>La copia de seguridad no contiene datos, por lo que no se cambió nada.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1881"/>
+        <location filename="../client/desktop/management_tab.cc" line="1898"/>
         <source>The file is not a valid backup.</source>
         <translation>El archivo no es una copia de seguridad válida.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1885"/>
+        <location filename="../client/desktop/management_tab.cc" line="1902"/>
         <source>Failed to restore from the backup.</source>
         <translation>No se pudo restaurar desde la copia de seguridad.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1764"/>
-        <location filename="../client/desktop/management_tab.cc" line="1821"/>
+        <location filename="../client/desktop/management_tab.cc" line="1781"/>
+        <location filename="../client/desktop/management_tab.cc" line="1838"/>
         <source>Aspia Backup (*.aspia-backup);;All files (*)</source>
         <translation>Copia de seguridad de Aspia (*.aspia-backup);;Todos los archivos (*)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1784"/>
+        <location filename="../client/desktop/management_tab.cc" line="1801"/>
         <source>Unable to write the file.</source>
         <translation>No se pudo escribir el archivo.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1877"/>
+        <location filename="../client/desktop/management_tab.cc" line="1894"/>
         <source>Unable to read the file.</source>
         <translation>No se pudo leer el archivo.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1797"/>
+        <location filename="../client/desktop/management_tab.cc" line="1814"/>
         <source>Export completed successfully.
 Routers exported: %1
 Groups exported: %2
@@ -5631,37 +5642,37 @@ Contraseñas guardadas exportadas: %4
 Credenciales exportadas: %5</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1578"/>
+        <location filename="../client/desktop/management_tab.cc" line="1595"/>
         <source>Are you sure you want to delete space &quot;%1&quot;?</source>
         <translation>¿Seguro que desea eliminar el espacio &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1598"/>
+        <location filename="../client/desktop/management_tab.cc" line="1615"/>
         <source>Failed to delete the space.</source>
         <translation>No se pudo eliminar el espacio.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1700"/>
+        <location filename="../client/desktop/management_tab.cc" line="1717"/>
         <source>Are you sure you want to delete the group &quot;%1&quot;? Hosts assigned to this group or its subgroups will be moved to the space root.</source>
         <translation>¿Seguro que desea eliminar el grupo &quot;%1&quot;? Los hosts asignados a este grupo o a sus subgrupos se moverán a la raíz del espacio.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1788"/>
+        <location filename="../client/desktop/management_tab.cc" line="1805"/>
         <source>Some records of the database are damaged. Fix or delete them and try again.</source>
         <translation>Algunos registros de la base de datos están dañados. Corríjalos o elimínelos e inténtelo de nuevo.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1865"/>
+        <location filename="../client/desktop/management_tab.cc" line="1882"/>
         <source>Unable to decrypt the file with the specified password.</source>
         <translation>No se pudo descifrar el archivo con la contraseña especificada.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1869"/>
+        <location filename="../client/desktop/management_tab.cc" line="1886"/>
         <source>Unsupported file format version.</source>
         <translation>Versión de formato de archivo no compatible.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1890"/>
+        <location filename="../client/desktop/management_tab.cc" line="1907"/>
         <source>Import completed successfully.
 Routers imported: %1
 Groups imported: %2
@@ -5676,17 +5687,17 @@ Contraseñas guardadas importadas: %4
 Credenciales importadas: %5</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2330"/>
+        <location filename="../client/desktop/management_tab.cc" line="2347"/>
         <source>The router associated with this host has been deleted. Edit the host to select another router or switch to direct connection.</source>
         <translation>El router asociado a este host se eliminó. Edite el host para seleccionar otro router o cambie a conexión directa.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2337"/>
+        <location filename="../client/desktop/management_tab.cc" line="2354"/>
         <source>The host has an invalid host ID.</source>
         <translation>El host tiene un ID de host no válido.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2346"/>
+        <location filename="../client/desktop/management_tab.cc" line="2363"/>
         <source>The host has an incorrect address.</source>
         <translation>El host tiene una dirección incorrecta.</translation>
     </message>
@@ -5947,7 +5958,7 @@ Credenciales importadas: %5</translation>
 <context>
     <name>NetworkWorker</name>
     <message>
-        <location filename="../client/workers/network_worker.cc" line="384"/>
+        <location filename="../client/workers/network_worker.cc" line="388"/>
         <source>Failed to connect to the relay server</source>
         <translation>No se pudo conectar al servidor relay</translation>
     </message>
@@ -7539,43 +7550,58 @@ Detail: %1</source>
         <translation>Comentario:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="135"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="78"/>
+        <source>Notify about viewing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="79"/>
+        <source>Notify about control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="80"/>
+        <source>Notify about files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="169"/>
         <source>Failed to get list of spaces.</source>
         <translation>No se pudo obtener la lista de espacios.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="143"/>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="187"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="177"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="221"/>
         <source>Not assigned</source>
         <translation>Sin asignar</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="172"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="206"/>
         <source>Failed to get list of groups.</source>
         <translation>No se pudo obtener la lista de grupos.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="246"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="280"/>
         <source>Enter both the user name and the password, or leave both empty.</source>
         <translation>Introduzca tanto el nombre de usuario como la contraseña, o deje ambos vacíos.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="261"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="295"/>
         <source>Failed to save the credentials.</source>
         <translation>No se pudieron guardar las credenciales.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="292"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="345"/>
         <source>Failed to read the list of credentials.</source>
         <translation>No se pudo leer la lista de credenciales.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="338"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="391"/>
         <source>Failed to read the credentials of the host.</source>
         <translation>No se pudieron leer las credenciales del host.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="343"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="396"/>
         <source>The credentials of the host are damaged. Enter them again.</source>
         <translation>Las credenciales del host están dañadas. Introdúzcalas de nuevo.</translation>
     </message>
