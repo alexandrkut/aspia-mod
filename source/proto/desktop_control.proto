@@ -79,6 +79,7 @@ message Config
     bool lock_at_disconnect     = 10;
     bool disable_preferred_size = 11;
     uint32 quality              = 12;
+    bool view_only              = 13;
 }
 
 message Feedback

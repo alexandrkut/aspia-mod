@@ -61,7 +61,7 @@ InputWorker::~InputWorker()
 //--------------------------------------------------------------------------------------------------
 void InputWorker::onInjectKeyEvent(const proto::input::KeyEvent& event)
 {
-    if (is_paused_ || is_keyboard_locked_)
+    if (is_paused_ || is_view_only_ || is_keyboard_locked_)
         return;
 
     if (input_injector_)
@@ -82,7 +82,7 @@ void InputWorker::onInjectKeyEvent(const proto::input::KeyEvent& event)
 //--------------------------------------------------------------------------------------------------
 void InputWorker::onInjectTextEvent(const proto::input::TextEvent& event)
 {
-    if (is_paused_ || is_keyboard_locked_)
+    if (is_paused_ || is_view_only_ || is_keyboard_locked_)
         return;
 
     if (input_injector_)
@@ -103,7 +103,7 @@ void InputWorker::onInjectTextEvent(const proto::input::TextEvent& event)
 //--------------------------------------------------------------------------------------------------
 void InputWorker::onInjectMouseEvent(const proto::input::MouseEvent& event)
 {
-    if (is_paused_ || is_mouse_locked_)
+    if (is_paused_ || is_view_only_ || is_mouse_locked_)
         return;
 
     const QSize frame_size(event.frame_width(), event.frame_height());
@@ -136,7 +136,7 @@ void InputWorker::onInjectMouseEvent(const proto::input::MouseEvent& event)
 //--------------------------------------------------------------------------------------------------
 void InputWorker::onInjectTouchEvent(const proto::input::TouchEvent& event)
 {
-    if (is_paused_ || is_mouse_locked_ || is_keyboard_locked_)
+    if (is_paused_ || is_view_only_ || is_mouse_locked_ || is_keyboard_locked_)
         return;
 
     if (input_injector_)
@@ -160,6 +160,15 @@ void InputWorker::onSetPaused(bool paused)
     is_paused_ = paused;
 
     if (paused)
+        releaseAllInput();
+}
+
+//--------------------------------------------------------------------------------------------------
+void InputWorker::onSetViewOnly(bool view_only)
+{
+    is_view_only_ = view_only;
+
+    if (view_only)
         releaseAllInput();
 }
 

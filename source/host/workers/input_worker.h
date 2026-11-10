@@ -56,6 +56,7 @@ public slots:
     void onSetMouseLocked(bool locked);
     void onSetKeyboardLocked(bool locked);
     void onSetBlockInput(bool enable);
+    void onSetViewOnly(bool view_only);
 
 protected:
     // Worker implementation.
@@ -89,6 +90,7 @@ private:
     bool is_paused_ = false;
     bool is_mouse_locked_ = false;
     bool is_keyboard_locked_ = false;
+    bool is_view_only_ = false;
 
     QSize screen_size_;
     QSize desktop_size_;

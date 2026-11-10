@@ -893,6 +893,9 @@ void DesktopWindow::onSendCredentials(const SecureString& username, const Secure
 //--------------------------------------------------------------------------------------------------
 void DesktopWindow::onClipboardEvent(const proto::clipboard::Event& event)
 {
+    if (desktop_config_.view_only())
+        return;
+
     if (!desktop_config_.clipboard())
         return;
 
@@ -969,6 +972,9 @@ void DesktopWindow::onMetricsRequest()
 //--------------------------------------------------------------------------------------------------
 void DesktopWindow::onMouseEvent(const proto::input::MouseEvent& event)
 {
+    if (desktop_config_.view_only())
+        return;
+
     QPoint pos(event.x(), event.y());
 
     if (toolbar_->autoScrolling() && toolbar_->scale() != -1)
@@ -1092,6 +1098,9 @@ void DesktopWindow::onMouseFlushTimer()
 //--------------------------------------------------------------------------------------------------
 void DesktopWindow::onKeyEvent(const proto::input::KeyEvent& event)
 {
+    if (desktop_config_.view_only())
+        return;
+
     ++send_key_count_;
 
     proto::input::ClientToHost& message = outgoing_message_.newMessage<proto::input::ClientToHost>();
@@ -1368,6 +1377,9 @@ void DesktopWindow::sendMouseEvent(const proto::input::MouseEvent& event)
 //--------------------------------------------------------------------------------------------------
 void DesktopWindow::sendText(const QString& text)
 {
+    if (desktop_config_.view_only())
+        return;
+
     ++send_text_count_;
 
     proto::input::ClientToHost& message = outgoing_message_.newMessage<proto::input::ClientToHost>();

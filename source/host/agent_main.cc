@@ -119,6 +119,15 @@ int runDesktopAgent(CoreApplication& application)
     {
         QObject::connect(ipc_worker, &DesktopIpcWorker::sig_blockInput, input_worker, &InputWorker::onSetBlockInput,
                          Qt::QueuedConnection);
+
+        QObject::connect(ipc_worker, &DesktopIpcWorker::sig_configure, input_worker,
+                         [input_worker](const proto::control::Config& config, bool)
+                         {
+                             QMetaObject::invokeMethod(input_worker, [input_worker, view_only = config.view_only()]()
+                             {
+                                 input_worker->onSetViewOnly(view_only);
+                             }, Qt::QueuedConnection);
+                         }, Qt::QueuedConnection);
     }
 
     QObject::connect(ipc_worker, &DesktopIpcWorker::sig_audioEnabled, audio_worker, &AudioWorker::onSetEnabled,
