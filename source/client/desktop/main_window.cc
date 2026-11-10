@@ -665,6 +665,12 @@ void MainWindow::onConnect(const HostConfig& host, proto::peer::SessionType sess
         {
             proto::control::Config desktop_config = Database::instance().desktopConfig();
 
+            if (auto* management_tab = qobject_cast<ManagementTab*>(sender()))
+            {
+                if (management_tab->consumeViewOnlyPending())
+                    desktop_config.set_view_only(true);
+            }
+
             // When the session opens in a tab, its visible area is bounded by the main window from
             // the very first frame. Pass the initial preferred size in the config so the host
             // scales the desktop to fit the tab right away, instead of streaming the full
