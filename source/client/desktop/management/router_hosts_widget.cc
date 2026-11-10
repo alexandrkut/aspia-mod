@@ -1058,6 +1058,20 @@ QString newBulkId()
     return "bulk-" + QUuid::createUuid().toString(QUuid::WithoutBraces);
 }
 
+// Bulk targets are online hosts only: the router answers a command for a disconnected
+// host no sooner than its per-host timeout, which would stall the whole sequence.
+// Offline hosts stay in the preview as skipped rows.
+QList<RouterHostBulkTarget> bulkOnlineTargets(const QList<RouterHost>& hosts)
+{
+    QList<RouterHostBulkTarget> targets;
+    for (const RouterHost& host : hosts)
+    {
+        if (host.online)
+            targets.append({host.host_id, bulkHostLabel(host)});
+    }
+    return targets;
+}
+
 // Runs a fetch runner to completion under a modal progress dialog.
 QList<RouterHostBulkResult> execFetchBulk(RouterHostBulkRunner* runner,
                                          const QString& label,
@@ -1079,7 +1093,10 @@ QList<RouterHostBulkResult> execFetchBulk(RouterHostBulkRunner* runner,
                      });
     QObject::connect(runner, &RouterHostBulkRunner::finished, &loop, &QEventLoop::quit);
     runner->start();
-    loop.exec();
+    // start() can finish synchronously (no targets, or no session): quit() would then be
+    // called before exec() and the loop would never return.
+    if (runner->isRunning())
+        loop.exec();
     progress.setValue(runner->targetCount());
     return runner->results();
 }
@@ -1174,9 +1191,7 @@ void RouterHostsWidget::onHostsAddUser()
     user_params["flags"] = static_cast<qint64>(user.flags);
     user_params["bulk_id"] = bulk_id;
 
-    QList<RouterHostBulkTarget> targets;
-    for (const RouterHost& host : hosts)
-        targets.append({host.host_id, bulkHostLabel(host)});
+    const QList<RouterHostBulkTarget> targets = bulkOnlineTargets(hosts);
 
     AutoQPointer<RouterHostBulkRunner> fetch(new RouterHostBulkRunner(
         router_id_, targets, "get_host_users",
@@ -1186,18 +1201,29 @@ void RouterHostsWidget::onHostsAddUser()
 
     QList<RouterHostBulkTarget> apply_targets;
     QList<RouterHostBulkPreviewRow> preview;
-    for (int i = 0; i < hosts.size() && i < fetched.size(); ++i)
+    int fetched_index = 0;
+    for (int i = 0; i < hosts.size(); ++i)
     {
         RouterHostBulkPreviewRow row;
         row.host = bulkHostLabel(hosts[i]);
         row.action = tr("Add user \"%1\"").arg(user.name);
-        const RouterHostBulkResult& f = fetched[i];
+        if (!hosts[i].online)
+        {
+            row.will_run = false;
+            row.detail = tr("Host is offline.");
+            preview.append(row);
+            continue;
+        }
+        if (fetched_index >= fetched.size())
+            break;
+        const int target_index = fetched_index++;
+        const RouterHostBulkResult& f = fetched[target_index];
         if (f.status != "ok")
         {
             row.will_run = true;
             row.target_index = apply_targets.size();
             row.detail = tr("List unreadable (%1), will try anyway.").arg(f.detail);
-            apply_targets.append(targets[i]);
+            apply_targets.append(targets[target_index]);
         }
         else
         {
@@ -1224,7 +1250,7 @@ void RouterHostsWidget::onHostsAddUser()
             {
                 row.will_run = true;
                 row.target_index = apply_targets.size();
-                apply_targets.append(targets[i]);
+                apply_targets.append(targets[target_index]);
             }
         }
         preview.append(row);
@@ -1253,9 +1279,7 @@ void RouterHostsWidget::onHostsRemoveUser()
     const bool force = input->force();
     const QString bulk_id = newBulkId();
 
-    QList<RouterHostBulkTarget> targets;
-    for (const RouterHost& host : hosts)
-        targets.append({host.host_id, bulkHostLabel(host)});
+    const QList<RouterHostBulkTarget> targets = bulkOnlineTargets(hosts);
 
     AutoQPointer<RouterHostBulkRunner> fetch(new RouterHostBulkRunner(
         router_id_, targets, "get_host_users",
@@ -1266,18 +1290,29 @@ void RouterHostsWidget::onHostsRemoveUser()
     QList<RouterHostBulkTarget> apply_targets;
     QMap<HostId, qint64> entry_by_host;
     QList<RouterHostBulkPreviewRow> preview;
-    for (int i = 0; i < hosts.size() && i < fetched.size(); ++i)
+    int fetched_index = 0;
+    for (int i = 0; i < hosts.size(); ++i)
     {
         RouterHostBulkPreviewRow row;
         row.host = bulkHostLabel(hosts[i]);
         row.action = tr("Remove user \"%1\"").arg(name);
-        const RouterHostBulkResult& f = fetched[i];
+        if (!hosts[i].online)
+        {
+            row.will_run = false;
+            row.detail = tr("Host is offline.");
+            preview.append(row);
+            continue;
+        }
+        if (fetched_index >= fetched.size())
+            break;
+        const int target_index = fetched_index++;
+        const RouterHostBulkResult& f = fetched[target_index];
         if (f.status != "ok")
         {
             row.will_run = true;
             row.target_index = apply_targets.size();
             row.detail = tr("List unreadable (%1), will try anyway.").arg(f.detail);
-            apply_targets.append(targets[i]);
+            apply_targets.append(targets[target_index]);
         }
         else
         {
@@ -1310,7 +1345,7 @@ void RouterHostsWidget::onHostsRemoveUser()
                 row.target_index = apply_targets.size();
                 if (enabled && enabled_total <= 1)
                     row.detail = tr("Last enabled user, the host will refuse.");
-                apply_targets.append(targets[i]);
+                apply_targets.append(targets[target_index]);
                 entry_by_host[hosts[i].host_id] = entry_id;
             }
         }
@@ -1347,8 +1382,12 @@ void RouterHostsWidget::onHostsUpdateConfig()
     QSet<QString> channels, servers;
     int auto_on = 0, auto_known = 0;
     QSet<int> freqs;
+    int run_count = 0;
     for (const RouterHost& host : hosts)
     {
+        if (!host.online)
+            continue;
+        ++run_count;
         const BulkTeleInfo info = telemetries.value(host.host_id);
         if (!info.ok)
             continue;
@@ -1369,7 +1408,7 @@ void RouterHostsWidget::onHostsUpdateConfig()
     freq_list.sort();
     const QString summary = tr("Hosts in run: %1. Channels: %2. Servers: %3. "
                                "Auto-update on: %4 of %5. Frequencies (days): %6.")
-        .arg(hosts.size())
+        .arg(run_count)
         .arg(channels.isEmpty() ? tr("(unknown)") : channel_list.join(", "))
         .arg(servers.isEmpty() ? tr("(unknown)") : server_list.join(", "))
         .arg(auto_on).arg(auto_known)
@@ -1406,6 +1445,14 @@ void RouterHostsWidget::onHostsUpdateConfig()
     {
         RouterHostBulkPreviewRow row;
         row.host = bulkHostLabel(host);
+        if (!host.online)
+        {
+            row.will_run = false;
+            row.action = tr("Set selected fields.");
+            row.detail = tr("Host is offline.");
+            preview.append(row);
+            continue;
+        }
         const BulkTeleInfo info = telemetries.value(host.host_id);
         if (!info.ok)
         {
@@ -1546,9 +1593,7 @@ void RouterHostsWidget::onHostsFullConfig()
     const QString config_json =
         QString::fromUtf8(QJsonDocument(cfg).toJson(QJsonDocument::Compact));
 
-    QList<RouterHostBulkTarget> targets;
-    for (const RouterHost& host : hosts)
-        targets.append({host.host_id, bulkHostLabel(host)});
+    const QList<RouterHostBulkTarget> targets = bulkOnlineTargets(hosts);
 
     AutoQPointer<RouterHostBulkRunner> dry(new RouterHostBulkRunner(
         router_id_, targets, "apply_full_config",
@@ -1566,17 +1611,29 @@ void RouterHostsWidget::onHostsFullConfig()
 
     QList<RouterHostBulkTarget> apply_targets;
     QList<RouterHostBulkPreviewRow> preview;
-    for (int i = 0; i < hosts.size() && i < dried.size(); ++i)
+    int dried_index = 0;
+    for (int i = 0; i < hosts.size(); ++i)
     {
         RouterHostBulkPreviewRow row;
         row.host = bulkHostLabel(hosts[i]);
-        const RouterHostBulkResult& d = dried[i];
+        if (!hosts[i].online)
+        {
+            row.will_run = false;
+            row.action = tr("Apply full config.");
+            row.detail = tr("Host is offline.");
+            preview.append(row);
+            continue;
+        }
+        if (dried_index >= dried.size())
+            break;
+        const int target_index = dried_index++;
+        const RouterHostBulkResult& d = dried[target_index];
         if (d.status != "ok")
         {
             row.will_run = true;
             row.target_index = apply_targets.size();
             row.action = tr("Apply full config (dry run %1, will try anyway).").arg(d.detail);
-            apply_targets.append(targets[i]);
+            apply_targets.append(targets[target_index]);
         }
         else
         {
@@ -1602,7 +1659,7 @@ void RouterHostsWidget::onHostsFullConfig()
             row.target_index = apply_targets.size();
             row.action = parts.isEmpty() ? tr("Apply full config (no visible diff).")
                                          : parts.join("; ");
-            apply_targets.append(targets[i]);
+            apply_targets.append(targets[target_index]);
         }
         preview.append(row);
     }

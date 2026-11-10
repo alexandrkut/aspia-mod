@@ -7939,25 +7939,25 @@ Detail: %1</source>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="505"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1492"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1539"/>
         <source>Open host configuration file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="506"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1494"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1541"/>
         <source>JSON files (*.json);;All files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="513"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1501"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1548"/>
         <source>Cannot open file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="524"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1511"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1558"/>
         <source>Invalid JSON: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8005,195 +8005,213 @@ Detail: %1</source>
         <translation>Kan ikke skrive filen.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1067"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1081"/>
         <source>Cancel</source>
         <translation type="unfinished">Annuller</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1161"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1178"/>
         <source>Failed to create user credentials.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1185"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1264"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1200"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1288"/>
         <source>Reading user lists...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1193"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1209"/>
         <source>Add user &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1199"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1279"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1213"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1302"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1452"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1623"/>
+        <source>Host is offline.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1225"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1314"/>
         <source>List unreadable (%1), will try anyway.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1221"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1247"/>
         <source>Already exists, skipped.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1237"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1263"/>
         <source>Add user on hosts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1273"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1298"/>
         <source>Remove user &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1305"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1340"/>
         <source>No such user, skipped.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1312"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1347"/>
         <source>Last enabled user, the host will refuse.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1334"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1369"/>
         <source>Remove user from hosts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1355"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1373"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1374"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1376"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1394"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1412"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1413"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1415"/>
         <source>(unknown)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1356"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1425"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1427"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1433"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1435"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1395"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1472"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1474"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1480"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1482"/>
         <source>(default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1370"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1409"/>
         <source>Hosts in run: %1. Channels: %2. Servers: %3. Auto-update on: %4 of %5. Frequencies (days): %6.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1397"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1436"/>
         <source>No fields selected, nothing to do.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1414"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1451"/>
+        <source>Set selected fields.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1461"/>
         <source>Set selected fields (current settings unknown).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1424"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1471"/>
         <source>server: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1432"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1479"/>
         <source>public key: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1433"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1435"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1480"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1482"/>
         <source>(set)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1440"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1487"/>
         <source>channel: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1445"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1492"/>
         <source>auto-update: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1446"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1447"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1493"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1494"/>
         <source>on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1446"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1447"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1493"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1494"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1452"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1499"/>
         <source>frequency: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1459"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1506"/>
         <source>No changes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1460"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1507"/>
         <source>Already matching, skipped.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1481"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1528"/>
         <source>Update configuration on hosts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1517"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1564"/>
         <source>Not a host configuration file (no system/database sections).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1534"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1581"/>
         <source>File: %1
 Sections: %2. Users in file: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1536"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1583"/>
         <source>(kept)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1565"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1610"/>
         <source>Dry run on hosts...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1578"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1622"/>
+        <source>Apply full config.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1635"/>
         <source>Apply full config (dry run %1, will try anyway).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1591"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1648"/>
         <source>users: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1598"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1655"/>
         <source>system: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1603"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1660"/>
         <source>Apply full config (no visible diff).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1622"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1679"/>
         <source>Full configuration on hosts</source>
         <translation type="unfinished"></translation>
     </message>
