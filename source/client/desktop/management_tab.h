@@ -59,6 +59,8 @@ public:
     explicit ManagementTab(QWidget* parent = nullptr);
     ~ManagementTab() final;
 
+    bool consumeViewOnlyPending();
+
     // Tab implementation.
     QByteArray saveState() final;
     void restoreState(const QByteArray& state) final;
@@ -146,6 +148,7 @@ private:
     QPointer<QDialog> two_factor_dialog_;
     QSet<qint64> dismissed_two_factor_;
     ContentWidget* current_content_ = nullptr;
+    bool view_only_pending_ = false;
     ContentWidget* previous_content_ = nullptr;
 
     LocalGroupWidget* local_group_widget_ = nullptr;

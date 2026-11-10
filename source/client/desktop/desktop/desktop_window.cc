@@ -428,6 +428,8 @@ void DesktopWindow::onSessionStarted()
     toolbar_->enableTerminal(true);
     toolbar_->enableSystemInfo(true);
 
+    toolbar_->setViewOnly(desktop_config_.view_only());
+
     sendCapabilities();
 }
 

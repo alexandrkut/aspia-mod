@@ -36,6 +36,7 @@
 #include "client/backup.h"
 #include "client/database.h"
 #include "client/router_controller.h"
+#include "client/router_session.h"
 #include "client/settings.h"
 #include "client/desktop/file_dialog.h"
 #include "client/desktop/ui_management_tab.h"
@@ -1276,19 +1277,19 @@ void ManagementTab::onHostContextMenu(const QPoint& pos, int column)
 
     if (is_single)
     {
-        QAction* action_config = menu->addAction(tr("Host update configuration..."));
+        QAction* action_config = menu->addAction(QIcon(":/img/computer-update.svg"), tr("Host update configuration..."));
         connect(action_config, &QAction::triggered, this, [this]()
         {
             router_hosts_widget_->onHostUpdateConfig();
         });
 
-        QAction* action_users = menu->addAction(tr("Host users..."));
+        QAction* action_users = menu->addAction(QIcon(":/img/user.svg"), tr("Host users..."));
         connect(action_users, &QAction::triggered, this, [this]()
         {
             router_hosts_widget_->onHostUsers();
         });
 
-        QAction* action_full_config = menu->addAction(tr("Host full configuration (from file)..."));
+        QAction* action_full_config = menu->addAction(QIcon(":/img/import.svg"), tr("Host full configuration (from file)..."));
         connect(action_full_config, &QAction::triggered, this, [this]()
         {
             router_hosts_widget_->onHostFullConfig();
@@ -1299,25 +1300,25 @@ void ManagementTab::onHostContextMenu(const QPoint& pos, int column)
     {
         menu->addSeparator();
 
-        QAction* bulk_add = menu->addAction(tr("Bulk add user..."));
+        QAction* bulk_add = menu->addAction(QIcon(":/img/user-add.svg"), tr("Bulk add user..."));
         connect(bulk_add, &QAction::triggered, this, [this]()
         {
             router_hosts_widget_->onHostsAddUser();
         });
 
-        QAction* bulk_remove = menu->addAction(tr("Bulk remove user..."));
+        QAction* bulk_remove = menu->addAction(QIcon(":/img/user-delete.svg"), tr("Bulk remove user..."));
         connect(bulk_remove, &QAction::triggered, this, [this]()
         {
             router_hosts_widget_->onHostsRemoveUser();
         });
 
-        QAction* bulk_config = menu->addAction(tr("Bulk update configuration..."));
+        QAction* bulk_config = menu->addAction(QIcon(":/img/computer-update.svg"), tr("Bulk update configuration..."));
         connect(bulk_config, &QAction::triggered, this, [this]()
         {
             router_hosts_widget_->onHostsUpdateConfig();
         });
 
-        QAction* bulk_full = menu->addAction(tr("Bulk full configuration (from file)..."));
+        QAction* bulk_full = menu->addAction(QIcon(":/img/import.svg"), tr("Bulk full configuration (from file)..."));
         connect(bulk_full, &QAction::triggered, this, [this]()
         {
             router_hosts_widget_->onHostsFullConfig();
@@ -1335,6 +1336,21 @@ void ManagementTab::onHostContextMenu(const QPoint& pos, int column)
         addProxy(ui->action_file_transfer_connect);
         addProxy(ui->action_chat_connect);
         addProxy(ui->action_system_info_connect);
+
+        QList<RouterHost> online_hosts = router_hosts_widget_->selectedOnlineHosts();
+        bool is_admin = false;
+        RouterSession* session = RouterController::session(router_hosts_widget_->routerId());
+        if (session && session->config().sessionType() == proto::router::SESSION_TYPE_ADMIN)
+            is_admin = true;
+        if (is_admin)
+        {
+            QAction* view_connect = menu->addAction(QIcon(":/img/view-monitor.svg"), tr("Connect for viewing..."));
+            connect(view_connect, &QAction::triggered, this, [this]()
+            {
+                view_only_pending_ = true;
+                onConnectAction(ui->action_desktop_connect);
+            });
+        }
     }
     menu->addSeparator();
 
@@ -2393,4 +2409,13 @@ void ManagementTab::removeItem(qint64 entry_id)
         local_group_widget_->removeItem(entry_id);
     else if (current_content_ == search_widget_)
         search_widget_->removeItem(entry_id);
+}
+
+
+//--------------------------------------------------------------------------------------------------
+bool ManagementTab::consumeViewOnlyPending()
+{
+    const bool value = view_only_pending_;
+    view_only_pending_ = false;
+    return value;
 }

@@ -222,6 +222,8 @@
         <file>memory.svg</file>
         <file>ai.svg</file>
         <file>ai-online.svg</file>
+
+<file>view-monitor.svg</file>
     </qresource>
     <qresource prefix="/fonts">
         <file alias="JetBrainsMono-Regular.ttf">fonts/JetBrainsMono-Regular.ttf</file>
