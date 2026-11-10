@@ -5042,7 +5042,7 @@ Credentials imported: %5</source>
     <name>MainWindow</name>
     <message>
         <location filename="../client/desktop/main_window.ui" line="20"/>
-        <location filename="../client/desktop/main_window.cc" line="546"/>
+        <location filename="../client/desktop/main_window.cc" line="550"/>
         <source>Aspia Client</source>
         <translation>Клиент Aspia</translation>
     </message>
@@ -5143,89 +5143,104 @@ Credentials imported: %5</source>
         <translation>Винаги най-отгоре</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="123"/>
+        <location filename="../client/desktop/main_window.cc" line="127"/>
         <source>Search...</source>
         <translation>Търсене...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="212"/>
+        <location filename="../client/desktop/main_window.cc" line="216"/>
         <source>Unable to turn on the MCP connector.</source>
         <translation>Неуспешно включване на MCP конектора.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="235"/>
+        <location filename="../client/desktop/main_window.cc" line="239"/>
         <source>Management</source>
         <translation>Управление</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="278"/>
+        <location filename="../client/desktop/main_window.cc" line="282"/>
         <source>Are you sure you want to close the application?</source>
         <translation>Наистина ли искате да затворите приложението?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="472"/>
+        <location filename="../client/desktop/main_window.cc" line="476"/>
         <source>Credentials</source>
         <translation>Идентификационни данни</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="503"/>
+        <location filename="../client/desktop/main_window.cc" line="507"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="513"/>
+        <location filename="../client/desktop/main_window.cc" line="517"/>
         <source>Close all sessions to lock the application.</source>
         <translation>Затворете всички сесии, за да заключите приложението.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="519"/>
+        <location filename="../client/desktop/main_window.cc" line="523"/>
         <source>Close all dialogs to lock the application.</source>
         <translation>Затворете всички диалогови прозорци, за да заключите приложението.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="539"/>
+        <location filename="../client/desktop/main_window.cc" line="543"/>
         <source>Connect to a host by its ID from the command line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="540"/>
+        <location filename="../client/desktop/main_window.cc" line="544"/>
         <source>The icon of the screen of all the monitors at once</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="541"/>
+        <location filename="../client/desktop/main_window.cc" line="545"/>
         <source>Remote management of host users and update settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="542"/>
+        <location filename="../client/desktop/main_window.cc" line="546"/>
         <source>Full host configuration from a file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="543"/>
+        <location filename="../client/desktop/main_window.cc" line="547"/>
         <source>Bulk operations on multiple hosts at once</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="643"/>
+        <location filename="../client/desktop/main_window.cc" line="647"/>
         <source>Connection by ID is specified in the properties of the host, but the router is not configured. Check the parameters of the router in the properties of the host.</source>
         <translation>В свойствата на хоста е зададено свързване по ID, но рутерът не е конфигуриран. Проверете параметрите на рутера в свойствата на хоста.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="910"/>
+        <location filename="../client/desktop/main_window.cc" line="914"/>
         <source>Unknown application</source>
         <translation>Неизвестно приложение</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="913"/>
+        <location filename="../client/desktop/main_window.cc" line="917"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>MCP конектор. Свързани: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="914"/>
+        <location filename="../client/desktop/main_window.cc" line="918"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - ИИ е свързан</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1394"/>
+        <source>A host named by its address has no record of it in the address book, and there are no stored credentials to use. Give the user name and the password with --username and --password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1656"/>
+        <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1662"/>
+        <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
