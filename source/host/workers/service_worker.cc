@@ -360,7 +360,8 @@ void ServiceWorker::onUserSessionAttached()
                 QString display_name = client->displayName();
                 quint32 client_id = client->clientId();
 
-                user_session_->sendConnectEvent(client_id, session_type, computer_name, display_name);
+                user_session_->sendConnectEvent(client_id, session_type, computer_name, display_name,
+                               client->tcpChannel()->peerNotifySuppressed());
             }
             break;
 

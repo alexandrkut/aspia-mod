@@ -18,6 +18,8 @@
 
 #include "client/session_state.h"
 
+bool SessionState::next_notify_suppressed_ = false;
+
 #include "base/build_config.h"
 #include "base/net/address.h"
 #include "base/peer/host_id.h"

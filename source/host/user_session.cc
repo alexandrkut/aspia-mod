@@ -154,7 +154,7 @@ UserSession::~UserSession()
 
 //--------------------------------------------------------------------------------------------------
 void UserSession::sendConnectEvent(quint32 client_id, proto::peer::SessionType session_type,
-    const QString& computer_name, const QString& display_name)
+    const QString& computer_name, const QString& display_name, bool notify_suppressed)
 {
     proto::user::ConnectEvent* event =
         outgoing_message_.newMessage<proto::user::ServiceToUser>().mutable_connect_event();
@@ -162,6 +162,7 @@ void UserSession::sendConnectEvent(quint32 client_id, proto::peer::SessionType s
     event->set_session_type(session_type);
     event->set_computer_name(computer_name.toStdString());
     event->set_display_name(display_name.toStdString());
+    event->set_notify_suppressed(notify_suppressed);
     sendMessage();
 }
 

@@ -20,6 +20,7 @@
 #define CLIENT_DESKTOP_MANAGEMENT_ROUTER_HOST_DIALOG_H
 
 #include <QDialog>
+#include <QCheckBox>
 
 #include <memory>
 
@@ -62,6 +63,10 @@ private:
     qint64 router_id_ = 0;
     RouterHost host_;
     bool credentials_loaded_ = false;
+
+    QCheckBox* checkbox_notify_view_ = nullptr;
+    QCheckBox* checkbox_notify_control_ = nullptr;
+    QCheckBox* checkbox_notify_files_ = nullptr;
 
     Q_DISABLE_COPY_MOVE(RouterHostDialog)
 };

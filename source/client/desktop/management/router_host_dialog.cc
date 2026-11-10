@@ -19,7 +19,10 @@
 #include "client/desktop/management/router_host_dialog.h"
 
 #include <QAbstractButton>
+#include <QCheckBox>
 #include <QDialogButtonBox>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QIcon>
 #include <QLabel>
 #include <QPushButton>
@@ -70,6 +73,37 @@ RouterHostDialog::RouterHostDialog(qint64 router_id, const RouterHost& host, QWi
 
     if (!session || session->config().sessionType() != proto::router::SESSION_TYPE_ADMIN)
         ui->combo_workspace->setEnabled(false);
+
+    // Notify options (per host), visible only for ADMIN router sessions.
+    checkbox_notify_view_ = new QCheckBox(tr("Notify about viewing"), this);
+    checkbox_notify_control_ = new QCheckBox(tr("Notify about control"), this);
+    checkbox_notify_files_ = new QCheckBox(tr("Notify about files"), this);
+
+    checkbox_notify_view_->setChecked(false);
+    checkbox_notify_control_->setChecked(true);
+    checkbox_notify_files_->setChecked(true);
+
+    // Load stored values.
+    {
+        QString key = QString("host_notify/%1").arg(host_.address);
+        QString value = Database::instance().readSetting(key);
+        QJsonDocument doc = QJsonDocument::fromJson(value.toUtf8());
+        QJsonObject obj = doc.isObject() ? doc.object() : QJsonObject();
+        if (obj.contains("view")) checkbox_notify_view_->setChecked(obj.value("view").toBool());
+        if (obj.contains("control")) checkbox_notify_control_->setChecked(obj.value("control").toBool());
+        if (obj.contains("files")) checkbox_notify_files_->setChecked(obj.value("files").toBool());
+    }
+
+    bool is_admin = session && session->config().sessionType() == proto::router::SESSION_TYPE_ADMIN;
+    checkbox_notify_view_->setVisible(is_admin);
+    checkbox_notify_control_->setVisible(is_admin);
+    checkbox_notify_files_->setVisible(is_admin);
+
+    QGridLayout* grid = ui->gridLayout;
+    int row = 8;
+    grid->addWidget(checkbox_notify_view_, row++, 0, 1, 2);
+    grid->addWidget(checkbox_notify_control_, row++, 0, 1, 2);
+    grid->addWidget(checkbox_notify_files_, row++, 0, 1, 2);
 
     // A temporary host id is handed out at random and comes back for another machine, so what was
     // saved under it would be sent to a host the user never gave it to. Such a host is edited like
@@ -264,9 +298,28 @@ void RouterHostDialog::onButtonBoxClicked(QAbstractButton* button)
 
     if (session->config().sessionType() == proto::router::SESSION_TYPE_OPERATOR)
     {
+        // Save notify settings (if admin visible).
+        {
+            QJsonObject obj;
+            obj.insert("view", checkbox_notify_view_ ? checkbox_notify_view_->isChecked() : false);
+            obj.insert("control", checkbox_notify_control_ ? checkbox_notify_control_->isChecked() : true);
+            obj.insert("files", checkbox_notify_files_ ? checkbox_notify_files_->isChecked() : true);
+            QJsonDocument doc(obj);
+            Database::instance().writeSetting(QString("host_notify/%1_%2").arg(router_id_).arg(host_.host_id), QString::fromUtf8(doc.toJson(QJsonDocument::Compact)));
+        }
         LOG(INFO) << "[ACTION] Edit host accepted, credentials saved";
         accept();
         return;
+    }
+
+    // Save notify settings.
+    {
+        QJsonObject obj;
+        obj.insert("view", checkbox_notify_view_ ? checkbox_notify_view_->isChecked() : false);
+        obj.insert("control", checkbox_notify_control_ ? checkbox_notify_control_->isChecked() : true);
+        obj.insert("files", checkbox_notify_files_ ? checkbox_notify_files_->isChecked() : true);
+        QJsonDocument doc(obj);
+        Database::instance().writeSetting(QString("host_notify/%1_%2").arg(router_id_).arg(host_.host_id), QString::fromUtf8(doc.toJson(QJsonDocument::Compact)));
     }
 
     LOG(INFO) << "[ACTION] Edit host accepted, sending request";

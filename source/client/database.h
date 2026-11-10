@@ -207,6 +207,10 @@ public:
     bool setBiometricBlob(const QByteArray& blob);
     bool clearBiometricUnlock();
 
+public:
+    QString readSetting(const QString& name, bool* found = nullptr) const;
+    bool writeSetting(const QString& name, const QString& value);
+
 private:
     friend class DatabaseTestPeer;
 
@@ -214,9 +218,6 @@ private:
 
     bool openDatabase();
     bool setMasterPassword(const QByteArray& salt, const QByteArray& verifier, quint32 version);
-
-    QString readSetting(const QString& name, bool* found = nullptr) const;
-    bool writeSetting(const QString& name, const QString& value);
 
     mutable SqlDatabase db_;
 };

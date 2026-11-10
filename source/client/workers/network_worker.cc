@@ -26,12 +26,16 @@
 #include "base/peer/client_authenticator.h"
 #include "base/peer/relay_peer.h"
 #include "client/database.h"
+#include "client/session_state.h"
 #include "client/udp_attempt.h"
 #include "proto/key_exchange.h"
 #include "proto/peer.h"
 #include "proto/router_client.h"
 #include "proto/router_constants.h"
 #include "proto/router_peer.h"
+
+#include <QJsonDocument>
+#include <QJsonObject>
 
 // Registers NetworkWorker::Status so it can cross threads through the queued sig_statusChanged.
 static volatile auto g_statusType = qRegisterMetaType<NetworkWorker::Status>();
@@ -417,6 +421,32 @@ void NetworkWorker::startConnection()
         auth->setUserName(session_state_->hostUserName());
         auth->setPassword(SecureString(session_state_->hostPassword()));
         auth->setSessionType(static_cast<quint32>(session_state_->sessionType()));
+        // Compute notify_suppressed from per-host settings.
+        bool notify_suppressed = false;
+        {
+            const HostConfig& host = session_state_->host();
+            QString key;
+            if (host.routerId() > 0)
+                key = QString("host_notify/router_%1_%2").arg(host.routerId()).arg(host.address());
+            else if (!host.address().isEmpty())
+                key = QString("host_notify/%1").arg(host.address());
+            else
+                key = QString("host_notify/%1").arg(host.name());
+            QString value = Database::instance().readSetting(key);
+            QJsonDocument doc = QJsonDocument::fromJson(value.toUtf8());
+            QJsonObject obj = doc.isObject() ? doc.object() : QJsonObject();
+            bool view = obj.contains("view") ? obj.value("view").toBool() : false;
+            bool control = obj.contains("control") ? obj.value("control").toBool() : true;
+            bool files = obj.contains("files") ? obj.value("files").toBool() : true;
+            const proto::peer::SessionType st = session_state_->sessionType();
+            if (st == proto::peer::SESSION_TYPE_FILE_TRANSFER)
+                notify_suppressed = !files;
+            else if (SessionState::nextNotifySuppressed())
+                notify_suppressed = !view;
+            else
+                notify_suppressed = !control;
+        }
+        auth->setNotifySuppressed(notify_suppressed);
         auth->setDisplayName(session_state_->displayName());
     };
 

@@ -522,6 +522,7 @@ void TcpChannel::init()
         user_name_     = authenticator_->userName();
         user_id_       = authenticator_->userId();
         session_type_  = authenticator_->sessionType();
+        notify_suppressed_ = authenticator_->notifySuppressed();
 
         authenticator_->disconnect();
         authenticated_ = true;

@@ -668,7 +668,14 @@ void MainWindow::onConnect(const HostConfig& host, proto::peer::SessionType sess
             if (auto* management_tab = qobject_cast<ManagementTab*>(sender()))
             {
                 if (management_tab->consumeViewOnlyPending())
+                {
                     desktop_config.set_view_only(true);
+                    SessionState::setNextNotifySuppressed(true);
+                }
+                else
+                {
+                    SessionState::setNextNotifySuppressed(false);
+                }
             }
 
             // When the session opens in a tab, its visible area is bounded by the main window from

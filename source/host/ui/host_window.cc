@@ -492,29 +492,47 @@ void HostWindow::onStatusChanged(UserIpcWorker::Status status)
 //--------------------------------------------------------------------------------------------------
 void HostWindow::onClientListChanged(const UserIpcWorker::ClientList& clients)
 {
-    if (!notifier_)
+    bool has_unsuppressed = false;
+    for (const auto& client : std::as_const(clients))
     {
-        LOG(INFO) << "Create NotifierWindow";
-        notifier_ = new NotifierWindow();
-
-        connect(notifier_, &NotifierWindow::sig_killSession, this, &HostWindow::onKillSession);
-        connect(notifier_, &NotifierWindow::sig_lockMouse,
-                ipc_worker_, &UserIpcWorker::onMouseLock, Qt::QueuedConnection);
-        connect(notifier_, &NotifierWindow::sig_lockKeyboard,
-                ipc_worker_, &UserIpcWorker::onKeyboardLock, Qt::QueuedConnection);
-        connect(notifier_, &NotifierWindow::sig_pause,
-                ipc_worker_, &UserIpcWorker::onPause, Qt::QueuedConnection);
-
-        notifier_->setAttribute(Qt::WA_DeleteOnClose);
-        notifier_->show();
-        notifier_->raise();
-    }
-    else
-    {
-        LOG(INFO) << "NotifierWindow already exists";
+        if (!client.notify_suppressed)
+        {
+            has_unsuppressed = true;
+            break;
+        }
     }
 
-    notifier_->onClientListChanged(clients);
+    if (has_unsuppressed)
+    {
+        if (!notifier_)
+        {
+            LOG(INFO) << "Create NotifierWindow";
+            notifier_ = new NotifierWindow();
+
+            connect(notifier_, &NotifierWindow::sig_killSession, this, &HostWindow::onKillSession);
+            connect(notifier_, &NotifierWindow::sig_lockMouse,
+                    ipc_worker_, &UserIpcWorker::onMouseLock, Qt::QueuedConnection);
+            connect(notifier_, &NotifierWindow::sig_lockKeyboard,
+                    ipc_worker_, &UserIpcWorker::onKeyboardLock, Qt::QueuedConnection);
+            connect(notifier_, &NotifierWindow::sig_pause,
+                    ipc_worker_, &UserIpcWorker::onPause, Qt::QueuedConnection);
+
+            notifier_->setAttribute(Qt::WA_DeleteOnClose);
+            notifier_->show();
+            notifier_->raise();
+        }
+        else
+        {
+            LOG(INFO) << "NotifierWindow already exists";
+        }
+
+        notifier_->onClientListChanged(clients);
+    }
+    else if (notifier_)
+    {
+        notifier_->close();
+        notifier_ = nullptr;
+    }
 
     bool portable = false;
 #if defined(Q_OS_WINDOWS)

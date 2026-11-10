@@ -156,6 +156,7 @@ public:
     const std::string& peerUserName() const { return user_name_; }
     qint64 peerUserId() const { return user_id_; }
     quint32 peerSessionType() const { return session_type_; }
+    bool peerNotifySuppressed() const { return notify_suppressed_; }
 
 signals:
     void sig_connected();
@@ -268,6 +269,7 @@ private:
     std::string user_name_;
     qint64 user_id_ = 0;
     quint32 session_type_ = 0;
+    bool notify_suppressed_ = false;
 
     qint64 total_tx_ = 0;
     qint64 total_rx_ = 0;
