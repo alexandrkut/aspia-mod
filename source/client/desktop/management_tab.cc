@@ -1349,6 +1349,7 @@ void ManagementTab::onHostContextMenu(const QPoint& pos, int column)
             {
                 view_only_pending_ = true;
                 onConnectAction(ui->action_desktop_connect);
+                view_only_pending_ = false;
             });
         }
     }
