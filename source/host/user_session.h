@@ -64,7 +64,8 @@ public:
     quint32 oneTimeSessions() const { return one_time_sessions_; }
 
     void sendConnectEvent(quint32 client_id, proto::peer::SessionType session_type,
-        const QString& computer_name, const QString& display_name, bool notify_suppressed = false);
+        const QString& computer_name, const QString& display_name, bool notify_suppressed = false,
+        bool view_only = false);
     void sendDisconnectEvent(quint32 client_id);
 
 public slots:

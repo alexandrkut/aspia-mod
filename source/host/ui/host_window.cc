@@ -530,7 +530,7 @@ void HostWindow::onClientListChanged(const UserIpcWorker::ClientList& clients)
     }
     else if (notifier_)
     {
-        notifier_->close();
+        notifier_->closeNotifier();
         notifier_ = nullptr;
     }
 

@@ -61,11 +61,15 @@ class SessionTreeItem : public QTreeWidgetItem
 public:
     SessionTreeItem(const UserIpcWorker::Client& client)
         : session_type_(client.session_type),
+          view_only_(client.view_only),
           client_id_(client.client_id),
           display_name_(client.display_name),
           computer_name_(client.computer_name)
     {
-        setIcon(0, sessionIcon(session_type_));
+        if (session_type_ == proto::peer::SESSION_TYPE_DESKTOP && view_only_)
+            setIcon(0, QIcon(":/img/view-monitor.svg"));
+        else
+            setIcon(0, sessionIcon(session_type_));
 
         if (display_name_.isEmpty())
         {
@@ -97,6 +101,7 @@ public:
 
 private:
     const proto::peer::SessionType session_type_;
+    const bool view_only_;
     const quint32 client_id_;
     const QString display_name_;
     const QString computer_name_;

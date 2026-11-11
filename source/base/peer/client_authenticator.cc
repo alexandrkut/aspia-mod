@@ -630,6 +630,7 @@ void ClientAuthenticator::sendSessionResponse()
     response.set_arch(QSysInfo::buildCpuArchitecture().toStdString());
     response.set_probe(is_probe_);
     response.set_notify_suppressed(notifySuppressed());
+    response.set_view_only(viewOnly());
 
     QByteArray message = serialize(response);
     if (message.isEmpty())

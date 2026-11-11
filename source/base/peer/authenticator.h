@@ -84,11 +84,13 @@ public:
     [[nodiscard]] const std::string& peerDisplayName() const { return peer_display_name_; }
     [[nodiscard]] quint32 sessionType() const { return session_type_; }
     [[nodiscard]] bool notifySuppressed() const { return notify_suppressed_; }
+    [[nodiscard]] bool viewOnly() const { return view_only_; }
     [[nodiscard]] const std::string& userName() const { return user_name_; }
     [[nodiscard]] qint64 userId() const { return user_id_; }
     [[nodiscard]] bool isProbe() const { return is_probe_; }
 
     void setNotifySuppressed(bool value) { notify_suppressed_ = value; }
+    void setViewOnly(bool value) { view_only_ = value; }
 
     // Returns the current state.
     [[nodiscard]] State state() const { return state_; }
@@ -146,6 +148,7 @@ protected:
     qint64 user_id_ = 0; // Database id of the authenticated user (server-side only).
     bool is_probe_ = false;
     bool notify_suppressed_ = false;
+    bool view_only_ = false;
 
 private:
     GenericHash transcript_hash_;

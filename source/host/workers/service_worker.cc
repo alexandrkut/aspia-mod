@@ -361,7 +361,8 @@ void ServiceWorker::onUserSessionAttached()
                 quint32 client_id = client->clientId();
 
                 user_session_->sendConnectEvent(client_id, session_type, computer_name, display_name,
-                               client->tcpChannel()->peerNotifySuppressed());
+                               client->tcpChannel()->peerNotifySuppressed(),
+                               client->tcpChannel()->peerViewOnly());
             }
             break;
 

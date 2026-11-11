@@ -446,6 +446,7 @@ void NetworkWorker::startConnection()
                 notify_suppressed = !control;
         }
         auth->setNotifySuppressed(notify_suppressed);
+        auth->setViewOnly(SessionState::nextNotifySuppressed());
         auth->setDisplayName(session_state_->displayName());
     };
 

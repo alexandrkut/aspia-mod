@@ -644,6 +644,7 @@ void ServerAuthenticator::onSessionResponse(const QByteArray& buffer)
 
     is_probe_ = response.probe();
     notify_suppressed_ = response.notify_suppressed();
+    view_only_ = response.view_only();
 
     CLOG(TRACE) << "Client (session_type:" << response.session_type()
                 << "version:" << peerVersion().toString() << "name:" << peerComputerName()
