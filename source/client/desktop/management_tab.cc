@@ -1523,6 +1523,21 @@ void ManagementTab::onRouterGroupContextMenu(const QPoint& pos)
     addProxy(ui->action_chat_connect);
     addProxy(ui->action_system_info_connect);
 
+    // The view-only entry mirrors onHostContextMenu: administrators only. It resolves the host
+    // through the same onConnectAction path, which picks the selection of router_group_widget_
+    // (the content shown for a workspace/group in the sidebar).
+    RouterSession* session = RouterController::session(router_group_widget_->routerId());
+    if (session && session->config().sessionType() == proto::router::SESSION_TYPE_ADMIN)
+    {
+        QAction* view_connect = menu->addAction(QIcon(":/img/view-monitor.svg"), tr("Connect for viewing..."));
+        connect(view_connect, &QAction::triggered, this, [this]()
+        {
+            view_only_pending_ = true;
+            onConnectAction(ui->action_desktop_connect);
+            view_only_pending_ = false;
+        });
+    }
+
     if (ui->action_edit_host->isVisible())
     {
         menu->addSeparator();
