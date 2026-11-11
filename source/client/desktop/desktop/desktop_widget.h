@@ -60,8 +60,8 @@ public:
     void drawDesktopFrame(const QList<QRect>& dirty_rects);
     void setCursorShape(QPixmap&& cursor_shape, const QPoint& hotspot);
     void setCursorPosition(const QPointF& relative_position);
-    // In a view-only session the pointer stays a view marker instead of mimicking the remote
-    // cursor: no input is forwarded and the user must see it at a glance.
+    // In a view-only session the pointer is the standard no-entry cursor instead of mimicking the
+    // remote cursor: no input is forwarded and the user must see it at a glance.
     void setViewOnlyCursor(bool enable);
 
     void doMouseEvent(QEvent::Type event_type,
