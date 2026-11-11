@@ -228,6 +228,9 @@ void DesktopIpcWorker::onClientConfigured()
     proto::control::Config merged_config;
     merged_config.set_effects(true);
     merged_config.set_wallpaper(true);
+    // Identity for && below: the global guard engages only while every configured client is
+    // view-only; a parallel control client turns it off (per-client drop covers the view client).
+    merged_config.set_view_only(true);
     merged_config.set_quality(std::numeric_limits<quint32>::max());
 
     bool has_configured = false;
@@ -252,7 +255,7 @@ void DesktopIpcWorker::onClientConfigured()
         merged_config.set_effects(merged_config.effects() && config->effects());
         merged_config.set_wallpaper(merged_config.wallpaper() && config->wallpaper());
         merged_config.set_block_input(merged_config.block_input() || config->block_input());
-        merged_config.set_view_only(merged_config.view_only() || config->view_only());
+        merged_config.set_view_only(merged_config.view_only() && config->view_only());
         merged_config.set_lock_at_disconnect(merged_config.lock_at_disconnect() || config->lock_at_disconnect());
         merged_config.set_cursor_position(merged_config.cursor_position() || config->cursor_position());
         merged_config.set_cursor_shape(merged_config.cursor_shape() || config->cursor_shape());

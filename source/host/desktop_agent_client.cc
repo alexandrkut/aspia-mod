@@ -175,6 +175,12 @@ void DesktopAgentClient::readSessionMessage(quint8 channel_id, const QByteArray&
             return;
         }
 
+        // A view-only client must never drive the host: drop its input right here, per client, so
+        // one view session does not block a parallel control session (second layer of the view-only
+        // guard; the first layer is the client itself not sending input).
+        if (config_.has_value() && config_->view_only())
+            return;
+
         if (message->has_mouse())
             emit sig_injectMouseEvent(message->mouse());
         else if (message->has_touch())
