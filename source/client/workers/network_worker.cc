@@ -26,6 +26,7 @@
 #include "base/peer/client_authenticator.h"
 #include "base/peer/relay_peer.h"
 #include "client/database.h"
+#include "client/router_controller.h"
 #include "client/session_state.h"
 #include "client/udp_attempt.h"
 #include "proto/key_exchange.h"
@@ -421,10 +422,21 @@ void NetworkWorker::startConnection()
         auth->setUserName(session_state_->hostUserName());
         auth->setPassword(SecureString(session_state_->hostPassword()));
         auth->setSessionType(static_cast<quint32>(session_state_->sessionType()));
-        // Compute notify_suppressed from per-host settings.
+        // Compute notify_suppressed from per-host settings. Suppression is an administrator's
+        // privilege through a router: only an ADMIN router session honors the stored per-host
+        // notify switches; a manager/operator session and any direct connection always notify
+        // the host.
         bool notify_suppressed = false;
+        const HostConfig& host = session_state_->host();
+        bool honor_notify_settings = false;
+        if (host.routerId() > 0)
         {
-            const HostConfig& host = session_state_->host();
+            RouterSession* router_session = RouterController::session(host.routerId());
+            honor_notify_settings = router_session &&
+                router_session->config().sessionType() == proto::router::SESSION_TYPE_ADMIN;
+        }
+        if (honor_notify_settings)
+        {
             QString value;
             for (const QString& key : host.notifySettingsKeys())
             {
