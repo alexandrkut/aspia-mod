@@ -658,6 +658,7 @@ void MainWindow::onConnect(const HostConfig& host, proto::peer::SessionType sess
         parent_tab->isDetached() : !ui->action_sessions_in_tabs->isChecked();
 
     ClientWindow* client_window = nullptr;
+    bool view_only_session = false;
 
     switch (session_type)
     {
@@ -671,6 +672,7 @@ void MainWindow::onConnect(const HostConfig& host, proto::peer::SessionType sess
                 {
                     applyViewOnlyOverrides(desktop_config);
                     SessionState::setNextNotifySuppressed(true);
+                    view_only_session = true;
                 }
                 else
                 {
@@ -724,6 +726,9 @@ void MainWindow::onConnect(const HostConfig& host, proto::peer::SessionType sess
     QString display_name = Database::instance().displayName();
     QString computer_name = host.name().isEmpty() ? host.address() : host.name();
     QIcon icon = sessionIcon(session_type);
+    // A view session gets its own tab/window icon so it is told apart from a control session.
+    if (view_only_session)
+        icon = QIcon(QStringLiteral(":/img/view-monitor.svg"));
 
     client_window->setWindowIcon(icon);
 
