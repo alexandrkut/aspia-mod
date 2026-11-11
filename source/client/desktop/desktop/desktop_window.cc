@@ -144,6 +144,10 @@ DesktopWindow::DesktopWindow(const proto::control::Config& desktop_config, QWidg
     Database& db = Database::instance();
     desktop_->enableKeyCombinations(db.isSendKeyCombinationsEnabled());
     desktop_->enableRemoteCursorPosition(desktop_config_.cursor_position());
+    // A view-only session shows a view marker as the pointer instead of the remote cursor shape:
+    // nothing is forwarded and the user must see it at a glance.
+    if (desktop_config_.view_only())
+        desktop_->setViewOnlyCursor(true);
 
     connect(toolbar_, &DesktopToolBar::sig_keyCombination, desktop_, &DesktopWidget::executeKeyCombination);
     connect(toolbar_, &DesktopToolBar::sig_switchToAutosize, this, &DesktopWindow::onAutosizeWindow);

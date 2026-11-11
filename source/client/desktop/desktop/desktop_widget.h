@@ -60,6 +60,9 @@ public:
     void drawDesktopFrame(const QList<QRect>& dirty_rects);
     void setCursorShape(QPixmap&& cursor_shape, const QPoint& hotspot);
     void setCursorPosition(const QPointF& relative_position);
+    // In a view-only session the pointer stays a view marker instead of mimicking the remote
+    // cursor: no input is forwarded and the user must see it at a glance.
+    void setViewOnlyCursor(bool enable);
 
     void doMouseEvent(QEvent::Type event_type,
                       const Qt::MouseButtons& buttons,
@@ -115,6 +118,7 @@ private:
 #endif // defined(Q_OS_MACOS)
 
     QTimer* error_timer_ = nullptr;
+    bool view_only_cursor_ = false;
     proto::video::ErrorCode last_error_code_ = proto::video::ERROR_CODE_OK;
     proto::video::ErrorCode current_error_code_ = proto::video::ERROR_CODE_OK;
     std::unique_ptr<QImage> error_image_;

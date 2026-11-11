@@ -19,6 +19,7 @@
 #include "client/desktop/desktop/desktop_widget.h"
 
 #include <QApplication>
+#include <QIcon>
 #include <QPainter>
 #include <QPainterPath>
 #include <QSvgRenderer>
@@ -272,6 +273,14 @@ void DesktopWidget::setCursorShape(QPixmap&& cursor_shape, const QPoint& hotspot
     remote_cursor_shape_ = std::move(cursor_shape);
     remote_cursor_hotspot_ = hotspot;
 
+    if (view_only_cursor_)
+    {
+        // The shape is still kept for the painted position marker of the remote pointer, but the
+        // pointer itself stays the view marker: a view session never forwards input.
+        setCursor(QCursor(QIcon(QStringLiteral(":/img/view-monitor.svg")).pixmap(32, 32), 0, 0));
+        return;
+    }
+
     if (remote_cursor_shape_.isNull())
     {
         setCursor(QCursor(Qt::ArrowCursor));
@@ -279,6 +288,19 @@ void DesktopWidget::setCursorShape(QPixmap&& cursor_shape, const QPoint& hotspot
     }
 
     setCursor(QCursor(remote_cursor_shape_, hotspot.x(), hotspot.y()));
+}
+
+//--------------------------------------------------------------------------------------------------
+void DesktopWidget::setViewOnlyCursor(bool enable)
+{
+    view_only_cursor_ = enable;
+
+    if (enable)
+        setCursor(QCursor(QIcon(QStringLiteral(":/img/view-monitor.svg")).pixmap(32, 32), 0, 0));
+    else if (remote_cursor_shape_.isNull())
+        setCursor(QCursor(Qt::ArrowCursor));
+    else
+        setCursor(QCursor(remote_cursor_shape_, remote_cursor_hotspot_.x(), remote_cursor_hotspot_.y()));
 }
 
 //--------------------------------------------------------------------------------------------------
