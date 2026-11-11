@@ -80,10 +80,26 @@ QList<RouterHost> hostsToMove(const QList<RouterHost>& hosts, qint64 router_id, 
     QList<RouterHost> result;
     for (const RouterHost& host : hosts)
     {
-        if (host.workspace_id == workspace_id && host.group_id == group_id)
+        // Already in the dropped place (same workspace and group): nothing to do.
+        bool same_place = false;
+        bool member_of_target = false;
+        for (const auto& membership : std::as_const(host.memberships))
+        {
+            if (membership.first == workspace_id)
+            {
+                member_of_target = true;
+                if (membership.second == group_id)
+                    same_place = true;
+            }
+        }
+
+        if (same_place)
             continue;
 
-        if (host.workspace_id != workspace_id && !is_admin)
+        // Only an administrator may claim a workspace the host is not a member of; a member may
+        // only regroup within the workspaces the host already belongs to (the router refuses a
+        // workspace-set change from a non-admin anyway).
+        if (!member_of_target && !is_admin)
             continue;
 
         result.append(host);
@@ -1809,8 +1825,17 @@ bool Sidebar::onDrop(QDropEvent* event)
         {
             const HostId host_id = host.host_id;
 
-            host.workspace_id = target_workspace_id;
-            host.group_id = target_group_id;
+            // Drag & drop adds the membership of the dropped place: the host joins the target
+            // workspace in the dropped group (the workspace root if dropped on the workspace
+            // node) and keeps every other membership. The scalar fields stay as they are, the
+            // router re-derives the primary membership after the edit.
+            for (qsizetype i = host.memberships.size() - 1; i >= 0; --i)
+            {
+                if (host.memberships.at(i).first == target_workspace_id)
+                    host.memberships.removeAt(i);
+            }
+            host.memberships.append(qMakePair(target_workspace_id, target_group_id));
+
             session->editHost(host, { this,
                 [this, router_id, batch, total, host_id](const proto::router::HostResult& result)
             {

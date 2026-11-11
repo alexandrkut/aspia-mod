@@ -32,6 +32,8 @@ namespace Ui {
 class RouterHostDialog;
 } // namespace Ui
 
+class QListWidget;
+
 namespace proto::router {
 class HostResult;
 } // namespace proto::router
@@ -46,7 +48,6 @@ public:
 
 private slots:
     void onWorkspaceListReceived(const RouterWorkspaceList& list);
-    void onWorkspaceChanged(int index);
     void onGroupListReceived(const RouterGroupList& list);
     void onHostResultReceived(const proto::router::HostResult& result);
     void onSavedCredentialsToggled(bool checked);
@@ -63,6 +64,10 @@ private:
     qint64 router_id_ = 0;
     RouterHost host_;
     bool credentials_loaded_ = false;
+
+    // The workspace picker: a host may belong to several workspaces at once, so the single
+    // combo box is replaced by this check list (the combo stays in the ui file, hidden).
+    QListWidget* workspace_list_ = nullptr;
 
     QCheckBox* checkbox_notify_view_ = nullptr;
     QCheckBox* checkbox_notify_control_ = nullptr;

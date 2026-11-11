@@ -607,11 +607,35 @@ void RouterWorkspaceDialog::runPendingHostMove()
     if (!session || !pending_host_move_)
         return;
 
-    // The record is sent back as it was read, with the workspace it is to end up in: a claim puts
-    // the host at the root of the workspace, and a release takes its group and its note with it.
+    // The record is sent back with the membership of THIS workspace changed: a claim adds the
+    // host at the workspace root (unless it is already a member), a remove drops only this
+    // membership - every other workspace of the host stays (drag & drop adds, it does not move).
+    // The scalar fields stay untouched: the router re-derives the primary membership itself.
     RouterHost host = pending_host_;
-    host.workspace_id = pending_host_workspace_id_ == kNoWorkspace ? kNoWorkspace : entry_id_;
-    host.group_id = 0;
+
+    if (pending_host_workspace_id_ == kNoWorkspace)
+    {
+        for (qsizetype i = host.memberships.size() - 1; i >= 0; --i)
+        {
+            if (host.memberships.at(i).first == entry_id_)
+                host.memberships.removeAt(i);
+        }
+    }
+    else
+    {
+        bool present = false;
+        for (const auto& membership : std::as_const(host.memberships))
+        {
+            if (membership.first == entry_id_)
+            {
+                present = true;
+                break;
+            }
+        }
+
+        if (!present)
+            host.memberships.append(qMakePair(entry_id_, static_cast<qint64>(0)));
+    }
 
     pending_host_ = RouterHost();
     pending_host_workspace_id_ = 0;
@@ -619,7 +643,7 @@ void RouterWorkspaceDialog::runPendingHostMove()
 
     ui->tab_hosts->setEnabled(false);
 
-    LOG(INFO) << "[ACTION] Moving host" << host.host_id << "to workspace" << host.workspace_id;
+    LOG(INFO) << "[ACTION] Updating workspaces of host" << host.host_id;
     session->editHost(host, { this, &RouterWorkspaceDialog::onHostResultReceived });
 }
 
