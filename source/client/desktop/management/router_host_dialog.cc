@@ -327,7 +327,8 @@ void RouterHostDialog::onButtonBoxClicked(QAbstractButton* button)
         obj.insert("control", checkbox_notify_control_ ? checkbox_notify_control_->isChecked() : true);
         obj.insert("files", checkbox_notify_files_ ? checkbox_notify_files_->isChecked() : true);
         QJsonDocument doc(obj);
-        Database::instance().writeSetting(QString("host_notify/%1_%2").arg(router_id_).arg(host_.host_id), QString::fromUtf8(doc.toJson(QJsonDocument::Compact)));
+        HostConfig notify_host = HostConfig::forRouterHost(router_id_, host_.host_id, host_.computer_name);
+        Database::instance().writeSetting(notify_host.notifySettingsKeys().front(), QString::fromUtf8(doc.toJson(QJsonDocument::Compact)));
     }
 
     LOG(INFO) << "[ACTION] Edit host accepted, sending request";
