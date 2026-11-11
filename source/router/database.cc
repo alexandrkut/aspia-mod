@@ -330,22 +330,30 @@ bool ensureSchema(SqlDatabase& db)
         return false;
     }
 
-    if (!run("CREATE TABLE IF NOT EXISTS \"host_workspaces\" ("
-             "\"host_id\" INTEGER NOT NULL,"
-             "\"workspace_id\" INTEGER NOT NULL,"
-             "\"group_id\" INTEGER NOT NULL DEFAULT 0,"
-             "PRIMARY KEY (\"host_id\", \"workspace_id\"),"
-             "FOREIGN KEY (\"host_id\") REFERENCES \"hosts\"(\"id\") ON DELETE CASCADE,"
-             "FOREIGN KEY (\"workspace_id\") REFERENCES \"workspaces\"(\"id\") ON DELETE CASCADE)"))
+    if (!run("CREATE TABLE IF NOT EXISTS \"host_workspaces\" (\"host_id\" INTEGER NOT NULL, \"workspace_id\" INTEGER NOT NULL, \"group_id\" INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (\"host_id\", \"workspace_id\"), FOREIGN KEY (\"host_id\") REFERENCES \"hosts\"(\"id\") ON DELETE CASCADE, FOREIGN KEY (\"workspace_id\") REFERENCES \"workspaces\"(\"id\") ON DELETE CASCADE)"))
     {
         return false;
     }
 
-    if (!run("CREATE INDEX IF NOT EXISTS \"host_workspaces_workspace\" "
-             "ON \"host_workspaces\"(\"workspace_id\", \"group_id\")"))
+    if (!run("CREATE INDEX IF NOT EXISTS \"host_workspaces_workspace\" ON \"host_workspaces\"(\"workspace_id\", \"group_id\")"))
     {
         return false;
     }
+
+    // Migration from the single-membership model: seed host_workspaces from hosts that were
+    // assigned to a workspace. No-op once memberships exist.
+    if (!run("INSERT INTO \"host_workspaces\" (\"host_id\", \"workspace_id\", \"group_id\") SELECT \"id\", \"workspace_id\", \"group_id\" FROM \"hosts\" WHERE \"workspace_id\" > 0 AND (SELECT COUNT(*) FROM \"host_workspaces\") = 0"))
+    {
+        return false;
+    }
+
+
+    if (!run(R"(CREATE INDEX IF NOT EXISTS "host_workspaces_workspace" ON "host_workspaces"("workspace_id", "group_id"))"))
+    {
+        return false;
+    }
+
+
 
     // Migration from the single-membership model: seed host_workspaces from hosts that were
     // assigned to a workspace. No-op once memberships exist.
