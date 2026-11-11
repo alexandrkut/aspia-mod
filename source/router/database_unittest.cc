@@ -1287,3 +1287,154 @@ TEST(RouterDatabaseFreshTest, AddHostBeforeAnyAutoincrementInsert)
     ASSERT_EQ(db.hostId("hash-1", &host_id), proto::router::kErrorOk);
     EXPECT_EQ(host_id, HostId(1));
 }
+
+//--------------------------------------------------------------------------------------------------
+// A host of the single-membership era: scalar columns set, membership table empty. Opening the
+// database seeds the membership from the scalar exactly once.
+TEST_F(RouterDatabaseTest, MigrationSeedsMembershipsOnce)
+{
+    const qint64 workspace_id = addWorkspace("alpha", {admin_.entry_id});
+    ASSERT_GT(workspace_id, 0);
+
+    const HostId host_id = addHost("hash-1");
+    ASSERT_NE(host_id, kInvalidHostId);
+    ASSERT_TRUE(execRaw(QString("UPDATE hosts SET workspace_id=%1, group_id=0 WHERE id=%2")
+                            .arg(workspace_id)
+                            .arg(host_id)));
+
+    Database reopened;
+    ASSERT_TRUE(reopened.open(file_path_));
+
+    std::vector<qint64> seeded = reopened.hostWorkspaceIds(host_id);
+    ASSERT_EQ(seeded.size(), 1);
+    EXPECT_EQ(seeded[0], workspace_id);
+}
+
+//--------------------------------------------------------------------------------------------------
+// The scalar mirrors the FIRST membership added, and follows the removals.
+TEST_F(RouterDatabaseTest, MembershipPrimaryFollowsTheFirstAdded)
+{
+    const qint64 ws1 = addWorkspace("one", {admin_.entry_id});
+    const qint64 ws2 = addWorkspace("two", {admin_.entry_id});
+    ASSERT_GT(ws1, 0);
+    ASSERT_GT(ws2, 0);
+
+    const HostId host_id = addHost("hash-1");
+    ASSERT_NE(host_id, kInvalidHostId);
+
+    ASSERT_EQ(db_.addHostMembership(host_id, ws1, 0), proto::router::kErrorOk);
+    ASSERT_EQ(db_.addHostMembership(host_id, ws2, 0), proto::router::kErrorOk);
+
+    // First added stays primary even though ws2 was written last.
+    EXPECT_EQ(findHost(host_id).workspace_id(), ws1);
+
+    // The host is listed in both workspaces.
+    proto::router::HostList in_second;
+    db_.hosts(ws2, -1, 0, proto::router::kMaxHostPageSize, &in_second);
+    ASSERT_EQ(in_second.error_code(), proto::router::kErrorOk);
+    EXPECT_EQ(in_second.host_size(), 1);
+
+    // Removing the primary hands the baton to the next membership.
+    ASSERT_EQ(db_.removeHostMembership(host_id, ws1), proto::router::kErrorOk);
+    EXPECT_EQ(findHost(host_id).workspace_id(), ws2);
+
+    // Removing the last one releases the host entirely.
+    ASSERT_EQ(db_.removeHostMembership(host_id, ws2), proto::router::kErrorOk);
+    EXPECT_EQ(findHost(host_id).workspace_id(), 0);
+    EXPECT_TRUE(db_.hostWorkspaceIds(host_id).empty());
+}
+
+//--------------------------------------------------------------------------------------------------
+// Deleting a workspace takes only its membership rows: a host shared with another workspace
+// stays there, a host without one left becomes unassigned.
+TEST_F(RouterDatabaseTest, RemovingAWorkspaceKeepsHostsOfTheOthers)
+{
+    const qint64 ws1 = addWorkspace("one", {admin_.entry_id});
+    const qint64 ws2 = addWorkspace("two", {admin_.entry_id});
+    ASSERT_GT(ws1, 0);
+    ASSERT_GT(ws2, 0);
+
+    const HostId shared = addHost("hash-1");
+    const HostId only_first = addHost("hash-2");
+    ASSERT_NE(shared, kInvalidHostId);
+    ASSERT_NE(only_first, kInvalidHostId);
+
+    ASSERT_EQ(db_.addHostMembership(shared, ws1, 0), proto::router::kErrorOk);
+    ASSERT_EQ(db_.addHostMembership(shared, ws2, 0), proto::router::kErrorOk);
+    ASSERT_EQ(db_.addHostMembership(only_first, ws1, 0), proto::router::kErrorOk);
+
+    ASSERT_EQ(db_.removeWorkspace(ws1), proto::router::kErrorOk);
+
+    EXPECT_EQ(findHost(shared).workspace_id(), ws2);
+    EXPECT_EQ(findHost(only_first).workspace_id(), 0);
+
+    std::vector<qint64> remaining = db_.hostWorkspaceIds(shared);
+    ASSERT_EQ(remaining.size(), 1);
+    EXPECT_EQ(remaining[0], ws2);
+
+    proto::router::HostList still_listed;
+    db_.hosts(ws2, -1, 0, proto::router::kMaxHostPageSize, &still_listed);
+    ASSERT_EQ(still_listed.error_code(), proto::router::kErrorOk);
+    EXPECT_EQ(still_listed.host_size(), 1);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Deleting a group clears the group only on the memberships of ITS workspace.
+TEST_F(RouterDatabaseTest, RemovingAGroupClearsOnlyItsWorkspace)
+{
+    const qint64 ws1 = addWorkspace("one", {admin_.entry_id});
+    const qint64 ws2 = addWorkspace("two", {admin_.entry_id});
+    ASSERT_GT(ws1, 0);
+    ASSERT_GT(ws2, 0);
+
+    qint64 group1 = -1;
+    qint64 group2 = -1;
+    ASSERT_EQ(db_.addGroup(ws1, 0, "g1", std::string_view(), &group1), proto::router::kErrorOk);
+    ASSERT_EQ(db_.addGroup(ws2, 0, "g2", std::string_view(), &group2), proto::router::kErrorOk);
+
+    const HostId host_id = addHost("hash-1");
+    ASSERT_NE(host_id, kInvalidHostId);
+    ASSERT_EQ(db_.addHostMembership(host_id, ws1, group1), proto::router::kErrorOk);
+    ASSERT_EQ(db_.addHostMembership(host_id, ws2, group2), proto::router::kErrorOk);
+
+    ASSERT_EQ(db_.removeGroup(ws1, group1), proto::router::kErrorOk);
+
+    // The primary membership survived the group: still ws1, back at the root.
+    const proto::router::Host stored = findHost(host_id);
+    EXPECT_EQ(stored.workspace_id(), ws1);
+    EXPECT_EQ(stored.group_id(), 0);
+
+    // The group of the OTHER workspace is untouched.
+    proto::router::HostList in_other_group;
+    db_.hosts(ws2, group2, 0, proto::router::kMaxHostPageSize, &in_other_group);
+    ASSERT_EQ(in_other_group.error_code(), proto::router::kErrorOk);
+    EXPECT_EQ(in_other_group.host_size(), 1);
+}
+
+//--------------------------------------------------------------------------------------------------
+// A host shared between two of the searched workspaces matches once, not once per workspace.
+TEST_F(RouterDatabaseTest, SearchReturnsASharedHostOnce)
+{
+    const qint64 ws1 = addWorkspace("one", {admin_.entry_id});
+    const qint64 ws2 = addWorkspace("two", {admin_.entry_id});
+    ASSERT_GT(ws1, 0);
+    ASSERT_GT(ws2, 0);
+
+    const HostId host_id = addHost("hash-1");
+    ASSERT_NE(host_id, kInvalidHostId);
+    ASSERT_EQ(db_.addHostMembership(host_id, ws1, 0), proto::router::kErrorOk);
+    ASSERT_EQ(db_.addHostMembership(host_id, ws2, 0), proto::router::kErrorOk);
+
+    const proto::router::Host current = findHost(host_id);
+    ASSERT_EQ(db_.modifyHost(host_id, current.revision(), ws1, 0, "shared host",
+                             std::string_view()),
+              proto::router::kErrorOk);
+
+    std::set<qint64> scopes = { ws1, ws2 };
+    proto::router::HostSearchResult result;
+    db_.searchHosts("shared", scopes, 0, proto::router::kMaxHostPageSize, &result);
+    ASSERT_EQ(result.error_code(), proto::router::kErrorOk);
+
+    EXPECT_EQ(result.total_count(), 1);
+    EXPECT_EQ(result.host_size(), 1);
+}

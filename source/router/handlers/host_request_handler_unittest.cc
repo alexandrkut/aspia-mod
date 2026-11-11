@@ -1028,3 +1028,33 @@ TEST_F(HostListTest, SearchWithAnInvalidPageIsRejected)
     EXPECT_EQ(huge.error_code(), proto::router::kErrorInvalidRequest);
     EXPECT_EQ(huge.total_count(), 0);
 }
+
+//--------------------------------------------------------------------------------------------------
+// The host is shared with a second workspace; an operator who is a member of that workspace may
+// edit the host even though the edit keeps it in the primary workspace he does NOT belong to,
+// and an operator sharing no workspace with the host is refused.
+TEST_F(HostRequestHandlerTest, MemberOfASecondWorkspaceMayEditTheHost)
+{
+    const qint64 shared_id = addWorkspace("beta");
+    ASSERT_GT(shared_id, 0);
+    ASSERT_EQ(db_.addHostMembership(host_id_, shared_id, 0), proto::router::kErrorOk);
+
+    const RouterUser client = addUser("client", proto::router::SESSION_TYPE_OPERATOR);
+    ASSERT_TRUE(client.isValid());
+    ASSERT_EQ(db_.modifyWorkspace(shared_id, 1, "beta", std::string_view(),
+                                  { client.entry_id }),
+              proto::router::kErrorOk);
+    setCaller(client, proto::router::SESSION_TYPE_OPERATOR);
+
+    // The edit keeps the host in its primary workspace, which the caller is not a member of:
+    // the membership in beta is enough.
+    EXPECT_EQ(handle(makeRequest(host_id_, 0, "display")).error_code, proto::router::kErrorOk);
+
+    // A caller sharing no workspace with the host is refused.
+    const RouterUser outsider = addUser("outsider", proto::router::SESSION_TYPE_OPERATOR);
+    ASSERT_TRUE(outsider.isValid());
+    setCaller(outsider, proto::router::SESSION_TYPE_OPERATOR);
+
+    EXPECT_EQ(handle(makeRequest(host_id_, 0, "display")).error_code,
+              proto::router::kErrorAccessDenied);
+}
