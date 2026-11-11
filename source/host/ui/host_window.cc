@@ -492,17 +492,16 @@ void HostWindow::onStatusChanged(UserIpcWorker::Status status)
 //--------------------------------------------------------------------------------------------------
 void HostWindow::onClientListChanged(const UserIpcWorker::ClientList& clients)
 {
-    bool has_unsuppressed = false;
+    // A suppressed session must never leak into the popup: only unsuppressed clients are listed
+    // (and drive the show/close decision); if none are left, the popup goes away.
+    UserIpcWorker::ClientList visible_clients;
     for (const auto& client : std::as_const(clients))
     {
         if (!client.notify_suppressed)
-        {
-            has_unsuppressed = true;
-            break;
-        }
+            visible_clients.append(client);
     }
 
-    if (has_unsuppressed)
+    if (!visible_clients.isEmpty())
     {
         if (!notifier_)
         {
@@ -526,7 +525,7 @@ void HostWindow::onClientListChanged(const UserIpcWorker::ClientList& clients)
             LOG(INFO) << "NotifierWindow already exists";
         }
 
-        notifier_->onClientListChanged(clients);
+        notifier_->onClientListChanged(visible_clients);
     }
     else if (notifier_)
     {
