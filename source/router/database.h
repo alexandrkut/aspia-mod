@@ -230,6 +230,25 @@ public:
     // answer could not be read. Used to validate user access before edits.
     std::string_view hostWorkspaceId(HostId host_id, qint64* workspace_id) const;
 
+    // Every workspace the host belongs to, in membership order (the first row added first).
+    // Empty when the host has no memberships or the database cannot be read.
+    std::vector<qint64> hostWorkspaceIds(HostId host_id) const;
+
+    // Re-points the scalar workspace_id/group_id columns of |hosts| at the primary membership -
+    // the first row added, i.e. the lowest rowid. No rows left means "not assigned" (0/0).
+    // Does not touch revision or last_modify: callers that move data move those themselves.
+    void refreshPrimaryMembership(HostId host_id);
+
+    // Adds a membership of the host in the workspace (insert is idempotent: an existing
+    // membership keeps its group). Bumps revision and last_modify. group_id == 0 places the host
+    // at the workspace root. Returns a proto::router error code.
+    std::string_view addHostMembership(HostId host_id, qint64 workspace_id, qint64 group_id = 0);
+
+    // Drops the membership of the host in the workspace and refreshes the primary membership
+    // (the host may stay in the workspace through another membership, and keeps its other
+    // workspaces). Bumps revision and last_modify. Returns a proto::router error code.
+    std::string_view removeHostMembership(HostId host_id, qint64 workspace_id);
+
     // Updates the admin/manager-editable fields of a host. workspace_id is the workspace the host
     // ends up in: 0 releases it, and the group it carried within the workspace goes with it; the
     // note is the host's own and is stored as given whether the host is in a workspace or not.

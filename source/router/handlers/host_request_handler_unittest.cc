@@ -165,8 +165,8 @@ TEST_F(HostRequestHandlerTest, HostListStaysSendableAfterOversizedEdits)
 {
     const HostId second_id = addHost("hash-2");
     ASSERT_NE(second_id, kInvalidHostId);
-    ASSERT_TRUE(execRaw(QString("UPDATE hosts SET workspace_id=%1 WHERE id=%2")
-                        .arg(workspace_id_).arg(second_id)));
+    // The rows must be in the membership table: the listing reads membership, not the scalar.
+    ASSERT_EQ(db_.addHostMembership(second_id, workspace_id_, 0), proto::router::kErrorOk);
 
     for (HostId id : { host_id_, second_id })
     {
@@ -881,6 +881,13 @@ TEST_F(HostListTest, FullPageOfLargestHostsFitsTheChannel)
         .arg(proto::router::kMaxEntryNameLength).arg(proto::router::kMaxCommentLength);
 
     ASSERT_TRUE(execRaw(sql));
+
+    // The listing reads the membership table, so the raw rows above need their membership rows
+    // too - the point of the test is the size of the reply, not the path the rows took.
+    ASSERT_TRUE(execRaw(QString(
+        "INSERT INTO host_workspaces (host_id, workspace_id, group_id) "
+        "SELECT id, workspace_id, 0 FROM hosts WHERE workspace_id = %1 "
+        "AND id NOT IN (SELECT host_id FROM host_workspaces)").arg(workspace_id_)));
 
     proto::router::HostListRequest request =
         hostListRequest(proto::router::HostListRequest::MODE_FILTERED, workspace_id_, 0);
