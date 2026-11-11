@@ -423,6 +423,22 @@ HostConfig HostConfig::forRouterHost(qint64 router_id, HostId host_id, const QSt
 }
 
 //--------------------------------------------------------------------------------------------------
+QStringList HostConfig::notifySettingsKeys() const
+{
+    QStringList keys;
+    if (routerId() > 0)
+    {
+        keys.append(QString("host_notify/router_%1_%2").arg(routerId()).arg(address()));
+        keys.append(QString("host_notify/%1_%2").arg(routerId()).arg(address()));
+    }
+    if (!address().isEmpty())
+        keys.append(QString("host_notify/%1").arg(address()));
+    if (!name().isEmpty())
+        keys.append(QString("host_notify/%1").arg(name()));
+    return keys;
+}
+
+//--------------------------------------------------------------------------------------------------
 proto::control::Config defaultDesktopConfig()
 {
     proto::control::Config config;

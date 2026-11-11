@@ -425,14 +425,13 @@ void NetworkWorker::startConnection()
         bool notify_suppressed = false;
         {
             const HostConfig& host = session_state_->host();
-            QString key;
-            if (host.routerId() > 0)
-                key = QString("host_notify/router_%1_%2").arg(host.routerId()).arg(host.address());
-            else if (!host.address().isEmpty())
-                key = QString("host_notify/%1").arg(host.address());
-            else
-                key = QString("host_notify/%1").arg(host.name());
-            QString value = Database::instance().readSetting(key);
+            QString value;
+            for (const QString& key : host.notifySettingsKeys())
+            {
+                value = Database::instance().readSetting(key);
+                if (!value.isEmpty())
+                    break;
+            }
             QJsonDocument doc = QJsonDocument::fromJson(value.toUtf8());
             QJsonObject obj = doc.isObject() ? doc.object() : QJsonObject();
             bool view = obj.contains("view") ? obj.value("view").toBool() : false;

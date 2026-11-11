@@ -34,6 +34,7 @@
 #include "base/logging.h"
 #include "base/crypto/secure_string.h"
 #include "base/peer/host_id.h"
+#include "client/config.h"
 #include "client/database.h"
 #include "client/router_controller.h"
 #include "client/settings.h"
@@ -85,8 +86,14 @@ RouterHostDialog::RouterHostDialog(qint64 router_id, const RouterHost& host, QWi
 
     // Load stored values.
     {
-        QString key = QString("host_notify/%1").arg(host_.address);
-        QString value = Database::instance().readSetting(key);
+        HostConfig notify_host = HostConfig::forRouterHost(router_id_, host_.host_id, host_.computer_name);
+        QString value;
+        for (const QString& key : notify_host.notifySettingsKeys())
+        {
+            value = Database::instance().readSetting(key);
+            if (!value.isEmpty())
+                break;
+        }
         QJsonDocument doc = QJsonDocument::fromJson(value.toUtf8());
         QJsonObject obj = doc.isObject() ? doc.object() : QJsonObject();
         if (obj.contains("view")) checkbox_notify_view_->setChecked(obj.value("view").toBool());
@@ -305,7 +312,8 @@ void RouterHostDialog::onButtonBoxClicked(QAbstractButton* button)
             obj.insert("control", checkbox_notify_control_ ? checkbox_notify_control_->isChecked() : true);
             obj.insert("files", checkbox_notify_files_ ? checkbox_notify_files_->isChecked() : true);
             QJsonDocument doc(obj);
-            Database::instance().writeSetting(QString("host_notify/%1_%2").arg(router_id_).arg(host_.host_id), QString::fromUtf8(doc.toJson(QJsonDocument::Compact)));
+            HostConfig notify_host = HostConfig::forRouterHost(router_id_, host_.host_id, host_.computer_name);
+            Database::instance().writeSetting(notify_host.notifySettingsKeys().front(), QString::fromUtf8(doc.toJson(QJsonDocument::Compact)));
         }
         LOG(INFO) << "[ACTION] Edit host accepted, credentials saved";
         accept();

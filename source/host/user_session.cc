@@ -325,12 +325,14 @@ void UserSession::onClientStarted()
         case proto::peer::SESSION_TYPE_DESKTOP:
         {
             ++desktop_client_count_;
-            sendConnectEvent(client_id, session_type, computer_name, display_name);
+            sendConnectEvent(client_id, session_type, computer_name, display_name,
+                             client->tcpChannel()->peerNotifySuppressed());
         }
         break;
 
         case proto::peer::SESSION_TYPE_FILE_TRANSFER:
-            sendConnectEvent(client_id, session_type, computer_name, display_name);
+            sendConnectEvent(client_id, session_type, computer_name, display_name,
+                             client->tcpChannel()->peerNotifySuppressed());
             break;
 
         default:

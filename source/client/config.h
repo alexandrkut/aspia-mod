@@ -339,6 +339,8 @@ public:
     const QString& address() const { return address_; }
     void setAddress(const QString& value) { address_ = value; }
 
+    QStringList notifySettingsKeys() const;
+
     const QString& name() const { return name_; }
     void setName(const QString& value) { name_ = value; }
 
