@@ -463,7 +463,7 @@ void RouterGroupWidget::startDrag()
         return;
 
     RouterHostDrag drag(this);
-    drag.setHosts(router_id_, hosts, mime_type_);
+    drag.setHosts(router_id_, workspace_id_, hosts, mime_type_);
 
     const QIcon icon = index.siblingAtColumn(0).data(Qt::DecorationRole).value<QIcon>();
     drag.setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));

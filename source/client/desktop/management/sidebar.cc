@@ -109,6 +109,34 @@ QList<RouterHost> hostsToMove(const QList<RouterHost>& hosts, qint64 router_id, 
 }
 
 //--------------------------------------------------------------------------------------------------
+// The hosts that a drop onto the "Approved Hosts" node unassigns: the hosts the drop would take
+// out of the space they were dragged from. A host that is not a member of that space (one
+// dragged from the approved list itself, which is no space) is left out, and so is everything
+// a non-admin drags - the router refuses a workspace-set change from anybody but an
+// administrator, so highlighting the target would only promise a drop that fails.
+QList<RouterHost> hostsToUnassign(const QList<RouterHost>& hosts, qint64 router_id,
+                                  qint64 source_workspace_id)
+{
+    if (source_workspace_id <= 0 || !isRouterAdmin(router_id))
+        return QList<RouterHost>();
+
+    QList<RouterHost> result;
+    for (const RouterHost& host : hosts)
+    {
+        for (const auto& membership : std::as_const(host.memberships))
+        {
+            if (membership.first == source_workspace_id)
+            {
+                result.append(host);
+                break;
+            }
+        }
+    }
+
+    return result;
+}
+
+//--------------------------------------------------------------------------------------------------
 // Names an item across restarts. The items of a router lie under it at the top level.
 QByteArray itemKey(const SidebarItem* item)
 {
@@ -1418,12 +1446,14 @@ bool Sidebar::onDragMove(QDragMoveEvent* event)
         if (!host_mime_data)
             return true;
 
-        // The target is either a host group or the workspace item (move to the workspace root,
-        // group id 0). A host stays within its router.
+        // The target is either a host group, the workspace item (move to the workspace root,
+        // group id 0) or the "Approved Hosts" node (take the host out of the space it was
+        // dragged from). A host stays within its router.
         SidebarItem* target_item = static_cast<SidebarItem*>(target_tree_item);
         qint64 target_router_id = 0;
         qint64 target_workspace_id = 0;
         qint64 target_group_id = 0;
+        bool unassign = false;
 
         if (target_item->itemType() == SidebarItem::ROUTER_GROUP)
         {
@@ -1438,6 +1468,12 @@ bool Sidebar::onDragMove(QDragMoveEvent* event)
             target_router_id = workspace_item->routerId();
             target_workspace_id = workspace_item->workspaceId();
         }
+        else if (target_item->itemType() == SidebarItem::ROUTER_HOSTS)
+        {
+            auto* hosts_item = static_cast<SidebarRouterHosts*>(target_item);
+            target_router_id = hosts_item->routerId();
+            unassign = true;
+        }
         else
         {
             return true;
@@ -1446,7 +1482,12 @@ bool Sidebar::onDragMove(QDragMoveEvent* event)
         if (target_router_id != host_mime_data->routerId())
             return true;
 
-        if (hostsToMove(host_mime_data->hosts(), target_router_id, target_workspace_id, target_group_id).isEmpty())
+        const QList<RouterHost> affected = unassign ?
+            hostsToUnassign(host_mime_data->hosts(), target_router_id,
+                            host_mime_data->sourceWorkspaceId()) :
+            hostsToMove(host_mime_data->hosts(), target_router_id, target_workspace_id,
+                        target_group_id);
+        if (affected.isEmpty())
             return true;
 
         tree_widget_->clearSelection();
@@ -1766,11 +1807,13 @@ bool Sidebar::onDrop(QDropEvent* event)
             return true;
         }
 
-        // The target is either a host group or the workspace item (move to the workspace root).
+        // The target is either a host group, the workspace item (move to the workspace root)
+        // or the "Approved Hosts" node (take the host out of the space it was dragged from).
         SidebarItem* target_item = static_cast<SidebarItem*>(target_tree_item);
         qint64 target_router_id = 0;
         qint64 target_workspace_id = 0;
         qint64 target_group_id = 0;
+        bool unassign = false;
 
         if (target_item->itemType() == SidebarItem::ROUTER_GROUP)
         {
@@ -1785,6 +1828,12 @@ bool Sidebar::onDrop(QDropEvent* event)
             target_router_id = workspace_item->routerId();
             target_workspace_id = workspace_item->workspaceId();
         }
+        else if (target_item->itemType() == SidebarItem::ROUTER_HOSTS)
+        {
+            auto* hosts_item = static_cast<SidebarRouterHosts*>(target_item);
+            target_router_id = hosts_item->routerId();
+            unassign = true;
+        }
         else
         {
             restoreSelection();
@@ -1795,9 +1844,12 @@ bool Sidebar::onDrop(QDropEvent* event)
 
         // Repeat the eligibility checks from onDragMove in case the user releases over a
         // target that wasn't validated (DragLeave without DragMove can happen).
-        const QList<RouterHost> hosts = target_router_id == router_id ?
-            hostsToMove(host_mime_data->hosts(), router_id, target_workspace_id, target_group_id) :
-            QList<RouterHost>();
+        const QList<RouterHost> hosts = target_router_id != router_id ? QList<RouterHost>() :
+            (unassign ?
+                hostsToUnassign(host_mime_data->hosts(), router_id,
+                                host_mime_data->sourceWorkspaceId()) :
+                hostsToMove(host_mime_data->hosts(), router_id, target_workspace_id,
+                            target_group_id));
         if (hosts.isEmpty())
         {
             restoreSelection();
@@ -1825,19 +1877,40 @@ bool Sidebar::onDrop(QDropEvent* event)
         {
             const HostId host_id = host.host_id;
 
-            // Drag & drop adds the membership of the dropped place: the host joins the target
-            // workspace in the dropped group (the workspace root if dropped on the workspace
-            // node) and keeps every other membership. The scalar fields stay as they are, the
-            // router re-derives the primary membership after the edit.
-            for (qsizetype i = host.memberships.size() - 1; i >= 0; --i)
+            if (unassign)
             {
-                if (host.memberships.at(i).first == target_workspace_id)
-                    host.memberships.removeAt(i);
+                // The drop takes the host out of the space it was dragged from; every other
+                // membership stays. With no membership left the host is released from the
+                // spaces entirely - the scalar has to follow, an untouched scalar against an
+                // empty list reads as a no-op edit on the router.
+                for (qsizetype i = host.memberships.size() - 1; i >= 0; --i)
+                {
+                    if (host.memberships.at(i).first == host_mime_data->sourceWorkspaceId())
+                        host.memberships.removeAt(i);
+                }
+
+                if (host.memberships.isEmpty())
+                {
+                    host.workspace_id = 0;
+                    host.group_id = 0;
+                }
             }
-            host.memberships.append(qMakePair(target_workspace_id, target_group_id));
+            else
+            {
+                // Drag & drop adds the membership of the dropped place: the host joins the target
+                // workspace in the dropped group (the workspace root if dropped on the workspace
+                // node) and keeps every other membership. The scalar fields stay as they are, the
+                // router re-derives the primary membership after the edit.
+                for (qsizetype i = host.memberships.size() - 1; i >= 0; --i)
+                {
+                    if (host.memberships.at(i).first == target_workspace_id)
+                        host.memberships.removeAt(i);
+                }
+                host.memberships.append(qMakePair(target_workspace_id, target_group_id));
+            }
 
             session->editHost(host, { this,
-                [this, router_id, batch, total, host_id](const proto::router::HostResult& result)
+                [this, router_id, unassign, batch, total, host_id](const proto::router::HostResult& result)
             {
                 if (result.error_code() != proto::router::kErrorOk)
                 {
@@ -1850,9 +1923,14 @@ bool Sidebar::onDrop(QDropEvent* event)
 
                 if (batch->failed > 0)
                 {
-                    MsgBox::warning(tree_widget_, total == 1 ?
-                        tr("Failed to move the host to the selected group.") :
-                        tr("Failed to move %n of the selected hosts.", "", batch->failed));
+                    MsgBox::warning(tree_widget_, unassign ?
+                        (total == 1 ?
+                            tr("Failed to remove the host from the space.") :
+                            tr("Failed to remove %n of the selected hosts from the space.", "",
+                               batch->failed)) :
+                        (total == 1 ?
+                            tr("Failed to move the host to the selected group.") :
+                            tr("Failed to move %n of the selected hosts.", "", batch->failed)));
                 }
 
                 if (batch->failed < total)

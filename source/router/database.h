@@ -290,12 +290,20 @@ public:
     void hosts(qint64 workspace_id, qint64 group_id, qint64 offset, qint64 count,
         proto::router::HostList* out) const;
 
+    // Appends the hosts that are NOT members of |workspace_id| (> 0) to |out|: the hosts of the
+    // other workspaces together with the hosts no workspace claimed, whatever group they sit
+    // in. The page rules are the same as in the overload above; this scope has no group
+    // dimension.
+    void hostsOutside(qint64 workspace_id, qint64 offset, qint64 count,
+        proto::router::HostList* out) const;
+
     // Reads into |count| the host count in the same scope as the matching hosts() overload. Used
     // by the client to drive pagination UI without fetching the full list. Returns
     // kErrorInternalError when the answer could not be read - a zero count from a failed query
     // would truncate the pagination.
     std::string_view hostCount(const proto::router::HostFilter& filter, qint64* count) const;
     std::string_view hostCount(qint64 workspace_id, qint64 group_id, qint64* count) const;
+    std::string_view hostCountOutside(qint64 workspace_id, qint64* count) const;
 
     // Substring search over |display_name|, |comment| (case-insensitive) and the decimal host_id,
     // restricted to the given workspaces. |workspace_ids| must already be the set the user is

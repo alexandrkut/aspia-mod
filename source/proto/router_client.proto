@@ -146,7 +146,7 @@ message HostFilter
     string host_id              = 7;
 }
 
-// A page of hosts. The page is mandatory in both modes: a reply carrying every host of the scope
+// A page of hosts. The page is mandatory in every mode: a reply carrying every host of the scope
 // grows past the message limit, and such a reply ends the session instead of being sent.
 message HostListRequest
 {
@@ -161,6 +161,13 @@ message HostListRequest
         // with |workspace_id| > 0). The caller must have access to the requested workspace.
         // A request carrying |filter| is refused.
         MODE_FILTERED = 2;
+        // The hosts that are NOT members of |workspace_id| (> 0): the hosts of the other
+        // workspaces together with the hosts no workspace claimed, whatever group they sit
+        // in. This is what a workspace properties dialog lists as "outside". Admin only;
+        // |group_id| must be zero and a request carrying |filter| is refused. A router that
+        // predates the mode answers invalid_request, which the client reads as a signal to
+        // fall back to the free-hosts list.
+        MODE_OUTSIDE_WORKSPACE = 3;
     }
 
     int64 request_id   = 1;

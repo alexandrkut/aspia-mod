@@ -212,7 +212,7 @@
          <item>
           <widget class="QLabel" name="label_hosts_available">
            <property name="text">
-            <string>Unassigned hosts</string>
+            <string>Hosts outside the space</string>
            </property>
           </widget>
          </item>
@@ -220,9 +220,9 @@
           <widget class="QListWidget" name="list_hosts_available"/>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="layout_hosts_free_pagination">
+          <layout class="QHBoxLayout" name="layout_hosts_out_pagination">
            <item>
-            <widget class="QToolButton" name="button_hosts_free_prev">
+            <widget class="QToolButton" name="button_hosts_out_prev">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                <horstretch>0</horstretch>
@@ -239,14 +239,14 @@
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="combo_hosts_free_page">
+            <widget class="QComboBox" name="combo_hosts_out_page">
              <property name="sizeAdjustPolicy">
               <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="button_hosts_free_next">
+            <widget class="QToolButton" name="button_hosts_out_next">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                <horstretch>0</horstretch>
@@ -263,7 +263,7 @@
             </widget>
            </item>
            <item>
-            <spacer name="spacer_hosts_free_pagination">
+            <spacer name="spacer_hosts_out_pagination">
              <property name="orientation">
               <enum>Qt::Orientation::Horizontal</enum>
              </property>

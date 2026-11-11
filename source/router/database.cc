@@ -2501,6 +2501,85 @@ void Database::hosts(qint64 workspace_id, qint64 group_id, qint64 offset,
 }
 
 //--------------------------------------------------------------------------------------------------
+void Database::hostsOutside(qint64 workspace_id, qint64 offset, qint64 count,
+    proto::router::HostList* out) const
+{
+    if (!isValid())
+    {
+        LOG(ERROR) << "Database is not valid";
+        out->set_error_code(proto::router::kErrorInternalError);
+        return;
+    }
+
+    if (!isPageValid(offset, count, proto::router::kMaxHostPageSize))
+    {
+        LOG(ERROR) << "Invalid host list page: offset" << offset << "count" << count;
+        out->set_error_code(proto::router::kErrorInvalidRequest);
+        return;
+    }
+
+    // The complement of the membership scope above: a host qualifies when no membership row
+    // ties it to the workspace. That reads from one workspace's point of view as "everywhere
+    // else" - the hosts of the other workspaces and the hosts without any workspace.
+    const std::string sql =
+        "SELECT id, revision, workspace_id, group_id, display_name, computer_name, cpu_arch, "
+        "version, os_name, address, comment, last_connect, last_modify FROM hosts "
+        "WHERE NOT EXISTS (SELECT 1 FROM host_workspaces hw WHERE hw.host_id = hosts.id AND "
+        "hw.workspace_id = ?) ORDER BY id LIMIT ? OFFSET ?";
+
+    SqlQuery query(db_, sql);
+    if (!query.isValid())
+    {
+        LOG(ERROR) << "Unable to execute query:" << db_.lastError();
+        out->set_error_code(proto::router::kErrorInternalError);
+        return;
+    }
+
+    query.addInt64(workspace_id);
+    query.addInt64(count);
+    query.addInt64(offset);
+
+    std::vector<quint64> page_ids;
+    page_ids.reserve(static_cast<size_t>(count));
+
+    for (;;)
+    {
+        const SqlQuery::StepResult step = query.next();
+        if (step == SqlQuery::StepResult::FAILED)
+        {
+            // An error reply must not carry the partial list scanned so far.
+            LOG(ERROR) << "Unable to execute query:" << db_.lastError();
+            out->clear_host();
+            out->set_error_code(proto::router::kErrorInternalError);
+            return;
+        }
+
+        if (step == SqlQuery::StepResult::DONE)
+            break;
+
+        proto::router::Host* host = out->add_host();
+        host->set_host_id(query.columnUInt64(0));
+        host->set_revision(query.columnInt64(1));
+        host->set_workspace_id(query.columnInt64(2));
+        host->set_group_id(query.columnInt64(3));
+        host->set_display_name(query.columnTextView(4));
+        host->set_computer_name(query.columnTextView(5));
+        host->set_cpu_arch(query.columnTextView(6));
+        host->set_version(query.columnTextView(7));
+        host->set_os_name(query.columnTextView(8));
+        host->set_address(query.columnTextView(9));
+        host->set_comment(query.columnTextView(10));
+        host->set_last_connect(query.columnInt64(11));
+        host->set_last_modify(query.columnInt64(12));
+        page_ids.emplace_back(host->host_id());
+    }
+
+    attachMemberships(page_ids, out);
+
+    out->set_error_code(proto::router::kErrorOk);
+}
+
+//--------------------------------------------------------------------------------------------------
 std::string_view Database::hostCount(const proto::router::HostFilter& filter, qint64* count) const
 {
     CHECK(count);
@@ -2580,6 +2659,44 @@ std::string_view Database::hostCount(qint64 workspace_id, qint64 group_id, qint6
         query.addInt64(workspace_id);
     if (!any_group)
         query.addInt64(group_id);
+
+    // See the unfiltered overload: a missing row is an error, not an empty scope.
+    if (query.next() != SqlQuery::StepResult::ROW)
+    {
+        LOG(ERROR) << "Unable to execute query:" << db_.lastError();
+        return proto::router::kErrorInternalError;
+    }
+
+    *count = query.columnInt64(0);
+    return proto::router::kErrorOk;
+}
+
+//--------------------------------------------------------------------------------------------------
+std::string_view Database::hostCountOutside(qint64 workspace_id, qint64* count) const
+{
+    CHECK(count);
+
+    *count = 0;
+
+    if (!isValid())
+    {
+        LOG(ERROR) << "Database is not valid";
+        return proto::router::kErrorInternalError;
+    }
+
+    // Same scope as the matching hostsOutside() overload.
+    const std::string sql =
+        "SELECT COUNT(*) FROM hosts WHERE NOT EXISTS (SELECT 1 FROM host_workspaces hw WHERE "
+        "hw.host_id = hosts.id AND hw.workspace_id = ?)";
+
+    SqlQuery query(db_, sql);
+    if (!query.isValid())
+    {
+        LOG(ERROR) << "Unable to execute query:" << db_.lastError();
+        return proto::router::kErrorInternalError;
+    }
+
+    query.addInt64(workspace_id);
 
     // See the unfiltered overload: a missing row is an error, not an empty scope.
     if (query.next() != SqlQuery::StepResult::ROW)

@@ -644,6 +644,87 @@ TEST_F(HostListTest, UnassignedHostsAreListedForAdminOnly)
 }
 
 //--------------------------------------------------------------------------------------------------
+// The outside list is what a workspace properties dialog shows as "outside the space": every host
+// that is not a member of the requested workspace - the hosts of the other workspaces together
+// with the hosts no workspace claimed. A host shared with a second workspace is outside neither
+// of the workspaces it belongs to.
+TEST_F(HostListTest, OutsideListTakesTheOtherWorkspacesAndTheUnassigned)
+{
+    const qint64 second_id = addWorkspace("beta");
+    ASSERT_GT(second_id, 0);
+
+    const HostId in_alpha = addHostTo("hash-1", workspace_id_, 0, "in-alpha");
+    const HostId in_beta = addHostTo("hash-2", second_id, 0, "in-beta");
+    const HostId free_host = addHost("hash-3");
+    ASSERT_NE(in_alpha, kInvalidHostId);
+    ASSERT_NE(in_beta, kInvalidHostId);
+    ASSERT_NE(free_host, kInvalidHostId);
+
+    // Shared between both workspaces: outside neither of them.
+    ASSERT_EQ(db_.addHostMembership(in_beta, workspace_id_, 0), proto::router::kErrorOk);
+
+    const proto::router::HostList outside_alpha =
+        hostList(hostListRequest(proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE,
+                                 workspace_id_, 0));
+    ASSERT_EQ(outside_alpha.error_code(), proto::router::kErrorOk);
+    EXPECT_EQ(hostIds(outside_alpha), (std::set<quint64>{ quint64(free_host) }));
+    EXPECT_EQ(outside_alpha.total_count(), 1);
+
+    const proto::router::HostList outside_beta =
+        hostList(hostListRequest(proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE,
+                                 second_id, 0));
+    ASSERT_EQ(outside_beta.error_code(), proto::router::kErrorOk);
+    EXPECT_EQ(hostIds(outside_beta),
+              (std::set<quint64>{ quint64(in_alpha), quint64(free_host) }));
+    EXPECT_EQ(outside_beta.total_count(), 2);
+}
+
+//--------------------------------------------------------------------------------------------------
+// The outside list spans every workspace of the router, so like MODE_ALL only an administrator
+// may ask for it.
+TEST_F(HostListTest, NonAdminCannotUseOutsideMode)
+{
+    const RouterUser client = addUser("client", proto::router::SESSION_TYPE_OPERATOR);
+    ASSERT_TRUE(client.isValid());
+    setCaller(client, proto::router::SESSION_TYPE_OPERATOR);
+
+    const proto::router::HostList list =
+        hostList(hostListRequest(proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE,
+                                 workspace_id_, 0));
+
+    EXPECT_EQ(list.error_code(), proto::router::kErrorAccessDenied);
+    EXPECT_EQ(list.host_size(), 0);
+    EXPECT_EQ(list.total_count(), 0);
+}
+
+//--------------------------------------------------------------------------------------------------
+// The scope needs a real workspace and refuses the dimensions it does not have: workspace 0
+// would read as "not a member of workspace 0" and list every host, which only MODE_ALL does;
+// a group filter has no meaning outside the workspace and a filter narrows nothing here.
+TEST_F(HostListTest, OutsideListValidation)
+{
+    ASSERT_NE(addHostTo("hash-1", workspace_id_, 0, "assigned"), kInvalidHostId);
+
+    const proto::router::HostList no_workspace =
+        hostList(hostListRequest(proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE, 0, 0));
+    EXPECT_EQ(no_workspace.error_code(), proto::router::kErrorInvalidRequest);
+    EXPECT_EQ(no_workspace.total_count(), 0);
+
+    const proto::router::HostList with_group =
+        hostList(hostListRequest(proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE,
+                                 workspace_id_, 5));
+    EXPECT_EQ(with_group.error_code(), proto::router::kErrorInvalidRequest);
+    EXPECT_EQ(with_group.total_count(), 0);
+
+    proto::router::HostListRequest filter_request =
+        hostListRequest(proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE, workspace_id_, 0);
+    filter_request.mutable_filter()->set_display_name("assigned");
+    const proto::router::HostList with_filter = hostList(filter_request);
+    EXPECT_EQ(with_filter.error_code(), proto::router::kErrorInvalidRequest);
+    EXPECT_EQ(with_filter.total_count(), 0);
+}
+
+//--------------------------------------------------------------------------------------------------
 // The page is the window the client asked for, but the count is the whole scope - that is what
 // drives its pagination.
 TEST_F(HostListTest, PaginationReturnsWindowAndFullCount)

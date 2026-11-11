@@ -60,6 +60,7 @@ private slots:
     void onWorkspaceListReceived(const RouterWorkspaceList& list);
     void onUserListReceived(const proto::router::UserList& list);
     void onHostListReceived(const RouterHostList& list);
+    void onHostsOutsideListReceived(const RouterHostList& list);
     void onHostResultReceived(const proto::router::HostResult& result);
     void onWorkspaceResultReceived(const proto::router::WorkspaceResult& result);
     void onButtonBoxClicked(QAbstractButton* button);
@@ -106,12 +107,15 @@ private:
 
     PageModel users_page_;
     PageModel hosts_in_page_;
-    PageModel hosts_free_page_;
+    // The hosts outside this workspace: the hosts of the other workspaces together with the
+    // hosts no workspace claimed. A router that predates the outside mode answers the old
+    // free-hosts request instead (see onHostsOutsideListReceived).
+    PageModel hosts_out_page_;
 
     // The pages of hosts as they arrived; the hosts are not part of the model, because a host
     // operation is applied by the router before it is shown.
     QList<RouterHost> hosts_in_;
-    QList<RouterHost> hosts_free_;
+    QList<RouterHost> hosts_out_;
 
     // The host operation waiting for the workspace of a create-mode dialog to be created.
     RouterHost pending_host_;

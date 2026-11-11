@@ -193,7 +193,8 @@ void handleHostList(Database& database, const RequestCaller& caller,
     out->set_group_id(group_id);
 
     if (mode != proto::router::HostListRequest::MODE_ALL &&
-        mode != proto::router::HostListRequest::MODE_FILTERED)
+        mode != proto::router::HostListRequest::MODE_FILTERED &&
+        mode != proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE)
     {
         LOG(ERROR) << "Unknown host list mode:" << mode;
         out->set_error_code(proto::router::kErrorInvalidRequest);
@@ -203,6 +204,15 @@ void handleHostList(Database& database, const RequestCaller& caller,
     if (mode == proto::router::HostListRequest::MODE_ALL && !is_admin)
     {
         LOG(ERROR) << "Non-admin requested MODE_ALL host list";
+        out->set_error_code(proto::router::kErrorAccessDenied);
+        return;
+    }
+
+    if (mode == proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE && !is_admin)
+    {
+        // The scope spans every workspace of the router, the requested one included, so like
+        // MODE_ALL it is an administrator's list.
+        LOG(ERROR) << "Non-admin requested MODE_OUTSIDE_WORKSPACE host list";
         out->set_error_code(proto::router::kErrorAccessDenied);
         return;
     }
@@ -233,12 +243,42 @@ void handleHostList(Database& database, const RequestCaller& caller,
         }
     }
 
+    if (mode == proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE)
+    {
+        if (request.has_filter())
+        {
+            LOG(ERROR) << "Host filter in MODE_OUTSIDE_WORKSPACE host list";
+            out->set_error_code(proto::router::kErrorInvalidRequest);
+            return;
+        }
+
+        // The scope has no group dimension: the hosts of the other workspaces sit in whatever
+        // group their own workspace put them in.
+        if (group_id != 0)
+        {
+            LOG(ERROR) << "Group filter in MODE_OUTSIDE_WORKSPACE host list";
+            out->set_error_code(proto::router::kErrorInvalidRequest);
+            return;
+        }
+
+        // Workspace 0 would read as "not a member of workspace 0", which every host satisfies:
+        // a list of every host, which only MODE_ALL does and only for an administrator.
+        if (workspace_id <= 0)
+        {
+            LOG(ERROR) << "MODE_OUTSIDE_WORKSPACE host list without a workspace";
+            out->set_error_code(proto::router::kErrorInvalidRequest);
+            return;
+        }
+    }
+
     // A zero count from a failed query would make the client truncate its pagination while the
     // list itself arrives non-empty - so a count failure fails the whole request.
     qint64 total_count = 0;
     const std::string_view count_code = mode == proto::router::HostListRequest::MODE_ALL
         ? database.hostCount(request.filter(), &total_count)
-        : database.hostCount(workspace_id, group_id, &total_count);
+        : mode == proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE
+            ? database.hostCountOutside(workspace_id, &total_count)
+            : database.hostCount(workspace_id, group_id, &total_count);
     if (count_code != proto::router::kErrorOk)
     {
         out->set_error_code(count_code);
@@ -249,6 +289,8 @@ void handleHostList(Database& database, const RequestCaller& caller,
 
     if (mode == proto::router::HostListRequest::MODE_ALL)
         database.hosts(request.filter(), request.offset(), request.count(), out);
+    else if (mode == proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE)
+        database.hostsOutside(workspace_id, request.offset(), request.count(), out);
     else
         database.hosts(workspace_id, group_id, request.offset(), request.count(), out);
 

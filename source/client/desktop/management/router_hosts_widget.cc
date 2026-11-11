@@ -878,7 +878,8 @@ void RouterHostsWidget::startDrag()
         return;
 
     RouterHostDrag drag(this);
-    drag.setHosts(router_id_, hosts, mime_type_);
+    // The approved list is no space: a drag from it has no space to be unassigned from.
+    drag.setHosts(router_id_, /*source_workspace_id=*/0, hosts, mime_type_);
 
     const QIcon icon = index.siblingAtColumn(0).data(Qt::DecorationRole).value<QIcon>();
     drag.setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));

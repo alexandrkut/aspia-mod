@@ -7506,8 +7506,18 @@ Detail: %1</source>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_dialog.ui" line="25"/>
-        <source>Space:</source>
-        <translation>Пространство:</translation>
+        <source>Spaces...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="227"/>
+        <source>Spaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="278"/>
+        <source>Spaces... (%1)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_dialog.ui" line="39"/>
@@ -8734,8 +8744,8 @@ Sections: %2. Users in file: %3.</source>
     </message>
     <message>
         <location filename="../client/desktop/management/router_workspace_dialog.ui" line="215"/>
-        <source>Unassigned hosts</source>
-        <translation>Неприсвоени хостове</translation>
+        <source>Hosts outside the space</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_workspace_dialog.ui" line="300"/>
@@ -10065,6 +10075,20 @@ Sections: %2. Users in file: %3.</source>
         <translation>
             <numerusform>Неуспешно преместване на %n от избраните хостове.</numerusform>
             <numerusform>Неуспешно преместване на %n от избраните хостове.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/sidebar.cc" line="1928"/>
+        <source>Failed to remove the host from the space.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/sidebar.cc" line="1929"/>
+        <source>Failed to remove %n of the selected hosts from the space.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
 </context>

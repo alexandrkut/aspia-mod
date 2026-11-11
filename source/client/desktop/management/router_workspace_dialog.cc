@@ -67,7 +67,7 @@ RouterWorkspaceDialog::RouterWorkspaceDialog(
 
     users_page_.setPageSize(kPageSize);
     hosts_in_page_.setPageSize(kPageSize);
-    hosts_free_page_.setPageSize(kPageSize);
+    hosts_out_page_.setPageSize(kPageSize);
 
     connect(ui->buttonbox, &QDialogButtonBox::clicked, this, &RouterWorkspaceDialog::onButtonBoxClicked);
     connect(ui->button_add, &QToolButton::clicked, this, &RouterWorkspaceDialog::onAddClicked);
@@ -119,21 +119,21 @@ RouterWorkspaceDialog::RouterWorkspaceDialog(
         fetchHosts();
     });
 
-    connect(ui->combo_hosts_free_page, &QComboBox::currentIndexChanged, this, [this](int index)
+    connect(ui->combo_hosts_out_page, &QComboBox::currentIndexChanged, this, [this](int index)
     {
-        if (index < 0 || index == hosts_free_page_.currentPage())
+        if (index < 0 || index == hosts_out_page_.currentPage())
             return;
-        hosts_free_page_.setCurrentPage(index);
+        hosts_out_page_.setCurrentPage(index);
         fetchHosts();
     });
-    connect(ui->button_hosts_free_prev, &QToolButton::clicked, this, [this]()
+    connect(ui->button_hosts_out_prev, &QToolButton::clicked, this, [this]()
     {
-        hosts_free_page_.setCurrentPage(hosts_free_page_.currentPage() - 1);
+        hosts_out_page_.setCurrentPage(hosts_out_page_.currentPage() - 1);
         fetchHosts();
     });
-    connect(ui->button_hosts_free_next, &QToolButton::clicked, this, [this]()
+    connect(ui->button_hosts_out_next, &QToolButton::clicked, this, [this]()
     {
-        hosts_free_page_.setCurrentPage(hosts_free_page_.currentPage() + 1);
+        hosts_out_page_.setCurrentPage(hosts_out_page_.currentPage() + 1);
         fetchHosts();
     });
 
@@ -335,19 +335,55 @@ void RouterWorkspaceDialog::onHostListReceived(const RouterHostList& list)
         return;
     }
 
-    // The two lists are told apart by the scope they were asked for.
-    if (list.workspace_id == kNoWorkspace)
+    hosts_in_ = list.hosts;
+    if (hosts_in_page_.setTotalCount(list.total_count))
+        fetchHosts();
+
+    rebuildHostLists();
+}
+
+//--------------------------------------------------------------------------------------------------
+// The left list: every host outside this workspace. A router that predates the outside mode
+// answers invalid_request and the dialog falls back to the free-hosts list of the old dialog;
+// that fallback request echoes workspace 0, and the echo is what tells the two answers apart
+// (the outside reply echoes the workspace it was asked about).
+void RouterWorkspaceDialog::onHostsOutsideListReceived(const RouterHostList& list)
+{
+    if (closing_)
+        return;
+
+    if (list.error_code == proto::router::kErrorInvalidRequest &&
+        list.workspace_id != kNoWorkspace)
     {
-        hosts_free_ = list.hosts;
-        if (hosts_free_page_.setTotalCount(list.total_count))
-            fetchHosts();
+        LOG(WARNING) << "Router refused the outside-workspace host list (" << list.error_code
+                     << "), falling back to the free-hosts list";
+
+        proto::router::HostListRequest free_request;
+        free_request.set_mode(proto::router::HostListRequest::MODE_FILTERED);
+        free_request.set_workspace_id(kNoWorkspace);
+        free_request.set_group_id(0);
+        free_request.set_offset(hosts_out_page_.offset());
+        free_request.set_count(hosts_out_page_.pageSize());
+
+        RouterSession* session = RouterController::session(router_id_);
+        if (session)
+        {
+            session->listHosts(RouterSession::CachePolicy::RELOAD, std::move(free_request),
+                               { this, &RouterWorkspaceDialog::onHostsOutsideListReceived });
+        }
+        return;
     }
-    else
+
+    if (list.error_code != proto::router::kErrorOk)
     {
-        hosts_in_ = list.hosts;
-        if (hosts_in_page_.setTotalCount(list.total_count))
-            fetchHosts();
+        LOG(ERROR) << "Unable to get the list of the hosts outside the space:"
+                   << list.error_code;
+        return;
     }
+
+    hosts_out_ = list.hosts;
+    if (hosts_out_page_.setTotalCount(list.total_count))
+        fetchHosts();
 
     rebuildHostLists();
 }
@@ -390,6 +426,10 @@ void RouterWorkspaceDialog::onWorkspaceResultReceived(const proto::router::Works
         if (pending_host_move_ && entry_id_ == 0)
         {
             entry_id_ = result.entry_id();
+            // The claim was filed against the workspace before it had an id (0 used to read
+            // as "remove" in runPendingHostMove, and the claim silently did nothing): now
+            // that it exists, the pending operation is a claim into it.
+            pending_host_workspace_id_ = entry_id_;
             LOG(INFO) << "[ACTION] Workspace created for a host operation (entry_id:"
                       << entry_id_ << ")";
 
@@ -620,6 +660,16 @@ void RouterWorkspaceDialog::runPendingHostMove()
             if (host.memberships.at(i).first == entry_id_)
                 host.memberships.removeAt(i);
         }
+
+        // Removing the last membership releases the host. The scalar has to say so too: with
+        // it left at the workspace the host just lost, the router reads the edit as a no-op
+        // (an empty list keeps the scalar move rules and nothing re-derives a primary the
+        // request does not name).
+        if (host.memberships.isEmpty())
+        {
+            host.workspace_id = kNoWorkspace;
+            host.group_id = 0;
+        }
     }
     else
     {
@@ -655,7 +705,7 @@ RouterHost RouterWorkspaceDialog::hostById(quint64 host_id) const
         if (host.host_id == host_id)
             return host;
     }
-    for (const RouterHost& host : std::as_const(hosts_free_))
+    for (const RouterHost& host : std::as_const(hosts_out_))
     {
         if (host.host_id == host_id)
             return host;
@@ -697,8 +747,6 @@ void RouterWorkspaceDialog::fetchHosts()
     if (!session || !is_admin_)
         return;
 
-    // The hosts of a workspace that does not exist yet are an empty list, and the free ones
-    // cannot be claimed before it is created.
     if (entry_id_ > 0)
     {
         proto::router::HostListRequest request;
@@ -709,16 +757,31 @@ void RouterWorkspaceDialog::fetchHosts()
         request.set_count(hosts_in_page_.pageSize());
         session->listHosts(RouterSession::CachePolicy::RELOAD, std::move(request),
                            { this, &RouterWorkspaceDialog::onHostListReceived });
+
+        // The left list: every host outside this workspace - the hosts of the other spaces
+        // together with the hosts no space claimed.
+        proto::router::HostListRequest outside_request;
+        outside_request.set_mode(proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE);
+        outside_request.set_workspace_id(entry_id_);
+        outside_request.set_group_id(0);
+        outside_request.set_offset(hosts_out_page_.offset());
+        outside_request.set_count(hosts_out_page_.pageSize());
+        session->listHosts(RouterSession::CachePolicy::RELOAD, std::move(outside_request),
+                           { this, &RouterWorkspaceDialog::onHostsOutsideListReceived });
+        return;
     }
 
+    // The hosts of a workspace that does not exist yet are an empty list, and the free ones
+    // cannot be claimed before it is created. This request echoes workspace 0 - see
+    // onHostsOutsideListReceived for how the reply is told apart from the outside list.
     proto::router::HostListRequest free_request;
     free_request.set_mode(proto::router::HostListRequest::MODE_FILTERED);
     free_request.set_workspace_id(kNoWorkspace);
     free_request.set_group_id(0);
-    free_request.set_offset(hosts_free_page_.offset());
-    free_request.set_count(hosts_free_page_.pageSize());
+    free_request.set_offset(hosts_out_page_.offset());
+    free_request.set_count(hosts_out_page_.pageSize());
     session->listHosts(RouterSession::CachePolicy::RELOAD, std::move(free_request),
-                       { this, &RouterWorkspaceDialog::onHostListReceived });
+                       { this, &RouterWorkspaceDialog::onHostsOutsideListReceived });
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -837,12 +900,12 @@ void RouterWorkspaceDialog::rebuildHostLists()
     };
 
     fill(ui->list_hosts_in_workspace, hosts_in_);
-    fill(ui->list_hosts_available, hosts_free_);
+    fill(ui->list_hosts_available, hosts_out_);
 
     updatePagination(ui->combo_hosts_in_page, ui->button_hosts_in_prev, ui->button_hosts_in_next,
                      hosts_in_page_);
-    updatePagination(ui->combo_hosts_free_page, ui->button_hosts_free_prev,
-                     ui->button_hosts_free_next, hosts_free_page_);
+    updatePagination(ui->combo_hosts_out_page, ui->button_hosts_out_prev,
+                     ui->button_hosts_out_next, hosts_out_page_);
 
     updateButtonsState();
 }

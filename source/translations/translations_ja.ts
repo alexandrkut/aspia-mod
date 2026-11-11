@@ -7496,8 +7496,18 @@ Detail: %1</source>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_dialog.ui" line="25"/>
-        <source>Space:</source>
-        <translation>スペース:</translation>
+        <source>Spaces...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="227"/>
+        <source>Spaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="278"/>
+        <source>Spaces... (%1)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_dialog.ui" line="63"/>
@@ -8697,8 +8707,8 @@ Sections: %2. Users in file: %3.</source>
     </message>
     <message>
         <location filename="../client/desktop/management/router_workspace_dialog.ui" line="215"/>
-        <source>Unassigned hosts</source>
-        <translation>未割り当てのホスト</translation>
+        <source>Hosts outside the space</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_workspace_dialog.cc" line="234"/>
@@ -10006,6 +10016,20 @@ Sections: %2. Users in file: %3.</source>
         <location filename="../client/desktop/management/sidebar.cc" line="1829"/>
         <source>Failed to move the host to the selected group.</source>
         <translation>ホストを選択したグループに移動できませんでした。</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/sidebar.cc" line="1928"/>
+        <source>Failed to remove the host from the space.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/sidebar.cc" line="1929"/>
+        <source>Failed to remove %n of the selected hosts from the space.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
