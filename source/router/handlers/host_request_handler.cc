@@ -87,20 +87,25 @@ RequestResult handleHostRequest(Database& database, const RequestCaller& caller,
             return result;
         }
 
-        if (workspace_id == 0)
+        // The host may live in several workspaces now: an edit is allowed when the user is a
+        // member of ANY of them (the admin-only move rule above stays). An unassigned host has
+        // no memberships, so it stays admin-only exactly as before.
+        bool has_access = false;
+        for (qint64 member_workspace : database.hostWorkspaceIds(host_id))
         {
-            LOG(ERROR) << "User" << caller.user_id << "cannot edit unassigned host" << host_id;
-            result.error_code = proto::router::kErrorAccessDenied;
-            return result;
+            if (database.checkWorkspaceAccess(caller.user_id, member_workspace) ==
+                proto::router::kErrorOk)
+            {
+                has_access = true;
+                break;
+            }
         }
 
-        const std::string_view access_code =
-            database.checkWorkspaceAccess(caller.user_id, workspace_id);
-        if (access_code != proto::router::kErrorOk)
+        if (!has_access)
         {
             LOG(ERROR) << "User" << caller.user_id << "cannot edit host" << host_id
-                       << "(workspace_id=" << workspace_id << ")";
-            result.error_code = access_code;
+                       << "(no workspace shared with the user)";
+            result.error_code = proto::router::kErrorAccessDenied;
             return result;
         }
     }

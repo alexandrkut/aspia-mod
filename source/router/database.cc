@@ -2184,6 +2184,58 @@ std::string_view Database::modifyHost(HostId host_id, qint64 base_revision, qint
 }
 
 //--------------------------------------------------------------------------------------------------
+template <typename List>
+void Database::attachMemberships(const std::vector<quint64>& host_ids, List* list) const
+{
+    if (host_ids.empty() || !list)
+        return;
+
+    std::string placeholders;
+    placeholders.reserve(host_ids.size() * 2);
+    for (size_t i = 0; i < host_ids.size(); ++i)
+        placeholders += i ? ",?" : "?";
+
+    // One query for the whole page instead of one per host.
+    SqlQuery query(db_,
+        "SELECT host_id, workspace_id, group_id FROM host_workspaces WHERE host_id IN (" +
+        placeholders + ") ORDER BY host_id, rowid");
+    for (quint64 host_id : host_ids)
+        query.addUInt64(host_id);
+
+    std::unordered_map<quint64, std::vector<std::pair<qint64, qint64>>> memberships;
+    for (;;)
+    {
+        const SqlQuery::StepResult step = query.next();
+        if (step != SqlQuery::StepResult::ROW)
+        {
+            if (step == SqlQuery::StepResult::FAILED)
+                LOG(ERROR) << "Unable to execute query:" << db_.lastError();
+            break;
+        }
+        memberships[query.columnUInt64(0)].emplace_back(query.columnInt64(1),
+                                                       query.columnInt64(2));
+    }
+
+    // The scalar workspace_id/group_id on each host stay the primary membership; this fills the
+    // repeated memberships with every workspace the host belongs to.
+    auto* hosts = list->mutable_host();
+    for (int i = 0; i < hosts->size(); ++i)
+    {
+        proto::router::Host* host = hosts->Mutable(i);
+        const auto it = memberships.find(host->host_id());
+        if (it == memberships.end())
+            continue;
+
+        for (const auto& membership : it->second)
+        {
+            proto::router::HostMembership* added = host->add_memberships();
+            added->set_workspace_id(membership.first);
+            added->set_group_id(membership.second);
+        }
+    }
+}
+
+//--------------------------------------------------------------------------------------------------
 void Database::hosts(const proto::router::HostFilter& filter, qint64 offset, qint64 count,
     proto::router::HostList* out) const
 {
@@ -2226,6 +2278,9 @@ void Database::hosts(const proto::router::HostFilter& filter, qint64 offset, qin
     query.addInt64(count);
     query.addInt64(offset);
 
+    std::vector<quint64> page_ids;
+    page_ids.reserve(static_cast<size_t>(count));
+
     for (;;)
     {
         const SqlQuery::StepResult step = query.next();
@@ -2255,7 +2310,10 @@ void Database::hosts(const proto::router::HostFilter& filter, qint64 offset, qin
         host->set_comment(query.columnTextView(10));
         host->set_last_connect(query.columnInt64(11));
         host->set_last_modify(query.columnInt64(12));
+        page_ids.emplace_back(host->host_id());
     }
+
+    attachMemberships(page_ids, out);
 
     out->set_error_code(proto::router::kErrorOk);
 }
@@ -2313,6 +2371,9 @@ void Database::hosts(qint64 workspace_id, qint64 group_id, qint64 offset,
     query.addInt64(count);
     query.addInt64(offset);
 
+    std::vector<quint64> page_ids;
+    page_ids.reserve(static_cast<size_t>(count));
+
     for (;;)
     {
         const SqlQuery::StepResult step = query.next();
@@ -2342,7 +2403,10 @@ void Database::hosts(qint64 workspace_id, qint64 group_id, qint64 offset,
         host->set_comment(query.columnTextView(10));
         host->set_last_connect(query.columnInt64(11));
         host->set_last_modify(query.columnInt64(12));
+        page_ids.emplace_back(host->host_id());
     }
+
+    attachMemberships(page_ids, out);
 
     out->set_error_code(proto::router::kErrorOk);
 }
@@ -2549,6 +2613,9 @@ void Database::searchHosts(std::string_view query_text, const std::set<qint64>& 
     query.addInt64(count);
     query.addInt64(offset);
 
+    std::vector<quint64> page_ids;
+    page_ids.reserve(static_cast<size_t>(count));
+
     for (;;)
     {
         const SqlQuery::StepResult step = query.next();
@@ -2580,7 +2647,10 @@ void Database::searchHosts(std::string_view query_text, const std::set<qint64>& 
         host->set_comment(query.columnTextView(10));
         host->set_last_connect(query.columnInt64(11));
         host->set_last_modify(query.columnInt64(12));
+        page_ids.emplace_back(host->host_id());
     }
+
+    attachMemberships(page_ids, out);
 
     out->set_error_code(proto::router::kErrorOk);
 }

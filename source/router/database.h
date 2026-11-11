@@ -249,6 +249,13 @@ public:
     // workspaces). Bumps revision and last_modify. Returns a proto::router error code.
     std::string_view removeHostMembership(HostId host_id, qint64 workspace_id);
 
+    // Reads the membership rows of |host_ids| in one query and appends them to the matching
+    // hosts of |list| (a page of a host list or a host search). The scalar workspace_id/group_id
+    // fields stay the primary membership; this fills the repeated memberships field for the
+    // client. Call it once the page is collected.
+    template <typename List>
+    void attachMemberships(const std::vector<quint64>& host_ids, List* list) const;
+
     // Updates the admin/manager-editable fields of a host. workspace_id is the workspace the host
     // ends up in: 0 releases it, and the group it carried within the workspace goes with it; the
     // note is the host's own and is stored as given whether the host is in a workspace or not.
