@@ -1058,3 +1058,34 @@ TEST_F(HostRequestHandlerTest, MemberOfASecondWorkspaceMayEditTheHost)
     EXPECT_EQ(handle(makeRequest(host_id_, 0, "display")).error_code,
               proto::router::kErrorAccessDenied);
 }
+
+//--------------------------------------------------------------------------------------------------
+// The membership list of the request may only change the workspace SET for an administrator;
+// a member may send the list as long as it names the workspaces the host already belongs to.
+TEST_F(HostRequestHandlerTest, NonAdminCannotChangeTheWorkspaceSet)
+{
+    const qint64 second_id = addWorkspace("beta");
+    ASSERT_GT(second_id, 0);
+    ASSERT_EQ(db_.addHostMembership(host_id_, second_id, 0), proto::router::kErrorOk);
+
+    const RouterUser client = addUser("client", proto::router::SESSION_TYPE_OPERATOR);
+    ASSERT_TRUE(client.isValid());
+    ASSERT_EQ(db_.modifyWorkspace(second_id, 1, "beta", std::string_view(),
+                                  { client.entry_id }),
+              proto::router::kErrorOk);
+    setCaller(client, proto::router::SESSION_TYPE_OPERATOR);
+
+    // The list drops beta, which the host currently belongs to: refused.
+    proto::router::HostRequest shrinking = makeRequest(host_id_, 0, "display");
+    proto::router::HostMembership* only_primary = shrinking.mutable_host()->add_memberships();
+    only_primary->set_workspace_id(workspace_id_);
+    EXPECT_EQ(handle(shrinking).error_code, proto::router::kErrorAccessDenied);
+
+    // The list names the same workspaces the host has: accepted.
+    proto::router::HostRequest same_set = makeRequest(host_id_, 0, "display");
+    proto::router::HostMembership* primary = same_set.mutable_host()->add_memberships();
+    primary->set_workspace_id(workspace_id_);
+    proto::router::HostMembership* second = same_set.mutable_host()->add_memberships();
+    second->set_workspace_id(second_id);
+    EXPECT_EQ(handle(same_set).error_code, proto::router::kErrorOk);
+}

@@ -1438,3 +1438,39 @@ TEST_F(RouterDatabaseTest, SearchReturnsASharedHostOnce)
     EXPECT_EQ(result.total_count(), 1);
     EXPECT_EQ(result.host_size(), 1);
 }
+
+//--------------------------------------------------------------------------------------------------
+// A full membership list in an edit synchronizes the join: a workspace asked for but missing is
+// added, a membership present but not asked for is dropped, and the primary stays the first row
+// that survived.
+TEST_F(RouterDatabaseTest, ModifyHostSynchronizesTheMembershipList)
+{
+    const qint64 ws1 = addWorkspace("one", {admin_.entry_id});
+    const qint64 ws2 = addWorkspace("two", {admin_.entry_id});
+    const qint64 ws3 = addWorkspace("three", {admin_.entry_id});
+    ASSERT_GT(ws1, 0);
+    ASSERT_GT(ws2, 0);
+    ASSERT_GT(ws3, 0);
+
+    const HostId host_id = addHost("hash-1");
+    ASSERT_NE(host_id, kInvalidHostId);
+    ASSERT_EQ(db_.addHostMembership(host_id, ws1, 0), proto::router::kErrorOk);
+    ASSERT_EQ(db_.addHostMembership(host_id, ws2, 0), proto::router::kErrorOk);
+
+    // Keep ws1, drop ws2, add ws3.
+    const proto::router::Host current = findHost(host_id);
+    const std::vector<std::pair<qint64, qint64>> requested = { { ws1, 0 }, { ws3, 0 } };
+    ASSERT_EQ(db_.modifyHost(host_id, current.revision(), ws1, 0, current.display_name(),
+                             current.comment(), requested),
+              proto::router::kErrorOk);
+
+    std::vector<qint64> after = db_.hostWorkspaceIds(host_id);
+    ASSERT_EQ(after.size(), 2);
+    EXPECT_EQ(after[0], ws1);  // kept row, same rowid - still the primary
+    EXPECT_EQ(after[1], ws3);  // appended
+    EXPECT_EQ(findHost(host_id).workspace_id(), ws1);
+
+    proto::router::HostList dropped_scope;
+    db_.hosts(ws2, -1, 0, proto::router::kMaxHostPageSize, &dropped_scope);
+    EXPECT_EQ(dropped_scope.host_size(), 0);
+}

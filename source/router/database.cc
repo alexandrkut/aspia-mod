@@ -22,6 +22,7 @@
 #include <QFileInfo>
 
 #include <set>
+#include <algorithm>
 #include <string>
 #include <unordered_map>
 #include <utility>
@@ -2030,7 +2031,8 @@ std::string_view Database::removeHostMembership(HostId host_id, qint64 workspace
 
 //--------------------------------------------------------------------------------------------------
 std::string_view Database::modifyHost(HostId host_id, qint64 base_revision, qint64 workspace_id,
-    qint64 group_id, std::string_view display_name, std::string_view comment)
+    qint64 group_id, std::string_view display_name, std::string_view comment,
+    const std::vector<std::pair<qint64, qint64>>& memberships)
 {
     if (!isValid())
     {
@@ -2169,6 +2171,93 @@ std::string_view Database::modifyHost(HostId host_id, qint64 base_revision, qint
         {
             LOG(ERROR) << "Unable to execute query:" << db_.lastError();
             return proto::router::kErrorInternalError;
+        }
+    }
+
+    // A non-empty membership list (from an edit dialog that shows every workspace the host
+    // belongs to) synchronizes the join as a whole: rows asked for but missing are inserted,
+    // rows present but not asked for are dropped, and the group of a kept row is updated in
+    // place - its rowid, and with it the "first added" primary, survives. An empty list keeps
+    // the old behaviour above: only the primary membership moves.
+    if (!memberships.empty())
+    {
+        std::vector<std::pair<qint64, qint64>> stored;
+        {
+            SqlQuery rows(db_,
+                "SELECT workspace_id, group_id FROM host_workspaces WHERE host_id=? ORDER BY rowid");
+            rows.addUInt64(host_id);
+
+            for (;;)
+            {
+                const SqlQuery::StepResult step = rows.next();
+                if (step != SqlQuery::StepResult::ROW)
+                {
+                    if (step == SqlQuery::StepResult::FAILED)
+                    {
+                        LOG(ERROR) << "Unable to execute query:" << db_.lastError();
+                        return proto::router::kErrorInternalError;
+                    }
+                    break;
+                }
+                stored.emplace_back(rows.columnInt64(0), rows.columnInt64(1));
+            }
+        }
+
+        for (const auto& current : stored)
+        {
+            const auto requested = std::find_if(
+                memberships.begin(), memberships.end(),
+                [&](const std::pair<qint64, qint64>& item) { return item.first == current.first; });
+
+            if (requested == memberships.end())
+            {
+                SqlQuery drop_row(db_,
+                    "DELETE FROM host_workspaces WHERE host_id=? AND workspace_id=?");
+                drop_row.addUInt64(host_id);
+                drop_row.addInt64(current.first);
+
+                if (!drop_row.exec())
+                {
+                    LOG(ERROR) << "Unable to execute query:" << db_.lastError();
+                    return proto::router::kErrorInternalError;
+                }
+            }
+            else if (requested->second != current.second)
+            {
+                SqlQuery move_group(db_,
+                    "UPDATE host_workspaces SET group_id=? WHERE host_id=? AND workspace_id=?");
+                move_group.addInt64(requested->second);
+                move_group.addUInt64(host_id);
+                move_group.addInt64(current.first);
+
+                if (!move_group.exec())
+                {
+                    LOG(ERROR) << "Unable to execute query:" << db_.lastError();
+                    return proto::router::kErrorInternalError;
+                }
+            }
+        }
+
+        for (const auto& requested : memberships)
+        {
+            const bool exists = std::any_of(
+                stored.begin(), stored.end(),
+                [&](const std::pair<qint64, qint64>& item) { return item.first == requested.first; });
+
+            if (!exists)
+            {
+                SqlQuery add_row(db_,
+                    "INSERT INTO host_workspaces (host_id, workspace_id, group_id) VALUES (?, ?, ?)");
+                add_row.addUInt64(host_id);
+                add_row.addInt64(requested.first);
+                add_row.addInt64(requested.second);
+
+                if (!add_row.exec())
+                {
+                    LOG(ERROR) << "Unable to execute query:" << db_.lastError();
+                    return proto::router::kErrorInternalError;
+                }
+            }
         }
     }
 

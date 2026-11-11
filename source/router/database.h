@@ -24,6 +24,7 @@
 
 #include <set>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 #include "base/peer/host_id.h"
@@ -264,9 +265,14 @@ public:
     // at the workspace root; > 0 moves it under the given group (caller must validate group
     // ownership). Also bumps last_modify. |base_revision| is the revision the edit was built on:
     // a stale one answers kErrorConflict instead of silently overwriting a concurrent edit.
-    // Returns a proto::router error code.
+    // Returns a proto::router error code. |memberships| is the full set of workspaces the host
+    // should belong to with the group it has in each; an empty list keeps the old behaviour and
+    // moves only the primary membership (an old client sends none). When it is non-empty the
+    // host's memberships are synchronized to it: added, dropped and group-updated in place, so
+    // the rowid - and with it the "first added" primary - of kept rows survives.
     std::string_view modifyHost(HostId host_id, qint64 base_revision, qint64 workspace_id,
-        qint64 group_id, std::string_view display_name, std::string_view comment);
+        qint64 group_id, std::string_view display_name, std::string_view comment,
+        const std::vector<std::pair<qint64, qint64>>& memberships = {});
 
     // Appends every host in the database (admin-only call site) that passes |filter| to |out| and
     // sets its error_code, reading rows straight into the protobuf message. A filter with more

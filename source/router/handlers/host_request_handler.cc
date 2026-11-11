@@ -19,6 +19,8 @@
 #include "router/handlers/host_request_handler.h"
 
 #include <set>
+#include <utility>
+#include <vector>
 
 #include "base/logging.h"
 #include "base/peer/host_id.h"
@@ -70,6 +72,13 @@ RequestResult handleHostRequest(Database& database, const RequestCaller& caller,
     const bool is_admin = caller.session_type == proto::router::SESSION_TYPE_ADMIN;
     const qint64 target_workspace_id = host.workspace_id();
 
+    // The full membership list of the request: an edit dialog may retarget every workspace of
+    // the host at once. An empty list is an old client and moves only the primary membership.
+    std::vector<std::pair<qint64, qint64>> memberships;
+    memberships.reserve(static_cast<size_t>(host.memberships_size()));
+    for (const proto::router::HostMembership& membership : host.memberships())
+        memberships.emplace_back(membership.workspace_id(), membership.group_id());
+
     if (target_workspace_id < 0)
     {
         LOG(ERROR) << "Invalid workspace id in host edit request:" << target_workspace_id;
@@ -108,6 +117,28 @@ RequestResult handleHostRequest(Database& database, const RequestCaller& caller,
             result.error_code = proto::router::kErrorAccessDenied;
             return result;
         }
+
+        // Changing WHICH workspaces the host belongs to is an administrator's move, the same as
+        // moving the host between workspaces above; the groups inside the memberships stay
+        // editable for a member (they are local to a workspace).
+        if (!memberships.empty())
+        {
+            std::set<qint64> requested;
+            for (const auto& membership : memberships)
+                requested.emplace(membership.first);
+
+            std::set<qint64> current;
+            for (qint64 member_workspace : database.hostWorkspaceIds(host_id))
+                current.emplace(member_workspace);
+
+            if (requested != current)
+            {
+                LOG(ERROR) << "User" << caller.user_id
+                           << "cannot change the workspaces of host" << host_id;
+                result.error_code = proto::router::kErrorAccessDenied;
+                return result;
+            }
+        }
     }
 
     // group_id == 0 keeps the host at the workspace root; any other value must reference a group
@@ -135,7 +166,8 @@ RequestResult handleHostRequest(Database& database, const RequestCaller& caller,
     }
 
     const std::string_view error_code = database.modifyHost(
-        host_id, host.revision(), target_workspace_id, group_id, host.display_name(), host.comment());
+        host_id, host.revision(), target_workspace_id, group_id, host.display_name(),
+        host.comment(), memberships);
     if (error_code != proto::router::kErrorOk)
     {
         result.error_code = error_code;
