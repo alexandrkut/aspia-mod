@@ -56,6 +56,8 @@ RouterHost parseHost(const proto::router::Host& src)
     dst.host_id       = src.host_id();
     dst.workspace_id  = src.workspace_id();
     dst.group_id      = src.group_id();
+    for (const auto& m : src.memberships())
+        dst.memberships.append(qMakePair(m.workspace_id(), m.group_id()));
     dst.display_name  = QString::fromStdString(src.display_name());
     dst.computer_name = QString::fromStdString(src.computer_name());
     dst.cpu_arch      = QString::fromStdString(src.cpu_arch());
@@ -432,6 +434,12 @@ void RouterSession::editHost(const RouterHost& host, RouterCallback<proto::route
     serialized.set_host_id(host.host_id);
     serialized.set_workspace_id(host.workspace_id);
     serialized.set_group_id(host.group_id);
+    for (const auto& m : host.memberships)
+    {
+        auto* hm = serialized.add_memberships();
+        hm->set_workspace_id(m.first);
+        hm->set_group_id(m.second);
+    }
     serialized.set_display_name(host.display_name.toStdString());
     serialized.set_comment(host.comment.toStdString());
     serialized.set_revision(host.revision);

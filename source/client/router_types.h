@@ -78,6 +78,7 @@ struct RouterHost
     HostId host_id = kInvalidHostId;
     qint64 workspace_id = 0;
     qint64 group_id = 0;
+    QList<QPair<qint64, qint64>> memberships; // (workspace_id, group_id)
     QString display_name;
     QString computer_name;
     QString cpu_arch;
