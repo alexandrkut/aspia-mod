@@ -454,3 +454,15 @@ proto::control::Config defaultDesktopConfig()
     config.set_quality(kAutoQuality);
     return config;
 }
+
+//--------------------------------------------------------------------------------------------------
+void applyViewOnlyOverrides(proto::control::Config& config)
+{
+    // A view session must not alter the host desktop and must show where the host user points:
+    // the remote cursor position is always on, regardless of the user's settings.
+    config.set_view_only(true);
+    config.set_cursor_position(true);
+    config.set_wallpaper(true);
+    config.set_effects(true);
+    config.clear_preferred_resolution();
+}

@@ -669,10 +669,7 @@ void MainWindow::onConnect(const HostConfig& host, proto::peer::SessionType sess
             {
                 if (management_tab->consumeViewOnlyPending())
                 {
-                    desktop_config.set_view_only(true);
-                    desktop_config.set_wallpaper(true);
-                    desktop_config.set_effects(true);
-                    desktop_config.clear_preferred_resolution();
+                    applyViewOnlyOverrides(desktop_config);
                     SessionState::setNextNotifySuppressed(true);
                 }
                 else

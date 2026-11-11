@@ -377,4 +377,8 @@ const quint32 kHighQuality = 10;
 
 proto::control::Config defaultDesktopConfig();
 
+// Applies the view-only session overrides on top of a desktop config: the session never alters
+// the host desktop and always shows the remote cursor, no matter what the user's settings say.
+void applyViewOnlyOverrides(proto::control::Config& config);
+
 #endif // CLIENT_CONFIG_H

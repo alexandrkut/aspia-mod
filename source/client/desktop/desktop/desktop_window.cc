@@ -18,6 +18,8 @@
 
 #include "client/desktop/desktop/desktop_window.h"
 
+#include "client/config.h"
+
 #include <QApplication>
 #include <QBrush>
 #include <QClipboard>
@@ -263,8 +265,15 @@ void DesktopWindow::applySettings()
     Database& db = Database::instance();
 
     const bool had_preferred_size = !desktop_config_.disable_preferred_size();
+    const bool was_view_only = desktop_config_.view_only();
 
     desktop_config_ = db.desktopConfig();
+    if (was_view_only)
+    {
+        // A view session stays view-only across a settings reload: re-apply the view overrides
+        // (including the always-on remote cursor) instead of the raw user settings.
+        applyViewOnlyOverrides(desktop_config_);
+    }
     onDesktopConfigChanged(desktop_config_);
 
     desktop_->enableRemoteCursorPosition(desktop_config_.cursor_position());
