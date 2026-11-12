@@ -598,6 +598,19 @@ void RouterHostsWidget::onHostListReceived(const RouterHostList& list)
         return;
     }
 
+    // Same page-cap adaptation as RouterGroupWidget: the model counts pages at the router's
+    // cap so everything past the first page stays reachable.
+    if (RouterSession* session = RouterController::session(router_id_))
+    {
+        const qint64 limit = session->hostPageLimit();
+        if (limit > 0 && limit < hosts_page_.pageSize())
+        {
+            LOG(INFO) << "Approved hosts page sized to the router cap:" << limit;
+            hosts_page_.setPageSize(limit);
+            hosts_page_.setCurrentPage(0);
+        }
+    }
+
     const QList<RouterHost> selected = selectedHosts();
     const RouterHost* current = model_->hostAt(ui->tree_hosts->currentIndex().row());
     const HostId current_host_id = current ? current->host_id : kInvalidHostId;

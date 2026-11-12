@@ -178,6 +178,11 @@ public:
     // unreachable, and the next request repopulates the cache.
     void invalidateHostLists() { cache_.invalidateHostLists(); }
 
+    // The page cap of this router once it refused a bigger one (an older router serves at
+    // most 100). Zero while unknown; the lists size their pages to it so everything past the
+    // first page stays reachable. Lives with the session - a reconnect probes again.
+    qint64 hostPageLimit() const { return host_page_limit_; }
+
     // Substring search by display name and host id across every workspace of the user. The page is
     // mandatory as for listHosts; total_count counts the matches of the whole scope.
     void searchHosts(const QString& query, qint64 offset, qint64 count,
@@ -223,6 +228,7 @@ private:
     qint64 user_id_ = 0;
 
     RouterCache cache_;
+    qint64 host_page_limit_ = 0;
     RouterRpc rpc_;
 
     Q_DISABLE_COPY_MOVE(RouterSession)

@@ -291,6 +291,22 @@ void RouterGroupWidget::onHostListReceived(const RouterHostList& list)
         return;
     }
 
+    // A router that caps the page below the configured size paginates at its cap: the model
+    // has to count pages the way rows actually arrive, or everything past the first page
+    // stays unreachable. The first limited reply is the only one that can change the size -
+    // it arrives while a single page of the configured size is all there is, so the current
+    // page cannot be past the new count.
+    if (RouterSession* session = RouterController::session(router_id_))
+    {
+        const qint64 limit = session->hostPageLimit();
+        if (limit > 0 && limit < hosts_page_.pageSize())
+        {
+            LOG(INFO) << "Host list page sized to the router cap:" << limit;
+            hosts_page_.setPageSize(limit);
+            hosts_page_.setCurrentPage(0);
+        }
+    }
+
     const QList<RouterHost> selected = selectedHosts();
     const RouterHost* current = model_->hostAt(ui->tree_host->currentIndex().row());
     const HostId current_host_id = current ? current->host_id : kInvalidHostId;

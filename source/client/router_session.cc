@@ -654,6 +654,9 @@ void RouterSession::listHosts(CachePolicy policy, proto::router::HostListRequest
             if (list.error_code == proto::router::kErrorInvalidRequest)
             {
                 LOG(WARNING) << "Host list refused, retrying with the legacy page size";
+                // The router caps its pages: the lists have to count pages at that cap or
+                // everything past the first one stays unreachable.
+                host_page_limit_ = kLegacyHostPageSize;
                 proto::router::HostListRequest retry = retry_request;
                 retry.set_count(kLegacyHostPageSize);
                 listHosts(CachePolicy::RELOAD, std::move(retry), std::move(original));
