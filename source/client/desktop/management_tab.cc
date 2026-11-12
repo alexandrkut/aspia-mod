@@ -1349,11 +1349,11 @@ void ManagementTab::onHostContextMenu(const QPoint& pos, int column)
         addProxy(ui->action_system_info_connect);
 
         QList<RouterHost> online_hosts = router_hosts_widget_->selectedOnlineHosts();
-        bool is_admin = false;
         RouterSession* session = RouterController::session(router_hosts_widget_->routerId());
-        if (session && session->config().sessionType() == proto::router::SESSION_TYPE_ADMIN)
-            is_admin = true;
-        if (is_admin)
+        // View is offered to every role of the router: without a right to connect to the
+        // host's desktop the session does not start anyway, so the entry costs nothing.
+        // Notification suppression stays an administrator's setting (NetworkWorker).
+        if (session)
         {
             QAction* view_connect = menu->addAction(QIcon(":/img/view-monitor.svg"), tr("Connect for viewing..."));
             connect(view_connect, &QAction::triggered, this, [this]()
@@ -1534,11 +1534,11 @@ void ManagementTab::onRouterGroupContextMenu(const QPoint& pos)
     addProxy(ui->action_chat_connect);
     addProxy(ui->action_system_info_connect);
 
-    // The view-only entry mirrors onHostContextMenu: administrators only. It resolves the host
-    // through the same onConnectAction path, which picks the selection of router_group_widget_
+    // The view-only entry mirrors onHostContextMenu: every role of the router. It resolves the
+    // host through the same onConnectAction path, which picks the selection of router_group_widget_
     // (the content shown for a workspace/group in the sidebar).
     RouterSession* session = RouterController::session(router_group_widget_->routerId());
-    if (session && session->config().sessionType() == proto::router::SESSION_TYPE_ADMIN)
+    if (session)
     {
         QAction* view_connect = menu->addAction(QIcon(":/img/view-monitor.svg"), tr("Connect for viewing..."));
         connect(view_connect, &QAction::triggered, this, [this]()
