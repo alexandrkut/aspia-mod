@@ -35,6 +35,7 @@
 
 #include "base/auto_qpointer.h"
 #include "base/logging.h"
+#include "client/database.h"
 #include "client/router_controller.h"
 #include "client/desktop/management/drag_and_drop.h"
 #include "client/desktop/management/router_host_dialog.h"
@@ -113,17 +114,12 @@ RouterGroupWidget::RouterGroupWidget(QWidget* parent)
 
     connect(ui->tree_host, &QAbstractItemView::activated, this, &RouterGroupWidget::sig_activated);
 
-    // The largest entry is the largest page the router serves (kMaxHostPageSize).
-    ui->combo_hosts_page_size->addItem("25", QVariant::fromValue<qint64>(25));
-    ui->combo_hosts_page_size->addItem("50", QVariant::fromValue<qint64>(50));
-    ui->combo_hosts_page_size->addItem("100", QVariant::fromValue<qint64>(100));
-    ui->combo_hosts_page_size->setCurrentIndex(2);
-    hosts_page_.setPageSize(ui->combo_hosts_page_size->currentData().toLongLong());
+    // The page size comes from the settings (hosts per page): one source of truth for every
+    // host list. The local 25/50/100 combo is gone with it.
+    hosts_page_.setPageSize(Database::instance().hostsPerPage());
 
     ui->button_hosts_next->setIconOnRight(true);
 
-    connect(ui->combo_hosts_page_size, &QComboBox::currentIndexChanged,
-            this, &RouterGroupWidget::onPageSizeChanged);
     connect(ui->combo_hosts_page, &QComboBox::currentIndexChanged,
             this, &RouterGroupWidget::onPageChanged);
     connect(ui->button_hosts_prev, &QToolButton::clicked, this, &RouterGroupWidget::onPrevClicked);
@@ -331,11 +327,20 @@ void RouterGroupWidget::onHostListReceived(const RouterHostList& list)
 }
 
 //--------------------------------------------------------------------------------------------------
-void RouterGroupWidget::onPageSizeChanged(int /* index */)
+void RouterGroupWidget::setHostsPageSize(qint64 page_size)
 {
-    hosts_page_.setPageSize(ui->combo_hosts_page_size->currentData().toLongLong());
+    if (page_size <= 0 || page_size == hosts_page_.pageSize())
+        return;
+
+    hosts_page_.setPageSize(page_size);
     hosts_page_.setCurrentPage(0);
-    fetchHosts(RouterSession::CachePolicy::USE_CACHE);
+
+    // The cached pages were fetched with the old size: their keys never match again, but they
+    // would sit in the cache until the session ends.
+    if (RouterSession* session = RouterController::session(router_id_))
+        session->invalidateHostLists();
+
+    fetchHosts(RouterSession::CachePolicy::RELOAD);
 }
 
 //--------------------------------------------------------------------------------------------------

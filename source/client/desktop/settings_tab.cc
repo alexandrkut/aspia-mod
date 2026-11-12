@@ -204,6 +204,13 @@ SettingsTab::SettingsTab(QWidget* parent)
     ui->combo_backup_retention->setCurrentIndex(
         ui->combo_backup_retention->findData(static_cast<int>(db.backupRetention())));
 
+    // The page size of the host lists. The values are the ones the router serves as a whole
+    // page; a stored value outside the set (written by hand) falls back to the default index.
+    for (qint64 page_size : { 50, 100, 500 })
+        ui->combo_hosts_per_page->addItem(QString::number(page_size), page_size);
+    int page_index = ui->combo_hosts_per_page->findData(db.hostsPerPage());
+    ui->combo_hosts_per_page->setCurrentIndex(page_index >= 0 ? page_index : 1);
+
     ui->combo_lock_timeout->addItem(tr("Do not lock"), 0);
     ui->combo_lock_timeout->addItem(tr("1 minute"), 1);
     ui->combo_lock_timeout->addItem(tr("5 minutes"), 5);
@@ -350,6 +357,8 @@ SettingsTab::SettingsTab(QWidget* parent)
     connect(ui->button_select_backup_dir, &QPushButton::clicked, this, &SettingsTab::onSelectBackupPath);
     connect(ui->combo_backup_retention, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &SettingsTab::onBackupRetentionChanged);
+    connect(ui->combo_hosts_per_page, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, &SettingsTab::onHostsPerPageChanged);
     connect(ui->combo_proxy_type, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &SettingsTab::onProxyChanged);
     connect(ui->edit_proxy_address, &QLineEdit::editingFinished, this, &SettingsTab::onProxyChanged);
@@ -538,6 +547,18 @@ void SettingsTab::onBackupRetentionChanged()
     LOG(INFO) << "[ACTION] Backup retention changed";
     Database::instance().setBackupRetention(
         static_cast<AutoBackup::Retention>(ui->combo_backup_retention->currentData().toInt()));
+}
+
+//--------------------------------------------------------------------------------------------------
+void SettingsTab::onHostsPerPageChanged()
+{
+    const qint64 page_size = ui->combo_hosts_per_page->currentData().toLongLong();
+    if (page_size <= 0)
+        return;
+
+    LOG(INFO) << "[ACTION] Hosts per page changed:" << page_size;
+    Database::instance().setHostsPerPage(page_size);
+    emit sig_hostsPerPageChanged(page_size);
 }
 
 //--------------------------------------------------------------------------------------------------

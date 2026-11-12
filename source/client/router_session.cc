@@ -640,6 +640,29 @@ void RouterSession::listGroups(CachePolicy policy, qint64 workspace_id,
 void RouterSession::listHosts(CachePolicy policy, proto::router::HostListRequest request,
                               RouterCallback<RouterHostList> callback)
 {
+    // A router older than the raised page cap refuses a page over 100 with invalid_request;
+    // the same reply for a page of 100 or less means something else is wrong. Retry once at
+    // the old cap so one client serves both generations.
+    static constexpr qint64 kLegacyHostPageSize = 100;
+    if (request.count() > kLegacyHostPageSize)
+    {
+        const proto::router::HostListRequest retry_request = request;
+        RouterCallback<RouterHostList> original = std::move(callback);
+        callback = RouterCallback<RouterHostList>(
+            this, [this, retry_request, original](const RouterHostList& list) mutable
+        {
+            if (list.error_code == proto::router::kErrorInvalidRequest)
+            {
+                LOG(WARNING) << "Host list refused, retrying with the legacy page size";
+                proto::router::HostListRequest retry = retry_request;
+                retry.set_count(kLegacyHostPageSize);
+                listHosts(CachePolicy::RELOAD, std::move(retry), std::move(original));
+                return;
+            }
+            original(list);
+        });
+    }
+
     // Only filtered (per workspace/group) queries are cached. The page is part of the key: two
     // pages of the same selection are different answers.
     const bool cacheable = request.mode() == proto::router::HostListRequest::MODE_FILTERED;

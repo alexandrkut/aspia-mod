@@ -174,6 +174,10 @@ public:
     void listHosts(CachePolicy policy, proto::router::HostListRequest request,
                    RouterCallback<RouterHostList> callback);
 
+    // Drops every cached host list. A page size change makes the keys of the old pages
+    // unreachable, and the next request repopulates the cache.
+    void invalidateHostLists() { cache_.invalidateHostLists(); }
+
     // Substring search by display name and host id across every workspace of the user. The page is
     // mandatory as for listHosts; total_count counts the matches of the whole scope.
     void searchHosts(const QString& query, qint64 offset, qint64 count,

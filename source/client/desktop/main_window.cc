@@ -504,6 +504,12 @@ void MainWindow::onSettings()
         }
     });
 
+    connect(settings_tab, &SettingsTab::sig_hostsPerPageChanged, this, [this](qint64 page_size)
+    {
+        if (ManagementTab* management_tab = managementTab())
+            management_tab->setHostsPerPage(page_size);
+    });
+
     addTab(settings_tab, tr("Settings"), QIcon(":/img/settings.svg"));
 }
 

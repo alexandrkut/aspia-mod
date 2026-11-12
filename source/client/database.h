@@ -132,6 +132,9 @@ public:
     bool isCheckUpdatesEnabled() const;
     bool setCheckUpdatesEnabled(bool enable);
 
+    qint64 hostsPerPage() const;
+    bool setHostsPerPage(qint64 value);
+
     QString updateChannel() const;
     bool setUpdateChannel(const QString& channel);
 

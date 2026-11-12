@@ -46,6 +46,7 @@ public:
 signals:
     void sig_desktopConfigChanged();
     void sig_lockTimeoutChanged();
+    void sig_hostsPerPageChanged(qint64 page_size);
 
 protected:
     // QWidget implementation.
@@ -61,6 +62,7 @@ private slots:
     void onBackupPathChanged();
     void onSelectBackupPath();
     void onBackupRetentionChanged();
+    void onHostsPerPageChanged();
     void onProxyChanged();
     void onUdpMethodsChanged();
     void onLockTimeoutChanged();

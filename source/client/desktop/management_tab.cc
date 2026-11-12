@@ -501,6 +501,17 @@ void ManagementTab::searchTextChanged(const QString& text)
 }
 
 //--------------------------------------------------------------------------------------------------
+void ManagementTab::setHostsPerPage(qint64 page_size)
+{
+    // Both host lists of this tab follow the setting: the workspace/group view and the
+    // approved hosts view. Each resets to its first page and refetches.
+    if (router_group_widget_)
+        router_group_widget_->setHostsPageSize(page_size);
+    if (router_hosts_widget_)
+        router_hosts_widget_->setHostsPageSize(page_size);
+}
+
+//--------------------------------------------------------------------------------------------------
 void ManagementTab::reloadRouters()
 {
     ui->sidebar->reloadRouters();

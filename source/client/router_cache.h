@@ -102,6 +102,10 @@ public:
     // Marks the cached workspace list stale without dropping it - the next request refetches.
     void invalidateWorkspaces() { workspaces_loaded_ = false; }
 
+    // Drops every cached host list: the keys carry the page size, so a size change strands
+    // the old pages - they would never be read again, but they would never be freed either.
+    void invalidateHostLists() { cached_hosts_.clear(); }
+
 private:
     bool workspaces_loaded_ = false;
     RouterWorkspaceList cached_workspaces_;

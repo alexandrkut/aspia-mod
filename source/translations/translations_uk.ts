@@ -9623,6 +9623,11 @@ Sections: %2. Users in file: %3.</source>
         <source>Unable to turn on the automatic unlock.</source>
         <translation>Не вдалося увімкнути автоматичне розблокування.</translation>
     </message>
+<message>
+        <location filename="../client/desktop/settings_tab.ui" line="184"/>
+        <source>Hosts per page:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsUtil</name>

@@ -963,6 +963,32 @@ TEST_F(HostListTest, FilterIsRejectedInFilteredMode)
 }
 
 //--------------------------------------------------------------------------------------------------
+// The page cap is what keeps a reply inside the channel limit: a page of exactly the cap is
+// served, one more is refused without a count. The size itself is pinned by
+// FullPageOfLargestHostsFitsTheChannel, which fills a page of the cap with the largest hosts.
+TEST_F(HostListTest, HostPageAcceptsTheMaximumAndRefusesOneMore)
+{
+    ASSERT_NE(addHostTo("hash-1", workspace_id_, 0, "first"), kInvalidHostId);
+
+    proto::router::HostListRequest at_cap =
+        hostListRequest(proto::router::HostListRequest::MODE_FILTERED, workspace_id_, 0);
+    at_cap.set_count(proto::router::kMaxHostPageSize);
+
+    const proto::router::HostList served = hostList(at_cap);
+    EXPECT_EQ(served.error_code(), proto::router::kErrorOk);
+    EXPECT_EQ(served.host_size(), 1);
+    EXPECT_EQ(served.total_count(), 1);
+
+    proto::router::HostListRequest over_cap = at_cap;
+    over_cap.set_count(proto::router::kMaxHostPageSize + 1);
+
+    const proto::router::HostList refused = hostList(over_cap);
+    EXPECT_EQ(refused.error_code(), proto::router::kErrorInvalidRequest);
+    EXPECT_EQ(refused.host_size(), 0);
+    EXPECT_EQ(refused.total_count(), 0);
+}
+
+//--------------------------------------------------------------------------------------------------
 // A full page of hosts whose every field sits on its limit still fits what the channel can carry.
 // This is what picks the value of kMaxHostPageSize, and it is the assumption that quietly breaks
 // once a field is added to a host record or a field limit is raised.

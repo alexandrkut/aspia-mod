@@ -2791,3 +2791,21 @@ TEST_F(DatabaseTest, ResetDoesNotOverwriteAFileInPlaceOfTheCopy)
     ASSERT_TRUE(file.open(QIODevice::ReadOnly));
     EXPECT_EQ(file.readAll(), "data");
 }
+
+//--------------------------------------------------------------------------------------------------
+// The page size setting: absent means the default the lists shipped with, a stored value is
+// kept, and anything a caller could store by mistake falls back to that default instead of
+// ever reaching the lists.
+TEST_F(DatabaseTest, HostsPerPageDefaultsTo100AndClampsWhatItIsGiven)
+{
+    EXPECT_EQ(db_.hostsPerPage(), 100);
+
+    EXPECT_TRUE(db_.setHostsPerPage(500));
+    EXPECT_EQ(db_.hostsPerPage(), 500);
+
+    EXPECT_TRUE(db_.setHostsPerPage(50));
+    EXPECT_EQ(db_.hostsPerPage(), 50);
+
+    EXPECT_TRUE(db_.setHostsPerPage(0));
+    EXPECT_EQ(db_.hostsPerPage(), 100);
+}

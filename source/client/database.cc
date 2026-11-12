@@ -64,6 +64,7 @@ constexpr auto kSettingMcpEnabled    = "mcp_enabled";
 constexpr auto kSettingMcpConfirm    = "mcp_auto_confirm";
 constexpr auto kSettingMcpSessions   = "mcp_session_types";
 constexpr auto kSettingMcpSignIn     = "mcp_sign_in";
+constexpr auto kSettingHostsPerPage  = "hosts_per_page";
 constexpr auto kSettingSalt          = "master_password_salt";
 constexpr auto kSettingVerifier      = "master_password_verifier";
 constexpr auto kSettingVersion       = "master_password_version";
@@ -1930,6 +1931,27 @@ bool Database::isCheckUpdatesEnabled() const
 bool Database::setCheckUpdatesEnabled(bool enable)
 {
     return writeSetting(kSettingCheckUpdates, enable ? "1" : "0");
+}
+
+//--------------------------------------------------------------------------------------------------
+qint64 Database::hostsPerPage() const
+{
+    QString value = readSetting(kSettingHostsPerPage);
+    if (value.isEmpty())
+        return 100;
+    bool ok = false;
+    qint64 result = value.toLongLong(&ok);
+    if (!ok || result <= 0)
+        return 100;
+    return result;
+}
+
+//--------------------------------------------------------------------------------------------------
+bool Database::setHostsPerPage(qint64 value)
+{
+    if (value <= 0)
+        value = 100;
+    return writeSetting(kSettingHostsPerPage, QString::number(value));
 }
 
 //--------------------------------------------------------------------------------------------------

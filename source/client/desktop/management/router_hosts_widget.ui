@@ -240,20 +240,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_hosts_page_size">
-       <property name="text">
-        <string>Items per page:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="combo_hosts_page_size">
-       <property name="sizeAdjustPolicy">
-        <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
       <spacer name="spacer_hosts_pagination">
        <property name="orientation">
         <enum>Qt::Orientation::Horizontal</enum>

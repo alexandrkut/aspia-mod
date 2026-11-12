@@ -54,6 +54,10 @@ public:
     void showRouter(qint64 router_id);
     qint64 routerId() const { return router_id_; }
     void setMimeType(const QString& mime_type);
+
+    // Applies a new page size from the settings: resets to the first page, drops the cached
+    // pages of the old size and refetches.
+    void setHostsPageSize(qint64 page_size);
     bool hasSelectedHost() const;
     HostId selectedHostId() const;
     HostConfig selectedHostConfig() const;
@@ -99,7 +103,6 @@ private slots:
     void onWorkspaceListReceived(const RouterWorkspaceList& list);
     void onHostContextMenu(const QPoint& pos);
     void onHeaderContextMenu(const QPoint& pos);
-    void onHostsPageSizeChanged(int index);
     void onHostsPageChanged(int index);
     void onHostsPrevClicked();
     void onHostsNextClicked();

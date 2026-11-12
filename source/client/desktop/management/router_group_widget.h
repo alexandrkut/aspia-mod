@@ -43,6 +43,10 @@ public:
 
     void showGroup(qint64 router_id, qint64 workspace_id, qint64 group_id);
 
+    // Applies a new page size from the settings: resets to the first page, drops the cached
+    // pages of the old size and refetches.
+    void setHostsPageSize(qint64 page_size);
+
     qint64 routerId() const { return router_id_; }
     bool hasSelectedHost() const;
     RouterHost selectedHost() const;
@@ -70,7 +74,6 @@ protected:
 
 private slots:
     void onHostListReceived(const RouterHostList& list);
-    void onPageSizeChanged(int index);
     void onPageChanged(int index);
     void onPrevClicked();
     void onNextClicked();

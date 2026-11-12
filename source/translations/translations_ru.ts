@@ -9625,7 +9625,13 @@ Sections: %2. Users in file: %3.</source>
             <source>Unable to turn on the automatic unlock.</source>
             <translation>Не удалось включить автоматическую разблокировку.</translation>
         </message>
-    </context>
+    
+<message>
+            <location filename="../client/desktop/settings_tab.ui" line="184" />
+            <source>Hosts per page:</source>
+            <translation>Хостов на странице:</translation>
+        </message>
+</context>
     <context>
         <name>SettingsUtil</name>
         <message>
