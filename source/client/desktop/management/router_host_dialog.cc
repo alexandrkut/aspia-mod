@@ -43,6 +43,7 @@
 #include "client/settings.h"
 #include "client/desktop/management/group_combo_box.h"
 #include "client/desktop/management/ui_router_host_dialog.h"
+#include "common/desktop/dialog_button_box.h"
 #include "common/desktop/msg_box.h"
 #include "common/desktop/router_error.h"
 #include "common/desktop/password_edit.h"
@@ -249,8 +250,10 @@ void RouterHostDialog::onWorkspacesButtonClicked()
     list->setEnabled(is_admin);
     layout->addWidget(list);
 
+    // DialogButtonBox instead of the plain QDialogButtonBox: it translates the standard buttons
+    // on show, otherwise the popup says "Cancel" in a Russian UI.
     auto* button_box =
-        new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, &dialog);
+        new DialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, &dialog);
     connect(button_box, &QDialogButtonBox::accepted, &dialog, &QDialog::accept);
     connect(button_box, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
     layout->addWidget(button_box);

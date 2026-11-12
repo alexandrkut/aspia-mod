@@ -333,6 +333,26 @@ TEST_F(HostRequestHandlerTest, AdminMovesHostDirectlyToAnotherWorkspace)
 }
 
 //--------------------------------------------------------------------------------------------------
+// A release names no workspace and carries no membership list: every membership row goes with
+// it. A host in two spaces used to keep the non-primary one, and refreshPrimaryMembership
+// pointed the scalar straight back at that row - the host never became free.
+TEST_F(HostRequestHandlerTest, ReleaseDropsEveryMembership)
+{
+    caller_.session_type = proto::router::SESSION_TYPE_ADMIN;
+
+    const qint64 second_id = addWorkspace("beta");
+    ASSERT_GT(second_id, 0);
+    ASSERT_EQ(db_.addHostMembership(host_id_, second_id, 0), proto::router::kErrorOk);
+    ASSERT_EQ(db_.hostWorkspaceIds(host_id_).size(), 2u);
+
+    const RequestResult released = handle(makeMoveRequest(host_id_, 0, 0, "display"));
+
+    EXPECT_EQ(released.error_code, proto::router::kErrorOk);
+    EXPECT_EQ(findHost(host_id_).workspace_id(), 0);
+    EXPECT_TRUE(db_.hostWorkspaceIds(host_id_).empty());
+}
+
+//--------------------------------------------------------------------------------------------------
 // An edit built on a stale revision is refused, and the sender is told to refetch. The revision
 // of the request is what carries the base state to the check.
 TEST_F(HostRequestHandlerTest, StaleHostEditIsConflict)

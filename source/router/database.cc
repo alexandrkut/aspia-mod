@@ -2159,13 +2159,13 @@ std::string_view Database::modifyHost(HostId host_id, qint64 base_revision, qint
             }
         }
     }
-    else if (old_workspace_id > 0)
+    else
     {
-        // Released: the primary membership goes away, the host may stay through other
-        // memberships, and refreshPrimaryMembership below re-points the scalar at the next one.
-        SqlQuery drop(db_, "DELETE FROM host_workspaces WHERE host_id=? AND workspace_id=?");
+        // Released: the host leaves every workspace. The scalar says so and an empty membership
+        // list follows, so all the rows go: keeping any of them would re-point the scalar right
+        // back at it through refreshPrimaryMembership below and the host would never be free.
+        SqlQuery drop(db_, "DELETE FROM host_workspaces WHERE host_id=?");
         drop.addUInt64(host_id);
-        drop.addInt64(old_workspace_id);
 
         if (!drop.exec())
         {
