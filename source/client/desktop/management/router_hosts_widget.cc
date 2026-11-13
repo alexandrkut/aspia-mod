@@ -1331,29 +1331,18 @@ void RouterHostsWidget::onHostsRemoveUser()
     int fetched_index = 0;
     for (int i = 0; i < hosts.size(); ++i)
     {
-        RouterHostBulkPreviewRow row;
-        row.host = bulkHostLabel(hosts[i]);
+        // Only hosts the removal is ready to run on get a row: offline hosts, hosts whose
+        // user list could not be read and hosts without any of the selected users are left
+        // out entirely - the pick dialog already reports the offline/unreadable counts.
         if (!hosts[i].online)
-        {
-            row.will_run = false;
-            row.detail = tr("Host is offline.");
-            row.action = tr("Remove user");
-            preview.append(row);
             continue;
-        }
         if (fetched_index >= fetched.size())
             break;
         const int target_index = fetched_index++;
         const RouterHostBulkResult& f = fetched[target_index];
 
         if (f.status != "ok")
-        {
-            row.will_run = false;
-            row.detail = tr("List unreadable (%1).").arg(f.detail);
-            row.action = tr("Remove user");
-            preview.append(row);
             continue;
-        }
 
         // Parse user list for this host.
         QMap<QString, qint64> entry_by_name; // lower name -> entry_id
@@ -1372,13 +1361,11 @@ void RouterHostsWidget::onHostsRemoveUser()
             }
         }
 
-        bool any = false;
         for (const QString& name : names)
         {
             const qint64 entry_id = entry_by_name.value(name.toLower(), -1);
             if (entry_id < 0)
                 continue;
-            any = true;
 
             RouterHostBulkPreviewRow nrow;
             nrow.host = bulkHostLabel(hosts[i]);
@@ -1408,16 +1395,6 @@ void RouterHostsWidget::onHostsRemoveUser()
             apply_targets.append(targets[target_index]);
             apply_names.append(name);
             apply_entry_ids.append(entry_id);
-        }
-
-        if (!any)
-        {
-            RouterHostBulkPreviewRow nrow;
-            nrow.host = bulkHostLabel(hosts[i]);
-            nrow.action = tr("Remove user");
-            nrow.will_run = false;
-            nrow.detail = tr("No selected user, skipped.");
-            preview.append(nrow);
         }
     }
 
