@@ -237,13 +237,16 @@ int RouterHostBulkDialog::execBulk(RouterHostBulkRunner* runner,
         set_cell(i, 1, preview[i].action);
         if (preview[i].will_run)
         {
+            // The map is indexed by TARGET number: the runner's result index goes straight
+            // into it. A skipped row must not append anything, or every index after the
+            // first skip would shift and that row would never be updated (bug of 13.11.2026:
+            // rows after a skipped one kept "Pending" forever).
             row_of_target_.append(i);
             set_cell(i, 2, tr("Pending"));
             set_cell(i, 3, QString());
         }
         else
         {
-            row_of_target_.append(-1);
             set_cell(i, 2, statusText("skipped"));
             set_cell(i, 3, preview[i].detail);
         }
@@ -315,7 +318,7 @@ void RouterHostBulkDialog::onResultReady(int index)
         return;
 
     const RouterHostBulkResult& result = results[index];
-    if (index < row_of_target_.size() && row_of_target_[index] >= 0)
+    if (index < row_of_target_.size())
     {
         setRowResult(row_of_target_[index], result.status, result.detail);
         status_label_->setText(tr("%1 of %2 done.").arg(index + 1).arg(row_of_target_.size()));
@@ -340,11 +343,8 @@ void RouterHostBulkDialog::onFinished()
         else if (result.status == "cancelled")
             ++cancelled;
     }
-    for (int row : row_of_target_)
-    {
-        if (row < 0)
-            ++skipped;
-    }
+    // The preview rows that never entered the map are the skipped ones.
+    skipped = table_->rowCount() - static_cast<int>(row_of_target_.size());
 
     status_label_->setText(
         tr("Done: %1, failed: %2, offline: %3, skipped: %4, cancelled: %5.")
