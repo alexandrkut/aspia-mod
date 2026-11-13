@@ -19,6 +19,7 @@
 #include <QFormLayout>
 #include <QHBoxLayout>
 #include <QHeaderView>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QLabel>
 #include <QLineEdit>
@@ -29,6 +30,7 @@
 #include <QVBoxLayout>
 
 #include "base/logging.h"
+#include "base/peer/user.h"
 #include "client/router_controller.h"
 #include "client/router_session.h"
 #include "common/desktop/msg_box.h"
@@ -52,6 +54,19 @@ QString statusText(const QString& status)
     if (status == "running")
         return RouterHostBulkDialog::tr("Running...");
     return status;
+}
+
+
+// Display label for a host in bulk tables.
+QString bulkHostLabel(const RouterHost& host)
+{
+    if (!host.display_name.isEmpty() && !host.computer_name.isEmpty())
+        return host.display_name + " (" + host.computer_name + ")";
+    if (!host.display_name.isEmpty())
+        return host.display_name;
+    if (!host.computer_name.isEmpty())
+        return host.computer_name;
+    return QString::number(host.host_id);
 }
 
 } // namespace
@@ -218,9 +233,11 @@ RouterHostBulkDialog::RouterHostBulkDialog(const QString& title, QWidget* parent
 
 //--------------------------------------------------------------------------------------------------
 int RouterHostBulkDialog::execBulk(RouterHostBulkRunner* runner,
-                                   const QList<RouterHostBulkPreviewRow>& preview)
+                                   const QList<RouterHostBulkPreviewRow>& preview,
+                                   const QString& confirm_word)
 {
     runner_ = runner;
+    confirm_word_ = confirm_word.trimmed();
     row_of_target_.clear();
 
     auto set_cell = [this](int row, int column, const QString& text)
@@ -267,6 +284,30 @@ int RouterHostBulkDialog::execBulk(RouterHostBulkRunner* runner,
     else
     {
         status_label_->setText(tr("%n host(s) selected.", "", run_count));
+    }
+
+    // Optional confirmation gate: Apply stays disabled until the word is typed.
+    if (!confirm_word_.isEmpty())
+    {
+        auto* hint = new QLabel(
+            tr("Type %1 to enable Apply.").arg(confirm_word_), this);
+        hint->setWordWrap(true);
+        layout()->addWidget(hint);
+
+        confirm_edit_ = new QLineEdit(this);
+        layout()->addWidget(confirm_edit_);
+
+        const bool has_work = (run_count > 0);
+        apply_button_->setEnabled(false);
+        connect(confirm_edit_, &QLineEdit::textChanged, this,
+                [this, has_work](const QString&)
+        {
+            if (running_ || completed_)
+                return;
+            const bool ok = has_work &&
+                (confirm_edit_->text().trimmed().compare(confirm_word_, Qt::CaseInsensitive) == 0);
+            apply_button_->setEnabled(ok);
+        });
     }
 
     running_ = false;
@@ -443,56 +484,163 @@ void RouterHostBulkFullConfigDialog::onButtonClicked(QAbstractButton* button)
 }
 
 //--------------------------------------------------------------------------------------------------
-RouterHostBulkRemoveDialog::RouterHostBulkRemoveDialog(QWidget* parent)
+RouterHostBulkUserPickDialog::RouterHostBulkUserPickDialog(const QList<RouterHost>& hosts,
+                                                          const QList<RouterHostBulkResult>& fetched,
+                                                          QWidget* parent)
     : QDialog(parent)
 {
     setWindowTitle(tr("Remove user from hosts"));
-    setMinimumWidth(380);
+    setMinimumSize(620, 420);
 
-    auto* layout = new QFormLayout(this);
+    auto* layout = new QVBoxLayout(this);
 
-    edit_name_ = new QLineEdit(this);
-    layout->addRow(tr("User name:"), edit_name_);
+    // Aggregate unique user names (case-insensitive) across readable hosts.
+    int offline_count = 0;
+    int unreadable_count = 0;
+    int readable_count = 0;
+    int queried_count = 0;
+
+    QMap<QString, int> name_index;
+    QStringList name_hosts_list; // placeholder
+    QVector<QStringList> name_hosts;
+    QVector<int> name_total;
+    QVector<int> name_enabled;
+
+    int fetched_index = 0;
+    for (int i = 0; i < hosts.size(); ++i)
+    {
+        if (!hosts[i].online)
+        {
+            ++offline_count;
+            continue;
+        }
+        ++queried_count;
+        if (fetched_index >= fetched.size())
+        {
+            ++unreadable_count;
+            ++fetched_index;
+            continue;
+        }
+        const RouterHostBulkResult& f = fetched[fetched_index++];
+        if (f.status != "ok")
+        {
+            ++unreadable_count;
+            continue;
+        }
+        ++readable_count;
+
+        QJsonDocument doc = QJsonDocument::fromJson(f.raw.toUtf8());
+        if (!doc.isArray())
+        {
+            ++unreadable_count;
+            --readable_count;
+            continue;
+        }
+
+        const QString host_label = bulkHostLabel(hosts[i]);
+        for (const QJsonValue& v : doc.array())
+        {
+            const QJsonObject o = v.toObject();
+            const QString name = o.value("name").toString();
+            if (name.isEmpty())
+                continue;
+            const QString key = name.toLower();
+            if (!name_index.contains(key))
+            {
+                name_index[key] = names_.size();
+                names_.append(name);
+                name_hosts.append(QStringList());
+                name_total.append(0);
+                name_enabled.append(0);
+            }
+            const int idx = name_index[key];
+            name_hosts[idx].append(host_label);
+            ++name_total[idx];
+            if (o.value("flags").toInteger() & User::ENABLED)
+                ++name_enabled[idx];
+        }
+    }
+
+    auto* summary = new QLabel(
+        tr("Queried hosts: %1, offline: %2, unreadable: %3")
+            .arg(queried_count).arg(offline_count).arg(unreadable_count),
+        this);
+    layout->addWidget(summary);
+
+    table_ = new QTableWidget(this);
+    table_->setColumnCount(3);
+    table_->setHorizontalHeaderLabels(
+        {tr("User"), tr("Hosts"), tr("Status")});
+    table_->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+    table_->horizontalHeader()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+    table_->horizontalHeader()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
+    table_->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    table_->setSelectionBehavior(QAbstractItemView::SelectRows);
+    layout->addWidget(table_);
+
+    table_->setRowCount(names_.size());
+    for (int i = 0; i < names_.size(); ++i)
+    {
+        auto* name_item = new QTableWidgetItem(names_[i]);
+        name_item->setFlags(name_item->flags() | Qt::ItemIsUserCheckable);
+        name_item->setCheckState(Qt::Unchecked);
+        table_->setItem(i, 0, name_item);
+
+        const QString hosts_text = tr("%1 of %2").arg(name_total[i]).arg(readable_count);
+        auto* hosts_item = new QTableWidgetItem(hosts_text);
+        hosts_item->setToolTip(name_hosts[i].join(QStringLiteral(", ")));
+        table_->setItem(i, 1, hosts_item);
+
+        QString status;
+        if (name_total[i] > 0 && name_enabled[i] == name_total[i])
+            status = tr("enabled");
+        else if (name_enabled[i] == 0)
+            status = tr("disabled");
+        else
+            status = tr("enabled on some hosts");
+        auto* status_item = new QTableWidgetItem(status);
+        table_->setItem(i, 2, status_item);
+    }
+
+    auto* warning = new QLabel(
+        tr("Warning: removing a user is irreversible. The password cannot be "
+           "restored, only recreated."),
+        this);
+    warning->setWordWrap(true);
+    layout->addWidget(warning);
 
     check_force_ = new QCheckBox(
-        tr("Force (remove even with live sessions, last enabled user is still protected)"), this);
-    layout->addRow(QString(), check_force_);
+        tr("Force (remove even with live sessions; last enabled user is still protected)"),
+        this);
+    check_force_->setChecked(false);
+    layout->addWidget(check_force_);
 
     auto* buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
-    layout->addRow(buttons);
-
-    connect(buttons, &QDialogButtonBox::clicked,
-            this, &RouterHostBulkRemoveDialog::onButtonClicked);
+    layout->addWidget(buttons);
+    connect(buttons, &QDialogButtonBox::accepted, this, &QDialog::accept);
+    connect(buttons, &QDialogButtonBox::rejected, this, &QDialog::reject);
 }
 
 //--------------------------------------------------------------------------------------------------
-QString RouterHostBulkRemoveDialog::userName() const
+QStringList RouterHostBulkUserPickDialog::selectedNames() const
 {
-    return edit_name_->text().trimmed();
-}
-
-//--------------------------------------------------------------------------------------------------
-bool RouterHostBulkRemoveDialog::force() const
-{
-    return check_force_->isChecked();
-}
-
-//--------------------------------------------------------------------------------------------------
-void RouterHostBulkRemoveDialog::onButtonClicked(QAbstractButton* button)
-{
-    auto* button_box = qobject_cast<QDialogButtonBox*>(sender());
-    if (!button_box || button_box->standardButton(button) != QDialogButtonBox::Ok)
+    QStringList out;
+    if (!table_)
+        return out;
+    for (int i = 0; i < table_->rowCount(); ++i)
     {
-        reject();
-        return;
+        const QTableWidgetItem* item = table_->item(i, 0);
+        if (item && item->checkState() == Qt::Checked)
+        {
+            if (i < names_.size())
+                out.append(names_[i]);
+        }
     }
+    return out;
+}
 
-    if (edit_name_->text().trimmed().isEmpty())
-    {
-        MsgBox::warning(this, tr("Enter a user name."));
-        edit_name_->setFocus();
-        return;
-    }
-
-    accept();
+//--------------------------------------------------------------------------------------------------
+bool RouterHostBulkUserPickDialog::force() const
+{
+    return check_force_ ? check_force_->isChecked() : false;
 }

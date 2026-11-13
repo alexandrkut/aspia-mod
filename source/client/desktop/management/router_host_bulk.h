@@ -109,7 +109,12 @@ public:
 
     // Shows the preview; on Apply runs |runner| to completion in the same dialog.
     // Returns Accepted if the run completed, Rejected if cancelled before Apply.
-    int execBulk(RouterHostBulkRunner* runner, const QList<RouterHostBulkPreviewRow>& preview);
+    // |confirm_word|, when non-empty, adds a confirmation input: Apply stays
+    // disabled until the user types that word (case-insensitive, trimmed).
+    // Empty keeps the old behaviour (no field) for every other bulk flow.
+    int execBulk(RouterHostBulkRunner* runner,
+                const QList<RouterHostBulkPreviewRow>& preview,
+                const QString& confirm_word = QString());
 
 private slots:
     void onButtonClicked(QAbstractButton* button);
@@ -126,6 +131,8 @@ private:
     QPushButton* apply_button_ = nullptr;
     QPushButton* cancel_button_ = nullptr;
     QLabel* status_label_ = nullptr;
+    QLineEdit* confirm_edit_ = nullptr;
+    QString confirm_word_;
 
     RouterHostBulkRunner* runner_ = nullptr;
     QVector<int> row_of_target_;
@@ -133,6 +140,26 @@ private:
     bool completed_ = false;
 
     Q_DISABLE_COPY_MOVE(RouterHostBulkDialog)
+};
+
+// Window for choosing which users to remove from the selected hosts.
+class RouterHostBulkUserPickDialog final : public QDialog
+{
+    Q_OBJECT
+public:
+    explicit RouterHostBulkUserPickDialog(const QList<RouterHost>& hosts,
+                                          const QList<RouterHostBulkResult>& fetched,
+                                          QWidget* parent = nullptr);
+
+    QStringList selectedNames() const;
+    bool force() const;
+
+private:
+    QTableWidget* table_ = nullptr;
+    QCheckBox* check_force_ = nullptr;
+    QStringList names_;
+
+    Q_DISABLE_COPY_MOVE(RouterHostBulkUserPickDialog)
 };
 
 // Tiny input for bulk full config: file summary plus the keep-router checkbox.
@@ -152,27 +179,6 @@ private:
     QCheckBox* check_keep_ = nullptr;
 
     Q_DISABLE_COPY_MOVE(RouterHostBulkFullConfigDialog)
-};
-
-// Tiny input for bulk user removal: name plus the force flag.
-class RouterHostBulkRemoveDialog final : public QDialog
-{
-    Q_OBJECT
-
-public:
-    explicit RouterHostBulkRemoveDialog(QWidget* parent = nullptr);
-
-    QString userName() const;
-    bool force() const;
-
-private slots:
-    void onButtonClicked(QAbstractButton* button);
-
-private:
-    QLineEdit* edit_name_ = nullptr;
-    QCheckBox* check_force_ = nullptr;
-
-    Q_DISABLE_COPY_MOVE(RouterHostBulkRemoveDialog)
 };
 
 #endif // CLIENT_DESKTOP_MANAGEMENT_ROUTER_HOST_BULK_H

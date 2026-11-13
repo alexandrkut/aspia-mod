@@ -1291,14 +1291,6 @@ void RouterHostsWidget::onHostsRemoveUser()
     if (hosts.isEmpty())
         return;
 
-    AutoQPointer<RouterHostBulkRemoveDialog> input(new RouterHostBulkRemoveDialog(this));
-    if (input->exec() != QDialog::Accepted)
-        return;
-
-    const QString name = input->userName();
-    const bool force = input->force();
-    const QString bulk_id = newBulkId();
-
     const QList<RouterHostBulkTarget> targets = bulkOnlineTargets(hosts);
 
     AutoQPointer<RouterHostBulkRunner> fetch(new RouterHostBulkRunner(
@@ -1307,19 +1299,36 @@ void RouterHostsWidget::onHostsRemoveUser()
     const QList<RouterHostBulkResult> fetched =
         execFetchBulk(fetch, tr("Reading user lists..."), this);
 
+    AutoQPointer<RouterHostBulkUserPickDialog> pick(
+        new RouterHostBulkUserPickDialog(hosts, fetched, this));
+    if (pick->exec() != QDialog::Accepted)
+        return;
+
+    const QStringList names = pick->selectedNames();
+    if (names.isEmpty())
+        return;
+
+    const bool force = pick->force();
+    const QString bulk_id = newBulkId();
+
+    // Build preview: one row per (host x selected name) that actually exists.
+    // apply_targets / apply_names / apply_entry_ids stay aligned with each other
+    // and with the will_run rows of the preview (hosts outer, names inner).
     QList<RouterHostBulkTarget> apply_targets;
-    QMap<HostId, qint64> entry_by_host;
+    QVector<QString> apply_names;
+    QVector<qint64> apply_entry_ids;
+
     QList<RouterHostBulkPreviewRow> preview;
     int fetched_index = 0;
     for (int i = 0; i < hosts.size(); ++i)
     {
         RouterHostBulkPreviewRow row;
         row.host = bulkHostLabel(hosts[i]);
-        row.action = tr("Remove user \"%1\"").arg(name);
         if (!hosts[i].online)
         {
             row.will_run = false;
             row.detail = tr("Host is offline.");
+            row.action = tr("Remove user");
             preview.append(row);
             continue;
         }
@@ -1327,67 +1336,105 @@ void RouterHostsWidget::onHostsRemoveUser()
             break;
         const int target_index = fetched_index++;
         const RouterHostBulkResult& f = fetched[target_index];
+
         if (f.status != "ok")
         {
-            row.will_run = true;
-            row.target_index = apply_targets.size();
-            row.detail = tr("List unreadable (%1), will try anyway.").arg(f.detail);
-            apply_targets.append(targets[target_index]);
+            row.will_run = false;
+            row.detail = tr("List unreadable (%1).").arg(f.detail);
+            row.action = tr("Remove user");
+            preview.append(row);
+            continue;
         }
-        else
+
+        // Parse user list for this host.
+        QMap<QString, qint64> entry_by_name; // lower name -> entry_id
+        int enabled_total = 0;
+        QJsonDocument doc = QJsonDocument::fromJson(f.raw.toUtf8());
+        if (doc.isArray())
         {
-            qint64 entry_id = -1;
+            for (const QJsonValue& v : doc.array())
+            {
+                const QJsonObject o = v.toObject();
+                if (o.value("flags").toInteger() & User::ENABLED)
+                    ++enabled_total;
+                entry_by_name.insert(
+                    o.value("name").toString().toLower(),
+                    o.value("entry_id").toInteger(-1));
+            }
+        }
+
+        bool any = false;
+        for (const QString& name : names)
+        {
+            const qint64 entry_id = entry_by_name.value(name.toLower(), -1);
+            if (entry_id < 0)
+                continue;
+            any = true;
+
+            RouterHostBulkPreviewRow nrow;
+            nrow.host = bulkHostLabel(hosts[i]);
+            nrow.action = tr("Remove user \"%1\"").arg(name);
+            nrow.will_run = true;
+            nrow.target_index = apply_targets.size();
+
+            // enabled check for this specific user
             bool enabled = false;
-            int enabled_total = 0;
-            QJsonDocument doc = QJsonDocument::fromJson(f.raw.toUtf8());
             if (doc.isArray())
             {
                 for (const QJsonValue& v : doc.array())
                 {
                     const QJsonObject o = v.toObject();
-                    if (o.value("flags").toInteger() & User::ENABLED)
-                        ++enabled_total;
                     if (o.value("name").toString().compare(name, Qt::CaseInsensitive) == 0)
                     {
-                        entry_id = o.value("entry_id").toInteger(-1);
                         enabled = o.value("flags").toInteger() & User::ENABLED;
+                        break;
                     }
                 }
             }
-            if (entry_id < 0)
-            {
-                row.will_run = false;
-                row.detail = tr("No such user, skipped.");
-            }
-            else
-            {
-                row.will_run = true;
-                row.target_index = apply_targets.size();
-                if (enabled && enabled_total <= 1)
-                    row.detail = tr("Last enabled user, the host will refuse.");
-                apply_targets.append(targets[target_index]);
-                entry_by_host[hosts[i].host_id] = entry_id;
-            }
+            if (enabled && enabled_total <= 1)
+                nrow.detail = tr("Last enabled user, the host will refuse.");
+
+            preview.append(nrow);
+
+            apply_targets.append(targets[target_index]);
+            apply_names.append(name);
+            apply_entry_ids.append(entry_id);
         }
-        preview.append(row);
+
+        if (!any)
+        {
+            RouterHostBulkPreviewRow nrow;
+            nrow.host = bulkHostLabel(hosts[i]);
+            nrow.action = tr("Remove user");
+            nrow.will_run = false;
+            nrow.detail = tr("No selected user, skipped.");
+            preview.append(nrow);
+        }
     }
 
+    // Params function: aligned with apply_targets order via a mutable counter.
+    int apply_index = -1;
     AutoQPointer<RouterHostBulkRunner> runner(new RouterHostBulkRunner(
         router_id_, apply_targets, "remove_user",
-        [&](HostId host_id)
+        [&](HostId /*host_id*/)
         {
+            ++apply_index;
             QJsonObject params;
-            if (entry_by_host.contains(host_id))
-                params["entry_id"] = entry_by_host[host_id];
-            params["name"] = name;
+            if (apply_index >= 0 && apply_index < apply_entry_ids.size())
+            {
+                if (apply_entry_ids[apply_index] >= 0)
+                    params["entry_id"] = apply_entry_ids[apply_index];
+                params["name"] = apply_names[apply_index];
+            }
             if (force)
                 params["force"] = true;
             params["bulk_id"] = bulk_id;
             return params;
         }, this));
+
     AutoQPointer<RouterHostBulkDialog> dialog(
         new RouterHostBulkDialog(tr("Remove user from hosts"), this));
-    dialog->execBulk(runner, preview);
+    dialog->execBulk(runner, preview, QStringLiteral("DELETE"));
 }
 
 //--------------------------------------------------------------------------------------------------
