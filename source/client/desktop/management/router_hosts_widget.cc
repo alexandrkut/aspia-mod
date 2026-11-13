@@ -39,6 +39,7 @@
 #include <QMouseEvent>
 #include <QRegularExpressionValidator>
 #include <QSaveFile>
+#include <QSet>
 #include <QSignalBlocker>
 #include <QTimer>
 #include <QToolButton>
@@ -1130,6 +1131,108 @@ QList<RouterHostBulkResult> execFetchBulk(RouterHostBulkRunner* runner,
     return runner->results();
 }
 
+// Hosts without the mod never answer get_host_users: asking only burns the per-host
+// timeout. A mod host is identified by the -mod suffix the router substitutes into
+// hosts.version from its telemetry; before the first telemetry the version is numeric
+// and a fresh mod host counts as "no mod" - it then shows up as unreadable and is
+// served on the next attempt, once the telemetry has landed.
+QSet<HostId> noModHosts(const QList<RouterHost>& hosts)
+{
+    QSet<HostId> result;
+    for (const RouterHost& host : hosts)
+    {
+        if (!host.version.isEmpty() && !host.version.contains(QLatin1String("-mod")))
+            result.insert(host.host_id);
+    }
+    return result;
+}
+
+// Read-only bulk fetch of get_host_users, fired in parallel: one slow host costs its
+// own latency instead of stalling every host in turn. Hosts in |no_mod| are never
+// asked; their placeholder keeps an empty status, which callers already treat exactly
+// like a failed read (unreadable in the pick dialog, excluded from the preview).
+// Results stay aligned with |targets|.
+QList<RouterHostBulkResult> fetchUserListsParallel(qint64 router_id,
+                                                   const QList<RouterHostBulkTarget>& targets,
+                                                   const QSet<HostId>& no_mod,
+                                                   QWidget* parent)
+{
+    struct FetchState
+    {
+        QList<RouterHostBulkResult> results;
+        int pending = 0;
+    };
+
+    SharedPointer<FetchState> state(new FetchState());
+    state->results.reserve(targets.size());
+    for (const RouterHostBulkTarget& target : targets)
+    {
+        RouterHostBulkResult placeholder;
+        placeholder.host_id = target.host_id;
+        placeholder.display = target.display;
+        state->results.append(placeholder); // status stays empty: not "ok" = host excluded
+        if (!no_mod.contains(target.host_id))
+            ++state->pending;
+    }
+
+    RouterSession* session = RouterController::session(router_id);
+    if (!session || state->pending == 0)
+        return state->results;
+
+    QEventLoop loop;
+    QTimer::singleShot(30000, &loop, &QEventLoop::quit); // safety net, replies are bounded by the per-host timeout
+
+    QProgressDialog progress(RouterHostsWidget::tr("Reading user lists..."),
+                             RouterHostsWidget::tr("Cancel"), 0, state->pending, parent);
+    progress.setWindowModality(Qt::WindowModal);
+    progress.setMinimumDuration(0);
+    progress.setValue(0);
+
+    // The loop and the dialog die when this function returns (cancel or safety timeout):
+    // a late reply must not touch them, so every callback holds a guard instead.
+    QPointer<QEventLoop> loop_guard(&loop);
+    QPointer<QProgressDialog> progress_guard(&progress);
+    QObject::connect(&progress, &QProgressDialog::canceled, &loop, [loop_guard]()
+    {
+        if (loop_guard)
+            loop_guard->quit();
+    });
+
+    for (int i = 0; i < targets.size(); ++i)
+    {
+        if (no_mod.contains(targets[i].host_id))
+            continue;
+
+        session->setHostConfig(targets[i].host_id, "get_host_users", "{}",
+                               {parent, [state, i, progress_guard, loop_guard](
+                                   const proto::router::HostResult& result)
+        {
+            RouterHostBulkResult& entry = state->results[i];
+            if (result.error_code() == proto::router::kErrorOk)
+            {
+                entry.status = "ok";
+                entry.raw = QString::fromStdString(result.result());
+            }
+            else
+            {
+                entry.status = (result.error_code() == proto::router::kErrorHostOffline) ?
+                    QStringLiteral("offline") : QStringLiteral("failed");
+                entry.detail = QString::fromStdString(result.error_code());
+            }
+
+            if (progress_guard)
+                progress_guard->setValue(progress_guard->value() + 1);
+            if (--state->pending <= 0 && loop_guard)
+                loop_guard->quit();
+        }});
+    }
+
+    loop.exec();
+    if (progress_guard)
+        progress_guard->setValue(progress_guard->maximum());
+    return state->results;
+}
+
 struct BulkTeleInfo
 {
     bool ok = false;
@@ -1221,12 +1324,8 @@ void RouterHostsWidget::onHostsAddUser()
     user_params["bulk_id"] = bulk_id;
 
     const QList<RouterHostBulkTarget> targets = bulkOnlineTargets(hosts);
-
-    AutoQPointer<RouterHostBulkRunner> fetch(new RouterHostBulkRunner(
-        router_id_, targets, "get_host_users",
-        [](HostId) { return QJsonObject(); }, this));
     const QList<RouterHostBulkResult> fetched =
-        execFetchBulk(fetch, tr("Reading user lists..."), this);
+        fetchUserListsParallel(router_id_, targets, noModHosts(hosts), this);
 
     QList<RouterHostBulkTarget> apply_targets;
     QList<RouterHostBulkPreviewRow> preview;
@@ -1301,12 +1400,8 @@ void RouterHostsWidget::onHostsRemoveUser()
         return;
 
     const QList<RouterHostBulkTarget> targets = bulkOnlineTargets(hosts);
-
-    AutoQPointer<RouterHostBulkRunner> fetch(new RouterHostBulkRunner(
-        router_id_, targets, "get_host_users",
-        [](HostId) { return QJsonObject(); }, this));
     const QList<RouterHostBulkResult> fetched =
-        execFetchBulk(fetch, tr("Reading user lists..."), this);
+        fetchUserListsParallel(router_id_, targets, noModHosts(hosts), this);
 
     AutoQPointer<RouterHostBulkUserPickDialog> pick(
         new RouterHostBulkUserPickDialog(hosts, fetched, this));
