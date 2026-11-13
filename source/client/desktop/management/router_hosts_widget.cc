@@ -880,7 +880,16 @@ void RouterHostsWidget::updateHostsPagination()
 //--------------------------------------------------------------------------------------------------
 void RouterHostsWidget::updateCountLabel()
 {
-    ui->label_hosts_count->setText(tr("%n host(s)", "", model_->rowCount()));
+    int online_count = 0;
+    const int row_count = model_->rowCount();
+    for (int row = 0; row < row_count; ++row)
+    {
+        const RouterHost* host = model_->hostAt(row);
+        if (host && host->online)
+            ++online_count;
+    }
+    ui->label_hosts_count->setText(
+        tr("%n host(s) (%1 online)", "", row_count).arg(online_count));
 }
 
 //--------------------------------------------------------------------------------------------------

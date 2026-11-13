@@ -8090,11 +8090,11 @@ Detail: %1</source>
     </message>
     <message numerus="yes">
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="883"/>
-        <source>%n host(s)</source>
+        <source>%n host(s) (%1 online)</source>
         <translation>
-            <numerusform>%n хост</numerusform>
-            <numerusform>%n хоста</numerusform>
-            <numerusform>%n хостов</numerusform>
+            <numerusform>%n хост (%1 в сети)</numerusform>
+            <numerusform>%n хоста (%1 в сети)</numerusform>
+            <numerusform>%n хостов (%1 в сети)</numerusform>
         </translation>
     </message>
     <message>
