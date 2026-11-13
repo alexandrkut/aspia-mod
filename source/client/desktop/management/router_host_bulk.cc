@@ -616,6 +616,7 @@ RouterHostBulkUserPickDialog::RouterHostBulkUserPickDialog(const QList<RouterHos
     layout->addWidget(check_force_);
 
     auto* buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+    buttons->button(QDialogButtonBox::Ok)->setText(tr("Next step"));
     layout->addWidget(buttons);
     connect(buttons, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(buttons, &QDialogButtonBox::rejected, this, &QDialog::reject);
