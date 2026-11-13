@@ -305,7 +305,7 @@ int RouterHostBulkDialog::execBulk(RouterHostBulkRunner* runner,
             if (running_ || completed_)
                 return;
             const bool ok = has_work &&
-                (confirm_edit_->text().trimmed().compare(confirm_word_, Qt::CaseInsensitive) == 0);
+                (confirm_edit_->text().trimmed().compare(confirm_word_, Qt::CaseSensitive) == 0);
             apply_button_->setEnabled(ok);
         });
     }
