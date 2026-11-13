@@ -354,9 +354,12 @@ void RouterManager::onNewPeerConnected()
         TcpChannel* tcp_channel = ready.first;
 
         tcp_channel->setParent(this);
+        tcp_channel->setCallerIsAdmin(offer.caller_is_admin());
 
         ReadyConnection connection;
         connection.tcp_channel = ready.first;
+        connection.caller_is_admin = offer.caller_is_admin();
+        connection.offer = offer;
 
         if (offer.has_stun_info())
         {

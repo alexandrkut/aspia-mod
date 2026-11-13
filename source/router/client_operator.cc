@@ -438,6 +438,7 @@ void ClientOperator::sendConnectionOffer(const proto::router::ConnectionRequest&
     proto::router::ConnectionOffer* offer = message.mutable_connection_offer();
     offer->Swap(&built.offer);
     offer->set_request_id(request_id);
+    offer->set_caller_is_admin(sessionType() == proto::router::SESSION_TYPE_ADMIN);
 
     if (offer->error_code() != proto::router::kErrorOk)
     {

@@ -35,6 +35,7 @@
 #include "base/peer/user_list.h"
 #include "host/database.h"
 #include "proto/user.h"
+#include "proto/router_peer.h"
 
 namespace proto::router {
 class ConnectionOffer;
@@ -83,6 +84,8 @@ public:
         TcpChannel* tcp_channel = nullptr;
         QString stun_host;
         quint16 stun_port = 0;
+        bool caller_is_admin = false;
+        proto::router::ConnectionOffer offer;
     };
 
     bool hasReadyConnections() const;

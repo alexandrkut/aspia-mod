@@ -317,6 +317,8 @@ void ServiceWorker::onNewRelayConnection()
         pending.start_time = Clock::now();
         pending.stun_host = connection->stun_host;
         pending.stun_port = connection->stun_port;
+        if (connection->tcp_channel)
+            connection->tcp_channel->setCallerIsAdmin(connection->caller_is_admin);
         startConfirmation(pending);
     }
 }

@@ -158,6 +158,9 @@ public:
     quint32 peerSessionType() const { return session_type_; }
     bool peerNotifySuppressed() const { return notify_suppressed_; }
     bool peerViewOnly() const { return view_only_; }
+    bool peerCallerIsAdmin() const { return caller_is_admin_; }
+    bool callerIsAdmin() const { return caller_is_admin_; }
+    void setCallerIsAdmin(bool value) { caller_is_admin_ = value; }
 
 signals:
     void sig_connected();
@@ -272,6 +275,7 @@ private:
     quint32 session_type_ = 0;
     bool notify_suppressed_ = false;
     bool view_only_ = false;
+    bool caller_is_admin_ = false;
 
     qint64 total_tx_ = 0;
     qint64 total_rx_ = 0;
