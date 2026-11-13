@@ -877,16 +877,15 @@ void RouterWorkspaceDialog::fetchHosts()
         return;
     }
 
-    // The hosts of a workspace that does not exist yet are an empty list, and the free ones
-    // cannot be claimed before it is created. This request echoes workspace 0 - see
-    // onHostsOutsideListReceived for how the reply is told apart from the outside list.
-    proto::router::HostListRequest free_request;
-    free_request.set_mode(proto::router::HostListRequest::MODE_FILTERED);
-    free_request.set_workspace_id(kNoWorkspace);
-    free_request.set_group_id(0);
-    free_request.set_offset(hosts_out_page_.offset());
-    free_request.set_count(hosts_out_page_.pageSize());
-    session->listHosts(RouterSession::CachePolicy::RELOAD, std::move(free_request),
+    // A workspace that does not exist yet contains nothing, so "outside" it is every host of
+    // the router. MODE_ALL is admin-only and this dialog fetches only under is_admin_ above;
+    // the reply echoes workspace 0, so onHostsOutsideListReceived treats it as the outside
+    // list without falling back anywhere.
+    proto::router::HostListRequest all_request;
+    all_request.set_mode(proto::router::HostListRequest::MODE_ALL);
+    all_request.set_offset(hosts_out_page_.offset());
+    all_request.set_count(hosts_out_page_.pageSize());
+    session->listHosts(RouterSession::CachePolicy::RELOAD, std::move(all_request),
                        { this, &RouterWorkspaceDialog::onHostsOutsideListReceived });
 }
 
