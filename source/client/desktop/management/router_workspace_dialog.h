@@ -23,6 +23,7 @@
 
 #include <memory>
 
+#include "base/shared_pointer.h"
 #include "client/page_model.h"
 #include "client/router_types.h"
 #include "client/desktop/management/workspace_edit_model.h"
@@ -77,8 +78,8 @@ private:
     // one and apply right away, so a host operation needs a workspace to move the host into. In
     // create mode the first one creates the workspace from the name of the form and runs after
     // the reply.
-    void moveHost(const RouterHost& host, qint64 workspace_id);
-    void runPendingHostMove();
+    void moveHosts(const QList<RouterHost>& hosts, qint64 workspace_id);
+    void runPendingHostMoves();
 
     // The record of the host of a list, empty when the pages no longer carry it.
     RouterHost hostById(quint64 host_id) const;
@@ -117,10 +118,24 @@ private:
     QList<RouterHost> hosts_in_;
     QList<RouterHost> hosts_out_;
 
-    // The host operation waiting for the workspace of a create-mode dialog to be created.
-    RouterHost pending_host_;
-    qint64 pending_host_workspace_id_ = 0;
+    // A batch of host operations waiting for the workspace of a create-mode dialog to be created,
+    // or currently in flight.
+    struct PendingHostMove
+    {
+        RouterHost host;
+        qint64 workspace_id = 0;
+    };
+    QList<PendingHostMove> pending_host_moves_;
     bool pending_host_move_ = false;
+
+    struct HostMoveBatch
+    {
+        int pending = 0;
+        int failed = 0;
+        int total = 0;
+        std::string error_code;
+    };
+    SharedPointer<HostMoveBatch> host_move_batch_;
 
     bool closing_ = false;
 

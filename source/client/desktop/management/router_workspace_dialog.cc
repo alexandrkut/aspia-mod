@@ -19,12 +19,14 @@
 #include "client/desktop/management/router_workspace_dialog.h"
 
 #include <QAbstractButton>
+#include <QAbstractItemView>
 #include <QComboBox>
 #include <QEvent>
 #include <QIcon>
 #include <QListWidgetItem>
 #include <QPushButton>
 #include <QScrollBar>
+#include <QSet>
 #include <QSignalBlocker>
 #include <QToolButton>
 
@@ -58,6 +60,9 @@ RouterWorkspaceDialog::RouterWorkspaceDialog(
     LOG(INFO) << "Ctor";
     ui->setupUi(this);
     updateArrowIcons();
+
+    ui->list_hosts_available->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    ui->list_hosts_in_workspace->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
     Settings settings;
     restoreGeometry(settings.dialogGeometry(objectName()));
@@ -394,6 +399,42 @@ void RouterWorkspaceDialog::onHostResultReceived(const proto::router::HostResult
     if (closing_)
         return;
 
+    // A batch of host moves is in flight: account for this reply in the shared counter and
+    // finish the batch (single refetch + single warning) only on the last reply.
+    if (host_move_batch_)
+    {
+        if (result.error_code() != proto::router::kErrorOk)
+        {
+            LOG(ERROR) << "Host move failed:" << result.error_code();
+            ++host_move_batch_->failed;
+            host_move_batch_->error_code = result.error_code();
+        }
+
+        if (--host_move_batch_->pending > 0)
+            return;
+
+        const int failed = host_move_batch_->failed;
+        const int total = host_move_batch_->total;
+        const std::string error_code = host_move_batch_->error_code;
+        host_move_batch_.reset();
+        pending_host_move_ = false;
+
+        ui->tab_hosts->setEnabled(true);
+
+        if (failed > 0)
+        {
+            if (total == 1)
+                MsgBox::warning(this, routerErrorText(error_code));
+            else
+                MsgBox::warning(this, tr("Failed to move %n of %1 hosts.", "", failed).arg(total));
+        }
+
+        // Both lists change with a move, and a refetch is the only thing that tells which page
+        // the hosts ended up on.
+        fetchHosts();
+        return;
+    }
+
     ui->tab_hosts->setEnabled(true);
 
     const std::string& error_code = result.error_code();
@@ -403,8 +444,6 @@ void RouterWorkspaceDialog::onHostResultReceived(const proto::router::HostResult
         MsgBox::warning(this, routerErrorText(error_code));
     }
 
-    // Both lists change with a move, and a refetch is the only thing that tells which page the
-    // host ended up on.
     fetchHosts();
 }
 
@@ -426,17 +465,20 @@ void RouterWorkspaceDialog::onWorkspaceResultReceived(const proto::router::Works
         if (pending_host_move_ && entry_id_ == 0)
         {
             entry_id_ = result.entry_id();
-            // The claim was filed against the workspace before it had an id (0 used to read
-            // as "remove" in runPendingHostMove, and the claim silently did nothing): now
-            // that it exists, the pending operation is a claim into it.
-            pending_host_workspace_id_ = entry_id_;
+            // The moves were filed against the workspace before it had an id (0 read as
+            // "remove"): now that it exists, every pending claim into it is retargeted.
+            for (PendingHostMove& move : pending_host_moves_)
+            {
+                if (move.workspace_id == 0)
+                    move.workspace_id = entry_id_;
+            }
             LOG(INFO) << "[ACTION] Workspace created for a host operation (entry_id:"
                       << entry_id_ << ")";
 
             model_ = std::make_unique<WorkspaceEditModel>(entry_id_);
             setEnabled(true);
             refetchLists();
-            runPendingHostMove();
+            runPendingHostMoves();
             return;
         }
 
@@ -446,8 +488,7 @@ void RouterWorkspaceDialog::onWorkspaceResultReceived(const proto::router::Works
         return;
     }
 
-    pending_host_ = RouterHost();
-    pending_host_workspace_id_ = 0;
+    pending_host_moves_.clear();
     pending_host_move_ = false;
 
     if (error_code == proto::router::kErrorConflict)
@@ -541,31 +582,60 @@ void RouterWorkspaceDialog::onRemoveClicked()
 //--------------------------------------------------------------------------------------------------
 void RouterWorkspaceDialog::onHostAddClicked()
 {
-    QListWidgetItem* item = ui->list_hosts_available->currentItem();
-    if (!item)
+    QList<RouterHost> hosts;
+    for (QListWidgetItem* item : ui->list_hosts_available->selectedItems())
+    {
+        const RouterHost host = hostById(item->data(Qt::UserRole).toULongLong());
+        if (host.host_id != kInvalidHostId)
+            hosts.append(host);
+    }
+    if (hosts.isEmpty())
         return;
 
-    moveHost(hostById(item->data(Qt::UserRole).toULongLong()), entry_id_);
+    moveHosts(hosts, entry_id_);
 }
 
 //--------------------------------------------------------------------------------------------------
 void RouterWorkspaceDialog::onHostRemoveClicked()
 {
-    QListWidgetItem* item = ui->list_hosts_in_workspace->currentItem();
-    if (!item)
+    // A refetch that arrives while the question is shown rebuilds the list and deletes the items,
+    // so the ids are taken before asking.
+    QList<quint64> host_ids;
+    for (QListWidgetItem* item : ui->list_hosts_in_workspace->selectedItems())
+        host_ids.append(item->data(Qt::UserRole).toULongLong());
+
+    if (host_ids.isEmpty())
         return;
 
-    // A refetch that arrives while the question is shown rebuilds the list and deletes the item,
-    // so the id is taken before asking.
-    const quint64 host_id = item->data(Qt::UserRole).toULongLong();
-
-    if (MsgBox::question(this, tr("Are you sure you want to remove the host from the space?")) == MsgBox::No)
+    if (host_ids.size() == 1)
     {
-        LOG(INFO) << "Action is rejected by user";
-        return;
+        if (MsgBox::question(this, tr("Are you sure you want to remove the host from the space?")) == MsgBox::No)
+        {
+            LOG(INFO) << "Action is rejected by user";
+            return;
+        }
+    }
+    else
+    {
+        if (MsgBox::question(this, tr("Are you sure you want to remove %n hosts from the space?",
+                                      "", host_ids.size())) == MsgBox::No)
+        {
+            LOG(INFO) << "Action is rejected by user";
+            return;
+        }
     }
 
-    moveHost(hostById(host_id), kNoWorkspace);
+    QList<RouterHost> hosts;
+    for (quint64 host_id : std::as_const(host_ids))
+    {
+        const RouterHost host = hostById(host_id);
+        if (host.host_id != kInvalidHostId)
+            hosts.append(host);
+    }
+    if (hosts.isEmpty())
+        return;
+
+    moveHosts(hosts, kNoWorkspace);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -599,17 +669,38 @@ void RouterWorkspaceDialog::applyMemberLookup(const proto::router::UserList& lis
 }
 
 //--------------------------------------------------------------------------------------------------
-void RouterWorkspaceDialog::moveHost(const RouterHost& host, qint64 workspace_id)
+void RouterWorkspaceDialog::moveHosts(const QList<RouterHost>& hosts, qint64 workspace_id)
 {
+    if (hosts.isEmpty())
+        return;
+
     RouterSession* session = RouterController::session(router_id_);
-    if (!session || host.host_id == kInvalidHostId)
+    if (!session)
     {
-        LOG(ERROR) << "Nothing to move";
+        LOG(ERROR) << "No session for router" << router_id_;
         return;
     }
 
-    pending_host_ = host;
-    pending_host_workspace_id_ = workspace_id;
+    QList<PendingHostMove> moves;
+    for (const RouterHost& host : hosts)
+    {
+        if (host.host_id == kInvalidHostId)
+            continue;
+        PendingHostMove move;
+        move.host = host;
+        move.workspace_id = workspace_id;
+        moves.append(move);
+    }
+    if (moves.isEmpty())
+        return;
+
+    if (pending_host_move_)
+    {
+        LOG(WARNING) << "Host move already in progress";
+        return;
+    }
+
+    pending_host_moves_ = moves;
     pending_host_move_ = true;
 
     // A host cannot be claimed for a workspace that does not exist yet, so the creation runs
@@ -619,8 +710,7 @@ void RouterWorkspaceDialog::moveHost(const RouterHost& host, qint64 workspace_id
         const QString new_name = validatedName();
         if (new_name.isEmpty())
         {
-            pending_host_ = RouterHost();
-            pending_host_workspace_id_ = 0;
+            pending_host_moves_.clear();
             pending_host_move_ = false;
             return;
         }
@@ -631,70 +721,86 @@ void RouterWorkspaceDialog::moveHost(const RouterHost& host, qint64 workspace_id
         workspace.user_ids = model_->accessUserIdsForSave();
 
         setEnabled(false);
+        ui->tab_hosts->setEnabled(false);
 
         LOG(INFO) << "[ACTION] Creating workspace for a host operation";
         session->addWorkspace(workspace, { this, &RouterWorkspaceDialog::onWorkspaceResultReceived });
         return;
     }
 
-    runPendingHostMove();
+    runPendingHostMoves();
 }
 
 //--------------------------------------------------------------------------------------------------
-void RouterWorkspaceDialog::runPendingHostMove()
+void RouterWorkspaceDialog::runPendingHostMoves()
 {
     RouterSession* session = RouterController::session(router_id_);
-    if (!session || !pending_host_move_)
+    if (!session || pending_host_moves_.isEmpty())
+    {
+        pending_host_moves_.clear();
+        pending_host_move_ = false;
+        ui->tab_hosts->setEnabled(true);
         return;
-
-    // The record is sent back with the membership of THIS workspace changed: a claim adds the
-    // host at the workspace root (unless it is already a member), a remove drops only this
-    // membership - every other workspace of the host stays (drag & drop adds, it does not move).
-    // The scalar fields stay untouched: the router re-derives the primary membership itself.
-    RouterHost host = pending_host_;
-
-    if (pending_host_workspace_id_ == kNoWorkspace)
-    {
-        for (qsizetype i = host.memberships.size() - 1; i >= 0; --i)
-        {
-            if (host.memberships.at(i).first == entry_id_)
-                host.memberships.removeAt(i);
-        }
-
-        // Removing the last membership releases the host. The scalar has to say so too: with
-        // it left at the workspace the host just lost, the router reads the edit as a no-op
-        // (an empty list keeps the scalar move rules and nothing re-derives a primary the
-        // request does not name).
-        if (host.memberships.isEmpty())
-        {
-            host.workspace_id = kNoWorkspace;
-            host.group_id = 0;
-        }
-    }
-    else
-    {
-        bool present = false;
-        for (const auto& membership : std::as_const(host.memberships))
-        {
-            if (membership.first == entry_id_)
-            {
-                present = true;
-                break;
-            }
-        }
-
-        if (!present)
-            host.memberships.append(qMakePair(entry_id_, static_cast<qint64>(0)));
     }
 
-    pending_host_ = RouterHost();
-    pending_host_workspace_id_ = 0;
-    pending_host_move_ = false;
+    const int total = static_cast<int>(pending_host_moves_.size());
+
+    host_move_batch_ = SharedPointer<HostMoveBatch>(new HostMoveBatch());
+    host_move_batch_->pending = total;
+    host_move_batch_->failed = 0;
+    host_move_batch_->total = total;
 
     ui->tab_hosts->setEnabled(false);
 
-    LOG(INFO) << "[ACTION] Updating workspaces of host" << host.host_id;
-    session->editHost(host, { this, &RouterWorkspaceDialog::onHostResultReceived });
+    const QList<PendingHostMove> moves = pending_host_moves_;
+    pending_host_moves_.clear();
+
+    for (const PendingHostMove& pending : moves)
+    {
+        // The record is sent back with the membership of THIS workspace changed: a claim adds the
+        // host at the workspace root (unless it is already a member), a remove drops only this
+        // membership - every other workspace of the host stays (drag & drop adds, it does not move).
+        // The scalar fields stay untouched: the router re-derives the primary membership itself.
+        RouterHost host = pending.host;
+        const qint64 target_workspace_id = pending.workspace_id;
+
+        if (target_workspace_id == kNoWorkspace)
+        {
+            for (qsizetype i = host.memberships.size() - 1; i >= 0; --i)
+            {
+                if (host.memberships.at(i).first == entry_id_)
+                    host.memberships.removeAt(i);
+            }
+
+            // Removing the last membership releases the host. The scalar has to say so too: with
+            // it left at the workspace the host just lost, the router reads the edit as a no-op
+            // (an empty list keeps the scalar move rules and nothing re-derives a primary the
+            // request does not name).
+            if (host.memberships.isEmpty())
+            {
+                host.workspace_id = kNoWorkspace;
+                host.group_id = 0;
+            }
+        }
+        else
+        {
+            bool present = false;
+            for (const auto& membership : std::as_const(host.memberships))
+            {
+                if (membership.first == target_workspace_id)
+                {
+                    present = true;
+                    break;
+                }
+            }
+
+            if (!present)
+                host.memberships.append(qMakePair(target_workspace_id, static_cast<qint64>(0)));
+        }
+
+        LOG(INFO) << "[ACTION] Updating workspaces of host" << host.host_id;
+        session->editHost(host, { this, &RouterWorkspaceDialog::onHostResultReceived });
+    }
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -865,9 +971,13 @@ void RouterWorkspaceDialog::rebuildHostLists()
 {
     const auto fill = [](QListWidget* list, const QList<RouterHost>& hosts)
     {
-        QVariant selected;
+        QSet<quint64> selected_ids;
+        for (QListWidgetItem* item : list->selectedItems())
+            selected_ids.insert(item->data(Qt::UserRole).toULongLong());
+
+        QVariant current;
         if (QListWidgetItem* item = list->currentItem())
-            selected = item->data(Qt::UserRole);
+            current = item->data(Qt::UserRole);
         const int scroll = list->verticalScrollBar()->value();
 
         list->clear();
@@ -885,11 +995,17 @@ void RouterWorkspaceDialog::rebuildHostLists()
 
         list->sortItems();
 
-        if (selected.isValid())
+        for (int i = 0; i < list->count(); ++i)
+        {
+            if (selected_ids.contains(list->item(i)->data(Qt::UserRole).toULongLong()))
+                list->item(i)->setSelected(true);
+        }
+
+        if (current.isValid())
         {
             for (int i = 0; i < list->count(); ++i)
             {
-                if (list->item(i)->data(Qt::UserRole) == selected)
+                if (list->item(i)->data(Qt::UserRole) == current)
                 {
                     list->setCurrentItem(list->item(i));
                     break;
@@ -932,8 +1048,8 @@ void RouterWorkspaceDialog::updateButtonsState()
 {
     ui->button_add->setEnabled(ui->list_available->currentItem() != nullptr);
     ui->button_remove->setEnabled(ui->list_with_access->currentItem() != nullptr);
-    ui->button_host_add->setEnabled(ui->list_hosts_available->currentItem() != nullptr);
-    ui->button_host_remove->setEnabled(ui->list_hosts_in_workspace->currentItem() != nullptr);
+    ui->button_host_add->setEnabled(!ui->list_hosts_available->selectedItems().isEmpty());
+    ui->button_host_remove->setEnabled(!ui->list_hosts_in_workspace->selectedItems().isEmpty());
 }
 
 //--------------------------------------------------------------------------------------------------
