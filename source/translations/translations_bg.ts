@@ -7138,11 +7138,11 @@ Credentials imported: %5</source>
         <translation>Напред</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_group_widget.cc" line="449"/>
-        <source>%n host(s)</source>
-        <translation>
-            <numerusform>%n хост</numerusform>
-            <numerusform>%n хоста</numerusform>
+        <location filename="../client/desktop/management/router_group_widget.cc" line="458"/>
+        <source>%n host(s) (%1 online)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
 </context>

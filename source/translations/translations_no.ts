@@ -7117,14 +7117,6 @@ Påloggingsinformasjon importert: %5</translation>
 </context>
 <context>
     <name>RouterGroupWidget</name>
-    <message numerus="yes">
-        <location filename="../client/desktop/management/router_group_widget.cc" line="449"/>
-        <source>%n host(s)</source>
-        <translation>
-            <numerusform>%n vert</numerusform>
-            <numerusform>%n verter</numerusform>
-        </translation>
-    </message>
     <message>
         <location filename="../client/desktop/management/router_group_widget.ui" line="62"/>
         <source>Previous page</source>
@@ -7144,6 +7136,14 @@ Påloggingsinformasjon importert: %5</translation>
         <location filename="../client/desktop/management/router_group_widget.ui" line="86"/>
         <source>Next</source>
         <translation>Neste</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_group_widget.cc" line="458"/>
+        <source>%n host(s) (%1 online)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>

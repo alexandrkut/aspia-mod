@@ -7084,13 +7084,6 @@ Credentials imported: %5</source>
 </context>
 <context>
     <name>RouterGroupWidget</name>
-    <message numerus="yes">
-        <location filename="../client/desktop/management/router_group_widget.cc" line="449"/>
-        <source>%n host(s)</source>
-        <translation>
-            <numerusform>%n 個主機</numerusform>
-        </translation>
-    </message>
     <message>
         <location filename="../client/desktop/management/router_group_widget.ui" line="62"/>
         <source>Previous page</source>
@@ -7110,6 +7103,13 @@ Credentials imported: %5</source>
         <location filename="../client/desktop/management/router_group_widget.ui" line="86"/>
         <source>Next</source>
         <translation>下一頁</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_group_widget.cc" line="458"/>
+        <source>%n host(s) (%1 online)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
