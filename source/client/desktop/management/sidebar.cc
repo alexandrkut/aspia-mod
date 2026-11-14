@@ -138,6 +138,47 @@ QList<RouterHost> hostsToUnassign(const QList<RouterHost>& hosts, qint64 router_
 }
 
 //--------------------------------------------------------------------------------------------------
+// The hosts a Shift-move takes out of the source space that hostsToMove filtered out because
+// they already sit in the target place: nothing is added for them, but the move must still
+// take them out of the source. Same gating as hostsToUnassign: only an administrator may
+// change the workspaces a host belongs to, the router refuses that change from anybody else.
+QList<RouterHost> hostsToLeaveOnMove(const QList<RouterHost>& dragged,
+                                     const QList<RouterHost>& moving,
+                                     qint64 router_id, qint64 source_workspace_id)
+{
+    if (source_workspace_id <= 0 || !isRouterAdmin(router_id))
+        return QList<RouterHost>();
+
+    QList<RouterHost> result;
+    for (const RouterHost& host : dragged)
+    {
+        bool already_moving = false;
+        for (const RouterHost& moving_host : moving)
+        {
+            if (moving_host.host_id == host.host_id)
+            {
+                already_moving = true;
+                break;
+            }
+        }
+
+        if (already_moving)
+            continue;
+
+        for (const auto& membership : std::as_const(host.memberships))
+        {
+            if (membership.first == source_workspace_id)
+            {
+                result.append(host);
+                break;
+            }
+        }
+    }
+
+    return result;
+}
+
+//--------------------------------------------------------------------------------------------------
 // Names an item across restarts. The items of a router lie under it at the top level.
 QByteArray itemKey(const SidebarItem* item)
 {
@@ -1483,17 +1524,30 @@ bool Sidebar::onDragMove(QDragMoveEvent* event)
         if (target_router_id != host_mime_data->routerId())
             return true;
 
-        const QList<RouterHost> affected = unassign ?
+        QList<RouterHost> affected = unassign ?
             hostsToUnassign(host_mime_data->hosts(), target_router_id,
                             host_mime_data->sourceWorkspaceId()) :
             hostsToMove(host_mime_data->hosts(), target_router_id, target_workspace_id,
                         target_group_id);
+
+        const bool is_move = !unassign &&
+            (event->keyboardModifiers() & Qt::ShiftModifier) &&
+            host_mime_data->sourceWorkspaceId() > 0 &&
+            target_workspace_id != host_mime_data->sourceWorkspaceId();
+        if (is_move)
+        {
+            affected += hostsToLeaveOnMove(host_mime_data->hosts(), affected, target_router_id,
+                                           host_mime_data->sourceWorkspaceId());
+        }
+
         if (affected.isEmpty())
             return true;
 
         tree_widget_->clearSelection();
         target_tree_item->setSelected(true);
-        if (event->keyboardModifiers() & Qt::ShiftModifier)
+        // Dropping onto "Approved Hosts" takes the host out of its space: that is a move even
+        // without Shift. Elsewhere Shift moves and a plain drop copies.
+        if (unassign || (event->keyboardModifiers() & Qt::ShiftModifier))
             event->setDropAction(Qt::MoveAction);
         else
             event->setDropAction(Qt::CopyAction);
@@ -1848,15 +1902,29 @@ bool Sidebar::onDrop(QDropEvent* event)
 
         const qint64 router_id = host_mime_data->routerId();
 
+        const bool is_move = !unassign &&
+            (event->keyboardModifiers() & Qt::ShiftModifier) &&
+            host_mime_data->sourceWorkspaceId() > 0 &&
+            target_workspace_id != host_mime_data->sourceWorkspaceId();
+
         // Repeat the eligibility checks from onDragMove in case the user releases over a
         // target that wasn't validated (DragLeave without DragMove can happen).
-        const QList<RouterHost> hosts = target_router_id != router_id ? QList<RouterHost>() :
+        QList<RouterHost> add_hosts = target_router_id != router_id ? QList<RouterHost>() :
             (unassign ?
                 hostsToUnassign(host_mime_data->hosts(), router_id,
                                 host_mime_data->sourceWorkspaceId()) :
                 hostsToMove(host_mime_data->hosts(), router_id, target_workspace_id,
                             target_group_id));
-        if (hosts.isEmpty())
+
+        // A Shift-move also takes the hosts out of the source that hostsToMove filtered out
+        // as already being in the target place: they join the same batch, one editHost each.
+        if (is_move && target_router_id == router_id)
+        {
+            add_hosts += hostsToLeaveOnMove(host_mime_data->hosts(), add_hosts, router_id,
+                                            host_mime_data->sourceWorkspaceId());
+        }
+
+        if (add_hosts.isEmpty())
         {
             restoreSelection();
             return true;
@@ -1869,19 +1937,11 @@ bool Sidebar::onDrop(QDropEvent* event)
             return true;
         }
 
-
         struct Batch
         {
             int pending = 0;
             int failed = 0;
         };
-
-        const bool is_move = !unassign &&
-            (event->keyboardModifiers() & Qt::ShiftModifier) &&
-            host_mime_data->sourceWorkspaceId() > 0 &&
-            target_workspace_id != host_mime_data->sourceWorkspaceId();
-
-        QList<RouterHost> add_hosts = hosts;
 
         struct DragContext
         {
@@ -1979,7 +2039,7 @@ bool Sidebar::onDrop(QDropEvent* event)
             finalize();
         }
 
-        if (event->keyboardModifiers() & Qt::ShiftModifier)
+        if (unassign || (event->keyboardModifiers() & Qt::ShiftModifier))
             event->setDropAction(Qt::MoveAction);
         else
             event->setDropAction(Qt::CopyAction);
