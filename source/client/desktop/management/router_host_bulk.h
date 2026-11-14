@@ -24,7 +24,6 @@
 
 class QAbstractButton;
 class QDialogButtonBox;
-class QLineEdit;
 class QPlainTextEdit;
 class QCheckBox;
 class QLabel;
@@ -109,12 +108,11 @@ public:
 
     // Shows the preview; on Apply runs |runner| to completion in the same dialog.
     // Returns Accepted if the run completed, Rejected if cancelled before Apply.
-    // |confirm_word|, when non-empty, adds a confirmation input: Apply stays
-    // disabled until the user types that word (case-insensitive, trimmed).
-    // Empty keeps the old behaviour (no field) for every other bulk flow.
+    // |confirm_required| adds a confirmation checkbox: Apply stays disabled until
+    // the box is checked. False keeps the plain behaviour for every other bulk flow.
     int execBulk(RouterHostBulkRunner* runner,
                 const QList<RouterHostBulkPreviewRow>& preview,
-                const QString& confirm_word = QString());
+                bool confirm_required = false);
 
 private slots:
     void onButtonClicked(QAbstractButton* button);
@@ -131,8 +129,7 @@ private:
     QPushButton* apply_button_ = nullptr;
     QPushButton* cancel_button_ = nullptr;
     QLabel* status_label_ = nullptr;
-    QLineEdit* confirm_edit_ = nullptr;
-    QString confirm_word_;
+    QCheckBox* confirm_check_ = nullptr;
 
     RouterHostBulkRunner* runner_ = nullptr;
     QVector<int> row_of_target_;

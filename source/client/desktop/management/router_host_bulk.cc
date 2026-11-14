@@ -22,7 +22,6 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QLabel>
-#include <QLineEdit>
 #include <QProgressDialog>
 #include <QPlainTextEdit>
 #include <QPushButton>
@@ -234,10 +233,9 @@ RouterHostBulkDialog::RouterHostBulkDialog(const QString& title, QWidget* parent
 //--------------------------------------------------------------------------------------------------
 int RouterHostBulkDialog::execBulk(RouterHostBulkRunner* runner,
                                    const QList<RouterHostBulkPreviewRow>& preview,
-                                   const QString& confirm_word)
+                                   bool confirm_required)
 {
     runner_ = runner;
-    confirm_word_ = confirm_word.trimmed();
     row_of_target_.clear();
 
     auto set_cell = [this](int row, int column, const QString& text)
@@ -286,27 +284,19 @@ int RouterHostBulkDialog::execBulk(RouterHostBulkRunner* runner,
         status_label_->setText(tr("%n host(s) selected.", "", run_count));
     }
 
-    // Optional confirmation gate: Apply stays disabled until the word is typed.
-    if (!confirm_word_.isEmpty())
+    // Optional confirmation gate: Apply stays disabled until the box is checked.
+    if (confirm_required)
     {
-        auto* hint = new QLabel(
-            tr("Type %1 to enable Apply.").arg(confirm_word_), this);
-        hint->setWordWrap(true);
-        layout()->addWidget(hint);
-
-        confirm_edit_ = new QLineEdit(this);
-        layout()->addWidget(confirm_edit_);
+        confirm_check_ = new QCheckBox(tr("Confirm the deletion"), this);
+        layout()->addWidget(confirm_check_);
 
         const bool has_work = (run_count > 0);
         apply_button_->setEnabled(false);
-        connect(confirm_edit_, &QLineEdit::textChanged, this,
-                [this, has_work](const QString&)
+        connect(confirm_check_, &QCheckBox::toggled, this, [this, has_work](bool checked)
         {
             if (running_ || completed_)
                 return;
-            const bool ok = has_work &&
-                (confirm_edit_->text().trimmed().compare(confirm_word_, Qt::CaseSensitive) == 0);
-            apply_button_->setEnabled(ok);
+            apply_button_->setEnabled(has_work && checked);
         });
     }
 

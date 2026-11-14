@@ -1515,7 +1515,7 @@ void RouterHostsWidget::onHostsRemoveUser()
 
     AutoQPointer<RouterHostBulkDialog> dialog(
         new RouterHostBulkDialog(tr("Remove user from hosts"), this));
-    dialog->execBulk(runner, preview, QStringLiteral("Delete"));
+    dialog->execBulk(runner, preview, true);
 }
 
 //--------------------------------------------------------------------------------------------------
