@@ -412,6 +412,16 @@
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="label_host_summary">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="DialogButtonBox" name="buttonbox">
      <property name="standardButtons">
       <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>

@@ -178,8 +178,16 @@ RouterWorkspaceDialog::RouterWorkspaceDialog(
 
     connect(&controller, &RouterController::sig_hostsChanged, this, [this](qint64 router_id)
     {
-        if (router_id == router_id_)
-            fetchHosts();
+        if (router_id != router_id_)
+            return;
+
+        if (!staged_.isEmpty())
+        {
+            LOG(INFO) << "Hosts changed notification suppressed: staged host edits pending";
+            return;
+        }
+
+        fetchHosts();
     });
 
     RouterSession* session = RouterController::session(router_id_);
@@ -429,9 +437,20 @@ void RouterWorkspaceDialog::onHostResultReceived(const proto::router::HostResult
                 MsgBox::warning(this, tr("Failed to move %n of %1 hosts.", "", failed).arg(total));
         }
 
+        if (close_dialog_after_host_batch_)
+        {
+            close_dialog_after_host_batch_ = false;
+            staged_.clear();
+            updateHostSummary();
+            accept();
+            close();
+            return;
+        }
+
         // Both lists change with a move, and a refetch is the only thing that tells which page
         // the hosts ended up on.
-        fetchHosts();
+        if (staged_.isEmpty())
+            fetchHosts();
         return;
     }
 
@@ -478,6 +497,56 @@ void RouterWorkspaceDialog::onWorkspaceResultReceived(const proto::router::Works
             model_ = std::make_unique<WorkspaceEditModel>(entry_id_);
             setEnabled(true);
             refetchLists();
+            runPendingHostMoves();
+            return;
+        }
+
+        if (apply_hosts_on_save_)
+        {
+            apply_hosts_on_save_ = false;
+
+            QList<PendingHostMove> moves;
+            for (auto it = staged_.constBegin(); it != staged_.constEnd(); ++it)
+            {
+                const quint64 host_id = it.key();
+                const bool now_member = it.value();
+                const RouterHost host = hostById(host_id);
+                if (host.host_id == kInvalidHostId)
+                    continue;
+
+                bool was_member = false;
+                for (const RouterHost& h : std::as_const(hosts_in_))
+                {
+                    if (h.host_id == host_id)
+                    {
+                        was_member = true;
+                        break;
+                    }
+                }
+
+                if (now_member == was_member)
+                    continue;
+
+                PendingHostMove move;
+                move.host = host;
+                move.workspace_id = now_member ? entry_id_ : kNoWorkspace;
+                moves.append(move);
+            }
+
+            if (moves.isEmpty())
+            {
+                staged_.clear();
+                updateHostSummary();
+                LOG(INFO) << "[ACTION] Workspace saved";
+                accept();
+                close();
+                return;
+            }
+
+            pending_host_moves_ = moves;
+            pending_host_move_ = false;
+            close_dialog_after_host_batch_ = true;
+            setEnabled(true);
             runPendingHostMoves();
             return;
         }
@@ -543,6 +612,8 @@ void RouterWorkspaceDialog::onButtonBoxClicked(QAbstractButton* button)
 
     setEnabled(false);
 
+    apply_hosts_on_save_ = (entry_id_ > 0 && !staged_.isEmpty());
+
     LOG(INFO) << "[ACTION] Submitting workspace (entry_id:" << entry_id_
               << ", access entries:" << workspace.user_ids.size() << ")";
     if (entry_id_ > 0)
@@ -582,24 +653,40 @@ void RouterWorkspaceDialog::onRemoveClicked()
 //--------------------------------------------------------------------------------------------------
 void RouterWorkspaceDialog::onHostAddClicked()
 {
-    QList<RouterHost> hosts;
+    QList<quint64> host_ids;
     for (QListWidgetItem* item : ui->list_hosts_available->selectedItems())
-    {
-        const RouterHost host = hostById(item->data(Qt::UserRole).toULongLong());
-        if (host.host_id != kInvalidHostId)
-            hosts.append(host);
-    }
-    if (hosts.isEmpty())
+        host_ids.append(item->data(Qt::UserRole).toULongLong());
+
+    if (host_ids.isEmpty())
         return;
 
-    moveHosts(hosts, entry_id_);
+    // Create mode keeps the immediate (OK-creates-workspace) behaviour.
+    if (entry_id_ == 0)
+    {
+        QList<RouterHost> hosts;
+        for (quint64 host_id : std::as_const(host_ids))
+        {
+            const RouterHost host = hostById(host_id);
+            if (host.host_id != kInvalidHostId)
+                hosts.append(host);
+        }
+        if (hosts.isEmpty())
+            return;
+        moveHosts(hosts, entry_id_);
+        return;
+    }
+
+    for (quint64 host_id : std::as_const(host_ids))
+        staged_[host_id] = true;
+
+    rebuildHostLists();
+    updateHostSummary();
+    updateButtonsState();
 }
 
 //--------------------------------------------------------------------------------------------------
 void RouterWorkspaceDialog::onHostRemoveClicked()
 {
-    // A refetch that arrives while the question is shown rebuilds the list and deletes the items,
-    // so the ids are taken before asking.
     QList<quint64> host_ids;
     for (QListWidgetItem* item : ui->list_hosts_in_workspace->selectedItems())
         host_ids.append(item->data(Qt::UserRole).toULongLong());
@@ -607,35 +694,47 @@ void RouterWorkspaceDialog::onHostRemoveClicked()
     if (host_ids.isEmpty())
         return;
 
-    if (host_ids.size() == 1)
+    // Create mode keeps the immediate behaviour (with confirmation).
+    if (entry_id_ == 0)
     {
-        if (MsgBox::question(this, tr("Are you sure you want to remove the host from the space?")) == MsgBox::No)
+        if (host_ids.size() == 1)
         {
-            LOG(INFO) << "Action is rejected by user";
-            return;
+            if (MsgBox::question(this, tr("Are you sure you want to remove the host from the space?")) == MsgBox::No)
+            {
+                LOG(INFO) << "Action is rejected by user";
+                return;
+            }
         }
-    }
-    else
-    {
-        if (MsgBox::question(this, tr("Are you sure you want to remove %n hosts from the space?",
-                                      "", host_ids.size())) == MsgBox::No)
+        else
         {
-            LOG(INFO) << "Action is rejected by user";
-            return;
+            if (MsgBox::question(this, tr("Are you sure you want to remove %n hosts from the space?",
+                                          "", host_ids.size())) == MsgBox::No)
+            {
+                LOG(INFO) << "Action is rejected by user";
+                return;
+            }
         }
-    }
 
-    QList<RouterHost> hosts;
-    for (quint64 host_id : std::as_const(host_ids))
-    {
-        const RouterHost host = hostById(host_id);
-        if (host.host_id != kInvalidHostId)
-            hosts.append(host);
-    }
-    if (hosts.isEmpty())
+        QList<RouterHost> hosts;
+        for (quint64 host_id : std::as_const(host_ids))
+        {
+            const RouterHost host = hostById(host_id);
+            if (host.host_id != kInvalidHostId)
+                hosts.append(host);
+        }
+        if (hosts.isEmpty())
+            return;
+
+        moveHosts(hosts, kNoWorkspace);
         return;
+    }
 
-    moveHosts(hosts, kNoWorkspace);
+    for (quint64 host_id : std::as_const(host_ids))
+        staged_[host_id] = false;
+
+    rebuildHostLists();
+    updateHostSummary();
+    updateButtonsState();
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -849,6 +948,12 @@ void RouterWorkspaceDialog::fetchMemberNames()
 //--------------------------------------------------------------------------------------------------
 void RouterWorkspaceDialog::fetchHosts()
 {
+    if (!staged_.isEmpty())
+    {
+        LOG(INFO) << "FetchHosts suppressed: staged host edits pending";
+        return;
+    }
+
     RouterSession* session = RouterController::session(router_id_);
     if (!session || !is_admin_)
         return;
@@ -892,6 +997,12 @@ void RouterWorkspaceDialog::fetchHosts()
 //--------------------------------------------------------------------------------------------------
 void RouterWorkspaceDialog::refetchLists()
 {
+    if (!staged_.isEmpty())
+    {
+        LOG(INFO) << "Refetch suppressed: staged host edits pending";
+        return;
+    }
+
     RouterSession* session = RouterController::session(router_id_);
     if (!session)
         return;
@@ -1014,15 +1125,42 @@ void RouterWorkspaceDialog::rebuildHostLists()
         list->verticalScrollBar()->setValue(scroll);
     };
 
-    fill(ui->list_hosts_in_workspace, hosts_in_);
-    fill(ui->list_hosts_available, hosts_out_);
+    // Apply the staged draft on top of the server snapshot without mutating it.
+    QList<RouterHost> in_list;
+    QList<RouterHost> out_list;
+    for (const RouterHost& host : std::as_const(hosts_in_))
+    {
+        if (staged_.value(host.host_id, true))
+            in_list.append(host);
+        else
+            out_list.append(host);
+    }
+    for (const RouterHost& host : std::as_const(hosts_out_))
+    {
+        if (staged_.value(host.host_id, false))
+            in_list.append(host);
+        else
+            out_list.append(host);
+    }
+
+    fill(ui->list_hosts_in_workspace, in_list);
+    fill(ui->list_hosts_available, out_list);
 
     updatePagination(ui->combo_hosts_in_page, ui->button_hosts_in_prev, ui->button_hosts_in_next,
                      hosts_in_page_);
     updatePagination(ui->combo_hosts_out_page, ui->button_hosts_out_prev,
                      ui->button_hosts_out_next, hosts_out_page_);
 
+    const bool staged = !staged_.isEmpty();
+    ui->combo_hosts_in_page->setEnabled(!staged && hosts_in_page_.pageCount() > 1);
+    ui->button_hosts_in_prev->setEnabled(!staged && hosts_in_page_.currentPage() > 0);
+    ui->button_hosts_in_next->setEnabled(!staged && hosts_in_page_.currentPage() < hosts_in_page_.pageCount() - 1);
+    ui->combo_hosts_out_page->setEnabled(!staged && hosts_out_page_.pageCount() > 1);
+    ui->button_hosts_out_prev->setEnabled(!staged && hosts_out_page_.currentPage() > 0);
+    ui->button_hosts_out_next->setEnabled(!staged && hosts_out_page_.currentPage() < hosts_out_page_.pageCount() - 1);
+
     updateButtonsState();
+    updateHostSummary();
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1049,6 +1187,42 @@ void RouterWorkspaceDialog::updateButtonsState()
     ui->button_remove->setEnabled(ui->list_with_access->currentItem() != nullptr);
     ui->button_host_add->setEnabled(!ui->list_hosts_available->selectedItems().isEmpty());
     ui->button_host_remove->setEnabled(!ui->list_hosts_in_workspace->selectedItems().isEmpty());
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterWorkspaceDialog::updateHostSummary()
+{
+    int added = 0;
+    int removed = 0;
+    for (auto it = staged_.constBegin(); it != staged_.constEnd(); ++it)
+    {
+        const quint64 host_id = it.key();
+        const bool now_member = it.value();
+
+        bool was_member = false;
+        for (const RouterHost& h : std::as_const(hosts_in_))
+        {
+            if (h.host_id == host_id)
+            {
+                was_member = true;
+                break;
+            }
+        }
+
+        if (now_member && !was_member)
+            ++added;
+        else if (!now_member && was_member)
+            ++removed;
+    }
+
+    if (added == 0 && removed == 0)
+    {
+        ui->label_host_summary->clear();
+        return;
+    }
+
+    ui->label_host_summary->setText(
+        tr("Будет применено: +%1 хостов, -%2").arg(added).arg(removed));
 }
 
 //--------------------------------------------------------------------------------------------------

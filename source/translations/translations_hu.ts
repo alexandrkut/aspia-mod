@@ -8739,51 +8739,56 @@ Sections: %2. Users in file: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="239"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="247"/>
         <source>Failed to get list of spaces.</source>
         <translation>Nem sikerült lekérni a terek listáját.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="266"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="274"/>
         <source>The space was deleted from another console.</source>
         <translation>A teret egy másik konzolból törölték.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="304"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="312"/>
         <source>Failed to get list of users.</source>
         <translation>Nem sikerült lekérni a felhasználók listáját.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="429"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="437"/>
         <source>Failed to move %n of %1 hosts.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="499"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="568"/>
         <source>The space was changed from another console. The lists are being refreshed - check the changes and save again.</source>
         <translation>A teret egy másik konzolból módosították. A listák frissítés alatt állnak - ellenőrizze a változásokat, és mentse újra.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="612"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="702"/>
         <source>Are you sure you want to remove the host from the space?</source>
         <translation>Biztosan eltávolítja a gazdagépet a térből?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="620"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="710"/>
         <source>Are you sure you want to remove %n hosts from the space?</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1104"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1225"/>
+        <source>Будет применено: +%1 хостов, -%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1278"/>
         <source>Space name cannot be empty.</source>
         <translation>A tér neve nem lehet üres.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1115"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1289"/>
         <source>A space with the specified name already exists.</source>
         <translation>A megadott névvel már létezik tér.</translation>
     </message>
@@ -9953,124 +9958,124 @@ Sections: %2. Users in file: %3.</source>
     <name>Sidebar</name>
     <message>
         <location filename="../client/desktop/management/search_widget.cc" line="115"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="199"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="200"/>
         <source>Local</source>
         <translation>Helyi</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="224"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="285"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="337"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="225"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="286"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="338"/>
         <source>Failed to read data. The list may be out of date.</source>
         <translation>Nem sikerült olvasni az adatokat. Lehet, hogy a lista elavult.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="643"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="644"/>
         <source>Change Password</source>
         <translation>Jelszó módosítása</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="651"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="652"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>A jelszó nem lehet rövidebb %n karakternél.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="652"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="653"/>
         <source>The password can not be longer than %n characters.</source>
         <translation>
             <numerusform>A jelszó nem haladhatja meg a %n karaktert.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="660"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="661"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>A megadott jelszó nem felel meg a biztonsági követelményeknek!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="661"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="662"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>A jelszónak tartalmaznia kell kisbetűket és nagybetűket, számokat, és nem lehet rövidebb %n karakternél.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="664"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="665"/>
         <source>Do you want to enter a different password?</source>
         <translation>Szeretne másik jelszót megadni?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="687"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="688"/>
         <source>Changing the password. Waiting for the session to sign in again...</source>
         <translation>Jelszó módosítása. Várakozás a munkamenet újbóli bejelentkezésére...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="885"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="886"/>
         <source>Are you sure you want to delete group &quot;%1&quot;?</source>
         <translation>Biztosan törli a(z) &quot;%1&quot; csoportot?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="898"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="899"/>
         <source>Unable to remove group</source>
         <translation>Nem lehet eltávolítani a csoportot</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="963"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="964"/>
         <source>Are you sure you want to delete router &quot;%1&quot;?</source>
         <translation>Biztosan törli a(z) &quot;%1&quot; útválasztót?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1572"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1578"/>
         <source>A group with this name already exists in the selected parent group.</source>
         <translation>A kiválasztott szülőcsoportban már létezik ilyen nevű csoport.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="1679"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1685"/>
         <source>%n of the selected hosts were not moved because hosts with the same names already exist in the selected group.</source>
         <translation>
             <numerusform>A kijelölt gazdagépek közül %n nem lett áthelyezve, mert a kiválasztott csoportban már léteznek ilyen nevű gazdagépek.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="1687"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1933"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1693"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1915"/>
         <source>Failed to move %n of the selected hosts.</source>
         <translation>
             <numerusform>A kijelölt gazdagépek közül %n gazdagépet nem sikerült áthelyezni.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1562"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1581"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1784"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1568"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1587"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1790"/>
         <source>Failed to move the group.</source>
         <translation>Nem sikerült áthelyezni a csoportot.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1641"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1647"/>
         <source>Failed to move the hosts to the selected group.</source>
         <translation>Nem sikerült áthelyezni a gazdagépeket a kiválasztott csoportba.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1678"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1684"/>
         <source>A host with this name already exists in the selected group.</source>
         <translation>A kiválasztott csoportban már létezik ilyen nevű gazdagép.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1640"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1686"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1932"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1646"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1692"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1914"/>
         <source>Failed to move the host to the selected group.</source>
         <translation>Nem sikerült áthelyezni a gazdagépet a kiválasztott csoportba.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1928"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1910"/>
         <source>Failed to remove the host from the space.</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="1929"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1911"/>
         <source>Failed to remove %n of the selected hosts from the space.</source>
         <translation type="unfinished">
             <numerusform></numerusform>

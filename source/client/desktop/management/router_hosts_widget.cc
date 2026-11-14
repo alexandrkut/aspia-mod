@@ -913,7 +913,7 @@ void RouterHostsWidget::startDrag()
     const QIcon icon = index.siblingAtColumn(0).data(Qt::DecorationRole).value<QIcon>();
     drag.setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
 
-    drag.exec(Qt::MoveAction);
+    drag.exec(Qt::MoveAction | Qt::CopyAction);
 }
 
 //--------------------------------------------------------------------------------------------------

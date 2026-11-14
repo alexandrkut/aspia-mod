@@ -8739,51 +8739,56 @@ Sections: %2. Users in file: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="239"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="247"/>
         <source>Failed to get list of spaces.</source>
         <translation>스페이스 목록을 가져오지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="266"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="274"/>
         <source>The space was deleted from another console.</source>
         <translation>다른 콘솔에서 스페이스가 삭제되었습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="304"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="312"/>
         <source>Failed to get list of users.</source>
         <translation>사용자 목록을 가져오지 못했습니다.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="429"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="437"/>
         <source>Failed to move %n of %1 hosts.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="499"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="568"/>
         <source>The space was changed from another console. The lists are being refreshed - check the changes and save again.</source>
         <translation>다른 콘솔에서 스페이스가 변경되었습니다. 목록을 새로 고치는 중입니다. 변경 사항을 확인한 후 다시 저장하십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="612"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="702"/>
         <source>Are you sure you want to remove the host from the space?</source>
         <translation>호스트를 스페이스에서 제거하시겠습니까?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="620"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="710"/>
         <source>Are you sure you want to remove %n hosts from the space?</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1104"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1225"/>
+        <source>Будет применено: +%1 хостов, -%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1278"/>
         <source>Space name cannot be empty.</source>
         <translation>스페이스 이름은 비워 둘 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1115"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1289"/>
         <source>A space with the specified name already exists.</source>
         <translation>지정한 이름의 스페이스가 이미 있습니다.</translation>
     </message>
@@ -9953,124 +9958,124 @@ Sections: %2. Users in file: %3.</source>
     <name>Sidebar</name>
     <message>
         <location filename="../client/desktop/management/search_widget.cc" line="115"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="199"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="200"/>
         <source>Local</source>
         <translation>로컬</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="224"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="285"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="337"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="225"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="286"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="338"/>
         <source>Failed to read data. The list may be out of date.</source>
         <translation>데이터를 읽지 못했습니다. 목록이 오래되었을 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="643"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="644"/>
         <source>Change Password</source>
         <translation>암호 변경</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="651"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="652"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>암호는 %n자보다 짧을 수 없습니다.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="652"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="653"/>
         <source>The password can not be longer than %n characters.</source>
         <translation>
             <numerusform>암호는 %n자를 초과할 수 없습니다.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="660"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="661"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>입력한 암호가 보안 요구 사항을 충족하지 않습니다!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="661"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="662"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>암호는 대문자와 소문자, 숫자를 포함해야 하며 %n자보다 짧을 수 없습니다.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="664"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="665"/>
         <source>Do you want to enter a different password?</source>
         <translation>다른 암호를 입력하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="687"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="688"/>
         <source>Changing the password. Waiting for the session to sign in again...</source>
         <translation>암호를 변경하는 중입니다. 세션이 다시 로그인하기를 기다리는 중...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="885"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="886"/>
         <source>Are you sure you want to delete group &quot;%1&quot;?</source>
         <translation>&quot;%1&quot; 그룹을 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="898"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="899"/>
         <source>Unable to remove group</source>
         <translation>그룹을 제거할 수 없음</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="963"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="964"/>
         <source>Are you sure you want to delete router &quot;%1&quot;?</source>
         <translation>&quot;%1&quot; 라우터를 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1572"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1578"/>
         <source>A group with this name already exists in the selected parent group.</source>
         <translation>선택한 상위 그룹에 같은 이름의 그룹이 이미 있습니다.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="1679"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1685"/>
         <source>%n of the selected hosts were not moved because hosts with the same names already exist in the selected group.</source>
         <translation>
             <numerusform>선택한 그룹에 같은 이름의 호스트가 이미 있어 선택한 호스트 중 %n개를 이동하지 않았습니다.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="1687"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1933"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1693"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1915"/>
         <source>Failed to move %n of the selected hosts.</source>
         <translation>
             <numerusform>선택한 호스트 중 %n개를 이동하지 못했습니다.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1562"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1581"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1784"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1568"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1587"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1790"/>
         <source>Failed to move the group.</source>
         <translation>그룹을 이동하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1641"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1647"/>
         <source>Failed to move the hosts to the selected group.</source>
         <translation>호스트를 선택한 그룹으로 이동하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1678"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1684"/>
         <source>A host with this name already exists in the selected group.</source>
         <translation>선택한 그룹에 같은 이름의 호스트가 이미 있습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1640"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1686"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1932"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1646"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1692"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1914"/>
         <source>Failed to move the host to the selected group.</source>
         <translation>호스트를 선택한 그룹으로 이동하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1928"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1910"/>
         <source>Failed to remove the host from the space.</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="1929"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1911"/>
         <source>Failed to remove %n of the selected hosts from the space.</source>
         <translation type="unfinished">
             <numerusform></numerusform>

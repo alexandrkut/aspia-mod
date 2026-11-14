@@ -8791,22 +8791,22 @@ Sections: %2. Users in file: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="239"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="247"/>
         <source>Failed to get list of spaces.</source>
         <translation>קבלת רשימת המרחבים נכשלה.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="266"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="274"/>
         <source>The space was deleted from another console.</source>
         <translation>המרחב נמחק ממסוף אחר.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="304"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="312"/>
         <source>Failed to get list of users.</source>
         <translation>קבלת רשימת המשתמשים נכשלה.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="429"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="437"/>
         <source>Failed to move %n of %1 hosts.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -8814,17 +8814,17 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="499"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="568"/>
         <source>The space was changed from another console. The lists are being refreshed - check the changes and save again.</source>
         <translation>המרחב שונה ממסוף אחר. הרשימות מתרעננות - בדוק את השינויים ושמור שוב.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="612"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="702"/>
         <source>Are you sure you want to remove the host from the space?</source>
         <translation>האם אתה בטוח שברצונך להסיר את המארח מהמרחב?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="620"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="710"/>
         <source>Are you sure you want to remove %n hosts from the space?</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -8832,12 +8832,17 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1104"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1225"/>
+        <source>Будет применено: +%1 хостов, -%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1278"/>
         <source>Space name cannot be empty.</source>
         <translation>שם המרחב אינו יכול להיות ריק.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1115"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1289"/>
         <source>A space with the specified name already exists.</source>
         <translation>מרחב בשם שצוין כבר קיים.</translation>
     </message>
@@ -10010,24 +10015,24 @@ Sections: %2. Users in file: %3.</source>
     <name>Sidebar</name>
     <message>
         <location filename="../client/desktop/management/search_widget.cc" line="115"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="199"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="200"/>
         <source>Local</source>
         <translation>מקומי</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="224"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="285"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="337"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="225"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="286"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="338"/>
         <source>Failed to read data. The list may be out of date.</source>
         <translation>קריאת הנתונים נכשלה. ייתכן שהרשימה אינה מעודכנת.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="643"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="644"/>
         <source>Change Password</source>
         <translation>שינוי סיסמה</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="651"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="652"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>אורך הסיסמה לא יפחת מ-%n תו.</numerusform>
@@ -10035,7 +10040,7 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="652"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="653"/>
         <source>The password can not be longer than %n characters.</source>
         <translation>
             <numerusform>אורך הסיסמה לא יחרוג מ-%n תו.</numerusform>
@@ -10043,12 +10048,12 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="660"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="661"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>הסיסמה שהזנת אינה עומדת בדרישות האבטחה!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="661"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="662"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>הסיסמה חייבת להכיל אותיות קטנות וגדולות ומספרים, ואורכה לא יפחת מ-%n תו.</numerusform>
@@ -10056,37 +10061,37 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="664"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="665"/>
         <source>Do you want to enter a different password?</source>
         <translation>האם ברצונך להזין סיסמה אחרת?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="687"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="688"/>
         <source>Changing the password. Waiting for the session to sign in again...</source>
         <translation>משנה את הסיסמה. ממתין שההפעלה תתחבר מחדש...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="885"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="886"/>
         <source>Are you sure you want to delete group &quot;%1&quot;?</source>
         <translation>האם אתה בטוח שברצונך למחוק את הקבוצה &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="898"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="899"/>
         <source>Unable to remove group</source>
         <translation>לא ניתן להסיר קבוצה</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="963"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="964"/>
         <source>Are you sure you want to delete router &quot;%1&quot;?</source>
         <translation>האם אתה בטוח שברצונך למחוק את הנתב &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1572"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1578"/>
         <source>A group with this name already exists in the selected parent group.</source>
         <translation>קבוצה בשם זה כבר קיימת בקבוצת האב שנבחרה.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="1679"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1685"/>
         <source>%n of the selected hosts were not moved because hosts with the same names already exist in the selected group.</source>
         <translation>
             <numerusform>%n מהמארחים שנבחרו לא הועבר מכיוון שמארח בשם זהה כבר קיים בקבוצה שנבחרה.</numerusform>
@@ -10094,8 +10099,8 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="1687"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1933"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1693"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1915"/>
         <source>Failed to move %n of the selected hosts.</source>
         <translation>
             <numerusform>העברת %n מהמארחים שנבחרו נכשלה.</numerusform>
@@ -10103,36 +10108,36 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1562"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1581"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1784"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1568"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1587"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1790"/>
         <source>Failed to move the group.</source>
         <translation>העברת הקבוצה נכשלה.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1641"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1647"/>
         <source>Failed to move the hosts to the selected group.</source>
         <translation>העברת המארחים לקבוצה שנבחרה נכשלה.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1678"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1684"/>
         <source>A host with this name already exists in the selected group.</source>
         <translation>מארח בשם זה כבר קיים בקבוצה שנבחרה.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1640"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1686"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1932"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1646"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1692"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1914"/>
         <source>Failed to move the host to the selected group.</source>
         <translation>העברת המארח לקבוצה שנבחרה נכשלה.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1928"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1910"/>
         <source>Failed to remove the host from the space.</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="1929"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1911"/>
         <source>Failed to remove %n of the selected hosts from the space.</source>
         <translation type="unfinished">
             <numerusform></numerusform>

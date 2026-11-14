@@ -8791,22 +8791,22 @@ Sections: %2. Users in file: %3.</source>
         <translation>Хостове в пространството</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="239"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="247"/>
         <source>Failed to get list of spaces.</source>
         <translation>Неуспешно получаване на списъка с пространства.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="266"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="274"/>
         <source>The space was deleted from another console.</source>
         <translation>Пространството е изтрито от друга конзола.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="304"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="312"/>
         <source>Failed to get list of users.</source>
         <translation>Неуспешно получаване на списъка с потребители.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="429"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="437"/>
         <source>Failed to move %n of %1 hosts.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -8814,17 +8814,17 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="499"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="568"/>
         <source>The space was changed from another console. The lists are being refreshed - check the changes and save again.</source>
         <translation>Пространството е променено от друга конзола. Списъците се обновяват - проверете промените и запазете отново.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="612"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="702"/>
         <source>Are you sure you want to remove the host from the space?</source>
         <translation>Наистина ли искате да премахнете хоста от пространството?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="620"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="710"/>
         <source>Are you sure you want to remove %n hosts from the space?</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -8832,12 +8832,17 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1104"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1225"/>
+        <source>Будет применено: +%1 хостов, -%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1278"/>
         <source>Space name cannot be empty.</source>
         <translation>Името на пространството не може да бъде празно.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1115"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1289"/>
         <source>A space with the specified name already exists.</source>
         <translation>Вече съществува пространство с посоченото име.</translation>
     </message>
@@ -10010,24 +10015,24 @@ Sections: %2. Users in file: %3.</source>
     <name>Sidebar</name>
     <message>
         <location filename="../client/desktop/management/search_widget.cc" line="115"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="199"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="200"/>
         <source>Local</source>
         <translation>Локални</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="224"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="285"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="337"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="225"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="286"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="338"/>
         <source>Failed to read data. The list may be out of date.</source>
         <translation>Неуспешно четене на данните. Списъкът може да не е актуален.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="643"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="644"/>
         <source>Change Password</source>
         <translation>Промяна на паролата</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="651"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="652"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>Паролата не може да бъде по-кратка от %n знак.</numerusform>
@@ -10035,7 +10040,7 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="652"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="653"/>
         <source>The password can not be longer than %n characters.</source>
         <translation>
             <numerusform>Паролата не може да бъде по-дълга от %n знак.</numerusform>
@@ -10043,12 +10048,12 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="660"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="661"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>Въведената парола не отговаря на изискванията за защита!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="661"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="662"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>Паролата трябва да съдържа малки и главни букви, цифри и не трябва да бъде по-кратка от %n знак.</numerusform>
@@ -10056,61 +10061,61 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="664"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="665"/>
         <source>Do you want to enter a different password?</source>
         <translation>Искате ли да въведете друга парола?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="687"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="688"/>
         <source>Changing the password. Waiting for the session to sign in again...</source>
         <translation>Промяна на паролата. Изчакване на повторното влизане на сесията...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="885"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="886"/>
         <source>Are you sure you want to delete group &quot;%1&quot;?</source>
         <translation>Наистина ли искате да изтриете групата &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="898"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="899"/>
         <source>Unable to remove group</source>
         <translation>Неуспешно изтриване на групата</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="963"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="964"/>
         <source>Are you sure you want to delete router &quot;%1&quot;?</source>
         <translation>Наистина ли искате да изтриете рутера &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1562"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1581"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1784"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1568"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1587"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1790"/>
         <source>Failed to move the group.</source>
         <translation>Неуспешно преместване на групата.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1572"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1578"/>
         <source>A group with this name already exists in the selected parent group.</source>
         <translation>Група с това име вече съществува в избраната родителска група.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1640"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1686"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1932"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1646"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1692"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1914"/>
         <source>Failed to move the host to the selected group.</source>
         <translation>Неуспешно преместване на хоста в избраната група.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1641"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1647"/>
         <source>Failed to move the hosts to the selected group.</source>
         <translation>Неуспешно преместване на хостовете в избраната група.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1678"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1684"/>
         <source>A host with this name already exists in the selected group.</source>
         <translation>Хост с това име вече съществува в избраната група.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="1679"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1685"/>
         <source>%n of the selected hosts were not moved because hosts with the same names already exist in the selected group.</source>
         <translation>
             <numerusform>%n от избраните хостове не беше преместен, тъй като в избраната група вече съществуват хостове със същите имена.</numerusform>
@@ -10118,8 +10123,8 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="1687"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1933"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1693"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1915"/>
         <source>Failed to move %n of the selected hosts.</source>
         <translation>
             <numerusform>Неуспешно преместване на %n от избраните хостове.</numerusform>
@@ -10127,12 +10132,12 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1928"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1910"/>
         <source>Failed to remove the host from the space.</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="1929"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1911"/>
         <source>Failed to remove %n of the selected hosts from the space.</source>
         <translation type="unfinished">
             <numerusform></numerusform>

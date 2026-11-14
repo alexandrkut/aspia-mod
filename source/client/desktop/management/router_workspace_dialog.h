@@ -20,6 +20,7 @@
 #define CLIENT_DESKTOP_MANAGEMENT_ROUTER_WORKSPACE_DIALOG_H
 
 #include <QDialog>
+#include <QHash>
 
 #include <memory>
 
@@ -95,6 +96,7 @@ private:
     void updateButtonsState();
     void updateLoadingState();
     void updateArrowIcons();
+    void updateHostSummary();
 
     // The name of the form, checked the way the router checks it. Empty when it is not usable.
     QString validatedName();
@@ -118,6 +120,10 @@ private:
     QList<RouterHost> hosts_in_;
     QList<RouterHost> hosts_out_;
 
+    // Staged membership changes for the hosts tab in modify mode: host id -> becomes member.
+    // Empty means nothing pending; while non-empty pagination/auto-refresh are blocked.
+    QHash<quint64, bool> staged_;
+
     // A batch of host operations waiting for the workspace of a create-mode dialog to be created,
     // or currently in flight.
     struct PendingHostMove
@@ -138,6 +144,11 @@ private:
     SharedPointer<HostMoveBatch> host_move_batch_;
 
     bool closing_ = false;
+
+    // Modify-mode OK chain: save the record first, then send the staged host batch.
+    bool apply_hosts_on_save_ = false;
+    // Close the dialog after the staged host batch started from OK finishes.
+    bool close_dialog_after_host_batch_ = false;
 
     Q_DISABLE_COPY_MOVE(RouterWorkspaceDialog)
 };
