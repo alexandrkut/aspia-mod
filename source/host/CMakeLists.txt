@@ -356,6 +356,11 @@ if (LINUX)
 endif()
 
 add_executable(aspia_host ${SOURCE_HOST} ${SOURCE_HOST_RESOURCES} host.rc)
+# The shell icon comes from common/resources/aspia.ico: without this dependency
+# Ninja does not recompile the resource when the icon changes and the exe keeps
+# embedding the stale icon.
+set_property(SOURCE host.rc APPEND PROPERTY OBJECT_DEPENDS
+             "${CMAKE_CURRENT_SOURCE_DIR}/../common/resources/aspia.ico")
 
 if (WIN32)
     set_target_properties(aspia_host PROPERTIES WIN32_EXECUTABLE TRUE)

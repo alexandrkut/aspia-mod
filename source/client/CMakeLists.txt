@@ -120,6 +120,11 @@ if (WIN32)
         audio_output_win.cc
         audio_output_win.h)
     list(APPEND SOURCE_CLIENT client.rc)
+    # The shell icon comes from common/resources/aspia.ico: without this
+    # dependency Ninja does not recompile the resource when the icon changes
+    # and the exe keeps embedding the stale icon.
+    set_property(SOURCE client.rc APPEND PROPERTY OBJECT_DEPENDS
+                 "${CMAKE_CURRENT_SOURCE_DIR}/../common/resources/aspia.ico")
 endif()
 
 if (LINUX)
