@@ -1498,7 +1498,7 @@ bool Sidebar::onDragMove(QDragMoveEvent* event)
         else
             event->setDropAction(Qt::CopyAction);
 
-        event->acceptProposedAction();
+        event->accept();
         return true;
     }
 
@@ -1882,10 +1882,6 @@ bool Sidebar::onDrop(QDropEvent* event)
             target_workspace_id != host_mime_data->sourceWorkspaceId();
 
         QList<RouterHost> add_hosts = hosts;
-        QList<RouterHost> remove_hosts;
-        if (is_move)
-            remove_hosts = hostsToUnassign(host_mime_data->hosts(), router_id,
-                                          host_mime_data->sourceWorkspaceId());
 
         struct DragContext
         {
@@ -1893,75 +1889,31 @@ bool Sidebar::onDrop(QDropEvent* event)
             int failed = 0;
         };
         SharedPointer<DragContext> ctx(new DragContext());
-        ctx->total = static_cast<int>(add_hosts.size() + remove_hosts.size());
-        if (ctx->total <= 0)
-            ctx->total = static_cast<int>(add_hosts.size());
+        ctx->total = static_cast<int>(add_hosts.size());
 
-        const QList<RouterHost> remove_hosts_copy = remove_hosts;
-
-        auto finalize = [this, router_id, unassign, is_move, ctx]()
+        auto finalize = [this, router_id, unassign, ctx]()
         {
             const int total = ctx->total > 0 ? ctx->total : 1;
             const int failed = ctx->failed;
             if (failed > 0)
             {
-                MsgBox::warning(tree_widget_, (unassign || is_move) ?
-                    (total == 1 ?
+                if (unassign)
+                {
+                    MsgBox::warning(tree_widget_, (total == 1 ?
                         tr("Failed to remove the host from the space.") :
                         tr("Failed to remove %n of the selected hosts from the space.", "",
-                           failed)) :
-                    (total == 1 ?
+                           failed)));
+                }
+                else
+                {
+                    MsgBox::warning(tree_widget_, (total == 1 ?
                         tr("Failed to move the host to the selected group.") :
                         tr("Failed to move %n of the selected hosts.", "", failed)));
+                }
             }
 
             if (failed < (ctx->total > 0 ? ctx->total : 1))
                 emit sig_routerHostMoved(router_id);
-        };
-
-        std::function<void()> runRemovePhase = [this, router_id, session, host_mime_data,
-                                                 ctx, remove_hosts_copy, finalize]()
-        {
-            if (remove_hosts_copy.isEmpty())
-            {
-                finalize();
-                return;
-            }
-
-            SharedPointer<Batch> remove_batch(new Batch());
-            remove_batch->pending = static_cast<int>(remove_hosts_copy.size());
-
-            for (RouterHost host : remove_hosts_copy)
-            {
-                const HostId host_id = host.host_id;
-
-                for (qsizetype i = host.memberships.size() - 1; i >= 0; --i)
-                {
-                    if (host.memberships.at(i).first == host_mime_data->sourceWorkspaceId())
-                        host.memberships.removeAt(i);
-                }
-
-                if (host.memberships.isEmpty())
-                {
-                    host.workspace_id = 0;
-                    host.group_id = 0;
-                }
-
-                session->editHost(host, { this,
-                    [ctx, remove_batch, host_id, finalize](const proto::router::HostResult& result)
-                {
-                    if (result.error_code() != proto::router::kErrorOk)
-                    {
-                        LOG(ERROR) << "Move of host" << host_id << "failed:" << result.error_code();
-                        ++ctx->failed;
-                    }
-
-                    if (--remove_batch->pending > 0)
-                        return;
-
-                    finalize();
-                } });
-            }
         };
 
         if (!add_hosts.isEmpty())
@@ -1989,6 +1941,15 @@ bool Sidebar::onDrop(QDropEvent* event)
                 }
                 else
                 {
+                    if (is_move)
+                    {
+                        for (qsizetype i = host.memberships.size() - 1; i >= 0; --i)
+                        {
+                            if (host.memberships.at(i).first == host_mime_data->sourceWorkspaceId())
+                                host.memberships.removeAt(i);
+                        }
+                    }
+
                     for (qsizetype i = host.memberships.size() - 1; i >= 0; --i)
                     {
                         if (host.memberships.at(i).first == target_workspace_id)
@@ -1998,7 +1959,7 @@ bool Sidebar::onDrop(QDropEvent* event)
                 }
 
                 session->editHost(host, { this,
-                    [this, ctx, add_batch, host_id, runRemovePhase, finalize, remove_hosts_copy](const proto::router::HostResult& result)
+                    [this, ctx, add_batch, host_id, finalize](const proto::router::HostResult& result)
                 {
                     if (result.error_code() != proto::router::kErrorOk)
                     {
@@ -2009,16 +1970,13 @@ bool Sidebar::onDrop(QDropEvent* event)
                     if (--add_batch->pending > 0)
                         return;
 
-                    if (!remove_hosts_copy.isEmpty())
-                        runRemovePhase();
-                    else
-                        finalize();
+                    finalize();
                 } });
             }
         }
         else
         {
-            runRemovePhase();
+            finalize();
         }
 
         if (event->keyboardModifiers() & Qt::ShiftModifier)
@@ -2026,7 +1984,7 @@ bool Sidebar::onDrop(QDropEvent* event)
         else
             event->setDropAction(Qt::CopyAction);
 
-        event->acceptProposedAction();
+        event->accept();
         restoreSelection();
         return true;
     }
