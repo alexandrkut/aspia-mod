@@ -7414,7 +7414,7 @@ Detail: %1</source>
     <message>
         <location filename="../client/desktop/management/router_host_bulk.cc" line="482"/>
         <source>Remove user from hosts</source>
-        <translation type="unfinished">Удаление юзера на хостах</translation>
+        <translation>Удаление юзера на хостах</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_bulk.cc" line="555"/>
@@ -7424,32 +7424,32 @@ Detail: %1</source>
     <message>
         <location filename="../client/desktop/management/router_host_bulk.cc" line="563"/>
         <source>User</source>
-        <translation type="unfinished">Пользователь</translation>
+        <translation>Пользователь</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_bulk.cc" line="563"/>
         <source>Hosts</source>
-        <translation type="unfinished">Хосты</translation>
+        <translation>Хосты</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_bulk.cc" line="563"/>
         <source>Status</source>
-        <translation type="unfinished">Состояние</translation>
+        <translation>Состояние</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_bulk.cc" line="579"/>
         <source>%1 of %2</source>
-        <translation type="unfinished">%1 из %2</translation>
+        <translation>%1 из %2</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_bulk.cc" line="586"/>
         <source>enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>включён</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_bulk.cc" line="588"/>
         <source>disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>выключен</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_bulk.cc" line="590"/>
@@ -7464,7 +7464,7 @@ Detail: %1</source>
     <message>
         <location filename="../client/desktop/management/router_host_bulk.cc" line="603"/>
         <source>Force (remove even with live sessions; last enabled user is still protected)</source>
-        <translation type="unfinished"></translation>
+        <translation>Принудительно (удалить даже при живых сессиях; последний включённый пользователь всё равно защищён)</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_bulk.cc" line="609"/>
