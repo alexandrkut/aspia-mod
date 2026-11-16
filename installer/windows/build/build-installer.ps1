@@ -22,7 +22,8 @@ param(
     [string]$Product = 'client',
     [string]$Version = '',
     [string]$Architecture = 'x86_64',
-    [string]$Language = ''
+    [string]$Language = '',
+    [string]$BuildDir = ''
 )
 
 $ErrorActionPreference = 'Stop'
@@ -30,7 +31,7 @@ $ErrorActionPreference = 'Stop'
 $root   = 'C:\Projects\aspia-mod'
 $wix    = Join-Path $root 'tools\wix3'
 $srcDir = Join-Path $root "aspia\installer\windows"
-$build  = Join-Path $root 'aspia\builds\local-win-x64\Release'
+$build  = if ($BuildDir) { $BuildDir } else { Join-Path $root 'aspia\builds\local-win-x64\Release' }
 $stage  = Join-Path $root "aspia\builds\msi-$Product-$Architecture"
 
 # The name of the program in the list of the installed programs and the name of the shortcut in
