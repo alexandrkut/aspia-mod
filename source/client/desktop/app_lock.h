@@ -45,7 +45,8 @@ public:
     // Shows the unlock dialog. At the |startup| the user chooses the database, later the dialog asks
     // for the one already open. |connect_request|, when set and not empty, is forwarded to the
     // instance of the already open database instead of being lost on CANCELLED.
-    static Result unlock(bool startup, const ConnectRequest* connect_request = nullptr);
+    static Result unlock(bool startup, const ConnectRequest* connect_request = nullptr,
+                        const SecureString* master_password = nullptr);
 
     // Tells the user what is wrong with |password| as a new master password. Returns false when
     // another one has to be entered.

@@ -27,6 +27,7 @@
 #include "client/storage/database.h"
 
 class ConnectRequest;
+class SecureString;
 
 namespace Ui {
 class UnlockDialog;
@@ -43,6 +44,7 @@ public:
     Q_ENUM(Mode)
 
     explicit UnlockDialog(Mode mode, const ConnectRequest* connect_request = nullptr,
+                          const SecureString* master_password = nullptr,
                           QWidget* parent = nullptr);
     ~UnlockDialog() final;
 
@@ -75,6 +77,7 @@ private:
     std::unique_ptr<Ui::UnlockDialog> ui;
     const Mode mode_;
     const ConnectRequest* connect_request_ = nullptr;
+    const SecureString* master_password_ = nullptr;
     QList<Database::Info> databases_;
     QSet<QString> open_ids_;
     QString no_password_id_;

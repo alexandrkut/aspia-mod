@@ -27,8 +27,11 @@
 #include <QStyle>
 #include <QTabBar>
 #include <QToolButton>
+#include <QSet>
 #include <QUrl>
 #include <QWindow>
+
+#include <optional>
 
 #include "base/auto_qpointer.h"
 #include "base/gui_application.h"
@@ -1414,9 +1417,18 @@ void MainWindow::connectToLocalHost(const QString& identifier, int session_type,
     showAndActivate();
 
     ConnectTarget target;
+    QString resolve_error;
 
-    if (!resolveTarget(identifier, &target))
+    if (!resolveTarget(identifier, &target, &resolve_error))
     {
+        if (!resolve_error.isEmpty())
+        {
+            // A name collision or an ID/name conflict is a definite answer, not a miss: the
+            // user is told about it and no router fallback is attempted.
+            MsgBox::warning(this, resolve_error);
+            return;
+        }
+
         // Nothing here knows the ID. It may still be a host of a router that was never asked for
         // its list, so the routers themselves are asked before the request is given up on.
         const QString id = identifier;
@@ -1504,37 +1516,42 @@ void MainWindow::connectToLocalHost(const QString& identifier, int session_type,
 }
 
 //--------------------------------------------------------------------------------------------------
-bool MainWindow::resolveTarget(const QString& identifier, ConnectTarget* target) const
+bool MainWindow::resolveTarget(const QString& identifier, ConnectTarget* target, QString* error) const
 {
     Database& db = Database::instance();
 
-    // A number is looked for first as the record ID of the address book: that is the autoincrement
-    // the book keeps for itself.
-    LocalHostConfig entry;
+    std::optional<ConnectTarget> id_candidate;
 
-    if (db.findLocalHost(identifier.toLongLong(), &entry) == Database::FindResult::FOUND)
+    if (identifier.toLongLong() > 0)
     {
-        *target = ConnectTarget();
-        target->entry_id = entry.id();
-        return true;
+        LocalHostConfig entry;
+
+        if (db.findLocalHost(identifier.toLongLong(), &entry) == Database::FindResult::FOUND)
+        {
+            ConnectTarget candidate;
+            candidate.entry_id = entry.id();
+            id_candidate = candidate;
+        }
     }
 
-    // And then as the ID of a host, which is the number a connection to it is made with and the
-    // one the "Address / ID" column shows. Two places hold it: the address of a record of the
-    // local book, and the key of a host in the book of a router.
     QList<LocalHostConfig> local_hosts;
 
     if (db.allLocalHosts(&local_hosts) == Database::ReadResult::OK)
     {
-        for (const LocalHostConfig& host : std::as_const(local_hosts))
+        if (!id_candidate)
         {
-            if (host.address().compare(identifier, Qt::CaseInsensitive) == 0)
+            for (const LocalHostConfig& host : std::as_const(local_hosts))
             {
-                LOG(INFO) << "Host ID" << identifier << "belongs to the address book record"
-                          << host.id() << "(" << host.name() << ")";
-                *target = ConnectTarget();
-                target->entry_id = host.id();
-                return true;
+                if (host.address().compare(identifier, Qt::CaseInsensitive) == 0)
+                {
+                    LOG(INFO) << "Host ID" << identifier << "belongs to the address book record"
+                              << host.id() << "(" << host.name() << ")";
+
+                    ConnectTarget candidate;
+                    candidate.entry_id = host.id();
+                    id_candidate = candidate;
+                    break;
+                }
             }
         }
     }
@@ -1543,21 +1560,95 @@ bool MainWindow::resolveTarget(const QString& identifier, ConnectTarget* target)
 
     if (db.allRouterHosts(&router_hosts) == Database::ReadResult::OK)
     {
-        for (const RouterHostConfig& host : std::as_const(router_hosts))
+        if (!id_candidate)
         {
-            if (hostIdToString(host.hostId()) != identifier)
-                continue;
+            for (const RouterHostConfig& host : std::as_const(router_hosts))
+            {
+                if (hostIdToString(host.hostId()) != identifier)
+                    continue;
 
-            LOG(INFO) << "Host ID" << identifier << "belongs to the book of the router";
+                LOG(INFO) << "Host ID" << identifier << "belongs to the book of the router";
 
-            *target = ConnectTarget();
-            target->host_id = host.hostId();
-            return true;
+                ConnectTarget candidate;
+                candidate.host_id = host.hostId();
+                id_candidate = candidate;
+                break;
+            }
         }
     }
 
-    // A host that is in no book at all can still be named by its address: the client connects to
-    // it directly, the way it does for a host of the address book that has no router of its own.
+    QList<ConnectTarget> name_candidates;
+
+    if (db.allLocalHosts(&local_hosts) == Database::ReadResult::OK)
+    {
+        for (const LocalHostConfig& host : std::as_const(local_hosts))
+        {
+            if (host.name().compare(identifier, Qt::CaseInsensitive) != 0)
+                continue;
+
+            ConnectTarget candidate;
+            candidate.entry_id = host.id();
+            candidate.name = host.name();
+            name_candidates.append(candidate);
+        }
+    }
+
+    if (name_candidates.size() > 1)
+    {
+        QSet<qint64> distinct_ids;
+        for (const ConnectTarget& candidate : std::as_const(name_candidates))
+            distinct_ids.insert(candidate.entry_id);
+
+        if (distinct_ids.size() > 1)
+        {
+            if (error)
+                *error = QApplication::translate(
+                    "Client", "Several hosts are named \"%1\". Use the ID of the one you mean.")
+                             .arg(identifier);
+            return false;
+        }
+    }
+
+    const bool has_name = !name_candidates.isEmpty();
+    const ConnectTarget name_candidate = has_name ? name_candidates.first() : ConnectTarget();
+
+    auto same_host = [](const ConnectTarget& a, const ConnectTarget& b) {
+        if (a.entry_id != 0 && a.entry_id == b.entry_id)
+            return true;
+        if (a.host_id != kInvalidHostId && a.host_id == b.host_id)
+            return true;
+        return false;
+    };
+
+    if (id_candidate && has_name)
+    {
+        if (!same_host(*id_candidate, name_candidate))
+        {
+            if (error)
+                *error = QApplication::translate(
+                    "Client", "\"%1\" is both the name of a host and the ID of another. Connect by the record ID of the host you mean.")
+                             .arg(identifier);
+            return false;
+        }
+
+        *target = *id_candidate;
+        if (target->name.isEmpty())
+            target->name = name_candidate.name;
+        return true;
+    }
+
+    if (id_candidate)
+    {
+        *target = *id_candidate;
+        return true;
+    }
+
+    if (has_name)
+    {
+        *target = name_candidate;
+        return true;
+    }
+
     if (ConnectRequest::isHostAddress(identifier))
     {
         LOG(INFO) << "Connecting to the host at the address" << identifier << "directly";
@@ -1571,6 +1662,7 @@ bool MainWindow::resolveTarget(const QString& identifier, ConnectTarget* target)
 
     return false;
 }
+
 
 //--------------------------------------------------------------------------------------------------
 void MainWindow::connectToRouterHost(const QString& identifier, proto::peer::SessionType session_type,

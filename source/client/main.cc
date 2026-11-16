@@ -246,7 +246,29 @@ int main(int argc, char* argv[])
               << "(version:" << SysInfo::operatingSystemVersion()
               <<  "arch:" << SysInfo::operatingSystemArchitecture() << ")";
     LOG(INFO) << "Qt version:" << QT_VERSION_STR;
-    LOG(INFO) << "Command line:" << application.arguments();
+    // The command line is logged for diagnostics, but passwords must never reach the log. Build a
+    // copy with the values of --password and --master-password replaced by "***" (both the
+    // "--flag value" and the "--flag=value" forms); the original arguments are left untouched.
+    QStringList logged_arguments = application.arguments();
+    for (int i = 0; i < logged_arguments.size(); ++i)
+    {
+        const QString& argument = logged_arguments.at(i);
+
+        if (argument == QStringLiteral("--password") ||
+            argument == QStringLiteral("--master-password"))
+        {
+            if (i + 1 < logged_arguments.size())
+                logged_arguments[i + 1] = QStringLiteral("***");
+        }
+        else if (argument.startsWith(QStringLiteral("--password=")) ||
+                 argument.startsWith(QStringLiteral("--master-password=")))
+        {
+            const int equals = argument.indexOf(QLatin1Char('='));
+            logged_arguments[i] = argument.left(equals + 1) + QStringLiteral("***");
+        }
+    }
+
+    LOG(INFO) << "Command line:" << logged_arguments;
 
     if (application.isMigrationFailed())
     {
@@ -280,9 +302,10 @@ int main(int argc, char* argv[])
     const QCommandLineOption connect_option(
         { QStringLiteral("connect"), QStringLiteral("c") },
         QApplication::translate("Client",
-            "Connect to the host of the address book with this record ID or host ID, using the "
-            "login and the password stored in it, or connect directly to a host by its address, "
-            "which needs the login and the password given with --username and --password."),
+            "Connect to the host of the address book with this record ID or host ID, or with the "
+            "name of a record, using the login and the password stored in it, or connect directly "
+            "to a host by its address, which needs the login and the password given with "
+            "--username and --password."),
         QApplication::translate("Client", "id"));
 
     const QCommandLineOption session_type_option(
@@ -311,6 +334,12 @@ int main(int argc, char* argv[])
             "Open the database with this name or ID instead of the selection dialog."),
         QApplication::translate("Client", "name"));
 
+    const QCommandLineOption master_password_option("master-password",
+        QApplication::translate("Client",
+            "Unlock the database with this master password instead of asking for it. A password on "
+            "a command line is visible to the other users of the machine."),
+        QApplication::translate("Client", "password"));
+
     const QCommandLineOption list_databases_option("list-databases",
         QApplication::translate("Client", "Print the ID and the name of every database and exit."));
 
@@ -321,7 +350,15 @@ int main(int argc, char* argv[])
     parser.addOption(password_option);
     parser.addOption(database_option);
     parser.addOption(list_databases_option);
+    parser.addOption(master_password_option);
     parser.process(application);
+
+    SecureString master_password;
+    if (parser.isSet(master_password_option))
+    {
+        const QString raw = parser.value(master_password_option);
+        master_password = SecureString(raw);
+    }
 
     if (parser.isSet(list_databases_option))
     {
@@ -335,6 +372,9 @@ int main(int argc, char* argv[])
             {
                 FILE* stream = nullptr;
                 freopen_s(&stream, "CONOUT$", "w", stdout);
+
+                fputs("\n", stdout);
+                fflush(stdout);
             }
         }
 #endif
@@ -422,14 +462,54 @@ int main(int argc, char* argv[])
 
         if (!MasterPassword::isSet() || !MasterPassword::autoUnlock())
         {
-            if (AppLock::unlock(true, &connect_request) != AppLock::Result::UNLOCKED)
+            // A database without a master password has nothing to unlock: the option is
+            // meaningless there and the usual flow (the dialog that asks to set a password)
+            // takes over instead of reporting a bogus "invalid password".
+            if (!master_password.isEmpty() && MasterPassword::isSet())
+            {
+                if (MasterPassword::unlock(master_password) != MasterPassword::Result::SUCCESS)
+                {
+                    MsgBox::warning(nullptr, QApplication::translate("Client", "Invalid master password."));
+                    return 2;
+                }
+            }
+            else if (AppLock::unlock(true, &connect_request,
+                                     master_password.isEmpty() ? nullptr : &master_password) !=
+                     AppLock::Result::UNLOCKED)
+            {
                 return 0;
+            }
         }
     }
     else if (parser.isSet(select_database_option) || !openOnlyDatabase())
     {
-        if (AppLock::unlock(true, &connect_request) != AppLock::Result::UNLOCKED)
+        const QList<Database::Info> database_list = Database::list();
+
+        if (!master_password.isEmpty() && !parser.isSet(select_database_option) &&
+            database_list.size() == 1 && MasterPassword::isSet() &&
+            !MasterPassword::autoUnlock())
+        {
+            Database::select(database_list.first().id);
+
+            if (!Database::instance().isValid())
+            {
+                MsgBox::warning(nullptr, QApplication::translate(
+                    "Client", "Unable to open the database \"%1\".").arg(database_list.first().id));
+                return 2;
+            }
+
+            if (MasterPassword::unlock(master_password) != MasterPassword::Result::SUCCESS)
+            {
+                MsgBox::warning(nullptr, QApplication::translate("Client", "Invalid master password."));
+                return 2;
+            }
+        }
+        else if (AppLock::unlock(true, &connect_request,
+                                 master_password.isEmpty() ? nullptr : &master_password) !=
+                 AppLock::Result::UNLOCKED)
+        {
             return 0;
+        }
     }
 
     if (!connect_request.isEmpty() &&

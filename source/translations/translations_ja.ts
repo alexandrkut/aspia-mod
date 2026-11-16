@@ -993,113 +993,126 @@
 <context>
     <name>Client</name>
     <message>
-        <location filename="../client/main.cc" line="96"/>
+        <location filename="../client/main.cc" line="99"/>
         <source>Unable to create a backup in the directory &quot;%1&quot;.</source>
         <translation>ディレクトリ &quot;%1&quot; にバックアップを作成できませんでした。</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="102"/>
+        <location filename="../client/main.cc" line="105"/>
         <source>Unable to create a backup. Some records of the database are damaged. Fix or delete them.</source>
         <translation>バックアップを作成できませんでした。データベースの一部のレコードが破損しています。修正または削除してください。</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="108"/>
+        <location filename="../client/main.cc" line="111"/>
         <source>Unable to create a backup.</source>
         <translation>バックアップを作成できませんでした。</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="250"/>
+        <location filename="../client/main.cc" line="275"/>
         <source>Unable to move the address book into the new format. The old address book is not changed, and the next start tries again. The details are in the log.</source>
         <translation>アドレス帳を新しい形式に移行できません。古いアドレス帳は変更されておらず、次回の起動時に再試行されます。詳細はログに記録されています。</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="257"/>
-        <location filename="../client/main.cc" line="274"/>
+        <location filename="../client/main.cc" line="282"/>
+        <location filename="../client/main.cc" line="299"/>
         <source>Aspia Client</source>
         <translation>Aspia クライアント</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="271"/>
+        <location filename="../client/main.cc" line="296"/>
         <source>Show the database selection dialog.</source>
         <translation>データベースの選択ダイアログを表示します。</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="279"/>
-        <source>Connect to the host of the address book with this record ID or host ID, using the login and the password stored in it, or connect directly to a host by its address, which needs the login and the password given with --username and --password.</source>
+        <location filename="../client/main.cc" line="304"/>
+        <source>Connect to the host of the address book with this record ID or host ID, or with the name of a record, using the login and the password stored in it, or connect directly to a host by its address, which needs the login and the password given with --username and --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="283"/>
+        <location filename="../client/main.cc" line="309"/>
         <source>id</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="287"/>
+        <location filename="../client/main.cc" line="313"/>
         <source>Kind of the session to open: desktop, file, info, chat or terminal (default: the one from the settings of the application).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="290"/>
+        <location filename="../client/main.cc" line="316"/>
         <source>type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="294"/>
+        <location filename="../client/main.cc" line="320"/>
         <source>Log in with this user name instead of the one stored in the host. Requires --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="297"/>
-        <location filename="../client/main.cc" line="309"/>
+        <location filename="../client/main.cc" line="323"/>
+        <location filename="../client/main.cc" line="335"/>
         <source>name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="301"/>
+        <location filename="../client/main.cc" line="327"/>
         <source>Log in with this password instead of the stored one. Requires --username. A password on a command line is visible to the other users of the machine.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="304"/>
+        <location filename="../client/main.cc" line="330"/>
+        <location filename="../client/main.cc" line="341"/>
         <source>password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="307"/>
+        <location filename="../client/main.cc" line="333"/>
         <source>Open the database with this name or ID instead of the selection dialog.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="312"/>
+        <location filename="../client/main.cc" line="338"/>
+        <source>Unlock the database with this master password instead of asking for it. A password on a command line is visible to the other users of the machine.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="344"/>
         <source>Print the ID and the name of every database and exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="376"/>
+        <location filename="../client/main.cc" line="458"/>
+        <location filename="../client/main.cc" line="493"/>
         <source>Unable to open the database &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../client/main.cc" line="469"/>
+        <location filename="../client/main.cc" line="500"/>
+        <source>Invalid master password.</source>
+        <translation type="unfinished">マスター パスワードが正しくありません。</translation>
+    </message>
     <message numerus="yes">
-        <location filename="../client/desktop/app_lock.cc" line="95"/>
+        <location filename="../client/desktop/app_lock.cc" line="96"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>パスワードは %n 文字以上でなければなりません。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/app_lock.cc" line="103"/>
+        <location filename="../client/desktop/app_lock.cc" line="104"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>入力されたパスワードはセキュリティ要件を満たしていません！</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/app_lock.cc" line="105"/>
+        <location filename="../client/desktop/app_lock.cc" line="106"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>パスワードには小文字、大文字、数字を含める必要があり、%n 文字以上でなければなりません。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/app_lock.cc" line="109"/>
+        <location filename="../client/desktop/app_lock.cc" line="110"/>
         <source>Do you want to enter a different password?</source>
         <translation>別のパスワードを入力しますか？</translation>
     </message>
@@ -1161,6 +1174,16 @@
     <message>
         <location filename="../client/storage/database.cc" line="147"/>
         <source>No database matches &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1605"/>
+        <source>Several hosts are named &quot;%1&quot;. Use the ID of the one you mean.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1628"/>
+        <source>&quot;%1&quot; is both the name of a host and the ID of another. Connect by the record ID of the host you mean.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4999,7 +5022,7 @@ Credentials replaced: %2</source>
     <name>MainWindow</name>
     <message>
         <location filename="../client/desktop/main_window.ui" line="20"/>
-        <location filename="../client/desktop/main_window.cc" line="596"/>
+        <location filename="../client/desktop/main_window.cc" line="599"/>
         <source>Aspia Client</source>
         <translation>Aspia クライアント</translation>
     </message>
@@ -5105,112 +5128,112 @@ Credentials replaced: %2</source>
         <translation>常に手前に表示</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="134"/>
+        <location filename="../client/desktop/main_window.cc" line="137"/>
         <source>Search...</source>
         <translation>検索...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="227"/>
+        <location filename="../client/desktop/main_window.cc" line="230"/>
         <source>The MCP connector is already in use by another window of the application.</source>
         <translation>MCP コネクタは、アプリケーションの別のウィンドウで既に使用されています。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="229"/>
+        <location filename="../client/desktop/main_window.cc" line="232"/>
         <source>Unable to turn on the MCP connector.</source>
         <translation>MCP コネクタを有効にできません。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="252"/>
+        <location filename="../client/desktop/main_window.cc" line="255"/>
         <source>Management</source>
         <translation>管理</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="295"/>
+        <location filename="../client/desktop/main_window.cc" line="298"/>
         <source>Are you sure you want to close the application?</source>
         <translation>アプリケーションを閉じてもよろしいですか？</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="542"/>
+        <location filename="../client/desktop/main_window.cc" line="545"/>
         <source>Close all sessions to change the database.</source>
         <translation>データベースを切り替えるには、すべてのセッションを閉じてください。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="548"/>
+        <location filename="../client/desktop/main_window.cc" line="551"/>
         <source>Close all dialogs to change the database.</source>
         <translation>データベースを切り替えるには、すべてのダイアログを閉じてください。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="563"/>
+        <location filename="../client/desktop/main_window.cc" line="566"/>
         <source>Close all sessions to lock the application.</source>
         <translation>アプリケーションをロックするには、すべてのセッションを閉じてください。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="569"/>
+        <location filename="../client/desktop/main_window.cc" line="572"/>
         <source>Close all dialogs to lock the application.</source>
         <translation>アプリケーションをロックするには、すべてのダイアログを閉じてください。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="589"/>
+        <location filename="../client/desktop/main_window.cc" line="592"/>
         <source>Connect to a host by its ID from the command line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="590"/>
+        <location filename="../client/desktop/main_window.cc" line="593"/>
         <source>The icon of the screen of all the monitors at once</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="591"/>
+        <location filename="../client/desktop/main_window.cc" line="594"/>
         <source>Remote management of host users and update settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="592"/>
+        <location filename="../client/desktop/main_window.cc" line="595"/>
         <source>Full host configuration from a file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="593"/>
+        <location filename="../client/desktop/main_window.cc" line="596"/>
         <source>Bulk operations on multiple hosts at once</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="961"/>
+        <location filename="../client/desktop/main_window.cc" line="964"/>
         <source>Unknown application</source>
         <translation>不明なアプリケーション</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="964"/>
+        <location filename="../client/desktop/main_window.cc" line="967"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>MCP コネクタ。接続済み: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="965"/>
+        <location filename="../client/desktop/main_window.cc" line="968"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - AI が接続されています</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1442"/>
+        <location filename="../client/desktop/main_window.cc" line="1454"/>
         <source>A host named by its address has no record of it in the address book, and there are no stored credentials to use. Give the user name and the password with --username and --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1694"/>
+        <location filename="../client/desktop/main_window.cc" line="1786"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1700"/>
+        <location filename="../client/desktop/main_window.cc" line="1792"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="489"/>
+        <location filename="../client/desktop/main_window.cc" line="492"/>
         <source>Credentials</source>
         <translation>資格情報</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="532"/>
+        <location filename="../client/desktop/main_window.cc" line="535"/>
         <source>Settings</source>
         <translation>設定</translation>
     </message>
@@ -14786,127 +14809,128 @@ Sections: %2. Users in file: %3.</source>
         <translation>パスワードの確認</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="58"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="60"/>
         <source>Open Database</source>
         <translation>データベースを開く</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="152"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="154"/>
         <source>The database is already open.</source>
         <translation>データベースは既に開いています。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="154"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="156"/>
         <source>The master password of this database is not set.</source>
         <translation>このデータベースのマスター パスワードは設定されていません。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="179"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="181"/>
         <source>The database is open in another window. Close it to rename the database.</source>
         <translation>このデータベースは別のウィンドウで開かれています。名前を変更するには、そのデータベースを閉じてください。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="187"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="189"/>
         <source>Enter the new name of the database.</source>
         <translation>データベースの新しい名前を入力してください。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="205"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="207"/>
         <source>The database is open in another window. Close it to delete the database.</source>
         <translation>このデータベースは別のウィンドウで開かれています。削除するには、そのデータベースを閉じてください。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="210"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="212"/>
         <source>The database &quot;%1&quot; with all its records and settings will be deleted.
 Delete the database?</source>
         <translation>データベース &quot;%1&quot; とそのすべてのレコードおよび設定が削除されます。
 データベースを削除しますか？</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="211"/>
-        <location filename="../client/desktop/unlock_dialog.cc" line="260"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="213"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="262"/>
         <source>Unnamed database</source>
         <translation>名前のないデータベース</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="218"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="220"/>
         <source>Unable to move the database to the trash. Delete it permanently?</source>
         <translation>データベースをゴミ箱に移動できません。完全に削除しますか？</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="227"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="229"/>
         <source>Unable to delete the database.</source>
         <translation>データベースを削除できません。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="265"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="267"/>
         <source>%1 (open)</source>
         <translation>%1 (開いています)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="286"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="288"/>
         <source>Database #1</source>
         <translation>データベース #1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="338"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="340"/>
         <source>Unable to open the database.</source>
         <translation>データベースを開けません。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="368"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="366"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="385"/>
         <source>Invalid master password.</source>
         <translation>マスター パスワードが正しくありません。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="375"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="392"/>
         <source>Unable to unlock the database.</source>
         <translation>データベースのロックを解除できません。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="392"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="409"/>
         <source>Passwords do not match.</source>
         <translation>パスワードが一致しません。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="417"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="434"/>
         <source>Unable to create the database.</source>
         <translation>データベースを作成できません。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="446"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="463"/>
         <source>Unable to rename the database.</source>
         <translation>データベースの名前を変更できません。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="461"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="478"/>
         <source>Name cannot be empty.</source>
         <translation>名前を空にすることはできません。</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/unlock_dialog.cc" line="468"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="485"/>
         <source>Too long name. The maximum length of the name is %n characters.</source>
         <translation>
             <numerusform>名前が長すぎます。名前の最大長は %n 文字です。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="476"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="493"/>
         <source>A database with this name already exists.</source>
         <translation>この名前のデータベースは既に存在します。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="514"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="531"/>
         <source>Enter the name and the master password of the new database.</source>
         <translation>新しいデータベースの名前とマスター パスワードを入力してください。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="540"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="557"/>
         <source>Enter the master password to unlock the database.</source>
         <translation>データベースのロックを解除するには、マスター パスワードを入力してください。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="542"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="559"/>
         <source>The master password of this database is remembered on this computer.</source>
         <translation>このデータベースのマスター パスワードはこのコンピューターに保存されています。</translation>
     </message>

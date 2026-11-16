@@ -56,7 +56,8 @@ AppLock::~AppLock() = default;
 
 //--------------------------------------------------------------------------------------------------
 // static
-AppLock::Result AppLock::unlock(bool startup, const ConnectRequest* connect_request)
+AppLock::Result AppLock::unlock(bool startup, const ConnectRequest* connect_request,
+                                const SecureString* master_password)
 {
     AutoQPointer<UnlockDialog> dialog(
         new UnlockDialog(startup ? UnlockDialog::Mode::STARTUP : UnlockDialog::Mode::LOCK,

@@ -131,7 +131,7 @@ private:
         QString address;
     };
 
-    bool resolveTarget(const QString& identifier, ConnectTarget* target) const;
+    bool resolveTarget(const QString& identifier, ConnectTarget* target, QString* error = nullptr) const;
     void connectToRouterHost(const QString& identifier, proto::peer::SessionType session_type,
                              const QString& username, const SecureString& password);
     void reportUnknownHost(const QString& identifier, bool router_offline = false);

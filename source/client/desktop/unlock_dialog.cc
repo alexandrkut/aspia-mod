@@ -38,11 +38,13 @@
 #include "common/desktop/msg_box.h"
 
 //--------------------------------------------------------------------------------------------------
-UnlockDialog::UnlockDialog(Mode mode, const ConnectRequest* connect_request, QWidget* parent)
+UnlockDialog::UnlockDialog(Mode mode, const ConnectRequest* connect_request,
+                          const SecureString* master_password, QWidget* parent)
     : QDialog(parent),
       ui(std::make_unique<Ui::UnlockDialog>()),
       mode_(mode),
-      connect_request_(connect_request)
+      connect_request_(connect_request),
+      master_password_(master_password)
 {
     LOG(TRACE) << "Ctor";
     ui->setupUi(this);
@@ -350,6 +352,21 @@ void UnlockDialog::unlock()
         if (MasterPassword::autoUnlock())
         {
             accept();
+            return;
+        }
+
+        if (master_password_)
+        {
+            if (MasterPassword::unlock(*master_password_) == MasterPassword::Result::SUCCESS)
+            {
+                accept();
+                return;
+            }
+
+            MsgBox::warning(this, tr("Invalid master password."));
+            setPasswordVisible(true);
+            ui->edit_password->selectAll();
+            ui->edit_password->setFocus();
             return;
         }
 

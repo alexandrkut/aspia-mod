@@ -993,115 +993,128 @@
 <context>
     <name>Client</name>
     <message>
-        <location filename="../client/main.cc" line="102"/>
+        <location filename="../client/main.cc" line="105"/>
         <source>Unable to create a backup. Some records of the database are damaged. Fix or delete them.</source>
         <translation>Nem sikerült létrehozni a biztonsági mentést. Az adatbázis néhány rekordja sérült. Javítsa vagy törölje őket.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/app_lock.cc" line="95"/>
+        <location filename="../client/desktop/app_lock.cc" line="96"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>A jelszó nem lehet rövidebb %n karakternél.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/app_lock.cc" line="103"/>
+        <location filename="../client/desktop/app_lock.cc" line="104"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>A megadott jelszó nem felel meg a biztonsági követelményeknek!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/app_lock.cc" line="105"/>
+        <location filename="../client/desktop/app_lock.cc" line="106"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>A jelszónak tartalmaznia kell kisbetűket és nagybetűket, számokat, és nem lehet rövidebb %n karakternél.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/app_lock.cc" line="109"/>
+        <location filename="../client/desktop/app_lock.cc" line="110"/>
         <source>Do you want to enter a different password?</source>
         <translation>Szeretne másik jelszót megadni?</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="96"/>
+        <location filename="../client/main.cc" line="99"/>
         <source>Unable to create a backup in the directory &quot;%1&quot;.</source>
         <translation>Nem sikerült létrehozni a biztonsági mentést a(z) &quot;%1&quot; könyvtárban.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="108"/>
+        <location filename="../client/main.cc" line="111"/>
         <source>Unable to create a backup.</source>
         <translation>Nem sikerült létrehozni a biztonsági mentést.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="250"/>
+        <location filename="../client/main.cc" line="275"/>
         <source>Unable to move the address book into the new format. The old address book is not changed, and the next start tries again. The details are in the log.</source>
         <translation>Nem sikerült átalakítani a címjegyzéket az új formátumra. A régi címjegyzék nem változott, és a következő indításkor az alkalmazás újra megpróbálja. A részletek a naplóban találhatók.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="257"/>
-        <location filename="../client/main.cc" line="274"/>
+        <location filename="../client/main.cc" line="282"/>
+        <location filename="../client/main.cc" line="299"/>
         <source>Aspia Client</source>
         <translation>Aspia kliens</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="271"/>
+        <location filename="../client/main.cc" line="296"/>
         <source>Show the database selection dialog.</source>
         <translation>Az adatbázis-választó párbeszédablak megjelenítése.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="279"/>
-        <source>Connect to the host of the address book with this record ID or host ID, using the login and the password stored in it, or connect directly to a host by its address, which needs the login and the password given with --username and --password.</source>
+        <location filename="../client/main.cc" line="304"/>
+        <source>Connect to the host of the address book with this record ID or host ID, or with the name of a record, using the login and the password stored in it, or connect directly to a host by its address, which needs the login and the password given with --username and --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="283"/>
+        <location filename="../client/main.cc" line="309"/>
         <source>id</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="287"/>
+        <location filename="../client/main.cc" line="313"/>
         <source>Kind of the session to open: desktop, file, info, chat or terminal (default: the one from the settings of the application).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="290"/>
+        <location filename="../client/main.cc" line="316"/>
         <source>type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="294"/>
+        <location filename="../client/main.cc" line="320"/>
         <source>Log in with this user name instead of the one stored in the host. Requires --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="297"/>
-        <location filename="../client/main.cc" line="309"/>
+        <location filename="../client/main.cc" line="323"/>
+        <location filename="../client/main.cc" line="335"/>
         <source>name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="301"/>
+        <location filename="../client/main.cc" line="327"/>
         <source>Log in with this password instead of the stored one. Requires --username. A password on a command line is visible to the other users of the machine.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="304"/>
+        <location filename="../client/main.cc" line="330"/>
+        <location filename="../client/main.cc" line="341"/>
         <source>password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="307"/>
+        <location filename="../client/main.cc" line="333"/>
         <source>Open the database with this name or ID instead of the selection dialog.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="312"/>
+        <location filename="../client/main.cc" line="338"/>
+        <source>Unlock the database with this master password instead of asking for it. A password on a command line is visible to the other users of the machine.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="344"/>
         <source>Print the ID and the name of every database and exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="376"/>
+        <location filename="../client/main.cc" line="458"/>
+        <location filename="../client/main.cc" line="493"/>
         <source>Unable to open the database &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="469"/>
+        <location filename="../client/main.cc" line="500"/>
+        <source>Invalid master password.</source>
+        <translation type="unfinished">Érvénytelen mesterjelszó.</translation>
     </message>
     <message>
         <location filename="../client/connect_request.cc" line="150"/>
@@ -1161,6 +1174,16 @@
     <message>
         <location filename="../client/storage/database.cc" line="147"/>
         <source>No database matches &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1605"/>
+        <source>Several hosts are named &quot;%1&quot;. Use the ID of the one you mean.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1628"/>
+        <source>&quot;%1&quot; is both the name of a host and the ID of another. Connect by the record ID of the host you mean.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5025,7 +5048,7 @@ Lecserélt hitelesítő adatok: %2</translation>
     </message>
     <message>
         <location filename="../client/desktop/main_window.ui" line="20"/>
-        <location filename="../client/desktop/main_window.cc" line="596"/>
+        <location filename="../client/desktop/main_window.cc" line="599"/>
         <source>Aspia Client</source>
         <translation>Aspia kliens</translation>
     </message>
@@ -5105,112 +5128,112 @@ Lecserélt hitelesítő adatok: %2</translation>
         <translation>Mindig felül</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="134"/>
+        <location filename="../client/desktop/main_window.cc" line="137"/>
         <source>Search...</source>
         <translation>Keresés...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="227"/>
+        <location filename="../client/desktop/main_window.cc" line="230"/>
         <source>The MCP connector is already in use by another window of the application.</source>
         <translation>Az MCP-összekötőt már az alkalmazás egy másik ablaka használja.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="229"/>
+        <location filename="../client/desktop/main_window.cc" line="232"/>
         <source>Unable to turn on the MCP connector.</source>
         <translation>Nem lehet bekapcsolni az MCP-összekötőt.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="252"/>
+        <location filename="../client/desktop/main_window.cc" line="255"/>
         <source>Management</source>
         <translation>Kezelés</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="295"/>
+        <location filename="../client/desktop/main_window.cc" line="298"/>
         <source>Are you sure you want to close the application?</source>
         <translation>Biztosan bezárja az alkalmazást?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="542"/>
+        <location filename="../client/desktop/main_window.cc" line="545"/>
         <source>Close all sessions to change the database.</source>
         <translation>Zárja be az összes munkamenetet az adatbázis váltásához.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="548"/>
+        <location filename="../client/desktop/main_window.cc" line="551"/>
         <source>Close all dialogs to change the database.</source>
         <translation>Zárja be az összes párbeszédablakot az adatbázis váltásához.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="563"/>
+        <location filename="../client/desktop/main_window.cc" line="566"/>
         <source>Close all sessions to lock the application.</source>
         <translation>Zárja be az összes munkamenetet az alkalmazás zárolásához.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="569"/>
+        <location filename="../client/desktop/main_window.cc" line="572"/>
         <source>Close all dialogs to lock the application.</source>
         <translation>Zárja be az összes párbeszédablakot az alkalmazás zárolásához.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="589"/>
+        <location filename="../client/desktop/main_window.cc" line="592"/>
         <source>Connect to a host by its ID from the command line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="590"/>
+        <location filename="../client/desktop/main_window.cc" line="593"/>
         <source>The icon of the screen of all the monitors at once</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="591"/>
+        <location filename="../client/desktop/main_window.cc" line="594"/>
         <source>Remote management of host users and update settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="592"/>
+        <location filename="../client/desktop/main_window.cc" line="595"/>
         <source>Full host configuration from a file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="593"/>
+        <location filename="../client/desktop/main_window.cc" line="596"/>
         <source>Bulk operations on multiple hosts at once</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="961"/>
+        <location filename="../client/desktop/main_window.cc" line="964"/>
         <source>Unknown application</source>
         <translation>Ismeretlen alkalmazás</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="964"/>
+        <location filename="../client/desktop/main_window.cc" line="967"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>MCP-összekötő. Csatlakoztatva: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="965"/>
+        <location filename="../client/desktop/main_window.cc" line="968"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - MI csatlakoztatva</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1442"/>
+        <location filename="../client/desktop/main_window.cc" line="1454"/>
         <source>A host named by its address has no record of it in the address book, and there are no stored credentials to use. Give the user name and the password with --username and --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1694"/>
+        <location filename="../client/desktop/main_window.cc" line="1786"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1700"/>
+        <location filename="../client/desktop/main_window.cc" line="1792"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="489"/>
+        <location filename="../client/desktop/main_window.cc" line="492"/>
         <source>Credentials</source>
         <translation>Hitelesítő adatok</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="532"/>
+        <location filename="../client/desktop/main_window.cc" line="535"/>
         <source>Settings</source>
         <translation>Beállítások</translation>
     </message>
@@ -14786,127 +14809,128 @@ Sections: %2. Users in file: %3.</source>
         <translation>Jelszó megerősítése</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="58"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="60"/>
         <source>Open Database</source>
         <translation>Adatbázis megnyitása</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="152"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="154"/>
         <source>The database is already open.</source>
         <translation>Az adatbázis már meg van nyitva.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="154"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="156"/>
         <source>The master password of this database is not set.</source>
         <translation>Ehhez az adatbázishoz nincs beállítva mesterjelszó.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="179"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="181"/>
         <source>The database is open in another window. Close it to rename the database.</source>
         <translation>Az adatbázis meg van nyitva egy másik ablakban. Az adatbázis átnevezéséhez zárja be azt.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="187"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="189"/>
         <source>Enter the new name of the database.</source>
         <translation>Adja meg az adatbázis új nevét.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="205"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="207"/>
         <source>The database is open in another window. Close it to delete the database.</source>
         <translation>Az adatbázis meg van nyitva egy másik ablakban. Az adatbázis törléséhez zárja be azt.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="210"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="212"/>
         <source>The database &quot;%1&quot; with all its records and settings will be deleted.
 Delete the database?</source>
         <translation>A(z) &quot;%1&quot; adatbázis az összes rekordjával és beállításával együtt törlődni fog.
 Törli az adatbázist?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="211"/>
-        <location filename="../client/desktop/unlock_dialog.cc" line="260"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="213"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="262"/>
         <source>Unnamed database</source>
         <translation>Névtelen adatbázis</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="218"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="220"/>
         <source>Unable to move the database to the trash. Delete it permanently?</source>
         <translation>Nem lehet áthelyezni az adatbázist a lomtárba. Véglegesen törli?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="227"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="229"/>
         <source>Unable to delete the database.</source>
         <translation>Nem lehet törölni az adatbázist.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="265"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="267"/>
         <source>%1 (open)</source>
         <translation>%1 (megnyitva)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="286"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="288"/>
         <source>Database #1</source>
         <translation>Adatbázis #1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="338"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="340"/>
         <source>Unable to open the database.</source>
         <translation>Nem lehet megnyitni az adatbázist.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="368"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="366"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="385"/>
         <source>Invalid master password.</source>
         <translation>Érvénytelen mesterjelszó.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="375"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="392"/>
         <source>Unable to unlock the database.</source>
         <translation>Nem lehet feloldani az adatbázist.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="392"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="409"/>
         <source>Passwords do not match.</source>
         <translation>A jelszavak nem egyeznek.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="417"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="434"/>
         <source>Unable to create the database.</source>
         <translation>Nem lehet létrehozni az adatbázist.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="446"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="463"/>
         <source>Unable to rename the database.</source>
         <translation>Nem lehet átnevezni az adatbázist.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="461"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="478"/>
         <source>Name cannot be empty.</source>
         <translation>A név nem lehet üres.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/unlock_dialog.cc" line="468"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="485"/>
         <source>Too long name. The maximum length of the name is %n characters.</source>
         <translation>
             <numerusform>Túl hosszú név. A név maximális hossza %n karakter.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="476"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="493"/>
         <source>A database with this name already exists.</source>
         <translation>Már létezik ilyen nevű adatbázis.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="514"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="531"/>
         <source>Enter the name and the master password of the new database.</source>
         <translation>Adja meg az új adatbázis nevét és mesterjelszavát.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="540"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="557"/>
         <source>Enter the master password to unlock the database.</source>
         <translation>Adja meg a mesterjelszót az adatbázis feloldásához.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="542"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="559"/>
         <source>The master password of this database is remembered on this computer.</source>
         <translation>Ennek az adatbázisnak a mesterjelszava meg van jegyezve ezen a számítógépen.</translation>
     </message>
