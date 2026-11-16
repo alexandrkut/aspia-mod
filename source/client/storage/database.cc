@@ -17,6 +17,7 @@
 //
 
 #include "client/storage/database.h"
+#include "client/storage/database_migration.h"
 
 #include <QDir>
 #include <QFile>
@@ -137,6 +138,11 @@ bool Database::open(const QString& file_path)
         db_.close();
         return false;
     }
+
+    // One-time migration of legacy host_notify keys to the single-router canonical form.
+    // Non-fatal: a failure leaves the legacy rows in place (idempotent on next open).
+    if (!DatabaseMigration::migrateHostNotifySettings(db_))
+        LOG(WARNING) << "host_notify settings migration failed";
 
     if (!db_.exec("PRAGMA foreign_keys = ON"))
     {

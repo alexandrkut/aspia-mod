@@ -565,6 +565,125 @@ bool DatabaseMigration::finish(Database& db, const QString& old_file_path)
 
 //--------------------------------------------------------------------------------------------------
 // static
+bool DatabaseMigration::migrateHostNotifySettings(SqlDatabase& db)
+{
+    struct LegacyKey
+    {
+        QString name;
+        QString value;
+        QString target_rest;
+    };
+
+    QList<LegacyKey> legacy;
+
+    {
+        SqlQuery query(db, "SELECT name, value FROM settings");
+        for (;;)
+        {
+            const SqlQuery::StepResult step = query.next();
+            if (step == SqlQuery::StepResult::FAILED)
+            {
+                LOG(ERROR) << "Unable to read settings:" << db.lastError();
+                return false;
+            }
+            if (step == SqlQuery::StepResult::DONE)
+                break;
+
+            const QString name = query.columnText(0);
+            if (!name.startsWith("host_notify/"))
+                continue;
+
+            const QString after_prefix = name.mid(QString("host_notify/").length());
+            QString target_rest;
+
+            if (after_prefix.startsWith("router_"))
+            {
+                const QString after_router = after_prefix.mid(QString("router_").length());
+                int i = 0;
+                while (i < after_router.length() && after_router[i].isDigit())
+                    ++i;
+                if (i > 0 && i < after_router.length() && after_router[i] == '_')
+                    target_rest = after_router.mid(i + 1);
+            }
+            else
+            {
+                int i = 0;
+                while (i < after_prefix.length() && after_prefix[i].isDigit())
+                    ++i;
+                if (i > 0 && i < after_prefix.length() && after_prefix[i] == '_')
+                    target_rest = after_prefix.mid(i + 1);
+            }
+
+            if (target_rest.isEmpty())
+                continue;
+
+            legacy.append({ name, query.columnText(1), target_rest });
+        }
+    }
+
+    if (legacy.isEmpty())
+        return true;
+
+    int moved = 0;
+
+    SqlTransaction transaction(db);
+    if (!transaction.begin(SqlTransaction::Mode::IMMEDIATE))
+    {
+        LOG(ERROR) << "Unable to begin transaction:" << db.lastError();
+        return false;
+    }
+
+    for (const LegacyKey& lk : legacy)
+    {
+        const QString target_name = "host_notify/" + lk.target_rest;
+
+        bool target_exists = false;
+        {
+            SqlQuery query(db, "SELECT 1 FROM settings WHERE name=?");
+            query.addText(target_name);
+            const SqlQuery::StepResult step = query.next();
+            if (step == SqlQuery::StepResult::FAILED)
+            {
+                LOG(ERROR) << "Unable to check target key:" << db.lastError();
+                return false;
+            }
+            target_exists = (step == SqlQuery::StepResult::ROW);
+        }
+
+        if (!target_exists)
+        {
+            SqlQuery insert(db, "INSERT INTO settings (name, value) VALUES (?, ?)");
+            insert.addText(target_name);
+            insert.addText(lk.value);
+            if (!insert.exec())
+            {
+                LOG(ERROR) << "Unable to write migrated key:" << db.lastError();
+                return false;
+            }
+            ++moved;
+        }
+
+        SqlQuery remove(db, "DELETE FROM settings WHERE name=?");
+        remove.addText(lk.name);
+        if (!remove.exec())
+        {
+            LOG(ERROR) << "Unable to delete legacy key:" << db.lastError();
+            return false;
+        }
+    }
+
+    if (!transaction.commit())
+    {
+        LOG(ERROR) << "Unable to commit migration:" << db.lastError();
+        return false;
+    }
+
+    LOG(INFO) << "Migrated" << moved << "host_notify settings keys";
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+// static
 bool DatabaseMigration::build(const QString& old_file_path, const QString& dir_path)
 {
     SqlDatabase old_db;
