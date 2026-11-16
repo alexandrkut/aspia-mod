@@ -17,7 +17,7 @@ Remote desktop, file transfer and system information tool.
 нескольких пространствах, экспорт установщиков и свой сервер обновлений. Ниже —
 всё, что меняет мод.
 
-Актуальная версия — [v3.3.5.4](https://github.com/alexandrkut/aspia-mod/releases/tag/v3.3.5.4).
+Актуальная версия — [v3.3.5.5](https://github.com/alexandrkut/aspia-mod/releases/tag/v3.3.5.5).
 
 ## Совместимость с оригиниалом и миграция
 
