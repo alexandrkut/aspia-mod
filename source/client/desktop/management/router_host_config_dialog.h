@@ -18,8 +18,8 @@
 
 #include <memory>
 
-#include "client/router_controller.h"
-#include "client/router_session.h"
+#include "client/router/router_controller.h"
+#include "client/router/router_session.h"
 
 namespace proto::router {
 class HostTelemetryResult;
@@ -36,7 +36,7 @@ class RouterHostConfigDialog final : public QDialog
     Q_OBJECT
 
 public:
-    RouterHostConfigDialog(qint64 router_id, qint64 host_id, QWidget* parent);
+    RouterHostConfigDialog(qint64 host_id, QWidget* parent);
     ~RouterHostConfigDialog() final;
 
 private slots:
@@ -48,7 +48,6 @@ private:
     void applyResult(const proto::router::HostResult& result);
     bool validate() const;
 
-    qint64 router_id_ = 0;
     qint64 host_id_ = 0;
 
     QLineEdit* edit_server_ = nullptr;

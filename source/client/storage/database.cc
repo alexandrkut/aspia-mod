@@ -292,6 +292,50 @@ bool Database::import(const std::optional<RouterConfig>& router,
 }
 
 //--------------------------------------------------------------------------------------------------
+bool Database::saveCopyAndClearAll(const QString& copy_path)
+{
+    if (!isValid())
+    {
+        LOG(ERROR) << "Database is not valid";
+        return false;
+    }
+
+    // The workers keep their own connections to the file, so it is not renamed but emptied in place.
+    {
+        SqlQuery copy(db_, "VACUUM INTO ?");
+        copy.addText(copy_path);
+
+        if (!copy.exec())
+        {
+            LOG(ERROR) << "Unable to copy the database:" << db_.lastError();
+            return false;
+        }
+    }
+
+    SqlTransaction transaction(db_);
+    if (!transaction.begin(SqlTransaction::Mode::IMMEDIATE))
+    {
+        LOG(ERROR) << "Unable to begin transaction";
+        return false;
+    }
+
+    if (!db_.exec("DELETE FROM local_groups") || !clearRouter() ||
+        !db_.exec("DELETE FROM router_hosts") || !db_.exec("DELETE FROM local_hosts") ||
+        !db_.exec("DELETE FROM credentials") || !db_.exec("DELETE FROM profiles") ||
+        !db_.exec("DELETE FROM settings"))
+    {
+        LOG(ERROR) << "Unable to clear the database:" << db_.lastError();
+        return false;
+    }
+
+    if (!transaction.commit())
+        return false;
+
+    LOG(INFO) << "Database is reset, the copy is saved to:" << copy_path;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
 bool Database::reencryptAll(const QList<LocalHostConfig>& local_hosts,
                             const std::optional<RouterConfig>& router,
                             const QList<RouterHostConfig>& router_hosts,

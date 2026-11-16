@@ -571,21 +571,6 @@ void SettingsTab::onSaveGeneral()
     written &= db.setBackupRetention(
         static_cast<AutoBackup::Retention>(ui->combo_backup_retention->currentData().toInt()));
 
-//--------------------------------------------------------------------------------------------------
-void SettingsTab::onHostsPerPageChanged()
-{
-    const qint64 page_size = ui->combo_hosts_per_page->currentData().toLongLong();
-    if (page_size <= 0)
-        return;
-
-    LOG(INFO) << "[ACTION] Hosts per page changed:" << page_size;
-    Database::instance().setHostsPerPage(page_size);
-    emit sig_hostsPerPageChanged(page_size);
-}
-
-//--------------------------------------------------------------------------------------------------
-void SettingsTab::onProxyChanged()
-{
     const int proxy_type = ui->combo_proxy_type->currentData().toInt();
 
     ProxySettings proxy_settings;
@@ -645,6 +630,44 @@ void SettingsTab::onProxyChanged()
 
     if (locale_changed)
         MsgBox::information(this, tr("The new language will be applied after the application is restarted."));
+}
+
+//--------------------------------------------------------------------------------------------------
+void SettingsTab::onHostsPerPageChanged()
+{
+    const qint64 page_size = ui->combo_hosts_per_page->currentData().toLongLong();
+    if (page_size <= 0)
+        return;
+
+    LOG(INFO) << "[ACTION] Hosts per page changed:" << page_size;
+    Database::instance().setHostsPerPage(page_size);
+    emit sig_hostsPerPageChanged(page_size);
+}
+
+//--------------------------------------------------------------------------------------------------
+void SettingsTab::onProxyChanged()
+{
+    const int type = ui->combo_proxy_type->currentData().toInt();
+
+    ProxySettings settings;
+    settings.enabled = type != kNoProxy;
+    if (settings.enabled)
+        settings.type = static_cast<ProxySettings::Type>(type);
+    settings.address = ui->edit_proxy_address->text().trimmed();
+    settings.port = static_cast<quint16>(ui->spinbox_proxy_port->value());
+    settings.user = ui->edit_proxy_username->text();
+    settings.password = ui->edit_proxy_password->password();
+
+    ProxyConfig proxy;
+    proxy.setSettings(settings);
+
+    if (settings.enabled)
+        LOG(INFO) << "[ACTION] Proxy changed:" << settings.type;
+    else
+        LOG(INFO) << "[ACTION] Proxy turned off";
+
+    updateProxyFields();
+    Database::instance().setProxyConfig(proxy);
 }
 
 //--------------------------------------------------------------------------------------------------

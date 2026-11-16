@@ -36,7 +36,7 @@
 #include "base/auto_qpointer.h"
 #include "base/logging.h"
 #include "client/storage/database.h"
-#include "client/router_controller.h"
+#include "client/router/router_controller.h"
 #include "client/desktop/management/drag_and_drop.h"
 #include "client/desktop/management/router_host_dialog.h"
 #include "client/desktop/management/ui_router_group_widget.h"
@@ -294,7 +294,7 @@ void RouterGroupWidget::onHostListReceived(const RouterHostList& list)
     // stays unreachable. The first limited reply is the only one that can change the size -
     // it arrives while a single page of the configured size is all there is, so the current
     // page cannot be past the new count.
-    if (RouterSession* session = RouterController::session(router_id_))
+    if (RouterSession* session = RouterController::session())
     {
         const qint64 limit = session->hostPageLimit();
         if (limit > 0 && limit < hosts_page_.pageSize())
@@ -351,7 +351,7 @@ void RouterGroupWidget::setHostsPageSize(qint64 page_size)
 
     // The cached pages were fetched with the old size: their keys never match again, but they
     // would sit in the cache until the session ends.
-    if (RouterSession* session = RouterController::session(router_id_))
+    if (RouterSession* session = RouterController::session())
         session->invalidateHostLists();
 
     fetchHosts(RouterSession::CachePolicy::RELOAD);
@@ -491,7 +491,7 @@ void RouterGroupWidget::startDrag()
         return;
 
     RouterHostDrag drag(this);
-    drag.setHosts(router_id_, workspace_id_, hosts, mime_type_);
+    drag.setHosts(workspace_id_, hosts, mime_type_);
 
     const QIcon icon = index.siblingAtColumn(0).data(Qt::DecorationRole).value<QIcon>();
     drag.setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));

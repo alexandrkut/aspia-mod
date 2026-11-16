@@ -47,7 +47,6 @@ public:
     // pages of the old size and refetches.
     void setHostsPageSize(qint64 page_size);
 
-    qint64 routerId() const { return router_id_; }
     bool hasSelectedHost() const;
     RouterHost selectedHost() const;
     HostConfig selectedHostConfig() const;

@@ -140,6 +140,8 @@ public:
                 const QList<CredentialConfig>& credentials,
                 const QList<ProfileConfig>& profiles);
 
+    bool saveCopyAndClearAll(const QString& copy_path);
+
     // Settings.
     QString name() const;
     bool setName(const QString& name);
@@ -213,7 +215,8 @@ private:
 
     bool openDatabase();
     bool setMasterPassword(const QByteArray& salt, const QByteArray& verifier, quint32 version);
-
+    bool ensureDefaultProfile();
+    bool clearRouter();
 
     mutable SqlDatabase db_;
 };

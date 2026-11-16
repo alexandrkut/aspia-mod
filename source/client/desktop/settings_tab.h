@@ -71,12 +71,8 @@ private slots:
     void onRenameProfile();
     void onDeleteProfile();
 
-    void onBackupRetentionChanged();
     void onHostsPerPageChanged();
     void onProxyChanged();
-    void onUdpMethodsChanged();
-    void onLockTimeoutChanged();
-    void onAutoUnlockChanged();
     void onDesktopFeatureChanged();
     void onSelectRecordingPath();
     void onMcpEnabledChanged();

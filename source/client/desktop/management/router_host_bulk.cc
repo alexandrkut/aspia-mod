@@ -30,8 +30,8 @@
 
 #include "base/logging.h"
 #include "base/peer/user.h"
-#include "client/router_controller.h"
-#include "client/router_session.h"
+#include "client/router/router_controller.h"
+#include "client/router/router_session.h"
 #include "common/desktop/msg_box.h"
 #include "proto/router_constants.h"
 
@@ -71,13 +71,11 @@ QString bulkHostLabel(const RouterHost& host)
 } // namespace
 
 //--------------------------------------------------------------------------------------------------
-RouterHostBulkRunner::RouterHostBulkRunner(qint64 router_id,
-                                           const QList<RouterHostBulkTarget>& targets,
+RouterHostBulkRunner::RouterHostBulkRunner(const QList<RouterHostBulkTarget>& targets,
                                            const QString& command,
                                            ParamsFn params_fn,
                                            QObject* parent)
     : QObject(parent),
-      router_id_(router_id),
       targets_(targets),
       command_(command),
       params_fn_(std::move(params_fn))
@@ -134,7 +132,7 @@ void RouterHostBulkRunner::runNext()
         return;
     }
 
-    RouterSession* session = RouterController::session(router_id_);
+    RouterSession* session = RouterController::session();
     if (!session)
     {
         while (results_.size() < targets_.size())

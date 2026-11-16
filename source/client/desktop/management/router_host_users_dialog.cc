@@ -27,8 +27,8 @@
 #include "base/logging.h"
 #include "base/peer/router_user.h"
 #include "client/desktop/management/router_host_user_dialog.h"
-#include "client/router_controller.h"
-#include "client/router_session.h"
+#include "client/router/router_controller.h"
+#include "client/router/router_session.h"
 #include "common/desktop/msg_box.h"
 #include "proto/peer.h"
 
@@ -56,9 +56,8 @@ QStringList existingNames(const QList<RouterHostUsersDialog::UserInfo>& users)
 } // namespace
 
 //--------------------------------------------------------------------------------------------------
-RouterHostUsersDialog::RouterHostUsersDialog(qint64 router_id, qint64 host_id, QWidget* parent)
+RouterHostUsersDialog::RouterHostUsersDialog(qint64 host_id, QWidget* parent)
     : QDialog(parent),
-      router_id_(router_id),
       host_id_(host_id)
 {
     setWindowTitle(tr("Host users"));
@@ -99,7 +98,7 @@ RouterHostUsersDialog::~RouterHostUsersDialog()
 //--------------------------------------------------------------------------------------------------
 void RouterHostUsersDialog::fetchUsers()
 {
-    RouterSession* session = RouterController::session(router_id_);
+    RouterSession* session = RouterController::session();
     if (!session)
     {
         MsgBox::warning(this, tr("No session to router."));
@@ -176,7 +175,7 @@ void RouterHostUsersDialog::onAdd()
     params["sessions"] = static_cast<qint64>(user.sessions);
     params["flags"] = static_cast<qint64>(user.flags);
 
-    RouterSession* session = RouterController::session(router_id_);
+    RouterSession* session = RouterController::session();
     if (!session)
     {
         MsgBox::warning(this, tr("No session to router."));
@@ -228,7 +227,7 @@ void RouterHostUsersDialog::onEdit()
         params["verifier"] = QString::fromLatin1(user.verifier.toHex());
     }
 
-    RouterSession* session = RouterController::session(router_id_);
+    RouterSession* session = RouterController::session();
     if (!session)
     {
         MsgBox::warning(this, tr("No session to router."));
@@ -262,7 +261,7 @@ void RouterHostUsersDialog::onRemove()
     QJsonObject params;
     params["entry_id"] = info.entry_id;
 
-    RouterSession* session = RouterController::session(router_id_);
+    RouterSession* session = RouterController::session();
     if (!session)
     {
         MsgBox::warning(this, tr("No session to router."));

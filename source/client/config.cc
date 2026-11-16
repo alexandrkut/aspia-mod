@@ -440,11 +440,6 @@ HostConfig HostConfig::forRouterHost(HostId host_id, const QString& name)
 QStringList HostConfig::notifySettingsKeys() const
 {
     QStringList keys;
-    if (routerId() > 0)
-    {
-        keys.append(QString("host_notify/router_%1_%2").arg(routerId()).arg(address()));
-        keys.append(QString("host_notify/%1_%2").arg(routerId()).arg(address()));
-    }
     if (!address().isEmpty())
         keys.append(QString("host_notify/%1").arg(address()));
     if (!name().isEmpty())

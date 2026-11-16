@@ -27,8 +27,8 @@
 #include <QVBoxLayout>
 
 #include "base/logging.h"
-#include "client/router_controller.h"
-#include "client/router_session.h"
+#include "client/router/router_controller.h"
+#include "client/router/router_session.h"
 #include "common/desktop/msg_box.h"
 #include "proto/router_admin.h"
 #include "proto/router_client.h"
@@ -55,9 +55,8 @@ bool isValidKeyHex(const QString& hex)
 } // namespace
 
 //--------------------------------------------------------------------------------------------------
-RouterHostConfigDialog::RouterHostConfigDialog(qint64 router_id, qint64 host_id, QWidget* parent)
+RouterHostConfigDialog::RouterHostConfigDialog(qint64 host_id, QWidget* parent)
     : QDialog(parent),
-      router_id_(router_id),
       host_id_(host_id)
 {
     setWindowTitle(tr("Host update configuration"));
@@ -109,7 +108,7 @@ RouterHostConfigDialog::~RouterHostConfigDialog()
 //--------------------------------------------------------------------------------------------------
 void RouterHostConfigDialog::requestTelemetry()
 {
-    RouterSession* session = RouterController::session(router_id_);
+    RouterSession* session = RouterController::session();
     if (!session)
     {
         label_status_->setText(tr("No session to router."));
@@ -175,7 +174,7 @@ void RouterHostConfigDialog::onApply()
     if (!validate())
         return;
 
-    RouterSession* session = RouterController::session(router_id_);
+    RouterSession* session = RouterController::session();
     if (!session)
     {
         MsgBox::warning(this, tr("No session to router."));

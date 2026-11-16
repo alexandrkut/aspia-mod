@@ -26,7 +26,7 @@
 #include "base/peer/client_authenticator.h"
 #include "base/peer/relay_peer.h"
 #include "client/storage/database.h"
-#include "client/router_controller.h"
+#include "client/router/router_controller.h"
 #include "client/session_state.h"
 #include "client/udp_attempt.h"
 #include "client/storage/database.h"
@@ -430,9 +430,9 @@ void NetworkWorker::startConnection()
         bool notify_suppressed = false;
         const HostConfig& host = session_state_->host();
         bool honor_notify_settings = false;
-        if (host.routerId() > 0)
+        if (session_state_->isConnectionByHostId())
         {
-            RouterSession* router_session = RouterController::session(host.routerId());
+            RouterSession* router_session = RouterController::session();
             honor_notify_settings = router_session &&
                 router_session->config().sessionType() == proto::router::SESSION_TYPE_ADMIN;
         }

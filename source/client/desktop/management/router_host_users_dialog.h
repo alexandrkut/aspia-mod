@@ -19,8 +19,8 @@
 #include <memory>
 
 #include "base/peer/router_user.h"
-#include "client/router_controller.h"
-#include "client/router_session.h"
+#include "client/router/router_controller.h"
+#include "client/router/router_session.h"
 
 namespace proto::router {
 class HostResult;
@@ -36,7 +36,7 @@ class RouterHostUsersDialog final : public QDialog
     Q_OBJECT
 
 public:
-    RouterHostUsersDialog(qint64 router_id, qint64 host_id, QWidget* parent);
+    RouterHostUsersDialog(qint64 host_id, QWidget* parent);
     ~RouterHostUsersDialog() final;
 
     struct UserInfo {
@@ -59,7 +59,6 @@ private:
     void refreshList();
     void showResult(const proto::router::HostResult& result, const QString& action);
 
-    qint64 router_id_ = 0;
     qint64 host_id_ = 0;
 
     QList<UserInfo> users_;

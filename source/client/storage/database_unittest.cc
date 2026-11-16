@@ -3206,7 +3206,8 @@ TEST_F(DatabaseTest, ResetKeepsWhatTheDatabaseHeldInACopy)
     ASSERT_TRUE(db_.setLockTimeout(Minutes(5)));
 
     addHost("Host", addGroup("Group", 0));
-    addRouterHost(addRouter("Router"), 1, "user", "password");
+    addRouter();
+    addRouterHost(1, "user", "password");
     addCredential("Credential", "user", "password");
 
     const QString copy_path = QFileInfo(file_path_).dir().filePath("copy.db3");
@@ -3216,7 +3217,10 @@ TEST_F(DatabaseTest, ResetKeepsWhatTheDatabaseHeldInACopy)
     EXPECT_EQ(db_.lockTimeout(), Minutes::zero());
     EXPECT_TRUE(allLocalGroups().isEmpty());
     EXPECT_TRUE(allLocalHosts().isEmpty());
-    EXPECT_TRUE(routerList().isEmpty());
+
+    RouterConfig router;
+    EXPECT_EQ(db_.routerConfig(&router), Database::FindResult::NOT_FOUND);
+
     EXPECT_TRUE(allRouterHosts().isEmpty());
     EXPECT_TRUE(credentialList().isEmpty());
 

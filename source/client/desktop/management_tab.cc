@@ -33,11 +33,11 @@
 #include "base/net/address.h"
 #include "base/peer/host_id.h"
 #include "base/peer/user.h"
-#include "client/backup.h"
+#include "client/storage/backup.h"
 #include "client/storage/database.h"
-#include "client/router_controller.h"
-#include "client/router_session.h"
-#include "client/settings.h"
+#include "client/router/router_controller.h"
+#include "client/router/router_session.h"
+#include "client/storage/user_settings.h"
 #include "client/desktop/file_dialog.h"
 #include "client/desktop/ui_management_tab.h"
 #include "client/desktop/management/content_widget.h"
@@ -1328,7 +1328,7 @@ void ManagementTab::onHostContextMenu(const QPoint& pos, int column)
         addProxy(ui->action_system_info_connect);
 
         QList<RouterHost> online_hosts = router_hosts_widget_->selectedOnlineHosts();
-        RouterSession* session = RouterController::session(router_hosts_widget_->routerId());
+        RouterSession* session = RouterController::session();
         // View is offered to every role of the router: without a right to connect to the
         // host's desktop the session does not start anyway, so the entry costs nothing.
         // Notification suppression stays an administrator's setting (NetworkWorker).
@@ -1516,7 +1516,7 @@ void ManagementTab::onRouterGroupContextMenu(const QPoint& pos)
     // The view-only entry mirrors onHostContextMenu: every role of the router. It resolves the
     // host through the same onConnectAction path, which picks the selection of router_group_widget_
     // (the content shown for a workspace/group in the sidebar).
-    RouterSession* session = RouterController::session(router_group_widget_->routerId());
+    RouterSession* session = RouterController::session();
     if (session)
     {
         QAction* view_connect = menu->addAction(QIcon(":/img/view-monitor.svg"), tr("Connect for viewing..."));

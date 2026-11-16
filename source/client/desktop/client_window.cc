@@ -662,7 +662,7 @@ bool ClientWindow::askCredentials(HostConfig* host)
     // A Quick Support host may have a user of its own: the mod exports the users of the host
     // with the package, and such a host is entered with a login and a password. The one-time
     // password stays the way in that is offered first, but the other ways are not taken away.
-    auth_dialog->setOneTimePasswordEnabled(host->routerId() > 0);
+    auth_dialog->setOneTimePasswordEnabled(host->entryId() == 0);
     auth_dialog->setOneTimePasswordPreferred(host->isPortable());
     auth_dialog->setSaveCredentialsVisible(can_save_credentials);
     auth_dialog->setUserName(host->username());

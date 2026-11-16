@@ -126,7 +126,6 @@ private:
     struct ConnectTarget
     {
         qint64 entry_id = 0;
-        qint64 router_id = 0;
         HostId host_id = kInvalidHostId;
         QString name;
         QString address;
@@ -136,7 +135,7 @@ private:
     void connectToRouterHost(const QString& identifier, proto::peer::SessionType session_type,
                              const QString& username, const SecureString& password);
     void reportUnknownHost(const QString& identifier, bool router_offline = false);
-    void runWhenRouterOnline(qint64 router_id, std::function<void()> action,
+    void runWhenRouterOnline(std::function<void()> action,
                              std::function<void()> on_timeout = std::function<void()>());
 
     static constexpr int kRouterWaitTimeout = 60000;

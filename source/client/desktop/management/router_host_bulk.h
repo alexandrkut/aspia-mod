@@ -20,7 +20,7 @@
 
 #include <functional>
 
-#include "client/router_types.h"
+#include "client/router/router_types.h"
 
 class QAbstractButton;
 class QDialogButtonBox;
@@ -56,8 +56,7 @@ class RouterHostBulkRunner final : public QObject
 public:
     using ParamsFn = std::function<QJsonObject(HostId)>;
 
-    RouterHostBulkRunner(qint64 router_id,
-                         const QList<RouterHostBulkTarget>& targets,
+    RouterHostBulkRunner(const QList<RouterHostBulkTarget>& targets,
                          const QString& command,
                          ParamsFn params_fn,
                          QObject* parent = nullptr);
@@ -75,7 +74,6 @@ signals:
 private:
     void runNext();
 
-    qint64 router_id_ = 0;
     QList<RouterHostBulkTarget> targets_;
     QString command_;
     ParamsFn params_fn_;

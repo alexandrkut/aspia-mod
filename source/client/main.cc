@@ -46,9 +46,9 @@
 #include "base/crypto/secure_string.h"
 #include "client/connect_request.h"
 #include "client/storage/database.h"
-#include "client/master_password.h"
-#include "client/settings.h"
-#include "client/system_settings.h"
+#include "client/storage/master_password.h"
+#include "client/storage/user_settings.h"
+#include "client/storage/system_settings.h"
 #include "client/desktop/app_lock.h"
 #include "client/desktop/main_window.h"
 #include "client/desktop/update_server_dialog.h"
@@ -329,7 +329,7 @@ int main(int argc, char* argv[])
     if (!connect_request.isEmpty() &&
         connect_request.sessionType() == proto::peer::SESSION_TYPE_UNKNOWN)
     {
-        connect_request.setSessionType(Settings().sessionType());
+        connect_request.setSessionType(UserSettings().sessionType());
 
         if (connect_request.sessionType() == proto::peer::SESSION_TYPE_UNKNOWN)
             connect_request.setSessionType(proto::peer::SESSION_TYPE_DESKTOP);

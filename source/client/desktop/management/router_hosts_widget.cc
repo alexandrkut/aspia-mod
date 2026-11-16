@@ -53,7 +53,7 @@
 #include "base/time_types.h"
 #include "base/peer/host_id.h"
 #include "client/storage/database.h"
-#include "client/router_controller.h"
+#include "client/router/router_controller.h"
 #include "client/desktop/file_dialog.h"
 #include "client/desktop/management/drag_and_drop.h"
 #include "client/desktop/management/host_telemetry_dialog.h"
@@ -468,7 +468,7 @@ void RouterHostsWidget::onHostUpdateConfig()
     const RouterHost& host = hosts.front();
 
     LOG(INFO) << "[ACTION] Host update configuration requested by user";
-    AutoQPointer<RouterHostConfigDialog> dialog(new RouterHostConfigDialog(router_id_, host.host_id, this));
+    AutoQPointer<RouterHostConfigDialog> dialog(new RouterHostConfigDialog(host.host_id, this));
     dialog->exec();
 }
 
@@ -485,7 +485,7 @@ void RouterHostsWidget::onHostUsers()
     const RouterHost& host = hosts.front();
 
     LOG(INFO) << "[ACTION] Host users requested by user";
-    AutoQPointer<RouterHostUsersDialog> dialog(new RouterHostUsersDialog(router_id_, host.host_id, this));
+    AutoQPointer<RouterHostUsersDialog> dialog(new RouterHostUsersDialog(host.host_id, this));
     dialog->exec();
 }
 
@@ -525,7 +525,7 @@ void RouterHostsWidget::onHostFullConfig()
     }
 
     const QString json = QString::fromUtf8(doc.toJson(QJsonDocument::Compact));
-    RouterSession* session = RouterController::session(router_id_);
+    RouterSession* session = RouterController::session();
     if (!session)
     {
         MsgBox::warning(this, tr("No session to router."));
@@ -602,7 +602,7 @@ void RouterHostsWidget::onHostListReceived(const RouterHostList& list)
 
     // Same page-cap adaptation as RouterGroupWidget: the model counts pages at the router's
     // cap so everything past the first page stays reachable.
-    if (RouterSession* session = RouterController::session(router_id_))
+    if (RouterSession* session = RouterController::session())
     {
         const qint64 limit = session->hostPageLimit();
         if (limit > 0 && limit < hosts_page_.pageSize())
@@ -712,7 +712,7 @@ void RouterHostsWidget::setHostsPageSize(qint64 page_size)
 
     // The cached pages were fetched with the old size: their keys never match again, but they
     // would sit in the cache until the session ends.
-    if (RouterSession* session = RouterController::session(router_id_))
+    if (RouterSession* session = RouterController::session())
         session->invalidateHostLists();
 
     fetchHosts();
@@ -909,7 +909,7 @@ void RouterHostsWidget::startDrag()
 
     RouterHostDrag drag(this);
     // The approved list is no space: a drag from it has no space to be unassigned from.
-    drag.setHosts(router_id_, /*source_workspace_id=*/0, hosts, mime_type_);
+    drag.setHosts(/*source_workspace_id=*/0, hosts, mime_type_);
 
     const QIcon icon = index.siblingAtColumn(0).data(Qt::DecorationRole).value<QIcon>();
     drag.setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
@@ -1153,7 +1153,7 @@ QSet<HostId> noModHosts(const QList<RouterHost>& hosts)
 // asked; their placeholder keeps an empty status, which callers already treat exactly
 // like a failed read (unreadable in the pick dialog, excluded from the preview).
 // Results stay aligned with |targets|.
-QList<RouterHostBulkResult> fetchUserListsParallel(qint64 router_id,
+QList<RouterHostBulkResult> fetchUserListsParallel(
                                                    const QList<RouterHostBulkTarget>& targets,
                                                    const QSet<HostId>& no_mod,
                                                    QWidget* parent)
@@ -1176,7 +1176,7 @@ QList<RouterHostBulkResult> fetchUserListsParallel(qint64 router_id,
             ++state->pending;
     }
 
-    RouterSession* session = RouterController::session(router_id);
+    RouterSession* session = RouterController::session();
     if (!session || state->pending == 0)
         return state->results;
 
@@ -1245,13 +1245,13 @@ struct BulkTeleInfo
 };
 
 // Telemetry is served from the router database cache, so this is fast and never blocks.
-QMap<HostId, BulkTeleInfo> fetchBulkTelemetries(qint64 router_id,
+QMap<HostId, BulkTeleInfo> fetchBulkTelemetries(
                                                const QList<RouterHost>& hosts,
                                                QWidget* parent)
 {
     QMap<HostId, BulkTeleInfo> out;
 
-    RouterSession* session = RouterController::session(router_id);
+    RouterSession* session = RouterController::session();
     if (!session || hosts.isEmpty())
         return out;
 
@@ -1326,7 +1326,7 @@ void RouterHostsWidget::onHostsAddUser()
 
     const QList<RouterHostBulkTarget> targets = bulkOnlineTargets(hosts);
     const QList<RouterHostBulkResult> fetched =
-        fetchUserListsParallel(router_id_, targets, noModHosts(hosts), this);
+        fetchUserListsParallel(targets, noModHosts(hosts), this);
 
     QList<RouterHostBulkTarget> apply_targets;
     QList<RouterHostBulkPreviewRow> preview;
@@ -1386,7 +1386,7 @@ void RouterHostsWidget::onHostsAddUser()
     }
 
     AutoQPointer<RouterHostBulkRunner> runner(new RouterHostBulkRunner(
-        router_id_, apply_targets, "add_user",
+        apply_targets, "add_user",
         [user_params](HostId) { return user_params; }, this));
     AutoQPointer<RouterHostBulkDialog> dialog(
         new RouterHostBulkDialog(tr("Add user on hosts"), this));
@@ -1402,7 +1402,7 @@ void RouterHostsWidget::onHostsRemoveUser()
 
     const QList<RouterHostBulkTarget> targets = bulkOnlineTargets(hosts);
     const QList<RouterHostBulkResult> fetched =
-        fetchUserListsParallel(router_id_, targets, noModHosts(hosts), this);
+        fetchUserListsParallel(targets, noModHosts(hosts), this);
 
     AutoQPointer<RouterHostBulkUserPickDialog> pick(
         new RouterHostBulkUserPickDialog(hosts, fetched, this));
@@ -1497,7 +1497,7 @@ void RouterHostsWidget::onHostsRemoveUser()
     // Params function: aligned with apply_targets order via a mutable counter.
     int apply_index = -1;
     AutoQPointer<RouterHostBulkRunner> runner(new RouterHostBulkRunner(
-        router_id_, apply_targets, "remove_user",
+        apply_targets, "remove_user",
         [&](HostId /*host_id*/)
         {
             ++apply_index;
@@ -1526,7 +1526,7 @@ void RouterHostsWidget::onHostsUpdateConfig()
     if (hosts.isEmpty())
         return;
 
-    const QMap<HostId, BulkTeleInfo> telemetries = fetchBulkTelemetries(router_id_, hosts, this);
+    const QMap<HostId, BulkTeleInfo> telemetries = fetchBulkTelemetries(hosts, this);
 
     QSet<QString> channels, servers;
     int auto_on = 0, auto_known = 0;
@@ -1666,7 +1666,7 @@ void RouterHostsWidget::onHostsUpdateConfig()
     }
 
     AutoQPointer<RouterHostBulkRunner> runner(new RouterHostBulkRunner(
-        router_id_, apply_targets, "set_update_config",
+        apply_targets, "set_update_config",
         [wanted, bulk_id](HostId)
         {
             QJsonObject params = wanted;
@@ -1745,7 +1745,7 @@ void RouterHostsWidget::onHostsFullConfig()
     const QList<RouterHostBulkTarget> targets = bulkOnlineTargets(hosts);
 
     AutoQPointer<RouterHostBulkRunner> dry(new RouterHostBulkRunner(
-        router_id_, targets, "apply_full_config",
+        targets, "apply_full_config",
         [&](HostId)
         {
             QJsonObject params;
@@ -1814,7 +1814,7 @@ void RouterHostsWidget::onHostsFullConfig()
     }
 
     AutoQPointer<RouterHostBulkRunner> runner(new RouterHostBulkRunner(
-        router_id_, apply_targets, "apply_full_config",
+        apply_targets, "apply_full_config",
         [&](HostId)
         {
             QJsonObject params;
