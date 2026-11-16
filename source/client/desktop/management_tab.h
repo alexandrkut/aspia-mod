@@ -58,6 +58,8 @@ public:
     explicit ManagementTab(QWidget* parent = nullptr);
     ~ManagementTab() final;
 
+    bool consumeViewOnlyPending();
+
     // Tab implementation.
     QByteArray saveState() final;
     void restoreState(const QByteArray& state) final;
@@ -68,7 +70,20 @@ public:
 
     void reloadRouter();
     void connectLocalHost(qint64 entry_id, proto::peer::SessionType session_type);
+
+    // Applies the hosts-per-page setting to the host lists of this tab.
+    void setHostsPerPage(qint64 page_size);
+
+    // The same, with credentials given by the caller (the command line) instead of the ones of the
+    // record. An empty |username| with an empty |password| is the plain call above.
+    void connectLocalHost(qint64 entry_id, proto::peer::SessionType session_type,
+                          const QString& username, const SecureString& password);
     void connectRouterHost(const HostConfig& host, proto::peer::SessionType session_type);
+
+    // The same, for a host that is in no book and is named by its address: the client connects to
+    // it directly, without a router. The credentials of such a host are the ones the caller gave,
+    // for there is no record of it and no stored credentials to take.
+    void connectDirectHost(const HostConfig& host, proto::peer::SessionType session_type);
 
 private slots:
     void onSwitchContent(SidebarItem::Type type);
@@ -135,6 +150,7 @@ private:
     QPointer<QDialog> two_factor_dialog_;
     bool two_factor_dismissed_ = false;
     ContentWidget* current_content_ = nullptr;
+    bool view_only_pending_ = false;
     ContentWidget* previous_content_ = nullptr;
 
     LocalGroupWidget* local_group_widget_ = nullptr;

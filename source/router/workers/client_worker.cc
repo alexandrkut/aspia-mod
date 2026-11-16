@@ -301,19 +301,28 @@ void ClientWorker::onNewConnection()
         }
 
         ClientOperator* client = nullptr;
+
+        // Whether the role of this session has to answer a code is a per role setting of the
+        // configuration, and the session is opened as one role only, so it is read once here and
+        // handed over together with the session rather than looked up from inside the handler.
+        const bool two_factor_required = Settings().isTwoFactorEnabledFor(session_type);
+
         switch (session_type)
         {
             case proto::router::SESSION_TYPE_OPERATOR:
-                client = new ClientOperator(Database::instance(), access_log_, channel.release(), this);
+                client = new ClientOperator(Database::instance(), access_log_, channel.release(), this,
+                                            two_factor_required);
                 break;
 
             case proto::router::SESSION_TYPE_MANAGER:
-                client = new ClientManager(Database::instance(), access_log_, channel.release(), this);
+                client = new ClientManager(Database::instance(), access_log_, channel.release(), this,
+                                           two_factor_required);
                 break;
 
             case proto::router::SESSION_TYPE_ADMIN:
             {
-                ClientAdmin* admin = new ClientAdmin(Database::instance(), access_log_, channel.release(), this);
+                ClientAdmin* admin = new ClientAdmin(Database::instance(), access_log_, channel.release(), this,
+                                                      two_factor_required);
                 connect(admin, &ClientAdmin::sig_clientListRequest, this, &ClientWorker::onClientListRequest);
                 connect(admin, &ClientAdmin::sig_clientRequest, this, &ClientWorker::onClientRequest);
                 client = admin;

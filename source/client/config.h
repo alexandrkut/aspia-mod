@@ -349,6 +349,8 @@ public:
     const QString& address() const { return address_; }
     void setAddress(const QString& value) { address_ = value; }
 
+    QStringList notifySettingsKeys() const;
+
     const QString& name() const { return name_; }
     void setName(const QString& value) { name_ = value; }
 
@@ -357,6 +359,12 @@ public:
 
     const SecureString& password() const { return password_; }
     void setPassword(const SecureString& value) { password_ = value; }
+
+    // The credentials above were given by whoever started the connection (the command line), not
+    // read from the address book. The stored ones must not replace them: a script that passes a
+    // login of its own means it.
+    bool hasForcedCredentials() const { return forced_credentials_; }
+    void setForcedCredentials(bool forced) { forced_credentials_ = forced; }
 
     bool isPortable() const { return portable_; }
     void setPortable(bool portable) { portable_ = portable; }
@@ -367,6 +375,7 @@ private:
     QString name_;
     QString username_;
     SecureString password_;
+    bool forced_credentials_ = false;
     bool portable_ = false;
 };
 
@@ -379,5 +388,9 @@ proto::control::Config defaultDesktopConfig();
 
 // The directory chosen in |config|, or the default one when none is chosen.
 QString recordingPath(const proto::control::Config& config);
+
+// Applies the view-only session overrides on top of a desktop config: the session never alters
+// the host desktop and always shows the remote cursor, no matter what the user's settings say.
+void applyViewOnlyOverrides(proto::control::Config& config);
 
 #endif // CLIENT_CONFIG_H

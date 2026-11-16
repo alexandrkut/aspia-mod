@@ -38,12 +38,19 @@ public:
     void setProgress(const QString& message);
     void setError(const QString& message);
 
+    // Shows (seconds > 0) or hides the countdown line under the message. When retry is true the
+    // text reads "Retry in: N s", otherwise "Time left: N s".
+    void setCountdown(int seconds, bool retry);
+
     QString message() const;
     bool isBusy() const;
 
 signals:
     // Emitted when the user clicks the close button to cancel the connection or dismiss an error.
     void sig_closeRequested();
+
+    // Emitted when the user clicks the reconnect button on an error screen.
+    void sig_reconnectRequested();
 
 protected:
     // QObject implementation.
@@ -53,8 +60,10 @@ private:
     void showMessage(const QString& message, bool busy);
 
     QLabel* message_label_ = nullptr;
+    QLabel* countdown_label_ = nullptr;
     QProgressBar* busy_bar_ = nullptr;
     QPushButton* close_button_ = nullptr;
+    QPushButton* reconnect_button_ = nullptr;
 
     Q_DISABLE_COPY_MOVE(StatusOverlay)
 };

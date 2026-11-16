@@ -147,6 +147,17 @@ public:
     QString displayName() const;
     bool setDisplayName(const QString& name);
 
+    bool isConfirmCloseEnabled() const;
+    bool setConfirmCloseEnabled(bool enable);
+
+    bool isCheckUpdatesEnabled() const;
+    bool setCheckUpdatesEnabled(bool enable);
+
+    qint64 hostsPerPage() const;
+    bool setHostsPerPage(qint64 value);
+
+    QString updateChannel() const;
+    bool setUpdateChannel(const QString& channel);
     bool isBackupOnStartupEnabled() const;
     bool setBackupOnStartupEnabled(bool enable);
 
@@ -189,6 +200,10 @@ public:
     bool setBiometricBlob(const QByteArray& blob);
     bool clearBiometricUnlock();
 
+public:
+    QString readSetting(const QString& name, bool* found = nullptr) const;
+    bool writeSetting(const QString& name, const QString& value);
+
 private:
     friend class DatabaseMigration;
     friend class DatabaseTestPeer;
@@ -199,10 +214,6 @@ private:
     bool openDatabase();
     bool setMasterPassword(const QByteArray& salt, const QByteArray& verifier, quint32 version);
 
-    QString readSetting(const QString& name, bool* found = nullptr) const;
-    bool writeSetting(const QString& name, const QString& value);
-    bool ensureDefaultProfile();
-    bool clearRouter();
 
     mutable SqlDatabase db_;
 };

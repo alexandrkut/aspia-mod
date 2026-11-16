@@ -105,9 +105,8 @@ int CoreService::exec(CoreApplication& application)
         // Install the handlers only when the self-pipe exists. Otherwise the default disposition is
         // kept, so the process can still be terminated by SIGTERM/SIGINT/SIGQUIT instead of trapping
         // them in a handler that can no longer do anything.
-        if (signal(SIGKILL, signalHandler) == SIG_ERR)
-            LOG(ERROR) << "Unable to install signal handler for SIGKILL";
-
+        // SIGKILL and SIGSTOP are not in the list: the kernel does not let a process catch
+        // them, and asking for a handler for them fails every time.
         if (signal(SIGTERM, signalHandler) == SIG_ERR)
             LOG(ERROR) << "Unable to install signal handler for SIGTERM";
 
@@ -119,9 +118,6 @@ int CoreService::exec(CoreApplication& application)
 
         if (signal(SIGINT, signalHandler) == SIG_ERR)
             LOG(ERROR) << "Unable to install signal handler for SIGINT";
-
-        if (signal(SIGSTOP, signalHandler) == SIG_ERR)
-            LOG(ERROR) << "Unable to install signal handler for SIGSTOP";
 
         if (signal(SIGABRT, signalHandler) == SIG_ERR)
             LOG(ERROR) << "Unable to install signal handler for SIGABRT";

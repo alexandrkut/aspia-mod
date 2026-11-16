@@ -27,6 +27,8 @@ list(APPEND SOURCE_CLIENT_CORE
     audio_player.h
     config.cc
     config.h
+    connect_request.cc
+    connect_request.h
     file_error_code.cc
     file_error_code.h
     file_remove_queue_builder.cc
@@ -57,6 +59,7 @@ list(APPEND SOURCE_CLIENT
 
 list(APPEND SOURCE_CLIENT_TESTS
     config_unittest.cc
+    connect_request_unittest.cc
     desktop/authorization_dialog_unittest.cc
     desktop/credentials/credential_list_model_unittest.cc
     desktop/management/access_log_list_model_unittest.cc
@@ -65,6 +68,7 @@ list(APPEND SOURCE_CLIENT_TESTS
     desktop/management/host_list_model_unittest.cc
     desktop/management/local_host_list_model_unittest.cc
     desktop/management/relay_list_model_unittest.cc
+    desktop/management/router_host_dialog_unittest.cc
     desktop/management/router_status_widget_unittest.cc
     desktop/management/router_user_dialog_unittest.cc
     desktop/management/search_result_model_unittest.cc
@@ -92,6 +96,11 @@ if (WIN32)
         audio_output_win.cc
         audio_output_win.h)
     list(APPEND SOURCE_CLIENT client.rc)
+    # The shell icon comes from common/resources/aspia.ico: without this
+    # dependency Ninja does not recompile the resource when the icon changes
+    # and the exe keeps embedding the stale icon.
+    set_property(SOURCE client.rc APPEND PROPERTY OBJECT_DEPENDS
+                 "${CMAKE_CURRENT_SOURCE_DIR}/../common/resources/aspia.ico")
 endif()
 
 if (LINUX)
@@ -236,7 +245,7 @@ if (ANDROID)
         QT_ANDROID_APP_NAME "Aspia Client"
         QT_ANDROID_APP_ICON "@mipmap/ic_launcher"
         QT_ANDROID_VERSION_CODE ${GIT_COMMIT_COUNT}
-        QT_ANDROID_VERSION_NAME "${ASPIA_VERSION_MAJOR}.${ASPIA_VERSION_MINOR}.${ASPIA_VERSION_PATCH}.${GIT_COMMIT_COUNT}"
+        QT_ANDROID_VERSION_NAME "${ASPIA_VERSION_MAJOR}.${ASPIA_VERSION_MINOR}.${ASPIA_VERSION_PATCH}.${ASPIA_VERSION_BUILD}"
         QT_ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android/packaging")
 
     if (NOT ASPIA_GOOGLE_PLAY)

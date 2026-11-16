@@ -22,19 +22,28 @@
 #define STR_HELPER_INTERNAL(x) #x
 #define STR_INTERNAL(x) STR_HELPER_INTERNAL(x)
 
+// The suffix is empty for a released build and something like "-mod" for a modified one. It is
+// only ever appended to the two printed forms below: ASPIA_VERSION, the numeric one that anything
+// comparing versions works with, carries nothing of it.
+#ifndef ASPIA_VERSION_SUFFIX
+#    define ASPIA_VERSION_SUFFIX ""
+#endif
+
 #define ASPIA_VERSION_STRING                 \
     STR_INTERNAL(ASPIA_VERSION_MAJOR) "."    \
     STR_INTERNAL(ASPIA_VERSION_MINOR) "."    \
     STR_INTERNAL(ASPIA_VERSION_PATCH) "."    \
-    STR_INTERNAL(GIT_COMMIT_COUNT)
+    STR_INTERNAL(ASPIA_VERSION_BUILD)        \
+    ASPIA_VERSION_SUFFIX
 
 #define ASPIA_VERSION_SHORT_STRING           \
     STR_INTERNAL(ASPIA_VERSION_MAJOR) "."    \
     STR_INTERNAL(ASPIA_VERSION_MINOR) "."    \
-    STR_INTERNAL(ASPIA_VERSION_PATCH)
+    STR_INTERNAL(ASPIA_VERSION_PATCH)        \
+    ASPIA_VERSION_SUFFIX
 
 #define ASPIA_VERSION                        \
     ASPIA_VERSION_MAJOR,ASPIA_VERSION_MINOR, \
-    ASPIA_VERSION_PATCH,GIT_COMMIT_COUNT
+    ASPIA_VERSION_PATCH,ASPIA_VERSION_BUILD
 
 #endif // ASPIA_VERSION_H

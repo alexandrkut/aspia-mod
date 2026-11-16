@@ -116,6 +116,15 @@ if (WIN32)
     set_target_properties(aspia_router PROPERTIES LINK_FLAGS "/MANIFEST:NO")
 endif()
 
+if (LINUX)
+    # The router is built with a compiler that is newer than the compiler of the system it
+    # is meant to run on, and the C++ runtime of that compiler is not on the system: the
+    # system has GLIBCXX_3.4.25 and the binary asks for more. Linking the runtime and the
+    # unwinder statically keeps the binary free of a dependency it cannot satisfy, and
+    # leaves nothing but the C library to be found on the target.
+    target_link_options(aspia_router PRIVATE -static-libstdc++ -static-libgcc)
+endif()
+
 target_link_libraries(aspia_router
     aspia_router_core)
 
@@ -123,17 +132,21 @@ set_property(TARGET aspia_router PROPERTY AUTOMOC ON)
 set_property(TARGET aspia_router PROPERTY AUTOUIC ON)
 set_property(TARGET aspia_router PROPERTY AUTORCC ON)
 
-add_executable(aspia_router_tests ${SOURCE_ROUTER_TESTS} ${SOURCE_ROUTER_HANDLERS_TESTS}
-    ${SOURCE_ROUTER_WORKERS_TESTS})
+if (NOT ASPIA_ROUTER_ONLY)
+    # The tests need the test framework of Qt and of Google, which a build of the router
+    # alone does not have.
+    add_executable(aspia_router_tests ${SOURCE_ROUTER_TESTS} ${SOURCE_ROUTER_HANDLERS_TESTS}
+        ${SOURCE_ROUTER_WORKERS_TESTS})
 
-target_link_libraries(aspia_router_tests
-    aspia_router_core
-    GTest::gtest
-    ${THIRD_PARTY_LIBS})
+    target_link_libraries(aspia_router_tests
+        aspia_router_core
+        GTest::gtest
+        ${THIRD_PARTY_LIBS})
 
-set_property(TARGET aspia_router_tests PROPERTY AUTOMOC ON)
-set_property(TARGET aspia_router_tests PROPERTY AUTOUIC ON)
-set_property(TARGET aspia_router_tests PROPERTY AUTORCC ON)
-qt_import_plugins(aspia_router_tests INCLUDE "" EXCLUDE "" INCLUDE_BY_TYPE "" EXCLUDE_BY_TYPE imageformats)
+    set_property(TARGET aspia_router_tests PROPERTY AUTOMOC ON)
+    set_property(TARGET aspia_router_tests PROPERTY AUTOUIC ON)
+    set_property(TARGET aspia_router_tests PROPERTY AUTORCC ON)
+    qt_import_plugins(aspia_router_tests INCLUDE "" EXCLUDE "" INCLUDE_BY_TYPE "" EXCLUDE_BY_TYPE imageformats)
 
-add_test(NAME aspia_router_tests COMMAND aspia_router_tests)
+    add_test(NAME aspia_router_tests COMMAND aspia_router_tests)
+endif()

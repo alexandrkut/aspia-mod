@@ -70,6 +70,9 @@ public:
     void setProfile(const ProfileConfig& profile);
     ProfileConfig profile() const;
 
+    static void setNextNotifySuppressed(bool value) { next_notify_suppressed_ = value; }
+    static bool nextNotifySuppressed() { return next_notify_suppressed_; }
+
 private:
     const HostConfig host_;
     const proto::peer::SessionType session_type_;
@@ -82,6 +85,7 @@ private:
     proto::router::ConnectionOffer connection_offer_;
     bool auto_reconnect_ = false;
     bool reconnecting_ = false;
+    static bool next_notify_suppressed_;
 };
 
 #endif // CLIENT_SHARED_SESSION_STATE_H

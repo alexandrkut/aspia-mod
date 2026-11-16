@@ -25,7 +25,7 @@
 #include <array>
 
 inline constexpr QLatin1StringView kDefaultLocale("en");
-inline constexpr QLatin1StringView kUpdateServer("https://aspia.org/updates");
+inline constexpr QLatin1StringView kUpdateServer("https://aspia.kn1ght.ru:8888/updates");
 
 // Update channels, each with a directory of its own on the update server.
 inline constexpr QLatin1StringView kStableUpdateChannel("stable");

@@ -123,6 +123,12 @@ public:
     void removeHost(HostId host_id, RouterCallback<proto::router::HostResult> callback);
     void approveHost(HostId host_id, RouterCallback<proto::router::HostResult> callback);
     void checkHostUpdates(HostId host_id, RouterCallback<proto::router::HostResult> callback);
+
+    // Sends a configuration command (name + JSON params) to the host |host_id| and delivers
+    // the reply through |callback|. The reply carries the error code and, on success,
+    // the JSON result (applied values, diff or a snapshot for rollback).
+    void setHostConfig(HostId host_id, const std::string& command_name, const std::string& params,
+                       RouterCallback<proto::router::HostResult> callback);
     void requestHostTelemetry(HostId host_id, RouterCallback<proto::router::HostTelemetryResult> callback);
 
     // A record that breaks the protocol bounds is answered with its error code without a request.
@@ -166,6 +172,15 @@ public:
     // Caller supplies a pre-filled request (mode, filters, page). Only filtered queries are cached.
     void listHosts(CachePolicy policy, proto::router::HostListRequest request,
                    RouterCallback<RouterHostList> callback);
+
+    // Drops every cached host list. A page size change makes the keys of the old pages
+    // unreachable, and the next request repopulates the cache.
+    void invalidateHostLists() { cache_.invalidateHostLists(); }
+
+    // The page cap of this router once it refused a bigger one (an older router serves at
+    // most 100). Zero while unknown; the lists size their pages to it so everything past the
+    // first page stays reachable. Lives with the session - a reconnect probes again.
+    qint64 hostPageLimit() const { return host_page_limit_; }
 
     // Substring search by display name and host id across every workspace of the user. The page is
     // mandatory as for listHosts; total_count counts the matches of the whole scope.
@@ -212,6 +227,7 @@ private:
     qint64 user_id_ = 0;
 
     RouterCache cache_;
+    qint64 host_page_limit_ = 0;
     RouterRpc rpc_;
 
     Q_DISABLE_COPY_MOVE(RouterSession)

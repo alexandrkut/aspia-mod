@@ -129,4 +129,6 @@ message SessionResponse
     string arch          = 6;
     string display_name  = 7;
     bool probe           = 8;
+    bool notify_suppressed = 9;
+    bool view_only        = 10;
 }

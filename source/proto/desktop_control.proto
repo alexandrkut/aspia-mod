@@ -82,6 +82,7 @@ message Config
     bool disable_key_combinations = 13;
     bool record_sessions          = 14;
     string recording_path         = 15;
+    bool view_only                = 16;
 }
 
 message Feedback

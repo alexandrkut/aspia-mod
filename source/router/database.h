@@ -24,6 +24,7 @@
 
 #include <set>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 #include "base/peer/host_id.h"
@@ -212,6 +213,10 @@ public:
     // Replaces the telemetry the host reported last.
     bool updateHostTelemetry(HostId host_id, std::string_view telemetry);
 
+    // Updates only the version string of a host (used to store the full version with build number
+    // and mod suffix received via telemetry). Returns false if the host is not found.
+    bool updateHostVersion(HostId host_id, std::string_view version);
+
     // Reads the telemetry the host reported last. Returns kErrorNotFound for an unknown host and
     // kErrorInternalError when the read failed.
     std::string_view hostTelemetry(HostId host_id, std::string* telemetry) const;
@@ -226,6 +231,32 @@ public:
     // answer could not be read. Used to validate user access before edits.
     std::string_view hostWorkspaceId(HostId host_id, qint64* workspace_id) const;
 
+    // Every workspace the host belongs to, in membership order (the first row added first).
+    // Empty when the host has no memberships or the database cannot be read.
+    std::vector<qint64> hostWorkspaceIds(HostId host_id) const;
+
+    // Re-points the scalar workspace_id/group_id columns of |hosts| at the primary membership -
+    // the first row added, i.e. the lowest rowid. No rows left means "not assigned" (0/0).
+    // Does not touch revision or last_modify: callers that move data move those themselves.
+    void refreshPrimaryMembership(HostId host_id);
+
+    // Adds a membership of the host in the workspace (insert is idempotent: an existing
+    // membership keeps its group). Bumps revision and last_modify. group_id == 0 places the host
+    // at the workspace root. Returns a proto::router error code.
+    std::string_view addHostMembership(HostId host_id, qint64 workspace_id, qint64 group_id = 0);
+
+    // Drops the membership of the host in the workspace and refreshes the primary membership
+    // (the host may stay in the workspace through another membership, and keeps its other
+    // workspaces). Bumps revision and last_modify. Returns a proto::router error code.
+    std::string_view removeHostMembership(HostId host_id, qint64 workspace_id);
+
+    // Reads the membership rows of |host_ids| in one query and appends them to the matching
+    // hosts of |list| (a page of a host list or a host search). The scalar workspace_id/group_id
+    // fields stay the primary membership; this fills the repeated memberships field for the
+    // client. Call it once the page is collected.
+    template <typename List>
+    void attachMemberships(const std::vector<quint64>& host_ids, List* list) const;
+
     // Updates the admin/manager-editable fields of a host. workspace_id is the workspace the host
     // ends up in: 0 releases it, and the group it carried within the workspace goes with it; the
     // note is the host's own and is stored as given whether the host is in a workspace or not.
@@ -234,9 +265,14 @@ public:
     // at the workspace root; > 0 moves it under the given group (caller must validate group
     // ownership). Also bumps last_modify. |base_revision| is the revision the edit was built on:
     // a stale one answers kErrorConflict instead of silently overwriting a concurrent edit.
-    // Returns a proto::router error code.
+    // Returns a proto::router error code. |memberships| is the full set of workspaces the host
+    // should belong to with the group it has in each; an empty list keeps the old behaviour and
+    // moves only the primary membership (an old client sends none). When it is non-empty the
+    // host's memberships are synchronized to it: added, dropped and group-updated in place, so
+    // the rowid - and with it the "first added" primary - of kept rows survives.
     std::string_view modifyHost(HostId host_id, qint64 base_revision, qint64 workspace_id,
-        qint64 group_id, std::string_view display_name, std::string_view comment);
+        qint64 group_id, std::string_view display_name, std::string_view comment,
+        const std::vector<std::pair<qint64, qint64>>& memberships = {});
 
     // Appends every host in the database (admin-only call site) that passes |filter| to |out| and
     // sets its error_code, reading rows straight into the protobuf message. A filter with more
@@ -254,12 +290,20 @@ public:
     void hosts(qint64 workspace_id, qint64 group_id, qint64 offset, qint64 count,
         proto::router::HostList* out) const;
 
+    // Appends the hosts that are NOT members of |workspace_id| (> 0) to |out|: the hosts of the
+    // other workspaces together with the hosts no workspace claimed, whatever group they sit
+    // in. The page rules are the same as in the overload above; this scope has no group
+    // dimension.
+    void hostsOutside(qint64 workspace_id, qint64 offset, qint64 count,
+        proto::router::HostList* out) const;
+
     // Reads into |count| the host count in the same scope as the matching hosts() overload. Used
     // by the client to drive pagination UI without fetching the full list. Returns
     // kErrorInternalError when the answer could not be read - a zero count from a failed query
     // would truncate the pagination.
     std::string_view hostCount(const proto::router::HostFilter& filter, qint64* count) const;
     std::string_view hostCount(qint64 workspace_id, qint64 group_id, qint64* count) const;
+    std::string_view hostCountOutside(qint64 workspace_id, qint64* count) const;
 
     // Substring search over |display_name|, |comment| (case-insensitive) and the decimal host_id,
     // restricted to the given workspaces. |workspace_ids| must already be the set the user is

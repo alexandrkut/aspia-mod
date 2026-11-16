@@ -3196,3 +3196,83 @@ TEST_F(DatabaseTest, AutoUnlockIsTurnedOffOnlyByAKeyThatDoesNotFit)
     // Closes the file before the directory goes.
     DatabaseTestPeer::setFilePath(file_path);
 }
+
+//--------------------------------------------------------------------------------------------------
+// A reset leaves the database empty and without the master password, and what it held stays in a
+// copy next to it.
+TEST_F(DatabaseTest, ResetKeepsWhatTheDatabaseHeldInACopy)
+{
+    ASSERT_TRUE(db_.reencryptAll({}, {}, {}, {}, ProxyConfig(), "salt", "verifier", 1));
+    ASSERT_TRUE(db_.setLockTimeout(Minutes(5)));
+
+    addHost("Host", addGroup("Group", 0));
+    addRouterHost(addRouter("Router"), 1, "user", "password");
+    addCredential("Credential", "user", "password");
+
+    const QString copy_path = QFileInfo(file_path_).dir().filePath("copy.db3");
+    ASSERT_TRUE(db_.saveCopyAndClearAll(copy_path));
+
+    EXPECT_FALSE(db_.isMasterPasswordSet());
+    EXPECT_EQ(db_.lockTimeout(), Minutes::zero());
+    EXPECT_TRUE(allLocalGroups().isEmpty());
+    EXPECT_TRUE(allLocalHosts().isEmpty());
+    EXPECT_TRUE(routerList().isEmpty());
+    EXPECT_TRUE(allRouterHosts().isEmpty());
+    EXPECT_TRUE(credentialList().isEmpty());
+
+    Database copy;
+    ASSERT_TRUE(copy.open(copy_path));
+    EXPECT_TRUE(copy.isMasterPasswordSet());
+    EXPECT_EQ(copy.lockTimeout(), Minutes(5));
+
+    QList<LocalHostConfig> hosts;
+    ASSERT_EQ(copy.allLocalHosts(&hosts), Database::ReadResult::OK);
+    ASSERT_EQ(hosts.size(), 1);
+    EXPECT_EQ(hosts.front().address(), "192.168.0.1");
+
+    QList<RouterHostConfig> router_hosts;
+    ASSERT_EQ(copy.allRouterHosts(&router_hosts), Database::ReadResult::OK);
+    EXPECT_EQ(router_hosts.size(), 1);
+
+    QList<CredentialConfig> credentials;
+    ASSERT_EQ(copy.credentialList(&credentials), Database::ReadResult::OK);
+    EXPECT_EQ(credentials.size(), 1);
+}
+
+//--------------------------------------------------------------------------------------------------
+// A file that is already where the copy goes is not overwritten, and the database is not cleared.
+TEST_F(DatabaseTest, ResetDoesNotOverwriteAFileInPlaceOfTheCopy)
+{
+    addHost("Host", 0);
+
+    const QString copy_path = QFileInfo(file_path_).dir().filePath("copy.db3");
+
+    QFile file(copy_path);
+    ASSERT_TRUE(file.open(QIODevice::WriteOnly));
+    ASSERT_EQ(file.write("data"), 4);
+    file.close();
+
+    EXPECT_FALSE(db_.saveCopyAndClearAll(copy_path));
+    EXPECT_EQ(allLocalHosts().size(), 1);
+
+    ASSERT_TRUE(file.open(QIODevice::ReadOnly));
+    EXPECT_EQ(file.readAll(), "data");
+}
+
+//--------------------------------------------------------------------------------------------------
+// The page size setting: absent means the default the lists shipped with, a stored value is
+// kept, and anything a caller could store by mistake falls back to that default instead of
+// ever reaching the lists.
+TEST_F(DatabaseTest, HostsPerPageDefaultsTo100AndClampsWhatItIsGiven)
+{
+    EXPECT_EQ(db_.hostsPerPage(), 100);
+
+    EXPECT_TRUE(db_.setHostsPerPage(500));
+    EXPECT_EQ(db_.hostsPerPage(), 500);
+
+    EXPECT_TRUE(db_.setHostsPerPage(50));
+    EXPECT_EQ(db_.hostsPerPage(), 50);
+
+    EXPECT_TRUE(db_.setHostsPerPage(0));
+    EXPECT_EQ(db_.hostsPerPage(), 100);
+}

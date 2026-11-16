@@ -19,6 +19,7 @@
 #include "common/desktop/about_dialog.h"
 
 #include <QDesktopServices>
+#include <QStringList>
 #include <QSysInfo>
 
 #include "version.h"
@@ -42,6 +43,9 @@ const char kGplLink[] = "https://www.gnu.org/licenses/gpl.html";
 const char kGplTranslationLink[] = "https://www.gnu.org/licenses/translations.html";
 const char kHomeLink[] = "https://aspia.org";
 const char kGitHubLink[] = "https://github.com/dchapyshev/aspia";
+
+// The page of this fork, where the changes below are described and the sources are.
+const char kModificationsLink[] = "https://github.com/alexandrkut/aspia-mod";
 
 const char* kDevelopers[] = { "Dmitry Chapyshev (dmitry@aspia.ru)" };
 
@@ -99,10 +103,29 @@ QString createList(const QString& title, const char* array[], size_t array_size)
     return QString("<b>%1</b><br>%2").arg(title, list);
 }
 
+//--------------------------------------------------------------------------------------------------
+QString createList(const QString& title, const QStringList& list)
+{
+    if (list.isEmpty())
+        return QString();
+
+    QString result;
+
+    for (int i = 0; i < list.size(); ++i)
+    {
+        result.append(QString("&bull; %1").arg(list[i]));
+        if (i + 1 != list.size())
+            result.append("<br/>");
+    }
+
+    return QString("<b>%1</b><br>%2").arg(title, result);
+}
+
 } // namespace
 
 //--------------------------------------------------------------------------------------------------
-AboutDialog::AboutDialog(const QString& application_name, QWidget* parent)
+AboutDialog::AboutDialog(const QString& application_name, const QStringList& modifications,
+                         QWidget* parent)
     : QDialog(parent),
       ui(new Ui::AboutDialog())
 {
@@ -129,6 +152,18 @@ AboutDialog::AboutDialog(const QString& application_name, QWidget* parent)
              tr("Home page:"), kHomeLink,
              tr("GitHub page:"), kGitHubLink);
 
+    // The changes are shown only in a build that carries the mark of a modification, which is
+    // the suffix of the version. A build of the upstream carries none, and there is nothing
+    // to tell about it.
+    QString modifications_text;
+
+    if (ASPIA_VERSION_SUFFIX[0] != '\0' && !modifications.isEmpty())
+    {
+        modifications_text = createList(tr("Modifications"), modifications);
+        modifications_text += QString("<br>%1 <a href='%2'>%2</a>")
+            .arg(tr("The changes and the sources:"), kModificationsLink);
+    }
+
     QString developers =
         createList(tr("Developers"), kDevelopers, std::size(kDevelopers));
     QString translators =
@@ -144,6 +179,9 @@ AboutDialog::AboutDialog(const QString& application_name, QWidget* parent)
     html += "<html><body>";
     html += "<p>" + license + "</p>";
     html += "<p>" + license_translation + "</p>";
+
+    if (!modifications_text.isEmpty())
+        html += "<p>" + modifications_text + "</p>";
     html += "<p>" + links + "</p>";
     html += "<p>" + developers + "</p>";
     html += "<p>" + translators + "</p>";
@@ -175,9 +213,9 @@ AboutDialog::AboutDialog(const QString& application_name, QWidget* parent)
 #if defined(GIT_CURRENT_BRANCH) && defined(GIT_COMMIT_HASH)
     service_html += "<p><b>" + tr("Build Information") + "</b><br>"
         + QString("&bull; %1<br>").arg(tr("Git branch: %1")
-            .arg(QString("<a href='%1/tree/%2'>%2</a>").arg(kGitHubLink, GIT_CURRENT_BRANCH)))
+            .arg(QString("<a href='%1/tree/%2'>%2</a>").arg(kModificationsLink, GIT_CURRENT_BRANCH)))
         + QString("&bull; %1").arg(tr("Git commit: %1")
-            .arg(QString("<a href='%1/commit/%2'>%2</a>").arg(kGitHubLink, GIT_COMMIT_HASH)))
+            .arg(QString("<a href='%1/commit/%2'>%2</a>").arg(kModificationsLink, GIT_COMMIT_HASH)))
         + "</p>";
 #endif
 

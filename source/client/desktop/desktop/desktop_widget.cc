@@ -272,6 +272,14 @@ void DesktopWidget::setCursorShape(QPixmap&& cursor_shape, const QPoint& hotspot
     remote_cursor_shape_ = std::move(cursor_shape);
     remote_cursor_hotspot_ = hotspot;
 
+    if (view_only_cursor_)
+    {
+        // The shape is still kept for the painted position marker of the remote pointer, but the
+        // pointer itself is the standard no-entry cursor: a view session never forwards input.
+        setCursor(QCursor(Qt::ForbiddenCursor));
+        return;
+    }
+
     if (remote_cursor_shape_.isNull())
     {
         setCursor(QCursor(Qt::ArrowCursor));
@@ -279,6 +287,19 @@ void DesktopWidget::setCursorShape(QPixmap&& cursor_shape, const QPoint& hotspot
     }
 
     setCursor(QCursor(remote_cursor_shape_, hotspot.x(), hotspot.y()));
+}
+
+//--------------------------------------------------------------------------------------------------
+void DesktopWidget::setViewOnlyCursor(bool enable)
+{
+    view_only_cursor_ = enable;
+
+    if (enable)
+        setCursor(QCursor(Qt::ForbiddenCursor));
+    else if (remote_cursor_shape_.isNull())
+        setCursor(QCursor(Qt::ArrowCursor));
+    else
+        setCursor(QCursor(remote_cursor_shape_, remote_cursor_hotspot_.x(), remote_cursor_hotspot_.y()));
 }
 
 //--------------------------------------------------------------------------------------------------

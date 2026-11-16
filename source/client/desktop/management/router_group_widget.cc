@@ -35,6 +35,8 @@
 
 #include "base/auto_qpointer.h"
 #include "base/logging.h"
+#include "client/storage/database.h"
+#include "client/router_controller.h"
 #include "client/desktop/management/drag_and_drop.h"
 #include "client/desktop/management/router_host_dialog.h"
 #include "client/desktop/management/ui_router_group_widget.h"
@@ -113,17 +115,12 @@ RouterGroupWidget::RouterGroupWidget(QWidget* parent)
 
     connect(ui->tree_host, &QAbstractItemView::activated, this, &RouterGroupWidget::sig_activated);
 
-    // The largest entry is the largest page the router serves (kMaxHostPageSize).
-    ui->combo_hosts_page_size->addItem("25", QVariant::fromValue<qint64>(25));
-    ui->combo_hosts_page_size->addItem("50", QVariant::fromValue<qint64>(50));
-    ui->combo_hosts_page_size->addItem("100", QVariant::fromValue<qint64>(100));
-    ui->combo_hosts_page_size->setCurrentIndex(2);
-    hosts_page_.setPageSize(ui->combo_hosts_page_size->currentData().toLongLong());
+    // The page size comes from the settings (hosts per page): one source of truth for every
+    // host list. The local 25/50/100 combo is gone with it.
+    hosts_page_.setPageSize(Database::instance().hostsPerPage());
 
     ui->button_hosts_next->setIconOnRight(true);
 
-    connect(ui->combo_hosts_page_size, &QComboBox::currentIndexChanged,
-            this, &RouterGroupWidget::onPageSizeChanged);
     connect(ui->combo_hosts_page, &QComboBox::currentIndexChanged,
             this, &RouterGroupWidget::onPageChanged);
     connect(ui->button_hosts_prev, &QToolButton::clicked, this, &RouterGroupWidget::onPrevClicked);
@@ -292,6 +289,22 @@ void RouterGroupWidget::onHostListReceived(const RouterHostList& list)
         return;
     }
 
+    // A router that caps the page below the configured size paginates at its cap: the model
+    // has to count pages the way rows actually arrive, or everything past the first page
+    // stays unreachable. The first limited reply is the only one that can change the size -
+    // it arrives while a single page of the configured size is all there is, so the current
+    // page cannot be past the new count.
+    if (RouterSession* session = RouterController::session(router_id_))
+    {
+        const qint64 limit = session->hostPageLimit();
+        if (limit > 0 && limit < hosts_page_.pageSize())
+        {
+            LOG(INFO) << "Host list page sized to the router cap:" << limit;
+            hosts_page_.setPageSize(limit);
+            hosts_page_.setCurrentPage(0);
+        }
+    }
+
     const QList<RouterHost> selected = selectedHosts();
     const RouterHost* current = model_->hostAt(ui->tree_host->currentIndex().row());
     const HostId current_host_id = current ? current->host_id : kInvalidHostId;
@@ -328,11 +341,20 @@ void RouterGroupWidget::onHostListReceived(const RouterHostList& list)
 }
 
 //--------------------------------------------------------------------------------------------------
-void RouterGroupWidget::onPageSizeChanged(int /* index */)
+void RouterGroupWidget::setHostsPageSize(qint64 page_size)
 {
-    hosts_page_.setPageSize(ui->combo_hosts_page_size->currentData().toLongLong());
+    if (page_size <= 0 || page_size == hosts_page_.pageSize())
+        return;
+
+    hosts_page_.setPageSize(page_size);
     hosts_page_.setCurrentPage(0);
-    fetchHosts(RouterSession::CachePolicy::USE_CACHE);
+
+    // The cached pages were fetched with the old size: their keys never match again, but they
+    // would sit in the cache until the session ends.
+    if (RouterSession* session = RouterController::session(router_id_))
+        session->invalidateHostLists();
+
+    fetchHosts(RouterSession::CachePolicy::RELOAD);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -422,7 +444,16 @@ void RouterGroupWidget::fetchHosts(RouterSession::CachePolicy policy)
 //--------------------------------------------------------------------------------------------------
 void RouterGroupWidget::updateCountLabel()
 {
-    ui->label_hosts_count->setText(tr("%n host(s)", "", model_->rowCount()));
+    int online_count = 0;
+    const int row_count = model_->rowCount();
+    for (int row = 0; row < row_count; ++row)
+    {
+        const RouterHost* host = model_->hostAt(row);
+        if (host && host->online)
+            ++online_count;
+    }
+    ui->label_hosts_count->setText(
+        tr("%n host(s) (%1 online)", "", row_count).arg(online_count));
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -460,12 +491,12 @@ void RouterGroupWidget::startDrag()
         return;
 
     RouterHostDrag drag(this);
-    drag.setHosts(hosts, mime_type_);
+    drag.setHosts(router_id_, workspace_id_, hosts, mime_type_);
 
     const QIcon icon = index.siblingAtColumn(0).data(Qt::DecorationRole).value<QIcon>();
     drag.setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
 
-    drag.exec(Qt::MoveAction);
+    drag.exec(Qt::MoveAction | Qt::CopyAction);
 }
 
 //--------------------------------------------------------------------------------------------------

@@ -218,6 +218,13 @@ SettingsTab::SettingsTab(QWidget* parent)
     ui->button_save_general->setIcon(QIcon(":/img/done.svg"));
     ui->button_save_general->setIconSize(QSize(24, 24));
 
+    // The page size of the host lists. The values are the ones the router serves as a whole
+    // page; a stored value outside the set (written by hand) falls back to the default index.
+    for (qint64 page_size : { 50, 100, 500 })
+        ui->combo_hosts_per_page->addItem(QString::number(page_size), page_size);
+    int page_index = ui->combo_hosts_per_page->findData(db.hostsPerPage());
+    ui->combo_hosts_per_page->setCurrentIndex(page_index >= 0 ? page_index : 1);
+
     ui->combo_lock_timeout->addItem(tr("Do not lock"), 0);
     ui->combo_lock_timeout->addItem(tr("1 minute"), 1);
     ui->combo_lock_timeout->addItem(tr("5 minutes"), 5);
@@ -346,6 +353,9 @@ SettingsTab::SettingsTab(QWidget* parent)
 
     connect(ui->spinbox_proxy_port, QOverload<int>::of(&QSpinBox::valueChanged),
             this, &SettingsTab::onGeneralChanged);
+
+    connect(ui->combo_hosts_per_page, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, &SettingsTab::onHostsPerPageChanged);
     connect(ui->combo_proxy_type, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &SettingsTab::onProxyTypeChanged);
     connect(ui->checkbox_auto_unlock, &QCheckBox::toggled, this, &SettingsTab::onAutoUnlockToggled);
@@ -561,6 +571,21 @@ void SettingsTab::onSaveGeneral()
     written &= db.setBackupRetention(
         static_cast<AutoBackup::Retention>(ui->combo_backup_retention->currentData().toInt()));
 
+//--------------------------------------------------------------------------------------------------
+void SettingsTab::onHostsPerPageChanged()
+{
+    const qint64 page_size = ui->combo_hosts_per_page->currentData().toLongLong();
+    if (page_size <= 0)
+        return;
+
+    LOG(INFO) << "[ACTION] Hosts per page changed:" << page_size;
+    Database::instance().setHostsPerPage(page_size);
+    emit sig_hostsPerPageChanged(page_size);
+}
+
+//--------------------------------------------------------------------------------------------------
+void SettingsTab::onProxyChanged()
+{
     const int proxy_type = ui->combo_proxy_type->currentData().toInt();
 
     ProxySettings proxy_settings;
@@ -881,6 +906,7 @@ void SettingsTab::onCheckForUpdatesClicked()
     AutoQPointer<UpdateDialog> dialog(new UpdateDialog(
         settings.updateServer(), settings.updatePublicKey(), ui->combobox_update_channel->currentData().toString(),
         "client", proxy.settings(), UpdateDialog::Action::ASK, this));
+    dialog->setRestartAfterInstall(true);
     dialog->exec();
 }
 

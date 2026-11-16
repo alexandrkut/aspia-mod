@@ -97,6 +97,13 @@ DesktopToolBar::DesktopToolBar(QWidget* parent)
     LOG(INFO) << "Ctor";
     ui->setupUi(this);
 
+    action_view_only_ = new QAction(QIcon(":/img/view-monitor.svg"), tr("View only"), this);
+    action_view_only_->setCheckable(false);
+    action_view_only_->setEnabled(false);
+    action_view_only_->setVisible(false);
+    action_view_only_->setToolTip(tr("View only"));
+    ui->toolbar->addAction(action_view_only_);
+
     hide_timer_ = new QTimer(this);
     connect(hide_timer_, &QTimer::timeout, this, &DesktopToolBar::onHideTimer);
 
@@ -307,6 +314,13 @@ void DesktopToolBar::enablePasteAsKeystrokesFeature(bool enable)
 {
     LOG(INFO) << "enablePasteAsKeystrokesFeature:" << enable;
     ui->action_paste_clipboard_as_keystrokes->setEnabled(enable);
+}
+
+//--------------------------------------------------------------------------------------------------
+void DesktopToolBar::setViewOnly(bool enable)
+{
+    if (action_view_only_)
+        action_view_only_->setVisible(enable);
 }
 
 //--------------------------------------------------------------------------------------------------

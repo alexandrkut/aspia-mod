@@ -437,6 +437,22 @@ HostConfig HostConfig::forRouterHost(HostId host_id, const QString& name)
 }
 
 //--------------------------------------------------------------------------------------------------
+QStringList HostConfig::notifySettingsKeys() const
+{
+    QStringList keys;
+    if (routerId() > 0)
+    {
+        keys.append(QString("host_notify/router_%1_%2").arg(routerId()).arg(address()));
+        keys.append(QString("host_notify/%1_%2").arg(routerId()).arg(address()));
+    }
+    if (!address().isEmpty())
+        keys.append(QString("host_notify/%1").arg(address()));
+    if (!name().isEmpty())
+        keys.append(QString("host_notify/%1").arg(name()));
+    return keys;
+}
+
+//--------------------------------------------------------------------------------------------------
 proto::control::Config defaultDesktopConfig()
 {
     proto::control::Config config;
@@ -462,4 +478,15 @@ QString recordingPath(const proto::control::Config& config)
     if (path.isEmpty())
         path = QStandardPaths::writableLocation(QStandardPaths::MoviesLocation) + "/Aspia";
     return path;
+}
+
+void applyViewOnlyOverrides(proto::control::Config& config)
+{
+    // A view session must not alter the host desktop and must show where the host user points:
+    // the remote cursor position is always on, regardless of the user's settings.
+    config.set_view_only(true);
+    config.set_cursor_position(true);
+    config.set_wallpaper(true);
+    config.set_effects(true);
+    config.clear_preferred_resolution();
 }

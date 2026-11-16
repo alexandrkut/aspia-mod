@@ -24,6 +24,7 @@
 
 #include <algorithm>
 
+#include "base/serialization.h"
 #include "proto/peer.h"
 
 namespace {
@@ -220,8 +221,7 @@ QString RelayListModel::textAt(const proto::router::RelayInfo& relay, Column col
         case Column::VERSION:
         {
             const proto::peer::Version& version = relay.version();
-            return QString("%1.%2.%3")
-                .arg(version.major()).arg(version.minor()).arg(version.patch());
+            return versionToString(version);
         }
 
         case Column::COMPUTER_NAME:

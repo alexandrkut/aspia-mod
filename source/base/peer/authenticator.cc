@@ -224,6 +224,9 @@ void Authenticator::finish(const Location& location, ErrorCode error_code)
 //--------------------------------------------------------------------------------------------------
 bool Authenticator::setPeerVersion(const proto::peer::Version& version)
 {
+    // The revision is not checked here: it is the number of the build of the line of the
+    // versions, and the older builds put the number of the commits into it, and that number
+    // is of no use here.
     if (version.major() > kMaxVersionComponent || version.minor() > kMaxVersionComponent ||
         version.patch() > kMaxVersionComponent)
     {

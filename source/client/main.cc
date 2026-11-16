@@ -35,12 +35,20 @@
 #include "client/android/main_window.h"
 #include "common/android/message_dialog.h"
 #else
+#include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QDir>
 #include <QProcess>
 
 #include <functional>
 
+#include "base/auto_qpointer.h"
+#include "base/crypto/secure_string.h"
+#include "client/connect_request.h"
+#include "client/storage/database.h"
+#include "client/master_password.h"
+#include "client/settings.h"
+#include "client/system_settings.h"
 #include "client/desktop/app_lock.h"
 #include "client/desktop/main_window.h"
 #include "client/desktop/update_server_dialog.h"
@@ -51,6 +59,7 @@
 #include "client/storage/system_settings.h"
 #include "client/storage/user_settings.h"
 #include "common/desktop/msg_box.h"
+#include "proto/peer.h"
 #include "common/desktop/update_dialog.h"
 #endif // defined(Q_OS_ANDROID)
 
@@ -264,7 +273,40 @@ int main(int argc, char* argv[])
     parser.setApplicationDescription(QApplication::translate("Client", "Aspia Client"));
     parser.addHelpOption();
     parser.addVersionOption();
+    const QCommandLineOption connect_option(
+        { QStringLiteral("connect"), QStringLiteral("c") },
+        QApplication::translate("Client",
+            "Connect to the host of the address book with this record ID or host ID, using the "
+            "login and the password stored in it, or connect directly to a host by its address, "
+            "which needs the login and the password given with --username and --password."),
+        QApplication::translate("Client", "id"));
+
+    const QCommandLineOption session_type_option(
+        QStringLiteral("session-type"),
+        QApplication::translate("Client",
+            "Kind of the session to open: desktop, file, info, chat or terminal "
+            "(default: the one from the settings of the application)."),
+        QApplication::translate("Client", "type"));
+
+    const QCommandLineOption username_option(
+        { QStringLiteral("username"), QStringLiteral("u") },
+        QApplication::translate("Client",
+            "Log in with this user name instead of the one stored in the host. "
+            "Requires --password."),
+        QApplication::translate("Client", "name"));
+
+    const QCommandLineOption password_option(
+        QStringLiteral("password"),
+        QApplication::translate("Client",
+            "Log in with this password instead of the stored one. Requires --username. "
+            "A password on a command line is visible to the other users of the machine."),
+        QApplication::translate("Client", "password"));
+
     parser.addOption(select_database_option);
+    parser.addOption(connect_option);
+    parser.addOption(session_type_option);
+    parser.addOption(username_option);
+    parser.addOption(password_option);
     parser.process(application);
 
     if (parser.isSet(select_database_option) || !openOnlyDatabase())
@@ -273,14 +315,52 @@ int main(int argc, char* argv[])
             return 0;
     }
 
+    ConnectRequest connect_request;
+    QString start_url;
+    QString parse_error;
+
+    if (!ConnectRequest::parse(application.arguments().mid(1), &connect_request, &start_url, &parse_error))
+    {
+        LOG(ERROR) << "Invalid command line:" << parse_error;
+        MsgBox::warning(nullptr, parse_error);
+        return 2;
+    }
+
+    if (!connect_request.isEmpty() &&
+        connect_request.sessionType() == proto::peer::SESSION_TYPE_UNKNOWN)
+    {
+        connect_request.setSessionType(Settings().sessionType());
+
+        if (connect_request.sessionType() == proto::peer::SESSION_TYPE_UNKNOWN)
+            connect_request.setSessionType(proto::peer::SESSION_TYPE_DESKTOP);
+    }
+
+    if (!connect_request.isEmpty())
+    {
+        LOG(INFO) << "Command line asks for host" << connect_request.identifier()
+                  << "with session type" << connect_request.sessionType()
+                  << (connect_request.hasCredentials() ?
+                         ", credentials given on the command line" : "");
+    }
+
     Database& db = Database::instance();
 
     application.setInstanceKey(db.guid());
 
     if (application.isRunning())
     {
-        LOG(INFO) << "Another instance has opened the database, activating its window";
-        application.activateWindow();
+        if (!connect_request.isEmpty())
+        {
+            LOG(INFO) << "Another instance is already running, forwarding host to it";
+            application.openHost(connect_request.identifier(), connect_request.sessionType(),
+                                 connect_request.username(),
+                                 connect_request.password().toString());
+        }
+        else
+        {
+            LOG(INFO) << "Another instance is already running, activating its window";
+            application.activateWindow();
+        }
         return 0;
     }
 
@@ -302,6 +382,12 @@ int main(int argc, char* argv[])
 
         QObject::connect(&application, &Application::sig_windowActivated,
                          main_window.get(), &MainWindow::showAndActivate);
+        QObject::connect(&application, &Application::sig_hostOpened, main_window.get(),
+                         [main_window = main_window.get()](const QString& identifier, int session_type,
+                                                           const QString& username, const QString& password)
+        {
+            main_window->connectToLocalHost(identifier, session_type, username, password);
+        });
         QObject::connect(main_window.get(), &MainWindow::sig_lockRequested, &application, [&]()
         {
             // Until the new window there is no window on the screen, and closing the unlock dialog
@@ -336,6 +422,17 @@ int main(int argc, char* argv[])
     };
 
     create_main_window();
+
+    if (!connect_request.isEmpty())
+    {
+        QTimer::singleShot(0, main_window.get(), [window = main_window.get(), connect_request]()
+        {
+            window->connectToLocalHost(connect_request.identifier(), connect_request.sessionType(),
+                                      connect_request.username(),
+                                      connect_request.password().toString());
+        });
+    }
+
     return application.exec();
 #endif // defined(Q_OS_ANDROID)
 }

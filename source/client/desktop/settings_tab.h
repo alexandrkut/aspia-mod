@@ -52,6 +52,8 @@ signals:
     void sig_lockTimeoutChanged();
     void sig_routerChanged();
 
+    void sig_hostsPerPageChanged(qint64 page_size);
+
 protected:
     // QWidget implementation.
     void changeEvent(QEvent* event) final;
@@ -68,6 +70,13 @@ private slots:
     void onAddProfile();
     void onRenameProfile();
     void onDeleteProfile();
+
+    void onBackupRetentionChanged();
+    void onHostsPerPageChanged();
+    void onProxyChanged();
+    void onUdpMethodsChanged();
+    void onLockTimeoutChanged();
+    void onAutoUnlockChanged();
     void onDesktopFeatureChanged();
     void onSelectRecordingPath();
     void onMcpEnabledChanged();
