@@ -28,6 +28,7 @@ class MainWindow;
 class QTimer;
 class QWidget;
 class SecureString;
+class ConnectRequest;
 
 // Asks for the lock of the application when the user has not touched it for the time set in the
 // settings.
@@ -42,8 +43,9 @@ public:
     ~AppLock() final;
 
     // Shows the unlock dialog. At the |startup| the user chooses the database, later the dialog asks
-    // for the one already open.
-    static Result unlock(bool startup);
+    // for the one already open. |connect_request|, when set and not empty, is forwarded to the
+    // instance of the already open database instead of being lost on CANCELLED.
+    static Result unlock(bool startup, const ConnectRequest* connect_request = nullptr);
 
     // Tells the user what is wrong with |password| as a new master password. Returns false when
     // another one has to be entered.

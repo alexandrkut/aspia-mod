@@ -993,98 +993,114 @@
 <context>
     <name>Client</name>
     <message>
-        <location filename="../client/main.cc" line="101"/>
+        <location filename="../client/main.cc" line="102"/>
         <source>Unable to create a backup. Some records of the database are damaged. Fix or delete them.</source>
         <translation>無法建立備份。資料庫中有部分記錄已損壞。請修復或刪除這些記錄。</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/app_lock.cc" line="94"/>
+        <location filename="../client/desktop/app_lock.cc" line="95"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>密碼長度不能少於 %n 個字元。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/app_lock.cc" line="102"/>
+        <location filename="../client/desktop/app_lock.cc" line="103"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>輸入的密碼不符合安全性要求！</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/app_lock.cc" line="104"/>
+        <location filename="../client/desktop/app_lock.cc" line="105"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>密碼必須包含大小寫字母和數字，且長度不能少於 %n 個字元。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/app_lock.cc" line="108"/>
+        <location filename="../client/desktop/app_lock.cc" line="109"/>
         <source>Do you want to enter a different password?</source>
         <translation>要輸入其他密碼嗎？</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="95"/>
+        <location filename="../client/main.cc" line="96"/>
         <source>Unable to create a backup in the directory &quot;%1&quot;.</source>
         <translation>無法在資料夾「%1」中建立備份。</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="107"/>
+        <location filename="../client/main.cc" line="108"/>
         <source>Unable to create a backup.</source>
         <translation>無法建立備份。</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="249"/>
+        <location filename="../client/main.cc" line="250"/>
         <source>Unable to move the address book into the new format. The old address book is not changed, and the next start tries again. The details are in the log.</source>
         <translation>無法將通訊錄轉換為新格式。舊的通訊錄未變更，下次啟動時會再次嘗試。詳細資訊請參閱記錄檔。</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="256"/>
-        <location filename="../client/main.cc" line="273"/>
+        <location filename="../client/main.cc" line="257"/>
+        <location filename="../client/main.cc" line="274"/>
         <source>Aspia Client</source>
         <translation>Aspia Client</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="270"/>
+        <location filename="../client/main.cc" line="271"/>
         <source>Show the database selection dialog.</source>
         <translation>顯示資料庫選擇對話方塊。</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="278"/>
+        <location filename="../client/main.cc" line="279"/>
         <source>Connect to the host of the address book with this record ID or host ID, using the login and the password stored in it, or connect directly to a host by its address, which needs the login and the password given with --username and --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="282"/>
+        <location filename="../client/main.cc" line="283"/>
         <source>id</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="286"/>
+        <location filename="../client/main.cc" line="287"/>
         <source>Kind of the session to open: desktop, file, info, chat or terminal (default: the one from the settings of the application).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="289"/>
+        <location filename="../client/main.cc" line="290"/>
         <source>type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="293"/>
+        <location filename="../client/main.cc" line="294"/>
         <source>Log in with this user name instead of the one stored in the host. Requires --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="296"/>
+        <location filename="../client/main.cc" line="297"/>
+        <location filename="../client/main.cc" line="309"/>
         <source>name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="300"/>
+        <location filename="../client/main.cc" line="301"/>
         <source>Log in with this password instead of the stored one. Requires --username. A password on a command line is visible to the other users of the machine.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="303"/>
+        <location filename="../client/main.cc" line="304"/>
         <source>password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="307"/>
+        <source>Open the database with this name or ID instead of the selection dialog.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="312"/>
+        <source>Print the ID and the name of every database and exit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="376"/>
+        <source>Unable to open the database &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1135,6 +1151,16 @@
     <message>
         <location filename="../client/connect_request.cc" line="273"/>
         <source>--username and --password need a host to connect to (--connect or an aspia:// link).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/storage/database.cc" line="135"/>
+        <source>Several databases are named &quot;%1&quot;. Use the ID of the one you mean.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/storage/database.cc" line="147"/>
+        <source>No database matches &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14760,127 +14786,127 @@ Sections: %2. Users in file: %3.</source>
         <translation>確認密碼</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="56"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="58"/>
         <source>Open Database</source>
         <translation>開啟資料庫</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="150"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="152"/>
         <source>The database is already open.</source>
         <translation>資料庫已開啟。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="152"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="154"/>
         <source>The master password of this database is not set.</source>
         <translation>此資料庫尚未設定主密碼。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="177"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="179"/>
         <source>The database is open in another window. Close it to rename the database.</source>
         <translation>資料庫已在其他視窗中開啟。請關閉該視窗以重新命名資料庫。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="185"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="187"/>
         <source>Enter the new name of the database.</source>
         <translation>輸入資料庫的新名稱。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="203"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="205"/>
         <source>The database is open in another window. Close it to delete the database.</source>
         <translation>資料庫已在其他視窗中開啟。請關閉該視窗以刪除資料庫。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="208"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="210"/>
         <source>The database &quot;%1&quot; with all its records and settings will be deleted.
 Delete the database?</source>
         <translation>資料庫「%1」及其所有記錄和設定都將被刪除。
 要刪除資料庫嗎？</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="209"/>
-        <location filename="../client/desktop/unlock_dialog.cc" line="258"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="211"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="260"/>
         <source>Unnamed database</source>
         <translation>未命名資料庫</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="216"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="218"/>
         <source>Unable to move the database to the trash. Delete it permanently?</source>
         <translation>無法將資料庫移至資源回收筒。要永久刪除嗎？</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="225"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="227"/>
         <source>Unable to delete the database.</source>
         <translation>無法刪除資料庫。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="263"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="265"/>
         <source>%1 (open)</source>
         <translation>%1 (已開啟)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="284"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="286"/>
         <source>Database #1</source>
         <translation>資料庫 #1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="325"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="338"/>
         <source>Unable to open the database.</source>
         <translation>無法開啟資料庫。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="355"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="368"/>
         <source>Invalid master password.</source>
         <translation>主密碼無效。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="362"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="375"/>
         <source>Unable to unlock the database.</source>
         <translation>無法解除鎖定資料庫。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="379"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="392"/>
         <source>Passwords do not match.</source>
         <translation>密碼不相符。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="404"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="417"/>
         <source>Unable to create the database.</source>
         <translation>無法建立資料庫。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="433"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="446"/>
         <source>Unable to rename the database.</source>
         <translation>無法重新命名資料庫。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="448"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="461"/>
         <source>Name cannot be empty.</source>
         <translation>名稱不能為空。</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/unlock_dialog.cc" line="455"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="468"/>
         <source>Too long name. The maximum length of the name is %n characters.</source>
         <translation>
             <numerusform>名稱太長。名稱長度上限為 %n 個字元。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="463"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="476"/>
         <source>A database with this name already exists.</source>
         <translation>已存在同名資料庫。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="501"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="514"/>
         <source>Enter the name and the master password of the new database.</source>
         <translation>輸入新資料庫的名稱和主密碼。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="527"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="540"/>
         <source>Enter the master password to unlock the database.</source>
         <translation>輸入主密碼以解除鎖定資料庫。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="529"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="542"/>
         <source>The master password of this database is remembered on this computer.</source>
         <translation>此電腦已記住此資料庫的主密碼。</translation>
     </message>

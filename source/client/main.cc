@@ -39,6 +39,7 @@
 #include <QCommandLineParser>
 #include <QDir>
 #include <QProcess>
+#include <QTextStream>
 
 #include <functional>
 
@@ -302,17 +303,29 @@ int main(int argc, char* argv[])
             "A password on a command line is visible to the other users of the machine."),
         QApplication::translate("Client", "password"));
 
+    const QCommandLineOption database_option("database",
+        QApplication::translate("Client",
+            "Open the database with this name or ID instead of the selection dialog."),
+        QApplication::translate("Client", "name"));
+
+    const QCommandLineOption list_databases_option("list-databases",
+        QApplication::translate("Client", "Print the ID and the name of every database and exit."));
+
     parser.addOption(select_database_option);
     parser.addOption(connect_option);
     parser.addOption(session_type_option);
     parser.addOption(username_option);
     parser.addOption(password_option);
+    parser.addOption(database_option);
+    parser.addOption(list_databases_option);
     parser.process(application);
 
-    if (parser.isSet(select_database_option) || !openOnlyDatabase())
+    if (parser.isSet(list_databases_option))
     {
-        if (AppLock::unlock(true) != AppLock::Result::UNLOCKED)
-            return 0;
+        QTextStream out(stdout);
+        for (const Database::Info& info : Database::list())
+            out << info.id << '\t' << info.name << Qt::endl;
+        return 0;
     }
 
     ConnectRequest connect_request;
@@ -324,6 +337,57 @@ int main(int argc, char* argv[])
         LOG(ERROR) << "Invalid command line:" << parse_error;
         MsgBox::warning(nullptr, parse_error);
         return 2;
+    }
+
+    if (parser.isSet(database_option) && !parser.isSet(select_database_option))
+    {
+        QString error;
+        const QString id =
+            Database::resolveId(parser.value(database_option), Database::list(), &error);
+        if (id.isEmpty())
+        {
+            MsgBox::warning(nullptr, error);
+            return 2;
+        }
+
+        if (application.hasInstance(id))
+        {
+            LOG(INFO) << "The database is already open, forwarding to its instance";
+            application.setInstanceKey(id);
+
+            if (!connect_request.isEmpty())
+            {
+                const int session_type =
+                    connect_request.sessionType() == proto::peer::SESSION_TYPE_UNKNOWN ?
+                        proto::peer::SESSION_TYPE_DESKTOP : connect_request.sessionType();
+                application.openHost(connect_request.identifier(), session_type,
+                                     connect_request.username(),
+                                     connect_request.password().toString());
+            }
+
+            application.activateWindow();
+            return 0;
+        }
+
+        Database::select(id);
+
+        if (!Database::instance().isValid())
+        {
+            MsgBox::warning(nullptr, QApplication::translate(
+                "Client", "Unable to open the database \"%1\".").arg(id));
+            return 2;
+        }
+
+        if (!MasterPassword::isSet() || !MasterPassword::autoUnlock())
+        {
+            if (AppLock::unlock(true, &connect_request) != AppLock::Result::UNLOCKED)
+                return 0;
+        }
+    }
+    else if (parser.isSet(select_database_option) || !openOnlyDatabase())
+    {
+        if (AppLock::unlock(true, &connect_request) != AppLock::Result::UNLOCKED)
+            return 0;
     }
 
     if (!connect_request.isEmpty() &&

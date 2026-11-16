@@ -994,12 +994,12 @@
 <context>
     <name>Client</name>
     <message>
-        <location filename="../client/main.cc" line="101"/>
+        <location filename="../client/main.cc" line="102"/>
         <source>Unable to create a backup. Some records of the database are damaged. Fix or delete them.</source>
         <translation>No se pudo crear una copia de seguridad. Algunos registros de la base de datos están dañados. Corríjalos o elimínelos.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/app_lock.cc" line="94"/>
+        <location filename="../client/desktop/app_lock.cc" line="95"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>La contraseña no puede tener menos de %n carácter.</numerusform>
@@ -1007,12 +1007,12 @@
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/app_lock.cc" line="102"/>
+        <location filename="../client/desktop/app_lock.cc" line="103"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>¡La contraseña introducida no cumple los requisitos de seguridad!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/app_lock.cc" line="104"/>
+        <location filename="../client/desktop/app_lock.cc" line="105"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>La contraseña debe contener letras minúsculas y mayúsculas, números y no debe tener menos de %n carácter.</numerusform>
@@ -1020,74 +1020,90 @@
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/app_lock.cc" line="108"/>
+        <location filename="../client/desktop/app_lock.cc" line="109"/>
         <source>Do you want to enter a different password?</source>
         <translation>¿Desea introducir una contraseña diferente?</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="95"/>
+        <location filename="../client/main.cc" line="96"/>
         <source>Unable to create a backup in the directory &quot;%1&quot;.</source>
         <translation>No se pudo crear una copia de seguridad en el directorio &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="107"/>
+        <location filename="../client/main.cc" line="108"/>
         <source>Unable to create a backup.</source>
         <translation>No se pudo crear una copia de seguridad.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="249"/>
+        <location filename="../client/main.cc" line="250"/>
         <source>Unable to move the address book into the new format. The old address book is not changed, and the next start tries again. The details are in the log.</source>
         <translation>No se pudo convertir la libreta de direcciones al nuevo formato. La libreta de direcciones anterior no se ha modificado y se volverá a intentar en el próximo inicio. Los detalles están en el registro.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="256"/>
-        <location filename="../client/main.cc" line="273"/>
+        <location filename="../client/main.cc" line="257"/>
+        <location filename="../client/main.cc" line="274"/>
         <source>Aspia Client</source>
         <translation>Aspia Client</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="270"/>
+        <location filename="../client/main.cc" line="271"/>
         <source>Show the database selection dialog.</source>
         <translation>Muestra el diálogo de selección de base de datos.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="278"/>
+        <location filename="../client/main.cc" line="279"/>
         <source>Connect to the host of the address book with this record ID or host ID, using the login and the password stored in it, or connect directly to a host by its address, which needs the login and the password given with --username and --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="282"/>
+        <location filename="../client/main.cc" line="283"/>
         <source>id</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="286"/>
+        <location filename="../client/main.cc" line="287"/>
         <source>Kind of the session to open: desktop, file, info, chat or terminal (default: the one from the settings of the application).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="289"/>
+        <location filename="../client/main.cc" line="290"/>
         <source>type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="293"/>
+        <location filename="../client/main.cc" line="294"/>
         <source>Log in with this user name instead of the one stored in the host. Requires --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="296"/>
+        <location filename="../client/main.cc" line="297"/>
+        <location filename="../client/main.cc" line="309"/>
         <source>name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="300"/>
+        <location filename="../client/main.cc" line="301"/>
         <source>Log in with this password instead of the stored one. Requires --username. A password on a command line is visible to the other users of the machine.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="303"/>
+        <location filename="../client/main.cc" line="304"/>
         <source>password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="307"/>
+        <source>Open the database with this name or ID instead of the selection dialog.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="312"/>
+        <source>Print the ID and the name of every database and exit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="376"/>
+        <source>Unable to open the database &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1138,6 +1154,16 @@
     <message>
         <location filename="../client/connect_request.cc" line="273"/>
         <source>--username and --password need a host to connect to (--connect or an aspia:// link).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/storage/database.cc" line="135"/>
+        <source>Several databases are named &quot;%1&quot;. Use the ID of the one you mean.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/storage/database.cc" line="147"/>
+        <source>No database matches &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14824,105 +14850,105 @@ Sections: %2. Users in file: %3.</source>
         <translation>Confirmar contraseña</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="56"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="58"/>
         <source>Open Database</source>
         <translation>Abrir base de datos</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="150"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="152"/>
         <source>The database is already open.</source>
         <translation>La base de datos ya está abierta.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="152"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="154"/>
         <source>The master password of this database is not set.</source>
         <translation>La contraseña maestra de esta base de datos no está establecida.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="177"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="179"/>
         <source>The database is open in another window. Close it to rename the database.</source>
         <translation>La base de datos está abierta en otra ventana. Ciérrela para renombrar la base de datos.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="185"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="187"/>
         <source>Enter the new name of the database.</source>
         <translation>Introduzca el nuevo nombre de la base de datos.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="203"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="205"/>
         <source>The database is open in another window. Close it to delete the database.</source>
         <translation>La base de datos está abierta en otra ventana. Ciérrela para eliminar la base de datos.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="208"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="210"/>
         <source>The database &quot;%1&quot; with all its records and settings will be deleted.
 Delete the database?</source>
         <translation>Se eliminará la base de datos &quot;%1&quot; con todos sus registros y su configuración.
 ¿Eliminar la base de datos?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="209"/>
-        <location filename="../client/desktop/unlock_dialog.cc" line="258"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="211"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="260"/>
         <source>Unnamed database</source>
         <translation>Base de datos sin nombre</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="216"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="218"/>
         <source>Unable to move the database to the trash. Delete it permanently?</source>
         <translation>No se pudo mover la base de datos a la papelera. ¿Eliminarla de forma permanente?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="225"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="227"/>
         <source>Unable to delete the database.</source>
         <translation>No se pudo eliminar la base de datos.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="263"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="265"/>
         <source>%1 (open)</source>
         <translation>%1 (abierta)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="284"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="286"/>
         <source>Database #1</source>
         <translation>Base de datos #1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="325"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="338"/>
         <source>Unable to open the database.</source>
         <translation>No se pudo abrir la base de datos.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="355"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="368"/>
         <source>Invalid master password.</source>
         <translation>Contraseña maestra no válida.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="362"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="375"/>
         <source>Unable to unlock the database.</source>
         <translation>No se pudo desbloquear la base de datos.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="379"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="392"/>
         <source>Passwords do not match.</source>
         <translation>Las contraseñas no coinciden.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="404"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="417"/>
         <source>Unable to create the database.</source>
         <translation>No se pudo crear la base de datos.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="433"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="446"/>
         <source>Unable to rename the database.</source>
         <translation>No se pudo renombrar la base de datos.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="448"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="461"/>
         <source>Name cannot be empty.</source>
         <translation>El nombre no puede estar vacío.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/unlock_dialog.cc" line="455"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="468"/>
         <source>Too long name. The maximum length of the name is %n characters.</source>
         <translation>
             <numerusform>Nombre demasiado largo. La longitud máxima del nombre es de %n carácter.</numerusform>
@@ -14930,22 +14956,22 @@ Delete the database?</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="463"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="476"/>
         <source>A database with this name already exists.</source>
         <translation>Ya existe una base de datos con este nombre.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="501"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="514"/>
         <source>Enter the name and the master password of the new database.</source>
         <translation>Introduzca el nombre y la contraseña maestra de la nueva base de datos.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="527"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="540"/>
         <source>Enter the master password to unlock the database.</source>
         <translation>Introduzca la contraseña maestra para desbloquear la base de datos.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="529"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="542"/>
         <source>The master password of this database is remembered on this computer.</source>
         <translation>La contraseña maestra de esta base de datos se recuerda en este equipo.</translation>
     </message>

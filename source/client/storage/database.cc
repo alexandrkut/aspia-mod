@@ -19,6 +19,7 @@
 #include "client/storage/database.h"
 #include "client/storage/database_migration.h"
 
+#include <QCoreApplication>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
@@ -106,6 +107,47 @@ bool Database::remove(const QString& id)
         select(QString());
 
     return QFile::remove(filePathOf(id));
+}
+
+//--------------------------------------------------------------------------------------------------
+// static
+QString Database::resolveId(const QString& query, const QList<Info>& list, QString* error)
+{
+    const QString name = query.trimmed();
+
+    for (const Info& info : list)
+    {
+        if (info.id.compare(name, Qt::CaseInsensitive) == 0)
+            return info.id;
+    }
+
+    QString found;
+
+    for (const Info& info : list)
+    {
+        if (info.name.compare(name, Qt::CaseInsensitive) != 0)
+            continue;
+
+        if (!found.isEmpty())
+        {
+            if (error)
+            {
+                *error = QCoreApplication::translate(
+                    "Client", "Several databases are named \"%1\". Use the ID of the one you mean.")
+                    .arg(name);
+            }
+            return QString();
+        }
+
+        found = info.id;
+    }
+
+    if (found.isEmpty() && error)
+    {
+        *error = QCoreApplication::translate("Client", "No database matches \"%1\".").arg(name);
+    }
+
+    return found;
 }
 
 //--------------------------------------------------------------------------------------------------

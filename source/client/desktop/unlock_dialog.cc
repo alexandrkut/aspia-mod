@@ -29,6 +29,7 @@
 #include "base/logging.h"
 #include "base/crypto/secure_string.h"
 #include "client/application.h"
+#include "client/connect_request.h"
 #include "client/desktop/app_lock.h"
 #include "client/desktop/ui_unlock_dialog.h"
 #include "client/storage/instance_settings.h"
@@ -37,10 +38,11 @@
 #include "common/desktop/msg_box.h"
 
 //--------------------------------------------------------------------------------------------------
-UnlockDialog::UnlockDialog(Mode mode, QWidget* parent)
+UnlockDialog::UnlockDialog(Mode mode, const ConnectRequest* connect_request, QWidget* parent)
     : QDialog(parent),
       ui(std::make_unique<Ui::UnlockDialog>()),
-      mode_(mode)
+      mode_(mode),
+      connect_request_(connect_request)
 {
     LOG(TRACE) << "Ctor";
     ui->setupUi(this);
@@ -310,6 +312,17 @@ void UnlockDialog::unlock()
 
         LOG(INFO) << "The database is already open, activating its window";
         application->setInstanceKey(id);
+
+        if (connect_request_ && !connect_request_->isEmpty())
+        {
+            const int session_type =
+                connect_request_->sessionType() == proto::peer::SESSION_TYPE_UNKNOWN ?
+                    proto::peer::SESSION_TYPE_DESKTOP : connect_request_->sessionType();
+            application->openHost(connect_request_->identifier(), session_type,
+                                  connect_request_->username(),
+                                  connect_request_->password().toString());
+        }
+
         application->activateWindow();
 
         reject();
