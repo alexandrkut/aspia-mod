@@ -436,7 +436,10 @@ void DesktopWindow::onSessionStarted()
                 clipboard_, &Clipboard::addFileData);
     }
 
-    emit sig_showRequested();
+    // A reconnected session must not steal focus: only a brand-new session activates its tab.
+    // (Auto-reconnect keeps isAutoReconnect() true across the successful reconnect.)
+    if (auto state = sessionState(); !state || !state->isAutoReconnect())
+        emit sig_showRequested();
     toolbar_->enableTextChat(true);
     toolbar_->enableTerminal(true);
     toolbar_->enableSystemInfo(true);
