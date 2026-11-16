@@ -43,6 +43,9 @@
 
 #include <functional>
 
+#if defined(Q_OS_WINDOWS)
+#include <qt_windows.h>
+#endif
 #include "base/auto_qpointer.h"
 #include "base/crypto/secure_string.h"
 #include "client/connect_request.h"
@@ -322,6 +325,19 @@ int main(int argc, char* argv[])
 
     if (parser.isSet(list_databases_option))
     {
+#if defined(Q_OS_WINDOWS)
+        // A GUI-subsystem binary gets no standard handles from an interactive console, so the
+        // list would go nowhere. Attach to the console of the shell that started us and point
+        // stdout at it; under a redirection the handles are valid and are left alone.
+        if (GetFileType(GetStdHandle(STD_OUTPUT_HANDLE)) == FILE_TYPE_UNKNOWN)
+        {
+            if (AttachConsole(ATTACH_PARENT_PROCESS))
+            {
+                FILE* stream = nullptr;
+                freopen_s(&stream, "CONOUT$", "w", stdout);
+            }
+        }
+#endif
         QTextStream out(stdout);
         for (const Database::Info& info : Database::list())
             out << info.id << '\t' << info.name << Qt::endl;
@@ -337,6 +353,32 @@ int main(int argc, char* argv[])
         LOG(ERROR) << "Invalid command line:" << parse_error;
         MsgBox::warning(nullptr, parse_error);
         return 2;
+    }
+
+    // Exactly one database open: the request goes to its instance without asking.
+    if (!parser.isSet(database_option) && !parser.isSet(select_database_option) &&
+        !connect_request.isEmpty())
+    {
+        QString open_id;
+        int open_count = 0;
+        for (const Database::Info& info : Database::list())
+        {
+            if (application.hasInstance(info.id)) { open_id = info.id; ++open_count; }
+        }
+        if (open_count == 1)
+        {
+            LOG(INFO) << "One database is open, forwarding the command line request to its instance";
+            application.setInstanceKey(open_id);
+            const int session_type =
+                connect_request.sessionType() == proto::peer::SESSION_TYPE_UNKNOWN ?
+                    proto::peer::SESSION_TYPE_DESKTOP : connect_request.sessionType();
+            application.openHost(connect_request.identifier(), session_type,
+                                 connect_request.username(),
+                                 connect_request.password().toString());
+            application.activateWindow();
+            return 0;
+        }
+        // 0 or 2+ open: fall through to the existing logic (dialog as before).
     }
 
     if (parser.isSet(database_option) && !parser.isSet(select_database_option))
