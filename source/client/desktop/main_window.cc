@@ -283,7 +283,11 @@ void MainWindow::showAndActivate()
 {
     LOG(INFO) << "Show and activate window";
 
-    show();
+    if (isMinimized())
+        showNormal();
+    else
+        show();
+
     raise();
     activateWindow();
     setFocus();
