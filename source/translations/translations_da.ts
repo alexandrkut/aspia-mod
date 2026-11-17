@@ -724,54 +724,54 @@
         <translation>···</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="134"/>
-        <location filename="../common/desktop/chat_widget.cc" line="348"/>
+        <location filename="../common/desktop/chat_widget.cc" line="136"/>
+        <location filename="../common/desktop/chat_widget.cc" line="358"/>
         <source>Save chat...</source>
         <translation>Gem chat...</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="135"/>
-        <location filename="../common/desktop/chat_widget.cc" line="349"/>
+        <location filename="../common/desktop/chat_widget.cc" line="137"/>
+        <location filename="../common/desktop/chat_widget.cc" line="359"/>
         <source>Clear chat</source>
         <translation>Ryd chat</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="206"/>
+        <location filename="../common/desktop/chat_widget.cc" line="208"/>
         <source>%1 is typing...</source>
         <translation>%1 skriver...</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="209"/>
+        <location filename="../common/desktop/chat_widget.cc" line="211"/>
         <source>User %1 has joined the chat (%2)</source>
         <translation>Brugeren %1 er kommet ind i chatten (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="212"/>
+        <location filename="../common/desktop/chat_widget.cc" line="214"/>
         <source>User %1 has left the chat (%2)</source>
         <translation>Brugeren %1 har forladt chatten (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="215"/>
+        <location filename="../common/desktop/chat_widget.cc" line="217"/>
         <source>User %1 is logged in (%2)</source>
         <translation>Brugeren %1 er logget på (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="218"/>
+        <location filename="../common/desktop/chat_widget.cc" line="220"/>
         <source>User %1 is not logged in (%2)</source>
         <translation>Brugeren %1 er ikke logget på (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="221"/>
+        <location filename="../common/desktop/chat_widget.cc" line="223"/>
         <source>There are no connected users (%1)</source>
         <translation>Der er ingen forbundne brugere (%1)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="470"/>
+        <location filename="../common/desktop/chat_widget.cc" line="576"/>
         <source>Unable to write file.</source>
         <translation>Kan ikke skrive filen.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../common/desktop/chat_widget.cc" line="486"/>
+        <location filename="../common/desktop/chat_widget.cc" line="592"/>
         <source>The message is too long. The maximum message length is %n characters.</source>
         <translation>
             <numerusform>Meddelelsen er for lang. Den maksimale meddelelseslængde er %n tegn.</numerusform>
@@ -779,17 +779,17 @@
         </translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="409"/>
+        <location filename="../common/desktop/chat_widget.cc" line="515"/>
         <source>Save File</source>
         <translation>Gem fil</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="409"/>
+        <location filename="../common/desktop/chat_widget.cc" line="515"/>
         <source>TXT files (*.txt)</source>
         <translation>TXT-filer (*.txt)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="422"/>
+        <location filename="../common/desktop/chat_widget.cc" line="528"/>
         <source>Could not open file for writing.</source>
         <translation>Kunne ikke åbne filen til skrivning.</translation>
     </message>
@@ -967,6 +967,11 @@
         <source>Clear</source>
         <translation>Ryd</translation>
     </message>
+    <message>
+        <location filename="../client/desktop/chat/chat_window.cc" line="90"/>
+        <source>Force chat</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CheckPasswordDialog</name>
@@ -994,7 +999,7 @@
 <context>
     <name>Client</name>
     <message>
-        <location filename="../client/main.cc" line="105"/>
+        <location filename="../client/main.cc" line="107"/>
         <source>Unable to create a backup. Some records of the database are damaged. Fix or delete them.</source>
         <translation>Kunne ikke oprette sikkerhedskopien. Nogle poster i databasen er beskadigede. Ret eller slet dem.</translation>
     </message>
@@ -1025,97 +1030,97 @@
         <translation>Vil du indtaste en anden adgangskode?</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="99"/>
+        <location filename="../client/main.cc" line="101"/>
         <source>Unable to create a backup in the directory &quot;%1&quot;.</source>
         <translation>Kunne ikke oprette sikkerhedskopien i mappen &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="111"/>
+        <location filename="../client/main.cc" line="113"/>
         <source>Unable to create a backup.</source>
         <translation>Kunne ikke oprette sikkerhedskopien.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="275"/>
+        <location filename="../client/main.cc" line="277"/>
         <source>Unable to move the address book into the new format. The old address book is not changed, and the next start tries again. The details are in the log.</source>
         <translation>Kan ikke flytte adressebogen til det nye format. Den gamle adressebog er ikke ændret, og der forsøges igen ved næste start. Detaljerne findes i loggen.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="282"/>
-        <location filename="../client/main.cc" line="299"/>
+        <location filename="../client/main.cc" line="284"/>
+        <location filename="../client/main.cc" line="301"/>
         <source>Aspia Client</source>
         <translation>Aspia Client</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="296"/>
+        <location filename="../client/main.cc" line="298"/>
         <source>Show the database selection dialog.</source>
         <translation>Vis dialogboksen til valg af database.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="304"/>
+        <location filename="../client/main.cc" line="306"/>
         <source>Connect to the host of the address book with this record ID or host ID, or with the name of a record, using the login and the password stored in it, or connect directly to a host by its address, which needs the login and the password given with --username and --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="309"/>
+        <location filename="../client/main.cc" line="311"/>
         <source>id</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="313"/>
+        <location filename="../client/main.cc" line="315"/>
         <source>Kind of the session to open: desktop, file, info, chat or terminal (default: the one from the settings of the application).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="316"/>
+        <location filename="../client/main.cc" line="318"/>
         <source>type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="320"/>
+        <location filename="../client/main.cc" line="322"/>
         <source>Log in with this user name instead of the one stored in the host. Requires --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="323"/>
-        <location filename="../client/main.cc" line="335"/>
+        <location filename="../client/main.cc" line="325"/>
+        <location filename="../client/main.cc" line="337"/>
         <source>name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="327"/>
+        <location filename="../client/main.cc" line="329"/>
         <source>Log in with this password instead of the stored one. Requires --username. A password on a command line is visible to the other users of the machine.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="330"/>
-        <location filename="../client/main.cc" line="341"/>
+        <location filename="../client/main.cc" line="332"/>
+        <location filename="../client/main.cc" line="343"/>
         <source>password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="333"/>
+        <location filename="../client/main.cc" line="335"/>
         <source>Open the database with this name or ID instead of the selection dialog.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="338"/>
+        <location filename="../client/main.cc" line="340"/>
         <source>Unlock the database with this master password instead of asking for it. A password on a command line is visible to the other users of the machine.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="344"/>
+        <location filename="../client/main.cc" line="346"/>
         <source>Print the ID and the name of every database and exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="458"/>
-        <location filename="../client/main.cc" line="496"/>
+        <location filename="../client/main.cc" line="486"/>
+        <location filename="../client/main.cc" line="524"/>
         <source>Unable to open the database &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="472"/>
-        <location filename="../client/main.cc" line="503"/>
+        <location filename="../client/main.cc" line="500"/>
+        <location filename="../client/main.cc" line="531"/>
         <source>Invalid master password.</source>
         <translation type="unfinished">Ugyldig hovedadgangskode.</translation>
     </message>
@@ -4180,8 +4185,8 @@ Legitimationsoplysninger erstattet: %2</translation>
     <message>
         <location filename="../host/ui/host_window.ui" line="26"/>
         <location filename="../host/ui/host_window.cc" line="662"/>
-        <location filename="../host/ui/host_window.cc" line="915"/>
-        <location filename="../host/ui/host_window.cc" line="1193"/>
+        <location filename="../host/ui/host_window.cc" line="935"/>
+        <location filename="../host/ui/host_window.cc" line="1213"/>
         <source>Aspia Host</source>
         <translation>Aspia Host</translation>
     </message>
@@ -4197,7 +4202,7 @@ Legitimationsoplysninger erstattet: %2</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="198"/>
-        <location filename="../host/ui/host_window.cc" line="1145"/>
+        <location filename="../host/ui/host_window.cc" line="1165"/>
         <source>Router is disabled</source>
         <translation>Routeren er deaktiveret</translation>
     </message>
@@ -4268,7 +4273,7 @@ Legitimationsoplysninger erstattet: %2</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="335"/>
-        <location filename="../host/ui/host_window.cc" line="868"/>
+        <location filename="../host/ui/host_window.cc" line="888"/>
         <source>Hide</source>
         <translation>Skjul</translation>
     </message>
@@ -4310,13 +4315,13 @@ Legitimationsoplysninger erstattet: %2</translation>
     <message>
         <location filename="../host/ui/host_window.cc" line="181"/>
         <location filename="../host/ui/host_window.cc" line="662"/>
-        <location filename="../host/ui/host_window.cc" line="1193"/>
+        <location filename="../host/ui/host_window.cc" line="1213"/>
         <source>Aspia Quick Support</source>
         <translation>Aspia Quick Support</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.cc" line="340"/>
-        <location filename="../host/ui/host_window.cc" line="863"/>
+        <location filename="../host/ui/host_window.cc" line="883"/>
         <source>Show</source>
         <translation>Vis</translation>
     </message>
@@ -4331,62 +4336,62 @@ Legitimationsoplysninger erstattet: %2</translation>
         <translation>Skærmoptagelse er stoppet.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="852"/>
+        <location filename="../host/ui/host_window.cc" line="872"/>
         <source>Settings storage is unavailable.</source>
         <translation>Indstillingslageret er ikke tilgængeligt.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="911"/>
+        <location filename="../host/ui/host_window.cc" line="931"/>
         <source>The ability to show several monitors at once</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="912"/>
+        <location filename="../host/ui/host_window.cc" line="932"/>
         <source>Remote management of settings and users by the router administrator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="926"/>
+        <location filename="../host/ui/host_window.cc" line="946"/>
         <source>Aspia Host will be removed from this computer. The settings of the host will be kept. Do you really want to uninstall the application?</source>
         <translation>Aspia Host vil blive fjernet fra denne computer. Værtens indstillinger bevares. Vil du virkelig afinstallere programmet?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="938"/>
+        <location filename="../host/ui/host_window.cc" line="958"/>
         <source>Unable to uninstall the application.</source>
         <translation>Kan ikke afinstallere programmet.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="965"/>
+        <location filename="../host/ui/host_window.cc" line="985"/>
         <source>If you exit from Aspia, it will not be possible to connect to this computer until you turn on the computer or Aspia again manually. Do you really want to exit the application?</source>
         <translation>Hvis du afslutter Aspia, vil det ikke være muligt at oprette forbindelse til denne computer, før du manuelt tænder computeren eller starter Aspia igen. Vil du virkelig afslutte programmet?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1137"/>
+        <location filename="../host/ui/host_window.cc" line="1157"/>
         <source>Not connected to service</source>
         <translation>Ikke forbundet til tjenesten</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1150"/>
+        <location filename="../host/ui/host_window.cc" line="1170"/>
         <source>Connecting to router...</source>
         <translation>Opretter forbindelse til routeren...</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1155"/>
+        <location filename="../host/ui/host_window.cc" line="1175"/>
         <source>Connected to router</source>
         <translation>Forbundet til router</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1160"/>
+        <location filename="../host/ui/host_window.cc" line="1180"/>
         <source>Connection error</source>
         <translation>Forbindelsesfejl</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1238"/>
+        <location filename="../host/ui/host_window.cc" line="1258"/>
         <source>IP addresses:</source>
         <translation>IP-adresser:</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1194"/>
+        <location filename="../host/ui/host_window.cc" line="1214"/>
         <source>ID: %1</source>
         <translation>ID: %1</translation>
     </message>
