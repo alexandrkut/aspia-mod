@@ -45,6 +45,9 @@
 
 #if defined(Q_OS_WINDOWS)
 #include <qt_windows.h>
+
+#include <fcntl.h>
+#include <io.h>
 #endif
 #include "base/auto_qpointer.h"
 #include "base/crypto/secure_string.h"
@@ -376,6 +379,22 @@ int main(int argc, char* argv[])
                 fputs("\n", stdout);
                 fflush(stdout);
             }
+        }
+#endif
+#if defined(Q_OS_WINDOWS)
+        const HANDLE console_handle = reinterpret_cast<HANDLE>(_get_osfhandle(_fileno(stdout)));
+        DWORD console_mode = 0;
+        if (console_handle != INVALID_HANDLE_VALUE &&
+            GetConsoleMode(console_handle, &console_mode))
+        {
+            for (const Database::Info& info : Database::list())
+            {
+                const QString line = info.id + QChar('\t') + info.name + QStringLiteral("\r\n");
+                DWORD written = 0;
+                WriteConsoleW(console_handle, line.constData(), static_cast<DWORD>(line.size()),
+                             &written, nullptr);
+            }
+            return 0;
         }
 #endif
         QTextStream out(stdout);
