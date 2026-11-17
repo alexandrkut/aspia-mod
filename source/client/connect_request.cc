@@ -218,6 +218,21 @@ bool ConnectRequest::parse(const QStringList& arguments, ConnectRequest* request
             continue;
         }
 
+        if (const OptionValue database = optionValue(arguments, &i, u"--database"_s);
+            database.recognized)
+        {
+            // Belongs to the caller's parser: the value names a database, not a host, so it is
+            // consumed here and never validated as an identifier.
+            continue;
+        }
+
+        if (const OptionValue master = optionValue(arguments, &i, u"--master-password"_s);
+            master.recognized)
+        {
+            // See --database: a password is not an identifier either.
+            continue;
+        }
+
         if (argument.startsWith(u'-'))
         {
             // An option this parser knows nothing about, including the ones of Qt itself

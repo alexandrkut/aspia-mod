@@ -345,4 +345,35 @@ TEST(ConnectRequestTest, NeitherIdentifierIsRefused)
     EXPECT_TRUE(fails({ QStringLiteral("--connect=") }));
     EXPECT_TRUE(fails({ QStringLiteral("--connect=host/name") }));
     EXPECT_TRUE(fails({ QStringLiteral("--connect=a host") }));
-}
+}
+
+//--------------------------------------------------------------------------------------------------
+// Options that belong to the caller's parser (--database, --master-password) must be consumed here
+// without validating their value as a host identifier: a name like "Database #1" is neither an ID
+// nor an address.
+TEST(ConnectRequestTest, ForeignOptionsAreConsumed)
+{
+    const ConnectRequest request = parse({ QStringLiteral("--connect"), QStringLiteral("123"),
+                                           QStringLiteral("--database"), QStringLiteral("Database #1") });
+
+    EXPECT_FALSE(request.isEmpty());
+    EXPECT_EQ(request.identifier(), QStringLiteral("123"));
+}
+
+//--------------------------------------------------------------------------------------------------
+TEST(ConnectRequestTest, ForeignOptionsAloneDoNotConnect)
+{
+    ConnectRequest database_request;
+    QString url;
+    QString error;
+    EXPECT_TRUE(ConnectRequest::parse({ QStringLiteral("--database"),
+                                       QStringLiteral("Database #1") }, &database_request, &url, &error))
+        << error.toStdString();
+    EXPECT_TRUE(database_request.isEmpty());
+
+    ConnectRequest password_request;
+    EXPECT_TRUE(ConnectRequest::parse({ QStringLiteral("--master-password"),
+                                       QStringLiteral("qwerty") }, &password_request, &url, &error))
+        << error.toStdString();
+    EXPECT_TRUE(password_request.isEmpty());
+}
