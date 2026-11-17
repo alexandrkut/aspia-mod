@@ -557,14 +557,28 @@ std::string_view Database::removeWorkspace(qint64 entry_id)
     if (exists_check.columnInt64(0) == 0)
         return proto::router::kErrorNotFound;
 
-    SqlQuery release_hosts(db_,
-        "UPDATE hosts SET revision=revision+1, workspace_id=0, group_id=0 WHERE workspace_id=?");
-    release_hosts.addInt64(entry_id);
-
-    if (!release_hosts.exec())
+    // The workspace rows go away with the workspace (FK cascade); every host that had a
+    // membership there gets its scalar refreshed - it keeps any membership in other workspaces,
+    // and hosts without one left fall back to "not assigned".
+    std::vector<qint64> affected_hosts;
     {
-        LOG(ERROR) << "Unable to execute query:" << db_.lastError();
-        return proto::router::kErrorInternalError;
+        SqlQuery affected(db_, "SELECT host_id FROM host_workspaces WHERE workspace_id=?");
+        affected.addInt64(entry_id);
+
+        for (;;)
+        {
+            const SqlQuery::StepResult step = affected.next();
+            if (step != SqlQuery::StepResult::ROW)
+            {
+                if (step == SqlQuery::StepResult::FAILED)
+                {
+                    LOG(ERROR) << "Unable to execute query:" << db_.lastError();
+                    return proto::router::kErrorInternalError;
+                }
+                break;
+            }
+            affected_hosts.emplace_back(affected.columnInt64(0));
+        }
     }
 
     SqlQuery delete_workspace(db_, "DELETE FROM workspaces WHERE id=?");
@@ -574,6 +588,20 @@ std::string_view Database::removeWorkspace(qint64 entry_id)
     {
         LOG(ERROR) << "Unable to execute query:" << db_.lastError();
         return proto::router::kErrorInternalError;
+    }
+
+    for (qint64 host : affected_hosts)
+    {
+        SqlQuery touch(db_, "UPDATE hosts SET revision=revision+1 WHERE id=?");
+        touch.addInt64(host);
+
+        if (!touch.exec())
+        {
+            LOG(ERROR) << "Unable to execute query:" << db_.lastError();
+            return proto::router::kErrorInternalError;
+        }
+
+        refreshPrimaryMembership(static_cast<HostId>(host));
     }
 
     if (!transaction.commit())

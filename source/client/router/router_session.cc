@@ -604,7 +604,6 @@ void RouterSession::listHosts(CachePolicy policy, proto::router::HostListRequest
 
     // Only filtered (per workspace/group) queries are cached. The page is part of the key: two
     // pages of the same selection are different answers.
->>>>>>> port-3.4.2
     const bool cacheable = request.mode() == proto::router::HostListRequest::MODE_FILTERED;
     const RouterCache::HostKey key{ request.workspace_id(), request.group_id(),
                                     request.offset(), request.count() };

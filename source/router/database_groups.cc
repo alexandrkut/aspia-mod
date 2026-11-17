@@ -368,16 +368,49 @@ std::string_view Database::removeGroup(qint64 workspace_id, qint64 entry_id)
         return proto::router::kErrorInternalError;
     }
 
-    const char kReleaseHostsSql[] =
+    const std::string deleted_groups_cte =
         "WITH RECURSIVE deleted_groups(id) AS ("
         "    SELECT id FROM host_groups WHERE id=? AND workspace_id=?"
         "    UNION ALL"
         "    SELECT child.id FROM host_groups child "
         "    JOIN deleted_groups parent ON child.parent_id = parent.id "
         "    WHERE child.workspace_id=?"
-        ") UPDATE hosts SET revision=revision+1, group_id=0 WHERE workspace_id=? "
+        ") ";
+
+    // The hosts that sat in the deleted subtree: collect them first, then clear the group on
+    // their membership rows (the group dies with the workspace below), then refresh the scalar
+    // of each - a host shared with another workspace keeps that membership untouched.
+    std::vector<qint64> affected_hosts;
+    {
+        const std::string affected_sql = deleted_groups_cte +
+            "SELECT host_id FROM host_workspaces WHERE workspace_id=? "
+            "AND group_id IN (SELECT id FROM deleted_groups)";
+        SqlQuery affected(db_, affected_sql);
+        affected.addInt64(entry_id);
+        affected.addInt64(workspace_id);
+        affected.addInt64(workspace_id);
+        affected.addInt64(workspace_id);
+
+        for (;;)
+        {
+            const SqlQuery::StepResult step = affected.next();
+            if (step != SqlQuery::StepResult::ROW)
+            {
+                if (step == SqlQuery::StepResult::FAILED)
+                {
+                    LOG(ERROR) << "Unable to execute query:" << db_.lastError();
+                    return proto::router::kErrorInternalError;
+                }
+                break;
+            }
+            affected_hosts.emplace_back(affected.columnInt64(0));
+        }
+    }
+
+    const std::string release_sql = deleted_groups_cte +
+        "UPDATE host_workspaces SET group_id=0 WHERE workspace_id=? "
         "AND group_id IN (SELECT id FROM deleted_groups)";
-    SqlQuery release_hosts(db_, kReleaseHostsSql);
+    SqlQuery release_hosts(db_, release_sql);
     release_hosts.addInt64(entry_id);
     release_hosts.addInt64(workspace_id);
     release_hosts.addInt64(workspace_id);
@@ -387,6 +420,20 @@ std::string_view Database::removeGroup(qint64 workspace_id, qint64 entry_id)
     {
         LOG(ERROR) << "Unable to execute query:" << db_.lastError();
         return proto::router::kErrorInternalError;
+    }
+
+    for (qint64 host : affected_hosts)
+    {
+        SqlQuery touch(db_, "UPDATE hosts SET revision=revision+1 WHERE id=?");
+        touch.addInt64(host);
+
+        if (!touch.exec())
+        {
+            LOG(ERROR) << "Unable to execute query:" << db_.lastError();
+            return proto::router::kErrorInternalError;
+        }
+
+        refreshPrimaryMembership(static_cast<HostId>(host));
     }
 
     SqlQuery delete_group(db_, "DELETE FROM host_groups WHERE id=? AND workspace_id=?");

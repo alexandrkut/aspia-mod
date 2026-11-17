@@ -34,6 +34,7 @@ list(APPEND SOURCE_ROUTER_CORE
     database_hosts.cc
     database_users.cc
     database_workspaces.cc
+    database_mod.cc
     email_messages.cc
     email_messages.h
     email_queue.cc
