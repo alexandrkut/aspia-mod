@@ -317,6 +317,7 @@ void ServiceWorker::onNewRelayConnection()
         pending.start_time = Clock::now();
         pending.stun_host = connection->stun_host;
         pending.stun_port = connection->stun_port;
+        pending.via_router = true;
         if (connection->tcp_channel)
             connection->tcp_channel->setCallerIsAdmin(connection->caller_is_admin);
         startConfirmation(pending);
@@ -364,7 +365,8 @@ void ServiceWorker::onUserSessionAttached()
 
                 user_session_->sendConnectEvent(client_id, session_type, computer_name, display_name,
                                client->tcpChannel()->peerNotifySuppressed(),
-                               client->tcpChannel()->peerViewOnly());
+                               client->tcpChannel()->peerViewOnly(),
+                               client->via_router);
             }
             break;
 
@@ -779,6 +781,7 @@ void ServiceWorker::startClient(const PendingConfirmation& pending)
     if (router_manager_)
         router_manager_->onTelemetryChanged();
 
+    client_to_start->via_router = pending.via_router;
     clients_.append(client_to_start);
     client_to_start->start(pending.stun_host, pending.stun_port);
 }

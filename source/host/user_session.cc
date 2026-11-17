@@ -155,7 +155,7 @@ UserSession::~UserSession()
 //--------------------------------------------------------------------------------------------------
 void UserSession::sendConnectEvent(quint32 client_id, proto::peer::SessionType session_type,
     const QString& computer_name, const QString& display_name, bool notify_suppressed,
-    bool view_only)
+    bool view_only, bool via_router)
 {
     proto::user::ConnectEvent* event =
         outgoing_message_.newMessage<proto::user::ServiceToUser>().mutable_connect_event();
@@ -165,6 +165,7 @@ void UserSession::sendConnectEvent(quint32 client_id, proto::peer::SessionType s
     event->set_display_name(display_name.toStdString());
     event->set_notify_suppressed(notify_suppressed);
     event->set_view_only(view_only);
+    event->set_via_router(via_router);
     sendMessage();
 }
 

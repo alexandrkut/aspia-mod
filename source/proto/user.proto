@@ -68,6 +68,7 @@ message ConnectEvent
     peer.SessionType session_type = 4;
     bool notify_suppressed        = 5;
     bool view_only               = 6;
+    bool via_router              = 7;
 }
 
 // Service to host UI.

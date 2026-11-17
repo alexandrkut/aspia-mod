@@ -56,7 +56,8 @@ public:
               display_name(QString::fromStdString(event.display_name())),
               session_type(event.session_type()),
               notify_suppressed(event.notify_suppressed()),
-              view_only(event.view_only())
+              view_only(event.view_only()),
+              via_router(event.via_router())
         {
             // Nothing
         }
@@ -67,6 +68,7 @@ public:
         proto::peer::SessionType session_type;
         bool notify_suppressed = false;
         bool view_only = false;
+        bool via_router = false;
     };
 
     using ClientList = QVector<Client>;
