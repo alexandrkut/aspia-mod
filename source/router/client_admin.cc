@@ -18,6 +18,9 @@
 
 #include "router/client_admin.h"
 
+#include <QJsonDocument>
+#include <QJsonObject>
+
 #include "base/core_application.h"
 #include "base/logging.h"
 #include "base/serialization.h"
@@ -34,8 +37,9 @@
 #include "router/workers/relay_worker.h"
 
 //--------------------------------------------------------------------------------------------------
-ClientAdmin::ClientAdmin(Database& database, AccessLog& access_log, TcpChannel* channel, QObject* parent)
-    : ClientManager(database, access_log, channel, parent)
+ClientAdmin::ClientAdmin(Database& database, AccessLog& access_log, TcpChannel* channel, QObject* parent,
+                         bool two_factor_required)
+    : ClientManager(database, access_log, channel, parent, two_factor_required)
 {
     CLOG(INFO) << "Ctor";
 }
@@ -184,13 +188,16 @@ void ClientAdmin::doHostRequest(const proto::router::HostRequest& request)
     const std::string command_name = request.command_name();
     const HostId host_id = request.host().host_id();
 
-    auto send_result = [this, request_id, command_name](std::string_view error_code)
+    auto send_result = [this, request_id, command_name](std::string_view error_code,
+                                                        const std::string& result = "")
     {
         proto::router::RouterToAdmin message;
         proto::router::HostResult* host_result = message.mutable_host_result();
         host_result->set_request_id(request_id);
         host_result->set_command_name(command_name);
         host_result->set_error_code(error_code);
+        if (!result.empty())
+            host_result->set_result(result);
         sendMessage(proto::router::CHANNEL_ID_ADMIN, serialize(message));
     };
 
@@ -256,6 +263,69 @@ void ClientAdmin::doHostRequest(const proto::router::HostRequest& request)
 
             send_result(error_code);
         });
+    }
+    else if (command_name == proto::router::kCommandHostSetUpdateConfig ||
+             command_name == proto::router::kCommandHostAddUser ||
+             command_name == proto::router::kCommandHostModifyUser ||
+             command_name == proto::router::kCommandHostRemoveUser ||
+             command_name == proto::router::kCommandHostGetUsers ||
+             command_name == proto::router::kCommandHostSetAccessConfig ||
+             command_name == proto::router::kCommandHostSetOnetimeConfig ||
+             command_name == proto::router::kCommandHostReplaceUsers ||
+             command_name == proto::router::kCommandHostSetMisc ||
+             command_name == proto::router::kCommandHostApplyFullConfig)
+    {
+        // The router is the authority on who ordered the change: it stamps the params with
+        // the name of the authenticated admin session. A client-supplied "initiator" is
+        // replaced, never trusted.
+        QJsonObject params_obj;
+        const QJsonDocument params_doc =
+            QJsonDocument::fromJson(QByteArray::fromStdString(request.params()));
+        if (params_doc.isObject())
+            params_obj = params_doc.object();
+        params_obj["initiator"] = QString::fromStdString(userName());
+        const std::string params = QString::fromUtf8(
+            QJsonDocument(params_obj).toJson(QJsonDocument::Compact)).toStdString();
+
+        host_worker->setHostConfig(host_id, command_name, params, this,
+            [this, host_id, command_name, send_result](
+                std::string_view error_code, const std::string& result)
+            {
+                // Reads (get_*) are routine, especially under bulk runs: keep them at TRACE
+                // so they don't flood the log. Mutations stay loud.
+                const bool is_read = command_name.rfind("get_", 0) == 0;
+                if (error_code == proto::router::kErrorOk)
+                {
+                    if (is_read)
+                    {
+                        CLOG(TRACE) << "Host" << host_id << "config command '"
+                                    << QString::fromStdString(command_name)
+                                    << "' by" << userName() << ": ok";
+                    }
+                    else
+                    {
+                        CLOG(INFO) << "Host" << host_id << "config command '"
+                                   << QString::fromStdString(command_name)
+                                   << "' by" << userName() << ": ok";
+                    }
+                }
+                else
+                {
+                    if (is_read)
+                    {
+                        CLOG(TRACE) << "Host" << host_id << "config command '"
+                                    << QString::fromStdString(command_name)
+                                    << "' by" << userName() << " failed:" << error_code;
+                    }
+                    else
+                    {
+                        CLOG(WARNING) << "Host" << host_id << "config command '"
+                                      << QString::fromStdString(command_name)
+                                      << "' by" << userName() << " failed:" << error_code;
+                    }
+                }
+                send_result(error_code, result);
+            });
     }
     else
     {

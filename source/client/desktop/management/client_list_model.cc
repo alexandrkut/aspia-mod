@@ -24,6 +24,7 @@
 
 #include <algorithm>
 
+#include "base/serialization.h"
 #include "proto/peer.h"
 
 namespace {
@@ -223,8 +224,7 @@ QString ClientListModel::textAt(const proto::router::ClientInfo& client, Column 
         case Column::VERSION:
         {
             const proto::peer::Version& version = client.version();
-            return QString("%1.%2.%3")
-                .arg(version.major()).arg(version.minor()).arg(version.patch());
+            return versionToString(version);
         }
 
         case Column::ARCHITECTURE:

@@ -29,8 +29,9 @@
 #include "router/handlers/host_request_handler.h"
 
 //--------------------------------------------------------------------------------------------------
-ClientManager::ClientManager(Database& database, AccessLog& access_log, TcpChannel* channel, QObject* parent)
-    : ClientOperator(database, access_log, channel, parent)
+ClientManager::ClientManager(Database& database, AccessLog& access_log, TcpChannel* channel, QObject* parent,
+                               bool two_factor_required)
+    : ClientOperator(database, access_log, channel, parent, two_factor_required)
 {
     CLOG(INFO) << "Ctor";
 }

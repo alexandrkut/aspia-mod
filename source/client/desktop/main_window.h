@@ -23,7 +23,11 @@
 #include <QMainWindow>
 #include <QPointer>
 
+#include <functional>
 #include <memory>
+
+#include "base/peer/host_id.h"
+#include "base/crypto/secure_string.h"
 
 #include "client/desktop/tab.h"
 #include "client/mcp/mcp_controller.h"
@@ -43,6 +47,7 @@ class ManagementTab;
 class SearchDialog;
 class QLineEdit;
 class HostConfig;
+class LocalHostConfig;
 
 class MainWindow final
     : public QMainWindow,
@@ -58,6 +63,9 @@ public:
 
 public slots:
     void showAndActivate();
+
+    void connectToLocalHost(const QString& identifier, int session_type, const QString& username,
+                            const QString& password);
 
 signals:
     // The state of the window is saved by then, and the window is expected to be destroyed.
@@ -115,6 +123,24 @@ private:
     Tab* tabAt(int index);
     bool activateTab(Tab::Type type);
     bool showTab(Tab* tab);
+    struct ConnectTarget
+    {
+        qint64 entry_id = 0;
+        HostId host_id = kInvalidHostId;
+        QString name;
+        QString address;
+    };
+
+    bool resolveTarget(const QString& identifier, ConnectTarget* target, QString* error = nullptr) const;
+    void connectToRouterHost(const QString& identifier, proto::peer::SessionType session_type,
+                             const QString& username, const SecureString& password);
+    void reportUnknownHost(const QString& identifier, bool router_offline = false);
+    void runWhenRouterOnline(std::function<void()> action,
+                             std::function<void()> on_timeout = std::function<void()>());
+
+    static constexpr int kRouterWaitTimeout = 60000;
+    static constexpr int kRouterSearchTimeout = 30000;
+
     ManagementTab* managementTab() const;
     ClientWindow* clientWindow(qint64 client_id) const;
     void showSearchDialog();

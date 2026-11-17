@@ -17,7 +17,9 @@
 //
 
 #include "client/storage/database.h"
+#include "client/storage/database_migration.h"
 
+#include <QCoreApplication>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
@@ -108,6 +110,47 @@ bool Database::remove(const QString& id)
 }
 
 //--------------------------------------------------------------------------------------------------
+// static
+QString Database::resolveId(const QString& query, const QList<Info>& list, QString* error)
+{
+    const QString name = query.trimmed();
+
+    for (const Info& info : list)
+    {
+        if (info.id.compare(name, Qt::CaseInsensitive) == 0)
+            return info.id;
+    }
+
+    QString found;
+
+    for (const Info& info : list)
+    {
+        if (info.name.compare(name, Qt::CaseInsensitive) != 0)
+            continue;
+
+        if (!found.isEmpty())
+        {
+            if (error)
+            {
+                *error = QCoreApplication::translate(
+                    "Client", "Several databases are named \"%1\". Use the ID of the one you mean.")
+                    .arg(name);
+            }
+            return QString();
+        }
+
+        found = info.id;
+    }
+
+    if (found.isEmpty() && error)
+    {
+        *error = QCoreApplication::translate("Client", "No database matches \"%1\".").arg(name);
+    }
+
+    return found;
+}
+
+//--------------------------------------------------------------------------------------------------
 bool Database::open(const QString& file_path)
 {
     LOG(INFO) << (!QFileInfo::exists(file_path) ? "Creating" : "Opening") << "database:" << file_path;
@@ -137,6 +180,11 @@ bool Database::open(const QString& file_path)
         db_.close();
         return false;
     }
+
+    // One-time migration of legacy host_notify keys to the single-router canonical form.
+    // Non-fatal: a failure leaves the legacy rows in place (idempotent on next open).
+    if (!DatabaseMigration::migrateHostNotifySettings(db_))
+        LOG(WARNING) << "host_notify settings migration failed";
 
     if (!db_.exec("PRAGMA foreign_keys = ON"))
     {
@@ -289,6 +337,50 @@ bool Database::import(const std::optional<RouterConfig>& router,
     }
 
     return transaction.commit();
+}
+
+//--------------------------------------------------------------------------------------------------
+bool Database::saveCopyAndClearAll(const QString& copy_path)
+{
+    if (!isValid())
+    {
+        LOG(ERROR) << "Database is not valid";
+        return false;
+    }
+
+    // The workers keep their own connections to the file, so it is not renamed but emptied in place.
+    {
+        SqlQuery copy(db_, "VACUUM INTO ?");
+        copy.addText(copy_path);
+
+        if (!copy.exec())
+        {
+            LOG(ERROR) << "Unable to copy the database:" << db_.lastError();
+            return false;
+        }
+    }
+
+    SqlTransaction transaction(db_);
+    if (!transaction.begin(SqlTransaction::Mode::IMMEDIATE))
+    {
+        LOG(ERROR) << "Unable to begin transaction";
+        return false;
+    }
+
+    if (!db_.exec("DELETE FROM local_groups") || !clearRouter() ||
+        !db_.exec("DELETE FROM router_hosts") || !db_.exec("DELETE FROM local_hosts") ||
+        !db_.exec("DELETE FROM credentials") || !db_.exec("DELETE FROM profiles") ||
+        !db_.exec("DELETE FROM settings"))
+    {
+        LOG(ERROR) << "Unable to clear the database:" << db_.lastError();
+        return false;
+    }
+
+    if (!transaction.commit())
+        return false;
+
+    LOG(INFO) << "Database is reset, the copy is saved to:" << copy_path;
+    return true;
 }
 
 //--------------------------------------------------------------------------------------------------

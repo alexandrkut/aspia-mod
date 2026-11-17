@@ -85,6 +85,28 @@ public:
     void setEnableStun(bool enable);
     bool isStunEnabled() const;
 
+    // Whether the second factor is asked on top of the password, separately for the
+    // administrator, the manager and the operator. An administrator reaches every host and
+    // every setting, while an operator reaches a host and nothing else. Turning
+    // the second factor off for the first is not a reason to turn it off for the third.
+    //
+    // All three default to true: the second factor is on until the file says otherwise, so a
+    // configuration that never mentioned them - or a key that got lost on the way - keeps the
+    // accounts protected rather than silently opening them.
+    void setTwoFactorForAdmin(bool enabled);
+    bool isTwoFactorForAdminEnabled() const;
+
+    void setTwoFactorForManager(bool enabled);
+    bool isTwoFactorForManagerEnabled() const;
+
+    void setTwoFactorForOperator(bool enabled);
+    bool isTwoFactorForOperatorEnabled() const;
+
+    // The value for one role, given as the proto::router::SessionType that carries it. A role
+    // this build does not know is answered as protected: refusing to check the second factor of
+    // a role nobody thought about is exactly the mistake these settings exist to prevent.
+    bool isTwoFactorEnabledFor(quint32 session_type) const;
+
     void setStunPort(quint16 port);
     quint16 stunPort() const;
 

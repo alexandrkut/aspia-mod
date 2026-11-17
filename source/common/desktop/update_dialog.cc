@@ -19,6 +19,8 @@
 #include "common/desktop/update_dialog.h"
 
 #include <QCloseEvent>
+#include <QCoreApplication>
+#include <QProcess>
 #include <QTimer>
 
 #include "base/gui_application.h"
@@ -235,6 +237,9 @@ void UpdateDialog::startPrivilegedInstance()
 
         if (exit_code == kInstalledExitCode)
         {
+            if (restart_after_install_)
+                scheduleRestart();
+
             accept();
             return;
         }
@@ -328,6 +333,9 @@ void UpdateDialog::onDownloadCompleted()
     UpdateInstaller::Result result = installer_->install();
     if (result == UpdateInstaller::Result::STARTED)
     {
+        if (restart_after_install_)
+            scheduleRestart();
+
         accept();
         return;
     }
@@ -339,6 +347,31 @@ void UpdateDialog::onDownloadCompleted()
         setError(tr("The downloaded file is damaged."));
     else
         setError(tr("An error occurred while installing the update."));
+}
+
+//--------------------------------------------------------------------------------------------------
+void UpdateDialog::scheduleRestart()
+{
+    const QString app_path = QCoreApplication::applicationFilePath();
+
+    LOG(INFO) << "Scheduling application restart after update installation:" << app_path;
+
+#if defined(Q_OS_WINDOWS)
+    // A detached observer waits until msiexec has finished (so the files are already replaced)
+    // and only then starts the application again.
+    const QString command = QString(
+        "Start-Sleep -Seconds 2; "
+        "while (Get-Process msiexec -ErrorAction SilentlyContinue) { Start-Sleep -Seconds 1 }; "
+        "Start-Process -FilePath '%1'").arg(app_path);
+
+    if (!QProcess::startDetached("powershell",
+            QStringList() << "-WindowStyle" << "Hidden" << "-Command" << command))
+    {
+        LOG(ERROR) << "Unable to start the restart observer";
+    }
+#else
+    Q_UNUSED(app_path);
+#endif
 }
 
 //--------------------------------------------------------------------------------------------------

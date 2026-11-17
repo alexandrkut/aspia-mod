@@ -35,12 +35,24 @@
 #include "client/android/main_window.h"
 #include "common/android/message_dialog.h"
 #else
+#include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QDir>
 #include <QProcess>
+#include <QTextStream>
 
 #include <functional>
 
+#if defined(Q_OS_WINDOWS)
+#include <qt_windows.h>
+#endif
+#include "base/auto_qpointer.h"
+#include "base/crypto/secure_string.h"
+#include "client/connect_request.h"
+#include "client/storage/database.h"
+#include "client/storage/master_password.h"
+#include "client/storage/user_settings.h"
+#include "client/storage/system_settings.h"
 #include "client/desktop/app_lock.h"
 #include "client/desktop/main_window.h"
 #include "client/desktop/update_server_dialog.h"
@@ -51,6 +63,7 @@
 #include "client/storage/system_settings.h"
 #include "client/storage/user_settings.h"
 #include "common/desktop/msg_box.h"
+#include "proto/peer.h"
 #include "common/desktop/update_dialog.h"
 #endif // defined(Q_OS_ANDROID)
 
@@ -233,7 +246,29 @@ int main(int argc, char* argv[])
               << "(version:" << SysInfo::operatingSystemVersion()
               <<  "arch:" << SysInfo::operatingSystemArchitecture() << ")";
     LOG(INFO) << "Qt version:" << QT_VERSION_STR;
-    LOG(INFO) << "Command line:" << application.arguments();
+    // The command line is logged for diagnostics, but passwords must never reach the log. Build a
+    // copy with the values of --password and --master-password replaced by "***" (both the
+    // "--flag value" and the "--flag=value" forms); the original arguments are left untouched.
+    QStringList logged_arguments = application.arguments();
+    for (int i = 0; i < logged_arguments.size(); ++i)
+    {
+        const QString& argument = logged_arguments.at(i);
+
+        if (argument == QStringLiteral("--password") ||
+            argument == QStringLiteral("--master-password"))
+        {
+            if (i + 1 < logged_arguments.size())
+                logged_arguments[i + 1] = QStringLiteral("***");
+        }
+        else if (argument.startsWith(QStringLiteral("--password=")) ||
+                 argument.startsWith(QStringLiteral("--master-password=")))
+        {
+            const int equals = argument.indexOf(QLatin1Char('='));
+            logged_arguments[i] = argument.left(equals + 1) + QStringLiteral("***");
+        }
+    }
+
+    LOG(INFO) << "Command line:" << logged_arguments;
 
     if (application.isMigrationFailed())
     {
@@ -264,13 +299,234 @@ int main(int argc, char* argv[])
     parser.setApplicationDescription(QApplication::translate("Client", "Aspia Client"));
     parser.addHelpOption();
     parser.addVersionOption();
+    const QCommandLineOption connect_option(
+        { QStringLiteral("connect"), QStringLiteral("c") },
+        QApplication::translate("Client",
+            "Connect to the host of the address book with this record ID or host ID, or with the "
+            "name of a record, using the login and the password stored in it, or connect directly "
+            "to a host by its address, which needs the login and the password given with "
+            "--username and --password."),
+        QApplication::translate("Client", "id"));
+
+    const QCommandLineOption session_type_option(
+        QStringLiteral("session-type"),
+        QApplication::translate("Client",
+            "Kind of the session to open: desktop, file, info, chat or terminal "
+            "(default: the one from the settings of the application)."),
+        QApplication::translate("Client", "type"));
+
+    const QCommandLineOption username_option(
+        { QStringLiteral("username"), QStringLiteral("u") },
+        QApplication::translate("Client",
+            "Log in with this user name instead of the one stored in the host. "
+            "Requires --password."),
+        QApplication::translate("Client", "name"));
+
+    const QCommandLineOption password_option(
+        QStringLiteral("password"),
+        QApplication::translate("Client",
+            "Log in with this password instead of the stored one. Requires --username. "
+            "A password on a command line is visible to the other users of the machine."),
+        QApplication::translate("Client", "password"));
+
+    const QCommandLineOption database_option("database",
+        QApplication::translate("Client",
+            "Open the database with this name or ID instead of the selection dialog."),
+        QApplication::translate("Client", "name"));
+
+    const QCommandLineOption master_password_option("master-password",
+        QApplication::translate("Client",
+            "Unlock the database with this master password instead of asking for it. A password on "
+            "a command line is visible to the other users of the machine."),
+        QApplication::translate("Client", "password"));
+
+    const QCommandLineOption list_databases_option("list-databases",
+        QApplication::translate("Client", "Print the ID and the name of every database and exit."));
+
     parser.addOption(select_database_option);
+    parser.addOption(connect_option);
+    parser.addOption(session_type_option);
+    parser.addOption(username_option);
+    parser.addOption(password_option);
+    parser.addOption(database_option);
+    parser.addOption(list_databases_option);
+    parser.addOption(master_password_option);
     parser.process(application);
 
-    if (parser.isSet(select_database_option) || !openOnlyDatabase())
+    SecureString master_password;
+    if (parser.isSet(master_password_option))
     {
-        if (AppLock::unlock(true) != AppLock::Result::UNLOCKED)
+        const QString raw = parser.value(master_password_option);
+        master_password = SecureString(raw);
+    }
+
+    if (parser.isSet(list_databases_option))
+    {
+#if defined(Q_OS_WINDOWS)
+        // A GUI-subsystem binary gets no standard handles from an interactive console, so the
+        // list would go nowhere. Attach to the console of the shell that started us and point
+        // stdout at it; under a redirection the handles are valid and are left alone.
+        if (GetFileType(GetStdHandle(STD_OUTPUT_HANDLE)) == FILE_TYPE_UNKNOWN)
+        {
+            if (AttachConsole(ATTACH_PARENT_PROCESS))
+            {
+                FILE* stream = nullptr;
+                freopen_s(&stream, "CONOUT$", "w", stdout);
+
+                fputs("\n", stdout);
+                fflush(stdout);
+            }
+        }
+#endif
+        QTextStream out(stdout);
+        for (const Database::Info& info : Database::list())
+            out << info.id << '\t' << info.name << Qt::endl;
+        return 0;
+    }
+
+    ConnectRequest connect_request;
+    QString start_url;
+    QString parse_error;
+
+    if (!ConnectRequest::parse(application.arguments().mid(1), &connect_request, &start_url, &parse_error))
+    {
+        LOG(ERROR) << "Invalid command line:" << parse_error;
+        MsgBox::warning(nullptr, parse_error);
+        return 2;
+    }
+
+    // Exactly one database open: the request goes to its instance without asking.
+    if (!parser.isSet(database_option) && !parser.isSet(select_database_option) &&
+        !connect_request.isEmpty())
+    {
+        QString open_id;
+        int open_count = 0;
+        for (const Database::Info& info : Database::list())
+        {
+            if (application.hasInstance(info.id)) { open_id = info.id; ++open_count; }
+        }
+        if (open_count == 1)
+        {
+            LOG(INFO) << "One database is open, forwarding the command line request to its instance";
+            application.setInstanceKey(open_id);
+            const int session_type =
+                connect_request.sessionType() == proto::peer::SESSION_TYPE_UNKNOWN ?
+                    proto::peer::SESSION_TYPE_DESKTOP : connect_request.sessionType();
+            application.openHost(connect_request.identifier(), session_type,
+                                 connect_request.username(),
+                                 connect_request.password().toString());
+            application.activateWindow();
             return 0;
+        }
+        // 0 or 2+ open: fall through to the existing logic (dialog as before).
+    }
+
+    if (parser.isSet(database_option) && !parser.isSet(select_database_option))
+    {
+        QString error;
+        const QString id =
+            Database::resolveId(parser.value(database_option), Database::list(), &error);
+        if (id.isEmpty())
+        {
+            MsgBox::warning(nullptr, error);
+            return 2;
+        }
+
+        if (application.hasInstance(id))
+        {
+            LOG(INFO) << "The database is already open, forwarding to its instance";
+            application.setInstanceKey(id);
+
+            if (!connect_request.isEmpty())
+            {
+                const int session_type =
+                    connect_request.sessionType() == proto::peer::SESSION_TYPE_UNKNOWN ?
+                        proto::peer::SESSION_TYPE_DESKTOP : connect_request.sessionType();
+                application.openHost(connect_request.identifier(), session_type,
+                                     connect_request.username(),
+                                     connect_request.password().toString());
+            }
+
+            application.activateWindow();
+            return 0;
+        }
+
+        Database::select(id);
+
+        if (!Database::instance().isValid())
+        {
+            MsgBox::warning(nullptr, QApplication::translate(
+                "Client", "Unable to open the database \"%1\".").arg(id));
+            return 2;
+        }
+
+        if (!MasterPassword::isSet() || !MasterPassword::autoUnlock())
+        {
+            // A database without a master password has nothing to unlock: the option is
+            // meaningless there and the usual flow (the dialog that asks to set a password)
+            // takes over instead of reporting a bogus "invalid password".
+            if (!master_password.isEmpty() && MasterPassword::isSet())
+            {
+                if (MasterPassword::unlock(master_password) != MasterPassword::Result::SUCCESS)
+                {
+                    MsgBox::warning(nullptr, QApplication::translate("Client", "Invalid master password."));
+                    return 2;
+                }
+            }
+            else if (AppLock::unlock(true, &connect_request,
+                                     master_password.isEmpty() ? nullptr : &master_password) !=
+                     AppLock::Result::UNLOCKED)
+            {
+                return 0;
+            }
+        }
+    }
+    else if (parser.isSet(select_database_option) || !openOnlyDatabase())
+    {
+        const QList<Database::Info> database_list = Database::list();
+
+        if (!master_password.isEmpty() && !parser.isSet(select_database_option) &&
+            database_list.size() == 1 && MasterPassword::isSet() &&
+            !MasterPassword::autoUnlock())
+        {
+            Database::select(database_list.first().id);
+
+            if (!Database::instance().isValid())
+            {
+                MsgBox::warning(nullptr, QApplication::translate(
+                    "Client", "Unable to open the database \"%1\".").arg(database_list.first().id));
+                return 2;
+            }
+
+            if (MasterPassword::unlock(master_password) != MasterPassword::Result::SUCCESS)
+            {
+                MsgBox::warning(nullptr, QApplication::translate("Client", "Invalid master password."));
+                return 2;
+            }
+        }
+        else if (AppLock::unlock(true, &connect_request,
+                                 master_password.isEmpty() ? nullptr : &master_password) !=
+                 AppLock::Result::UNLOCKED)
+        {
+            return 0;
+        }
+    }
+
+    if (!connect_request.isEmpty() &&
+        connect_request.sessionType() == proto::peer::SESSION_TYPE_UNKNOWN)
+    {
+        connect_request.setSessionType(UserSettings().sessionType());
+
+        if (connect_request.sessionType() == proto::peer::SESSION_TYPE_UNKNOWN)
+            connect_request.setSessionType(proto::peer::SESSION_TYPE_DESKTOP);
+    }
+
+    if (!connect_request.isEmpty())
+    {
+        LOG(INFO) << "Command line asks for host" << connect_request.identifier()
+                  << "with session type" << connect_request.sessionType()
+                  << (connect_request.hasCredentials() ?
+                         ", credentials given on the command line" : "");
     }
 
     Database& db = Database::instance();
@@ -279,8 +535,18 @@ int main(int argc, char* argv[])
 
     if (application.isRunning())
     {
-        LOG(INFO) << "Another instance has opened the database, activating its window";
-        application.activateWindow();
+        if (!connect_request.isEmpty())
+        {
+            LOG(INFO) << "Another instance is already running, forwarding host to it";
+            application.openHost(connect_request.identifier(), connect_request.sessionType(),
+                                 connect_request.username(),
+                                 connect_request.password().toString());
+        }
+        else
+        {
+            LOG(INFO) << "Another instance is already running, activating its window";
+            application.activateWindow();
+        }
         return 0;
     }
 
@@ -302,6 +568,12 @@ int main(int argc, char* argv[])
 
         QObject::connect(&application, &Application::sig_windowActivated,
                          main_window.get(), &MainWindow::showAndActivate);
+        QObject::connect(&application, &Application::sig_hostOpened, main_window.get(),
+                         [main_window = main_window.get()](const QString& identifier, int session_type,
+                                                           const QString& username, const QString& password)
+        {
+            main_window->connectToLocalHost(identifier, session_type, username, password);
+        });
         QObject::connect(main_window.get(), &MainWindow::sig_lockRequested, &application, [&]()
         {
             // Until the new window there is no window on the screen, and closing the unlock dialog
@@ -336,6 +608,17 @@ int main(int argc, char* argv[])
     };
 
     create_main_window();
+
+    if (!connect_request.isEmpty())
+    {
+        QTimer::singleShot(0, main_window.get(), [window = main_window.get(), connect_request]()
+        {
+            window->connectToLocalHost(connect_request.identifier(), connect_request.sessionType(),
+                                      connect_request.username(),
+                                      connect_request.password().toString());
+        });
+    }
+
     return application.exec();
 #endif // defined(Q_OS_ANDROID)
 }

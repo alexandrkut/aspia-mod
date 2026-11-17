@@ -18,6 +18,8 @@
 
 #include "client/desktop/desktop/desktop_window.h"
 
+#include "client/config.h"
+
 #include <QApplication>
 #include <QBrush>
 #include <QClipboard>
@@ -141,6 +143,10 @@ DesktopWindow::DesktopWindow(const proto::control::Config& desktop_config, QWidg
 
     desktop_->enableKeyCombinations(!desktop_config_.disable_key_combinations());
     desktop_->enableRemoteCursorPosition(desktop_config_.cursor_position());
+    // A view-only session shows a view marker as the pointer instead of the remote cursor shape:
+    // nothing is forwarded and the user must see it at a glance.
+    if (desktop_config_.view_only())
+        desktop_->setViewOnlyCursor(true);
 
     connect(toolbar_, &DesktopToolBar::sig_keyCombination, desktop_, &DesktopWidget::executeKeyCombination);
     connect(toolbar_, &DesktopToolBar::sig_switchToAutosize, this, &DesktopWindow::onAutosizeWindow);
@@ -260,11 +266,18 @@ void DesktopWindow::applySettings()
     LOG(INFO) << "Apply client settings";
 
     const bool had_preferred_size = !desktop_config_.disable_preferred_size();
+    const bool was_view_only = desktop_config_.view_only();
 
     const ProfileConfig profile = Database::instance().hostProfile(sessionState()->host());
     sessionState()->setProfile(profile);
 
     desktop_config_ = profile.desktopConfig();
+    if (was_view_only)
+    {
+        // A view session stays view-only across a settings reload: re-apply the view overrides
+        // (including the always-on remote cursor) instead of the raw user settings.
+        applyViewOnlyOverrides(desktop_config_);
+    }
     onDesktopConfigChanged(desktop_config_);
 
     desktop_->enableRemoteCursorPosition(desktop_config_.cursor_position());
@@ -423,10 +436,15 @@ void DesktopWindow::onSessionStarted()
                 clipboard_, &Clipboard::addFileData);
     }
 
-    emit sig_showRequested();
+    // A reconnected session must not steal focus: only a brand-new session activates its tab.
+    // (Auto-reconnect keeps isAutoReconnect() true across the successful reconnect.)
+    if (auto state = sessionState(); !state || !state->isAutoReconnect())
+        emit sig_showRequested();
     toolbar_->enableTextChat(true);
     toolbar_->enableTerminal(true);
     toolbar_->enableSystemInfo(true);
+
+    toolbar_->setViewOnly(desktop_config_.view_only());
 
     sendCapabilities();
 }
@@ -893,6 +911,9 @@ void DesktopWindow::onSendCredentials(const SecureString& username, const Secure
 //--------------------------------------------------------------------------------------------------
 void DesktopWindow::onClipboardEvent(const proto::clipboard::Event& event)
 {
+    if (desktop_config_.view_only())
+        return;
+
     if (!desktop_config_.clipboard())
         return;
 
@@ -969,6 +990,9 @@ void DesktopWindow::onMetricsRequest()
 //--------------------------------------------------------------------------------------------------
 void DesktopWindow::onMouseEvent(const proto::input::MouseEvent& event)
 {
+    if (desktop_config_.view_only())
+        return;
+
     QPoint pos(event.x(), event.y());
 
     if (toolbar_->autoScrolling() && toolbar_->scale() != -1)
@@ -1092,6 +1116,9 @@ void DesktopWindow::onMouseFlushTimer()
 //--------------------------------------------------------------------------------------------------
 void DesktopWindow::onKeyEvent(const proto::input::KeyEvent& event)
 {
+    if (desktop_config_.view_only())
+        return;
+
     ++send_key_count_;
 
     proto::input::ClientToHost& message = outgoing_message_.newMessage<proto::input::ClientToHost>();
@@ -1368,6 +1395,9 @@ void DesktopWindow::sendMouseEvent(const proto::input::MouseEvent& event)
 //--------------------------------------------------------------------------------------------------
 void DesktopWindow::sendText(const QString& text)
 {
+    if (desktop_config_.view_only())
+        return;
+
     ++send_text_count_;
 
     proto::input::ClientToHost& message = outgoing_message_.newMessage<proto::input::ClientToHost>();

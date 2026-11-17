@@ -20,6 +20,7 @@
 #define CLIENT_DESKTOP_MANAGEMENT_ROUTER_HOST_DIALOG_H
 
 #include <QDialog>
+#include <QCheckBox>
 
 #include <memory>
 
@@ -43,18 +44,30 @@ public:
     RouterHostDialog(const RouterHost& host, QWidget* parent);
     ~RouterHostDialog() final;
 
+    // The edit dialog turns the checked workspace list into the membership list it sends:
+    // every kept membership keeps the group the list reply carried (the router reads a zero
+    // as a move to the workspace root), a newly checked workspace starts at the root, and
+    // the group picker's value applies to the primary workspace only. Pure, so the
+    // serialization can be tested without the widget.
+    static QList<QPair<qint64, qint64>> buildMemberships(
+        const QList<QPair<qint64, qint64>>& existing,
+        const QList<qint64>& checked_workspace_ids,
+        qint64 primary_workspace_id,
+        qint64 primary_group_id);
+
 private slots:
     void onWorkspaceListReceived(const RouterWorkspaceList& list);
-    void onWorkspaceChanged(int index);
     void onGroupListReceived(const RouterGroupList& list);
     void onHostResultReceived(const proto::router::HostResult& result);
     void onSavedCredentialsToggled(bool checked);
     void onButtonBoxClicked(QAbstractButton* button);
+    void onWorkspacesButtonClicked();
     void onLoadData();
 
 private:
     qint64 currentWorkspaceId() const;
     void fetchGroups();
+    void updateWorkspacesButton();
     bool saveCredentials();
     bool saveProfile();
     void setCredentialsEnabled(bool enable);
@@ -62,6 +75,16 @@ private:
     std::unique_ptr<Ui::RouterHostDialog> ui;
     RouterHost host_;
     bool credentials_loaded_ = false;
+
+    // The workspace picker: a host may belong to several workspaces at once, so a button in
+    // the dialog opens a check list of every space of the router. The selection lives here
+    // between the popup and the submit.
+    QList<RouterWorkspace> workspaces_;
+    QList<qint64> checked_workspace_ids_;
+
+    QCheckBox* checkbox_notify_view_ = nullptr;
+    QCheckBox* checkbox_notify_control_ = nullptr;
+    QCheckBox* checkbox_notify_files_ = nullptr;
 
     Q_DISABLE_COPY_MOVE(RouterHostDialog)
 };

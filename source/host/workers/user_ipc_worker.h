@@ -54,7 +54,9 @@ public:
             : client_id(event.client_id()),
               computer_name(QString::fromStdString(event.computer_name())),
               display_name(QString::fromStdString(event.display_name())),
-              session_type(event.session_type())
+              session_type(event.session_type()),
+              notify_suppressed(event.notify_suppressed()),
+              view_only(event.view_only())
         {
             // Nothing
         }
@@ -63,6 +65,8 @@ public:
         QString computer_name;
         QString display_name;
         proto::peer::SessionType session_type;
+        bool notify_suppressed = false;
+        bool view_only = false;
     };
 
     using ClientList = QVector<Client>;

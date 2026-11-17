@@ -3196,3 +3196,94 @@ TEST_F(DatabaseTest, AutoUnlockIsTurnedOffOnlyByAKeyThatDoesNotFit)
     // Closes the file before the directory goes.
     DatabaseTestPeer::setFilePath(file_path);
 }
+
+//--------------------------------------------------------------------------------------------------
+// The page size setting: absent means the default the lists shipped with, a stored value is
+// kept, and anything a caller could store by mistake falls back to that default instead of
+// ever reaching the lists.
+TEST_F(DatabaseTest, HostsPerPageDefaultsTo100AndClampsWhatItIsGiven)
+{
+    EXPECT_EQ(db_.hostsPerPage(), 100);
+
+    EXPECT_TRUE(db_.setHostsPerPage(500));
+    EXPECT_EQ(db_.hostsPerPage(), 500);
+
+    EXPECT_TRUE(db_.setHostsPerPage(50));
+    EXPECT_EQ(db_.hostsPerPage(), 50);
+
+    EXPECT_TRUE(db_.setHostsPerPage(0));
+    EXPECT_EQ(db_.hostsPerPage(), 100);
+}
+
+//--------------------------------------------------------------------------------------------------
+namespace {
+
+Database::Info makeInfo(const QString& id, const QString& name)
+{
+    Database::Info info;
+    info.id = id;
+    info.name = name;
+    return info;
+}
+
+} // namespace
+
+//--------------------------------------------------------------------------------------------------
+TEST(DatabaseResolveId, MatchesIdIgnoringCase)
+{
+    const QList<Database::Info> list = { makeInfo("id-1", "alpha"), makeInfo("b-2", "beta") };
+
+    QString error = "untouched";
+    EXPECT_EQ(Database::resolveId("id-1", list, &error), "id-1");
+    EXPECT_EQ(error, "untouched");
+}
+
+//--------------------------------------------------------------------------------------------------
+TEST(DatabaseResolveId, MatchesUppercaseId)
+{
+    const QList<Database::Info> list = { makeInfo("id-1", "alpha"), makeInfo("b-2", "beta") };
+
+    QString error = "untouched";
+    EXPECT_EQ(Database::resolveId("ID-1", list, &error), "id-1");
+    EXPECT_EQ(error, "untouched");
+}
+
+//--------------------------------------------------------------------------------------------------
+TEST(DatabaseResolveId, MatchesUniqueNameIgnoringCase)
+{
+    const QList<Database::Info> list = { makeInfo("id-1", "alpha"), makeInfo("b-2", "beta") };
+
+    QString error = "untouched";
+    EXPECT_EQ(Database::resolveId("ALPHA", list, &error), "id-1");
+    EXPECT_EQ(error, "untouched");
+}
+
+//--------------------------------------------------------------------------------------------------
+TEST(DatabaseResolveId, DuplicateNameFailsWithError)
+{
+    const QList<Database::Info> list = { makeInfo("id-1", "alpha"), makeInfo("b-2", "ALPHA") };
+
+    QString error;
+    EXPECT_TRUE(Database::resolveId("alpha", list, &error).isEmpty());
+    EXPECT_FALSE(error.isEmpty());
+}
+
+//--------------------------------------------------------------------------------------------------
+TEST(DatabaseResolveId, NoMatchFailsWithError)
+{
+    const QList<Database::Info> list = { makeInfo("id-1", "alpha"), makeInfo("b-2", "beta") };
+
+    QString error;
+    EXPECT_TRUE(Database::resolveId("gamma", list, &error).isEmpty());
+    EXPECT_FALSE(error.isEmpty());
+}
+
+//--------------------------------------------------------------------------------------------------
+TEST(DatabaseResolveId, IdWinsOverSomebodyElsesName)
+{
+    const QList<Database::Info> list = { makeInfo("id-1", "alpha"), makeInfo("b-2", "ID-1") };
+
+    QString error = "untouched";
+    EXPECT_EQ(Database::resolveId("ID-1", list, &error), "id-1");
+    EXPECT_EQ(error, "untouched");
+}

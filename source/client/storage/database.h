@@ -61,6 +61,11 @@ public:
     static bool moveToTrash(const QString& id);
     static bool remove(const QString& id);
 
+    // Resolves a --database command line value (a database name or ID) to the ID of the
+    // database it names. An empty |query| or no/ambiguous match leaves |error| with a
+    // message and returns an empty string; |error| is untouched on success.
+    static QString resolveId(const QString& query, const QList<Info>& list, QString* error);
+
     // Opens (creating when absent) the database at |file_path| and ensures the schema. instance()
     // opens the per-thread connection at filePath(); this entry exists so the tests can run every
     // path against an isolated temporary database.
@@ -140,6 +145,8 @@ public:
                 const QList<CredentialConfig>& credentials,
                 const QList<ProfileConfig>& profiles);
 
+    bool saveCopyAndClearAll(const QString& copy_path);
+
     // Settings.
     QString name() const;
     bool setName(const QString& name);
@@ -147,6 +154,17 @@ public:
     QString displayName() const;
     bool setDisplayName(const QString& name);
 
+    bool isConfirmCloseEnabled() const;
+    bool setConfirmCloseEnabled(bool enable);
+
+    bool isCheckUpdatesEnabled() const;
+    bool setCheckUpdatesEnabled(bool enable);
+
+    qint64 hostsPerPage() const;
+    bool setHostsPerPage(qint64 value);
+
+    QString updateChannel() const;
+    bool setUpdateChannel(const QString& channel);
     bool isBackupOnStartupEnabled() const;
     bool setBackupOnStartupEnabled(bool enable);
 
@@ -189,6 +207,10 @@ public:
     bool setBiometricBlob(const QByteArray& blob);
     bool clearBiometricUnlock();
 
+public:
+    QString readSetting(const QString& name, bool* found = nullptr) const;
+    bool writeSetting(const QString& name, const QString& value);
+
 private:
     friend class DatabaseMigration;
     friend class DatabaseTestPeer;
@@ -198,9 +220,6 @@ private:
 
     bool openDatabase();
     bool setMasterPassword(const QByteArray& salt, const QByteArray& verifier, quint32 version);
-
-    QString readSetting(const QString& name, bool* found = nullptr) const;
-    bool writeSetting(const QString& name, const QString& value);
     bool ensureDefaultProfile();
     bool clearRouter();
 

@@ -37,4 +37,5 @@ message ConnectionOffer
     string error_code        = 2;
     RelayCredentials relay   = 3;
     StunServerInfo stun_info = 4;
+    bool caller_is_admin     = 5;
 }

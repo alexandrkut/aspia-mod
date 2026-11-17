@@ -29,117 +29,127 @@
         <translation>Закрити</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="113"/>
+        <location filename="../common/desktop/about_dialog.cc" line="136"/>
         <source>Version: %1 (%2)</source>
         <translation>Версія: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="118"/>
+        <location filename="../common/desktop/about_dialog.cc" line="141"/>
         <source>Aspia is free software released under GNU General Public License 3.</source>
         <translation>Aspia - вільне програмне забезпечення, що розповсюджується за ліцензією GNU General Public License 3.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="119"/>
+        <location filename="../common/desktop/about_dialog.cc" line="142"/>
         <source>You can get a copy of license here:</source>
         <translation>Ви можете отримати копію ліцензії за адресою:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="124"/>
+        <location filename="../common/desktop/about_dialog.cc" line="147"/>
         <source>You can also get a translation of GNU GPL license here:</source>
         <translation>Ознайомитися з перекладом ліцензії вашою мовою можна за адресою:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="128"/>
+        <location filename="../common/desktop/about_dialog.cc" line="151"/>
         <source>Links</source>
         <translation>Посилання</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="129"/>
+        <location filename="../common/desktop/about_dialog.cc" line="152"/>
         <source>Home page:</source>
         <translation>Домашня сторінка:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="130"/>
+        <location filename="../common/desktop/about_dialog.cc" line="153"/>
         <source>GitHub page:</source>
         <translation>Сторінка GitHub:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="133"/>
+        <location filename="../common/desktop/about_dialog.cc" line="162"/>
+        <source>Modifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../common/desktop/about_dialog.cc" line="164"/>
+        <source>The changes and the sources:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../common/desktop/about_dialog.cc" line="168"/>
         <source>Developers</source>
         <translation>Розробники</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="135"/>
+        <location filename="../common/desktop/about_dialog.cc" line="170"/>
         <source>Translators</source>
         <translation>Перекладачі</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="137"/>
+        <location filename="../common/desktop/about_dialog.cc" line="172"/>
         <source>Third-party components</source>
         <translation>Сторонні компоненти</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="139"/>
+        <location filename="../common/desktop/about_dialog.cc" line="174"/>
         <source>Graphics and images</source>
         <translation>Графіка і зображення</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="140"/>
+        <location filename="../common/desktop/about_dialog.cc" line="175"/>
         <source>Icons by %1</source>
         <translation>Іконки від %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="167"/>
+        <location filename="../common/desktop/about_dialog.cc" line="205"/>
         <source>Application</source>
         <translation>Програма</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="168"/>
+        <location filename="../common/desktop/about_dialog.cc" line="206"/>
         <source>Path: %1</source>
         <translation>Шлях: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="169"/>
+        <location filename="../common/desktop/about_dialog.cc" line="207"/>
         <source>Logging directory: %1</source>
         <translation>Каталог логів: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="171"/>
+        <location filename="../common/desktop/about_dialog.cc" line="209"/>
         <source>Logging file: %1</source>
         <translation>Файл лога: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="176"/>
+        <location filename="../common/desktop/about_dialog.cc" line="214"/>
         <source>Build Information</source>
         <translation>Інформація про збірку</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="177"/>
+        <location filename="../common/desktop/about_dialog.cc" line="215"/>
         <source>Git branch: %1</source>
         <translation>Гілка Git: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="179"/>
+        <location filename="../common/desktop/about_dialog.cc" line="217"/>
         <source>Git commit: %1</source>
         <translation>Коміт Git: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="184"/>
+        <location filename="../common/desktop/about_dialog.cc" line="222"/>
         <source>Compilation</source>
         <translation>Компіляція</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="185"/>
+        <location filename="../common/desktop/about_dialog.cc" line="223"/>
         <source>Compilation date: %1</source>
         <translation>Дата компіляції: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="186"/>
+        <location filename="../common/desktop/about_dialog.cc" line="224"/>
         <source>Compilation time: %1</source>
         <translation>Час компіляції: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="215"/>
+        <location filename="../common/desktop/about_dialog.cc" line="253"/>
         <source>Version Information</source>
         <translation>Інформація про версії</translation>
     </message>
@@ -547,13 +557,13 @@
         <translation>Зберегти дані для входу</translation>
     </message>
     <message>
-        <location filename="../client/desktop/authorization_dialog.cc" line="216"/>
-        <location filename="../client/desktop/authorization_dialog.cc" line="232"/>
+        <location filename="../client/desktop/authorization_dialog.cc" line="227"/>
+        <location filename="../client/desktop/authorization_dialog.cc" line="243"/>
         <source>Password cannot be empty.</source>
         <translation>Пароль не може бути порожнім.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/authorization_dialog.cc" line="225"/>
+        <location filename="../client/desktop/authorization_dialog.cc" line="236"/>
         <source>User name cannot be empty.</source>
         <translation>Ім&apos;я користувача не може бути порожнім.</translation>
     </message>
@@ -699,17 +709,17 @@
         <translation>Чат Aspia</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.ui" line="175"/>
+        <location filename="../common/desktop/chat_widget.ui" line="159"/>
         <source>Send message</source>
         <translation>Надіслати повідомлення</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.ui" line="204"/>
+        <location filename="../common/desktop/chat_widget.ui" line="188"/>
         <source>Tools</source>
         <translation>Інструменти</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.ui" line="210"/>
+        <location filename="../common/desktop/chat_widget.ui" line="194"/>
         <source>···</source>
         <translation>···</translation>
     </message>
@@ -985,12 +995,12 @@
 <context>
     <name>Client</name>
     <message>
-        <location filename="../client/main.cc" line="92"/>
+        <location filename="../client/main.cc" line="105"/>
         <source>Unable to create a backup. Some records of the database are damaged. Fix or delete them.</source>
         <translation>Не вдалося створити резервну копію. Деякі записи бази даних пошкоджено. Виправте або видаліть їх.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/app_lock.cc" line="94"/>
+        <location filename="../client/desktop/app_lock.cc" line="96"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>Пароль не може бути коротшим за %n символ.</numerusform>
@@ -999,12 +1009,12 @@
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/app_lock.cc" line="102"/>
+        <location filename="../client/desktop/app_lock.cc" line="104"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>Введений пароль не відповідає вимогам безпеки!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/app_lock.cc" line="104"/>
+        <location filename="../client/desktop/app_lock.cc" line="106"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>Пароль повинен містити малі та великі літери, цифри і не повинен бути коротшим за %n символ.</numerusform>
@@ -1013,71 +1023,210 @@
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/app_lock.cc" line="108"/>
+        <location filename="../client/desktop/app_lock.cc" line="110"/>
         <source>Do you want to enter a different password?</source>
         <translation>Хочете ввести інший пароль?</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="86"/>
+        <location filename="../client/main.cc" line="99"/>
         <source>Unable to create a backup in the directory &quot;%1&quot;.</source>
         <translation>Не вдалося створити резервну копію в каталозі &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="98"/>
+        <location filename="../client/main.cc" line="111"/>
         <source>Unable to create a backup.</source>
         <translation>Не вдалося створити резервну копію.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="240"/>
+        <location filename="../client/main.cc" line="275"/>
         <source>Unable to move the address book into the new format. The old address book is not changed, and the next start tries again. The details are in the log.</source>
         <translation>Не вдалося перенести адресну книгу в новий формат. Стару адресну книгу не змінено, під час наступного запуску спробу буде повторено. Подробиці в журналі.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="247"/>
-        <location filename="../client/main.cc" line="264"/>
+        <location filename="../client/main.cc" line="282"/>
+        <location filename="../client/main.cc" line="299"/>
         <source>Aspia Client</source>
         <translation>Клієнт Aspia</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="261"/>
+        <location filename="../client/main.cc" line="296"/>
         <source>Show the database selection dialog.</source>
         <translation>Показати діалог вибору бази даних.</translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="304"/>
+        <source>Connect to the host of the address book with this record ID or host ID, or with the name of a record, using the login and the password stored in it, or connect directly to a host by its address, which needs the login and the password given with --username and --password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="309"/>
+        <source>id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="313"/>
+        <source>Kind of the session to open: desktop, file, info, chat or terminal (default: the one from the settings of the application).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="316"/>
+        <source>type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="320"/>
+        <source>Log in with this user name instead of the one stored in the host. Requires --password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="323"/>
+        <location filename="../client/main.cc" line="335"/>
+        <source>name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="327"/>
+        <source>Log in with this password instead of the stored one. Requires --username. A password on a command line is visible to the other users of the machine.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="330"/>
+        <location filename="../client/main.cc" line="341"/>
+        <source>password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="333"/>
+        <source>Open the database with this name or ID instead of the selection dialog.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="338"/>
+        <source>Unlock the database with this master password instead of asking for it. A password on a command line is visible to the other users of the machine.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="344"/>
+        <source>Print the ID and the name of every database and exit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="458"/>
+        <location filename="../client/main.cc" line="493"/>
+        <source>Unable to open the database &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/main.cc" line="469"/>
+        <location filename="../client/main.cc" line="500"/>
+        <source>Invalid master password.</source>
+        <translation type="unfinished">Невірний майстер-пароль.</translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="150"/>
+        <source>&quot;%1&quot; is neither a host ID nor a record ID nor a host address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="153"/>
+        <source>The host ID of --connect is missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="175"/>
+        <source>&quot;%1&quot; is not a valid session type. Use desktop, file, info, chat or terminal.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="178"/>
+        <source>The session type of --session-type is missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="195"/>
+        <source>The user name of --username is missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="211"/>
+        <source>The password of --password is missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="241"/>
+        <source>&quot;%1&quot; is neither an aspia:// link nor a host ID nor a host address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="260"/>
+        <source>--username requires --password as well.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="262"/>
+        <source>--password requires --username as well.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/connect_request.cc" line="273"/>
+        <source>--username and --password need a host to connect to (--connect or an aspia:// link).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/storage/database.cc" line="135"/>
+        <source>Several databases are named &quot;%1&quot;. Use the ID of the one you mean.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/storage/database.cc" line="147"/>
+        <source>No database matches &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1605"/>
+        <source>Several hosts are named &quot;%1&quot;. Use the ID of the one you mean.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1628"/>
+        <source>&quot;%1&quot; is both the name of a host and the ID of another. Connect by the record ID of the host you mean.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ClientListModel</name>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="141"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="142"/>
         <source>Computer Name</source>
         <translation>Ім&apos;я комп&apos;ютера</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="144"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="145"/>
         <source>User Name</source>
         <translation>Ім&apos;я користувача</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="147"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="148"/>
         <source>IP Address</source>
         <translation>IP-адреса</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="150"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="151"/>
         <source>Connect Time</source>
         <translation>Час підключення</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="153"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="154"/>
         <source>Version</source>
         <translation>Версія</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="156"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="157"/>
         <source>Architecture</source>
         <translation>Архітектура</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="159"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="160"/>
         <source>Operating System</source>
         <translation>Операційна система</translation>
     </message>
@@ -1085,62 +1234,69 @@
 <context>
     <name>ClientWindow</name>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="278"/>
+        <location filename="../client/desktop/client_window.cc" line="416"/>
         <source>Session started.</source>
         <translation>Сесію розпочато.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="593"/>
+        <location filename="../client/desktop/client_window.cc" line="761"/>
         <source>The specified router is unavailable.</source>
         <translation>Вказаний маршрутизатор недоступний.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="595"/>
+        <location filename="../client/desktop/client_window.cc" line="763"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>Дані маршрутизатора пошкоджено. Відредагуйте маршрутизатор і введіть їх знову.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="597"/>
+        <location filename="../client/desktop/client_window.cc" line="765"/>
         <source>The specified router is offline.</source>
         <translation>Вказаний маршрутизатор не в мережі.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="290"/>
+        <location filename="../client/desktop/client_window.cc" line="428"/>
         <source>Connecting to host %1...</source>
         <translation>Підключення до хоста %1...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="294"/>
+        <location filename="../client/desktop/client_window.cc" line="432"/>
         <source>Connecting to host %1:%2...</source>
         <translation>Підключення до хоста %1:%2...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="330"/>
+        <location filename="../client/desktop/client_window.cc" line="468"/>
         <source>Host is unavailable yet. Waiting to reconnect...</source>
         <translation>Хост недоступний. Очікування повторного підключення...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="105"/>
+        <location filename="../client/desktop/client_window.cc" line="113"/>
+        <location filename="../client/desktop/client_window.cc" line="238"/>
         <source>Timeout waiting for reconnection to host.</source>
         <translation>Перевищено час очікування при спробі повторного підключення до хоста.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="350"/>
+        <location filename="../client/desktop/client_window.cc" line="218"/>
+        <location filename="../client/desktop/client_window.cc" line="251"/>
+        <source>Connecting to host...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/client_window.cc" line="477"/>
         <source>The Host version is newer than the Client version (%1 &gt; %2). Please update the application.</source>
         <translation>Версія хоста новіша за версію клієнта (%1 &gt; %2). Будь ласка, оновіть застосунок.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="604"/>
+        <location filename="../client/desktop/client_window.cc" line="775"/>
         <source>Requesting connection to the host...</source>
         <translation>Запит на підключення до хоста...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="612"/>
+        <location filename="../client/desktop/client_window.cc" line="783"/>
         <source>Connection offer received.</source>
         <translation>Отримано пропозицію підключення.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="626"/>
+        <location filename="../client/desktop/client_window.cc" line="800"/>
         <source>Error requesting connection via router.</source>
         <translation>Помилка при запиті з&apos;єднання через маршрутизатор.</translation>
     </message>
@@ -1150,7 +1306,7 @@
     <message>
         <location filename="../host/ui/config_dialog.ui" line="14"/>
         <location filename="../host/ui/config_dialog.ui" line="185"/>
-        <location filename="../host/ui/config_dialog.cc" line="136"/>
+        <location filename="../host/ui/config_dialog.cc" line="137"/>
         <source>Settings</source>
         <translation>Налаштування</translation>
     </message>
@@ -1165,258 +1321,288 @@
         <translation>Змінити пароль</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="138"/>
+        <location filename="../host/ui/config_dialog.cc" line="139"/>
         <source>Installer</source>
         <translation>Інсталятор</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="140"/>
+        <location filename="../host/ui/config_dialog.cc" line="141"/>
         <source>Quick Support</source>
         <translation>Швидка підтримка</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="147"/>
+        <location filename="../host/ui/config_dialog.cc" line="148"/>
         <source>Once a day</source>
         <translation>Раз на день</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="148"/>
+        <location filename="../host/ui/config_dialog.cc" line="149"/>
         <source>Once a week</source>
         <translation>Раз на тиждень</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="149"/>
+        <location filename="../host/ui/config_dialog.cc" line="150"/>
         <source>Once a month</source>
         <translation>Раз на місяць</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="151"/>
+        <location filename="../host/ui/config_dialog.cc" line="152"/>
         <source>Stable</source>
         <translation>Стабільний</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="152"/>
+        <location filename="../host/ui/config_dialog.cc" line="153"/>
         <source>Beta</source>
         <translation>Бета</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="153"/>
+        <location filename="../host/ui/config_dialog.cc" line="154"/>
         <source>Alpha</source>
         <translation>Альфа</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="188"/>
+        <location filename="../host/ui/config_dialog.cc" line="189"/>
         <source>Default</source>
         <translation>За замовчуванням</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="222"/>
+        <location filename="../host/ui/config_dialog.cc" line="223"/>
         <source>No proxy</source>
         <translation>Без проксі-сервера</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="259"/>
+        <location filename="../host/ui/config_dialog.cc" line="260"/>
         <source>On reboot</source>
         <translation>При перезавантаженні</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="260"/>
+        <location filename="../host/ui/config_dialog.cc" line="261"/>
         <source>Every 5 minutes</source>
         <translation>Кожні 5 хвилин</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="261"/>
+        <location filename="../host/ui/config_dialog.cc" line="262"/>
         <source>Every 30 minutes</source>
         <translation>Кожні 30 хвилин</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="262"/>
+        <location filename="../host/ui/config_dialog.cc" line="263"/>
         <source>Every 1 hour</source>
         <translation>Кожну годину</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="263"/>
+        <location filename="../host/ui/config_dialog.cc" line="264"/>
         <source>Every 6 hours</source>
         <translation>Кожні 6 годин</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="264"/>
+        <location filename="../host/ui/config_dialog.cc" line="265"/>
         <source>Every 12 hours</source>
         <translation>Кожні 12 годин</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="272"/>
+        <location filename="../host/ui/config_dialog.cc" line="273"/>
         <source>Letters and digits</source>
         <translation>Літери і цифри</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="275"/>
+        <location filename="../host/ui/config_dialog.cc" line="276"/>
         <source>Letters</source>
         <translation>Літери</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="277"/>
+        <location filename="../host/ui/config_dialog.cc" line="278"/>
         <source>Digits</source>
         <translation>Цифри</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="294"/>
+        <location filename="../host/ui/config_dialog.cc" line="295"/>
         <source>Never</source>
         <translation>Ніколи</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="295"/>
+        <location filename="../host/ui/config_dialog.cc" line="296"/>
         <source>15 seconds</source>
         <translation>15 секунд</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="296"/>
+        <location filename="../host/ui/config_dialog.cc" line="297"/>
         <source>30 seconds</source>
         <translation>30 секунд</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="297"/>
+        <location filename="../host/ui/config_dialog.cc" line="298"/>
         <source>45 seconds</source>
         <translation>45 секунд</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="298"/>
+        <location filename="../host/ui/config_dialog.cc" line="299"/>
         <source>60 seconds</source>
         <translation>60 секунд</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="306"/>
+        <location filename="../host/ui/config_dialog.cc" line="307"/>
         <source>Accept connection</source>
         <translation>Приймати підключення</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="307"/>
+        <location filename="../host/ui/config_dialog.cc" line="308"/>
         <source>Reject connection</source>
         <translation>Відхиляти підключення</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="507"/>
+        <location filename="../host/ui/config_dialog.cc" line="508"/>
         <source>Are you sure you want to delete user &quot;%1&quot;?</source>
         <translation>Ви дійсно хочете видалити користувача &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="535"/>
-        <location filename="../host/ui/config_dialog.cc" line="569"/>
+        <location filename="../host/ui/config_dialog.cc" line="536"/>
+        <location filename="../host/ui/config_dialog.cc" line="570"/>
         <source>An error occurred while processing the password.</source>
         <translation>Сталася помилка при обробці пароля.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="552"/>
+        <location filename="../host/ui/config_dialog.cc" line="553"/>
         <source>Settings storage is unavailable.</source>
         <translation>Сховище налаштувань недоступне.</translation>
     </message>
     <message>
+        <location filename="../host/ui/config_dialog.cc" line="630"/>
+        <source>Export Installer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/config_dialog.cc" line="631"/>
+        <source>The exported installer carries the settings of this host: the connection to the router and the users. By default they are imported on the first installation only, and the data of a host that is already installed is left alone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/config_dialog.cc" line="637"/>
+        <source>Overwrite the old data on install</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../host/ui/config_dialog.ui" line="204"/>
-        <location filename="../host/ui/config_dialog.cc" line="583"/>
+        <location filename="../host/ui/config_dialog.cc" line="584"/>
         <source>Import</source>
         <translation>Імпорт</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="583"/>
-        <location filename="../host/ui/config_dialog.cc" line="600"/>
+        <location filename="../host/ui/config_dialog.cc" line="584"/>
+        <location filename="../host/ui/config_dialog.cc" line="601"/>
         <source>JSON-files (*.json)</source>
         <translation>JSON-файли (*.json)</translation>
     </message>
     <message>
         <location filename="../host/ui/config_dialog.ui" line="211"/>
-        <location filename="../host/ui/config_dialog.cc" line="600"/>
-        <location filename="../host/ui/config_dialog.cc" line="625"/>
-        <location filename="../host/ui/config_dialog.cc" line="660"/>
+        <location filename="../host/ui/config_dialog.cc" line="601"/>
+        <location filename="../host/ui/config_dialog.cc" line="649"/>
+        <location filename="../host/ui/config_dialog.cc" line="705"/>
         <source>Export</source>
         <translation>Експорт</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="625"/>
+        <location filename="../host/ui/config_dialog.cc" line="649"/>
         <source>MSI-files (*.msi)</source>
         <translation>MSI-файли (*.msi)</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="635"/>
+        <location filename="../host/ui/config_dialog.cc" line="659"/>
         <source>The installer was successfully exported.</source>
         <translation>Інсталятор експортовано успішно.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="639"/>
+        <location filename="../host/ui/config_dialog.cc" line="663"/>
         <source>The installed host package was not found.</source>
         <translation>Встановлений пакет хоста не знайдено.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="643"/>
+        <location filename="../host/ui/config_dialog.cc" line="667"/>
         <source>The installed version of the host does not support exporting the installer.</source>
         <translation>Встановлена версія хоста не підтримує експорт інсталятора.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="647"/>
+        <location filename="../host/ui/config_dialog.cc" line="671"/>
         <source>Unable to export the installer.</source>
         <translation>Не вдалося експортувати інсталятор.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="660"/>
+        <location filename="../host/ui/config_dialog.cc" line="687"/>
+        <source>Export Quick Support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/config_dialog.cc" line="688"/>
+        <source>The exported package connects to the same router as this host and accepts the one-time password. The users of this host can be exported with it: they will be able to connect to the exported host with their own login and password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/config_dialog.cc" line="693"/>
+        <source>Export the users of this host</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/config_dialog.cc" line="705"/>
         <source>Executable files (*.exe)</source>
         <translation>Виконувані файли (*.exe)</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="670"/>
+        <location filename="../host/ui/config_dialog.cc" line="715"/>
         <source>The portable version was successfully exported.</source>
         <translation>Портативну версію експортовано успішно.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="674"/>
+        <location filename="../host/ui/config_dialog.cc" line="719"/>
         <source>The portable version works only through a router. Set up the connection to the router and save the settings.</source>
         <translation>Портативна версія працює тільки через маршрутизатор. Налаштуйте підключення до маршрутизатора та збережіть налаштування.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="678"/>
+        <location filename="../host/ui/config_dialog.cc" line="723"/>
         <source>Unable to export the portable version.</source>
         <translation>Не вдалося експортувати портативну версію.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="699"/>
+        <location filename="../host/ui/config_dialog.cc" line="744"/>
         <source>The configuration can not be written. Make sure that you have sufficient rights to write.</source>
         <translation>Конфігурація не може бути записана. Переконайтеся, що у вас достатньо прав для запису.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="715"/>
+        <location filename="../host/ui/config_dialog.cc" line="760"/>
         <source>An invalid update server address was entered.</source>
         <translation>Введено недопустиму адресу сервера оновлень.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="723"/>
+        <location filename="../host/ui/config_dialog.cc" line="768"/>
         <source>Enter the update server address.</source>
         <translation>Введіть адресу сервера оновлень.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="733"/>
+        <location filename="../host/ui/config_dialog.cc" line="778"/>
         <source>An invalid public key was entered.</source>
         <translation>Введено некоректний публічний ключ.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="752"/>
+        <location filename="../host/ui/config_dialog.cc" line="797"/>
         <source>Incorrect proxy address entered.</source>
         <translation>Введено некоректну адресу проксі-сервера.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="764"/>
+        <location filename="../host/ui/config_dialog.cc" line="809"/>
         <source>Incorrect router address entered.</source>
         <translation>Введено некоректну адресу маршрутизатора.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="774"/>
+        <location filename="../host/ui/config_dialog.cc" line="819"/>
         <source>Incorrect router public key entered.</source>
         <translation>Введено некоректний публічний ключ маршрутизатора.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="946"/>
+        <location filename="../host/ui/config_dialog.cc" line="991"/>
         <source>Install</source>
         <translation>Встановити</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="951"/>
+        <location filename="../host/ui/config_dialog.cc" line="996"/>
         <source>Remove</source>
         <translation>Видалити</translation>
     </message>
@@ -2022,7 +2208,7 @@ Credentials exported: %1</source>
         <translation>Облікові дані ОС</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/credentials/credential_export_dialog.cc" line="288"/>
+        <location filename="../client/desktop/credentials/credential_export_dialog.cc" line="289"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>Пароль не може бути коротшим за %n символ.</numerusform>
@@ -2031,12 +2217,12 @@ Credentials exported: %1</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_export_dialog.cc" line="296"/>
+        <location filename="../client/desktop/credentials/credential_export_dialog.cc" line="297"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>Введений пароль не відповідає вимогам безпеки!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/credentials/credential_export_dialog.cc" line="297"/>
+        <location filename="../client/desktop/credentials/credential_export_dialog.cc" line="298"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>Пароль повинен містити малі та великі літери, цифри і не повинен бути коротшим за %n символ.</numerusform>
@@ -2045,7 +2231,7 @@ Credentials exported: %1</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_export_dialog.cc" line="300"/>
+        <location filename="../client/desktop/credentials/credential_export_dialog.cc" line="301"/>
         <source>Do you want to enter a different password?</source>
         <translation>Хочете ввести інший пароль?</translation>
     </message>
@@ -2138,7 +2324,7 @@ Credentials exported: %1</source>
     <name>CredentialImportDialog</name>
     <message>
         <location filename="../client/desktop/credentials/credential_import_dialog.ui" line="14"/>
-        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="89"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="88"/>
         <source>Import Credentials</source>
         <translation>Імпорт облікових даних</translation>
     </message>
@@ -2158,92 +2344,92 @@ Credentials exported: %1</source>
         <translation>Пароль:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.ui" line="68"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.ui" line="74"/>
         <source>Open</source>
         <translation>Відкрити</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.ui" line="87"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.ui" line="93"/>
         <source>Check all</source>
         <translation>Вибрати всі</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.ui" line="113"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.ui" line="119"/>
         <source>Uncheck all</source>
         <translation>Зняти всі відмітки</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.ui" line="149"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.ui" line="155"/>
         <source>Name</source>
         <translation>Ім&apos;я</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.ui" line="154"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.ui" line="160"/>
         <source>User Name</source>
         <translation>Ім&apos;я користувача</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.ui" line="159"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.ui" line="165"/>
         <source>Status</source>
         <translation>Статус</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="55"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="54"/>
         <source>Import</source>
         <translation>Імпортувати</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="90"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="89"/>
         <source>Aspia Credentials (*.aspia-credentials);;All files (*)</source>
         <translation>Облікові дані Aspia (*.aspia-credentials);;Всі файли (*)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="114"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="113"/>
         <source>Unable to decrypt the file with the specified password.</source>
         <translation>Не вдається розшифрувати файл за допомогою вказаного пароля.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="120"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="119"/>
         <source>Unable to read the file.</source>
         <translation>Не вдалося прочитати файл.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="124"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="123"/>
         <source>Unsupported file format version.</source>
         <translation>Непідтримувана версія формату файлу.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="128"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="127"/>
         <source>The file is not a valid credentials file.</source>
         <translation>Файл не є допустимим файлом облікових даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="132"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="131"/>
         <source>Failed to import the credentials.</source>
         <translation>Не вдалося імпортувати облікові дані.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="146"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="145"/>
         <source>Aspia Credentials</source>
         <translation>Облікові дані Aspia</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="147"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="146"/>
         <source>OS Credentials</source>
         <translation>Облікові дані ОС</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="163"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="162"/>
         <source>Exists</source>
         <translation>Існує</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="163"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="162"/>
         <source>New</source>
         <translation>Новий</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="243"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="242"/>
         <source>Unable to write credentials &quot;%1&quot;. The import was interrupted.
 Credentials added: %2
 Credentials replaced: %3</source>
@@ -2252,7 +2438,7 @@ Credentials replaced: %3</source>
 Замінено облікових даних: %3</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="253"/>
+        <location filename="../client/desktop/credentials/credential_import_dialog.cc" line="252"/>
         <source>Import completed successfully.
 Credentials added: %1
 Credentials replaced: %2</source>
@@ -2588,7 +2774,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="233"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1022"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1036"/>
         <source>Scale</source>
         <translation>Масштаб</translation>
     </message>
@@ -2678,7 +2864,7 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="435"/>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="438"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="610"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="624"/>
         <source>Start recording</source>
         <translation>Почати запис</translation>
     </message>
@@ -2700,69 +2886,75 @@ Credentials replaced: %2</source>
         <translation>Перемикання сесії</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="397"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="411"/>
         <source>Resolution selection</source>
         <translation>Вибір роздільної здатності</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1197"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1211"/>
         <source>Session %1</source>
         <translation>Сесія %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1197"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1211"/>
         <source>Session %1 (%2)</source>
         <translation>Сесія %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="605"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="619"/>
         <source>Stop recording</source>
         <translation>Зупинити запис</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="510"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="100"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="104"/>
+        <source>View only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="524"/>
         <source>Scripts</source>
         <translation>Скрипти</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="573"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="587"/>
         <source>Are you sure you want to run &quot;%1&quot; on the remote computer?</source>
         <translation>Ви дійсно хочете запустити скрипт &quot;%1&quot; на віддаленому комп&apos;ютері?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="837"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="851"/>
         <source>Are you sure you want to shutdown the remote computer?</source>
         <translation>Ви дійсно хочете вимкнути віддалений комп&apos;ютер?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="852"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="885"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="866"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="899"/>
         <source>Confirmation</source>
         <translation>Підтвердження</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="853"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="867"/>
         <source>Are you sure you want to reboot the remote computer?</source>
         <translation>Ви дійсно хочете перезавантажити віддалений комп&apos;ютер?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="861"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="894"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="875"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="908"/>
         <source>Wait for host</source>
         <translation>Очікування хоста</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="886"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="900"/>
         <source>Are you sure you want to reboot the remote computer in Safe Mode?</source>
         <translation>Ви дійсно хочете перезавантажити віддалений комп&apos;ютер у безпечному режимі?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="918"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="932"/>
         <source>Are you sure you want to end the user session on the remote computer?</source>
         <translation>Ви дійсно хочете завершити сеанс користувача на віддаленому комп&apos;ютері?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="933"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="947"/>
         <source>Are you sure you want to lock the user session on the remote computer?</source>
         <translation>Ви дійсно хочете заблокувати сеанс користувача на віддаленому комп&apos;ютері?</translation>
     </message>
@@ -2770,32 +2962,32 @@ Credentials replaced: %2</source>
 <context>
     <name>DesktopWidget</name>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="627"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="648"/>
         <source>The session was paused by a remote user</source>
         <translation>Сесію призупинено віддаленим користувачем</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="630"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="651"/>
         <source>The session is temporarily unavailable</source>
         <translation>Сесія тимчасово недоступна</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="633"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="654"/>
         <source>The session is permanently unavailable</source>
         <translation>Сесія недоступна</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="636"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="657"/>
         <source>Waiting for the remote user to confirm screen capture</source>
         <translation>Очікування підтвердження захоплення екрана віддаленим користувачем</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="639"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="660"/>
         <source>The remote device screen is locked</source>
         <translation>Екран віддаленого пристрою заблоковано</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="642"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="663"/>
         <source>Error while receiving video stream: %1</source>
         <translation>Помилка при отриманні відеопотоку: %1</translation>
     </message>
@@ -2803,37 +2995,37 @@ Credentials replaced: %2</source>
 <context>
     <name>DesktopWindow</name>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1149"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1176"/>
         <source>Save File</source>
         <translation>Зберегти файл</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1150"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1177"/>
         <source>PNG Image (*.png);;BMP Image (*.bmp)</source>
         <translation>PNG зображення (*.png);;BMP зображення (*.bmp)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1181"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1208"/>
         <source>Could not save image</source>
         <translation>Не вдалося зберегти зображення</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1434"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1464"/>
         <source>Invalid user name or password.</source>
         <translation>Неправильне ім&apos;я користувача або пароль.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1437"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1467"/>
         <source>The password has expired.</source>
         <translation>Термін дії пароля закінчився.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1440"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1470"/>
         <source>The account is locked out.</source>
         <translation>Обліковий запис заблоковано.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1443"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1473"/>
         <source>The account is disabled.</source>
         <translation>Обліковий запис відключено.</translation>
     </message>
@@ -3199,109 +3391,109 @@ Credentials replaced: %2</source>
 <context>
     <name>FilePanel</name>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.ui" line="145"/>
+        <location filename="../client/desktop/file_transfer/file_panel.ui" line="128"/>
         <source>Up</source>
         <translation>Вгору</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.ui" line="148"/>
+        <location filename="../client/desktop/file_transfer/file_panel.ui" line="131"/>
         <source>Browse to parent folder (Backspace)</source>
         <translation>Повернутись на каталог вище (Backspace)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.ui" line="157"/>
+        <location filename="../client/desktop/file_transfer/file_panel.ui" line="140"/>
         <source>Refresh</source>
         <translation>Оновити</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.ui" line="160"/>
+        <location filename="../client/desktop/file_transfer/file_panel.ui" line="143"/>
         <source>Refresh (F5)</source>
         <translation>Оновити (F5)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.ui" line="172"/>
+        <location filename="../client/desktop/file_transfer/file_panel.ui" line="155"/>
         <source>New Folder</source>
         <translation>Новий каталог</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.ui" line="175"/>
+        <location filename="../client/desktop/file_transfer/file_panel.ui" line="158"/>
         <source>Create a new folder</source>
         <translation>Створити новий каталог</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.ui" line="187"/>
+        <location filename="../client/desktop/file_transfer/file_panel.ui" line="170"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.ui" line="190"/>
+        <location filename="../client/desktop/file_transfer/file_panel.ui" line="173"/>
         <source>Delete selected object(s) (Delete)</source>
         <translation>Видалити обрані об&apos;єкти (Delete)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.ui" line="205"/>
+        <location filename="../client/desktop/file_transfer/file_panel.ui" line="188"/>
         <source>Send selected object(s) (F11)</source>
         <translation>Надіслати обрані об&apos;єкти (F11)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.ui" line="202"/>
+        <location filename="../client/desktop/file_transfer/file_panel.ui" line="185"/>
         <source>Send</source>
         <translation>Надіслати</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.cc" line="227"/>
+        <location filename="../client/desktop/file_transfer/file_panel.cc" line="245"/>
         <source>Failed to get list of drives: %1</source>
         <translation>Не вдалося отримати список дисків: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.cc" line="244"/>
+        <location filename="../client/desktop/file_transfer/file_panel.cc" line="262"/>
         <source>Failed to get list of files: %1</source>
         <translation>Не вдалося отримати список файлів: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.cc" line="269"/>
+        <location filename="../client/desktop/file_transfer/file_panel.cc" line="287"/>
         <source>Failed to create directory: %1</source>
         <translation>Не вдалося створити каталог: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.cc" line="281"/>
+        <location filename="../client/desktop/file_transfer/file_panel.cc" line="299"/>
         <source>Failed to rename item: %1</source>
         <translation>Не вдалося перейменувати елемент: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.cc" line="427"/>
+        <location filename="../client/desktop/file_transfer/file_panel.cc" line="445"/>
         <source>%1 object(s) selected</source>
         <translation>Вибрано об&apos;єктів: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.cc" line="488"/>
-        <location filename="../client/desktop/file_transfer/file_panel.cc" line="507"/>
+        <location filename="../client/desktop/file_transfer/file_panel.cc" line="506"/>
+        <location filename="../client/desktop/file_transfer/file_panel.cc" line="525"/>
         <source>Folder name can not be empty.</source>
         <translation>Ім&apos;я каталогу не може бути порожнім.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.cc" line="494"/>
-        <location filename="../client/desktop/file_transfer/file_panel.cc" line="513"/>
+        <location filename="../client/desktop/file_transfer/file_panel.cc" line="512"/>
+        <location filename="../client/desktop/file_transfer/file_panel.cc" line="531"/>
         <source>Name contains invalid characters.</source>
         <translation>Ім&apos;я містить некоректні символи.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.cc" line="455"/>
+        <location filename="../client/desktop/file_transfer/file_panel.cc" line="473"/>
         <source>&amp;Send	F11</source>
         <translation>&amp;Надіслати	F11</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.cc" line="456"/>
+        <location filename="../client/desktop/file_transfer/file_panel.cc" line="474"/>
         <source>&amp;Delete	Delete</source>
         <translation>&amp;Видалити	Delete</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.cc" line="466"/>
+        <location filename="../client/desktop/file_transfer/file_panel.cc" line="484"/>
         <source>&amp;Create Folder</source>
         <translation>&amp;Створити каталог</translation>
     </message>
     <message>
-        <location filename="../client/desktop/file_transfer/file_panel.cc" line="191"/>
+        <location filename="../client/desktop/file_transfer/file_panel.cc" line="209"/>
         <source>Are you sure you want to delete the selected items?</source>
         <translation>Ви дійсно хочете видалити вибрані елементи?</translation>
     </message>
@@ -3840,17 +4032,17 @@ Credentials replaced: %2</source>
 <context>
     <name>GuiApplication</name>
     <message>
-        <location filename="../base/gui_application.cc" line="690"/>
+        <location filename="../base/gui_application.cc" line="811"/>
         <source>Dark</source>
         <translation>Темна</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="692"/>
+        <location filename="../base/gui_application.cc" line="813"/>
         <source>Light</source>
         <translation>Світла</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="693"/>
+        <location filename="../base/gui_application.cc" line="814"/>
         <source>Auto</source>
         <translation>Автоматично</translation>
     </message>
@@ -4002,9 +4194,9 @@ Credentials replaced: %2</source>
     <name>HostWindow</name>
     <message>
         <location filename="../host/ui/host_window.ui" line="26"/>
-        <location filename="../host/ui/host_window.cc" line="644"/>
-        <location filename="../host/ui/host_window.cc" line="889"/>
-        <location filename="../host/ui/host_window.cc" line="1167"/>
+        <location filename="../host/ui/host_window.cc" line="662"/>
+        <location filename="../host/ui/host_window.cc" line="915"/>
+        <location filename="../host/ui/host_window.cc" line="1193"/>
         <source>Aspia Host</source>
         <translation>Хост Aspia</translation>
     </message>
@@ -4020,7 +4212,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="198"/>
-        <location filename="../host/ui/host_window.cc" line="1119"/>
+        <location filename="../host/ui/host_window.cc" line="1145"/>
         <source>Router is disabled</source>
         <translation>Маршрутизатор відключено</translation>
     </message>
@@ -4091,7 +4283,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="335"/>
-        <location filename="../host/ui/host_window.cc" line="850"/>
+        <location filename="../host/ui/host_window.cc" line="868"/>
         <source>Hide</source>
         <translation>Сховати</translation>
     </message>
@@ -4131,75 +4323,85 @@ Credentials replaced: %2</source>
         <translation>Показати чат</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="180"/>
-        <location filename="../host/ui/host_window.cc" line="644"/>
-        <location filename="../host/ui/host_window.cc" line="1167"/>
+        <location filename="../host/ui/host_window.cc" line="181"/>
+        <location filename="../host/ui/host_window.cc" line="662"/>
+        <location filename="../host/ui/host_window.cc" line="1193"/>
         <source>Aspia Quick Support</source>
         <translation>Швидка підтримка Aspia</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="339"/>
-        <location filename="../host/ui/host_window.cc" line="845"/>
+        <location filename="../host/ui/host_window.cc" line="340"/>
+        <location filename="../host/ui/host_window.cc" line="863"/>
         <source>Show</source>
         <translation>Показати</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="633"/>
+        <location filename="../host/ui/host_window.cc" line="651"/>
         <source>Screen recording has started.</source>
         <translation>Запис екрана розпочато.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="635"/>
+        <location filename="../host/ui/host_window.cc" line="653"/>
         <source>Screen recording stopped.</source>
         <translation>Запис екрана зупинено.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="834"/>
+        <location filename="../host/ui/host_window.cc" line="852"/>
         <source>Settings storage is unavailable.</source>
         <translation>Сховище налаштувань недоступне.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="900"/>
+        <location filename="../host/ui/host_window.cc" line="911"/>
+        <source>The ability to show several monitors at once</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/host_window.cc" line="912"/>
+        <source>Remote management of settings and users by the router administrator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../host/ui/host_window.cc" line="926"/>
         <source>Aspia Host will be removed from this computer. The settings of the host will be kept. Do you really want to uninstall the application?</source>
         <translation>Хост Aspia буде видалено з цього комп&apos;ютера. Налаштування хоста буде збережено. Ви дійсно хочете видалити застосунок?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="912"/>
+        <location filename="../host/ui/host_window.cc" line="938"/>
         <source>Unable to uninstall the application.</source>
         <translation>Не вдалося видалити застосунок.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="939"/>
+        <location filename="../host/ui/host_window.cc" line="965"/>
         <source>If you exit from Aspia, it will not be possible to connect to this computer until you turn on the computer or Aspia again manually. Do you really want to exit the application?</source>
         <translation>Якщо ви вийдете з Aspia, ви не зможете підключитися до цього комп&apos;ютера, доки знову не увімкнете комп&apos;ютер або Aspia вручну. Ви дійсно хочете вийти із застосунку?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1111"/>
+        <location filename="../host/ui/host_window.cc" line="1137"/>
         <source>Not connected to service</source>
         <translation>Немає підключення до служби</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1124"/>
+        <location filename="../host/ui/host_window.cc" line="1150"/>
         <source>Connecting to router...</source>
         <translation>Підключення до маршрутизатора...</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1129"/>
+        <location filename="../host/ui/host_window.cc" line="1155"/>
         <source>Connected to router</source>
         <translation>Підключено до маршрутизатора</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1134"/>
+        <location filename="../host/ui/host_window.cc" line="1160"/>
         <source>Connection error</source>
         <translation>Помилка підключення</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1212"/>
+        <location filename="../host/ui/host_window.cc" line="1238"/>
         <source>IP addresses:</source>
         <translation>IP адреси:</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1168"/>
+        <location filename="../host/ui/host_window.cc" line="1194"/>
         <source>ID: %1</source>
         <translation>ID: %1</translation>
     </message>
@@ -4892,7 +5094,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../client/desktop/main_window.ui" line="20"/>
-        <location filename="../client/desktop/main_window.cc" line="572"/>
+        <location filename="../client/desktop/main_window.cc" line="599"/>
         <source>Aspia Client</source>
         <translation>Клієнт Aspia</translation>
     </message>
@@ -4972,72 +5174,112 @@ Credentials replaced: %2</source>
         <translation>Налаштування...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="126"/>
+        <location filename="../client/desktop/main_window.cc" line="137"/>
         <source>Search...</source>
         <translation>Пошук...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="218"/>
+        <location filename="../client/desktop/main_window.cc" line="230"/>
         <source>The MCP connector is already in use by another window of the application.</source>
         <translation>MCP-конектор вже використовується іншим вікном застосунку.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="220"/>
+        <location filename="../client/desktop/main_window.cc" line="232"/>
         <source>Unable to turn on the MCP connector.</source>
         <translation>Не вдалося увімкнути MCP-конектор.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="243"/>
+        <location filename="../client/desktop/main_window.cc" line="255"/>
         <source>Management</source>
         <translation>Керування</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="286"/>
+        <location filename="../client/desktop/main_window.cc" line="298"/>
         <source>Are you sure you want to close the application?</source>
         <translation>Ви дійсно хочете закрити застосунок?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="527"/>
+        <location filename="../client/desktop/main_window.cc" line="545"/>
         <source>Close all sessions to change the database.</source>
         <translation>Закрийте всі сесії, щоб змінити базу даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="533"/>
+        <location filename="../client/desktop/main_window.cc" line="551"/>
         <source>Close all dialogs to change the database.</source>
         <translation>Закрийте всі діалоги, щоб змінити базу даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="548"/>
+        <location filename="../client/desktop/main_window.cc" line="566"/>
         <source>Close all sessions to lock the application.</source>
         <translation>Закрийте всі сесії, щоб заблокувати застосунок.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="554"/>
+        <location filename="../client/desktop/main_window.cc" line="572"/>
         <source>Close all dialogs to lock the application.</source>
         <translation>Закрийте всі діалоги, щоб заблокувати застосунок.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="915"/>
+        <location filename="../client/desktop/main_window.cc" line="592"/>
+        <source>Connect to a host by its ID from the command line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="593"/>
+        <source>The icon of the screen of all the monitors at once</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="594"/>
+        <source>Remote management of host users and update settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="595"/>
+        <source>Full host configuration from a file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="596"/>
+        <source>Bulk operations on multiple hosts at once</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="964"/>
         <source>Unknown application</source>
         <translation>Невідомий застосунок</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="918"/>
+        <location filename="../client/desktop/main_window.cc" line="967"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>MCP-конектор. Підключено: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="919"/>
+        <location filename="../client/desktop/main_window.cc" line="968"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - ШІ підключений</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="480"/>
+        <location filename="../client/desktop/main_window.cc" line="1454"/>
+        <source>A host named by its address has no record of it in the address book, and there are no stored credentials to use. Give the user name and the password with --username and --password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1786"/>
+        <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="1792"/>
+        <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="492"/>
         <source>Credentials</source>
         <translation>Облікові дані</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="517"/>
+        <location filename="../client/desktop/main_window.cc" line="535"/>
         <source>Settings</source>
         <translation>Налаштування</translation>
     </message>
@@ -5076,7 +5318,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../client/desktop/management_tab.ui" line="110"/>
-        <location filename="../client/desktop/management_tab.cc" line="1972"/>
+        <location filename="../client/desktop/management_tab.cc" line="2093"/>
         <source>Delete Host</source>
         <translation>Видалити хост</translation>
     </message>
@@ -5213,34 +5455,34 @@ Credentials replaced: %2</source>
         <translation>Автооновлення стану</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1084"/>
+        <location filename="../client/desktop/management_tab.cc" line="1127"/>
         <source>(copy)</source>
         <translation>(копія)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1052"/>
-        <location filename="../client/desktop/management_tab.cc" line="1129"/>
-        <location filename="../client/desktop/management_tab.cc" line="2188"/>
+        <location filename="../client/desktop/management_tab.cc" line="1095"/>
+        <location filename="../client/desktop/management_tab.cc" line="1172"/>
+        <location filename="../client/desktop/management_tab.cc" line="2309"/>
         <source>Failed to retrieve host information from the local database.</source>
         <translation>Не вдалося отримати інформацію про хост із локальної бази даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="884"/>
+        <location filename="../client/desktop/management_tab.cc" line="927"/>
         <source>The &quot;%1&quot; session type is not available for Quick Support.</source>
         <translation>Тип сесії &quot;%1&quot; недоступний для Швидкої підтримки.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1089"/>
+        <location filename="../client/desktop/management_tab.cc" line="1132"/>
         <source>Failed to add the host to the local database.</source>
         <translation>Не вдалося додати хост до локальної бази даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1147"/>
+        <location filename="../client/desktop/management_tab.cc" line="1190"/>
         <source>Are you sure you want to delete host &quot;%1&quot;?</source>
         <translation>Ви впевнені, що хочете видалити хост &quot;%1&quot;?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management_tab.cc" line="1149"/>
+        <location filename="../client/desktop/management_tab.cc" line="1192"/>
         <source>Are you sure you want to delete %n hosts?</source>
         <translation>
             <numerusform>Ви впевнені, що хочете видалити %n хост?</numerusform>
@@ -5249,12 +5491,12 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1175"/>
+        <location filename="../client/desktop/management_tab.cc" line="1218"/>
         <source>Unable to remove host</source>
         <translation>Не вдалося видалити хост</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management_tab.cc" line="1177"/>
+        <location filename="../client/desktop/management_tab.cc" line="1220"/>
         <source>Failed to delete %n of the selected hosts.</source>
         <translation>
             <numerusform>Не вдалося видалити %n з вибраних хостів.</numerusform>
@@ -5263,226 +5505,267 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1243"/>
-        <location filename="../client/desktop/management_tab.cc" line="1320"/>
-        <location filename="../client/desktop/management_tab.cc" line="1353"/>
-        <location filename="../client/desktop/management_tab.cc" line="1376"/>
+        <location filename="../client/desktop/management_tab.cc" line="1270"/>
+        <source>Host update configuration...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1276"/>
+        <source>Host users...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1282"/>
+        <source>Host full configuration (from file)...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1293"/>
+        <source>Bulk add user...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1299"/>
+        <source>Bulk remove user...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1305"/>
+        <source>Bulk update configuration...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1311"/>
+        <source>Bulk full configuration (from file)...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1337"/>
+        <location filename="../client/desktop/management_tab.cc" line="1522"/>
+        <source>Connect for viewing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1349"/>
+        <location filename="../client/desktop/management_tab.cc" line="1426"/>
+        <location filename="../client/desktop/management_tab.cc" line="1459"/>
+        <location filename="../client/desktop/management_tab.cc" line="1482"/>
         <source>Copy Row</source>
         <translation>Копіювати рядок</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1244"/>
-        <location filename="../client/desktop/management_tab.cc" line="1321"/>
-        <location filename="../client/desktop/management_tab.cc" line="1354"/>
-        <location filename="../client/desktop/management_tab.cc" line="1377"/>
+        <location filename="../client/desktop/management_tab.cc" line="1350"/>
+        <location filename="../client/desktop/management_tab.cc" line="1427"/>
+        <location filename="../client/desktop/management_tab.cc" line="1460"/>
+        <location filename="../client/desktop/management_tab.cc" line="1483"/>
         <source>Copy Value</source>
         <translation>Копіювати значення</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1611"/>
+        <location filename="../client/desktop/management_tab.cc" line="1732"/>
         <source>Failed to delete the group.</source>
         <translation>Не вдалося видалити групу.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1649"/>
-        <location filename="../client/desktop/management_tab.cc" line="1705"/>
+        <location filename="../client/desktop/management_tab.cc" line="1770"/>
+        <location filename="../client/desktop/management_tab.cc" line="1826"/>
         <source>The database is not available.</source>
         <translation>База даних недоступна.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1655"/>
+        <location filename="../client/desktop/management_tab.cc" line="1776"/>
         <source>Create Backup</source>
         <translation>Створити резервну копію</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1687"/>
+        <location filename="../client/desktop/management_tab.cc" line="1808"/>
         <source>Router exported</source>
         <translation>Маршрутизатор експортовано</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1783"/>
+        <location filename="../client/desktop/management_tab.cc" line="1904"/>
         <source>Router imported</source>
         <translation>Маршрутизатор імпортовано</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2031"/>
+        <location filename="../client/desktop/management_tab.cc" line="2152"/>
         <source>Delete Hosts</source>
         <translation>Видалити хости</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2183"/>
+        <location filename="../client/desktop/management_tab.cc" line="2304"/>
         <source>The data of the host is damaged. Edit the host and enter it again.</source>
         <translation>Дані хоста пошкоджено. Відредагуйте хост і введіть їх знову.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2203"/>
+        <location filename="../client/desktop/management_tab.cc" line="2324"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>Дані маршрутизатора пошкоджено. Відредагуйте маршрутизатор і введіть їх знову.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2209"/>
+        <location filename="../client/desktop/management_tab.cc" line="2330"/>
         <source>The host is reached through a router, but no router is set. Add a router or enter the address of the host instead of its ID.</source>
         <translation>Підключення до хоста виконується через маршрутизатор, але маршрутизатор не задано. Додайте маршрутизатор або введіть адресу хоста замість його ID.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2216"/>
+        <location filename="../client/desktop/management_tab.cc" line="2337"/>
         <source>Failed to read the router.</source>
         <translation>Не вдалося прочитати маршрутизатор.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2222"/>
+        <location filename="../client/desktop/management_tab.cc" line="2343"/>
         <source>The router is turned off. Turn it on in the router settings to connect to this host.</source>
         <translation>Маршрутизатор відключено. Увімкніть його в налаштуваннях маршрутизатора, щоб підключитися до цього хоста.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1680"/>
+        <location filename="../client/desktop/management_tab.cc" line="1801"/>
         <source>Failed to create the backup.</source>
         <translation>Не вдалося створити резервну копію.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1684"/>
+        <location filename="../client/desktop/management_tab.cc" line="1805"/>
         <source>Export completed successfully.</source>
         <translation>Експорт завершено успішно.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1689"/>
+        <location filename="../client/desktop/management_tab.cc" line="1810"/>
         <source>Router hosts exported: %1</source>
         <translation>Експортовано хостів маршрутизаторів: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1690"/>
+        <location filename="../client/desktop/management_tab.cc" line="1811"/>
         <source>Local groups exported: %1</source>
         <translation>Експортовано локальних груп: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1691"/>
+        <location filename="../client/desktop/management_tab.cc" line="1812"/>
         <source>Local hosts exported: %1</source>
         <translation>Експортовано локальних хостів: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1692"/>
+        <location filename="../client/desktop/management_tab.cc" line="1813"/>
         <source>Credentials exported: %1</source>
         <translation>Експортовано облікових даних: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1693"/>
+        <location filename="../client/desktop/management_tab.cc" line="1814"/>
         <source>Profiles exported: %1</source>
         <translation>Експортовано профілів: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1711"/>
-        <location filename="../client/desktop/management_tab.cc" line="1737"/>
+        <location filename="../client/desktop/management_tab.cc" line="1832"/>
+        <location filename="../client/desktop/management_tab.cc" line="1858"/>
         <source>Restore from Backup</source>
         <translation>Відновити з резервної копії</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1720"/>
+        <location filename="../client/desktop/management_tab.cc" line="1841"/>
         <source>Everything stored now is deleted and replaced with what the backup holds. Continue?</source>
         <translation>Все, що зберігається зараз, буде видалено та замінено вмістом резервної копії. Продовжити?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1739"/>
+        <location filename="../client/desktop/management_tab.cc" line="1860"/>
         <source>The backup was made on another installation. Enter the master password used there.</source>
         <translation>Резервну копію створено в іншому встановленні застосунку. Введіть майстер-пароль, який використовувався там.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1764"/>
+        <location filename="../client/desktop/management_tab.cc" line="1885"/>
         <source>The backup carries no data, so nothing was changed.</source>
         <translation>Резервна копія не містить даних, тому нічого не змінено.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1772"/>
+        <location filename="../client/desktop/management_tab.cc" line="1893"/>
         <source>The file is not a valid backup.</source>
         <translation>Файл не є допустимою резервною копією.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1776"/>
+        <location filename="../client/desktop/management_tab.cc" line="1897"/>
         <source>Failed to restore from the backup.</source>
         <translation>Не вдалося відновити з резервної копії.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1780"/>
+        <location filename="../client/desktop/management_tab.cc" line="1901"/>
         <source>Import completed successfully.</source>
         <translation>Імпорт завершено успішно.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1785"/>
+        <location filename="../client/desktop/management_tab.cc" line="1906"/>
         <source>Router hosts imported: %1</source>
         <translation>Імпортовано хостів маршрутизаторів: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1786"/>
+        <location filename="../client/desktop/management_tab.cc" line="1907"/>
         <source>Local groups imported: %1</source>
         <translation>Імпортовано локальних груп: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1787"/>
+        <location filename="../client/desktop/management_tab.cc" line="1908"/>
         <source>Local hosts imported: %1</source>
         <translation>Імпортовано локальних хостів: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1788"/>
+        <location filename="../client/desktop/management_tab.cc" line="1909"/>
         <source>Credentials imported: %1</source>
         <translation>Імпортовано облікових даних: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1789"/>
+        <location filename="../client/desktop/management_tab.cc" line="1910"/>
         <source>Profiles imported: %1</source>
         <translation>Імпортовано профілів: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1656"/>
-        <location filename="../client/desktop/management_tab.cc" line="1712"/>
+        <location filename="../client/desktop/management_tab.cc" line="1777"/>
+        <location filename="../client/desktop/management_tab.cc" line="1833"/>
         <source>Aspia Backup (*.aspia-backup);;All files (*)</source>
         <translation>Резервна копія Aspia (*.aspia-backup);;Всі файли (*)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1672"/>
+        <location filename="../client/desktop/management_tab.cc" line="1793"/>
         <source>Unable to write the file.</source>
         <translation>Не вдалося записати файл.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1768"/>
+        <location filename="../client/desktop/management_tab.cc" line="1889"/>
         <source>Unable to read the file.</source>
         <translation>Не вдалося прочитати файл.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1476"/>
+        <location filename="../client/desktop/management_tab.cc" line="1597"/>
         <source>Are you sure you want to delete space &quot;%1&quot;?</source>
         <translation>Ви впевнені, що хочете видалити простір &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1496"/>
+        <location filename="../client/desktop/management_tab.cc" line="1617"/>
         <source>Failed to delete the space.</source>
         <translation>Не вдалося видалити простір.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1593"/>
+        <location filename="../client/desktop/management_tab.cc" line="1714"/>
         <source>Are you sure you want to delete the group &quot;%1&quot;? Hosts assigned to this group or its subgroups will be moved to the space root.</source>
         <translation>Ви впевнені, що хочете видалити групу &quot;%1&quot;? Хости, призначені цій групі або її підгрупам, будуть переміщені в корінь простору.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1676"/>
+        <location filename="../client/desktop/management_tab.cc" line="1797"/>
         <source>Some records of the database are damaged. Fix or delete them and try again.</source>
         <translation>Деякі записи бази даних пошкоджено. Виправте або видаліть їх і повторіть спробу.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1756"/>
+        <location filename="../client/desktop/management_tab.cc" line="1877"/>
         <source>Unable to decrypt the file with the specified password.</source>
         <translation>Не вдається розшифрувати файл за допомогою вказаного пароля.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1760"/>
+        <location filename="../client/desktop/management_tab.cc" line="1881"/>
         <source>Unsupported file format version.</source>
         <translation>Непідтримувана версія формату файлу.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2229"/>
+        <location filename="../client/desktop/management_tab.cc" line="2350"/>
         <source>The host has an invalid host ID.</source>
         <translation>Хост має недопустимий ID.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2238"/>
+        <location filename="../client/desktop/management_tab.cc" line="2359"/>
         <source>The host has an incorrect address.</source>
         <translation>Хост має недопустиму адресу.</translation>
     </message>
@@ -5745,7 +6028,7 @@ Credentials replaced: %2</source>
 <context>
     <name>NetworkWorker</name>
     <message>
-        <location filename="../client/workers/network_worker.cc" line="384"/>
+        <location filename="../client/workers/network_worker.cc" line="390"/>
         <source>Failed to connect to the relay server</source>
         <translation>не вдалося підключитися до ретранслятора</translation>
     </message>
@@ -5754,19 +6037,19 @@ Credentials replaced: %2</source>
     <name>NotifierWindow</name>
     <message>
         <location filename="../host/ui/notifier_window.ui" line="293"/>
-        <location filename="../host/ui/notifier_window.cc" line="298"/>
+        <location filename="../host/ui/notifier_window.cc" line="303"/>
         <source>Lock mouse</source>
         <translation>Блокувати мишу</translation>
     </message>
     <message>
         <location filename="../host/ui/notifier_window.ui" line="319"/>
-        <location filename="../host/ui/notifier_window.cc" line="306"/>
+        <location filename="../host/ui/notifier_window.cc" line="311"/>
         <source>Lock keyboard</source>
         <translation>Блокувати клавіатуру</translation>
     </message>
     <message>
         <location filename="../host/ui/notifier_window.ui" line="345"/>
-        <location filename="../host/ui/notifier_window.cc" line="314"/>
+        <location filename="../host/ui/notifier_window.cc" line="319"/>
         <source>Pause</source>
         <translation>Пауза</translation>
     </message>
@@ -5777,27 +6060,27 @@ Credentials replaced: %2</source>
         <translation>Відключити всіх</translation>
     </message>
     <message>
-        <location filename="../host/ui/notifier_window.cc" line="265"/>
+        <location filename="../host/ui/notifier_window.cc" line="270"/>
         <source>Disconnect</source>
         <translation>Відключити</translation>
     </message>
     <message>
-        <location filename="../host/ui/notifier_window.cc" line="298"/>
+        <location filename="../host/ui/notifier_window.cc" line="303"/>
         <source>Unlock mouse</source>
         <translation>Розблокувати мишу</translation>
     </message>
     <message>
-        <location filename="../host/ui/notifier_window.cc" line="306"/>
+        <location filename="../host/ui/notifier_window.cc" line="311"/>
         <source>Unlock keyboard</source>
         <translation>Розблокувати клавіатуру</translation>
     </message>
     <message>
-        <location filename="../host/ui/notifier_window.cc" line="314"/>
+        <location filename="../host/ui/notifier_window.cc" line="319"/>
         <source>Resume</source>
         <translation>Відновити</translation>
     </message>
     <message>
-        <location filename="../host/ui/notifier_window.cc" line="566"/>
+        <location filename="../host/ui/notifier_window.cc" line="571"/>
         <source>Aspia Host</source>
         <translation>Хост Aspia</translation>
     </message>
@@ -6267,17 +6550,17 @@ Credentials replaced: %2</source>
 <context>
     <name>QAbstractSpinBox</name>
     <message>
-        <location filename="../base/gui_application.cc" line="102"/>
+        <location filename="../base/gui_application.cc" line="105"/>
         <source>&amp;Select All</source>
         <translation>&amp;Виділити все</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="103"/>
+        <location filename="../base/gui_application.cc" line="106"/>
         <source>&amp;Step up</source>
         <translation>&amp;Збільшити</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="104"/>
+        <location filename="../base/gui_application.cc" line="107"/>
         <source>Step &amp;down</source>
         <translation>З&amp;меншити</translation>
     </message>
@@ -6285,7 +6568,7 @@ Credentials replaced: %2</source>
 <context>
     <name>QGuiApplication</name>
     <message>
-        <location filename="../base/gui_application.cc" line="81"/>
+        <location filename="../base/gui_application.cc" line="84"/>
         <source>QT_LAYOUT_DIRECTION</source>
         <translation>LTR</translation>
     </message>
@@ -6293,37 +6576,37 @@ Credentials replaced: %2</source>
 <context>
     <name>QLineEdit</name>
     <message>
-        <location filename="../base/gui_application.cc" line="87"/>
+        <location filename="../base/gui_application.cc" line="90"/>
         <source>&amp;Undo</source>
         <translation>&amp;Скасувати</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="88"/>
+        <location filename="../base/gui_application.cc" line="91"/>
         <source>&amp;Redo</source>
         <translation>&amp;Повторити</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="89"/>
+        <location filename="../base/gui_application.cc" line="92"/>
         <source>Cu&amp;t</source>
         <translation>Ви&amp;різати</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="90"/>
+        <location filename="../base/gui_application.cc" line="93"/>
         <source>&amp;Copy</source>
         <translation>&amp;Копіювати</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="91"/>
+        <location filename="../base/gui_application.cc" line="94"/>
         <source>&amp;Paste</source>
         <translation>Вс&amp;тавити</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="92"/>
+        <location filename="../base/gui_application.cc" line="95"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="93"/>
+        <location filename="../base/gui_application.cc" line="96"/>
         <source>Select All</source>
         <translation>Виділити все</translation>
     </message>
@@ -6344,42 +6627,42 @@ Credentials replaced: %2</source>
 <context>
     <name>QWidgetTextControl</name>
     <message>
-        <location filename="../base/gui_application.cc" line="94"/>
+        <location filename="../base/gui_application.cc" line="97"/>
         <source>&amp;Undo</source>
         <translation>&amp;Скасувати</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="95"/>
+        <location filename="../base/gui_application.cc" line="98"/>
         <source>&amp;Redo</source>
         <translation>&amp;Повторити</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="96"/>
+        <location filename="../base/gui_application.cc" line="99"/>
         <source>Cu&amp;t</source>
         <translation>Ви&amp;різати</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="97"/>
+        <location filename="../base/gui_application.cc" line="100"/>
         <source>&amp;Copy</source>
         <translation>&amp;Копіювати</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="98"/>
+        <location filename="../base/gui_application.cc" line="101"/>
         <source>Copy &amp;Link Location</source>
         <translation>Копіювати &amp;адресу посилання</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="99"/>
+        <location filename="../base/gui_application.cc" line="102"/>
         <source>&amp;Paste</source>
         <translation>Вс&amp;тавити</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="100"/>
+        <location filename="../base/gui_application.cc" line="103"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../base/gui_application.cc" line="101"/>
+        <location filename="../base/gui_application.cc" line="104"/>
         <source>Select All</source>
         <translation>Виділити все</translation>
     </message>
@@ -6410,37 +6693,37 @@ Credentials replaced: %2</source>
 <context>
     <name>RelayListModel</name>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="141"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="142"/>
         <source>Address</source>
         <translation>Адреса</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="144"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="145"/>
         <source>Connect Time</source>
         <translation>Час підключення</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="147"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="148"/>
         <source>Pool Size</source>
         <translation>Розмір пулу</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="150"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="151"/>
         <source>Version</source>
         <translation>Версія</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="153"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="154"/>
         <source>Computer Name</source>
         <translation>Ім&apos;я комп&apos;ютера</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="156"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="157"/>
         <source>Architecture</source>
         <translation>Архітектура</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/relay_list_model.cc" line="159"/>
+        <location filename="../client/desktop/management/relay_list_model.cc" line="160"/>
         <source>Operating System</source>
         <translation>Операційна система</translation>
     </message>
@@ -6590,18 +6873,18 @@ Credentials replaced: %2</source>
 <context>
     <name>RouterCard</name>
     <message>
-        <location filename="../client/android/router_card.cc" line="178"/>
-        <location filename="../client/android/router_card.cc" line="227"/>
+        <location filename="../client/android/router_card.cc" line="171"/>
+        <location filename="../client/android/router_card.cc" line="223"/>
         <source>Enter Code</source>
         <translation>Ввести код</translation>
     </message>
     <message>
-        <location filename="../client/android/router_card.cc" line="225"/>
+        <location filename="../client/android/router_card.cc" line="221"/>
         <source>Blocked</source>
         <translation>Заблоковано</translation>
     </message>
     <message>
-        <location filename="../client/android/router_card.cc" line="227"/>
+        <location filename="../client/android/router_card.cc" line="223"/>
         <source>Set Up</source>
         <translation>Налаштувати</translation>
     </message>
@@ -6609,17 +6892,17 @@ Credentials replaced: %2</source>
 <context>
     <name>RouterClientsWidget</name>
     <message>
-        <location filename="../client/desktop/management/router_clients_widget.cc" line="226"/>
+        <location filename="../client/desktop/management/router_clients_widget.cc" line="227"/>
         <source>Save File</source>
         <translation>Зберегти файл</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_clients_widget.cc" line="226"/>
+        <location filename="../client/desktop/management/router_clients_widget.cc" line="227"/>
         <source>JSON files (*.json)</source>
         <translation>JSON-файли (*.json)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_clients_widget.cc" line="237"/>
+        <location filename="../client/desktop/management/router_clients_widget.cc" line="238"/>
         <source>Could not open file for writing.</source>
         <translation>Не вдалося відкрити файл для запису.</translation>
     </message>
@@ -6844,11 +7127,21 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../common/desktop/router_error.cc" line="57"/>
+        <source>The user has active sessions. Disconnect them first or force the change.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../common/desktop/router_error.cc" line="60"/>
+        <source>Cannot remove or disable the last enabled user.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../common/desktop/router_error.cc" line="63"/>
         <source>Too many connection requests. Try again later.</source>
         <translation>Занадто багато запитів на підключення. Повторіть спробу пізніше.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/router_error.cc" line="59"/>
+        <location filename="../common/desktop/router_error.cc" line="65"/>
         <source>Unknown error type.</source>
         <translation>Невідомий тип помилки.</translation>
     </message>
@@ -6908,15 +7201,6 @@ Credentials replaced: %2</source>
 </context>
 <context>
     <name>RouterGroupWidget</name>
-    <message numerus="yes">
-        <location filename="../client/desktop/management/router_group_widget.cc" line="425"/>
-        <source>%n host(s)</source>
-        <translation>
-            <numerusform>%n хост</numerusform>
-            <numerusform>%n хости</numerusform>
-            <numerusform>%n хостів</numerusform>
-        </translation>
-    </message>
     <message>
         <location filename="../client/desktop/management/router_group_widget.ui" line="62"/>
         <source>Previous page</source>
@@ -6937,10 +7221,407 @@ Credentials replaced: %2</source>
         <source>Next</source>
         <translation>Вперед</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_group_widget.cc" line="456"/>
+        <source>%n host(s) (%1 online)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostBulkConfigDialog</name>
     <message>
-        <location filename="../client/desktop/management/router_group_widget.ui" line="97"/>
-        <source>Items per page:</source>
-        <translation>Елементів на сторінку:</translation>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="53"/>
+        <source>Update configuration on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="65"/>
+        <source>Update server:</source>
+        <translation type="unfinished">Сервер оновлень:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="67"/>
+        <source>https://... (empty = default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="70"/>
+        <source>Public key:</source>
+        <translation type="unfinished">Публічний ключ:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="72"/>
+        <source>32 bytes hex (empty = default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="75"/>
+        <source>Channel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="82"/>
+        <source>Auto-update:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="83"/>
+        <source>Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="86"/>
+        <source>Check frequency:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="88"/>
+        <source>Once a day</source>
+        <translation type="unfinished">Раз на день</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="89"/>
+        <source>Once a week</source>
+        <translation type="unfinished">Раз на тиждень</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="90"/>
+        <source>Once a month</source>
+        <translation type="unfinished">Раз на місяць</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="95"/>
+        <source>Unchecked fields are left unchanged on every host. A checked field with an empty value resets it to the default.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="166"/>
+        <source>Invalid server URL.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="172"/>
+        <source>Invalid public key (must be 32 bytes hex).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="180"/>
+        <source>A public key without a server is not allowed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostBulkDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="44"/>
+        <source>Done</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="46"/>
+        <source>Skipped</source>
+        <translation type="unfinished">Не перевірено</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="48"/>
+        <source>Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="50"/>
+        <source>Offline</source>
+        <translation type="unfinished">Не в мережі</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="52"/>
+        <source>Cancelled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="54"/>
+        <source>Running...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="201"/>
+        <source>Host</source>
+        <translation type="unfinished">Хост</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="201"/>
+        <source>Planned action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="201"/>
+        <source>Result</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="201"/>
+        <source>Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="211"/>
+        <source>Details:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="223"/>
+        <source>Apply</source>
+        <translation type="unfinished">Застосувати</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="258"/>
+        <source>Pending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="277"/>
+        <source>Nothing to do.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="282"/>
+        <source>%n host(s) selected.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="288"/>
+        <source>Confirm the deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="303"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Скасувати</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="332"/>
+        <source>Cancelling, waiting for the current host...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="353"/>
+        <source>%1 of %2 done.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="379"/>
+        <source>Done: %1, failed: %2, offline: %3, skipped: %4, cancelled: %5.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="381"/>
+        <source>Close</source>
+        <translation type="unfinished">Закрити</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="416"/>
+        <source>Host: %1
+Planned: %2
+Result: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="418"/>
+        <source>
+Detail: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostBulkFullConfigDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="427"/>
+        <source>Full configuration on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="437"/>
+        <source>Warning: without the checkbox below, every host switches to the router, port and access settings from the file. Make sure the file comes from a host of this router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="445"/>
+        <source>Keep router connection, port and access settings (apply only system settings and users)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostBulkUserPickDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="480"/>
+        <source>Remove user from hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="553"/>
+        <source>Queried hosts: %1, offline: %2, unreadable: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="561"/>
+        <source>User</source>
+        <translation type="unfinished">Користувач</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="561"/>
+        <source>Hosts</source>
+        <translation type="unfinished">Хости</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="561"/>
+        <source>Status</source>
+        <translation type="unfinished">Статус</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="577"/>
+        <source>%1 of %2</source>
+        <translation type="unfinished">%1 з %2</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="584"/>
+        <source>enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="586"/>
+        <source>disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="588"/>
+        <source>enabled on some hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="594"/>
+        <source>Warning: removing a user is irreversible. The password cannot be restored, only recreated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="601"/>
+        <source>Force (remove even with live sessions; last enabled user is still protected)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="607"/>
+        <source>Next step</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostConfigDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="62"/>
+        <source>Host update configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="68"/>
+        <source>https://... (empty = default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="69"/>
+        <source>Update server:</source>
+        <translation type="unfinished">Сервер оновлень:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="72"/>
+        <source>32 bytes hex (empty = default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="73"/>
+        <source>Public key:</source>
+        <translation type="unfinished">Публічний ключ:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="79"/>
+        <source>Channel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="81"/>
+        <source>Auto-update enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="85"/>
+        <source>Once a day</source>
+        <translation type="unfinished">Раз на день</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="86"/>
+        <source>Once a week</source>
+        <translation type="unfinished">Раз на тиждень</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="87"/>
+        <source>Once a month</source>
+        <translation type="unfinished">Раз на місяць</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="89"/>
+        <source>Check frequency:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="91"/>
+        <source>Loading current settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="114"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="180"/>
+        <source>No session to router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="126"/>
+        <source>Failed to read telemetry: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="134"/>
+        <source>Telemetry is not JSON.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="152"/>
+        <source>Current settings loaded.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="160"/>
+        <source>Invalid server URL.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="165"/>
+        <source>Invalid public key (must be 32 bytes hex).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="204"/>
+        <source>Configuration applied successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="209"/>
+        <source>Failed to apply: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6949,6 +7630,11 @@ Credentials replaced: %2</source>
         <location filename="../client/desktop/management/router_host_dialog.ui" line="14"/>
         <source>Host Properties</source>
         <translation>Властивості хоста</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.ui" line="25"/>
+        <source>Spaces...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_dialog.ui" line="39"/>
@@ -6976,11 +7662,6 @@ Credentials replaced: %2</source>
         <translation>Пароль:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.ui" line="25"/>
-        <source>Space:</source>
-        <translation>Простір:</translation>
-    </message>
-    <message>
         <location filename="../client/desktop/management/router_host_dialog.ui" line="77"/>
         <source>Use saved credentials</source>
         <translation>Збережені облікові дані</translation>
@@ -7001,58 +7682,82 @@ Credentials replaced: %2</source>
         <translation>Коментар:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="139"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="200"/>
         <source>Failed to get list of spaces.</source>
         <translation>Не вдалося отримати список просторів.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="147"/>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="191"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="312"/>
         <source>Not assigned</source>
         <translation>Не призначено</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="176"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="297"/>
         <source>Failed to get list of groups.</source>
         <translation>Не вдалося отримати список груп.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="250"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="96"/>
+        <source>Notify about viewing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="97"/>
+        <source>Notify about control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="98"/>
+        <source>Notify about files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="232"/>
+        <source>Spaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="285"/>
+        <source>Spaces... (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="371"/>
         <source>Enter both the user name and the password, or leave both empty.</source>
         <translation>Введіть і ім&apos;я користувача, і пароль або залиште обидва поля порожніми.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="265"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="402"/>
         <source>Failed to save the credentials.</source>
         <translation>Не вдалося зберегти облікові дані.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="271"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="408"/>
         <source>Failed to save the profile.</source>
         <translation>Не вдалося зберегти профіль.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="297"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="455"/>
         <source>Failed to read the list of profiles.</source>
         <translation>Не вдалося прочитати список профілів.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="310"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="468"/>
         <source>Default</source>
         <translation>За замовчуванням</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="324"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="482"/>
         <source>Failed to read the list of credentials.</source>
         <translation>Не вдалося прочитати список облікових даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="375"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="533"/>
         <source>Failed to read the credentials of the host.</source>
         <translation>Не вдалося прочитати облікові дані хоста.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="380"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="538"/>
         <source>The credentials of the host are damaged. Enter them again.</source>
         <translation>Облікові дані хоста пошкоджено. Введіть їх знову.</translation>
     </message>
@@ -7130,6 +7835,187 @@ Credentials replaced: %2</source>
     </message>
 </context>
 <context>
+    <name>RouterHostUserDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="71"/>
+        <source>User Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="78"/>
+        <source>User Name:</source>
+        <translation type="unfinished">Ім&apos;я користувача:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="81"/>
+        <source>Password:</source>
+        <translation type="unfinished">Пароль:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="84"/>
+        <source>Password (repeat):</source>
+        <translation type="unfinished">Пароль (повторно):</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="86"/>
+        <source>Disable User Account</source>
+        <translation type="unfinished">Відключити обліковий запис користувача</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="92"/>
+        <source>Allowed Session Types:</source>
+        <translation type="unfinished">Дозволені типи сесій:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="96"/>
+        <source>Check all</source>
+        <translation type="unfinished">Вибрати всі</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="97"/>
+        <source>Uncheck all</source>
+        <translation type="unfinished">Зняти всі відмітки</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="252"/>
+        <source>The user name can not be empty and can contain only alphabet characters, numbers and _, -, ., @ characters. It can not consist of digits only.</source>
+        <translation type="unfinished">Ім&apos;я користувача не може бути порожнім і може містити тільки літери, цифри та символи _, -, ., @. Воно не може складатися лише з цифр.</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="269"/>
+        <source>The username you entered already exists.</source>
+        <translation type="unfinished">Введене вами ім&apos;я користувача вже існує.</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="277"/>
+        <source>The passwords you entered do not match.</source>
+        <translation type="unfinished">Введені паролі не збігаються.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="286"/>
+        <source>The password can not be shorter than %n characters.</source>
+        <translation type="unfinished">
+            <numerusform>Пароль не може бути коротшим за %n символ.</numerusform>
+            <numerusform>Пароль не може бути коротшим за %n символи.</numerusform>
+            <numerusform>Пароль не може бути коротшим за %n символів.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="288"/>
+        <source>The password can not be longer than %n characters.</source>
+        <translation type="unfinished">
+            <numerusform>Пароль не може перевищувати %n символ.</numerusform>
+            <numerusform>Пароль не може перевищувати %n символи.</numerusform>
+            <numerusform>Пароль не може перевищувати %n символів.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="300"/>
+        <source>Password you entered does not meet the security requirements!</source>
+        <translation type="unfinished">Введений пароль не відповідає вимогам безпеки!</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="303"/>
+        <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
+        <translation type="unfinished">
+            <numerusform>Пароль повинен містити малі та великі літери, цифри і не повинен бути коротшим за %n символ.</numerusform>
+            <numerusform>Пароль повинен містити малі та великі літери, цифри і не повинен бути коротшим за %n символи.</numerusform>
+            <numerusform>Пароль повинен містити малі та великі літери, цифри і не повинен бути коротшим за %n символів.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="307"/>
+        <source>Do you want to enter a different password?</source>
+        <translation type="unfinished">Хочете ввести інший пароль?</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="310"/>
+        <source>Warning</source>
+        <translation type="unfinished">Попередження</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="349"/>
+        <source>Double-click to change</source>
+        <translation type="unfinished">Подвійне клацання для зміни</translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostUsersDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="63"/>
+        <source>Host users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="72"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="189"/>
+        <source>Add</source>
+        <translation type="unfinished">Додати</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="73"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="241"/>
+        <source>Edit</source>
+        <translation type="unfinished">Правка</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="74"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="275"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="75"/>
+        <source>Close</source>
+        <translation type="unfinished">Закрити</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="104"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="181"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="233"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="267"/>
+        <source>No session to router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="120"/>
+        <source>Failed to get users: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="145"/>
+        <source> (disabled)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="163"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="222"/>
+        <source>Failed to create user credentials.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="200"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="252"/>
+        <source>Select a user first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="258"/>
+        <source>Remove user &quot;%1&quot;?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="285"/>
+        <source>%1: success.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="289"/>
+        <source>%1 failed: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RouterHostsWidget</name>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.ui" line="65"/>
@@ -7187,27 +8073,22 @@ Credentials replaced: %2</source>
         <translation>Вперед</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.ui" line="245"/>
-        <source>Items per page:</source>
-        <translation>Елементів на сторінку:</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="147"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="155"/>
         <source>All spaces</source>
         <translation>Всі простори</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="148"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="156"/>
         <source>Not in any space</source>
         <translation>Без простору</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="367"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="375"/>
         <source>Are you sure you want to disconnect host &quot;%1&quot;?</source>
         <translation>Ви впевнені, що хочете відключити хост &quot;%1&quot;?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="369"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="377"/>
         <source>Are you sure you want to disconnect %n hosts?</source>
         <translation>
             <numerusform>Ви впевнені, що хочете відключити %n хост?</numerusform>
@@ -7216,7 +8097,7 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="380"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="388"/>
         <source>Failed to disconnect %n of the selected hosts.</source>
         <translation>
             <numerusform>Не вдалося відключити %n з вибраних хостів.</numerusform>
@@ -7225,12 +8106,12 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="396"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="404"/>
         <source>Deleting a host will result in all its configuration for connecting to the router being deleted, and the application will be uninstalled on the host. This operation is irreversible. Are you sure you want to do this?</source>
         <translation>Видалення хоста призведе до видалення всієї його конфігурації для підключення до маршрутизатора, а застосунок на хості буде видалено. Ця дія незворотна. Ви впевнені, що хочете продовжити?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="401"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="409"/>
         <source>%n hosts will be deleted.</source>
         <translation>
             <numerusform>%n хост буде видалено.</numerusform>
@@ -7239,7 +8120,7 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="412"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="420"/>
         <source>Failed to remove %n of the selected hosts.</source>
         <translation>
             <numerusform>Не вдалося видалити %n з вибраних хостів.</numerusform>
@@ -7248,7 +8129,7 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="429"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="437"/>
         <source>Failed to check for updates on %n of the selected hosts.</source>
         <translation>
             <numerusform>Не вдалося перевірити оновлення на %n з вибраних хостів.</numerusform>
@@ -7256,32 +8137,275 @@ Credentials replaced: %2</source>
             <numerusform>Не вдалося перевірити оновлення на %n з вибраних хостів.</numerusform>
         </translation>
     </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="504"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1688"/>
+        <source>Open host configuration file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="505"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1690"/>
+        <source>JSON files (*.json);;All files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="512"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1697"/>
+        <source>Cannot open file: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="523"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1707"/>
+        <source>Invalid JSON: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="531"/>
+        <source>No session to router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="545"/>
+        <source>Configuration applied successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="547"/>
+        <source>Failed to apply: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="762"/>
-        <source>%n host(s)</source>
-        <translation>
-            <numerusform>%n хост</numerusform>
-            <numerusform>%n хости</numerusform>
-            <numerusform>%n хостів</numerusform>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="894"/>
+        <source>%n host(s) (%1 online)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="826"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1112"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1187"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Скасувати</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1186"/>
+        <source>Reading user lists...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1311"/>
+        <source>Failed to create user credentials.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1338"/>
+        <source>Add user &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1342"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1601"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1772"/>
+        <source>Host is offline.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1354"/>
+        <source>List unreadable (%1), will try anyway.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1376"/>
+        <source>Already exists, skipped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1392"/>
+        <source>Add user on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1468"/>
+        <source>Remove user &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1487"/>
+        <source>Last enabled user, the host will refuse.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1518"/>
+        <source>Remove user from hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1543"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1561"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1562"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1564"/>
+        <source>(unknown)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1544"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1621"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1623"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1629"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1631"/>
+        <source>(default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1558"/>
+        <source>Hosts in run: %1. Channels: %2. Servers: %3. Auto-update on: %4 of %5. Frequencies (days): %6.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1585"/>
+        <source>No fields selected, nothing to do.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1600"/>
+        <source>Set selected fields.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1610"/>
+        <source>Set selected fields (current settings unknown).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1620"/>
+        <source>server: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1628"/>
+        <source>public key: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1629"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1631"/>
+        <source>(set)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1636"/>
+        <source>channel: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1641"/>
+        <source>auto-update: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1642"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1643"/>
+        <source>on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1642"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1643"/>
+        <source>off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1648"/>
+        <source>frequency: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1655"/>
+        <source>No changes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1656"/>
+        <source>Already matching, skipped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1677"/>
+        <source>Update configuration on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1713"/>
+        <source>Not a host configuration file (no system/database sections).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1730"/>
+        <source>File: %1
+Sections: %2. Users in file: %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1732"/>
+        <source>(kept)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1759"/>
+        <source>Dry run on hosts...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1771"/>
+        <source>Apply full config.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1784"/>
+        <source>Apply full config (dry run %1, will try anyway).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1797"/>
+        <source>users: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1804"/>
+        <source>system: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1809"/>
+        <source>Apply full config (no visible diff).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1828"/>
+        <source>Full configuration on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="959"/>
         <source>Save File</source>
         <translation>Зберегти файл</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="826"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="959"/>
         <source>JSON files (*.json)</source>
         <translation>JSON-файли (*.json)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="837"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="970"/>
         <source>Could not open file for writing.</source>
         <translation>Не вдалося відкрити файл для запису.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="884"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1017"/>
         <source>Unable to write file.</source>
         <translation>Не вдалося записати файл.</translation>
     </message>
@@ -7289,17 +8413,17 @@ Credentials replaced: %2</source>
 <context>
     <name>RouterRelaysWidget</name>
     <message>
-        <location filename="../client/desktop/management/router_relays_widget.cc" line="238"/>
+        <location filename="../client/desktop/management/router_relays_widget.cc" line="239"/>
         <source>Save File</source>
         <translation>Зберегти файл</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_relays_widget.cc" line="238"/>
+        <location filename="../client/desktop/management/router_relays_widget.cc" line="239"/>
         <source>JSON files (*.json)</source>
         <translation>JSON-файли (*.json)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_relays_widget.cc" line="249"/>
+        <location filename="../client/desktop/management/router_relays_widget.cc" line="250"/>
         <source>Could not open file for writing.</source>
         <translation>Не вдалося відкрити файл для запису.</translation>
     </message>
@@ -7355,7 +8479,7 @@ Credentials replaced: %2</source>
 <context>
     <name>RouterSession</name>
     <message>
-        <location filename="../client/router/router_session.cc" line="163"/>
+        <location filename="../client/router/router_session.cc" line="165"/>
         <source>The router accepted the new password, but the record was not updated.</source>
         <translation>Маршрутизатор прийняв новий пароль, але запис не було оновлено.</translation>
     </message>
@@ -7721,22 +8845,22 @@ Credentials replaced: %2</source>
 <context>
     <name>RouterWidget</name>
     <message>
-        <location filename="../client/android/router_widget.cc" line="127"/>
+        <location filename="../client/android/router_widget.cc" line="133"/>
         <source>No router is set</source>
         <translation>Маршрутизатор не задано</translation>
     </message>
     <message>
-        <location filename="../client/android/router_widget.cc" line="168"/>
+        <location filename="../client/android/router_widget.cc" line="177"/>
         <source>Router</source>
         <translation>Маршрутизатор</translation>
     </message>
     <message>
-        <location filename="../client/android/router_widget.cc" line="171"/>
+        <location filename="../client/android/router_widget.cc" line="179"/>
         <source>%1 (disabled)</source>
         <translation>%1 (відключений)</translation>
     </message>
     <message>
-        <location filename="../client/android/router_widget.cc" line="205"/>
+        <location filename="../client/android/router_widget.cc" line="212"/>
         <source>Add Router</source>
         <translation>Додати маршрутизатор</translation>
     </message>
@@ -7772,6 +8896,11 @@ Credentials replaced: %2</source>
         <location filename="../client/desktop/management/router_workspace_dialog.ui" line="194"/>
         <source>Users with access</source>
         <translation>Користувачі з доступом</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_workspace_dialog.ui" line="215"/>
+        <source>Hosts outside the space</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_workspace_dialog.ui" line="300"/>
@@ -7828,42 +8957,60 @@ Credentials replaced: %2</source>
         <translation>Хости</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.ui" line="215"/>
-        <source>Unassigned hosts</source>
-        <translation>Непризначені хости</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="225"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="236"/>
         <source>Failed to get list of spaces.</source>
         <translation>Не вдалося отримати список просторів.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="252"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="263"/>
         <source>The space was deleted from another console.</source>
         <translation>Простір видалено з іншої консолі.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="290"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="301"/>
         <source>Failed to get list of users.</source>
         <translation>Не вдалося отримати список користувачів.</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="426"/>
+        <source>Failed to move %n of %1 hosts.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="409"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="557"/>
         <source>The space was changed from another console. The lists are being refreshed - check the changes and save again.</source>
         <translation>Простір змінено з іншої консолі. Списки оновлюються - перевірте зміни та збережіть знову.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="513"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="691"/>
         <source>Are you sure you want to remove the host from the space?</source>
         <translation>Ви впевнені, що хочете видалити хост із простору?</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="699"/>
+        <source>Are you sure you want to remove %n hosts from the space?</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="893"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1214"/>
+        <source>Будет применено: +%1 хостов, -%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1267"/>
         <source>Space name cannot be empty.</source>
         <translation>Ім&apos;я простору не може бути порожнім.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="904"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1278"/>
         <source>A space with the specified name already exists.</source>
         <translation>Простір з указаним ім&apos;ям вже існує.</translation>
     </message>
@@ -8142,311 +9289,316 @@ Credentials replaced: %2</source>
         <translation>Запитувати підтвердження під час закриття застосунку</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="366"/>
+        <location filename="../client/desktop/settings_tab.ui" line="380"/>
         <source>Backup</source>
         <translation>Резервне копіювання</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="372"/>
+        <location filename="../client/desktop/settings_tab.ui" line="386"/>
         <source>Create backups on application startup</source>
         <translation>Створювати резервні копії під час запуску застосунку</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="379"/>
+        <location filename="../client/desktop/settings_tab.ui" line="393"/>
         <source>Directory:</source>
         <translation>Каталог:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="402"/>
+        <location filename="../client/desktop/settings_tab.ui" line="416"/>
         <source>Keep backups for:</source>
         <translation>Зберігати резервні копії:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="293"/>
+        <location filename="../client/desktop/settings_tab.ui" line="307"/>
         <source>Proxy</source>
         <translation>Проксі-сервер</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="299"/>
+        <location filename="../client/desktop/settings_tab.ui" line="313"/>
         <source>Type:</source>
         <translation>Тип:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="221"/>
-        <location filename="../client/desktop/settings_tab.ui" line="313"/>
+        <location filename="../client/desktop/settings_tab.ui" line="235"/>
+        <location filename="../client/desktop/settings_tab.ui" line="327"/>
         <source>Address:</source>
         <translation>Адреса:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="323"/>
+        <location filename="../client/desktop/settings_tab.ui" line="337"/>
         <source>Port:</source>
         <translation>Порт:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="252"/>
-        <location filename="../client/desktop/settings_tab.ui" line="343"/>
+        <location filename="../client/desktop/settings_tab.ui" line="266"/>
+        <location filename="../client/desktop/settings_tab.ui" line="357"/>
         <source>User Name:</source>
         <translation>Ім&apos;я користувача:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="205"/>
+        <location filename="../client/desktop/settings_tab.ui" line="219"/>
         <source>Router</source>
         <translation>Маршрутизатор</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="211"/>
+        <location filename="../client/desktop/settings_tab.ui" line="225"/>
         <source>The data of the router is damaged. Enter it again.</source>
         <translation>Дані маршрутизатора пошкоджено. Введіть їх знову.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="231"/>
+        <location filename="../client/desktop/settings_tab.ui" line="245"/>
         <source>Host name or IP address</source>
         <translation>Ім&apos;я хоста або IP-адреса</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="238"/>
+        <location filename="../client/desktop/settings_tab.ui" line="252"/>
         <source>Access Level:</source>
         <translation>Рівень доступу:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="266"/>
-        <location filename="../client/desktop/settings_tab.ui" line="353"/>
+        <location filename="../client/desktop/settings_tab.ui" line="280"/>
+        <location filename="../client/desktop/settings_tab.ui" line="367"/>
         <source>Password:</source>
         <translation>Пароль:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="280"/>
+        <location filename="../client/desktop/settings_tab.ui" line="294"/>
         <source>Enabled</source>
         <translation>Увімкнений</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="529"/>
+        <location filename="../client/desktop/settings_tab.ui" line="543"/>
         <source>Save Settings</source>
         <translation>Зберегти налаштування</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="598"/>
+        <location filename="../client/desktop/settings_tab.ui" line="612"/>
         <source>Add...</source>
         <translation>Додати...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="611"/>
+        <location filename="../client/desktop/settings_tab.ui" line="625"/>
         <source>Rename...</source>
         <translation>Перейменувати...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="624"/>
+        <location filename="../client/desktop/settings_tab.ui" line="638"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="639"/>
+        <location filename="../client/desktop/settings_tab.ui" line="653"/>
         <source>Desktop Features</source>
         <translation>Можливості робочого столу</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="717"/>
+        <location filename="../client/desktop/settings_tab.ui" line="731"/>
         <source>Desktop Screen</source>
         <translation>Екран робочого столу</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="779"/>
+        <location filename="../client/desktop/settings_tab.ui" line="793"/>
         <source>Desktop Recording</source>
         <translation>Запис робочого столу</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="829"/>
+        <location filename="../client/desktop/settings_tab.ui" line="843"/>
         <source>UDP Connections</source>
         <translation>UDP підключення</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="835"/>
+        <location filename="../client/desktop/settings_tab.ui" line="849"/>
         <source>Allow direct connections</source>
         <translation>Дозволити прямі підключення</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="842"/>
+        <location filename="../client/desktop/settings_tab.ui" line="856"/>
         <source>Allow UDP Hole Punching</source>
         <translation>Дозволити UDP Hole Punching</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="849"/>
+        <location filename="../client/desktop/settings_tab.ui" line="863"/>
         <source>Allow PCP protocol</source>
         <translation>Дозволити протокол PCP</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="856"/>
+        <location filename="../client/desktop/settings_tab.ui" line="870"/>
         <source>Allow NAT-PMP protocol</source>
         <translation>Дозволити протокол NAT-PMP</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="863"/>
+        <location filename="../client/desktop/settings_tab.ui" line="877"/>
         <source>Allow UPnP protocol</source>
         <translation>Дозволити протокол UPnP</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="419"/>
+        <location filename="../client/desktop/settings_tab.ui" line="433"/>
         <source>Security</source>
         <translation>Безпека</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="425"/>
+        <location filename="../client/desktop/settings_tab.ui" line="202"/>
+        <source>Hosts per page:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/settings_tab.ui" line="439"/>
         <source>Lock after inactivity:</source>
         <translation>Блокувати при бездіяльності:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="439"/>
+        <location filename="../client/desktop/settings_tab.ui" line="453"/>
         <source>Unlock automatically on startup</source>
         <translation>Розблоковувати автоматично при запуску</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="446"/>
+        <location filename="../client/desktop/settings_tab.ui" line="460"/>
         <source>Change Master Password...</source>
         <translation>Змінити майстер-пароль...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="645"/>
+        <location filename="../client/desktop/settings_tab.ui" line="659"/>
         <source>Enable audio</source>
         <translation>Увімкнути звук</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="652"/>
+        <location filename="../client/desktop/settings_tab.ui" line="666"/>
         <source>Enable clipboard</source>
         <translation>Увімкнути буфер обміну</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="659"/>
+        <location filename="../client/desktop/settings_tab.ui" line="673"/>
         <source>Show shape of remote cursor</source>
         <translation>Показувати форму віддаленого курсора</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="666"/>
+        <location filename="../client/desktop/settings_tab.ui" line="680"/>
         <source>Show position of remote cursor</source>
         <translation>Показувати положення віддаленого курсора</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="673"/>
+        <location filename="../client/desktop/settings_tab.ui" line="687"/>
         <source>Disable desktop effects</source>
         <translation>Вимкнути ефекти робочого столу</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="680"/>
+        <location filename="../client/desktop/settings_tab.ui" line="694"/>
         <source>Disable desktop wallpaper</source>
         <translation>Вимкнути шпалери робочого столу</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="687"/>
+        <location filename="../client/desktop/settings_tab.ui" line="701"/>
         <source>Lock computer at disconnect</source>
         <translation>Блокувати комп&apos;ютер при відключенні</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="694"/>
+        <location filename="../client/desktop/settings_tab.ui" line="708"/>
         <source>Block remote input</source>
         <translation>Блокувати віддалене введення</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="701"/>
+        <location filename="../client/desktop/settings_tab.ui" line="715"/>
         <source>Send key combinations</source>
         <translation>Надсилати комбінації клавіш</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="723"/>
+        <location filename="../client/desktop/settings_tab.ui" line="737"/>
         <source>Preferred resolution:</source>
         <translation>Бажана роздільна здатність:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="743"/>
+        <location filename="../client/desktop/settings_tab.ui" line="757"/>
         <source>Quality:</source>
         <translation>Якість:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="763"/>
+        <location filename="../client/desktop/settings_tab.ui" line="777"/>
         <source>Scale image to window size on the host side</source>
         <translation>Масштабувати зображення за розміром вікна на стороні хоста</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="785"/>
+        <location filename="../client/desktop/settings_tab.ui" line="799"/>
         <source>Automatically start recording sessions on connection</source>
         <translation>Автоматично починати запис сесії при підключенні</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="794"/>
+        <location filename="../client/desktop/settings_tab.ui" line="808"/>
         <source>Write path:</source>
         <translation>Шлях для запису:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="934"/>
+        <location filename="../client/desktop/settings_tab.ui" line="948"/>
         <source>MCP Connector</source>
         <translation>MCP-конектор</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="940"/>
+        <location filename="../client/desktop/settings_tab.ui" line="954"/>
         <source>Allow the use of MCP</source>
         <translation>Дозволити використання MCP</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="947"/>
+        <location filename="../client/desktop/settings_tab.ui" line="961"/>
         <source>Add this command to the MCP servers of the AI application:</source>
         <translation>Додайте цю команду до списку MCP-серверів ШІ-застосунку:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="970"/>
+        <location filename="../client/desktop/settings_tab.ui" line="984"/>
         <source>Copy</source>
         <translation>Копіювати</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="986"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1000"/>
         <source>Allowed Session Types</source>
         <translation>Дозволені типи сесій</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1000"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1014"/>
         <source>Actions</source>
         <translation>Дії</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1006"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1020"/>
         <source>Confirm actions automatically</source>
         <translation>Автоматично підтверджувати дії</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1013"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1027"/>
         <source>Allow signing in with saved credentials</source>
         <translation>Дозволити вхід зі збереженими обліковими даними</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1084"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1098"/>
         <location filename="../client/desktop/settings_tab.cc" line="148"/>
         <source>Update</source>
         <translation>Оновлення</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1090"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1104"/>
         <source>Check for updates on startup</source>
         <translation>Перевіряти оновлення при запуску</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1099"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1113"/>
         <source>Update channel:</source>
         <translation>Канал оновлень:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1113"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1127"/>
         <source>Update server:</source>
         <translation>Сервер оновлень:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1127"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1141"/>
         <source>Public key:</source>
         <translation>Публічний ключ:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1145"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1159"/>
         <source>Change Update Server...</source>
         <translation>Змінити сервер оновлень...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1165"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1179"/>
         <source>Check for updates</source>
         <translation>Перевірити оновлення</translation>
     </message>
@@ -8487,154 +9639,154 @@ Credentials replaced: %2</source>
         <translation>1 рік</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="221"/>
+        <location filename="../client/desktop/settings_tab.cc" line="228"/>
         <source>Do not lock</source>
         <translation>Не блокувати</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="222"/>
+        <location filename="../client/desktop/settings_tab.cc" line="229"/>
         <source>1 minute</source>
         <translation>1 хвилина</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="223"/>
+        <location filename="../client/desktop/settings_tab.cc" line="230"/>
         <source>5 minutes</source>
         <translation>5 хвилин</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="224"/>
+        <location filename="../client/desktop/settings_tab.cc" line="231"/>
         <source>10 minutes</source>
         <translation>10 хвилин</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="225"/>
+        <location filename="../client/desktop/settings_tab.cc" line="232"/>
         <source>30 minutes</source>
         <translation>30 хвилин</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="226"/>
+        <location filename="../client/desktop/settings_tab.cc" line="233"/>
         <source>1 hour</source>
         <translation>1 година</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="241"/>
+        <location filename="../client/desktop/settings_tab.cc" line="248"/>
         <source>No proxy</source>
         <translation>Без проксі-сервера</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="262"/>
+        <location filename="../client/desktop/settings_tab.cc" line="269"/>
         <source>None</source>
         <translation>Немає</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="267"/>
+        <location filename="../client/desktop/settings_tab.cc" line="274"/>
         <source>Automatic</source>
         <translation>Автоматично</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="268"/>
+        <location filename="../client/desktop/settings_tab.cc" line="275"/>
         <source>Low</source>
         <translation>Низька</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="269"/>
+        <location filename="../client/desktop/settings_tab.cc" line="276"/>
         <source>Medium</source>
         <translation>Середня</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="270"/>
+        <location filename="../client/desktop/settings_tab.cc" line="277"/>
         <source>High</source>
         <translation>Висока</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="307"/>
+        <location filename="../client/desktop/settings_tab.cc" line="314"/>
         <source>Stable</source>
         <translation>Стабільний</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="308"/>
+        <location filename="../client/desktop/settings_tab.cc" line="315"/>
         <source>Beta</source>
         <translation>Бета</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="309"/>
+        <location filename="../client/desktop/settings_tab.cc" line="316"/>
         <source>Alpha</source>
         <translation>Альфа</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="605"/>
+        <location filename="../client/desktop/settings_tab.cc" line="615"/>
         <source>Failed to save the settings.</source>
         <translation>Не вдалося зберегти налаштування.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="622"/>
+        <location filename="../client/desktop/settings_tab.cc" line="632"/>
         <source>The new language will be applied after the application is restarted.</source>
         <translation>Нова мова буде застосована після перезапуску застосунку.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="495"/>
-        <location filename="../client/desktop/settings_tab.cc" line="726"/>
+        <location filename="../client/desktop/settings_tab.cc" line="505"/>
+        <location filename="../client/desktop/settings_tab.cc" line="774"/>
         <source>Choose path</source>
         <translation>Вибір шляху</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="449"/>
+        <location filename="../client/desktop/settings_tab.cc" line="459"/>
         <source>The settings have unsaved changes. Close the tab without saving?</source>
         <translation>У налаштуваннях є незбережені зміни. Закрити вкладку без збереження?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="637"/>
+        <location filename="../client/desktop/settings_tab.cc" line="685"/>
         <source>Add Profile</source>
         <translation>Додати профіль</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="647"/>
+        <location filename="../client/desktop/settings_tab.cc" line="695"/>
         <source>Unable to add profile.</source>
         <translation>Не вдалося додати профіль.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="668"/>
-        <location filename="../client/desktop/settings_tab.cc" line="1224"/>
+        <location filename="../client/desktop/settings_tab.cc" line="716"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1273"/>
         <source>Failed to read the profile.</source>
         <translation>Не вдалося прочитати профіль.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="672"/>
+        <location filename="../client/desktop/settings_tab.cc" line="720"/>
         <source>Rename Profile</source>
         <translation>Перейменувати профіль</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="680"/>
+        <location filename="../client/desktop/settings_tab.cc" line="728"/>
         <source>Unable to rename profile.</source>
         <translation>Не вдалося перейменувати профіль.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="697"/>
+        <location filename="../client/desktop/settings_tab.cc" line="745"/>
         <source>Are you sure you want to delete profile &quot;%1&quot;?</source>
         <translation>Ви дійсно хочете видалити профіль &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="705"/>
+        <location filename="../client/desktop/settings_tab.cc" line="753"/>
         <source>Unable to delete profile.</source>
         <translation>Не вдалося видалити профіль.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="754"/>
+        <location filename="../client/desktop/settings_tab.cc" line="802"/>
         <source>The settings will be applied after the application is restarted.</source>
         <translation>Налаштування будуть застосовані після перезапуску застосунку.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="801"/>
+        <location filename="../client/desktop/settings_tab.cc" line="849"/>
         <source>Change Master Password</source>
         <translation>Зміна майстер-пароля</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="803"/>
+        <location filename="../client/desktop/settings_tab.cc" line="851"/>
         <source>Enter your current password and choose a new one.</source>
         <translation>Введіть свій поточний пароль і виберіть новий.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/settings_tab.cc" line="811"/>
+        <location filename="../client/desktop/settings_tab.cc" line="859"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>Пароль не може бути коротшим за %n символ.</numerusform>
@@ -8643,12 +9795,12 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="818"/>
+        <location filename="../client/desktop/settings_tab.cc" line="866"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>Введений пароль не відповідає вимогам безпеки!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/settings_tab.cc" line="819"/>
+        <location filename="../client/desktop/settings_tab.cc" line="867"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>Пароль повинен містити малі та великі літери, цифри і не повинен бути коротшим за %n символ.</numerusform>
@@ -8657,89 +9809,89 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="822"/>
+        <location filename="../client/desktop/settings_tab.cc" line="870"/>
         <source>Do you want to enter a different password?</source>
         <translation>Хочете ввести інший пароль?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="835"/>
+        <location filename="../client/desktop/settings_tab.cc" line="883"/>
         <source>Invalid current password.</source>
         <translation>Невірний поточний пароль.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="839"/>
+        <location filename="../client/desktop/settings_tab.cc" line="887"/>
         <source>Some records of the database are damaged. Fix or delete them and try again.</source>
         <translation>Деякі записи бази даних пошкоджено. Виправте або видаліть їх і повторіть спробу.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="843"/>
+        <location filename="../client/desktop/settings_tab.cc" line="891"/>
         <source>Unable to change the password.</source>
         <translation>Не вдалося змінити пароль.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="876"/>
+        <location filename="../client/desktop/settings_tab.cc" line="924"/>
         <source>Unable to read the proxy settings.</source>
         <translation>Не вдалося прочитати налаштування проксі-сервера.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="990"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1039"/>
         <source>The key of the database will be stored on this computer. Any program running under your account will be able to read it, even when the application is not running.</source>
         <translation>Ключ бази даних буде збережено на цьому комп&apos;ютері. Будь-яка програма, запущена під вашим обліковим записом, зможе прочитати його, навіть коли застосунок не запущено.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="993"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1042"/>
         <source>Do you want to continue?</source>
         <translation>Ви хочете продовжити?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1004"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1053"/>
         <source>Unlock Automatically</source>
         <translation>Автоматичне розблокування</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1006"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1055"/>
         <source>Enter the master password to unlock the application automatically on startup.</source>
         <translation>Введіть майстер-пароль, щоб розблокувати застосунок автоматично при запуску.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1016"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1065"/>
         <source>Invalid master password.</source>
         <translation>Невірний майстер-пароль.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1020"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1069"/>
         <source>Unable to unlock the database.</source>
         <translation>Не вдалося розблокувати базу даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1034"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1083"/>
         <source>Unable to turn on the automatic unlock.</source>
         <translation>Не вдалося увімкнути автоматичне розблокування.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1050"/>
-        <location filename="../client/desktop/settings_tab.cc" line="1089"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1099"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1138"/>
         <source>Failed to read the router.</source>
         <translation>Не вдалося прочитати маршрутизатор.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1098"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1147"/>
         <source>An invalid router address was entered.</source>
         <translation>Введено недопустиму адресу маршрутизатора.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1106"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1155"/>
         <source>The user name can not be empty and can contain only alphabet characters, numbers and _, -, . characters.</source>
         <translation>Ім&apos;я користувача не може бути порожнім і може містити тільки літери, цифри та символи _, -, .</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1114"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1163"/>
         <source>Password cannot be empty.</source>
         <translation>Пароль не може бути порожнім.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1140"/>
-        <location filename="../client/desktop/settings_tab.cc" line="1150"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1189"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1199"/>
         <source>Failed to save the router.</source>
         <translation>Не вдалося зберегти налаштування маршрутизатора.</translation>
     </message>
@@ -8759,32 +9911,32 @@ Credentials replaced: %2</source>
         <translation>Оператор</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1170"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1219"/>
         <source>Failed to read the list of profiles.</source>
         <translation>Не вдалося прочитати список профілів.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1181"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1230"/>
         <source>Default</source>
         <translation>За замовчуванням</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1222"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1271"/>
         <source>The profile is damaged. Fix or delete it.</source>
         <translation>Профіль пошкоджено. Виправте або видаліть його.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1324"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1373"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1335"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1384"/>
         <source>Name cannot be empty.</source>
         <translation>Ім&apos;я не може бути порожнім.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/settings_tab.cc" line="1342"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1391"/>
         <source>Too long name. The maximum length of the name is %n characters.</source>
         <translation>
             <numerusform>Занадто довге ім&apos;я. Максимальна довжина імені - %n символ.</numerusform>
@@ -8793,12 +9945,12 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1359"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1408"/>
         <source>A profile with this name already exists.</source>
         <translation>Профіль з таким ім&apos;ям вже існує.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1390"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1439"/>
         <source>Unable to save profile.</source>
         <translation>Не вдалося зберегти профіль.</translation>
     </message>
@@ -9149,24 +10301,24 @@ Credentials replaced: %2</source>
     <name>Sidebar</name>
     <message>
         <location filename="../client/desktop/management/search_widget.cc" line="115"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="145"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="231"/>
         <source>Local</source>
         <translation>Локальні</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="170"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="231"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="292"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="256"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="317"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="378"/>
         <source>Failed to read data. The list may be out of date.</source>
         <translation>Не вдалося прочитати дані. Можливо, список застарів.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="551"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="637"/>
         <source>Change Password</source>
         <translation>Змінити пароль</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="559"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="645"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>Пароль не може бути коротшим за %n символ.</numerusform>
@@ -9175,7 +10327,7 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="560"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="646"/>
         <source>The password can not be longer than %n characters.</source>
         <translation>
             <numerusform>Пароль не може перевищувати %n символ.</numerusform>
@@ -9184,12 +10336,12 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="568"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="654"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>Введений пароль не відповідає вимогам безпеки!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="569"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="655"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>Пароль повинен містити малі та великі літери, цифри і не повинен бути коротшим за %n символ.</numerusform>
@@ -9198,32 +10350,32 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="572"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="658"/>
         <source>Do you want to enter a different password?</source>
         <translation>Хочете ввести інший пароль?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="595"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="681"/>
         <source>Changing the password. Waiting for the session to sign in again...</source>
         <translation>Зміна пароля. Очікування повторного входу в сеанс...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="792"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="878"/>
         <source>Are you sure you want to delete group &quot;%1&quot;?</source>
         <translation>Ви впевнені, що хочете видалити групу &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="805"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="891"/>
         <source>Unable to remove group</source>
         <translation>Не вдалося видалити групу</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1383"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1498"/>
         <source>A group with this name already exists in the selected parent group.</source>
         <translation>Група з таким ім&apos;ям вже існує у вибраній батьківській групі.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="1490"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1605"/>
         <source>%n of the selected hosts were not moved because hosts with the same names already exist in the selected group.</source>
         <translation>
             <numerusform>%n з вибраних хостів не було переміщено, оскільки хости з такими іменами вже існують у вибраній групі.</numerusform>
@@ -9232,8 +10384,8 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="1498"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1687"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1613"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1824"/>
         <source>Failed to move %n of the selected hosts.</source>
         <translation>
             <numerusform>Не вдалося перемістити %n з вибраних хостів.</numerusform>
@@ -9242,26 +10394,40 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1373"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1392"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1590"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1816"/>
+        <source>Failed to remove the host from the space.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/sidebar.cc" line="1817"/>
+        <source>Failed to remove %n of the selected hosts from the space.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/sidebar.cc" line="1488"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1507"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1705"/>
         <source>Failed to move the group.</source>
         <translation>Не вдалося перемістити групу.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1452"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1567"/>
         <source>Failed to move the hosts to the selected group.</source>
         <translation>Не вдалося перемістити хости у вибрану групу.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1489"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1604"/>
         <source>A host with this name already exists in the selected group.</source>
         <translation>Хост з таким ім&apos;ям вже існує у вибраній групі.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1451"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1497"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1686"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1566"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1612"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1823"/>
         <source>Failed to move the host to the selected group.</source>
         <translation>Не вдалося перемістити хост у вибрану групу.</translation>
     </message>
@@ -9357,9 +10523,24 @@ Credentials replaced: %2</source>
 <context>
     <name>StatusOverlay</name>
     <message>
-        <location filename="../client/desktop/status_overlay.cc" line="46"/>
+        <location filename="../client/desktop/status_overlay.cc" line="51"/>
         <source>Close</source>
         <translation>Закрити</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="54"/>
+        <source>Reconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="140"/>
+        <source>Retry in: %1 s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="141"/>
+        <source>Time left: %1 s</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13728,135 +14909,136 @@ Credentials replaced: %2</source>
         <translation>Розблокування</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.ui" line="97"/>
+        <location filename="../client/desktop/unlock_dialog.ui" line="96"/>
         <source>Create database</source>
         <translation>Створити базу даних</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.ui" line="126"/>
+        <location filename="../client/desktop/unlock_dialog.ui" line="116"/>
         <source>Rename database</source>
         <translation>Перейменувати базу даних</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.ui" line="155"/>
+        <location filename="../client/desktop/unlock_dialog.ui" line="136"/>
         <source>Delete database</source>
         <translation>Видалити базу даних</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.ui" line="180"/>
+        <location filename="../client/desktop/unlock_dialog.ui" line="152"/>
         <source>Name</source>
         <translation>Ім&apos;я</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.ui" line="187"/>
+        <location filename="../client/desktop/unlock_dialog.ui" line="159"/>
         <source>Password</source>
         <translation>Пароль</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.ui" line="194"/>
+        <location filename="../client/desktop/unlock_dialog.ui" line="166"/>
         <source>Confirm password</source>
         <translation>Підтвердження пароля</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="49"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="60"/>
         <source>Open Database</source>
         <translation>Відкриття бази даних</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="143"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="154"/>
         <source>The database is already open.</source>
         <translation>База даних вже відкрита.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="145"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="156"/>
         <source>The master password of this database is not set.</source>
         <translation>Майстер-пароль цієї бази даних не встановлено.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="170"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="181"/>
         <source>The database is open in another window. Close it to rename the database.</source>
         <translation>База даних відкрита в іншому вікні. Закрийте його, щоб перейменувати базу даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="178"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="189"/>
         <source>Enter the new name of the database.</source>
         <translation>Введіть нове ім&apos;я бази даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="196"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="207"/>
         <source>The database is open in another window. Close it to delete the database.</source>
         <translation>База даних відкрита в іншому вікні. Закрийте його, щоб видалити базу даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="201"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="212"/>
         <source>The database &quot;%1&quot; with all its records and settings will be deleted.
 Delete the database?</source>
         <translation>Базу даних &quot;%1&quot; з усіма записами та налаштуваннями буде видалено.
 Видалити базу даних?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="202"/>
-        <location filename="../client/desktop/unlock_dialog.cc" line="251"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="213"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="262"/>
         <source>Unnamed database</source>
         <translation>База даних без імені</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="209"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="220"/>
         <source>Unable to move the database to the trash. Delete it permanently?</source>
         <translation>Не вдалося перемістити базу даних до кошика. Видалити її остаточно?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="218"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="229"/>
         <source>Unable to delete the database.</source>
         <translation>Не вдалося видалити базу даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="256"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="267"/>
         <source>%1 (open)</source>
         <translation>%1 (відкрита)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="277"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="288"/>
         <source>Database #1</source>
         <translation>База даних #1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="318"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="340"/>
         <source>Unable to open the database.</source>
         <translation>Не вдалося відкрити базу даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="348"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="366"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="385"/>
         <source>Invalid master password.</source>
         <translation>Невірний майстер-пароль.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="355"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="392"/>
         <source>Unable to unlock the database.</source>
         <translation>Не вдалося розблокувати базу даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="372"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="409"/>
         <source>Passwords do not match.</source>
         <translation>Паролі не збігаються.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="397"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="434"/>
         <source>Unable to create the database.</source>
         <translation>Не вдалося створити базу даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="426"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="463"/>
         <source>Unable to rename the database.</source>
         <translation>Не вдалося перейменувати базу даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="441"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="478"/>
         <source>Name cannot be empty.</source>
         <translation>Ім&apos;я не може бути порожнім.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/unlock_dialog.cc" line="448"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="485"/>
         <source>Too long name. The maximum length of the name is %n characters.</source>
         <translation>
             <numerusform>Занадто довге ім&apos;я. Максимальна довжина імені - %n символ.</numerusform>
@@ -13865,22 +15047,22 @@ Delete the database?</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="456"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="493"/>
         <source>A database with this name already exists.</source>
         <translation>База даних з таким ім&apos;ям вже існує.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="494"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="531"/>
         <source>Enter the name and the master password of the new database.</source>
         <translation>Введіть ім&apos;я та майстер-пароль нової бази даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="520"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="557"/>
         <source>Enter the master password to unlock the database.</source>
         <translation>Введіть майстер-пароль, щоб розблокувати базу даних.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="522"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="559"/>
         <source>The master password of this database is remembered on this computer.</source>
         <translation>Майстер-пароль цієї бази даних збережено на цьому комп&apos;ютері.</translation>
     </message>
@@ -13893,7 +15075,7 @@ Delete the database?</source>
         <translation>Оновлення</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="374"/>
+        <location filename="../common/desktop/update_dialog.cc" line="407"/>
         <source>Checking for updates</source>
         <translation>Пошук оновлень</translation>
     </message>
@@ -13928,85 +15110,85 @@ Delete the database?</source>
         <translation>Оновити зараз!</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="379"/>
+        <location filename="../common/desktop/update_dialog.cc" line="412"/>
         <source>Close</source>
         <translation>Закрити</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="72"/>
+        <location filename="../common/desktop/update_dialog.cc" line="74"/>
         <source>Receiving information...</source>
         <translation>Отримання інформації...</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="158"/>
+        <location filename="../common/desktop/update_dialog.cc" line="160"/>
         <source>Install the update yourself: %1</source>
         <translation>Встановіть оновлення самостійно: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="164"/>
+        <location filename="../common/desktop/update_dialog.cc" line="166"/>
         <source>An update will be downloaded. After the download is complete, the application will automatically close.</source>
         <translation>Оновлення буде завантажено. Після завершення завантаження застосунок буде автоматично закрито.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="166"/>
+        <location filename="../common/desktop/update_dialog.cc" line="168"/>
         <source>All connected sessions will be terminated. You cannot establish a connection until the update is complete.</source>
         <translation>Всі підключені сесії будуть завершені. Ви не зможете встановити підключення до завершення оновлення.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="168"/>
+        <location filename="../common/desktop/update_dialog.cc" line="170"/>
         <source>All unsaved data will be lost.</source>
         <translation>Всі незбережені дані будуть втрачені.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="169"/>
+        <location filename="../common/desktop/update_dialog.cc" line="171"/>
         <source>Continue?</source>
         <translation>Продовжити?</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="199"/>
-        <location filename="../common/desktop/update_dialog.cc" line="220"/>
-        <location filename="../common/desktop/update_dialog.cc" line="245"/>
-        <location filename="../common/desktop/update_dialog.cc" line="341"/>
+        <location filename="../common/desktop/update_dialog.cc" line="201"/>
+        <location filename="../common/desktop/update_dialog.cc" line="222"/>
+        <location filename="../common/desktop/update_dialog.cc" line="250"/>
+        <location filename="../common/desktop/update_dialog.cc" line="349"/>
         <source>An error occurred while installing the update.</source>
         <translation>Сталася помилка при встановленні оновлення.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="314"/>
+        <location filename="../common/desktop/update_dialog.cc" line="319"/>
         <source>An error occurred while downloading the update: %1</source>
         <translation>Сталася помилка при завантаженні оновлення: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="339"/>
+        <location filename="../common/desktop/update_dialog.cc" line="347"/>
         <source>The downloaded file is damaged.</source>
         <translation>Завантажений файл пошкоджено.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="374"/>
+        <location filename="../common/desktop/update_dialog.cc" line="407"/>
         <source>Downloading the update</source>
         <translation>Завантаження оновлення</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="379"/>
+        <location filename="../common/desktop/update_dialog.cc" line="412"/>
         <source>Cancel</source>
         <translation>Скасувати</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="291"/>
+        <location filename="../common/desktop/update_dialog.cc" line="296"/>
         <source>Unknown</source>
         <translation>Невідомо</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="292"/>
+        <location filename="../common/desktop/update_dialog.cc" line="297"/>
         <source>Error retrieving update information.</source>
         <translation>Помилка при отриманні інформації про оновлення.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="349"/>
+        <location filename="../common/desktop/update_dialog.cc" line="382"/>
         <source>Installing the update. Please wait.</source>
         <translation>Встановлення оновлення. Будь ласка, зачекайте.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/update_dialog.cc" line="267"/>
+        <location filename="../common/desktop/update_dialog.cc" line="272"/>
         <source>No updates available.</source>
         <translation>Немає доступних оновлень.</translation>
     </message>

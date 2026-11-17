@@ -72,7 +72,18 @@ void AuthorizationDialog::setOneTimePasswordEnabled(bool enable)
 {
     one_time_password_enabled_ = enable;
 
-    if (enable && one_time_password_choice_)
+    if (enable && (one_time_password_choice_ || one_time_password_preferred_))
+        ui->radio_one_time_password->setChecked(true);
+
+    updateModes();
+}
+
+//--------------------------------------------------------------------------------------------------
+void AuthorizationDialog::setOneTimePasswordPreferred(bool preferred)
+{
+    one_time_password_preferred_ = preferred;
+
+    if (preferred && one_time_password_enabled_ && !one_time_password_choice_)
         ui->radio_one_time_password->setChecked(true);
 
     updateModes();

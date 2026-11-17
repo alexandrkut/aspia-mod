@@ -42,7 +42,8 @@ class ClientAdmin final : public ClientManager
     Q_OBJECT
 
 public:
-    ClientAdmin(Database& database, AccessLog& access_log, TcpChannel* channel, QObject* parent);
+    ClientAdmin(Database& database, AccessLog& access_log, TcpChannel* channel, QObject* parent,
+                bool two_factor_required = true);
     ~ClientAdmin() final;
 
 signals:

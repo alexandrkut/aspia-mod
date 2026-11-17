@@ -21,6 +21,7 @@
 
 #include <QByteArray>
 #include <QRect>
+#include <QString>
 #include <QVersionNumber>
 
 #include <google/protobuf/message_lite.h>
@@ -51,6 +52,10 @@ bool parse(const QByteArray& buffer, T* message)
 
 proto::peer::Version serialize(const QVersionNumber& version);
 QVersionNumber parse(const proto::peer::Version& version);
+
+// Returns the version as a string: "major.minor.patch", with the number of the build of the
+// line of the versions added when the version has one.
+QString versionToString(const proto::peer::Version& version);
 
 proto::screen::Size serialize(const QSize& size);
 QSize parse(const proto::screen::Size& size);

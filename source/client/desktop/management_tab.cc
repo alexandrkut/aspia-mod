@@ -33,6 +33,11 @@
 #include "base/net/address.h"
 #include "base/peer/host_id.h"
 #include "base/peer/user.h"
+#include "client/storage/backup.h"
+#include "client/storage/database.h"
+#include "client/router/router_controller.h"
+#include "client/router/router_session.h"
+#include "client/storage/user_settings.h"
 #include "client/desktop/file_dialog.h"
 #include "client/desktop/ui_management_tab.h"
 #include "client/desktop/management/content_widget.h"
@@ -488,6 +493,17 @@ void ManagementTab::searchTextChanged(const QString& text)
 }
 
 //--------------------------------------------------------------------------------------------------
+void ManagementTab::setHostsPerPage(qint64 page_size)
+{
+    // Both host lists of this tab follow the setting: the workspace/group view and the
+    // approved hosts view. Each resets to its first page and refetches.
+    if (router_group_widget_)
+        router_group_widget_->setHostsPageSize(page_size);
+    if (router_hosts_widget_)
+        router_hosts_widget_->setHostsPageSize(page_size);
+}
+
+//--------------------------------------------------------------------------------------------------
 void ManagementTab::reloadRouter()
 {
     ui->sidebar->reloadRouter();
@@ -495,6 +511,13 @@ void ManagementTab::reloadRouter()
 
 //--------------------------------------------------------------------------------------------------
 void ManagementTab::connectLocalHost(qint64 entry_id, proto::peer::SessionType session_type)
+{
+    connectLocalHost(entry_id, session_type, QString(), SecureString());
+}
+
+//--------------------------------------------------------------------------------------------------
+void ManagementTab::connectLocalHost(qint64 entry_id, proto::peer::SessionType session_type,
+                                     const QString& username, const SecureString& password)
 {
     LocalHostConfig entry;
     if (!readLocalHost(entry_id, &entry))
@@ -504,6 +527,17 @@ void ManagementTab::connectLocalHost(qint64 entry_id, proto::peer::SessionType s
     if (!validateHostForConnect(host))
         return;
 
+    // Credentials of the caller. They replace the ones of the record, and the flag keeps the
+    // session from putting the stored ones back on top of them.
+    if (!username.isEmpty())
+    {
+        LOG(INFO) << "Using the credentials given on the command line for host" << entry_id;
+
+        host.setUsername(username);
+        host.setPassword(password);
+        host.setForcedCredentials(true);
+    }
+
     setHostConnectTime(entry_id);
     emit sig_connectRequested(host, session_type);
 }
@@ -511,6 +545,15 @@ void ManagementTab::connectLocalHost(qint64 entry_id, proto::peer::SessionType s
 //--------------------------------------------------------------------------------------------------
 void ManagementTab::connectRouterHost(const HostConfig& host, proto::peer::SessionType session_type)
 {
+    if (validateHostForConnect(host))
+        emit sig_connectRequested(host, session_type);
+}
+
+//--------------------------------------------------------------------------------------------------
+void ManagementTab::connectDirectHost(const HostConfig& host, proto::peer::SessionType session_type)
+{
+    // A host that is in no book and is named by its address: there is no record of it, and so
+    // there is no connect time to remember either.
     if (validateHostForConnect(host))
         emit sig_connectRequested(host, session_type);
 }
@@ -1222,8 +1265,55 @@ void ManagementTab::onHostContextMenu(const QPoint& pos, int column)
         menu->addAction(ui->action_host_telemetry);
     menu->addAction(ui->action_host_remove);
 
+    if (is_single)
+    {
+        QAction* action_config = menu->addAction(QIcon(":/img/computer-update.svg"), tr("Host update configuration..."));
+        connect(action_config, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostUpdateConfig();
+        });
+
+        QAction* action_users = menu->addAction(QIcon(":/img/user.svg"), tr("Host users..."));
+        connect(action_users, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostUsers();
+        });
+
+        QAction* action_full_config = menu->addAction(QIcon(":/img/import.svg"), tr("Host full configuration (from file)..."));
+        connect(action_full_config, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostFullConfig();
+        });
+    }
+
     if (!is_single)
     {
+        menu->addSeparator();
+
+        QAction* bulk_add = menu->addAction(QIcon(":/img/user-add.svg"), tr("Bulk add user..."));
+        connect(bulk_add, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostsAddUser();
+        });
+
+        QAction* bulk_remove = menu->addAction(QIcon(":/img/user-delete.svg"), tr("Bulk remove user..."));
+        connect(bulk_remove, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostsRemoveUser();
+        });
+
+        QAction* bulk_config = menu->addAction(QIcon(":/img/computer-update.svg"), tr("Bulk update configuration..."));
+        connect(bulk_config, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostsUpdateConfig();
+        });
+
+        QAction* bulk_full = menu->addAction(QIcon(":/img/import.svg"), tr("Bulk full configuration (from file)..."));
+        connect(bulk_full, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostsFullConfig();
+        });
+
         menu->exec(pos);
         return;
     }
@@ -1236,6 +1326,22 @@ void ManagementTab::onHostContextMenu(const QPoint& pos, int column)
         addProxy(ui->action_file_transfer_connect);
         addProxy(ui->action_chat_connect);
         addProxy(ui->action_system_info_connect);
+
+        QList<RouterHost> online_hosts = router_hosts_widget_->selectedOnlineHosts();
+        RouterSession* session = RouterController::session();
+        // View is offered to every role of the router: without a right to connect to the
+        // host's desktop the session does not start anyway, so the entry costs nothing.
+        // Notification suppression stays an administrator's setting (NetworkWorker).
+        if (session)
+        {
+            QAction* view_connect = menu->addAction(QIcon(":/img/view-monitor.svg"), tr("Connect for viewing..."));
+            connect(view_connect, &QAction::triggered, this, [this]()
+            {
+                view_only_pending_ = true;
+                onConnectAction(ui->action_desktop_connect);
+                view_only_pending_ = false;
+            });
+        }
     }
     menu->addSeparator();
 
@@ -1406,6 +1512,21 @@ void ManagementTab::onRouterGroupContextMenu(const QPoint& pos)
     addProxy(ui->action_file_transfer_connect);
     addProxy(ui->action_chat_connect);
     addProxy(ui->action_system_info_connect);
+
+    // The view-only entry mirrors onHostContextMenu: every role of the router. It resolves the
+    // host through the same onConnectAction path, which picks the selection of router_group_widget_
+    // (the content shown for a workspace/group in the sidebar).
+    RouterSession* session = RouterController::session();
+    if (session)
+    {
+        QAction* view_connect = menu->addAction(QIcon(":/img/view-monitor.svg"), tr("Connect for viewing..."));
+        connect(view_connect, &QAction::triggered, this, [this]()
+        {
+            view_only_pending_ = true;
+            onConnectAction(ui->action_desktop_connect);
+            view_only_pending_ = false;
+        });
+    }
 
     if (ui->action_edit_host->isVisible())
     {
@@ -2285,4 +2406,13 @@ void ManagementTab::removeItem(qint64 entry_id)
         local_group_widget_->removeItem(entry_id);
     else if (current_content_ == search_widget_)
         search_widget_->removeItem(entry_id);
+}
+
+
+//--------------------------------------------------------------------------------------------------
+bool ManagementTab::consumeViewOnlyPending()
+{
+    const bool value = view_only_pending_;
+    view_only_pending_ = false;
+    return value;
 }

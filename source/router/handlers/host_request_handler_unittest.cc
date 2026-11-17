@@ -167,8 +167,8 @@ TEST_F(HostRequestHandlerTest, HostListStaysSendableAfterOversizedEdits)
 {
     const HostId second_id = addHost("hash-2");
     ASSERT_NE(second_id, kInvalidHostId);
-    ASSERT_TRUE(execRaw(QString("UPDATE hosts SET workspace_id=%1 WHERE id=%2")
-                        .arg(workspace_id_).arg(second_id)));
+    // The rows must be in the membership table: the listing reads membership, not the scalar.
+    ASSERT_EQ(db_.addHostMembership(second_id, workspace_id_, 0), proto::router::kErrorOk);
 
     for (HostId id : { host_id_, second_id })
     {
@@ -332,6 +332,26 @@ TEST_F(HostRequestHandlerTest, AdminMovesHostDirectlyToAnotherWorkspace)
 
     EXPECT_EQ(result.error_code, proto::router::kErrorOk);
     EXPECT_EQ(findHost(host_id_).workspace_id(), other_id);
+}
+
+//--------------------------------------------------------------------------------------------------
+// A release names no workspace and carries no membership list: every membership row goes with
+// it. A host in two spaces used to keep the non-primary one, and refreshPrimaryMembership
+// pointed the scalar straight back at that row - the host never became free.
+TEST_F(HostRequestHandlerTest, ReleaseDropsEveryMembership)
+{
+    caller_.session_type = proto::router::SESSION_TYPE_ADMIN;
+
+    const qint64 second_id = addWorkspace("beta");
+    ASSERT_GT(second_id, 0);
+    ASSERT_EQ(db_.addHostMembership(host_id_, second_id, 0), proto::router::kErrorOk);
+    ASSERT_EQ(db_.hostWorkspaceIds(host_id_).size(), 2u);
+
+    const RequestResult released = handle(makeMoveRequest(host_id_, 0, 0, "display"));
+
+    EXPECT_EQ(released.error_code, proto::router::kErrorOk);
+    EXPECT_EQ(findHost(host_id_).workspace_id(), 0);
+    EXPECT_TRUE(db_.hostWorkspaceIds(host_id_).empty());
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -646,6 +666,87 @@ TEST_F(HostListTest, UnassignedHostsAreListedForAdminOnly)
 }
 
 //--------------------------------------------------------------------------------------------------
+// The outside list is what a workspace properties dialog shows as "outside the space": every host
+// that is not a member of the requested workspace - the hosts of the other workspaces together
+// with the hosts no workspace claimed. A host shared with a second workspace is outside neither
+// of the workspaces it belongs to.
+TEST_F(HostListTest, OutsideListTakesTheOtherWorkspacesAndTheUnassigned)
+{
+    const qint64 second_id = addWorkspace("beta");
+    ASSERT_GT(second_id, 0);
+
+    const HostId in_alpha = addHostTo("hash-1", workspace_id_, 0, "in-alpha");
+    const HostId in_beta = addHostTo("hash-2", second_id, 0, "in-beta");
+    const HostId free_host = addHost("hash-3");
+    ASSERT_NE(in_alpha, kInvalidHostId);
+    ASSERT_NE(in_beta, kInvalidHostId);
+    ASSERT_NE(free_host, kInvalidHostId);
+
+    // Shared between both workspaces: outside neither of them.
+    ASSERT_EQ(db_.addHostMembership(in_beta, workspace_id_, 0), proto::router::kErrorOk);
+
+    const proto::router::HostList outside_alpha =
+        hostList(hostListRequest(proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE,
+                                 workspace_id_, 0));
+    ASSERT_EQ(outside_alpha.error_code(), proto::router::kErrorOk);
+    EXPECT_EQ(hostIds(outside_alpha), (std::set<quint64>{ quint64(free_host) }));
+    EXPECT_EQ(outside_alpha.total_count(), 1);
+
+    const proto::router::HostList outside_beta =
+        hostList(hostListRequest(proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE,
+                                 second_id, 0));
+    ASSERT_EQ(outside_beta.error_code(), proto::router::kErrorOk);
+    EXPECT_EQ(hostIds(outside_beta),
+              (std::set<quint64>{ quint64(in_alpha), quint64(free_host) }));
+    EXPECT_EQ(outside_beta.total_count(), 2);
+}
+
+//--------------------------------------------------------------------------------------------------
+// The outside list spans every workspace of the router, so like MODE_ALL only an administrator
+// may ask for it.
+TEST_F(HostListTest, NonAdminCannotUseOutsideMode)
+{
+    const RouterUser client = addUser("client", proto::router::SESSION_TYPE_OPERATOR);
+    ASSERT_TRUE(client.isValid());
+    setCaller(client, proto::router::SESSION_TYPE_OPERATOR);
+
+    const proto::router::HostList list =
+        hostList(hostListRequest(proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE,
+                                 workspace_id_, 0));
+
+    EXPECT_EQ(list.error_code(), proto::router::kErrorAccessDenied);
+    EXPECT_EQ(list.host_size(), 0);
+    EXPECT_EQ(list.total_count(), 0);
+}
+
+//--------------------------------------------------------------------------------------------------
+// The scope needs a real workspace and refuses the dimensions it does not have: workspace 0
+// would read as "not a member of workspace 0" and list every host, which only MODE_ALL does;
+// a group filter has no meaning outside the workspace and a filter narrows nothing here.
+TEST_F(HostListTest, OutsideListValidation)
+{
+    ASSERT_NE(addHostTo("hash-1", workspace_id_, 0, "assigned"), kInvalidHostId);
+
+    const proto::router::HostList no_workspace =
+        hostList(hostListRequest(proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE, 0, 0));
+    EXPECT_EQ(no_workspace.error_code(), proto::router::kErrorInvalidRequest);
+    EXPECT_EQ(no_workspace.total_count(), 0);
+
+    const proto::router::HostList with_group =
+        hostList(hostListRequest(proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE,
+                                 workspace_id_, 5));
+    EXPECT_EQ(with_group.error_code(), proto::router::kErrorInvalidRequest);
+    EXPECT_EQ(with_group.total_count(), 0);
+
+    proto::router::HostListRequest filter_request =
+        hostListRequest(proto::router::HostListRequest::MODE_OUTSIDE_WORKSPACE, workspace_id_, 0);
+    filter_request.mutable_filter()->set_display_name("assigned");
+    const proto::router::HostList with_filter = hostList(filter_request);
+    EXPECT_EQ(with_filter.error_code(), proto::router::kErrorInvalidRequest);
+    EXPECT_EQ(with_filter.total_count(), 0);
+}
+
+//--------------------------------------------------------------------------------------------------
 // The page is the window the client asked for, but the count is the whole scope - that is what
 // drives its pagination.
 TEST_F(HostListTest, PaginationReturnsWindowAndFullCount)
@@ -864,6 +965,32 @@ TEST_F(HostListTest, FilterIsRejectedInFilteredMode)
 }
 
 //--------------------------------------------------------------------------------------------------
+// The page cap is what keeps a reply inside the channel limit: a page of exactly the cap is
+// served, one more is refused without a count. The size itself is pinned by
+// FullPageOfLargestHostsFitsTheChannel, which fills a page of the cap with the largest hosts.
+TEST_F(HostListTest, HostPageAcceptsTheMaximumAndRefusesOneMore)
+{
+    ASSERT_NE(addHostTo("hash-1", workspace_id_, 0, "first"), kInvalidHostId);
+
+    proto::router::HostListRequest at_cap =
+        hostListRequest(proto::router::HostListRequest::MODE_FILTERED, workspace_id_, 0);
+    at_cap.set_count(proto::router::kMaxHostPageSize);
+
+    const proto::router::HostList served = hostList(at_cap);
+    EXPECT_EQ(served.error_code(), proto::router::kErrorOk);
+    EXPECT_EQ(served.host_size(), 1);
+    EXPECT_EQ(served.total_count(), 1);
+
+    proto::router::HostListRequest over_cap = at_cap;
+    over_cap.set_count(proto::router::kMaxHostPageSize + 1);
+
+    const proto::router::HostList refused = hostList(over_cap);
+    EXPECT_EQ(refused.error_code(), proto::router::kErrorInvalidRequest);
+    EXPECT_EQ(refused.host_size(), 0);
+    EXPECT_EQ(refused.total_count(), 0);
+}
+
+
 // A full page of hosts whose every field takes the most bytes its limit allows still fits what the
 // channel can carry.
 // This is what picks the value of kMaxHostPageSize, and it is the assumption that quietly breaks
@@ -884,6 +1011,13 @@ TEST_F(HostListTest, FullPageOfLargestHostsFitsTheChannel)
         .arg(proto::router::kMaxEntryNameLength * 3).arg(proto::router::kMaxCommentLength * 3);
 
     ASSERT_TRUE(execRaw(sql));
+
+    // The listing reads the membership table, so the raw rows above need their membership rows
+    // too - the point of the test is the size of the reply, not the path the rows took.
+    ASSERT_TRUE(execRaw(QString(
+        "INSERT INTO host_workspaces (host_id, workspace_id, group_id) "
+        "SELECT id, workspace_id, 0 FROM hosts WHERE workspace_id = %1 "
+        "AND id NOT IN (SELECT host_id FROM host_workspaces)").arg(workspace_id_)));
 
     proto::router::HostListRequest request =
         hostListRequest(proto::router::HostListRequest::MODE_FILTERED, workspace_id_, 0);
@@ -1023,4 +1157,65 @@ TEST_F(HostListTest, SearchWithAnInvalidPageIsRejected)
 
     EXPECT_EQ(huge.error_code(), proto::router::kErrorInvalidRequest);
     EXPECT_EQ(huge.total_count(), 0);
+}
+
+//--------------------------------------------------------------------------------------------------
+// The host is shared with a second workspace; an operator who is a member of that workspace may
+// edit the host even though the edit keeps it in the primary workspace he does NOT belong to,
+// and an operator sharing no workspace with the host is refused.
+TEST_F(HostRequestHandlerTest, MemberOfASecondWorkspaceMayEditTheHost)
+{
+    const qint64 shared_id = addWorkspace("beta");
+    ASSERT_GT(shared_id, 0);
+    ASSERT_EQ(db_.addHostMembership(host_id_, shared_id, 0), proto::router::kErrorOk);
+
+    const RouterUser client = addUser("client", proto::router::SESSION_TYPE_OPERATOR);
+    ASSERT_TRUE(client.isValid());
+    ASSERT_EQ(db_.modifyWorkspace(shared_id, 1, "beta", std::string_view(),
+                                  { client.entry_id }),
+              proto::router::kErrorOk);
+    setCaller(client, proto::router::SESSION_TYPE_OPERATOR);
+
+    // The edit keeps the host in its primary workspace, which the caller is not a member of:
+    // the membership in beta is enough.
+    EXPECT_EQ(handle(makeRequest(host_id_, 0, "display")).error_code, proto::router::kErrorOk);
+
+    // A caller sharing no workspace with the host is refused.
+    const RouterUser outsider = addUser("outsider", proto::router::SESSION_TYPE_OPERATOR);
+    ASSERT_TRUE(outsider.isValid());
+    setCaller(outsider, proto::router::SESSION_TYPE_OPERATOR);
+
+    EXPECT_EQ(handle(makeRequest(host_id_, 0, "display")).error_code,
+              proto::router::kErrorAccessDenied);
+}
+
+//--------------------------------------------------------------------------------------------------
+// The membership list of the request may only change the workspace SET for an administrator;
+// a member may send the list as long as it names the workspaces the host already belongs to.
+TEST_F(HostRequestHandlerTest, NonAdminCannotChangeTheWorkspaceSet)
+{
+    const qint64 second_id = addWorkspace("beta");
+    ASSERT_GT(second_id, 0);
+    ASSERT_EQ(db_.addHostMembership(host_id_, second_id, 0), proto::router::kErrorOk);
+
+    const RouterUser client = addUser("client", proto::router::SESSION_TYPE_OPERATOR);
+    ASSERT_TRUE(client.isValid());
+    ASSERT_EQ(db_.modifyWorkspace(second_id, 1, "beta", std::string_view(),
+                                  { client.entry_id }),
+              proto::router::kErrorOk);
+    setCaller(client, proto::router::SESSION_TYPE_OPERATOR);
+
+    // The list drops beta, which the host currently belongs to: refused.
+    proto::router::HostRequest shrinking = makeRequest(host_id_, 0, "display");
+    proto::router::HostMembership* only_primary = shrinking.mutable_host()->add_memberships();
+    only_primary->set_workspace_id(workspace_id_);
+    EXPECT_EQ(handle(shrinking).error_code, proto::router::kErrorAccessDenied);
+
+    // The list names the same workspaces the host has: accepted.
+    proto::router::HostRequest same_set = makeRequest(host_id_, 0, "display");
+    proto::router::HostMembership* primary = same_set.mutable_host()->add_memberships();
+    primary->set_workspace_id(workspace_id_);
+    proto::router::HostMembership* second = same_set.mutable_host()->add_memberships();
+    second->set_workspace_id(second_id);
+    EXPECT_EQ(handle(same_set).error_code, proto::router::kErrorOk);
 }

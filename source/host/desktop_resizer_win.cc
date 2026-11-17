@@ -71,6 +71,7 @@ private:
     ScreenId screen_id_;
     QString name_;
     QSize current_resolution_;
+    bool resolution_changed_ = false;
     std::map<QSize, DEVMODEW, QSizeLess> best_mode_;
 };
 
@@ -148,18 +149,24 @@ bool DesktopResizerWin::Screen::setResolution(const QSize& resolution)
     }
 
     current_resolution_ = resolution;
+    resolution_changed_ = true;
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
 void DesktopResizerWin::Screen::restoreResolution()
 {
+    if (!resolution_changed_)
+        return;
+
     // Restore the display mode based on the registry configuration.
     LONG result = ChangeDisplaySettingsExW(qUtf16Printable(name_), nullptr, nullptr, 0, nullptr);
     if (result != DISP_CHANGE_SUCCESSFUL)
     {
         LOG(ERROR) << "ChangeDisplaySettingsW failed:" << result;
     }
+
+    resolution_changed_ = false;
 }
 
 //--------------------------------------------------------------------------------------------------

@@ -622,3 +622,66 @@ TEST_F(DatabaseMigrationTest, FailureLeavesNothingBehind)
     EXPECT_FALSE(QFileInfo::exists(dir_path_));
     EXPECT_FALSE(QFileInfo::exists(dir_path_ + ".tmp"));
 }
+
+//--------------------------------------------------------------------------------------------------
+TEST(DatabaseMigrationNotifyTest, HostNotifyKeysMigrated)
+{
+    QTemporaryDir dir;
+    ASSERT_TRUE(dir.isValid());
+    const QString path = dir.filePath("t.db3");
+    SqlDatabase db;
+    ASSERT_TRUE(db.open(path));
+    ASSERT_TRUE(db.exec("CREATE TABLE settings (name TEXT PRIMARY KEY NOT NULL, value TEXT NOT NULL)"));
+
+    auto insert = [&db](const QString& name, const QString& value)
+    {
+        SqlQuery q(db, "INSERT INTO settings (name, value) VALUES (?, ?)");
+        q.addText(name);
+        q.addText(value);
+        ASSERT_TRUE(q.exec());
+    };
+
+    insert("host_notify/router_7_192.168.0.1", "legacy-router");
+    insert("host_notify/42_192.168.0.2", "legacy-id");
+    insert("host_notify/192.168.0.3", "existing");
+    insert("host_notify/router_9_192.168.0.3", "should-not-overwrite");
+    insert("confirm_close", "1");
+
+    ASSERT_TRUE(DatabaseMigration::migrateHostNotifySettings(db));
+
+    {
+        SqlQuery q(db, "SELECT value FROM settings WHERE name=?");
+        q.addText(QString("host_notify/192.168.0.1"));
+        ASSERT_EQ(q.next(), SqlQuery::StepResult::ROW);
+        EXPECT_EQ(q.columnText(0), "legacy-router");
+    }
+    {
+        SqlQuery q(db, "SELECT value FROM settings WHERE name=?");
+        q.addText(QString("host_notify/192.168.0.2"));
+        ASSERT_EQ(q.next(), SqlQuery::StepResult::ROW);
+        EXPECT_EQ(q.columnText(0), "legacy-id");
+    }
+    {
+        SqlQuery q(db, "SELECT value FROM settings WHERE name=?");
+        q.addText(QString("host_notify/192.168.0.3"));
+        ASSERT_EQ(q.next(), SqlQuery::StepResult::ROW);
+        EXPECT_EQ(q.columnText(0), "existing");
+    }
+    {
+        SqlQuery q(db, "SELECT COUNT(*) FROM settings WHERE name IN (?, ?, ?)");
+        q.addText(QString("host_notify/router_7_192.168.0.1"));
+        q.addText(QString("host_notify/42_192.168.0.2"));
+        q.addText(QString("host_notify/router_9_192.168.0.3"));
+        ASSERT_EQ(q.next(), SqlQuery::StepResult::ROW);
+        EXPECT_EQ(q.columnInt64(0), 0);
+    }
+    {
+        SqlQuery q(db, "SELECT value FROM settings WHERE name=?");
+        q.addText(QString("confirm_close"));
+        ASSERT_EQ(q.next(), SqlQuery::StepResult::ROW);
+        EXPECT_EQ(q.columnText(0), "1");
+    }
+
+    ASSERT_TRUE(DatabaseMigration::migrateHostNotifySettings(db));
+}
+

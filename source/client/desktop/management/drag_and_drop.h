@@ -104,11 +104,16 @@ public:
     RouterHostMimeData() = default;
     ~RouterHostMimeData() final = default;
 
-    void setHosts(const QList<RouterHost>& hosts, const QString& mime_type);
+    // |source_workspace_id| is the space the hosts are dragged FROM (0 - the approved list,
+    // which is no space at all): a drop onto "Approved Hosts" unassigns them from it.
+    void setHosts(qint64 source_workspace_id, const QList<RouterHost>& hosts,
+                  const QString& mime_type);
 
+    qint64 sourceWorkspaceId() const { return source_workspace_id_; }
     const QList<RouterHost>& hosts() const { return hosts_; }
 
 private:
+    qint64 source_workspace_id_ = 0;
     QList<RouterHost> hosts_;
 };
 
@@ -117,8 +122,10 @@ class RouterHostDrag final : public QDrag
 {
 public:
     explicit RouterHostDrag(QObject* drag_source = nullptr);
+    ~RouterHostDrag() final = default;
 
-    void setHosts(const QList<RouterHost>& hosts, const QString& mime_type);
+    void setHosts(qint64 source_workspace_id, const QList<RouterHost>& hosts,
+                  const QString& mime_type);
 };
 
 #endif // CLIENT_DESKTOP_MANAGEMENT_DRAG_AND_DROP_H

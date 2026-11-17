@@ -67,6 +67,8 @@ public:
     void enableWaitForHost(bool enable);
     void enablePasteAsKeystrokesFeature(bool enable);
 
+    void setViewOnly(bool enable);
+
     void setScreenList(const proto::screen::ScreenList& screen_list);
     void setSessionList(const proto::control::SessionList& session_list);
     void setToolList(const proto::tools::ToolList& tool_list);
@@ -143,6 +145,7 @@ private:
     QString formatSessionText(int index, const QString& user_name, bool is_console) const;
 
     std::unique_ptr<Ui::DesktopToolBar> ui;
+    QAction* action_view_only_ = nullptr;
     bool is_recording_started_ = false;
 
     QSize current_resolution_;

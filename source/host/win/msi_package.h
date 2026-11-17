@@ -33,7 +33,11 @@ public:
     };
 
     // Saves the installed host package to |file_path| with the current host settings built in.
-    static Result exportWithSettings(const QString& file_path);
+    // With |overwrite_data| the settings are imported on every installation of the exported
+    // package, and the data of the host that is already installed is overwritten. Without it
+    // the settings are imported only on the first installation, and the data of an installed
+    // host is left alone.
+    static Result exportWithSettings(const QString& file_path, bool overwrite_data);
 
 private:
     Q_DISABLE_COPY_MOVE(MsiPackage)

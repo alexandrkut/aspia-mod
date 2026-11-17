@@ -43,6 +43,10 @@ public:
     void setOneTimePasswordEnabled(bool enable);
     void setOneTimePasswordOnly(bool only);
 
+    // The one-time password is the way in that most of the hosts use, so it is the one the
+    // dialog offers first. The other ways stay available: a host may have a user of its own.
+    void setOneTimePasswordPreferred(bool preferred);
+
     void setSavedCredentials(const QList<CredentialConfig>& credentials);
     qint64 credentialId() const;
 
@@ -79,6 +83,7 @@ private:
     QList<CredentialConfig> credentials_;
     bool one_time_password_enabled_ = false;
     bool one_time_password_only_ = false;
+    bool one_time_password_preferred_ = false;
     bool one_time_password_choice_ = false;
     bool save_credentials_visible_ = false;
     Q_DISABLE_COPY_MOVE(AuthorizationDialog)

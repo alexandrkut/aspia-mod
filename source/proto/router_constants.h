@@ -26,7 +26,7 @@ namespace proto::router {
 
 // Page bounds of the list replies.
 [[maybe_unused]] constexpr int kMaxClientPageSize = 100;
-[[maybe_unused]] constexpr int kMaxHostPageSize = 100;
+[[maybe_unused]] constexpr int kMaxHostPageSize = 500;
 [[maybe_unused]] constexpr int kMaxTempHostPageSize = 100;
 [[maybe_unused]] constexpr int kMaxUserPageSize = 100;
 [[maybe_unused]] constexpr int kMaxAccessLogPageSize = 100;
@@ -67,6 +67,16 @@ extern const char* const kCommandHostModify;
 extern const char* const kCommandHostUpdate;
 extern const char* const kCommandHostApprove;
 extern const char* const kCommandHostTelemetry;
+extern const char* const kCommandHostSetUpdateConfig;
+extern const char* const kCommandHostAddUser;
+extern const char* const kCommandHostModifyUser;
+extern const char* const kCommandHostRemoveUser;
+extern const char* const kCommandHostGetUsers;
+extern const char* const kCommandHostSetAccessConfig;
+extern const char* const kCommandHostSetOnetimeConfig;
+extern const char* const kCommandHostReplaceUsers;
+extern const char* const kCommandHostSetMisc;
+extern const char* const kCommandHostApplyFullConfig;
 
 // Command names for RelayRequest.
 extern const char* const kCommandRelayDisconnect;

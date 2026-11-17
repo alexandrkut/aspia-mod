@@ -19,12 +19,18 @@
 #include "client/desktop/management/router_host_dialog.h"
 
 #include <QAbstractButton>
+#include <QCheckBox>
 #include <QDialogButtonBox>
+#include <QHash>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QIcon>
 #include <QLabel>
+#include <QListWidget>
 #include <QPushButton>
 #include <QSignalBlocker>
 #include <QTimer>
+#include <QVBoxLayout>
 
 #include <algorithm>
 
@@ -36,6 +42,8 @@
 #include "client/router/router_controller.h"
 #include "client/storage/database.h"
 #include "client/storage/user_settings.h"
+#include "client/config.h"
+#include "common/desktop/dialog_button_box.h"
 #include "common/desktop/msg_box.h"
 #include "common/desktop/router_error.h"
 #include "common/desktop/password_edit.h"
@@ -50,6 +58,23 @@ RouterHostDialog::RouterHostDialog(const RouterHost& host, QWidget* parent)
 {
     LOG(INFO) << "Ctor";
     ui->setupUi(this);
+
+    // The membership selection lives between the popup and the submit: initialized from the
+    // host's record, edited through the spaces button.
+    if (!host_.memberships.isEmpty())
+    {
+        for (const auto& membership : std::as_const(host_.memberships))
+            checked_workspace_ids_.append(membership.first);
+    }
+    else
+    {
+        // With no memberships on record (an older reply) the primary workspace is pre-checked
+        // so an edit does not silently claim anything new. A host in no workspace stays with
+        // an empty selection: a zero id is not a workspace.
+        if (host_.workspace_id > 0)
+            checked_workspace_ids_.append(host_.workspace_id);
+    }
+    updateWorkspacesButton();
 
     UserSettings settings;
     restoreGeometry(settings.dialogGeometry(objectName()));
@@ -69,8 +94,42 @@ RouterHostDialog::RouterHostDialog(const RouterHost& host, QWidget* parent)
         ui->combo_group->setEnabled(false);
     }
 
-    if (!session || session->config().sessionType() != proto::router::SESSION_TYPE_ADMIN)
-        ui->combo_workspace->setEnabled(false);
+    // Notify options (per host), visible only for ADMIN router sessions.
+    checkbox_notify_view_ = new QCheckBox(tr("Notify about viewing"), this);
+    checkbox_notify_control_ = new QCheckBox(tr("Notify about control"), this);
+    checkbox_notify_files_ = new QCheckBox(tr("Notify about files"), this);
+
+    checkbox_notify_view_->setChecked(false);
+    checkbox_notify_control_->setChecked(true);
+    checkbox_notify_files_->setChecked(true);
+
+    // Load stored values.
+    {
+        HostConfig notify_host = HostConfig::forRouterHost(host_.host_id, host_.computer_name);
+        QString value;
+        for (const QString& key : notify_host.notifySettingsKeys())
+        {
+            value = Database::instance().readSetting(key);
+            if (!value.isEmpty())
+                break;
+        }
+        QJsonDocument doc = QJsonDocument::fromJson(value.toUtf8());
+        QJsonObject obj = doc.isObject() ? doc.object() : QJsonObject();
+        if (obj.contains("view")) checkbox_notify_view_->setChecked(obj.value("view").toBool());
+        if (obj.contains("control")) checkbox_notify_control_->setChecked(obj.value("control").toBool());
+        if (obj.contains("files")) checkbox_notify_files_->setChecked(obj.value("files").toBool());
+    }
+
+    bool is_admin = session && session->config().sessionType() == proto::router::SESSION_TYPE_ADMIN;
+    checkbox_notify_view_->setVisible(is_admin);
+    checkbox_notify_control_->setVisible(is_admin);
+    checkbox_notify_files_->setVisible(is_admin);
+
+    QGridLayout* grid = ui->gridLayout;
+    int row = 8;
+    grid->addWidget(checkbox_notify_view_, row++, 0, 1, 2);
+    grid->addWidget(checkbox_notify_control_, row++, 0, 1, 2);
+    grid->addWidget(checkbox_notify_files_, row++, 0, 1, 2);
 
     // A temporary host id is handed out at random and comes back for another machine, so what was
     // saved under it would be sent to a host the user never gave it to. Such a host is edited like
@@ -84,10 +143,10 @@ RouterHostDialog::RouterHostDialog(const RouterHost& host, QWidget* parent)
 
     connect(ui->checkbox_saved_credentials, &QCheckBox::toggled, this, &RouterHostDialog::onSavedCredentialsToggled);
     connect(ui->button_box, &QDialogButtonBox::clicked, this, &RouterHostDialog::onButtonBoxClicked);
-    connect(ui->combo_workspace, &QComboBox::currentIndexChanged, this, &RouterHostDialog::onWorkspaceChanged);
+    connect(ui->button_workspaces, &QPushButton::clicked, this, &RouterHostDialog::onWorkspacesButtonClicked);
 
     int label_width = 0;
-    for (const QLabel* label : { ui->label_workspace, ui->label_group, ui->label_display_name,
+    for (const QLabel* label : { ui->label_group, ui->label_display_name,
                                  ui->label_username, ui->label_password, ui->label_credential,
                                  ui->label_profile })
     {
@@ -110,8 +169,10 @@ RouterHostDialog::RouterHostDialog(const RouterHost& host, QWidget* parent)
     QTimer::singleShot(MilliSeconds::zero(), this, &RouterHostDialog::onLoadData);
 
     // The combos are populated asynchronously. Ok stays disabled until the responses arrive so the
-    // user cannot submit before knowing which workspace and group they have selected.
+    // user cannot submit before knowing which workspace and group they have selected. The spaces
+    // button waits for the same reason: its popup lists what the router has.
     ui->button_box->button(QDialogButtonBox::Ok)->setEnabled(false);
+    ui->button_workspaces->setEnabled(false);
 
     if (!session)
     {
@@ -143,27 +204,87 @@ void RouterHostDialog::onWorkspaceListReceived(const RouterWorkspaceList& list)
         return;
     }
 
-    const QSignalBlocker blocker(ui->combo_workspace);
+    workspaces_ = list.workspaces;
 
-    const QIcon workspace_icon(":/img/workspace.svg");
-    ui->combo_workspace->addItem(workspace_icon, tr("Not assigned"), QVariant::fromValue<qint64>(0));
+    // Only what the router still lists counts as a selection: a workspace deleted since the
+    // record was written must not travel back as a membership.
+    QList<qint64> known;
+    known.reserve(workspaces_.size());
+    for (const RouterWorkspace& workspace : std::as_const(workspaces_))
+        known.append(workspace.entry_id);
 
-    for (const RouterWorkspace& workspace : std::as_const(list.workspaces))
-        ui->combo_workspace->addItem(workspace_icon, workspace.name, QVariant::fromValue(workspace.entry_id));
+    for (int i = checked_workspace_ids_.size() - 1; i >= 0; --i)
+    {
+        if (!known.contains(checked_workspace_ids_.at(i)))
+            checked_workspace_ids_.removeAt(i);
+    }
 
-    if (!list.workspaces.isEmpty())
-        ui->combo_workspace->insertSeparator(1);
-
-    const int index = ui->combo_workspace->findData(QVariant::fromValue(host_.workspace_id));
-    ui->combo_workspace->setCurrentIndex(std::max(index, 0));
+    updateWorkspacesButton();
+    ui->button_workspaces->setEnabled(true);
 
     fetchGroups();
 }
 
 //--------------------------------------------------------------------------------------------------
-void RouterHostDialog::onWorkspaceChanged(int /* index */)
+void RouterHostDialog::onWorkspacesButtonClicked()
 {
-    fetchGroups();
+    LOG(INFO) << "[ACTION] Pick spaces of host" << host_.host_id;
+
+    QDialog dialog(this);
+    dialog.setWindowTitle(tr("Spaces"));
+
+    RouterSession* session = RouterController::session();
+    const bool is_admin =
+        session && session->config().sessionType() == proto::router::SESSION_TYPE_ADMIN;
+
+    auto* layout = new QVBoxLayout(&dialog);
+    auto* list = new QListWidget(&dialog);
+    list->setObjectName(QStringLiteral("workspace_list"));
+
+    const QIcon workspace_icon(":/img/workspace.svg");
+    for (const RouterWorkspace& workspace : std::as_const(workspaces_))
+    {
+        auto* item = new QListWidgetItem(workspace_icon, workspace.name, list);
+        item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+        item->setData(Qt::UserRole, workspace.entry_id);
+        item->setCheckState(checked_workspace_ids_.contains(workspace.entry_id) ?
+            Qt::Checked : Qt::Unchecked);
+    }
+
+    // The membership set is the router's to grant: a non-admin reads it, only an administrator
+    // changes it.
+    list->setEnabled(is_admin);
+    layout->addWidget(list);
+
+    // DialogButtonBox instead of the plain QDialogButtonBox: it translates the standard buttons
+    // on show, otherwise the popup says "Cancel" in a Russian UI.
+    auto* button_box =
+        new DialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, &dialog);
+    connect(button_box, &QDialogButtonBox::accepted, &dialog, &QDialog::accept);
+    connect(button_box, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
+    layout->addWidget(button_box);
+
+    dialog.resize(340, 380);
+
+    if (dialog.exec() != QDialog::Accepted)
+        return;
+
+    checked_workspace_ids_.clear();
+    for (int i = 0; i < list->count(); ++i)
+    {
+        QListWidgetItem* item = list->item(i);
+        if (item->checkState() == Qt::Checked)
+            checked_workspace_ids_.append(item->data(Qt::UserRole).toLongLong());
+    }
+
+    updateWorkspacesButton();
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostDialog::updateWorkspacesButton()
+{
+    ui->button_workspaces->setText(
+        tr("Spaces... (%1)").arg(checked_workspace_ids_.size()));
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -253,11 +374,27 @@ void RouterHostDialog::onButtonBoxClicked(QAbstractButton* button)
         return;
     }
 
+    // The spaces picked in the popup become the membership list; the router synchronizes to it
+    // and re-derives the primary workspace itself. Every kept membership keeps its group - the
+    // list reply carries them, and a zero would tell the router to move the host to the
+    // workspace root. The picker below edits the group of the primary workspace only.
+    host_.memberships = buildMemberships(host_.memberships, checked_workspace_ids_,
+                                          currentWorkspaceId(),
+                                          ui->combo_group->currentGroupId());
+
     RouterHost host = host_;
     host.workspace_id = currentWorkspaceId();
     host.group_id     = ui->combo_group->currentGroupId();
     host.display_name = ui->edit_display_name->text();
     host.comment      = ui->edit_comment->toPlainText();
+
+    // Nothing checked: the host is released from every workspace. The scalar has to say so
+    // too - an untouched scalar against an empty list reads as a no-op edit on the router.
+    if (host.memberships.isEmpty())
+    {
+        host.workspace_id = 0;
+        host.group_id = 0;
+    }
 
     // The credentials live on this computer only, so they are not the router's to accept or
     // refuse. Kept for the answer, they would be lost with any error of it. A failure to keep them
@@ -276,9 +413,30 @@ void RouterHostDialog::onButtonBoxClicked(QAbstractButton* button)
 
     if (session->config().sessionType() == proto::router::SESSION_TYPE_OPERATOR)
     {
+        // Save notify settings (if admin visible).
+        {
+            QJsonObject obj;
+            obj.insert("view", checkbox_notify_view_ ? checkbox_notify_view_->isChecked() : false);
+            obj.insert("control", checkbox_notify_control_ ? checkbox_notify_control_->isChecked() : true);
+            obj.insert("files", checkbox_notify_files_ ? checkbox_notify_files_->isChecked() : true);
+            QJsonDocument doc(obj);
+            HostConfig notify_host = HostConfig::forRouterHost(host_.host_id, host_.computer_name);
+            Database::instance().writeSetting(notify_host.notifySettingsKeys().front(), QString::fromUtf8(doc.toJson(QJsonDocument::Compact)));
+        }
         LOG(INFO) << "[ACTION] Edit host accepted, credentials saved";
         accept();
         return;
+    }
+
+    // Save notify settings.
+    {
+        QJsonObject obj;
+        obj.insert("view", checkbox_notify_view_ ? checkbox_notify_view_->isChecked() : false);
+        obj.insert("control", checkbox_notify_control_ ? checkbox_notify_control_->isChecked() : true);
+        obj.insert("files", checkbox_notify_files_ ? checkbox_notify_files_->isChecked() : true);
+        QJsonDocument doc(obj);
+        HostConfig notify_host = HostConfig::forRouterHost(host_.host_id, host_.computer_name);
+        Database::instance().writeSetting(notify_host.notifySettingsKeys().front(), QString::fromUtf8(doc.toJson(QJsonDocument::Compact)));
     }
 
     LOG(INFO) << "[ACTION] Edit host accepted, sending request";
@@ -384,9 +542,33 @@ void RouterHostDialog::onLoadData()
 }
 
 //--------------------------------------------------------------------------------------------------
+QList<QPair<qint64, qint64>> RouterHostDialog::buildMemberships(
+    const QList<QPair<qint64, qint64>>& existing,
+    const QList<qint64>& checked_workspace_ids,
+    qint64 primary_workspace_id,
+    qint64 primary_group_id)
+{
+    QHash<qint64, qint64> groups;
+    for (const auto& membership : existing)
+        groups.insert(membership.first, membership.second);
+
+    QList<QPair<qint64, qint64>> result;
+    result.reserve(checked_workspace_ids.size());
+    for (qint64 workspace_id : checked_workspace_ids)
+    {
+        const qint64 group_id = (workspace_id == primary_workspace_id) ?
+            primary_group_id : groups.value(workspace_id, static_cast<qint64>(0));
+        result.append(qMakePair(workspace_id, group_id));
+    }
+    return result;
+}
+
+//--------------------------------------------------------------------------------------------------
 qint64 RouterHostDialog::currentWorkspaceId() const
 {
-    return ui->combo_workspace->currentData().toLongLong();
+    // The primary workspace of the host: the dialog no longer moves it (the router re-derives
+    // it from the membership list after every edit), it only feeds the group picker.
+    return host_.workspace_id;
 }
 
 //--------------------------------------------------------------------------------------------------

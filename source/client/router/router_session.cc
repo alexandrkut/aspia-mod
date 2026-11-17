@@ -71,6 +71,8 @@ RouterHost parseHost(const proto::router::Host& src)
     dst.host_id       = src.host_id();
     dst.workspace_id  = src.workspace_id();
     dst.group_id      = src.group_id();
+    for (const auto& m : src.memberships())
+        dst.memberships.append(qMakePair(m.workspace_id(), m.group_id()));
     dst.display_name  = QString::fromStdString(src.display_name());
     dst.computer_name = QString::fromStdString(src.computer_name());
     dst.cpu_arch      = QString::fromStdString(src.cpu_arch());
@@ -390,6 +392,20 @@ void RouterSession::checkHostUpdates(HostId host_id, RouterCallback<proto::route
 }
 
 //--------------------------------------------------------------------------------------------------
+void RouterSession::setHostConfig(HostId host_id, const std::string& command_name, const std::string& params,
+                                 RouterCallback<proto::router::HostResult> callback)
+{
+    proto::router::AdminToRouter message;
+    auto* request = message.mutable_host_request();
+    request->set_request_id(rpc_.nextRequestId());
+    request->set_command_name(command_name);
+    request->mutable_host()->set_host_id(host_id);
+    request->set_params(params);
+    rpc_.registerPending(request, std::move(callback));
+    send(proto::router::CHANNEL_ID_ADMIN, message);
+}
+
+//--------------------------------------------------------------------------------------------------
 void RouterSession::requestHostTelemetry(
     HostId host_id, RouterCallback<proto::router::HostTelemetryResult> callback)
 {
@@ -408,6 +424,12 @@ void RouterSession::editHost(const RouterHost& host, RouterCallback<proto::route
     serialized.set_host_id(host.host_id);
     serialized.set_workspace_id(host.workspace_id);
     serialized.set_group_id(host.group_id);
+    for (const auto& m : host.memberships)
+    {
+        auto* hm = serialized.add_memberships();
+        hm->set_workspace_id(m.first);
+        hm->set_group_id(m.second);
+    }
     serialized.set_display_name(host.display_name.toStdString());
     serialized.set_comment(host.comment.toStdString());
     serialized.set_revision(host.revision);
@@ -554,6 +576,35 @@ void RouterSession::listGroups(CachePolicy policy, qint64 workspace_id,
 void RouterSession::listHosts(CachePolicy policy, proto::router::HostListRequest request,
                               RouterCallback<RouterHostList> callback)
 {
+    // A router older than the raised page cap refuses a page over 100 with invalid_request;
+    // the same reply for a page of 100 or less means something else is wrong. Retry once at
+    // the old cap so one client serves both generations.
+    static constexpr qint64 kLegacyHostPageSize = 100;
+    if (request.count() > kLegacyHostPageSize)
+    {
+        const proto::router::HostListRequest retry_request = request;
+        RouterCallback<RouterHostList> original = std::move(callback);
+        callback = RouterCallback<RouterHostList>(
+            this, [this, retry_request, original](const RouterHostList& list) mutable
+        {
+            if (list.error_code == proto::router::kErrorInvalidRequest)
+            {
+                LOG(WARNING) << "Host list refused, retrying with the legacy page size";
+                // The router caps its pages: the lists have to count pages at that cap or
+                // everything past the first one stays unreachable.
+                host_page_limit_ = kLegacyHostPageSize;
+                proto::router::HostListRequest retry = retry_request;
+                retry.set_count(kLegacyHostPageSize);
+                listHosts(CachePolicy::RELOAD, std::move(retry), std::move(original));
+                return;
+            }
+            original(list);
+        });
+    }
+
+    // Only filtered (per workspace/group) queries are cached. The page is part of the key: two
+    // pages of the same selection are different answers.
+>>>>>>> port-3.4.2
     const bool cacheable = request.mode() == proto::router::HostListRequest::MODE_FILTERED;
     const RouterCache::HostKey key{ request.workspace_id(), request.group_id(),
                                     request.offset(), request.count() };

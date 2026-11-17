@@ -21,6 +21,7 @@
 
 #include <QQueue>
 
+#include <functional>
 #include <optional>
 
 #include "base/build_config.h"
@@ -34,6 +35,7 @@
 #include "base/peer/user_list.h"
 #include "host/database.h"
 #include "proto/user.h"
+#include "proto/router_peer.h"
 
 namespace proto::router {
 class ConnectionOffer;
@@ -82,6 +84,8 @@ public:
         TcpChannel* tcp_channel = nullptr;
         QString stun_host;
         quint16 stun_port = 0;
+        bool caller_is_admin = false;
+        proto::router::ConnectionOffer offer;
     };
 
     bool hasReadyConnections() const;
@@ -101,6 +105,9 @@ signals:
     void sig_clientConnected();
     void sig_removeHost();
     void sig_checkUpdates();
+    // Synchronous check (DirectConnection): returns whether any client session is open under
+    // the given user name. Used by the host-config applicator active-session guard.
+    void sig_checkUserSessions(const QString& username, bool* result);
 
 private slots:
     void onTcpReady();
@@ -115,6 +122,8 @@ private:
     void routerStateChanged(proto::user::RouterState::State state);
     void hostIdRequest();
     void sendTelemetry();
+    void sendHostConfigResult(const std::string& command_name, const std::string& error_code,
+                              const std::string& result);
     void readConnectionOffer(const proto::router::ConnectionOffer& offer);
     void renewOneTimePassword();
     User createOneTimeUser() const;

@@ -17,6 +17,7 @@
 //
 
 #include "client/storage/database.h"
+#include "client/storage/user_settings.h"
 
 #include <QDir>
 #include <QFileInfo>
@@ -336,3 +337,67 @@ bool Database::writeSetting(const QString& name, const QString& value)
 
     return true;
 }
+
+//--------------------------------------------------------------------------------------------------
+// The mod reads the switches below through Database, where its own code has always found them.
+// The values live in UserSettings - the same storage the settings dialog writes - so the dialog
+// and the update code share one truth. The defaults stay the mod's: the check of updates is on
+// until a user turns it off, the channel is the stable one, the close confirmation follows the
+// switch of the application.
+
+bool Database::isCheckUpdatesEnabled() const
+{
+    return UserSettings().isCheckUpdatesEnabled();
+}
+
+bool Database::setCheckUpdatesEnabled(bool enable)
+{
+    UserSettings().setCheckUpdatesEnabled(enable);
+    return true;
+}
+
+QString Database::updateChannel() const
+{
+    return UserSettings().updateChannel();
+}
+
+bool Database::setUpdateChannel(const QString& channel)
+{
+    UserSettings().setUpdateChannel(channel);
+    return true;
+}
+
+bool Database::isConfirmCloseEnabled() const
+{
+    return UserSettings().isConfirmCloseEnabled();
+}
+
+bool Database::setConfirmCloseEnabled(bool enable)
+{
+    UserSettings().setConfirmCloseEnabled(enable);
+    return true;
+}
+
+namespace {
+constexpr auto kSettingHostsPerPage = "hosts_per_page";
+} // namespace
+
+qint64 Database::hostsPerPage() const
+{
+    QString value = readSetting(kSettingHostsPerPage);
+    if (value.isEmpty())
+        return 100;
+    bool ok = false;
+    qint64 result = value.toLongLong(&ok);
+    if (!ok || result <= 0)
+        return 100;
+    return result;
+}
+
+bool Database::setHostsPerPage(qint64 value)
+{
+    if (value <= 0)
+        value = 100;
+    return writeSetting(kSettingHostsPerPage, QString::number(value));
+}
+

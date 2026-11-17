@@ -537,7 +537,9 @@ void ServerWorker::startClient(TcpChannel* tcp_channel, const QString& stun_host
     }
 
     const QVersionNumber& host_version = kCurrentVersion;
-    if (host_version > channel->peerVersion())
+    // The number of the build of the line of the versions tells nothing about the compatibility,
+    // so the versions are compared by the three numbers that matter.
+    if (compatibilityVersion(host_version) > compatibilityVersion(channel->peerVersion()))
     {
         LOG(ERROR) << "Version mismatch (host:" << host_version << "client:"
                    << channel->peerVersion() << ")";
