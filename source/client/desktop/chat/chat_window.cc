@@ -89,6 +89,10 @@ ChatWindow::ChatWindow(QWidget* parent)
 
     QPushButton* forced_button = new QPushButton(tr("Force chat"), this);
     forced_button->setCheckable(true);
+    forced_button->setStyleSheet(
+        "QPushButton:checked { background-color: #8B2E2E; color: #FFFFFF; }"
+        "QPushButton:checked:hover { background-color: #7A2828; }"
+        "QPushButton:checked:pressed { background-color: #692222; }");
     ui->verticalLayout_2->insertWidget(0, forced_button);
 
     connect(forced_button, &QPushButton::toggled, this, [this](bool checked)
