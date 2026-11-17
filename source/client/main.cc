@@ -38,7 +38,6 @@
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QDir>
-#include <QFileInfo>
 #include <QProcess>
 #include <QTextStream>
 
@@ -298,8 +297,8 @@ int main(int argc, char* argv[])
 
     QCommandLineParser parser;
     parser.setApplicationDescription(QApplication::translate("Client", "Aspia Client"));
-    const QCommandLineOption help_option = parser.addHelpOption();
-    const QCommandLineOption version_option = parser.addVersionOption();
+    parser.addHelpOption();
+    parser.addVersionOption();
     const QCommandLineOption connect_option(
         { QStringLiteral("connect"), QStringLiteral("c") },
         QApplication::translate("Client",
@@ -352,101 +351,6 @@ int main(int argc, char* argv[])
     parser.addOption(database_option);
     parser.addOption(list_databases_option);
     parser.addOption(master_password_option);
-
-    bool help_requested = false;
-    for (const QString& argument : application.arguments().mid(1))
-    {
-        if (argument == QStringLiteral("-h") ||
-            argument == QStringLiteral("--help") ||
-            argument == QStringLiteral("-?"))
-        {
-            help_requested = true;
-            break;
-        }
-    }
-
-    if (help_requested)
-    {
-#if defined(Q_OS_WINDOWS)
-        if (GetFileType(GetStdHandle(STD_OUTPUT_HANDLE)) == FILE_TYPE_UNKNOWN)
-        {
-            if (AttachConsole(ATTACH_PARENT_PROCESS))
-            {
-                FILE* stream = nullptr;
-                freopen_s(&stream, "CONOUT$", "w", stdout);
-            }
-        }
-#endif
-
-        const QString program_name = application.arguments().isEmpty() ?
-            QStringLiteral("aspia_client") :
-            QFileInfo(application.arguments().first()).fileName();
-
-        QString text;
-        text += QStringLiteral("Usage: ") + program_name + QStringLiteral(" [options]\n");
-        if (!parser.applicationDescription().isEmpty())
-            text += parser.applicationDescription() + QStringLiteral("\n");
-        text += QStringLiteral("\nOptions:\n");
-
-        // Qt's QCommandLineParser has no public accessor for the registered option objects, so
-        // keep an explicit list here; every option added above must be listed (help/version too).
-        const QList<QCommandLineOption> options = {
-            help_option, version_option, select_database_option, connect_option,
-            session_type_option, username_option, password_option, database_option,
-            list_databases_option, master_password_option };
-
-        int name_width = 0;
-        for (const QCommandLineOption& option : options)
-        {
-            QString names;
-            for (const QString& name : option.names())
-            {
-                if (!names.isEmpty())
-                    names += QStringLiteral(", ");
-                names += (name.size() == 1 ? QStringLiteral("-") : QStringLiteral("--")) + name;
-            }
-
-            if (!option.valueName().isEmpty())
-                names += QStringLiteral(" <") + option.valueName() + QStringLiteral(">");
-
-            if (names.size() > name_width)
-                name_width = names.size();
-        }
-
-        if (name_width > 40)
-            name_width = 40;
-
-        for (const QCommandLineOption& option : options)
-        {
-            QString names;
-            for (const QString& name : option.names())
-            {
-                if (!names.isEmpty())
-                    names += QStringLiteral(", ");
-                names += (name.size() == 1 ? QStringLiteral("-") : QStringLiteral("--")) + name;
-            }
-
-            if (!option.valueName().isEmpty())
-                names += QStringLiteral(" <") + option.valueName() + QStringLiteral(">");
-
-            if (names.size() <= name_width)
-            {
-                text += QStringLiteral("  ") + names.leftJustified(name_width + 2) +
-                        option.description() + QStringLiteral("\n");
-            }
-            else
-            {
-                text += QStringLiteral("  ") + names + QStringLiteral("\n");
-                text += QStringLiteral("  ") + QString(name_width + 2, QLatin1Char(' ')) +
-                        option.description() + QStringLiteral("\n");
-            }
-        }
-
-        fprintf(stdout, "%s", text.toLocal8Bit().constData());
-        fflush(stdout);
-        return 0;
-    }
-
     parser.process(application);
 
     SecureString master_password;
