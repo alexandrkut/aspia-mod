@@ -29,8 +29,10 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QKeyEvent>
+#include <QGuiApplication>
 #include <QMenu>
 #include <QSaveFile>
+#include <QScreen>
 #include <QScrollBar>
 #include <QTextEdit>
 #include <QTextStream>
@@ -337,6 +339,14 @@ bool ChatWidget::eventFilter(QObject* object, QEvent* event)
 //--------------------------------------------------------------------------------------------------
 void ChatWidget::changeEvent(QEvent* event)
 {
+    if (forced_ && event->type() == QEvent::WindowStateChange &&
+        (windowState() & Qt::WindowMinimized))
+    {
+        setWindowState(windowState() & ~Qt::WindowMinimized);
+        event->accept();
+        return;
+    }
+
     if (event->type() == QEvent::PaletteChange || event->type() == QEvent::StyleChange ||
         event->type() == QEvent::ApplicationPaletteChange)
     {
@@ -354,6 +364,12 @@ void ChatWidget::changeEvent(QEvent* event)
 //--------------------------------------------------------------------------------------------------
 void ChatWidget::closeEvent(QCloseEvent* event)
 {
+    if (forced_)
+    {
+        event->ignore();
+        return;
+    }
+
     LOG(INFO) << "Close event detected";
 
     emit sig_textChatClosed();
@@ -361,8 +377,53 @@ void ChatWidget::closeEvent(QCloseEvent* event)
 }
 
 //--------------------------------------------------------------------------------------------------
-void ChatWidget::resizeEvent(QResizeEvent* /* event */)
+void ChatWidget::moveEvent(QMoveEvent* event)
 {
+    if (forced_ && !forced_moving_)
+    {
+        QScreen* screen = this->screen();
+        if (!screen)
+            screen = QGuiApplication::primaryScreen();
+
+        if (screen)
+        {
+            const QRect available = screen->availableGeometry();
+            QPoint pos = event->pos();
+            const int max_x = qMax(available.left(), available.right() - width() + 1);
+            const int max_y = qMax(available.top(), available.bottom() - height() + 1);
+            const int clamped_x = qBound(available.left(), pos.x(), max_x);
+            const int clamped_y = qBound(available.top(), pos.y(), max_y);
+
+            if (clamped_x != pos.x() || clamped_y != pos.y())
+            {
+                forced_moving_ = true;
+                move(clamped_x, clamped_y);
+                forced_moving_ = false;
+                return;
+            }
+        }
+    }
+
+    QWidget::moveEvent(event);
+}
+
+//--------------------------------------------------------------------------------------------------
+void ChatWidget::resizeEvent(QResizeEvent* event)
+{
+    if (forced_ && !forced_resizing_)
+    {
+        const QSize wanted = event->size();
+        if (wanted.width() < forced_reference_size_.width() ||
+            wanted.height() < forced_reference_size_.height())
+        {
+            forced_resizing_ = true;
+            resize(qMax(wanted.width(), forced_reference_size_.width()),
+                   qMax(wanted.height(), forced_reference_size_.height()));
+            forced_resizing_ = false;
+            return;
+        }
+    }
+
     onUpdateSize();
 }
 
@@ -371,6 +432,51 @@ void ChatWidget::showEvent(QShowEvent* event)
 {
     QWidget::showEvent(event);
     QTimer::singleShot(MilliSeconds(0), this, &ChatWidget::onUpdateSize);
+}
+
+//--------------------------------------------------------------------------------------------------
+void ChatWidget::setForced(bool forced)
+{
+    if (forced_ == forced)
+        return;
+
+    if (forced)
+    {
+        if (!forced_reference_size_.isValid())
+            forced_reference_size_ = size().isValid() ? size() : minimumSizeHint();
+        if (!forced_reference_size_.isValid() || forced_reference_size_.isEmpty())
+            forced_reference_size_ = QSize(400, 300);
+    }
+
+    forced_ = forced;
+
+    if (forced)
+        showForced();
+}
+
+//--------------------------------------------------------------------------------------------------
+bool ChatWidget::isForced() const
+{
+    return forced_;
+}
+
+//--------------------------------------------------------------------------------------------------
+void ChatWidget::showForced()
+{
+    if (isMinimized())
+        showNormal();
+    else if (!isVisible())
+        show();
+
+    if (QScreen* screen = this->screen() ? this->screen() : QGuiApplication::primaryScreen())
+    {
+        const QRect available = screen->availableGeometry();
+        move(available.center() - rect().center());
+    }
+
+    raise();
+    activateWindow();
+    setFocus();
 }
 
 //--------------------------------------------------------------------------------------------------
