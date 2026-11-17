@@ -675,7 +675,20 @@ void HostWindow::onChat(const proto::chat::Chat& chat)
     }
     else if (chat.has_chat_status())
     {
-        chat_widget_->readStatus(chat.chat_status());
+        const proto::chat::Status& status = chat.chat_status();
+        if (status.code() == proto::chat::Status::CODE_FORCED_CHAT_ENABLE)
+        {
+            chat_widget_->setForced(true);
+            chat_widget_->showForced();
+        }
+        else if (status.code() == proto::chat::Status::CODE_FORCED_CHAT_DISABLE)
+        {
+            chat_widget_->setForced(false);
+        }
+        else
+        {
+            chat_widget_->readStatus(status);
+        }
     }
     else
     {

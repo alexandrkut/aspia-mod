@@ -33,6 +33,8 @@ message Status
         CODE_USER_DISCONNECTED = 4;
         CODE_USER_CONNECTED    = 5;
         CODE_NO_USERS          = 6;
+        CODE_FORCED_CHAT_ENABLE  = 7;
+        CODE_FORCED_CHAT_DISABLE = 8;
     }
 
     int64 timestamp = 1;

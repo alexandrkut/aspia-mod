@@ -26,6 +26,8 @@
 #include "client/storage/database.h"
 #include "client/workers/network_worker.h"
 #include "common/desktop/chat_widget.h"
+#include <QPushButton>
+
 #include "proto/chat.h"
 #include "proto/peer.h"
 
@@ -84,6 +86,19 @@ ChatWindow::ChatWindow(QWidget* parent)
 {
     LOG(INFO) << "Ctor";
     ui->setupUi(this);
+
+    QPushButton* forced_button = new QPushButton(tr("Force chat"), this);
+    forced_button->setCheckable(true);
+    ui->verticalLayout_2->insertWidget(0, forced_button);
+
+    connect(forced_button, &QPushButton::toggled, this, [this](bool checked)
+    {
+        proto::chat::Chat chat;
+        proto::chat::Status* status = chat.mutable_chat_status();
+        status->set_code(checked ? proto::chat::Status::CODE_FORCED_CHAT_ENABLE
+                                 : proto::chat::Status::CODE_FORCED_CHAT_DISABLE);
+        sendMessage(proto::peer::CHANNEL_ID_0, serialize(chat));
+    });
 
     connect(ui->text_chat_widget, &ChatWidget::sig_sendMessage,
             this, [this](const proto::chat::Message& message)

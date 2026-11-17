@@ -530,6 +530,19 @@ void ServiceWorker::onChatClientMessage(const proto::chat::Chat& chat)
 
     quint32 sender_client_id = sender_client->clientId();
 
+    // A forced-chat toggle is honored only for sessions that reached the host through the
+    // router; direct sessions are not allowed to force the host's chat window.
+    if (chat.has_chat_status())
+    {
+        const proto::chat::Status::Code code = chat.chat_status().code();
+        if ((code == proto::chat::Status::CODE_FORCED_CHAT_ENABLE ||
+             code == proto::chat::Status::CODE_FORCED_CHAT_DISABLE) &&
+            !sender_client->via_router)
+        {
+            return;
+        }
+    }
+
     if (user_session_->state() == UserSession::State::DETTACHED && chat.has_chat_message())
         sender_client->onSendStatus(proto::chat::Status::CODE_USER_DISCONNECTED);
     else if (user_session_->state() == UserSession::State::ATTACHED)
