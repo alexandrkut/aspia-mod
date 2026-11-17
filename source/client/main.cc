@@ -46,7 +46,6 @@
 #if defined(Q_OS_WINDOWS)
 #include <qt_windows.h>
 
-#include <fcntl.h>
 #include <io.h>
 #endif
 #include "base/auto_qpointer.h"
@@ -382,19 +381,29 @@ int main(int argc, char* argv[])
         }
 #endif
 #if defined(Q_OS_WINDOWS)
-        const HANDLE console_handle = reinterpret_cast<HANDLE>(_get_osfhandle(_fileno(stdout)));
-        DWORD console_mode = 0;
-        if (console_handle != INVALID_HANDLE_VALUE &&
-            GetConsoleMode(console_handle, &console_mode))
+        // QTextStream writes UTF-8 while an interactive console renders its own
+        // code page, so a Russian database name came out as gibberish. A console
+        // handle takes the Unicode line as is, a pipe or a file rejects
+        // WriteConsoleW and leaves nothing behind, so the UTF-8 output below
+        // stays byte for byte what it was.
+        const HANDLE console_handle =
+            reinterpret_cast<HANDLE>(_get_osfhandle(_fileno(stdout)));
+        if (console_handle != INVALID_HANDLE_VALUE)
         {
+            bool wrote_all = true;
             for (const Database::Info& info : Database::list())
             {
                 const QString line = info.id + QChar('\t') + info.name + QStringLiteral("\r\n");
                 DWORD written = 0;
-                WriteConsoleW(console_handle, line.constData(), static_cast<DWORD>(line.size()),
-                             &written, nullptr);
+                if (!WriteConsoleW(console_handle, line.constData(),
+                                   static_cast<DWORD>(line.size()), &written, nullptr))
+                {
+                    wrote_all = false;  // a failed call writes nothing
+                    break;
+                }
             }
-            return 0;
+            if (wrote_all)
+                return 0;
         }
 #endif
         QTextStream out(stdout);
