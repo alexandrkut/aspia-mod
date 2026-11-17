@@ -245,8 +245,7 @@ HostConfigApplier::Result HostConfigApplier::applySetUpdateConfig(const QJsonObj
 
     // apply
     settings.setUpdateServer(server);
-    if (!key_hex.isEmpty())
-        settings.setUpdatePublicKey(QByteArray::fromHex(key_hex.toLatin1()));
+    settings.setUpdatePublicKey(QByteArray::fromHex(key_hex.toLatin1()));
     settings.setUpdateChannel(channel);
     settings.setAutoUpdateEnabled(auto_update);
     settings.setUpdateCheckFrequency(freq);
@@ -262,7 +261,7 @@ HostConfigApplier::Result HostConfigApplier::applySetUpdateConfig(const QJsonObj
             check.updateChannel() != channel ||
             check.isAutoUpdateEnabled() != auto_update ||
             check.updateCheckFrequency() != freq ||
-            (!key_hex.isEmpty() && check.updatePublicKey().toHex() != key_hex.toLatin1()))
+            check.updatePublicKey().toHex() != key_hex.toLatin1())
         {
             LOG(ERROR) << "Update config read-back mismatch";
             result.error_code = "sync_failed";
@@ -954,7 +953,7 @@ HostConfigApplier::Result HostConfigApplier::applyFullConfig(const QJsonObject& 
             if (validateUrl(server) && (sys["update_public_key"].toString().isEmpty() || (key.size() == 32 && key.toHex() == sys["update_public_key"].toString().trimmed().toLower().toLatin1())))
             {
                 settings.setUpdateServer(server);
-                if (!sys["update_public_key"].toString().isEmpty())
+                if (sys.contains("update_public_key"))
                     settings.setUpdatePublicKey(key);
             }
         }

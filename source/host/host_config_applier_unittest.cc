@@ -78,3 +78,47 @@ TEST_F(HostConfigApplierTest, AddUserRejectsOneTimeName)
     HostConfigApplier::Result r = HostConfigApplier::apply("add_user", params, "admin");
     EXPECT_TRUE(r.error_code == "invalid_data" || r.error_code == "invalid_request");
 }
+
+
+//--------------------------------------------------------------------------------------------------
+TEST_F(HostConfigApplierTest, SetUpdateConfigClearsPublicKey)
+{
+    SystemSettings settings;
+    settings.setUpdatePublicKey(QByteArray::fromHex(QString("11").repeated(32).toLatin1()));
+    settings.sync();
+
+    QJsonObject params;
+    params["update_server"] = settings.updateServer().isEmpty() ? "http://example.com" : settings.updateServer();
+    params["update_public_key"] = "";
+    params["update_channel"] = settings.updateChannel().isEmpty() ? "stable" : settings.updateChannel();
+    params["auto_update_enabled"] = settings.isAutoUpdateEnabled();
+    params["update_check_frequency"] = settings.updateCheckFrequency();
+
+    HostConfigApplier::Result r = HostConfigApplier::apply("set_update_config", params, "admin");
+    EXPECT_EQ(r.error_code, "ok");
+
+    SystemSettings check;
+    EXPECT_TRUE(check.updatePublicKey().isEmpty());
+}
+
+//--------------------------------------------------------------------------------------------------
+TEST_F(HostConfigApplierTest, SetUpdateConfigOmitsPublicKeyLeavesStoredKey)
+{
+    SystemSettings settings;
+    const QByteArray key = QByteArray::fromHex(QString("22").repeated(32).toLatin1());
+    settings.setUpdatePublicKey(key);
+    settings.sync();
+
+    QJsonObject params;
+    params["update_server"] = settings.updateServer().isEmpty() ? "http://example.com" : settings.updateServer();
+    params["update_channel"] = settings.updateChannel().isEmpty() ? "stable" : settings.updateChannel();
+    params["auto_update_enabled"] = settings.isAutoUpdateEnabled();
+    params["update_check_frequency"] = settings.updateCheckFrequency();
+    // update_public_key intentionally omitted
+
+    HostConfigApplier::Result r = HostConfigApplier::apply("set_update_config", params, "admin");
+    EXPECT_EQ(r.error_code, "ok");
+
+    SystemSettings check;
+    EXPECT_EQ(check.updatePublicKey(), key);
+}
