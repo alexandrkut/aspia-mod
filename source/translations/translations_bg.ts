@@ -419,23 +419,23 @@
 <context>
     <name>AndroidMainWindow</name>
     <message>
-        <location filename="../client/android/main_window.cc" line="146"/>
-        <location filename="../client/android/main_window.cc" line="321"/>
-        <location filename="../client/android/main_window.cc" line="369"/>
+        <location filename="../client/android/main_window.cc" line="149"/>
+        <location filename="../client/android/main_window.cc" line="324"/>
+        <location filename="../client/android/main_window.cc" line="372"/>
         <source>Local</source>
         <translation>Локални</translation>
     </message>
     <message>
-        <location filename="../client/android/main_window.cc" line="147"/>
-        <location filename="../client/android/main_window.cc" line="325"/>
-        <location filename="../client/android/main_window.cc" line="389"/>
+        <location filename="../client/android/main_window.cc" line="150"/>
+        <location filename="../client/android/main_window.cc" line="328"/>
+        <location filename="../client/android/main_window.cc" line="392"/>
         <source>Remote</source>
         <translation>Отдалечени</translation>
     </message>
     <message>
-        <location filename="../client/android/main_window.cc" line="149"/>
-        <location filename="../client/android/main_window.cc" line="333"/>
-        <location filename="../client/android/main_window.cc" line="399"/>
+        <location filename="../client/android/main_window.cc" line="152"/>
+        <location filename="../client/android/main_window.cc" line="336"/>
+        <location filename="../client/android/main_window.cc" line="402"/>
         <location filename="../host/android/main_window.cc" line="84"/>
         <location filename="../host/android/main_window.cc" line="100"/>
         <location filename="../host/android/main_window.cc" line="390"/>
@@ -443,9 +443,9 @@
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../client/android/main_window.cc" line="490"/>
-        <location filename="../client/android/main_window.cc" line="773"/>
-        <location filename="../client/android/main_window.cc" line="779"/>
+        <location filename="../client/android/main_window.cc" line="493"/>
+        <location filename="../client/android/main_window.cc" line="776"/>
+        <location filename="../client/android/main_window.cc" line="782"/>
         <location filename="../host/android/main_window.cc" line="83"/>
         <location filename="../host/android/main_window.cc" line="99"/>
         <location filename="../host/android/main_window.cc" line="388"/>
@@ -453,49 +453,49 @@
         <translation>Връзка</translation>
     </message>
     <message>
-        <location filename="../client/android/main_window.cc" line="491"/>
+        <location filename="../client/android/main_window.cc" line="494"/>
         <source>The data of the host is damaged. Edit the host and enter it again.</source>
         <translation>Данните на хоста са повредени. Редактирайте хоста и ги въведете отново.</translation>
     </message>
     <message>
-        <location filename="../client/android/main_window.cc" line="148"/>
-        <location filename="../client/android/main_window.cc" line="329"/>
-        <location filename="../client/android/main_window.cc" line="379"/>
+        <location filename="../client/android/main_window.cc" line="151"/>
+        <location filename="../client/android/main_window.cc" line="332"/>
+        <location filename="../client/android/main_window.cc" line="382"/>
         <source>Router</source>
         <translation>Рутер</translation>
     </message>
     <message>
-        <location filename="../client/android/main_window.cc" line="716"/>
+        <location filename="../client/android/main_window.cc" line="719"/>
         <source>Update</source>
         <translation>Актуализиране</translation>
     </message>
     <message>
-        <location filename="../client/android/main_window.cc" line="717"/>
+        <location filename="../client/android/main_window.cc" line="720"/>
         <source>Version %1 is available.</source>
         <translation>Налична е версия %1.</translation>
     </message>
     <message>
-        <location filename="../client/android/main_window.cc" line="717"/>
+        <location filename="../client/android/main_window.cc" line="720"/>
         <source>Open</source>
         <translation>Отваряне</translation>
     </message>
     <message>
-        <location filename="../client/android/main_window.cc" line="766"/>
+        <location filename="../client/android/main_window.cc" line="769"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>Данните на рутера са повредени. Редактирайте рутера и ги въведете отново.</translation>
     </message>
     <message>
-        <location filename="../client/android/main_window.cc" line="768"/>
+        <location filename="../client/android/main_window.cc" line="771"/>
         <source>The host is reached through a router, but no router is set. Add a router or enter the address of the host instead of its ID.</source>
         <translation>Свързването с хоста става чрез рутер, но не е зададен рутер. Добавете рутер или въведете адреса на хоста вместо неговия ID.</translation>
     </message>
     <message>
-        <location filename="../client/android/main_window.cc" line="771"/>
+        <location filename="../client/android/main_window.cc" line="774"/>
         <source>Failed to read the router.</source>
         <translation>Неуспешно четене на рутера.</translation>
     </message>
     <message>
-        <location filename="../client/android/main_window.cc" line="780"/>
+        <location filename="../client/android/main_window.cc" line="783"/>
         <source>The router is turned off. Turn it on in the router settings to connect to this host.</source>
         <translation>Рутерът е изключен. Включете го в настройките на рутера, за да се свържете с този хост.</translation>
     </message>
@@ -1083,13 +1083,13 @@
     </message>
     <message>
         <location filename="../client/main.cc" line="458"/>
-        <location filename="../client/main.cc" line="493"/>
+        <location filename="../client/main.cc" line="496"/>
         <source>Unable to open the database &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="469"/>
-        <location filename="../client/main.cc" line="500"/>
+        <location filename="../client/main.cc" line="472"/>
+        <location filename="../client/main.cc" line="503"/>
         <source>Invalid master password.</source>
         <translation type="unfinished">Невалидна главна парола.</translation>
     </message>
@@ -1150,22 +1150,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/connect_request.cc" line="241"/>
+        <location filename="../client/connect_request.cc" line="256"/>
         <source>&quot;%1&quot; is neither an aspia:// link nor a host ID nor a host address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/connect_request.cc" line="260"/>
+        <location filename="../client/connect_request.cc" line="275"/>
         <source>--username requires --password as well.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/connect_request.cc" line="262"/>
+        <location filename="../client/connect_request.cc" line="277"/>
         <source>--password requires --username as well.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/connect_request.cc" line="273"/>
+        <location filename="../client/connect_request.cc" line="288"/>
         <source>--username and --password need a host to connect to (--connect or an aspia:// link).</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1180,12 +1180,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1605"/>
+        <location filename="../client/desktop/main_window.cc" line="1610"/>
         <source>Several hosts are named &quot;%1&quot;. Use the ID of the one you mean.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1628"/>
+        <location filename="../client/desktop/main_window.cc" line="1633"/>
         <source>&quot;%1&quot; is both the name of a host and the ID of another. Connect by the record ID of the host you mean.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1959,37 +1959,37 @@ Password: %2</source>
         <translation>Идентификационни данни на ОС</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_dialog.cc" line="56"/>
+        <location filename="../client/desktop/credentials/credential_dialog.cc" line="57"/>
         <source>Enter the user name, for example %1. On a computer in a domain, this is a domain account.</source>
         <translation>Въведете потребителското име, например %1. На компютър в домейн това е акаунт в домейна.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_dialog.cc" line="58"/>
+        <location filename="../client/desktop/credentials/credential_dialog.cc" line="59"/>
         <source>For an account of another domain, add the domain, for example %1 or %2.</source>
         <translation>За акаунт от друг домейн добавете домейна, например %1 или %2.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_dialog.cc" line="60"/>
+        <location filename="../client/desktop/credentials/credential_dialog.cc" line="61"/>
         <source>For a local account on a computer in a domain, add %1 before the name, for example %2.</source>
         <translation>За локален акаунт на компютър в домейн добавете %1 пред името, например %2.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_dialog.cc" line="64"/>
+        <location filename="../client/desktop/credentials/credential_dialog.cc" line="65"/>
         <source>Edit Credentials</source>
         <translation>Редактиране на идентификационни данни</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_dialog.cc" line="64"/>
+        <location filename="../client/desktop/credentials/credential_dialog.cc" line="65"/>
         <source>Add Credentials</source>
         <translation>Добавяне на идентификационни данни</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_dialog.cc" line="110"/>
+        <location filename="../client/desktop/credentials/credential_dialog.cc" line="111"/>
         <source>Name cannot be empty.</source>
         <translation>Името не може да бъде празно.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/credentials/credential_dialog.cc" line="118"/>
+        <location filename="../client/desktop/credentials/credential_dialog.cc" line="119"/>
         <source>Too long name. The maximum length of the name is %n characters.</source>
         <translation>
             <numerusform>Името е твърде дълго. Максималната дължина на името е %n знак.</numerusform>
@@ -1997,37 +1997,37 @@ Password: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_dialog.cc" line="132"/>
+        <location filename="../client/desktop/credentials/credential_dialog.cc" line="133"/>
         <source>Invalid user name.</source>
         <translation>Невалидно потребителско име.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_dialog.cc" line="141"/>
+        <location filename="../client/desktop/credentials/credential_dialog.cc" line="142"/>
         <source>The user name can not be empty and can contain only alphabet characters, numbers and &quot;_&quot;, &quot;-&quot;, &quot;.&quot; characters.</source>
         <translation>Потребителското име не може да бъде празно и може да съдържа само букви, цифри и знаците &quot;_&quot;, &quot;-&quot;, &quot;.&quot;.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_dialog.cc" line="150"/>
+        <location filename="../client/desktop/credentials/credential_dialog.cc" line="151"/>
         <source>Password cannot be empty.</source>
         <translation>Паролата не може да бъде празна.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_dialog.cc" line="168"/>
+        <location filename="../client/desktop/credentials/credential_dialog.cc" line="169"/>
         <source>Unable to add credentials</source>
         <translation>Неуспешно добавяне на идентификационни данни</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_dialog.cc" line="179"/>
+        <location filename="../client/desktop/credentials/credential_dialog.cc" line="180"/>
         <source>Unable to modify credentials</source>
         <translation>Неуспешна промяна на идентификационните данни</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_dialog.cc" line="209"/>
+        <location filename="../client/desktop/credentials/credential_dialog.cc" line="210"/>
         <source>Failed to read the credentials.</source>
         <translation>Неуспешно четене на идентификационните данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/credentials/credential_dialog.cc" line="223"/>
+        <location filename="../client/desktop/credentials/credential_dialog.cc" line="224"/>
         <source>The credentials are damaged. Enter them again.</source>
         <translation>Идентификационните данни са повредени. Въведете ги отново.</translation>
     </message>
@@ -2055,38 +2055,38 @@ Password: %2</source>
         <translation>Име</translation>
     </message>
     <message>
-        <location filename="../client/android/credential_editor.cc" line="61"/>
+        <location filename="../client/android/credential_editor.cc" line="62"/>
         <source>User Name</source>
         <translation>Потребителско име</translation>
     </message>
     <message>
-        <location filename="../client/android/credential_editor.cc" line="62"/>
+        <location filename="../client/android/credential_editor.cc" line="63"/>
         <source>Password</source>
         <translation>Парола</translation>
     </message>
     <message>
-        <location filename="../client/android/credential_editor.cc" line="71"/>
+        <location filename="../client/android/credential_editor.cc" line="72"/>
         <source>Save</source>
         <translation>Запазване</translation>
     </message>
     <message>
-        <location filename="../client/android/credential_editor.cc" line="74"/>
-        <location filename="../client/android/credential_editor.cc" line="225"/>
+        <location filename="../client/android/credential_editor.cc" line="75"/>
+        <location filename="../client/android/credential_editor.cc" line="226"/>
         <source>Delete</source>
         <translation>Изтриване</translation>
     </message>
     <message>
-        <location filename="../client/android/credential_editor.cc" line="148"/>
+        <location filename="../client/android/credential_editor.cc" line="149"/>
         <source>The credentials are damaged. Enter them again.</source>
         <translation>Идентификационните данни са повредени. Въведете ги отново.</translation>
     </message>
     <message>
-        <location filename="../client/android/credential_editor.cc" line="160"/>
+        <location filename="../client/android/credential_editor.cc" line="161"/>
         <source>Name cannot be empty.</source>
         <translation>Името не може да бъде празно.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/android/credential_editor.cc" line="167"/>
+        <location filename="../client/android/credential_editor.cc" line="168"/>
         <source>Too long name. The maximum length of the name is %n characters.</source>
         <translation>
             <numerusform>Името е твърде дълго. Максималната дължина на името е %n знак.</numerusform>
@@ -2094,33 +2094,33 @@ Password: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/android/credential_editor.cc" line="180"/>
-        <location filename="../client/android/credential_editor.cc" line="188"/>
+        <location filename="../client/android/credential_editor.cc" line="181"/>
+        <location filename="../client/android/credential_editor.cc" line="189"/>
         <source>Invalid user name.</source>
         <translation>Невалидно потребителско име.</translation>
     </message>
     <message>
-        <location filename="../client/android/credential_editor.cc" line="196"/>
+        <location filename="../client/android/credential_editor.cc" line="197"/>
         <source>Password cannot be empty.</source>
         <translation>Паролата не може да бъде празна.</translation>
     </message>
     <message>
-        <location filename="../client/android/credential_editor.cc" line="214"/>
+        <location filename="../client/android/credential_editor.cc" line="215"/>
         <source>Failed to save the credentials.</source>
         <translation>Неуспешно запазване на идентификационните данни.</translation>
     </message>
     <message>
-        <location filename="../client/android/credential_editor.cc" line="224"/>
+        <location filename="../client/android/credential_editor.cc" line="225"/>
         <source>Delete Credentials</source>
         <translation>Изтриване на идентификационни данни</translation>
     </message>
     <message>
-        <location filename="../client/android/credential_editor.cc" line="225"/>
+        <location filename="../client/android/credential_editor.cc" line="226"/>
         <source>Delete the credentials &quot;%1&quot;?</source>
         <translation>Да се изтрият ли идентификационните данни &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../client/android/credential_editor.cc" line="232"/>
+        <location filename="../client/android/credential_editor.cc" line="233"/>
         <source>Failed to delete the credentials.</source>
         <translation>Неуспешно изтриване на идентификационните данни.</translation>
     </message>
@@ -4429,12 +4429,12 @@ Credentials replaced: %2</source>
         <translation>Добавяне на група</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_group_dialog.cc" line="82"/>
+        <location filename="../client/desktop/management/local_group_dialog.cc" line="85"/>
         <source>Name cannot be empty.</source>
         <translation>Името не може да бъде празно.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/local_group_dialog.cc" line="90"/>
+        <location filename="../client/desktop/management/local_group_dialog.cc" line="93"/>
         <source>Too long name. The maximum length of the name is %n characters.</source>
         <translation>
             <numerusform>Името е твърде дълго. Максималната дължина на името е %n знак.</numerusform>
@@ -4442,7 +4442,7 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/local_group_dialog.cc" line="101"/>
+        <location filename="../client/desktop/management/local_group_dialog.cc" line="104"/>
         <source>Too long comment. The maximum length of the comment is %n characters.</source>
         <translation>
             <numerusform>Коментарът е твърде дълъг. Максималната дължина на коментара е %n знак.</numerusform>
@@ -4450,33 +4450,33 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_group_dialog.cc" line="114"/>
-        <location filename="../client/desktop/management/local_group_dialog.cc" line="185"/>
+        <location filename="../client/desktop/management/local_group_dialog.cc" line="117"/>
+        <location filename="../client/desktop/management/local_group_dialog.cc" line="188"/>
         <source>Failed to read the list of groups.</source>
         <translation>Неуспешно четене на списъка с групи.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_group_dialog.cc" line="123"/>
+        <location filename="../client/desktop/management/local_group_dialog.cc" line="126"/>
         <source>A group with this name already exists in the selected parent group.</source>
         <translation>Група с това име вече съществува в избраната родителска група.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_group_dialog.cc" line="141"/>
+        <location filename="../client/desktop/management/local_group_dialog.cc" line="144"/>
         <source>Unable to add group</source>
         <translation>Неуспешно добавяне на група</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_group_dialog.cc" line="150"/>
+        <location filename="../client/desktop/management/local_group_dialog.cc" line="153"/>
         <source>Unable to modify group</source>
         <translation>Неуспешна промяна на групата</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_group_dialog.cc" line="170"/>
+        <location filename="../client/desktop/management/local_group_dialog.cc" line="173"/>
         <source>Failed to read the group.</source>
         <translation>Неуспешно четене на групата.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_group_dialog.cc" line="201"/>
+        <location filename="../client/desktop/management/local_group_dialog.cc" line="204"/>
         <source>Local</source>
         <translation>Локални</translation>
     </message>
@@ -4489,28 +4489,28 @@ Credentials replaced: %2</source>
         <translation>Име</translation>
     </message>
     <message>
-        <location filename="../client/android/local_group_editor.cc" line="49"/>
+        <location filename="../client/android/local_group_editor.cc" line="50"/>
         <source>Comment</source>
         <translation>Коментар</translation>
     </message>
     <message>
-        <location filename="../client/android/local_group_editor.cc" line="57"/>
+        <location filename="../client/android/local_group_editor.cc" line="59"/>
         <source>Save</source>
         <translation>Запазване</translation>
     </message>
     <message>
-        <location filename="../client/android/local_group_editor.cc" line="60"/>
-        <location filename="../client/android/local_group_editor.cc" line="175"/>
+        <location filename="../client/android/local_group_editor.cc" line="62"/>
+        <location filename="../client/android/local_group_editor.cc" line="177"/>
         <source>Delete</source>
         <translation>Изтриване</translation>
     </message>
     <message>
-        <location filename="../client/android/local_group_editor.cc" line="132"/>
+        <location filename="../client/android/local_group_editor.cc" line="134"/>
         <source>Name cannot be empty.</source>
         <translation>Името не може да бъде празно.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/android/local_group_editor.cc" line="139"/>
+        <location filename="../client/android/local_group_editor.cc" line="141"/>
         <source>Too long name. The maximum length of the name is %n characters.</source>
         <translation>
             <numerusform>Името е твърде дълго. Максималната дължина на името е %n знак.</numerusform>
@@ -4518,7 +4518,7 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/android/local_group_editor.cc" line="148"/>
+        <location filename="../client/android/local_group_editor.cc" line="150"/>
         <source>Too long comment. The maximum length of the comment is %n characters.</source>
         <translation>
             <numerusform>Коментарът е твърде дълъг. Максималната дължина на коментара е %n знак.</numerusform>
@@ -4526,22 +4526,22 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/android/local_group_editor.cc" line="164"/>
+        <location filename="../client/android/local_group_editor.cc" line="166"/>
         <source>Failed to save the group.</source>
         <translation>Неуспешно запазване на групата.</translation>
     </message>
     <message>
-        <location filename="../client/android/local_group_editor.cc" line="174"/>
+        <location filename="../client/android/local_group_editor.cc" line="176"/>
         <source>Delete Group</source>
         <translation>Изтриване на група</translation>
     </message>
     <message>
-        <location filename="../client/android/local_group_editor.cc" line="175"/>
+        <location filename="../client/android/local_group_editor.cc" line="177"/>
         <source>Delete the group &quot;%1&quot;?</source>
         <translation>Да се изтрие ли групата &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../client/android/local_group_editor.cc" line="182"/>
+        <location filename="../client/android/local_group_editor.cc" line="184"/>
         <source>Failed to delete the group.</source>
         <translation>Неуспешно изтриване на групата.</translation>
     </message>
@@ -4627,12 +4627,12 @@ Credentials replaced: %2</source>
         <translation>Добавяне на хост</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="129"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="132"/>
         <source>Name cannot be empty.</source>
         <translation>Името не може да бъде празно.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="137"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="140"/>
         <source>Too long name. The maximum length of the name is %n characters.</source>
         <translation>
             <numerusform>Името е твърде дълго. Максималната дължина на името е %n знак.</numerusform>
@@ -4640,22 +4640,22 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="148"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="151"/>
         <source>An invalid host address was entered.</source>
         <translation>Въведен е невалиден адрес на хоста.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="160"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="163"/>
         <source>The user name can not be empty and can contain only alphabet characters, numbers and &quot;_&quot;, &quot;-&quot;, &quot;.&quot; characters.</source>
         <translation>Потребителското име не може да бъде празно и може да съдържа само букви, цифри и знаците &quot;_&quot;, &quot;-&quot;, &quot;.&quot;.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="169"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="172"/>
         <source>Enter both the user name and the password, or leave both empty.</source>
         <translation>Въведете и потребителското име, и паролата, или оставете и двете празни.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="177"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="180"/>
         <source>Too long comment. The maximum length of the comment is %n characters.</source>
         <translation>
             <numerusform>Коментарът е твърде дълъг. Максималната дължина на коментара е %n знак.</numerusform>
@@ -4663,57 +4663,57 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="190"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="193"/>
         <source>Failed to read data from the local database.</source>
         <translation>Неуспешно четене на данни от локалната база данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="199"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="202"/>
         <source>A host with this name already exists in the selected group.</source>
         <translation>Хост с това име вече съществува в избраната група.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="223"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="226"/>
         <source>Unable to add host</source>
         <translation>Неуспешно добавяне на хост</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="233"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="236"/>
         <source>Unable to modify host</source>
         <translation>Неуспешна промяна на хоста</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="253"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="256"/>
         <source>Failed to read the list of credentials.</source>
         <translation>Неуспешно четене на списъка с идентификационни данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="276"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="279"/>
         <source>Failed to read the list of profiles.</source>
         <translation>Неуспешно четене на списъка с профили.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="289"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="292"/>
         <source>Default</source>
         <translation>По подразбиране</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="297"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="300"/>
         <source>Failed to read the list of groups.</source>
         <translation>Неуспешно четене на списъка с групи.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="313"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="316"/>
         <source>Local</source>
         <translation>Локални</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="325"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="328"/>
         <source>Failed to retrieve host information from the local database.</source>
         <translation>Неуспешно извличане на информацията за хоста от локалната база данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/local_host_dialog.cc" line="360"/>
+        <location filename="../client/desktop/management/local_host_dialog.cc" line="363"/>
         <source>The data of the host is damaged. Enter it again.</source>
         <translation>Данните на хоста са повредени. Въведете ги отново.</translation>
     </message>
@@ -4731,65 +4731,65 @@ Credentials replaced: %2</source>
         <translation>Име</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="63"/>
+        <location filename="../client/android/local_host_editor.cc" line="64"/>
         <source>Address / ID</source>
         <translation>Адрес / ID</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="64"/>
+        <location filename="../client/android/local_host_editor.cc" line="65"/>
         <source>User Name</source>
         <translation>Потребителско име</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="65"/>
+        <location filename="../client/android/local_host_editor.cc" line="67"/>
         <source>Password</source>
         <translation>Парола</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="67"/>
+        <location filename="../client/android/local_host_editor.cc" line="69"/>
         <source>Credentials</source>
         <translation>Идентификационни данни</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="69"/>
+        <location filename="../client/android/local_host_editor.cc" line="71"/>
         <source>Comment</source>
         <translation>Коментар</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="77"/>
+        <location filename="../client/android/local_host_editor.cc" line="80"/>
         <source>Save</source>
         <translation>Запазване</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="80"/>
-        <location filename="../client/android/local_host_editor.cc" line="279"/>
+        <location filename="../client/android/local_host_editor.cc" line="83"/>
+        <location filename="../client/android/local_host_editor.cc" line="282"/>
         <source>Delete</source>
         <translation>Изтриване</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="170"/>
+        <location filename="../client/android/local_host_editor.cc" line="173"/>
         <source>The data of the host is damaged. Enter it again.</source>
         <translation>Данните на хоста са повредени. Въведете ги отново.</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="196"/>
-        <location filename="../client/android/local_host_editor.cc" line="304"/>
-        <location filename="../client/android/local_host_editor.cc" line="341"/>
+        <location filename="../client/android/local_host_editor.cc" line="199"/>
+        <location filename="../client/android/local_host_editor.cc" line="307"/>
+        <location filename="../client/android/local_host_editor.cc" line="344"/>
         <source>Failed to read data from the local database.</source>
         <translation>Неуспешно четене на данни от локалната база данни.</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="68"/>
+        <location filename="../client/android/local_host_editor.cc" line="70"/>
         <source>Profile</source>
         <translation>Профил</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="203"/>
+        <location filename="../client/android/local_host_editor.cc" line="206"/>
         <source>Name cannot be empty.</source>
         <translation>Името не може да бъде празно.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/android/local_host_editor.cc" line="210"/>
+        <location filename="../client/android/local_host_editor.cc" line="213"/>
         <source>Too long name. The maximum length of the name is %n characters.</source>
         <translation>
             <numerusform>Името е твърде дълго. Максималната дължина на името е %n знак.</numerusform>
@@ -4797,7 +4797,7 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/android/local_host_editor.cc" line="219"/>
+        <location filename="../client/android/local_host_editor.cc" line="222"/>
         <source>Too long comment. The maximum length of the comment is %n characters.</source>
         <translation>
             <numerusform>Коментарът е твърде дълъг. Максималната дължина на коментара е %n знак.</numerusform>
@@ -4805,42 +4805,42 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="229"/>
+        <location filename="../client/android/local_host_editor.cc" line="232"/>
         <source>An invalid host address was entered.</source>
         <translation>Въведен е невалиден адрес на хоста.</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="240"/>
+        <location filename="../client/android/local_host_editor.cc" line="243"/>
         <source>The user name can not be empty and can contain only alphabet characters, numbers and &quot;_&quot;, &quot;-&quot;, &quot;.&quot; characters.</source>
         <translation>Потребителското име не може да бъде празно и може да съдържа само букви, цифри и знаците &quot;_&quot;, &quot;-&quot;, &quot;.&quot;.</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="249"/>
+        <location filename="../client/android/local_host_editor.cc" line="252"/>
         <source>Enter both the user name and the password, or leave both empty.</source>
         <translation>Въведете и потребителското име, и паролата, или оставете и двете празни.</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="268"/>
+        <location filename="../client/android/local_host_editor.cc" line="271"/>
         <source>Failed to save the host.</source>
         <translation>Неуспешно запазване на хоста.</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="278"/>
+        <location filename="../client/android/local_host_editor.cc" line="281"/>
         <source>Delete Host</source>
         <translation>Изтриване на хост</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="279"/>
+        <location filename="../client/android/local_host_editor.cc" line="282"/>
         <source>Delete the host &quot;%1&quot;?</source>
         <translation>Да се изтрие ли хостът &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="286"/>
+        <location filename="../client/android/local_host_editor.cc" line="289"/>
         <source>Failed to delete the host.</source>
         <translation>Неуспешно изтриване на хоста.</translation>
     </message>
     <message>
-        <location filename="../client/android/local_host_editor.cc" line="353"/>
+        <location filename="../client/android/local_host_editor.cc" line="356"/>
         <source>Default</source>
         <translation>По подразбиране</translation>
     </message>
@@ -5045,7 +5045,7 @@ Credentials replaced: %2</source>
     <name>MainWindow</name>
     <message>
         <location filename="../client/desktop/main_window.ui" line="20"/>
-        <location filename="../client/desktop/main_window.cc" line="599"/>
+        <location filename="../client/desktop/main_window.cc" line="604"/>
         <source>Aspia Client</source>
         <translation>Клиент Aspia</translation>
     </message>
@@ -5156,107 +5156,107 @@ Credentials replaced: %2</source>
         <translation>Търсене...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="230"/>
+        <location filename="../client/desktop/main_window.cc" line="231"/>
         <source>The MCP connector is already in use by another window of the application.</source>
         <translation>MCP конекторът вече се използва от друг прозорец на приложението.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="232"/>
+        <location filename="../client/desktop/main_window.cc" line="233"/>
         <source>Unable to turn on the MCP connector.</source>
         <translation>Неуспешно включване на MCP конектора.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="255"/>
+        <location filename="../client/desktop/main_window.cc" line="256"/>
         <source>Management</source>
         <translation>Управление</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="298"/>
+        <location filename="../client/desktop/main_window.cc" line="303"/>
         <source>Are you sure you want to close the application?</source>
         <translation>Наистина ли искате да затворите приложението?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="492"/>
+        <location filename="../client/desktop/main_window.cc" line="497"/>
         <source>Credentials</source>
         <translation>Идентификационни данни</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="535"/>
+        <location filename="../client/desktop/main_window.cc" line="540"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="545"/>
+        <location filename="../client/desktop/main_window.cc" line="550"/>
         <source>Close all sessions to change the database.</source>
         <translation>Затворете всички сесии, за да смените базата данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="551"/>
+        <location filename="../client/desktop/main_window.cc" line="556"/>
         <source>Close all dialogs to change the database.</source>
         <translation>Затворете всички диалогови прозорци, за да смените базата данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="566"/>
+        <location filename="../client/desktop/main_window.cc" line="571"/>
         <source>Close all sessions to lock the application.</source>
         <translation>Затворете всички сесии, за да заключите приложението.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="572"/>
+        <location filename="../client/desktop/main_window.cc" line="577"/>
         <source>Close all dialogs to lock the application.</source>
         <translation>Затворете всички диалогови прозорци, за да заключите приложението.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="592"/>
+        <location filename="../client/desktop/main_window.cc" line="597"/>
         <source>Connect to a host by its ID from the command line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="593"/>
+        <location filename="../client/desktop/main_window.cc" line="598"/>
         <source>The icon of the screen of all the monitors at once</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="594"/>
+        <location filename="../client/desktop/main_window.cc" line="599"/>
         <source>Remote management of host users and update settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="595"/>
+        <location filename="../client/desktop/main_window.cc" line="600"/>
         <source>Full host configuration from a file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="596"/>
+        <location filename="../client/desktop/main_window.cc" line="601"/>
         <source>Bulk operations on multiple hosts at once</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="964"/>
+        <location filename="../client/desktop/main_window.cc" line="969"/>
         <source>Unknown application</source>
         <translation>Неизвестно приложение</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="967"/>
+        <location filename="../client/desktop/main_window.cc" line="972"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>MCP конектор. Свързани: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="968"/>
+        <location filename="../client/desktop/main_window.cc" line="973"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - ИИ е свързан</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1454"/>
+        <location filename="../client/desktop/main_window.cc" line="1459"/>
         <source>A host named by its address has no record of it in the address book, and there are no stored credentials to use. Give the user name and the password with --username and --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1786"/>
+        <location filename="../client/desktop/main_window.cc" line="1791"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1792"/>
+        <location filename="../client/desktop/main_window.cc" line="1797"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6378,63 +6378,63 @@ Credentials replaced: %2</source>
         <translation>Име</translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="66"/>
+        <location filename="../client/android/profile_editor.cc" line="67"/>
         <source>Quality</source>
         <translation>Качество</translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="67"/>
+        <location filename="../client/android/profile_editor.cc" line="68"/>
         <source>Automatic</source>
         <translation>Автоматично</translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="68"/>
+        <location filename="../client/android/profile_editor.cc" line="69"/>
         <source>Low</source>
         <translation>Ниско</translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="69"/>
+        <location filename="../client/android/profile_editor.cc" line="70"/>
         <source>Medium</source>
         <translation>Средно</translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="70"/>
+        <location filename="../client/android/profile_editor.cc" line="71"/>
         <source>High</source>
         <translation>Високо</translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="76"/>
+        <location filename="../client/android/profile_editor.cc" line="77"/>
         <source>Save</source>
         <translation>Запазване</translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="78"/>
-        <location filename="../client/android/profile_editor.cc" line="302"/>
+        <location filename="../client/android/profile_editor.cc" line="79"/>
+        <location filename="../client/android/profile_editor.cc" line="303"/>
         <source>Delete</source>
         <translation>Изтриване</translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="90"/>
+        <location filename="../client/android/profile_editor.cc" line="91"/>
         <source>Remote Desktop</source>
         <translation>Отдалечен работен плот</translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="102"/>
+        <location filename="../client/android/profile_editor.cc" line="103"/>
         <source>UDP Connections</source>
         <translation>UDP връзки</translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="191"/>
+        <location filename="../client/android/profile_editor.cc" line="192"/>
         <source>The profile is damaged. Fix or delete it.</source>
         <translation>Профилът е повреден. Поправете го или го изтрийте.</translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="213"/>
+        <location filename="../client/android/profile_editor.cc" line="214"/>
         <source>Name cannot be empty.</source>
         <translation>Името не може да бъде празно.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/android/profile_editor.cc" line="220"/>
+        <location filename="../client/android/profile_editor.cc" line="221"/>
         <source>Too long name. The maximum length of the name is %n characters.</source>
         <translation>
             <numerusform>Името е твърде дълго. Максималната дължина на името е %n знак.</numerusform>
@@ -6442,32 +6442,32 @@ Credentials replaced: %2</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="230"/>
+        <location filename="../client/android/profile_editor.cc" line="231"/>
         <source>Default</source>
         <translation>По подразбиране</translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="242"/>
+        <location filename="../client/android/profile_editor.cc" line="243"/>
         <source>A profile with this name already exists.</source>
         <translation>Профил с това име вече съществува.</translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="291"/>
+        <location filename="../client/android/profile_editor.cc" line="292"/>
         <source>Failed to save the profile.</source>
         <translation>Неуспешно запазване на профила.</translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="301"/>
+        <location filename="../client/android/profile_editor.cc" line="302"/>
         <source>Delete Profile</source>
         <translation>Изтриване на профил</translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="302"/>
+        <location filename="../client/android/profile_editor.cc" line="303"/>
         <source>Delete the profile &quot;%1&quot;?</source>
         <translation>Да се изтрие ли профилът &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../client/android/profile_editor.cc" line="309"/>
+        <location filename="../client/android/profile_editor.cc" line="310"/>
         <source>Failed to delete the profile.</source>
         <translation>Неуспешно изтриване на профила.</translation>
     </message>
@@ -6812,27 +6812,27 @@ Credentials replaced: %2</source>
         <translation>Всички типове сесии</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_access_log_widget.cc" line="281"/>
+        <location filename="../client/desktop/management/router_access_log_widget.cc" line="280"/>
         <source>Save File</source>
         <translation>Запазване на файл</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_access_log_widget.cc" line="281"/>
+        <location filename="../client/desktop/management/router_access_log_widget.cc" line="280"/>
         <source>JSON files (*.json)</source>
         <translation>JSON файлове (*.json)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_access_log_widget.cc" line="292"/>
+        <location filename="../client/desktop/management/router_access_log_widget.cc" line="291"/>
         <source>Could not open file for writing.</source>
         <translation>Неуспешно отваряне на файла за запис.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_access_log_widget.cc" line="327"/>
+        <location filename="../client/desktop/management/router_access_log_widget.cc" line="326"/>
         <source>Unable to write file.</source>
         <translation>Неуспешно записване на файла.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_access_log_widget.cc" line="537"/>
+        <location filename="../client/desktop/management/router_access_log_widget.cc" line="536"/>
         <source>%n entry(s)</source>
         <translation>
             <numerusform>%n запис</numerusform>
@@ -6999,38 +6999,38 @@ Credentials replaced: %2</source>
         <translation>Потребителско име</translation>
     </message>
     <message>
-        <location filename="../client/android/router_editor.cc" line="56"/>
+        <location filename="../client/android/router_editor.cc" line="57"/>
         <source>Password</source>
         <translation>Парола</translation>
     </message>
     <message>
-        <location filename="../client/android/router_editor.cc" line="65"/>
+        <location filename="../client/android/router_editor.cc" line="66"/>
         <source>Save</source>
         <translation>Запазване</translation>
     </message>
     <message>
-        <location filename="../client/android/router_editor.cc" line="127"/>
+        <location filename="../client/android/router_editor.cc" line="128"/>
         <source>The data of the router is damaged. Enter it again.</source>
         <translation>Данните на рутера са повредени. Въведете ги отново.</translation>
     </message>
     <message>
-        <location filename="../client/android/router_editor.cc" line="140"/>
+        <location filename="../client/android/router_editor.cc" line="141"/>
         <source>An invalid router address was entered.</source>
         <translation>Въведен е невалиден адрес на рутера.</translation>
     </message>
     <message>
-        <location filename="../client/android/router_editor.cc" line="149"/>
+        <location filename="../client/android/router_editor.cc" line="150"/>
         <source>The user name can not be empty and can contain only alphabet characters, numbers and &quot;_&quot;, &quot;-&quot;, &quot;.&quot; characters.</source>
         <translation>Потребителското име не може да бъде празно и може да съдържа само букви, цифри и знаците &quot;_&quot;, &quot;-&quot;, &quot;.&quot;.</translation>
     </message>
     <message>
-        <location filename="../client/android/router_editor.cc" line="159"/>
+        <location filename="../client/android/router_editor.cc" line="160"/>
         <source>Password cannot be empty.</source>
         <translation>Паролата не може да бъде празна.</translation>
     </message>
     <message>
-        <location filename="../client/android/router_editor.cc" line="184"/>
-        <location filename="../client/android/router_editor.cc" line="193"/>
+        <location filename="../client/android/router_editor.cc" line="185"/>
+        <location filename="../client/android/router_editor.cc" line="194"/>
         <source>Failed to save the router.</source>
         <translation>Неуспешно запазване на рутера.</translation>
     </message>
@@ -7647,82 +7647,82 @@ Detail: %1</source>
         <translation>Коментар:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="200"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="202"/>
         <source>Failed to get list of spaces.</source>
         <translation>Неуспешно получаване на списъка с пространства.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="312"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="314"/>
         <source>Not assigned</source>
         <translation>Не е присвоено</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="297"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="299"/>
         <source>Failed to get list of groups.</source>
         <translation>Неуспешно получаване на списъка с групи.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="96"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="98"/>
         <source>Notify about viewing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="97"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="99"/>
         <source>Notify about control</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="98"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="100"/>
         <source>Notify about files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="232"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="234"/>
         <source>Spaces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="285"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="287"/>
         <source>Spaces... (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="371"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="373"/>
         <source>Enter both the user name and the password, or leave both empty.</source>
         <translation>Въведете и потребителското име, и паролата, или оставете и двете празни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="402"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="404"/>
         <source>Failed to save the credentials.</source>
         <translation>Неуспешно запазване на идентификационните данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="408"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="410"/>
         <source>Failed to save the profile.</source>
         <translation>Неуспешно запазване на профила.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="455"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="457"/>
         <source>Failed to read the list of profiles.</source>
         <translation>Неуспешно четене на списъка с профили.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="468"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="470"/>
         <source>Default</source>
         <translation>По подразбиране</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="482"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="484"/>
         <source>Failed to read the list of credentials.</source>
         <translation>Неуспешно четене на списъка с идентификационни данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="533"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="535"/>
         <source>Failed to read the credentials of the host.</source>
         <translation>Неуспешно четене на идентификационните данни на хоста.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="538"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="540"/>
         <source>The credentials of the host are damaged. Enter them again.</source>
         <translation>Идентификационните данни на хоста са повредени. Въведете ги отново.</translation>
     </message>
@@ -8045,12 +8045,12 @@ Detail: %1</source>
         <translation>Без пространство</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="375"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="374"/>
         <source>Are you sure you want to disconnect host &quot;%1&quot;?</source>
         <translation>Наистина ли искате да прекъснете връзката с хоста &quot;%1&quot;?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="377"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="376"/>
         <source>Are you sure you want to disconnect %n hosts?</source>
         <translation>
             <numerusform>Наистина ли искате да прекъснете връзката с %n хост?</numerusform>
@@ -8058,7 +8058,7 @@ Detail: %1</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="388"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="387"/>
         <source>Failed to disconnect %n of the selected hosts.</source>
         <translation>
             <numerusform>Неуспешно прекъсване на връзката с %n от избраните хостове.</numerusform>
@@ -8066,12 +8066,12 @@ Detail: %1</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="404"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="403"/>
         <source>Deleting a host will result in all its configuration for connecting to the router being deleted, and the application will be uninstalled on the host. This operation is irreversible. Are you sure you want to do this?</source>
         <translation>Изтриването на хост ще доведе до изтриване на цялата му конфигурация за свързване с рутера, а приложението на хоста ще бъде деинсталирано. Тази операция е необратима. Наистина ли искате да направите това?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="409"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="408"/>
         <source>%n hosts will be deleted.</source>
         <translation>
             <numerusform>%n хост ще бъде изтрит.</numerusform>
@@ -8079,7 +8079,7 @@ Detail: %1</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="420"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="419"/>
         <source>Failed to remove %n of the selected hosts.</source>
         <translation>
             <numerusform>Неуспешно изтриване на %n от избраните хостове.</numerusform>
@@ -8087,7 +8087,7 @@ Detail: %1</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="437"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="436"/>
         <source>Failed to check for updates on %n of the selected hosts.</source>
         <translation>
             <numerusform>Неуспешна проверка за актуализации на %n от избраните хостове.</numerusform>
@@ -8095,46 +8095,46 @@ Detail: %1</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="504"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1688"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="503"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1687"/>
         <source>Open host configuration file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="505"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1690"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="504"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1689"/>
         <source>JSON files (*.json);;All files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="512"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1697"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="511"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1696"/>
         <source>Cannot open file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="523"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1707"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="522"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1706"/>
         <source>Invalid JSON: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="531"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="530"/>
         <source>No session to router.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="545"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="544"/>
         <source>Configuration applied successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="547"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="546"/>
         <source>Failed to apply: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="894"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="893"/>
         <source>%n host(s) (%1 online)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -8142,226 +8142,226 @@ Detail: %1</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1112"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1187"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1111"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1186"/>
         <source>Cancel</source>
         <translation type="unfinished">Отказ</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1186"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1185"/>
         <source>Reading user lists...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1311"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1310"/>
         <source>Failed to create user credentials.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1338"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1337"/>
         <source>Add user &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1342"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1601"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1772"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1341"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1600"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1771"/>
         <source>Host is offline.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1354"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1353"/>
         <source>List unreadable (%1), will try anyway.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1376"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1375"/>
         <source>Already exists, skipped.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1392"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1391"/>
         <source>Add user on hosts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1468"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1467"/>
         <source>Remove user &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1487"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1486"/>
         <source>Last enabled user, the host will refuse.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1518"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1517"/>
         <source>Remove user from hosts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1543"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1542"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1560"/>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="1561"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1562"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1564"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1563"/>
         <source>(unknown)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1544"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1621"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1623"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1629"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1631"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1543"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1620"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1622"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1628"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1630"/>
         <source>(default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1558"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1557"/>
         <source>Hosts in run: %1. Channels: %2. Servers: %3. Auto-update on: %4 of %5. Frequencies (days): %6.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1585"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1584"/>
         <source>No fields selected, nothing to do.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1600"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1599"/>
         <source>Set selected fields.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1610"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1609"/>
         <source>Set selected fields (current settings unknown).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1620"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1619"/>
         <source>server: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1628"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1627"/>
         <source>public key: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1629"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1631"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1628"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1630"/>
         <source>(set)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1636"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1635"/>
         <source>channel: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1641"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1640"/>
         <source>auto-update: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1641"/>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="1642"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1643"/>
         <source>on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1641"/>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="1642"/>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1643"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1648"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1647"/>
         <source>frequency: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1655"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1654"/>
         <source>No changes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1656"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1655"/>
         <source>Already matching, skipped.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1677"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1676"/>
         <source>Update configuration on hosts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1713"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1712"/>
         <source>Not a host configuration file (no system/database sections).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1730"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1729"/>
         <source>File: %1
 Sections: %2. Users in file: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1732"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1731"/>
         <source>(kept)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1759"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1758"/>
         <source>Dry run on hosts...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1771"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1770"/>
         <source>Apply full config.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1784"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1783"/>
         <source>Apply full config (dry run %1, will try anyway).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1797"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1796"/>
         <source>users: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1804"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1803"/>
         <source>system: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1809"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1808"/>
         <source>Apply full config (no visible diff).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1828"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1827"/>
         <source>Full configuration on hosts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="959"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="958"/>
         <source>Save File</source>
         <translation>Запазване на файл</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="959"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="958"/>
         <source>JSON files (*.json)</source>
         <translation>JSON файлове (*.json)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="970"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="969"/>
         <source>Could not open file for writing.</source>
         <translation>Неуспешно отваряне на файла за запис.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1017"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1016"/>
         <source>Unable to write file.</source>
         <translation>Неуспешно записване на файла.</translation>
     </message>
@@ -8433,7 +8433,7 @@ Sections: %2. Users in file: %3.</source>
 <context>
     <name>RouterSession</name>
     <message>
-        <location filename="../client/router/router_session.cc" line="165"/>
+        <location filename="../client/router/router_session.cc" line="155"/>
         <source>The router accepted the new password, but the record was not updated.</source>
         <translation>Рутерът прие новата парола, но записът не беше актуализиран.</translation>
     </message>
@@ -8610,57 +8610,57 @@ Sections: %2. Users in file: %3.</source>
         <translation>Излизане от всички</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="200"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="202"/>
         <source>Failed to get list of users.</source>
         <translation>Неуспешно получаване на списъка с потребители.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="228"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="230"/>
         <source>The user was deleted from another console.</source>
         <translation>Потребителят е изтрит от друга конзола.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="329"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="331"/>
         <source>Resetting two-factor authentication will sign you out of all sessions and force you to enroll again on next login. Continue?</source>
         <translation>Нулирането на двуфакторното удостоверяване ще доведе до излизането ви от всички сесии и ще изисква ново регистриране при следващото влизане. Да се продължи ли?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="331"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="333"/>
         <source>Resetting two-factor authentication will sign this user out of all sessions and force them to enroll again on next login. Continue?</source>
         <translation>Нулирането на двуфакторното удостоверяване ще доведе до излизането на този потребител от всички сесии и ще изисква ново регистриране при следващото влизане. Да се продължи ли?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="382"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="384"/>
         <source>This is the token of your current session. Revoking it will disconnect you. Continue?</source>
         <translation>Това е токенът на текущата ви сесия. Отнемането му ще прекъсне връзката ви. Да се продължи ли?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="383"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="385"/>
         <source>Are you sure you want to sign this user out of this session?</source>
         <translation>Наистина ли искате да прекратите тази сесия на потребителя?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="408"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="410"/>
         <source>Are you sure you want to sign this user out of all sessions?</source>
         <translation>Наистина ли искате да прекратите всички сесии на този потребител?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="494"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="496"/>
         <source>The email address is invalid.</source>
         <translation>Имейл адресът е невалиден.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="509"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="511"/>
         <source>The user name can not be empty and can contain only alphabet characters, numbers and _, -, ., @ characters. It can not consist of digits only.</source>
         <translation>Потребителското име не може да бъде празно и може да съдържа само букви, цифри и знаците _, -, ., @. Не може да се състои само от цифри.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="522"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="524"/>
         <source>The passwords you entered do not match.</source>
         <translation>Въведените пароли не съвпадат.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="533"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="535"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>Паролата не може да бъде по-кратка от %n знак.</numerusform>
@@ -8668,7 +8668,7 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="534"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="536"/>
         <source>The password can not be longer than %n characters.</source>
         <translation>
             <numerusform>Паролата не може да бъде по-дълга от %n знак.</numerusform>
@@ -8676,12 +8676,12 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="545"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="547"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>Въведената парола не отговаря на изискванията за защита!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="546"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="548"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>Паролата трябва да съдържа малки и главни букви, цифри и не трябва да бъде по-кратка от %n знак.</numerusform>
@@ -8689,52 +8689,52 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="550"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="552"/>
         <source>Do you want to enter a different password?</source>
         <translation>Искате ли да въведете друга парола?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="553"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="555"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="573"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="575"/>
         <source>Unknown internal error when creating or modifying a user.</source>
         <translation>Неизвестна вътрешна грешка при създаване или промяна на потребител.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="635"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="637"/>
         <source>The user name you entered already exists.</source>
         <translation>Въведеното потребителско име вече съществува.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="717"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="719"/>
         <source>Double-click to change</source>
         <translation>Щракнете двукратно за промяна</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="770"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="772"/>
         <source>The token of your current session.</source>
         <translation>Токенът на текущата ви сесия.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="803"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="805"/>
         <source>Administrator</source>
         <translation>Администратор</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="807"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="809"/>
         <source>Manager</source>
         <translation>Мениджър</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="811"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="813"/>
         <source>Operator</source>
         <translation>Оператор</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="829"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="831"/>
         <source>Never</source>
         <translation>Никога</translation>
     </message>
@@ -9986,7 +9986,7 @@ Sections: %2. Users in file: %3.</source>
     </message>
     <message>
         <location filename="../client/android/settings_widget.cc" line="245"/>
-        <location filename="../client/android/settings_widget.cc" line="433"/>
+        <location filename="../client/android/settings_widget.cc" line="434"/>
         <source>Profiles</source>
         <translation>Профили</translation>
     </message>
@@ -10014,20 +10014,20 @@ Sections: %2. Users in file: %3.</source>
         <translation>Показвано име при свързване</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="385"/>
+        <location filename="../client/android/settings_widget.cc" line="386"/>
         <location filename="../host/android/settings_widget.cc" line="370"/>
         <source>Security</source>
         <translation>Защита</translation>
     </message>
     <message>
         <location filename="../client/android/settings_widget.cc" line="279"/>
-        <location filename="../client/android/settings_widget.cc" line="387"/>
+        <location filename="../client/android/settings_widget.cc" line="388"/>
         <source>Change Master Password</source>
         <translation>Промяна на главната парола</translation>
     </message>
     <message>
         <location filename="../client/android/settings_widget.cc" line="260"/>
-        <location filename="../client/android/settings_widget.cc" line="463"/>
+        <location filename="../client/android/settings_widget.cc" line="464"/>
         <location filename="../host/android/settings_widget.cc" line="277"/>
         <location filename="../host/android/settings_widget.cc" line="512"/>
         <source>Add folder</source>
@@ -10035,8 +10035,8 @@ Sections: %2. Users in file: %3.</source>
     </message>
     <message>
         <location filename="../client/android/settings_widget.cc" line="266"/>
-        <location filename="../client/android/settings_widget.cc" line="443"/>
-        <location filename="../client/android/settings_widget.cc" line="602"/>
+        <location filename="../client/android/settings_widget.cc" line="444"/>
+        <location filename="../client/android/settings_widget.cc" line="603"/>
         <location filename="../host/android/settings_widget.cc" line="283"/>
         <location filename="../host/android/settings_widget.cc" line="492"/>
         <location filename="../host/android/settings_widget.cc" line="618"/>
@@ -10050,108 +10050,108 @@ Sections: %2. Users in file: %3.</source>
         <translation>Тази папка не може да бъде добавена. Изберете папка във вътрешното хранилище или на SD картата.</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="395"/>
+        <location filename="../client/android/settings_widget.cc" line="396"/>
         <source>Unlock with biometrics</source>
         <translation>Отключване с биометрия</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="420"/>
+        <location filename="../client/android/settings_widget.cc" line="421"/>
         <source>Set up a fingerprint in the system settings to use this.</source>
         <translation>Настройте пръстов отпечатък в системните настройки, за да използвате тази функция.</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="422"/>
+        <location filename="../client/android/settings_widget.cc" line="423"/>
         <source>Biometrics are not available on this device.</source>
         <translation>Биометрията не е налична на това устройство.</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="435"/>
+        <location filename="../client/android/settings_widget.cc" line="436"/>
         <source>Manage Profiles</source>
         <translation>Управление на профилите</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="467"/>
+        <location filename="../client/android/settings_widget.cc" line="468"/>
         <location filename="../host/android/settings_widget.cc" line="516"/>
         <source>Files can be transferred only in the folders added here.</source>
         <translation>Файловете могат да се прехвърлят само в добавените тук папки.</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="476"/>
+        <location filename="../client/android/settings_widget.cc" line="477"/>
         <location filename="../host/android/settings_widget.cc" line="525"/>
         <source>Updates</source>
         <translation>Актуализации</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="478"/>
+        <location filename="../client/android/settings_widget.cc" line="479"/>
         <source>Check for updates on startup</source>
         <translation>Проверка за актуализации при стартиране</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="485"/>
+        <location filename="../client/android/settings_widget.cc" line="486"/>
         <location filename="../host/android/settings_widget.cc" line="528"/>
         <source>Update channel</source>
         <translation>Канал за актуализации</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="486"/>
+        <location filename="../client/android/settings_widget.cc" line="487"/>
         <location filename="../host/android/settings_widget.cc" line="529"/>
         <source>Stable</source>
         <translation>Стабилен</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="487"/>
+        <location filename="../client/android/settings_widget.cc" line="488"/>
         <location filename="../host/android/settings_widget.cc" line="530"/>
         <source>Beta</source>
         <translation>Бета</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="488"/>
+        <location filename="../client/android/settings_widget.cc" line="489"/>
         <location filename="../host/android/settings_widget.cc" line="531"/>
         <source>Alpha</source>
         <translation>Алфа</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="499"/>
+        <location filename="../client/android/settings_widget.cc" line="500"/>
         <location filename="../host/android/settings_widget.cc" line="545"/>
         <source>Update server</source>
         <translation>Сървър за актуализации</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="504"/>
+        <location filename="../client/android/settings_widget.cc" line="505"/>
         <location filename="../host/android/settings_widget.cc" line="550"/>
         <source>Public key</source>
         <translation>Публичен ключ</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="510"/>
+        <location filename="../client/android/settings_widget.cc" line="511"/>
         <location filename="../host/android/settings_widget.cc" line="556"/>
         <source>If the update server is not specified, the default one is used. If the public key is not specified, the built-in one is used.</source>
         <translation>Ако не е посочен сървър за актуализации, се използва сървърът по подразбиране. Ако не е посочен публичен ключ, се използва вграденият ключ.</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="564"/>
+        <location filename="../client/android/settings_widget.cc" line="565"/>
         <location filename="../host/android/settings_widget.cc" line="610"/>
         <source>Check for updates</source>
         <translation>Проверка за актуализации</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="588"/>
+        <location filename="../client/android/settings_widget.cc" line="589"/>
         <source>Enable biometric unlock</source>
         <translation>Включване на отключването с биометрия</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="589"/>
+        <location filename="../client/android/settings_widget.cc" line="590"/>
         <source>Cancel</source>
         <translation>Отказ</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="603"/>
+        <location filename="../client/android/settings_widget.cc" line="604"/>
         <location filename="../host/android/settings_widget.cc" line="619"/>
         <source>Remove the folder %1 from file transfer?</source>
         <translation>Да се премахне ли папката %1 от прехвърлянето на файлове?</translation>
     </message>
     <message>
-        <location filename="../client/android/settings_widget.cc" line="603"/>
+        <location filename="../client/android/settings_widget.cc" line="604"/>
         <location filename="../host/android/settings_widget.cc" line="619"/>
         <source>Remove</source>
         <translation>Премахване</translation>
@@ -14873,106 +14873,106 @@ Sections: %2. Users in file: %3.</source>
         <translation>Потвърждаване на паролата</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="60"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="66"/>
         <source>Open Database</source>
         <translation>Отваряне на база данни</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="154"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="161"/>
         <source>The database is already open.</source>
         <translation>Базата данни вече е отворена.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="156"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="163"/>
         <source>The master password of this database is not set.</source>
         <translation>Главната парола на тази база данни не е зададена.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="181"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="188"/>
         <source>The database is open in another window. Close it to rename the database.</source>
         <translation>Базата данни е отворена в друг прозорец. Затворете го, за да преименувате базата данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="189"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="196"/>
         <source>Enter the new name of the database.</source>
         <translation>Въведете новото име на базата данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="207"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="214"/>
         <source>The database is open in another window. Close it to delete the database.</source>
         <translation>Базата данни е отворена в друг прозорец. Затворете го, за да изтриете базата данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="212"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="219"/>
         <source>The database &quot;%1&quot; with all its records and settings will be deleted.
 Delete the database?</source>
         <translation>Базата данни &quot;%1&quot; с всички нейни записи и настройки ще бъде изтрита.
 Да се изтрие ли базата данни?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="213"/>
-        <location filename="../client/desktop/unlock_dialog.cc" line="262"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="220"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="269"/>
         <source>Unnamed database</source>
         <translation>База данни без име</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="220"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="227"/>
         <source>Unable to move the database to the trash. Delete it permanently?</source>
         <translation>Неуспешно преместване на базата данни в кошчето. Да се изтрие ли окончателно?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="229"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="236"/>
         <source>Unable to delete the database.</source>
         <translation>Неуспешно изтриване на базата данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="267"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="274"/>
         <source>%1 (open)</source>
         <translation>%1 (отворена)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="288"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="295"/>
         <source>Database #1</source>
         <translation>База данни #1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="340"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="347"/>
         <source>Unable to open the database.</source>
         <translation>Неуспешно отваряне на базата данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="366"/>
-        <location filename="../client/desktop/unlock_dialog.cc" line="385"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="373"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="392"/>
         <source>Invalid master password.</source>
         <translation>Невалидна главна парола.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="392"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="399"/>
         <source>Unable to unlock the database.</source>
         <translation>Неуспешно отключване на базата данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="409"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="416"/>
         <source>Passwords do not match.</source>
         <translation>Паролите не съвпадат.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="434"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="441"/>
         <source>Unable to create the database.</source>
         <translation>Неуспешно създаване на базата данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="463"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="470"/>
         <source>Unable to rename the database.</source>
         <translation>Неуспешно преименуване на базата данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="478"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="483"/>
         <source>Name cannot be empty.</source>
         <translation>Името не може да бъде празно.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/unlock_dialog.cc" line="485"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="490"/>
         <source>Too long name. The maximum length of the name is %n characters.</source>
         <translation>
             <numerusform>Името е твърде дълго. Максималната дължина на името е %n знак.</numerusform>
@@ -14980,22 +14980,22 @@ Delete the database?</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="493"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="498"/>
         <source>A database with this name already exists.</source>
         <translation>База данни с това име вече съществува.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="531"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="536"/>
         <source>Enter the name and the master password of the new database.</source>
         <translation>Въведете името и главната парола на новата база данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="557"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="562"/>
         <source>Enter the master password to unlock the database.</source>
         <translation>Въведете главната парола, за да отключите базата данни.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/unlock_dialog.cc" line="559"/>
+        <location filename="../client/desktop/unlock_dialog.cc" line="564"/>
         <source>The master password of this database is remembered on this computer.</source>
         <translation>Главната парола на тази база данни е запомнена на този компютър.</translation>
     </message>
@@ -15300,22 +15300,22 @@ Delete the database?</source>
         <translation>Премахване на отметките</translation>
     </message>
     <message>
-        <location filename="../host/ui/user_dialog.cc" line="182"/>
+        <location filename="../host/ui/user_dialog.cc" line="184"/>
         <source>The user name can not be empty and can contain only alphabet characters, numbers and _, -, ., @ characters. It can not consist of digits only.</source>
         <translation>Потребителското име не може да бъде празно и може да съдържа само букви, цифри и знаците _, -, ., @. Не може да се състои само от цифри.</translation>
     </message>
     <message>
-        <location filename="../host/ui/user_dialog.cc" line="200"/>
+        <location filename="../host/ui/user_dialog.cc" line="202"/>
         <source>The username you entered already exists.</source>
         <translation>Въведеното потребителско име вече съществува.</translation>
     </message>
     <message>
-        <location filename="../host/ui/user_dialog.cc" line="209"/>
+        <location filename="../host/ui/user_dialog.cc" line="211"/>
         <source>The passwords you entered do not match.</source>
         <translation>Въведените пароли не съвпадат.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../host/ui/user_dialog.cc" line="220"/>
+        <location filename="../host/ui/user_dialog.cc" line="222"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>Паролата не може да бъде по-кратка от %n знак.</numerusform>
@@ -15323,7 +15323,7 @@ Delete the database?</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../host/ui/user_dialog.cc" line="222"/>
+        <location filename="../host/ui/user_dialog.cc" line="224"/>
         <source>The password can not be longer than %n characters.</source>
         <translation>
             <numerusform>Паролата не може да бъде по-дълга от %n знак.</numerusform>
@@ -15331,12 +15331,12 @@ Delete the database?</source>
         </translation>
     </message>
     <message>
-        <location filename="../host/ui/user_dialog.cc" line="234"/>
+        <location filename="../host/ui/user_dialog.cc" line="236"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>Въведената парола не отговаря на изискванията за защита!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../host/ui/user_dialog.cc" line="237"/>
+        <location filename="../host/ui/user_dialog.cc" line="239"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>Паролата трябва да съдържа малки и главни букви, цифри и не трябва да бъде по-кратка от %n знак.</numerusform>
@@ -15344,24 +15344,24 @@ Delete the database?</source>
         </translation>
     </message>
     <message>
-        <location filename="../host/ui/user_dialog.cc" line="241"/>
+        <location filename="../host/ui/user_dialog.cc" line="243"/>
         <source>Do you want to enter a different password?</source>
         <translation>Искате ли да въведете друга парола?</translation>
     </message>
     <message>
-        <location filename="../host/ui/user_dialog.cc" line="244"/>
+        <location filename="../host/ui/user_dialog.cc" line="246"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../host/ui/user_dialog.cc" line="262"/>
-        <location filename="../host/ui/user_dialog.cc" line="292"/>
-        <location filename="../host/ui/user_dialog.cc" line="302"/>
+        <location filename="../host/ui/user_dialog.cc" line="264"/>
+        <location filename="../host/ui/user_dialog.cc" line="294"/>
+        <location filename="../host/ui/user_dialog.cc" line="304"/>
         <source>Unknown internal error when creating or modifying a user.</source>
         <translation>Неизвестна вътрешна грешка при създаване или промяна на потребител.</translation>
     </message>
     <message>
-        <location filename="../host/ui/user_dialog.cc" line="340"/>
+        <location filename="../host/ui/user_dialog.cc" line="342"/>
         <source>Double-click to change</source>
         <translation>Щракнете двукратно за промяна</translation>
     </message>
@@ -15374,74 +15374,74 @@ Delete the database?</source>
         <translation>Потребителско име</translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="115"/>
+        <location filename="../host/android/user_editor_widget.cc" line="116"/>
         <source>Password</source>
         <translation>Парола</translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="116"/>
+        <location filename="../host/android/user_editor_widget.cc" line="117"/>
         <source>Password (repeat)</source>
         <translation>Парола (повторно)</translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="117"/>
+        <location filename="../host/android/user_editor_widget.cc" line="118"/>
         <source>Leave the password empty to keep the current one.</source>
         <translation>Оставете паролата празна, за да запазите текущата.</translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="118"/>
+        <location filename="../host/android/user_editor_widget.cc" line="119"/>
         <source>User enabled</source>
         <translation>Потребителят е включен</translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="119"/>
+        <location filename="../host/android/user_editor_widget.cc" line="120"/>
         <source>Allowed sessions</source>
         <translation>Разрешени сесии</translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="120"/>
+        <location filename="../host/android/user_editor_widget.cc" line="121"/>
         <source>Desktop</source>
         <translation>Работен плот</translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="121"/>
+        <location filename="../host/android/user_editor_widget.cc" line="122"/>
         <source>File Transfer</source>
         <translation>Прехвърляне на файлове</translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="122"/>
+        <location filename="../host/android/user_editor_widget.cc" line="123"/>
         <source>Delete user</source>
         <translation>Изтриване на потребител</translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="169"/>
-        <location filename="../host/android/user_editor_widget.cc" line="182"/>
-        <location filename="../host/android/user_editor_widget.cc" line="202"/>
-        <location filename="../host/android/user_editor_widget.cc" line="215"/>
-        <location filename="../host/android/user_editor_widget.cc" line="223"/>
-        <location filename="../host/android/user_editor_widget.cc" line="246"/>
-        <location filename="../host/android/user_editor_widget.cc" line="257"/>
-        <location filename="../host/android/user_editor_widget.cc" line="280"/>
+        <location filename="../host/android/user_editor_widget.cc" line="170"/>
+        <location filename="../host/android/user_editor_widget.cc" line="183"/>
+        <location filename="../host/android/user_editor_widget.cc" line="203"/>
+        <location filename="../host/android/user_editor_widget.cc" line="216"/>
+        <location filename="../host/android/user_editor_widget.cc" line="224"/>
+        <location filename="../host/android/user_editor_widget.cc" line="247"/>
+        <location filename="../host/android/user_editor_widget.cc" line="258"/>
+        <location filename="../host/android/user_editor_widget.cc" line="281"/>
         <source>Error</source>
         <translation>Грешка</translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="170"/>
+        <location filename="../host/android/user_editor_widget.cc" line="171"/>
         <source>The user name can not be empty and can contain only alphabet characters, numbers and &quot;_&quot;, &quot;-&quot;, &quot;.&quot;, &quot;@&quot; characters. It can not consist of digits only.</source>
         <translation>Потребителското име не може да бъде празно и може да съдържа само букви, цифри и знаците &quot;_&quot;, &quot;-&quot;, &quot;.&quot;, &quot;@&quot;. Не може да се състои само от цифри.</translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="182"/>
+        <location filename="../host/android/user_editor_widget.cc" line="183"/>
         <source>The username you entered already exists.</source>
         <translation>Въведеното потребителско име вече съществува.</translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="202"/>
+        <location filename="../host/android/user_editor_widget.cc" line="203"/>
         <source>The passwords you entered do not match.</source>
         <translation>Въведените пароли не съвпадат.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../host/android/user_editor_widget.cc" line="210"/>
+        <location filename="../host/android/user_editor_widget.cc" line="211"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>Паролата не може да бъде по-кратка от %n знак.</numerusform>
@@ -15449,7 +15449,7 @@ Delete the database?</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../host/android/user_editor_widget.cc" line="212"/>
+        <location filename="../host/android/user_editor_widget.cc" line="213"/>
         <source>The password can not be longer than %n characters.</source>
         <translation>
             <numerusform>Паролата не може да бъде по-дълга от %n знак.</numerusform>
@@ -15457,29 +15457,29 @@ Delete the database?</source>
         </translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="224"/>
-        <location filename="../host/android/user_editor_widget.cc" line="247"/>
-        <location filename="../host/android/user_editor_widget.cc" line="258"/>
+        <location filename="../host/android/user_editor_widget.cc" line="225"/>
+        <location filename="../host/android/user_editor_widget.cc" line="248"/>
+        <location filename="../host/android/user_editor_widget.cc" line="259"/>
         <source>Unknown internal error when creating or modifying a user.</source>
         <translation>Неизвестна вътрешна грешка при създаване или промяна на потребител.</translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="272"/>
+        <location filename="../host/android/user_editor_widget.cc" line="273"/>
         <source>Delete User</source>
         <translation>Изтриване на потребител</translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="273"/>
+        <location filename="../host/android/user_editor_widget.cc" line="274"/>
         <source>Delete the user &quot;%1&quot;?</source>
         <translation>Да се изтрие ли потребителят &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="273"/>
+        <location filename="../host/android/user_editor_widget.cc" line="274"/>
         <source>Delete</source>
         <translation>Изтриване</translation>
     </message>
     <message>
-        <location filename="../host/android/user_editor_widget.cc" line="280"/>
+        <location filename="../host/android/user_editor_widget.cc" line="281"/>
         <source>Failed to delete the user.</source>
         <translation>Неуспешно изтриване на потребителя.</translation>
     </message>
