@@ -536,7 +536,10 @@ void RouterWorkspaceDialog::onWorkspaceResultReceived(const proto::router::Works
             }
 
             pending_host_moves_ = moves;
-            pending_host_move_ = false;
+            // runPendingHostMoves() drops the queue unless the flag is up: it guards re-entry
+            // for drag & drop and reads the flag as "a batch is queued". The flag goes up with
+            // the queue and down with the last reply (see onHostResultReceived).
+            pending_host_move_ = true;
             close_dialog_after_host_batch_ = true;
             runPendingHostMoves();
             return;
