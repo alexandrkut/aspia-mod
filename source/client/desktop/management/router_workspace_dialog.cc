@@ -416,6 +416,8 @@ void RouterWorkspaceDialog::onHostResultReceived(const proto::router::HostResult
         host_move_batch_.reset();
         pending_host_move_ = false;
 
+        saving_ = false;
+        setEnabled(true);
         ui->tab_hosts->setEnabled(true);
 
         if (failed > 0)
@@ -484,7 +486,6 @@ void RouterWorkspaceDialog::onWorkspaceResultReceived(const proto::router::Works
                       << entry_id_ << ")";
 
             model_ = std::make_unique<WorkspaceEditModel>(entry_id_);
-            setEnabled(true);
             refetchLists();
             runPendingHostMoves();
             return;
@@ -526,6 +527,8 @@ void RouterWorkspaceDialog::onWorkspaceResultReceived(const proto::router::Works
             {
                 staged_.clear();
                 updateHostSummary();
+                saving_ = false;
+                updateHostSummary();
                 LOG(INFO) << "[ACTION] Workspace saved";
                 accept();
                 close();
@@ -535,11 +538,12 @@ void RouterWorkspaceDialog::onWorkspaceResultReceived(const proto::router::Works
             pending_host_moves_ = moves;
             pending_host_move_ = false;
             close_dialog_after_host_batch_ = true;
-            setEnabled(true);
             runPendingHostMoves();
             return;
         }
 
+        saving_ = false;
+        updateHostSummary();
         LOG(INFO) << "[ACTION] Workspace saved";
         accept();
         close();
@@ -552,7 +556,9 @@ void RouterWorkspaceDialog::onWorkspaceResultReceived(const proto::router::Works
     if (error_code == proto::router::kErrorConflict)
     {
         LOG(ERROR) << "Workspace save rejected: concurrent change";
+        saving_ = false;
         setEnabled(true);
+        updateHostSummary();
         refetchLists();
         MsgBox::warning(this, tr("The space was changed from another console. The lists are "
                                  "being refreshed - check the changes and save again."));
@@ -560,7 +566,9 @@ void RouterWorkspaceDialog::onWorkspaceResultReceived(const proto::router::Works
     }
 
     LOG(ERROR) << "Workspace save failed:" << error_code;
+    saving_ = false;
     setEnabled(true);
+    updateHostSummary();
     MsgBox::warning(this, routerErrorText(error_code));
 }
 
@@ -573,6 +581,12 @@ void RouterWorkspaceDialog::onButtonBoxClicked(QAbstractButton* button)
         LOG(INFO) << "[ACTION] Action rejected";
         reject();
         close();
+        return;
+    }
+
+    if (saving_)
+    {
+        LOG(INFO) << "[ACTION] Save already in flight, ignored";
         return;
     }
 
@@ -599,7 +613,9 @@ void RouterWorkspaceDialog::onButtonBoxClicked(QAbstractButton* button)
         return;
     }
 
+    saving_ = true;
     setEnabled(false);
+    ui->label_host_summary->setText(tr("Saving..."));
 
     apply_hosts_on_save_ = (entry_id_ > 0 && !staged_.isEmpty());
 
@@ -827,6 +843,8 @@ void RouterWorkspaceDialog::runPendingHostMoves()
     {
         pending_host_moves_.clear();
         pending_host_move_ = false;
+        saving_ = false;
+        setEnabled(true);
         ui->tab_hosts->setEnabled(true);
         return;
     }

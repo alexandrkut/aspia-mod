@@ -144,6 +144,8 @@ private:
 
     bool closing_ = false;
 
+    bool saving_ = false;
+
     // Modify-mode OK chain: save the record first, then send the staged host batch.
     bool apply_hosts_on_save_ = false;
     // Close the dialog after the staged host batch started from OK finishes.

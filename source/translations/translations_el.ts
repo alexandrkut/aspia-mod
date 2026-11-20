@@ -8939,17 +8939,22 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="557"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="562"/>
         <source>The space was changed from another console. The lists are being refreshed - check the changes and save again.</source>
         <translation>Ο χώρος άλλαξε από άλλη κονσόλα. Οι λίστες ανανεώνονται - ελέγξτε τις αλλαγές και αποθηκεύστε ξανά.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="691"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="616"/>
+        <source>Saving...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="705"/>
         <source>Are you sure you want to remove the host from the space?</source>
         <translation>Είστε βέβαιοι ότι θέλετε να καταργήσετε τον κεντρικό υπολογιστή από τον χώρο;</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="699"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="713"/>
         <source>Are you sure you want to remove %n hosts from the space?</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -8957,17 +8962,17 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1214"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1228"/>
         <source>Будет применено: +%1 хостов, -%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1267"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1281"/>
         <source>Space name cannot be empty.</source>
         <translation>Το όνομα του χώρου δεν μπορεί να είναι κενό.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1278"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1292"/>
         <source>A space with the specified name already exists.</source>
         <translation>Υπάρχει ήδη χώρος με το καθορισμένο όνομα.</translation>
     </message>

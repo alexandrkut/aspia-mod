@@ -411,6 +411,51 @@ std::string_view Database::modifyWorkspace(qint64 entry_id, qint64 base_revision
         return proto::router::kErrorConflict;
     }
 
+    // A byte-identical save must not consume the revision: the client retries against the same
+    // base revision, and bumping on a no-op turns every repeated OK into a conflict.
+    {
+        SqlQuery stored(db_, "SELECT name, comment FROM workspaces WHERE id=?");
+        stored.addInt64(entry_id);
+
+        if (stored.next() != SqlQuery::StepResult::ROW)
+        {
+            LOG(ERROR) << "Unable to read workspace:" << db_.lastError();
+            return proto::router::kErrorInternalError;
+        }
+
+        const std::string_view stored_name = stored.columnTextView(0);
+        const std::string_view stored_comment = stored.columnTextView(1);
+
+        SqlQuery stored_access(db_, "SELECT user_id FROM workspace_access WHERE workspace_id=?");
+        stored_access.addInt64(entry_id);
+
+        std::set<qint64> stored_ids;
+        for (;;)
+        {
+            const SqlQuery::StepResult step = stored_access.next();
+            if (step != SqlQuery::StepResult::ROW)
+            {
+                if (step == SqlQuery::StepResult::FAILED)
+                {
+                    LOG(ERROR) << "Unable to execute query:" << db_.lastError();
+                    return proto::router::kErrorInternalError;
+                }
+                break;
+            }
+            stored_ids.insert(stored_access.columnInt64(0));
+        }
+
+        if (stored_name == name && stored_comment == comment && stored_ids == desired_ids)
+        {
+            if (!transaction.commit())
+            {
+                LOG(ERROR) << "Unable to commit transaction:" << db_.lastError();
+                return proto::router::kErrorInternalError;
+            }
+            return proto::router::kErrorOk;
+        }
+    }
+
     SqlQuery name_check(db_, "SELECT id FROM workspaces WHERE name=?");
     name_check.addText(name);
 

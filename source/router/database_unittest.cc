@@ -1454,3 +1454,26 @@ TEST_F(RouterDatabaseTest, ModifyHostSynchronizesTheMembershipList)
     db_.hosts(ws2, -1, 0, proto::router::kMaxHostPageSize, &dropped_scope);
     EXPECT_EQ(dropped_scope.host_size(), 0);
 }
+
+//--------------------------------------------------------------------------------------------------
+// A byte-identical save must not consume the revision, so a repeated OK stays harmless.
+TEST_F(RouterDatabaseTest, ModifyWorkspaceNoOpDoesNotBumpRevision)
+{
+    const qint64 workspace_id = addWorkspace("alpha", {admin_.entry_id});
+    ASSERT_GT(workspace_id, 0);
+
+    const qint64 revision_before = workspaceRevision(workspace_id);
+    ASSERT_GE(revision_before, 0);
+
+    ASSERT_EQ(db_.modifyWorkspace(workspace_id, revision_before, "alpha", std::string_view(),
+                                  {admin_.entry_id}),
+              proto::router::kErrorOk);
+
+    EXPECT_EQ(workspaceRevision(workspace_id), revision_before);
+
+    ASSERT_EQ(db_.modifyWorkspace(workspace_id, revision_before, "beta", std::string_view(),
+                                  {admin_.entry_id}),
+              proto::router::kErrorOk);
+
+    EXPECT_GT(workspaceRevision(workspace_id), revision_before);
+}

@@ -8887,34 +8887,39 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="557"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="562"/>
         <source>The space was changed from another console. The lists are being refreshed - check the changes and save again.</source>
         <translation>다른 콘솔에서 스페이스가 변경되었습니다. 목록을 새로 고치는 중입니다. 변경 사항을 확인한 후 다시 저장하십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="691"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="616"/>
+        <source>Saving...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="705"/>
         <source>Are you sure you want to remove the host from the space?</source>
         <translation>호스트를 스페이스에서 제거하시겠습니까?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="699"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="713"/>
         <source>Are you sure you want to remove %n hosts from the space?</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1214"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1228"/>
         <source>Будет применено: +%1 хостов, -%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1267"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1281"/>
         <source>Space name cannot be empty.</source>
         <translation>스페이스 이름은 비워 둘 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1278"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1292"/>
         <source>A space with the specified name already exists.</source>
         <translation>지정한 이름의 스페이스가 이미 있습니다.</translation>
     </message>
