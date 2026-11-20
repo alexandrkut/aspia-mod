@@ -1,4 +1,8 @@
-Aspia
+**Автор оригинальной программы Aspia никакого отношения к этому моду не имеет!!!
+https://aspia.org/**
+
+
+Aspia-mod
 =====
 
 Remote desktop, file transfer and system information tool.
