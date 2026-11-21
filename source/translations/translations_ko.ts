@@ -9,147 +9,137 @@
         <translation>정보</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="60"/>
+        <location filename="../common/desktop/about_dialog.ui" line="63"/>
         <source>General</source>
         <translation>일반</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="90"/>
+        <location filename="../common/desktop/about_dialog.ui" line="93"/>
         <source>Service Information</source>
         <translation>서비스 정보</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="112"/>
+        <location filename="../common/desktop/about_dialog.ui" line="115"/>
         <source>Donate!</source>
         <translation>후원하기!</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="136"/>
+        <location filename="../common/desktop/about_dialog.ui" line="139"/>
         <source>Close</source>
         <translation>닫기</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="136"/>
+        <location filename="../common/desktop/about_dialog.cc" line="116"/>
         <source>Version: %1 (%2)</source>
         <translation>버전: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="141"/>
-        <source>Aspia is free software released under GNU General Public License 3.</source>
-        <translation>Aspia는 GNU General Public License 3에 따라 배포되는 자유 소프트웨어입니다.</translation>
-    </message>
-    <message>
-        <location filename="../common/desktop/about_dialog.cc" line="142"/>
+        <location filename="../common/desktop/about_dialog.cc" line="122"/>
         <source>You can get a copy of license here:</source>
         <translation>라이선스 사본은 여기에서 받을 수 있습니다:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="147"/>
+        <location filename="../common/desktop/about_dialog.cc" line="127"/>
         <source>You can also get a translation of GNU GPL license here:</source>
         <translation>GNU GPL 라이선스의 번역본도 여기에서 받을 수 있습니다:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="151"/>
+        <location filename="../common/desktop/about_dialog.cc" line="131"/>
         <source>Links</source>
         <translation>링크</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="152"/>
+        <location filename="../common/desktop/about_dialog.cc" line="132"/>
         <source>Home page:</source>
         <translation>홈 페이지:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="153"/>
-        <source>GitHub page:</source>
-        <translation>GitHub 페이지:</translation>
-    </message>
-    <message>
-        <location filename="../common/desktop/about_dialog.cc" line="162"/>
-        <source>Modifications</source>
+        <location filename="../common/desktop/about_dialog.cc" line="121"/>
+        <source>Aspia-mod is free software released under GNU General Public License 3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="164"/>
-        <source>The changes and the sources:</source>
+        <location filename="../common/desktop/about_dialog.cc" line="133"/>
+        <source>Fork home page:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="168"/>
-        <source>Developers</source>
-        <translation>개발자</translation>
+        <location filename="../common/desktop/about_dialog.cc" line="136"/>
+        <source>Original software developer:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="170"/>
+        <location filename="../common/desktop/about_dialog.cc" line="138"/>
         <source>Translators</source>
         <translation>번역가</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="172"/>
+        <location filename="../common/desktop/about_dialog.cc" line="140"/>
         <source>Third-party components</source>
         <translation>타사 구성 요소</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="174"/>
+        <location filename="../common/desktop/about_dialog.cc" line="142"/>
         <source>Graphics and images</source>
         <translation>그래픽 및 이미지</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="175"/>
+        <location filename="../common/desktop/about_dialog.cc" line="143"/>
         <source>Icons by %1</source>
         <translation>아이콘 제공: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="205"/>
+        <location filename="../common/desktop/about_dialog.cc" line="170"/>
         <source>Application</source>
         <translation>응용 프로그램</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="206"/>
+        <location filename="../common/desktop/about_dialog.cc" line="171"/>
         <source>Path: %1</source>
         <translation>경로: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="207"/>
+        <location filename="../common/desktop/about_dialog.cc" line="172"/>
         <source>Logging directory: %1</source>
         <translation>로그 디렉터리: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="209"/>
+        <location filename="../common/desktop/about_dialog.cc" line="174"/>
         <source>Logging file: %1</source>
         <translation>로그 파일: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="214"/>
+        <location filename="../common/desktop/about_dialog.cc" line="179"/>
         <source>Build Information</source>
         <translation>빌드 정보</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="215"/>
+        <location filename="../common/desktop/about_dialog.cc" line="180"/>
         <source>Git branch: %1</source>
         <translation>Git 브랜치: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="217"/>
+        <location filename="../common/desktop/about_dialog.cc" line="182"/>
         <source>Git commit: %1</source>
         <translation>Git 커밋: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="222"/>
+        <location filename="../common/desktop/about_dialog.cc" line="187"/>
         <source>Compilation</source>
         <translation>컴파일</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="223"/>
+        <location filename="../common/desktop/about_dialog.cc" line="188"/>
         <source>Compilation date: %1</source>
         <translation>컴파일 날짜: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="224"/>
+        <location filename="../common/desktop/about_dialog.cc" line="189"/>
         <source>Compilation time: %1</source>
         <translation>컴파일 시간: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="253"/>
+        <location filename="../common/desktop/about_dialog.cc" line="218"/>
         <source>Version Information</source>
         <translation>버전 정보</translation>
     </message>
@@ -705,8 +695,8 @@
     <name>ChatWidget</name>
     <message>
         <location filename="../common/desktop/chat_widget.ui" line="20"/>
-        <source>Aspia Chat</source>
-        <translation>Aspia 채팅</translation>
+        <source>Aspia-mod Chat</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../common/desktop/chat_widget.ui" line="159"/>
@@ -1188,12 +1178,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1610"/>
+        <location filename="../client/desktop/main_window.cc" line="1602"/>
         <source>Several hosts are named &quot;%1&quot;. Use the ID of the one you mean.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1633"/>
+        <location filename="../client/desktop/main_window.cc" line="1625"/>
         <source>&quot;%1&quot; is both the name of a host and the ID of another. Connect by the record ID of the host you mean.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4174,12 +4164,16 @@ Credentials replaced: %2</source>
 <context>
     <name>HostWindow</name>
     <message>
-        <location filename="../host/ui/host_window.ui" line="26"/>
         <location filename="../host/ui/host_window.cc" line="662"/>
-        <location filename="../host/ui/host_window.cc" line="935"/>
-        <location filename="../host/ui/host_window.cc" line="1213"/>
+        <location filename="../host/ui/host_window.cc" line="1205"/>
         <source>Aspia Host</source>
         <translation>Aspia 호스트</translation>
+    </message>
+    <message>
+        <location filename="../host/ui/host_window.ui" line="26"/>
+        <location filename="../host/ui/host_window.cc" line="927"/>
+        <source>Aspia-mod Host</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="72"/>
@@ -4193,7 +4187,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="198"/>
-        <location filename="../host/ui/host_window.cc" line="1165"/>
+        <location filename="../host/ui/host_window.cc" line="1157"/>
         <source>Router is disabled</source>
         <translation>라우터 사용 안 함</translation>
     </message>
@@ -4304,9 +4298,8 @@ Credentials replaced: %2</source>
         <translation>채팅 표시</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="181"/>
         <location filename="../host/ui/host_window.cc" line="662"/>
-        <location filename="../host/ui/host_window.cc" line="1213"/>
+        <location filename="../host/ui/host_window.cc" line="1205"/>
         <source>Aspia Quick Support</source>
         <translation>Aspia 빠른 지원</translation>
     </message>
@@ -4315,6 +4308,11 @@ Credentials replaced: %2</source>
         <location filename="../host/ui/host_window.cc" line="883"/>
         <source>Show</source>
         <translation>표시</translation>
+    </message>
+    <message>
+        <location filename="../host/ui/host_window.cc" line="181"/>
+        <source>Aspia-mod Quick Support</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.cc" line="651"/>
@@ -4332,57 +4330,47 @@ Credentials replaced: %2</source>
         <translation>설정 저장소를 사용할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="931"/>
-        <source>The ability to show several monitors at once</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../host/ui/host_window.cc" line="932"/>
-        <source>Remote management of settings and users by the router administrator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../host/ui/host_window.cc" line="946"/>
+        <location filename="../host/ui/host_window.cc" line="938"/>
         <source>Aspia Host will be removed from this computer. The settings of the host will be kept. Do you really want to uninstall the application?</source>
         <translation>Aspia 호스트가 이 컴퓨터에서 제거됩니다. 호스트의 설정은 유지됩니다. 응용 프로그램을 제거하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="958"/>
+        <location filename="../host/ui/host_window.cc" line="950"/>
         <source>Unable to uninstall the application.</source>
         <translation>응용 프로그램을 제거할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="985"/>
+        <location filename="../host/ui/host_window.cc" line="977"/>
         <source>If you exit from Aspia, it will not be possible to connect to this computer until you turn on the computer or Aspia again manually. Do you really want to exit the application?</source>
         <translation>Aspia를 끝내면 컴퓨터 또는 Aspia를 다시 수동으로 켤 때까지 이 컴퓨터에 연결할 수 없습니다. 응용 프로그램을 끝내시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1157"/>
+        <location filename="../host/ui/host_window.cc" line="1149"/>
         <source>Not connected to service</source>
         <translation>서비스에 연결되지 않음</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1170"/>
+        <location filename="../host/ui/host_window.cc" line="1162"/>
         <source>Connecting to router...</source>
         <translation>라우터에 연결하는 중...</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1175"/>
+        <location filename="../host/ui/host_window.cc" line="1167"/>
         <source>Connected to router</source>
         <translation>라우터에 연결됨</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1180"/>
+        <location filename="../host/ui/host_window.cc" line="1172"/>
         <source>Connection error</source>
         <translation>연결 오류</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1258"/>
+        <location filename="../host/ui/host_window.cc" line="1250"/>
         <source>IP addresses:</source>
         <translation>IP 주소:</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1214"/>
+        <location filename="../host/ui/host_window.cc" line="1206"/>
         <source>ID: %1</source>
         <translation>ID: %1</translation>
     </message>
@@ -5033,9 +5021,9 @@ Credentials replaced: %2</source>
     <name>MainWindow</name>
     <message>
         <location filename="../client/desktop/main_window.ui" line="20"/>
-        <location filename="../client/desktop/main_window.cc" line="604"/>
-        <source>Aspia Client</source>
-        <translation>Aspia 클라이언트</translation>
+        <location filename="../client/desktop/main_window.cc" line="596"/>
+        <source>Aspia-mod Client</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../client/desktop/main_window.ui" line="68"/>
@@ -5139,112 +5127,87 @@ Credentials replaced: %2</source>
         <translation>항상 위</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="137"/>
+        <location filename="../client/desktop/main_window.cc" line="138"/>
         <source>Search...</source>
         <translation>검색...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="231"/>
+        <location filename="../client/desktop/main_window.cc" line="232"/>
         <source>The MCP connector is already in use by another window of the application.</source>
         <translation>MCP 커넥터가 이미 응용 프로그램의 다른 창에서 사용 중입니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="233"/>
+        <location filename="../client/desktop/main_window.cc" line="234"/>
         <source>Unable to turn on the MCP connector.</source>
         <translation>MCP 커넥터를 켤 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="256"/>
+        <location filename="../client/desktop/main_window.cc" line="257"/>
         <source>Management</source>
         <translation>관리</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="303"/>
+        <location filename="../client/desktop/main_window.cc" line="304"/>
         <source>Are you sure you want to close the application?</source>
         <translation>응용 프로그램을 닫으시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="550"/>
+        <location filename="../client/desktop/main_window.cc" line="551"/>
         <source>Close all sessions to change the database.</source>
         <translation>데이터베이스를 전환하려면 모든 세션을 닫으십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="556"/>
+        <location filename="../client/desktop/main_window.cc" line="557"/>
         <source>Close all dialogs to change the database.</source>
         <translation>데이터베이스를 전환하려면 모든 대화 상자를 닫으십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="571"/>
+        <location filename="../client/desktop/main_window.cc" line="572"/>
         <source>Close all sessions to lock the application.</source>
         <translation>응용 프로그램을 잠그려면 모든 세션을 닫으십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="577"/>
+        <location filename="../client/desktop/main_window.cc" line="578"/>
         <source>Close all dialogs to lock the application.</source>
         <translation>응용 프로그램을 잠그려면 모든 대화 상자를 닫으십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="597"/>
-        <source>Connect to a host by its ID from the command line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="598"/>
-        <source>The icon of the screen of all the monitors at once</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="599"/>
-        <source>Remote management of host users and update settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="600"/>
-        <source>Full host configuration from a file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="601"/>
-        <source>Bulk operations on multiple hosts at once</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="969"/>
+        <location filename="../client/desktop/main_window.cc" line="961"/>
         <source>Unknown application</source>
         <translation>알 수 없는 응용 프로그램</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="972"/>
+        <location filename="../client/desktop/main_window.cc" line="964"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>MCP 커넥터. 연결됨: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="973"/>
+        <location filename="../client/desktop/main_window.cc" line="965"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - AI 연결됨</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1459"/>
+        <location filename="../client/desktop/main_window.cc" line="1451"/>
         <source>A host named by its address has no record of it in the address book, and there are no stored credentials to use. Give the user name and the password with --username and --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1791"/>
+        <location filename="../client/desktop/main_window.cc" line="1783"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1797"/>
+        <location filename="../client/desktop/main_window.cc" line="1789"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="497"/>
+        <location filename="../client/desktop/main_window.cc" line="498"/>
         <source>Credentials</source>
         <translation>자격 증명</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="540"/>
+        <location filename="../client/desktop/main_window.cc" line="541"/>
         <source>Settings</source>
         <translation>설정</translation>
     </message>
@@ -6037,8 +6000,8 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../host/ui/notifier_window.cc" line="571"/>
-        <source>Aspia Host</source>
-        <translation>Aspia 호스트</translation>
+        <source>Aspia-mod Host</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8880,46 +8843,46 @@ Sections: %2. Users in file: %3.</source>
         <translation>사용자 목록을 가져오지 못했습니다.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="426"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="428"/>
         <source>Failed to move %n of %1 hosts.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="562"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="566"/>
         <source>The space was changed from another console. The lists are being refreshed - check the changes and save again.</source>
         <translation>다른 콘솔에서 스페이스가 변경되었습니다. 목록을 새로 고치는 중입니다. 변경 사항을 확인한 후 다시 저장하십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="616"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="621"/>
         <source>Saving...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="705"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="710"/>
         <source>Are you sure you want to remove the host from the space?</source>
         <translation>호스트를 스페이스에서 제거하시겠습니까?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="713"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="718"/>
         <source>Are you sure you want to remove %n hosts from the space?</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1228"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1235"/>
         <source>Будет применено: +%1 хостов, -%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1281"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1288"/>
         <source>Space name cannot be empty.</source>
         <translation>스페이스 이름은 비워 둘 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1292"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1299"/>
         <source>A space with the specified name already exists.</source>
         <translation>지정한 이름의 스페이스가 이미 있습니다.</translation>
     </message>

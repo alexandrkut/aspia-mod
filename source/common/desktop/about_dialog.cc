@@ -42,9 +42,8 @@ namespace {
 const char kGplLink[] = "https://www.gnu.org/licenses/gpl.html";
 const char kGplTranslationLink[] = "https://www.gnu.org/licenses/translations.html";
 const char kHomeLink[] = "https://aspia.org";
-const char kGitHubLink[] = "https://github.com/dchapyshev/aspia";
 
-// The page of this fork, where the changes below are described and the sources are.
+// The home page of this fork: its sources and the description of its changes.
 const char kModificationsLink[] = "https://github.com/alexandrkut/aspia-mod";
 
 const char* kDevelopers[] = { "Dmitry Chapyshev (dmitry@aspia.ru)" };
@@ -103,29 +102,10 @@ QString createList(const QString& title, const char* array[], size_t array_size)
     return QString("<b>%1</b><br>%2").arg(title, list);
 }
 
-//--------------------------------------------------------------------------------------------------
-QString createList(const QString& title, const QStringList& list)
-{
-    if (list.isEmpty())
-        return QString();
-
-    QString result;
-
-    for (int i = 0; i < list.size(); ++i)
-    {
-        result.append(QString("&bull; %1").arg(list[i]));
-        if (i + 1 != list.size())
-            result.append("<br/>");
-    }
-
-    return QString("<b>%1</b><br>%2").arg(title, result);
-}
-
 } // namespace
 
 //--------------------------------------------------------------------------------------------------
-AboutDialog::AboutDialog(const QString& application_name, const QStringList& modifications,
-                         QWidget* parent)
+AboutDialog::AboutDialog(const QString& application_name, QWidget* parent)
     : QDialog(parent),
       ui(new Ui::AboutDialog())
 {
@@ -138,7 +118,7 @@ AboutDialog::AboutDialog(const QString& application_name, const QStringList& mod
 
     QString license =
         QString("%1<br>%2<br><a href='%3'>%3</a>")
-        .arg(tr("Aspia is free software released under GNU General Public License 3."),
+        .arg(tr("Aspia-mod is free software released under GNU General Public License 3."),
              tr("You can get a copy of license here:"),
              kGplLink);
 
@@ -150,22 +130,10 @@ AboutDialog::AboutDialog(const QString& application_name, const QStringList& mod
         QString("<b>%1</b><br>%2 <a href='%3'>%3</a><br>%4 <a href='%5'>%5</a>")
         .arg(tr("Links"),
              tr("Home page:"), kHomeLink,
-             tr("GitHub page:"), kGitHubLink);
-
-    // The changes are shown only in a build that carries the mark of a modification, which is
-    // the suffix of the version. A build of the upstream carries none, and there is nothing
-    // to tell about it.
-    QString modifications_text;
-
-    if (ASPIA_VERSION_SUFFIX[0] != '\0' && !modifications.isEmpty())
-    {
-        modifications_text = createList(tr("Modifications"), modifications);
-        modifications_text += QString("<br>%1 <a href='%2'>%2</a>")
-            .arg(tr("The changes and the sources:"), kModificationsLink);
-    }
+             tr("Fork home page:"), kModificationsLink);
 
     QString developers =
-        createList(tr("Developers"), kDevelopers, std::size(kDevelopers));
+        createList(tr("Original software developer:"), kDevelopers, std::size(kDevelopers));
     QString translators =
         createList(tr("Translators"), kTranslators, std::size(kTranslators));
     QString third_party =
@@ -179,9 +147,6 @@ AboutDialog::AboutDialog(const QString& application_name, const QStringList& mod
     html += "<html><body>";
     html += "<p>" + license + "</p>";
     html += "<p>" + license_translation + "</p>";
-
-    if (!modifications_text.isEmpty())
-        html += "<p>" + modifications_text + "</p>";
     html += "<p>" + links + "</p>";
     html += "<p>" + developers + "</p>";
     html += "<p>" + translators + "</p>";

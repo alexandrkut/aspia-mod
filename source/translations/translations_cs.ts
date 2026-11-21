@@ -9,147 +9,137 @@
         <translation>O aplikaci</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="60"/>
+        <location filename="../common/desktop/about_dialog.ui" line="63"/>
         <source>General</source>
         <translation>Obecné</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="90"/>
+        <location filename="../common/desktop/about_dialog.ui" line="93"/>
         <source>Service Information</source>
         <translation>Servisní informace</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="112"/>
+        <location filename="../common/desktop/about_dialog.ui" line="115"/>
         <source>Donate!</source>
         <translation>Přispějte!</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="136"/>
+        <location filename="../common/desktop/about_dialog.ui" line="139"/>
         <source>Close</source>
         <translation>Zavřít</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="136"/>
+        <location filename="../common/desktop/about_dialog.cc" line="116"/>
         <source>Version: %1 (%2)</source>
         <translation>Verze: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="141"/>
-        <source>Aspia is free software released under GNU General Public License 3.</source>
-        <translation>Aspia je svobodný software vydaný pod licencí GNU General Public License 3.</translation>
-    </message>
-    <message>
-        <location filename="../common/desktop/about_dialog.cc" line="142"/>
+        <location filename="../common/desktop/about_dialog.cc" line="122"/>
         <source>You can get a copy of license here:</source>
         <translation>Kopii licence můžete získat zde:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="147"/>
+        <location filename="../common/desktop/about_dialog.cc" line="127"/>
         <source>You can also get a translation of GNU GPL license here:</source>
         <translation>Překlad licence GNU GPL můžete také získat zde:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="151"/>
+        <location filename="../common/desktop/about_dialog.cc" line="131"/>
         <source>Links</source>
         <translation>Odkazy</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="152"/>
+        <location filename="../common/desktop/about_dialog.cc" line="132"/>
         <source>Home page:</source>
         <translation>Domovská stránka:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="153"/>
-        <source>GitHub page:</source>
-        <translation>Stránka GitHub:</translation>
-    </message>
-    <message>
-        <location filename="../common/desktop/about_dialog.cc" line="162"/>
-        <source>Modifications</source>
+        <location filename="../common/desktop/about_dialog.cc" line="121"/>
+        <source>Aspia-mod is free software released under GNU General Public License 3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="164"/>
-        <source>The changes and the sources:</source>
+        <location filename="../common/desktop/about_dialog.cc" line="133"/>
+        <source>Fork home page:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="168"/>
-        <source>Developers</source>
-        <translation>Vývojáři</translation>
+        <location filename="../common/desktop/about_dialog.cc" line="136"/>
+        <source>Original software developer:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="170"/>
+        <location filename="../common/desktop/about_dialog.cc" line="138"/>
         <source>Translators</source>
         <translation>Překladatelé</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="172"/>
+        <location filename="../common/desktop/about_dialog.cc" line="140"/>
         <source>Third-party components</source>
         <translation>Komponenty třetích stran</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="174"/>
+        <location filename="../common/desktop/about_dialog.cc" line="142"/>
         <source>Graphics and images</source>
         <translation>Grafika a obrázky</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="175"/>
+        <location filename="../common/desktop/about_dialog.cc" line="143"/>
         <source>Icons by %1</source>
         <translation>Ikony od %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="205"/>
+        <location filename="../common/desktop/about_dialog.cc" line="170"/>
         <source>Application</source>
         <translation>Aplikace</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="206"/>
+        <location filename="../common/desktop/about_dialog.cc" line="171"/>
         <source>Path: %1</source>
         <translation>Cesta: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="207"/>
+        <location filename="../common/desktop/about_dialog.cc" line="172"/>
         <source>Logging directory: %1</source>
         <translation>Složka protokolů: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="209"/>
+        <location filename="../common/desktop/about_dialog.cc" line="174"/>
         <source>Logging file: %1</source>
         <translation>Soubor protokolu: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="214"/>
+        <location filename="../common/desktop/about_dialog.cc" line="179"/>
         <source>Build Information</source>
         <translation>Informace o sestavení</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="215"/>
+        <location filename="../common/desktop/about_dialog.cc" line="180"/>
         <source>Git branch: %1</source>
         <translation>Větev Git: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="217"/>
+        <location filename="../common/desktop/about_dialog.cc" line="182"/>
         <source>Git commit: %1</source>
         <translation>Commit Git: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="222"/>
+        <location filename="../common/desktop/about_dialog.cc" line="187"/>
         <source>Compilation</source>
         <translation>Kompilace</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="223"/>
+        <location filename="../common/desktop/about_dialog.cc" line="188"/>
         <source>Compilation date: %1</source>
         <translation>Datum kompilace: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="224"/>
+        <location filename="../common/desktop/about_dialog.cc" line="189"/>
         <source>Compilation time: %1</source>
         <translation>Čas kompilace: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="253"/>
+        <location filename="../common/desktop/about_dialog.cc" line="218"/>
         <source>Version Information</source>
         <translation>Informace o verzi</translation>
     </message>
@@ -705,8 +695,8 @@
     <name>ChatWidget</name>
     <message>
         <location filename="../common/desktop/chat_widget.ui" line="20"/>
-        <source>Aspia Chat</source>
-        <translation>Aspia Chat</translation>
+        <source>Aspia-mod Chat</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../common/desktop/chat_widget.ui" line="159"/>
@@ -1194,12 +1184,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1610"/>
+        <location filename="../client/desktop/main_window.cc" line="1602"/>
         <source>Several hosts are named &quot;%1&quot;. Use the ID of the one you mean.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1633"/>
+        <location filename="../client/desktop/main_window.cc" line="1625"/>
         <source>&quot;%1&quot; is both the name of a host and the ID of another. Connect by the record ID of the host you mean.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4204,12 +4194,16 @@ Nahrazené přihlašovací údaje: %2</translation>
 <context>
     <name>HostWindow</name>
     <message>
-        <location filename="../host/ui/host_window.ui" line="26"/>
         <location filename="../host/ui/host_window.cc" line="662"/>
-        <location filename="../host/ui/host_window.cc" line="935"/>
-        <location filename="../host/ui/host_window.cc" line="1213"/>
+        <location filename="../host/ui/host_window.cc" line="1205"/>
         <source>Aspia Host</source>
         <translation>Aspia Host</translation>
+    </message>
+    <message>
+        <location filename="../host/ui/host_window.ui" line="26"/>
+        <location filename="../host/ui/host_window.cc" line="927"/>
+        <source>Aspia-mod Host</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="72"/>
@@ -4223,7 +4217,7 @@ Nahrazené přihlašovací údaje: %2</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="198"/>
-        <location filename="../host/ui/host_window.cc" line="1165"/>
+        <location filename="../host/ui/host_window.cc" line="1157"/>
         <source>Router is disabled</source>
         <translation>Router je zakázán</translation>
     </message>
@@ -4334,9 +4328,8 @@ Nahrazené přihlašovací údaje: %2</translation>
         <translation>Zobrazit chat</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="181"/>
         <location filename="../host/ui/host_window.cc" line="662"/>
-        <location filename="../host/ui/host_window.cc" line="1213"/>
+        <location filename="../host/ui/host_window.cc" line="1205"/>
         <source>Aspia Quick Support</source>
         <translation>Aspia Quick Support</translation>
     </message>
@@ -4345,6 +4338,11 @@ Nahrazené přihlašovací údaje: %2</translation>
         <location filename="../host/ui/host_window.cc" line="883"/>
         <source>Show</source>
         <translation>Zobrazit</translation>
+    </message>
+    <message>
+        <location filename="../host/ui/host_window.cc" line="181"/>
+        <source>Aspia-mod Quick Support</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.cc" line="651"/>
@@ -4362,57 +4360,47 @@ Nahrazené přihlašovací údaje: %2</translation>
         <translation>Úložiště nastavení není k dispozici.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="931"/>
-        <source>The ability to show several monitors at once</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../host/ui/host_window.cc" line="932"/>
-        <source>Remote management of settings and users by the router administrator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../host/ui/host_window.cc" line="946"/>
+        <location filename="../host/ui/host_window.cc" line="938"/>
         <source>Aspia Host will be removed from this computer. The settings of the host will be kept. Do you really want to uninstall the application?</source>
         <translation>Aspia Host bude z tohoto počítače odstraněn. Nastavení hostitele zůstane zachováno. Opravdu chcete aplikaci odinstalovat?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="958"/>
+        <location filename="../host/ui/host_window.cc" line="950"/>
         <source>Unable to uninstall the application.</source>
         <translation>Nelze odinstalovat aplikaci.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="985"/>
+        <location filename="../host/ui/host_window.cc" line="977"/>
         <source>If you exit from Aspia, it will not be possible to connect to this computer until you turn on the computer or Aspia again manually. Do you really want to exit the application?</source>
         <translation>Pokud ukončíte Aspia, nebude možné se k tomuto počítači připojit, dokud počítač nebo Aspia znovu ručně nezapnete. Opravdu chcete aplikaci ukončit?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1157"/>
+        <location filename="../host/ui/host_window.cc" line="1149"/>
         <source>Not connected to service</source>
         <translation>Nepřipojeno ke službě</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1170"/>
+        <location filename="../host/ui/host_window.cc" line="1162"/>
         <source>Connecting to router...</source>
         <translation>Připojování k routeru...</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1175"/>
+        <location filename="../host/ui/host_window.cc" line="1167"/>
         <source>Connected to router</source>
         <translation>Připojeno k routeru</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1180"/>
+        <location filename="../host/ui/host_window.cc" line="1172"/>
         <source>Connection error</source>
         <translation>Chyba připojení</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1258"/>
+        <location filename="../host/ui/host_window.cc" line="1250"/>
         <source>IP addresses:</source>
         <translation>IP adresy:</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1214"/>
+        <location filename="../host/ui/host_window.cc" line="1206"/>
         <source>ID: %1</source>
         <translation>ID: %1</translation>
     </message>
@@ -5094,6 +5082,12 @@ Nahrazené přihlašovací údaje: %2</translation>
         <translation>Nápověda</translation>
     </message>
     <message>
+        <location filename="../client/desktop/main_window.ui" line="20"/>
+        <location filename="../client/desktop/main_window.cc" line="596"/>
+        <source>Aspia-mod Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../client/desktop/main_window.ui" line="218"/>
         <source>Exit</source>
         <translation>Ukončit</translation>
@@ -5102,12 +5096,6 @@ Nahrazené přihlašovací údaje: %2</translation>
         <location filename="../client/desktop/main_window.ui" line="143"/>
         <source>Online Help...</source>
         <translation>Online nápověda...</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.ui" line="20"/>
-        <location filename="../client/desktop/main_window.cc" line="604"/>
-        <source>Aspia Client</source>
-        <translation>Aspia Client</translation>
     </message>
     <message>
         <location filename="../client/desktop/main_window.ui" line="68"/>
@@ -5185,112 +5173,87 @@ Nahrazené přihlašovací údaje: %2</translation>
         <translation>Vždy navrchu</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="137"/>
+        <location filename="../client/desktop/main_window.cc" line="138"/>
         <source>Search...</source>
         <translation>Hledat...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="231"/>
+        <location filename="../client/desktop/main_window.cc" line="232"/>
         <source>The MCP connector is already in use by another window of the application.</source>
         <translation>MCP konektor již používá jiné okno aplikace.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="233"/>
+        <location filename="../client/desktop/main_window.cc" line="234"/>
         <source>Unable to turn on the MCP connector.</source>
         <translation>Nelze zapnout MCP konektor.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="256"/>
+        <location filename="../client/desktop/main_window.cc" line="257"/>
         <source>Management</source>
         <translation>Správa</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="303"/>
+        <location filename="../client/desktop/main_window.cc" line="304"/>
         <source>Are you sure you want to close the application?</source>
         <translation>Opravdu chcete zavřít aplikaci?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="550"/>
+        <location filename="../client/desktop/main_window.cc" line="551"/>
         <source>Close all sessions to change the database.</source>
         <translation>Pro přepnutí databáze zavřete všechny relace.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="556"/>
+        <location filename="../client/desktop/main_window.cc" line="557"/>
         <source>Close all dialogs to change the database.</source>
         <translation>Pro přepnutí databáze zavřete všechny dialogy.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="571"/>
+        <location filename="../client/desktop/main_window.cc" line="572"/>
         <source>Close all sessions to lock the application.</source>
         <translation>Pro uzamknutí aplikace zavřete všechny relace.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="577"/>
+        <location filename="../client/desktop/main_window.cc" line="578"/>
         <source>Close all dialogs to lock the application.</source>
         <translation>Pro uzamknutí aplikace zavřete všechny dialogy.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="597"/>
-        <source>Connect to a host by its ID from the command line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="598"/>
-        <source>The icon of the screen of all the monitors at once</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="599"/>
-        <source>Remote management of host users and update settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="600"/>
-        <source>Full host configuration from a file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="601"/>
-        <source>Bulk operations on multiple hosts at once</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="969"/>
+        <location filename="../client/desktop/main_window.cc" line="961"/>
         <source>Unknown application</source>
         <translation>Neznámá aplikace</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="972"/>
+        <location filename="../client/desktop/main_window.cc" line="964"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>MCP konektor. Připojeno: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="973"/>
+        <location filename="../client/desktop/main_window.cc" line="965"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - AI je připojena</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1459"/>
+        <location filename="../client/desktop/main_window.cc" line="1451"/>
         <source>A host named by its address has no record of it in the address book, and there are no stored credentials to use. Give the user name and the password with --username and --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1791"/>
+        <location filename="../client/desktop/main_window.cc" line="1783"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1797"/>
+        <location filename="../client/desktop/main_window.cc" line="1789"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="497"/>
+        <location filename="../client/desktop/main_window.cc" line="498"/>
         <source>Credentials</source>
         <translation>Přihlašovací údaje</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="540"/>
+        <location filename="../client/desktop/main_window.cc" line="541"/>
         <source>Settings</source>
         <translation>Nastavení</translation>
     </message>
@@ -6091,8 +6054,8 @@ Nahrazené přihlašovací údaje: %2</translation>
     </message>
     <message>
         <location filename="../host/ui/notifier_window.cc" line="571"/>
-        <source>Aspia Host</source>
-        <translation>Aspia Host</translation>
+        <source>Aspia-mod Host</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8982,7 +8945,7 @@ Sections: %2. Users in file: %3.</source>
         <translation>Nepodařilo se získat seznam uživatelů.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="426"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="428"/>
         <source>Failed to move %n of %1 hosts.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -8991,22 +8954,22 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="562"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="566"/>
         <source>The space was changed from another console. The lists are being refreshed - check the changes and save again.</source>
         <translation>Prostor byl změněn z jiné konzole. Seznamy se obnovují - zkontrolujte změny a uložte znovu.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="616"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="621"/>
         <source>Saving...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="705"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="710"/>
         <source>Are you sure you want to remove the host from the space?</source>
         <translation>Opravdu chcete odebrat hostitele z prostoru?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="713"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="718"/>
         <source>Are you sure you want to remove %n hosts from the space?</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -9015,17 +8978,17 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1228"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1235"/>
         <source>Будет применено: +%1 хостов, -%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1281"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1288"/>
         <source>Space name cannot be empty.</source>
         <translation>Název prostoru nemůže být prázdný.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1292"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1299"/>
         <source>A space with the specified name already exists.</source>
         <translation>Prostor se zadaným názvem již existuje.</translation>
     </message>

@@ -178,7 +178,7 @@ HostWindow::HostWindow(QWidget* parent)
 #if defined(Q_OS_WINDOWS)
     if (PortableHost::isActive())
     {
-        setWindowTitle(tr("Aspia Quick Support"));
+        setWindowTitle(tr("Aspia-mod Quick Support"));
         setWindowFlag(Qt::WindowStaysOnTopHint);
 
         ui->action_terminal->setChecked(false);
@@ -924,15 +924,7 @@ void HostWindow::onAboutSystem()
 void HostWindow::onAbout()
 {
     LOG(INFO) << "[ACTION] About";
-    // The changes of this fork that concern the host. The changes of the client and the
-    // router are of no use to the person who uses the host.
-    const QStringList modifications =
-    {
-        tr("The ability to show several monitors at once"),
-        tr("Remote management of settings and users by the router administrator")
-    };
-
-    AutoQPointer<AboutDialog> dialog(new AboutDialog(tr("Aspia Host"), modifications, this));
+    AutoQPointer<AboutDialog> dialog(new AboutDialog(tr("Aspia-mod Host"), this));
     dialog->exec();
 }
 

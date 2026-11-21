@@ -9,147 +9,137 @@
         <translation>Sobre</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="60"/>
+        <location filename="../common/desktop/about_dialog.ui" line="63"/>
         <source>General</source>
         <translation>Geral</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="90"/>
+        <location filename="../common/desktop/about_dialog.ui" line="93"/>
         <source>Service Information</source>
         <translation>Informação do Serviço</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="112"/>
+        <location filename="../common/desktop/about_dialog.ui" line="115"/>
         <source>Donate!</source>
         <translation>Doe!</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="136"/>
+        <location filename="../common/desktop/about_dialog.ui" line="139"/>
         <source>Close</source>
         <translation>Fechar</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="136"/>
+        <location filename="../common/desktop/about_dialog.cc" line="116"/>
         <source>Version: %1 (%2)</source>
         <translation>Versão: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="141"/>
-        <source>Aspia is free software released under GNU General Public License 3.</source>
-        <translation>Aspia é um software livre lançado sob a licença GNU General Public License 3.</translation>
-    </message>
-    <message>
-        <location filename="../common/desktop/about_dialog.cc" line="142"/>
+        <location filename="../common/desktop/about_dialog.cc" line="122"/>
         <source>You can get a copy of license here:</source>
         <translation>Você pode obter uma cópia da licença aqui:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="147"/>
+        <location filename="../common/desktop/about_dialog.cc" line="127"/>
         <source>You can also get a translation of GNU GPL license here:</source>
         <translation>Você também pode obter uma tradução da licença GNU GPL aqui:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="151"/>
+        <location filename="../common/desktop/about_dialog.cc" line="131"/>
         <source>Links</source>
         <translation>Links</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="152"/>
+        <location filename="../common/desktop/about_dialog.cc" line="132"/>
         <source>Home page:</source>
         <translation>Página inicial:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="153"/>
-        <source>GitHub page:</source>
-        <translation>Página no GitHub:</translation>
-    </message>
-    <message>
-        <location filename="../common/desktop/about_dialog.cc" line="162"/>
-        <source>Modifications</source>
+        <location filename="../common/desktop/about_dialog.cc" line="121"/>
+        <source>Aspia-mod is free software released under GNU General Public License 3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="164"/>
-        <source>The changes and the sources:</source>
+        <location filename="../common/desktop/about_dialog.cc" line="133"/>
+        <source>Fork home page:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="168"/>
-        <source>Developers</source>
-        <translation>Desenvolvedores</translation>
+        <location filename="../common/desktop/about_dialog.cc" line="136"/>
+        <source>Original software developer:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="170"/>
+        <location filename="../common/desktop/about_dialog.cc" line="138"/>
         <source>Translators</source>
         <translation>Tradutores</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="172"/>
+        <location filename="../common/desktop/about_dialog.cc" line="140"/>
         <source>Third-party components</source>
         <translation>Componentes de terceiros</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="174"/>
+        <location filename="../common/desktop/about_dialog.cc" line="142"/>
         <source>Graphics and images</source>
         <translation>Gráficos e imagens</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="175"/>
+        <location filename="../common/desktop/about_dialog.cc" line="143"/>
         <source>Icons by %1</source>
         <translation>Ícones por %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="205"/>
+        <location filename="../common/desktop/about_dialog.cc" line="170"/>
         <source>Application</source>
         <translation>Aplicativo</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="206"/>
+        <location filename="../common/desktop/about_dialog.cc" line="171"/>
         <source>Path: %1</source>
         <translation>Caminho: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="207"/>
+        <location filename="../common/desktop/about_dialog.cc" line="172"/>
         <source>Logging directory: %1</source>
         <translation>Diretório de logs: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="209"/>
+        <location filename="../common/desktop/about_dialog.cc" line="174"/>
         <source>Logging file: %1</source>
         <translation>Arquivo de log: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="214"/>
+        <location filename="../common/desktop/about_dialog.cc" line="179"/>
         <source>Build Information</source>
         <translation>Informações de compilação</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="215"/>
+        <location filename="../common/desktop/about_dialog.cc" line="180"/>
         <source>Git branch: %1</source>
         <translation>Branch do Git: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="217"/>
+        <location filename="../common/desktop/about_dialog.cc" line="182"/>
         <source>Git commit: %1</source>
         <translation>Commit do Git: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="222"/>
+        <location filename="../common/desktop/about_dialog.cc" line="187"/>
         <source>Compilation</source>
         <translation>Compilação</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="223"/>
+        <location filename="../common/desktop/about_dialog.cc" line="188"/>
         <source>Compilation date: %1</source>
         <translation>Data de compilação: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="224"/>
+        <location filename="../common/desktop/about_dialog.cc" line="189"/>
         <source>Compilation time: %1</source>
         <translation>Hora de compilação: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="253"/>
+        <location filename="../common/desktop/about_dialog.cc" line="218"/>
         <source>Version Information</source>
         <translation>Informações da versão</translation>
     </message>
@@ -705,8 +695,8 @@
     <name>ChatWidget</name>
     <message>
         <location filename="../common/desktop/chat_widget.ui" line="20"/>
-        <source>Aspia Chat</source>
-        <translation>Aspia Chat</translation>
+        <source>Aspia-mod Chat</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../common/desktop/chat_widget.ui" line="159"/>
@@ -1191,12 +1181,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1610"/>
+        <location filename="../client/desktop/main_window.cc" line="1602"/>
         <source>Several hosts are named &quot;%1&quot;. Use the ID of the one you mean.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1633"/>
+        <location filename="../client/desktop/main_window.cc" line="1625"/>
         <source>&quot;%1&quot; is both the name of a host and the ID of another. Connect by the record ID of the host you mean.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4189,12 +4179,16 @@ Credenciais substituídas: %2</translation>
 <context>
     <name>HostWindow</name>
     <message>
-        <location filename="../host/ui/host_window.ui" line="26"/>
         <location filename="../host/ui/host_window.cc" line="662"/>
-        <location filename="../host/ui/host_window.cc" line="935"/>
-        <location filename="../host/ui/host_window.cc" line="1213"/>
+        <location filename="../host/ui/host_window.cc" line="1205"/>
         <source>Aspia Host</source>
         <translation>Aspia Host</translation>
+    </message>
+    <message>
+        <location filename="../host/ui/host_window.ui" line="26"/>
+        <location filename="../host/ui/host_window.cc" line="927"/>
+        <source>Aspia-mod Host</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="72"/>
@@ -4208,7 +4202,7 @@ Credenciais substituídas: %2</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="198"/>
-        <location filename="../host/ui/host_window.cc" line="1165"/>
+        <location filename="../host/ui/host_window.cc" line="1157"/>
         <source>Router is disabled</source>
         <translation>O roteador está desabilitado</translation>
     </message>
@@ -4319,9 +4313,8 @@ Credenciais substituídas: %2</translation>
         <translation>Mostrar chat</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="181"/>
         <location filename="../host/ui/host_window.cc" line="662"/>
-        <location filename="../host/ui/host_window.cc" line="1213"/>
+        <location filename="../host/ui/host_window.cc" line="1205"/>
         <source>Aspia Quick Support</source>
         <translation>Aspia Quick Support</translation>
     </message>
@@ -4330,6 +4323,11 @@ Credenciais substituídas: %2</translation>
         <location filename="../host/ui/host_window.cc" line="883"/>
         <source>Show</source>
         <translation>Mostrar</translation>
+    </message>
+    <message>
+        <location filename="../host/ui/host_window.cc" line="181"/>
+        <source>Aspia-mod Quick Support</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.cc" line="651"/>
@@ -4347,57 +4345,47 @@ Credenciais substituídas: %2</translation>
         <translation>O armazenamento de configurações não está disponível.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="931"/>
-        <source>The ability to show several monitors at once</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../host/ui/host_window.cc" line="932"/>
-        <source>Remote management of settings and users by the router administrator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../host/ui/host_window.cc" line="946"/>
+        <location filename="../host/ui/host_window.cc" line="938"/>
         <source>Aspia Host will be removed from this computer. The settings of the host will be kept. Do you really want to uninstall the application?</source>
         <translation>O Aspia Host será removido deste computador. As configurações do host serão mantidas. Deseja realmente desinstalar o aplicativo?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="958"/>
+        <location filename="../host/ui/host_window.cc" line="950"/>
         <source>Unable to uninstall the application.</source>
         <translation>Não foi possível desinstalar o aplicativo.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="985"/>
+        <location filename="../host/ui/host_window.cc" line="977"/>
         <source>If you exit from Aspia, it will not be possible to connect to this computer until you turn on the computer or Aspia again manually. Do you really want to exit the application?</source>
         <translation>Se você sair do Aspia, não será possível conectar a este computador até que você ligue o computador ou inicie o Aspia novamente manualmente. Deseja realmente sair do aplicativo?</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1157"/>
+        <location filename="../host/ui/host_window.cc" line="1149"/>
         <source>Not connected to service</source>
         <translation>Não conectado ao serviço</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1170"/>
+        <location filename="../host/ui/host_window.cc" line="1162"/>
         <source>Connecting to router...</source>
         <translation>Conectando ao roteador...</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1175"/>
+        <location filename="../host/ui/host_window.cc" line="1167"/>
         <source>Connected to router</source>
         <translation>Conectado ao roteador</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1180"/>
+        <location filename="../host/ui/host_window.cc" line="1172"/>
         <source>Connection error</source>
         <translation>Erro de conexão</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1258"/>
+        <location filename="../host/ui/host_window.cc" line="1250"/>
         <source>IP addresses:</source>
         <translation>Endereços IP:</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1214"/>
+        <location filename="../host/ui/host_window.cc" line="1206"/>
         <source>ID: %1</source>
         <translation>ID: %1</translation>
     </message>
@@ -5076,12 +5064,6 @@ Credenciais substituídas: %2</translation>
         <translation>Ajuda online...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.ui" line="20"/>
-        <location filename="../client/desktop/main_window.cc" line="604"/>
-        <source>Aspia Client</source>
-        <translation>Aspia Client</translation>
-    </message>
-    <message>
         <location filename="../client/desktop/main_window.ui" line="68"/>
         <source>File</source>
         <translation>Arquivo</translation>
@@ -5147,6 +5129,12 @@ Credenciais substituídas: %2</translation>
         <translation>Sobre</translation>
     </message>
     <message>
+        <location filename="../client/desktop/main_window.ui" line="20"/>
+        <location filename="../client/desktop/main_window.cc" line="596"/>
+        <source>Aspia-mod Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../client/desktop/main_window.ui" line="110"/>
         <source>Actions</source>
         <translation>Ações</translation>
@@ -5162,112 +5150,87 @@ Credenciais substituídas: %2</translation>
         <translation>Exibir</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="137"/>
+        <location filename="../client/desktop/main_window.cc" line="138"/>
         <source>Search...</source>
         <translation>Pesquisar...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="231"/>
+        <location filename="../client/desktop/main_window.cc" line="232"/>
         <source>The MCP connector is already in use by another window of the application.</source>
         <translation>O conector MCP já está em uso por outra janela do aplicativo.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="233"/>
+        <location filename="../client/desktop/main_window.cc" line="234"/>
         <source>Unable to turn on the MCP connector.</source>
         <translation>Não foi possível ativar o conector MCP.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="256"/>
+        <location filename="../client/desktop/main_window.cc" line="257"/>
         <source>Management</source>
         <translation>Gerenciamento</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="303"/>
+        <location filename="../client/desktop/main_window.cc" line="304"/>
         <source>Are you sure you want to close the application?</source>
         <translation>Tem certeza de que deseja fechar o aplicativo?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="550"/>
+        <location filename="../client/desktop/main_window.cc" line="551"/>
         <source>Close all sessions to change the database.</source>
         <translation>Feche todas as sessões para trocar o banco de dados.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="556"/>
+        <location filename="../client/desktop/main_window.cc" line="557"/>
         <source>Close all dialogs to change the database.</source>
         <translation>Feche todas as caixas de diálogo para trocar o banco de dados.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="571"/>
+        <location filename="../client/desktop/main_window.cc" line="572"/>
         <source>Close all sessions to lock the application.</source>
         <translation>Feche todas as sessões para bloquear o aplicativo.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="577"/>
+        <location filename="../client/desktop/main_window.cc" line="578"/>
         <source>Close all dialogs to lock the application.</source>
         <translation>Feche todas as caixas de diálogo para bloquear o aplicativo.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="597"/>
-        <source>Connect to a host by its ID from the command line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="598"/>
-        <source>The icon of the screen of all the monitors at once</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="599"/>
-        <source>Remote management of host users and update settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="600"/>
-        <source>Full host configuration from a file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="601"/>
-        <source>Bulk operations on multiple hosts at once</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="969"/>
+        <location filename="../client/desktop/main_window.cc" line="961"/>
         <source>Unknown application</source>
         <translation>Aplicativo desconhecido</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="972"/>
+        <location filename="../client/desktop/main_window.cc" line="964"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>Conector MCP. Conectados: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="973"/>
+        <location filename="../client/desktop/main_window.cc" line="965"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - IA conectada</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1459"/>
+        <location filename="../client/desktop/main_window.cc" line="1451"/>
         <source>A host named by its address has no record of it in the address book, and there are no stored credentials to use. Give the user name and the password with --username and --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1791"/>
+        <location filename="../client/desktop/main_window.cc" line="1783"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1797"/>
+        <location filename="../client/desktop/main_window.cc" line="1789"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="497"/>
+        <location filename="../client/desktop/main_window.cc" line="498"/>
         <source>Credentials</source>
         <translation>Credenciais</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="540"/>
+        <location filename="../client/desktop/main_window.cc" line="541"/>
         <source>Settings</source>
         <translation>Configurações</translation>
     </message>
@@ -6064,8 +6027,8 @@ Credenciais substituídas: %2</translation>
     </message>
     <message>
         <location filename="../host/ui/notifier_window.cc" line="571"/>
-        <source>Aspia Host</source>
-        <translation>Aspia Host</translation>
+        <source>Aspia-mod Host</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8931,7 +8894,7 @@ Sections: %2. Users in file: %3.</source>
         <translation>Falha ao obter a lista de usuários.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="426"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="428"/>
         <source>Failed to move %n of %1 hosts.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -8939,22 +8902,22 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="562"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="566"/>
         <source>The space was changed from another console. The lists are being refreshed - check the changes and save again.</source>
         <translation>O espaço foi alterado a partir de outro console. As listas estão sendo atualizadas - verifique as alterações e salve novamente.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="616"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="621"/>
         <source>Saving...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="705"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="710"/>
         <source>Are you sure you want to remove the host from the space?</source>
         <translation>Tem certeza de que deseja remover o host do espaço?</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="713"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="718"/>
         <source>Are you sure you want to remove %n hosts from the space?</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -8962,17 +8925,17 @@ Sections: %2. Users in file: %3.</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1228"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1235"/>
         <source>Будет применено: +%1 хостов, -%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1281"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1288"/>
         <source>Space name cannot be empty.</source>
         <translation>O nome do espaço não pode estar vazio.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1292"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1299"/>
         <source>A space with the specified name already exists.</source>
         <translation>Já existe um espaço com o nome especificado.</translation>
     </message>
