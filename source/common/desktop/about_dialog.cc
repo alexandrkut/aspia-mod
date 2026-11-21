@@ -48,18 +48,6 @@ const char kModificationsLink[] = "https://github.com/alexandrkut/aspia-mod";
 
 const char* kDevelopers[] = { "Dmitry Chapyshev (dmitry@aspia.ru)" };
 
-const char* kTranslators[] =
-{
-    "Dmitry Chapyshev (Russian)",
-    "Felipe Borela (Portuguese Brazilian)",
-    "Giuseppe Bogetti (Italian)",
-    "Gregor Doroschenko (German)",
-    "Lyhyrda Myhaylo (Ukrainian)",
-    "Mark Jansen (Dutch)",
-    "Shun-An Lee (Chinese (Taiwan))",
-    "Wang Qiang (Chinese (China))"
-};
-
 const char* kThirdParty[] =
 {
     "asio &copy; 2003-2018 Christopher M. Kohlhoff; Boost Software License 1.0",
@@ -127,15 +115,14 @@ AboutDialog::AboutDialog(const QString& application_name, QWidget* parent)
         .arg(tr("You can also get a translation of GNU GPL license here:"), kGplTranslationLink);
 
     QString links =
-        QString("<b>%1</b><br>%2 <a href='%3'>%3</a><br>%4 <a href='%5'>%5</a>")
+        QString("<b>%1</b><br>%2 <a href='%3'>%3</a>")
         .arg(tr("Links"),
-             tr("Home page:"), kHomeLink,
              tr("Fork home page:"), kModificationsLink);
 
     QString developers =
-        createList(tr("Original software developer:"), kDevelopers, std::size(kDevelopers));
-    QString translators =
-        createList(tr("Translators"), kTranslators, std::size(kTranslators));
+        createList(tr("Original software developer:"), kDevelopers, std::size(kDevelopers)) +
+        QString("<br>%1 <a href='%2'>%2</a>")
+            .arg(tr("Home page:"), kHomeLink);
     QString third_party =
         createList(tr("Third-party components"), kThirdParty, std::size(kThirdParty));
     QString icons =
@@ -149,7 +136,6 @@ AboutDialog::AboutDialog(const QString& application_name, QWidget* parent)
     html += "<p>" + license_translation + "</p>";
     html += "<p>" + links + "</p>";
     html += "<p>" + developers + "</p>";
-    html += "<p>" + translators + "</p>";
     html += "<p>" + third_party + "</p>";
     html += "<p>" + icons + "</p>";
     html += "</body><html>";

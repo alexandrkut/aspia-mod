@@ -9,137 +9,132 @@
         <translation>Acerca de</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="63"/>
+        <location filename="../common/desktop/about_dialog.ui" line="64"/>
         <source>General</source>
         <translation>General</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="93"/>
+        <location filename="../common/desktop/about_dialog.ui" line="94"/>
         <source>Service Information</source>
         <translation>Información de servicio</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="115"/>
+        <location filename="../common/desktop/about_dialog.ui" line="116"/>
         <source>Donate!</source>
         <translation>¡Donar!</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="139"/>
+        <location filename="../common/desktop/about_dialog.ui" line="140"/>
         <source>Close</source>
         <translation>Cerrar</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="116"/>
+        <location filename="../common/desktop/about_dialog.cc" line="104"/>
         <source>Version: %1 (%2)</source>
         <translation>Versión: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="122"/>
+        <location filename="../common/desktop/about_dialog.cc" line="110"/>
         <source>You can get a copy of license here:</source>
         <translation>Puede obtener una copia de la licencia aquí:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="127"/>
+        <location filename="../common/desktop/about_dialog.cc" line="115"/>
         <source>You can also get a translation of GNU GPL license here:</source>
         <translation>También puede obtener una traducción de la licencia GNU GPL aquí:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="131"/>
+        <location filename="../common/desktop/about_dialog.cc" line="119"/>
         <source>Links</source>
         <translation>Enlaces</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="132"/>
+        <location filename="../common/desktop/about_dialog.cc" line="125"/>
         <source>Home page:</source>
         <translation>Página web:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="121"/>
+        <location filename="../common/desktop/about_dialog.cc" line="109"/>
         <source>Aspia-mod is free software released under GNU General Public License 3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="133"/>
+        <location filename="../common/desktop/about_dialog.cc" line="120"/>
         <source>Fork home page:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="136"/>
+        <location filename="../common/desktop/about_dialog.cc" line="123"/>
         <source>Original software developer:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="138"/>
-        <source>Translators</source>
-        <translation>Traductores</translation>
-    </message>
-    <message>
-        <location filename="../common/desktop/about_dialog.cc" line="140"/>
+        <location filename="../common/desktop/about_dialog.cc" line="127"/>
         <source>Third-party components</source>
         <translation>Componentes de terceros</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="142"/>
+        <location filename="../common/desktop/about_dialog.cc" line="129"/>
         <source>Graphics and images</source>
         <translation>Gráficos e imágenes</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="143"/>
+        <location filename="../common/desktop/about_dialog.cc" line="130"/>
         <source>Icons by %1</source>
         <translation>Iconos de %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="170"/>
+        <location filename="../common/desktop/about_dialog.cc" line="156"/>
         <source>Application</source>
         <translation>Aplicación</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="171"/>
+        <location filename="../common/desktop/about_dialog.cc" line="157"/>
         <source>Path: %1</source>
         <translation>Ruta: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="172"/>
+        <location filename="../common/desktop/about_dialog.cc" line="158"/>
         <source>Logging directory: %1</source>
         <translation>Directorio de registros: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="174"/>
+        <location filename="../common/desktop/about_dialog.cc" line="160"/>
         <source>Logging file: %1</source>
         <translation>Archivo de registro: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="179"/>
+        <location filename="../common/desktop/about_dialog.cc" line="165"/>
         <source>Build Information</source>
         <translation>Información de compilación</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="180"/>
+        <location filename="../common/desktop/about_dialog.cc" line="166"/>
         <source>Git branch: %1</source>
         <translation>Rama de Git: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="182"/>
+        <location filename="../common/desktop/about_dialog.cc" line="168"/>
         <source>Git commit: %1</source>
         <translation>Commit de Git: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="187"/>
+        <location filename="../common/desktop/about_dialog.cc" line="173"/>
         <source>Compilation</source>
         <translation>Compilación</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="188"/>
+        <location filename="../common/desktop/about_dialog.cc" line="174"/>
         <source>Compilation date: %1</source>
         <translation>Fecha de compilación: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="189"/>
+        <location filename="../common/desktop/about_dialog.cc" line="175"/>
         <source>Compilation time: %1</source>
         <translation>Hora de compilación: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="218"/>
+        <location filename="../common/desktop/about_dialog.cc" line="204"/>
         <source>Version Information</source>
         <translation>Información de versión</translation>
     </message>
