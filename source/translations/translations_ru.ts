@@ -55,8 +55,8 @@
     </message>
     <message>
         <location filename="../common/desktop/about_dialog.cc" line="109"/>
-        <source>Aspia-mod is free software released under GNU General Public License 3.</source>
-        <translation>Aspia-mod - свободное программное обеспечение, распространяющееся по лицензии GNU General Public License 3.</translation>
+        <source>Prephia is free software released under GNU General Public License 3.</source>
+        <translation>Prephia - свободное программное обеспечение, распространяющееся по лицензии GNU General Public License 3.</translation>
     </message>
     <message>
         <location filename="../common/desktop/about_dialog.cc" line="120"/>
@@ -690,8 +690,8 @@
     <name>ChatWidget</name>
     <message>
         <location filename="../common/desktop/chat_widget.ui" line="20"/>
-        <source>Aspia-mod Chat</source>
-        <translation>Чат Aspia-mod</translation>
+        <source>Prephia Chat</source>
+        <translation>Чат Prephia</translation>
     </message>
     <message>
         <location filename="../common/desktop/chat_widget.ui" line="159"/>
@@ -4197,8 +4197,8 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../host/ui/host_window.ui" line="26"/>
         <location filename="../host/ui/host_window.cc" line="927"/>
-        <source>Aspia-mod Host</source>
-        <translation>Хост Aspia-mod</translation>
+        <source>Prephia Host</source>
+        <translation>Хост Prephia</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="72"/>
@@ -4336,8 +4336,8 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../host/ui/host_window.cc" line="181"/>
-        <source>Aspia-mod Quick Support</source>
-        <translation>Быстрая поддержка Aspia-mod</translation>
+        <source>Prephia Quick Support</source>
+        <translation>Быстрая поддержка Prephia</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.cc" line="651"/>
@@ -5074,8 +5074,8 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../client/desktop/main_window.ui" line="20"/>
         <location filename="../client/desktop/main_window.cc" line="596"/>
-        <source>Aspia-mod Client</source>
-        <translation>Клиент Aspia-mod</translation>
+        <source>Prephia Client</source>
+        <translation>Клиент Prephia</translation>
     </message>
     <message>
         <location filename="../client/desktop/main_window.ui" line="94"/>
@@ -6049,8 +6049,8 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../host/ui/notifier_window.cc" line="571"/>
-        <source>Aspia-mod Host</source>
-        <translation>Хост Aspia-mod</translation>
+        <source>Prephia Host</source>
+        <translation>Хост Prephia</translation>
     </message>
 </context>
 <context>

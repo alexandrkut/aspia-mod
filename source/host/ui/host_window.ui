@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Aspia-mod Host</string>
+   <string>Prephia Host</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">

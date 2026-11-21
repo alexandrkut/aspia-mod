@@ -106,7 +106,7 @@ AboutDialog::AboutDialog(const QString& application_name, QWidget* parent)
 
     QString license =
         QString("%1<br>%2<br><a href='%3'>%3</a>")
-        .arg(tr("Aspia-mod is free software released under GNU General Public License 3."),
+        .arg(tr("Prephia is free software released under GNU General Public License 3."),
              tr("You can get a copy of license here:"),
              kGplLink);
 
