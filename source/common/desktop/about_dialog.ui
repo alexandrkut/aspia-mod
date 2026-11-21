@@ -43,7 +43,7 @@
    <item>
     <widget class="QLabel" name="label_copyright">
      <property name="text">
-      <string notr="true">Форк проекта https://aspia.org/,
+      <string notr="true">Форк проекта https://aspia.org/
 автор оригинального ПО никакого отношения к этому форку не имеет</string>
      </property>
      <property name="wordWrap">
