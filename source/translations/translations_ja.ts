@@ -55,7 +55,7 @@
     </message>
     <message>
         <location filename="../common/desktop/about_dialog.cc" line="109"/>
-        <source>Prephia is free software released under GNU General Public License 3.</source>
+        <source>Aspia-mod is free software released under GNU General Public License 3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -690,7 +690,7 @@
     <name>ChatWidget</name>
     <message>
         <location filename="../common/desktop/chat_widget.ui" line="20"/>
-        <source>Prephia Chat</source>
+        <source>Aspia-mod Chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4167,7 +4167,7 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../host/ui/host_window.ui" line="26"/>
         <location filename="../host/ui/host_window.cc" line="927"/>
-        <source>Prephia Host</source>
+        <source>Aspia-mod Host</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4306,7 +4306,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../host/ui/host_window.cc" line="181"/>
-        <source>Prephia Quick Support</source>
+        <source>Aspia-mod Quick Support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5017,7 +5017,7 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../client/desktop/main_window.ui" line="20"/>
         <location filename="../client/desktop/main_window.cc" line="596"/>
-        <source>Prephia Client</source>
+        <source>Aspia-mod Client</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5995,7 +5995,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../host/ui/notifier_window.cc" line="571"/>
-        <source>Prephia Host</source>
+        <source>Aspia-mod Host</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

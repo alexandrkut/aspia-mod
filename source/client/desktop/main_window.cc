@@ -593,7 +593,7 @@ void MainWindow::onHelp()
 void MainWindow::onAbout()
 {
     LOG(INFO) << "[ACTION] About clicked";
-    AutoQPointer<AboutDialog> dialog(new AboutDialog(tr("Prephia Client"), this));
+    AutoQPointer<AboutDialog> dialog(new AboutDialog(tr("Aspia-mod Client"), this));
     dialog->exec();
 }
 

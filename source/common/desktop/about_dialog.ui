@@ -23,7 +23,7 @@
       </font>
      </property>
      <property name="text">
-      <string notr="true">Prephia</string>
+      <string notr="true">Aspia-mod</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>

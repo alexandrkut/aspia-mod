@@ -178,7 +178,7 @@ HostWindow::HostWindow(QWidget* parent)
 #if defined(Q_OS_WINDOWS)
     if (PortableHost::isActive())
     {
-        setWindowTitle(tr("Prephia Quick Support"));
+        setWindowTitle(tr("Aspia-mod Quick Support"));
         setWindowFlag(Qt::WindowStaysOnTopHint);
 
         ui->action_terminal->setChecked(false);
@@ -924,7 +924,7 @@ void HostWindow::onAboutSystem()
 void HostWindow::onAbout()
 {
     LOG(INFO) << "[ACTION] About";
-    AutoQPointer<AboutDialog> dialog(new AboutDialog(tr("Prephia Host"), this));
+    AutoQPointer<AboutDialog> dialog(new AboutDialog(tr("Aspia-mod Host"), this));
     dialog->exec();
 }
 
