@@ -126,7 +126,9 @@ RouterHostDialog::RouterHostDialog(const RouterHost& host, QWidget* parent)
     checkbox_notify_files_->setVisible(is_admin);
 
     QGridLayout* grid = ui->gridLayout;
-    int row = 8;
+    // Row 8 holds the credentials note in the .ui; placing the checkboxes there
+    // would draw them over the note when saved credentials are switched off.
+    int row = 9;
     grid->addWidget(checkbox_notify_view_, row++, 0, 1, 2);
     grid->addWidget(checkbox_notify_control_, row++, 0, 1, 2);
     grid->addWidget(checkbox_notify_files_, row++, 0, 1, 2);
