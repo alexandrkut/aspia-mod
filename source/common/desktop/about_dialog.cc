@@ -207,12 +207,6 @@ AboutDialog::AboutDialog(const QString& application_name, QWidget* parent)
 
     service->setHtml(service_html);
 
-    connect(ui->push_button_donate, &QPushButton::clicked, this, []()
-    {
-        LOG(INFO) << "[ACTION] Donate button clicked";
-        QDesktopServices::openUrl(QUrl("https://aspia.org/donate"));
-    });
-
     connect(ui->push_button_close, &QPushButton::clicked, this, [this]()
     {
         LOG(INFO) << "[ACTION] Close button clicked";

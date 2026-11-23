@@ -111,17 +111,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="push_button_donate">
-       <property name="text">
-        <string>Donate!</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../resources/common.qrc">
-         <normaloff>:/img/love.svg</normaloff>:/img/love.svg</iconset>
-       </property>
-      </widget>
-     </item>
-     <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Orientation::Horizontal</enum>
