@@ -242,6 +242,7 @@ void serializeUser(const RouterUser& user, proto::router::User* out)
     out->set_group(user.group.toStdString());
     out->set_sessions(user.sessions);
     out->set_flags(user.flags);
+    out->set_user_type(user.user_type);
     out->set_email(user.email.toStdString());
 
     // A presentation-only flag derived from whether the user has a confirmed TOTP secret on file.

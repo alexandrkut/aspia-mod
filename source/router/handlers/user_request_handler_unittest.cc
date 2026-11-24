@@ -625,6 +625,34 @@ TEST_F(UserListTest, RecordsCarryNoCredentials)
     EXPECT_TRUE(user.verifier().empty());
 }
 
+//--------------------------------------------------------------------------------------------------
+// The account kind survives the round trip through the router: a Quick Support account is reported
+// as such, and an ordinary account stays regular.
+TEST_F(UserListTest, RecordsCarryUserType)
+{
+    RouterUser qs_user = RouterUser::create("qsuser", SecureString(kUserPassword));
+    qs_user.sessions = proto::router::SESSION_TYPE_OPERATOR;
+    qs_user.flags = User::ENABLED;
+    qs_user.user_type = proto::router::USER_TYPE_QUICK_SUPPORT;
+    ASSERT_EQ(db_.addUser(qs_user), proto::router::kErrorOk);
+
+    proto::router::UserListRequest qs_request;
+    qs_request.set_name("qsuser");
+
+    const proto::router::UserList qs_result = list(qs_request);
+    ASSERT_EQ(qs_result.error_code(), proto::router::kErrorOk);
+    ASSERT_EQ(qs_result.user_size(), 1);
+    EXPECT_EQ(qs_result.user(0).user_type(), proto::router::USER_TYPE_QUICK_SUPPORT);
+
+    proto::router::UserListRequest admin_request;
+    admin_request.set_name("admin");
+
+    const proto::router::UserList admin_result = list(admin_request);
+    ASSERT_EQ(admin_result.error_code(), proto::router::kErrorOk);
+    ASSERT_EQ(admin_result.user_size(), 1);
+    EXPECT_EQ(admin_result.user(0).user_type(), proto::router::USER_TYPE_REGULAR);
+}
+
 // The rotation of a session's own password over the client channel.
 class ChangePasswordTest : public RouterTestBase
 {
