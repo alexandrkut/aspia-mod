@@ -6917,8 +6917,8 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../client/desktop/qs_client_window.cc" line="123"/>
-        <source>Enter the ID shown by the support host.</source>
-        <translation>Введите ID, который показывает хост поддержки.</translation>
+        <source>Enter the ID shown by the host.</source>
+        <translation>Введите ID, который показывает хост.</translation>
     </message>
     <message>
         <location filename="../client/desktop/qs_client_window.cc" line="128"/>

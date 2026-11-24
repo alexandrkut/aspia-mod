@@ -120,7 +120,7 @@ void QsClientWindow::onRouterStatusChanged(RouterStatus status)
     switch (status)
     {
         case RouterStatus::ONLINE:
-            label_status_->setText(tr("Enter the ID shown by the support host."));
+            label_status_->setText(tr("Enter the ID shown by the host."));
             button_connect_->setEnabled(true);
             break;
 
