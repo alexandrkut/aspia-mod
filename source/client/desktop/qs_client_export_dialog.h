@@ -27,9 +27,11 @@ namespace Ui {
 class QsClientExportDialog;
 } // namespace Ui
 
-// Creates a new router account for one exported Quick Support client and writes a self-contained
-// copy of aspia_client.exe with the address and credentials baked into it. The account is new every
-// time: reusing a name would rotate the password and break the clients exported earlier.
+// Exports a self-contained copy of aspia_client.exe with the router address and credentials baked
+// into it. In the "create new user" mode a fresh Quick Support account is created on the router
+// (reusing a name would rotate the password and break the clients exported earlier); in the "use
+// existing user" mode the selected account is left untouched and only the password is sealed into
+// the file.
 class QsClientExportDialog final : public QDialog
 {
     Q_OBJECT

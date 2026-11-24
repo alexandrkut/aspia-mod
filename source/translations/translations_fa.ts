@@ -2758,7 +2758,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="233"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1038"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1053"/>
         <source>Scale</source>
         <translation>مقیاس</translation>
     </message>
@@ -2848,7 +2848,7 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="435"/>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="438"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="626"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="641"/>
         <source>Start recording</source>
         <translation>شروع ضبط</translation>
     </message>
@@ -2870,97 +2870,97 @@ Credentials replaced: %2</source>
         <translation>تعویض نشست</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="413"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="428"/>
         <source>Resolution selection</source>
         <translation>انتخاب وضوح</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1051"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1066"/>
         <source>Session settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1053"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1068"/>
         <source>Clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1055"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1070"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1057"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1072"/>
         <source>Cursor shape</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1059"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1074"/>
         <source>Cursor position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1061"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1076"/>
         <source>Effects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1063"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1078"/>
         <source>Wallpaper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1065"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1080"/>
         <source>Block input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1068"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1083"/>
         <source>Lock at disconnect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1071"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1086"/>
         <source>Enable keyboard shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1074"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1089"/>
         <source>Quality</source>
         <translation type="unfinished">کیفیت</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1077"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1092"/>
         <source>Auto</source>
         <translation type="unfinished">خودکار</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1079"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1094"/>
         <source>Low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1081"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1096"/>
         <source>Medium</source>
         <translation type="unfinished">متوسط</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1083"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1098"/>
         <source>High</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1325"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1340"/>
         <source>Session %1</source>
         <translation>نشست %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1325"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1340"/>
         <source>Session %1 (%2)</source>
         <translation>نشست %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="621"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="636"/>
         <source>Stop recording</source>
         <translation>توقف ضبط</translation>
     </message>
@@ -2971,49 +2971,49 @@ Credentials replaced: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="526"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="541"/>
         <source>Scripts</source>
         <translation>اسکریپت‌ها</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="589"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="604"/>
         <source>Are you sure you want to run &quot;%1&quot; on the remote computer?</source>
         <translation>آیا مطمئن هستید که می‌خواهید اسکریپت &quot;%1&quot; را در رایانه راه دور اجرا کنید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="853"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="868"/>
         <source>Are you sure you want to shutdown the remote computer?</source>
         <translation>آیا مطمئن هستید که می‌خواهید رایانه راه دور را خاموش کنید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="868"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="901"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="883"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="916"/>
         <source>Confirmation</source>
         <translation>تأیید</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="869"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="884"/>
         <source>Are you sure you want to reboot the remote computer?</source>
         <translation>آیا مطمئن هستید که می‌خواهید رایانه راه دور را راه‌اندازی مجدد کنید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="877"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="910"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="892"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="925"/>
         <source>Wait for host</source>
         <translation>انتظار برای میزبان</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="902"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="917"/>
         <source>Are you sure you want to reboot the remote computer in Safe Mode?</source>
         <translation>آیا مطمئن هستید که می‌خواهید رایانه راه دور را در حالت امن راه‌اندازی مجدد کنید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="934"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="949"/>
         <source>Are you sure you want to end the user session on the remote computer?</source>
         <translation>آیا مطمئن هستید که می‌خواهید نشست کاربر را در رایانه راه دور پایان دهید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="949"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="964"/>
         <source>Are you sure you want to lock the user session on the remote computer?</source>
         <translation>آیا مطمئن هستید که می‌خواهید نشست کاربر را در رایانه راه دور قفل کنید؟</translation>
     </message>
@@ -6028,7 +6028,7 @@ Credentials replaced: %2</source>
 <context>
     <name>NetworkWorker</name>
     <message>
-        <location filename="../client/workers/network_worker.cc" line="390"/>
+        <location filename="../client/workers/network_worker.cc" line="391"/>
         <source>Failed to connect to the relay server</source>
         <translation>اتصال به سرور رله ناموفق بود</translation>
     </message>
@@ -6667,78 +6667,151 @@ Credentials replaced: %2</source>
 <context>
     <name>QsClientExportDialog</name>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="73"/>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="186"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="88"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="404"/>
         <source>Export Preconfigured QS Client</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="76"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="91"/>
         <source>A new account is created on the router for this client. The password is generated automatically and stored only in the exported file. The suffix &quot;-qs&quot; is added to the name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="93"/>
-        <source>Name:</source>
-        <translation type="unfinished">نام:</translation>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="97"/>
+        <source>Create new user</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="94"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="98"/>
+        <source>Use existing user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="120"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="207"/>
+        <source>Show</source>
+        <translation type="unfinished">نمایش</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="121"/>
+        <source>Generate password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="130"/>
+        <source>The password must match the password of this account on the router. The password on the router is not changed - if it differs, the QS client will not connect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="148"/>
+        <source>User:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="149"/>
+        <source>Password:</source>
+        <translation type="unfinished">گذرواژه:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="150"/>
         <source>Router address:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="96"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="152"/>
         <source>Export...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="97"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="153"/>
         <source>Cancel</source>
         <translation type="unfinished">لغو</translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="126"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="179"/>
+        <source>A new account is created on the router for this client. The password is stored only in the exported file. The suffix &quot;-qs&quot; is added to the name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="185"/>
+        <source>An existing account is used. The account is not created or changed; only the password is sealed into the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="202"/>
+        <source>Hide</source>
+        <translation type="unfinished">پنهان کردن</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="228"/>
+        <source>Loading users...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="258"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="306"/>
+        <source>No Quick Support users found on the router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="269"/>
+        <source>No router session.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="285"/>
         <source>An administrator session with the router is required.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="133"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="297"/>
         <source>The user name is invalid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="142"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="316"/>
         <source>The router address is invalid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="169"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="324"/>
+        <source>The password must be 8 to 64 characters long.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="353"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="387"/>
         <source>The router did not answer the user lookup.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="175"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="359"/>
         <source>A user with this name already exists on the router.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="186"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="393"/>
+        <source>The selected user no longer exists on the router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="404"/>
         <source>Executable files (*.exe)</source>
         <translation type="unfinished">فایل‌های اجرایی (*.exe)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="202"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="418"/>
         <source>Failed to export the Quick Support client.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="237"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="453"/>
         <source>Failed to create the user on the router.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="241"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="458"/>
         <source>The Quick Support client has been exported.</source>
         <translation type="unfinished"></translation>
     </message>

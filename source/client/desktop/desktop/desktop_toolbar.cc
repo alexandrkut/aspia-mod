@@ -164,6 +164,12 @@ DesktopToolBar::DesktopToolBar(QWidget* parent)
 
     createAdditionalMenu();
 
+    if (Application::isQuickSupportMode())
+    {
+        ui->action_file_transfer->setVisible(false);
+        ui->action_file_transfer->setEnabled(false);
+    }
+
     connect(ui->action_cad, &QAction::triggered, this, &DesktopToolBar::onCtrlAltDel);
 
     connect(ui->action_terminal, &QAction::triggered, this, [this]()
@@ -253,6 +259,9 @@ void DesktopToolBar::enablePowerControl(bool enable)
 //--------------------------------------------------------------------------------------------------
 void DesktopToolBar::enableTextChat(bool enable)
 {
+    if (Application::isQuickSupportMode())
+        enable = false;
+
     LOG(INFO) << "enableTextChat:" << enable;
     ui->action_text_chat->setVisible(enable);
     ui->action_text_chat->setEnabled(enable);
@@ -262,6 +271,9 @@ void DesktopToolBar::enableTextChat(bool enable)
 //--------------------------------------------------------------------------------------------------
 void DesktopToolBar::enableTerminal(bool enable)
 {
+    if (Application::isQuickSupportMode())
+        enable = false;
+
     LOG(INFO) << "enableTerminal:" << enable;
     ui->action_terminal->setVisible(enable);
     ui->action_terminal->setEnabled(enable);
@@ -271,6 +283,9 @@ void DesktopToolBar::enableTerminal(bool enable)
 //--------------------------------------------------------------------------------------------------
 void DesktopToolBar::enableSystemInfo(bool enable)
 {
+    if (Application::isQuickSupportMode())
+        enable = false;
+
     LOG(INFO) << "enableSystemInfo:" << enable;
     ui->action_system_info->setVisible(enable);
     ui->action_system_info->setEnabled(enable);

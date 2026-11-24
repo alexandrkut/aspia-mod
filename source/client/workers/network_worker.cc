@@ -27,6 +27,7 @@
 #include "base/peer/relay_peer.h"
 #include "client/storage/database.h"
 #include "client/router/router_controller.h"
+#include "client/application.h"
 #include "client/session_state.h"
 #include "client/udp_attempt.h"
 #include "client/storage/database.h"
@@ -567,7 +568,10 @@ void NetworkWorker::tcpChannelReady()
 
     // The number of the build of the line of the versions tells nothing about the compatibility,
     // so the versions are compared by the three numbers that matter.
-    if (compatibilityVersion(host_version) > compatibilityVersion(client_version))
+    // QS client is portable and cannot be updated in the field, so it must work with newer hosts;
+    // the version-mismatch protection is kept for the regular client.
+    if (!Application::isQuickSupportMode() &&
+        compatibilityVersion(host_version) > compatibilityVersion(client_version))
     {
         LOG(ERROR) << "Version mismatch. Host:" << host_version << "Client:" << client_version;
         emit sig_statusChanged(Status::VERSION_MISMATCH);

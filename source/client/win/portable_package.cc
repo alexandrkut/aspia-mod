@@ -33,7 +33,7 @@ namespace {
 const wchar_t kResourceName[] = L"ASPIA_MOD_QS_CLIENT_CONFIG";
 const WORD kResourceLanguage = MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL);
 const wchar_t kIconResourceName[] = L"IDI_ICON1";
-const char kQuickSupportIcon[] = ":/img/aspia-qs.ico";
+const char kApplicationIcon[] = ":/img/aspia.ico";
 
 // The password has to come back out of the package to log in, so this is obfuscation rather than
 // protection against someone who has the file. The point is to keep the account from showing up
@@ -93,7 +93,7 @@ DataCryptor packageCryptor()
 //--------------------------------------------------------------------------------------------------
 bool replaceIcon(HANDLE update)
 {
-    QFile file(kQuickSupportIcon);
+    QFile file(kApplicationIcon);
     if (!file.open(QIODevice::ReadOnly))
     {
         LOG(ERROR) << "Unable to open icon:" << file.errorString();
