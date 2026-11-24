@@ -211,6 +211,10 @@ public:
     QString readSetting(const QString& name, bool* found = nullptr) const;
     bool writeSetting(const QString& name, const QString& value);
 
+    // Keeps the address book in a shared in-memory SQLite database. Used by the portable Quick
+    // Support client, which has no settings or files of its own. Must be called before instance().
+    static void setQuickSupportMode();
+
 private:
     friend class DatabaseMigration;
     friend class DatabaseTestPeer;

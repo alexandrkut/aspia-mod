@@ -333,17 +333,24 @@ void AuthorizationDialog::updateModes()
 
     const bool has_choice = one_time_offered || saved_credentials_offered;
 
-    ui->radio_user_password->setVisible(has_choice);
+    ui->radio_user_password->setVisible(has_choice && !one_time_password_only_);
     ui->radio_one_time_password->setVisible(one_time_offered);
-    ui->radio_saved_credentials->setVisible(saved_credentials_offered);
+    ui->radio_saved_credentials->setVisible(saved_credentials_offered && !one_time_password_only_);
 
     ui->radio_user_password->setEnabled(!one_time_password_only_);
     ui->radio_saved_credentials->setEnabled(!one_time_password_only_);
 
     ui->label_one_time_password->setVisible(one_time_offered);
     ui->edit_one_time_password->setVisible(one_time_offered);
-    ui->label_credential->setVisible(saved_credentials_offered);
-    ui->combo_credential->setVisible(saved_credentials_offered);
+    ui->label_credential->setVisible(saved_credentials_offered && !one_time_password_only_);
+    ui->combo_credential->setVisible(saved_credentials_offered && !one_time_password_only_);
+
+    // In the quick support client the host has no named accounts the operator could use, so the
+    // user name and password fields are not shown at all.
+    ui->label_username->setVisible(!one_time_password_only_);
+    ui->edit_username->setVisible(!one_time_password_only_);
+    ui->label_password->setVisible(!one_time_password_only_);
+    ui->edit_password->setVisible(!one_time_password_only_);
 
     const bool one_time = usesOneTimePassword();
     const bool saved = usesSavedCredentials();

@@ -53,6 +53,13 @@ const User User::kInvalidUser;
 
 //--------------------------------------------------------------------------------------------------
 // static
+bool User::isQuickSupportName(const QString& username)
+{
+    return username.endsWith(QLatin1String("-qs"), Qt::CaseInsensitive);
+}
+
+//--------------------------------------------------------------------------------------------------
+// static
 bool User::isValidUserName(const QString& username)
 {
     qsizetype length = username.length();

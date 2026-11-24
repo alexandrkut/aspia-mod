@@ -50,8 +50,13 @@
 #include "base/peer/user.h"
 #include "client/application.h"
 #include "client/mcp/mcp_worker.h"
+#if defined(Q_OS_WINDOWS)
+#include "client/desktop/qs_client_export_dialog.h"
+#endif
 #include "client/desktop/ui_settings_tab.h"
 #include "client/desktop/update_server_dialog.h"
+#include "client/router/router_controller.h"
+#include "client/router/router_session.h"
 #include "client/storage/database.h"
 #include "client/storage/master_password.h"
 #include "client/storage/system_settings.h"
@@ -361,6 +366,9 @@ SettingsTab::SettingsTab(QWidget* parent)
     connect(ui->checkbox_auto_unlock, &QCheckBox::toggled, this, &SettingsTab::onAutoUnlockToggled);
     connect(ui->button_select_backup_dir, &QToolButton::clicked, this, &SettingsTab::onSelectBackupPath);
     connect(ui->button_save_general, &QPushButton::clicked, this, &SettingsTab::onSaveGeneral);
+#if defined(Q_OS_WINDOWS)
+    connect(ui->button_export_qs_client, &QPushButton::clicked, this, &SettingsTab::onExportQsClient);
+#endif
     connect(ui->button_change_master_password, &QPushButton::clicked,
             this, &SettingsTab::onChangeMasterPassword);
 
@@ -933,6 +941,17 @@ void SettingsTab::onCheckForUpdatesClicked()
     dialog->exec();
 }
 
+#if defined(Q_OS_WINDOWS)
+//--------------------------------------------------------------------------------------------------
+void SettingsTab::onExportQsClient()
+{
+    LOG(INFO) << "[ACTION] Export Quick Support client";
+
+    QsClientExportDialog dialog(this);
+    dialog.exec();
+}
+#endif // defined(Q_OS_WINDOWS)
+
 //--------------------------------------------------------------------------------------------------
 void SettingsTab::onUpdateServerClicked()
 {
@@ -1107,6 +1126,9 @@ void SettingsTab::loadRouter()
     ui->edit_router_username->setText(router.username());
     ui->edit_router_password->setPassword(router.password());
     ui->checkbox_router_enabled->setChecked(router.isEnabled());
+
+    // Creating an account on the router is an administrator operation.
+    ui->button_export_qs_client->setEnabled(session_type == proto::router::SESSION_TYPE_ADMIN);
 
     if (found == Database::FindResult::UNREADABLE)
         LOG(ERROR) << "Data of the router could not be read";

@@ -35,6 +35,7 @@ struct RequestResult;
 namespace proto::router {
 class ChangePasswordRequest;
 class CheckHostStatus;
+class ClientToRouter;
 class ConnectionRequest;
 class GroupListRequest;
 class HostListRequest;
@@ -43,6 +44,7 @@ class TempHostListRequest;
 class TwoFactorResponse;
 class WorkspaceListRequest;
 enum SessionType : int;
+enum UserType : int;
 } // namespace proto::router
 
 class ClientOperator : public QObject
@@ -71,6 +73,11 @@ public:
     const std::string& userName() const;
     qint64 userId() const;
     proto::router::SessionType sessionType() const;
+
+    // The kind of the account behind the session, as stored on the router. Reported to admins in
+    // the client list; it is not taken from anything the client sends.
+    void setUserType(proto::router::UserType type) { user_type_ = type; }
+    proto::router::UserType userType() const { return user_type_; }
 
     qint64 sessionId() const { return session_id_; }
     const std::string& address() const { return tcp_channel_->peerAddress(); }
@@ -101,6 +108,11 @@ protected:
     AccessLog& accessLog() const { return access_log_; }
 
     virtual void onSessionMessage(quint8 channel_id, const QByteArray& buffer);
+
+    // Hooks for sessions that may use only part of the client protocol. The defaults allow
+    // everything; a restricted session narrows them rather than duplicating the dispatch below.
+    virtual bool isMessageAllowed(const proto::router::ClientToRouter& message) const;
+    virtual bool isHostIdAllowed(HostId host_id) const;
 
     // The identity the request handlers work with. Taken from the authenticated channel, never
     // from the request itself.
@@ -153,6 +165,7 @@ private:
     bool two_factor_completed_ = false;
     bool two_factor_required_ = true;
     qint64 token_id_ = 0;
+    proto::router::UserType user_type_ = static_cast<proto::router::UserType>(0);
 
     TimePoint offer_window_start_;
     int offer_count_ = 0;

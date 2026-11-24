@@ -27,12 +27,14 @@
 
 #include "base/serialization.h"
 #include "base/crypto/totp.h"
+#include "base/peer/router_user.h"
 #include "router/client_admin.h"
 #include "router/client_operator.h"
 #include "router/loopback_channel.h"
 #include "router/router_test_base.h"
 #include "router/router_test_worker.h"
 #include "router/handlers/two_factor_handler.h"
+#include "proto/router.h"
 
 namespace {
 
@@ -92,6 +94,43 @@ TEST(ClientWorkerTest, UnknownSessionSelectsNothing)
 {
     EXPECT_TRUE(ClientWorker::sessionsToStop(kSessions, 12345, kAdminSession).empty());
     EXPECT_TRUE(ClientWorker::sessionsToStop({}, 1, kAdminSession).empty());
+}
+
+//--------------------------------------------------------------------------------------------------
+// The type of the account decides which session class handles the login, whatever role the account
+// also carries. An exported client signs in as an operator, but a manager or administrator account
+// of that type must not regain the management channels by changing its role.
+TEST(ClientWorkerTest, QuickSupportTypeWinsOverTheLoginRole)
+{
+    RouterUser account;
+    account.name = QStringLiteral("boss-qs");
+    account.sessions = proto::router::SESSION_TYPE_ADMIN;
+    account.user_type = proto::router::USER_TYPE_QUICK_SUPPORT;
+
+    EXPECT_TRUE(ClientWorker::isQuickSupportAccount(account));
+}
+
+//--------------------------------------------------------------------------------------------------
+// The suffix is a readable hint in the client list, not a permission. An account named like a
+// Quick Support client but of the regular type keeps the rights of its role.
+TEST(ClientWorkerTest, QuickSupportNameDoesNotRestrictTheSession)
+{
+    RouterUser account;
+    account.name = QStringLiteral("boss-qs");
+    account.sessions = proto::router::SESSION_TYPE_ADMIN;
+
+    EXPECT_FALSE(ClientWorker::isQuickSupportAccount(account));
+}
+
+//--------------------------------------------------------------------------------------------------
+// A plain account of any role stays with its own session, even if an old bit is left in its mask.
+TEST(ClientWorkerTest, OrdinaryAccountKeepsItsRole)
+{
+    RouterUser account;
+    account.name = QStringLiteral("boss");
+    account.sessions = proto::router::SESSION_TYPE_OPERATOR | 32;
+
+    EXPECT_FALSE(ClientWorker::isQuickSupportAccount(account));
 }
 
 // The list of live sessions, the stop command and the timer are private to the worker; the peer

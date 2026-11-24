@@ -19,11 +19,32 @@
 #ifndef CLIENT_STORAGE_USER_SETTINGS_H
 #define CLIENT_STORAGE_USER_SETTINGS_H
 
+#include <QByteArray>
+#include <QMap>
 #include <QSettings>
+#include <QVariant>
+
+#include <memory>
 
 namespace proto::peer {
 enum SessionType : int;
 } // namespace proto::peer
+
+// The same tiny read/write surface as QSettings, backed by a map when the caller asks for no disk
+// access. Only the keys used by UserSettings need to be supported.
+class UserSettingsStore
+{
+public:
+    explicit UserSettingsStore(bool in_memory);
+
+    QVariant value(const QString& key,
+                   const QVariant& default_value = QVariant()) const;
+    void setValue(const QString& key, const QVariant& value);
+
+private:
+    std::unique_ptr<QSettings> settings_;
+    QMap<QString, QVariant> values_;
+};
 
 // Settings of the user that are common to all databases.
 class UserSettings
@@ -31,6 +52,9 @@ class UserSettings
 public:
     UserSettings();
     ~UserSettings();
+
+    // Keeps the settings in memory for the portable QS client, which has no settings to store.
+    static void setQuickSupportMode();
 
     QString locale() const;
     void setLocale(const QString& locale);
@@ -102,7 +126,7 @@ public:
     void setMcpSessionTypes(quint32 session_types);
 
 private:
-    QSettings settings_;
+    UserSettingsStore settings_;
     Q_DISABLE_COPY_MOVE(UserSettings)
 };
 

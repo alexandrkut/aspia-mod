@@ -352,7 +352,8 @@ void HostWorker::publishHostState(HostId host_id)
         host = nullptr;
 
     if (host)
-        SharedHosts::instance().add(host_id, host->version(), host->address(), host->computerName());
+        SharedHosts::instance().add(host_id, host->version(), host->address(), host->computerName(),
+                                    host->isPortable());
     else
         SharedHosts::instance().remove(host_id);
 }

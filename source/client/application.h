@@ -33,6 +33,10 @@ public:
     bool isMigrationFailed() const { return migration_failed_; }
     void loadSettings();
 
+    // A preconfigured Quick Support client must not download the full client over itself.
+    static void setQuickSupportMode(bool enable);
+    static bool isQuickSupportMode();
+
 public slots:
     void activateWindow();
 
@@ -52,6 +56,8 @@ signals:
                         const QString& password);
 
 private:
+    static bool is_quick_support_;
+
     bool migration_failed_ = false;
 
     Q_DISABLE_COPY_MOVE(Application)

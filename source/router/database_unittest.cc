@@ -173,6 +173,81 @@ TEST_F(RouterDatabaseTest, AddUserStoresRecord)
     EXPECT_EQ(stored.sessions, proto::router::SESSION_TYPE_OPERATOR);
     EXPECT_EQ(stored.flags, quint32(User::ENABLED));
     EXPECT_EQ(stored.verifier, user.verifier);
+    EXPECT_EQ(stored.user_type, proto::router::USER_TYPE_REGULAR);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Accounts exported by older builds carry bit 32 in the session mask. Opening such a database once
+// lifts that marker into the type column and clears the bit, so no reader has to know the bit.
+TEST(RouterDatabaseLegacyTest, QuickSupportBitBecomesTheAccountType)
+{
+    QTemporaryDir dir;
+    ASSERT_TRUE(dir.isValid());
+    const QString file_path = dir.path() + "/router.db3";
+
+    {
+        SqlDatabase raw;
+        ASSERT_TRUE(raw.open(file_path));
+        ASSERT_TRUE(raw.exec(
+            "CREATE TABLE \"users\" ("
+            "\"id\" INTEGER NOT NULL,"
+            "\"name\" TEXT NOT NULL UNIQUE,"
+            "\"group\" TEXT NOT NULL DEFAULT '',"
+            "\"salt\" BLOB NOT NULL,"
+            "\"verifier\" BLOB NOT NULL,"
+            "\"sessions\" INTEGER NOT NULL DEFAULT 0,"
+            "\"flags\" INTEGER NOT NULL DEFAULT 0,"
+            "\"otp_secret\" BLOB NOT NULL DEFAULT X'',"
+            "\"otp_counter\" INTEGER NOT NULL DEFAULT 0,"
+            "\"email\" TEXT NOT NULL DEFAULT '',"
+            "PRIMARY KEY(\"id\" AUTOINCREMENT))"));
+        ASSERT_TRUE(raw.exec(
+            "INSERT INTO users (name, \"group\", salt, verifier, sessions, flags, email) "
+            "VALUES ('legacy-qs', '', X'01', X'02', 34, 1, '')"));
+    }
+
+    Database db;
+    ASSERT_TRUE(db.open(file_path));
+
+    RouterUser user;
+    ASSERT_EQ(db.findUser(QStringLiteral("legacy-qs"), &user), proto::router::kErrorOk);
+    EXPECT_EQ(user.user_type, proto::router::USER_TYPE_QUICK_SUPPORT);
+    EXPECT_EQ(user.sessions, proto::router::SESSION_TYPE_OPERATOR);
+}
+
+//--------------------------------------------------------------------------------------------------
+// The account type is saved next to the level. A modify of an unrelated field must not change it;
+// only a request that also names a level may change the type.
+TEST_F(RouterDatabaseTest, QuickSupportTypeIsStoredAndKeptWithoutALevel)
+{
+    RouterUser user = makeUser("support-qs", proto::router::SESSION_TYPE_OPERATOR);
+    user.user_type = proto::router::USER_TYPE_QUICK_SUPPORT;
+    ASSERT_EQ(db_.addUser(user), proto::router::kErrorOk);
+
+    const RouterUser stored = findUser("support-qs");
+    EXPECT_EQ(stored.user_type, proto::router::USER_TYPE_QUICK_SUPPORT);
+    EXPECT_EQ(stored.sessions, proto::router::SESSION_TYPE_OPERATOR);
+
+    RouterUser email_only;
+    email_only.entry_id = stored.entry_id;
+    email_only.flags = User::ENABLED;
+    email_only.email = "support@example.com";
+    bool access_changed = true;
+    ASSERT_EQ(db_.modifyUser(email_only, nullptr, &access_changed), proto::router::kErrorOk);
+    EXPECT_FALSE(access_changed);
+    EXPECT_EQ(findUser(stored.entry_id).user_type, proto::router::USER_TYPE_QUICK_SUPPORT);
+
+    // The level stays the same, but leaving the Quick Support type must still stop the live
+    // sessions of this account: they were opened with only the portable-host channels.
+    RouterUser promoted;
+    promoted.entry_id = stored.entry_id;
+    promoted.sessions = proto::router::SESSION_TYPE_OPERATOR;
+    promoted.flags = User::ENABLED;
+    promoted.user_type = proto::router::USER_TYPE_REGULAR;
+    access_changed = false;
+    ASSERT_EQ(db_.modifyUser(promoted, nullptr, &access_changed), proto::router::kErrorOk);
+    EXPECT_TRUE(access_changed);
+    EXPECT_EQ(findUser(stored.entry_id).user_type, proto::router::USER_TYPE_REGULAR);
 }
 
 //--------------------------------------------------------------------------------------------------

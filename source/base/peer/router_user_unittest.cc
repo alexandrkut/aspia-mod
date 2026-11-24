@@ -130,6 +130,7 @@ TEST(router_user_test, serialize_parseFrom_roundtrip)
     original.entry_id = 42;
     original.sessions = 5;
     original.flags = User::ENABLED;
+    original.user_type = proto::router::USER_TYPE_QUICK_SUPPORT;
 
     proto::router::User proto_user = original.serialize();
     RouterUser restored = RouterUser::parseFrom(proto_user);
@@ -141,6 +142,7 @@ TEST(router_user_test, serialize_parseFrom_roundtrip)
     EXPECT_EQ(restored.verifier, original.verifier);
     EXPECT_EQ(restored.sessions, original.sessions);
     EXPECT_EQ(restored.flags, original.flags);
+    EXPECT_EQ(restored.user_type, proto::router::USER_TYPE_QUICK_SUPPORT);
     EXPECT_TRUE(restored.email.isEmpty());
 
     original.email = "bob@example.com";
@@ -159,6 +161,7 @@ TEST(router_user_test, serialize_default_router_user)
     EXPECT_TRUE(proto_user.verifier().empty());
     EXPECT_EQ(proto_user.sessions(), 0u);
     EXPECT_EQ(proto_user.flags(), 0u);
+    EXPECT_EQ(proto_user.user_type(), proto::router::USER_TYPE_REGULAR);
     EXPECT_TRUE(proto_user.email().empty());
 }
 

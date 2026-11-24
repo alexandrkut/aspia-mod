@@ -184,6 +184,20 @@ TEST_F(UserListModelTest, SessionTypesAreListed)
 }
 
 //--------------------------------------------------------------------------------------------------
+// A Quick Support account is stored as an operator, but the Users tab names its own kind.
+TEST_F(UserListModelTest, QuickSupportAccountShowsItsOwnKind)
+{
+    proto::router::UserList list;
+    addUser(&list, 1, "support-qs", User::ENABLED, proto::router::SESSION_TYPE_OPERATOR);
+    list.mutable_user(0)->set_user_type(proto::router::USER_TYPE_QUICK_SUPPORT);
+
+    model()->setUsers(list);
+
+    ASSERT_EQ(model()->rowCount(), 1);
+    EXPECT_EQ(textAt(model(), 0, Column::SESSIONS), QString("Quick Support"));
+}
+
+//--------------------------------------------------------------------------------------------------
 // An account with no kind of session at all is possible, and the column then says nothing rather
 // than something wrong.
 TEST_F(UserListModelTest, UserWithoutSessionTypesShowsNothing)

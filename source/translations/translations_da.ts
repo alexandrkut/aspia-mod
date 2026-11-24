@@ -1185,6 +1185,10 @@
         <source>&quot;%1&quot; is both the name of a host and the ID of another. Connect by the record ID of the host you mean.</source>
         <translation type="unfinished"></translation>
     </message>
+<message>
+        <source>Unable to determine the location of the Quick Support client.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ClientListModel</name>
@@ -1222,6 +1226,14 @@
         <location filename="../client/desktop/management/client_list_model.cc" line="160"/>
         <source>Operating System</source>
         <translation>Operativsystem</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quick Support</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8707,6 +8719,10 @@ Sections: %2. Users in file: %3.</source>
         <source>Never</source>
         <translation>Aldrig</translation>
     </message>
+    <message>
+        <source>Quick Support</source>
+        <translation>Quick Support</translation>
+    </message>
 </context>
 <context>
     <name>RouterUsersWidget</name>
@@ -9869,6 +9885,10 @@ Sections: %2. Users in file: %3.</source>
         <location filename="../client/desktop/settings_tab.cc" line="1439"/>
         <source>Unable to save profile.</source>
         <translation>Kan ikke gemme profilen.</translation>
+    </message>
+    <message>
+        <source>Export Quick Support Client</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -15598,6 +15618,128 @@ Vil du slette databasen?</translation>
         <location filename="../client/workers/video_worker.cc" line="48"/>
         <source>An error occurred while writing the recording.</source>
         <translation>Der opstod en fejl under skrivning af optagelsen.</translation>
+    </message>
+</context>
+<context>
+    <name>QsClientExportDialog</name>
+    <message>
+        <source>Export Quick Support Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A new account is created on the router for this client. The password is generated automatically and stored only in the exported file. The suffix "-qs" is added to the name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Router address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An administrator session with the router is required.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The user name is invalid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The router address is invalid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The router did not answer the user lookup.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A user with this name already exists on the router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Executable files (*.exe)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to export the Quick Support client.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to create the user on the router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Quick Support client has been exported.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QsClientWindow</name>
+<message>
+        <source>123 456 789</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Desktop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting to the router...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Host ID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Session:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the ID shown by the support host.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The router data is damaged.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waiting for the two-factor code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The router is unavailable. Retrying...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter a valid Quick Support ID.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The router is not connected yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quick Support %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

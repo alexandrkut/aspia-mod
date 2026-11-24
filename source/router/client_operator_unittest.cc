@@ -16,16 +16,22 @@
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 //
 
+#include <QVersionNumber>
+
 #include <memory>
 #include <optional>
 
+#include "base/peer/host_id.h"
 #include "base/serialization.h"
 #include "base/crypto/totp.h"
 #include "proto/router_admin.h"
+#include "proto/router_constants.h"
 #include "proto/router_manager.h"
 #include "router/client_admin.h"
 #include "router/client_manager.h"
+#include "router/client_qs_client.h"
 #include "router/loopback_channel.h"
+#include "router/shared_hosts.h"
 #include "router/router_test_base.h"
 #include "router/router_test_worker.h"
 #include "router/handlers/two_factor_handler.h"
@@ -56,14 +62,16 @@ protected:
     // channel belongs to the session, so it goes away with it.
     template <typename ClientT>
     void withClient(const RouterUser& user, quint32 session_type,
-                    const std::function<void(ClientT&, LoopbackChannel*)>& body)
+                    const std::function<void(ClientT&, LoopbackChannel*)>& body,
+                    bool two_factor_required = true)
     {
         worker_->invoke([&]()
         {
             LoopbackChannel channel(user, kUserPassword, session_type);
             ASSERT_NE(channel.routerEnd(), nullptr);
 
-            ClientT client(worker_->database(), worker_->accessLog(), channel.routerEnd(), nullptr);
+            ClientT client(worker_->database(), worker_->accessLog(), channel.routerEnd(), nullptr,
+                           two_factor_required);
             body(client, &channel);
         });
     }
@@ -71,9 +79,10 @@ protected:
     // The common case: the session of the built-in administrator.
     template <typename ClientT>
     void withClient(quint32 session_type,
-                    const std::function<void(ClientT&, LoopbackChannel*)>& body)
+                    const std::function<void(ClientT&, LoopbackChannel*)>& body,
+                    bool two_factor_required = true)
     {
-        withClient<ClientT>(admin_, session_type, body);
+        withClient<ClientT>(admin_, session_type, body, two_factor_required);
     }
 
     // The reply the session sent last, parsed as |MessageT|.
@@ -1187,4 +1196,93 @@ TEST_F(ClientOperatorTest, RefusedRequestsDoNotSpendTheBudget)
 
         EXPECT_FALSE(ClientOperatorTestPeer::isOfferLimitReached(client, Clock::now()));
     });
+}
+
+//--------------------------------------------------------------------------------------------------
+// The account of an exported client is handed to strangers, so the session answers one question
+// only. Everything else the ordinary client protocol can ask is dropped without a reply.
+TEST_F(ClientOperatorTest, QuickSupportSessionServesOnlyConnectionRequests)
+{
+    withClient<ClientQsClient>(proto::router::SESSION_TYPE_OPERATOR,
+                               [](ClientQsClient& client, LoopbackChannel* channel)
+    {
+        client.start();
+        channel->clearSent();
+
+        channel->receive(proto::router::CHANNEL_ID_CLIENT, workspaceListRequest(1));
+        channel->receive(proto::router::CHANNEL_ID_CLIENT, checkHostStatusRequest(2, kMinTempHostId));
+        channel->receive(proto::router::CHANNEL_ID_CLIENT, tempHostListRequest(3, true));
+
+        EXPECT_TRUE(channel->nothingSent());
+    });
+}
+
+//--------------------------------------------------------------------------------------------------
+// The flag is enforced in the session object itself. Even a caller that constructs the session as
+// if the role required a code gets straight through: there is nobody to enter it.
+TEST_F(ClientOperatorTest, QuickSupportSessionSkipsTheSecondFactor)
+{
+    withClient<ClientQsClient>(proto::router::SESSION_TYPE_OPERATOR,
+                               [](ClientQsClient& client, LoopbackChannel* channel)
+    {
+        client.start();
+
+        const std::optional<proto::router::RouterToClient> message =
+            lastMessage<proto::router::RouterToClient>(channel, proto::router::CHANNEL_ID_CLIENT);
+        ASSERT_TRUE(message.has_value());
+        EXPECT_TRUE(message->has_login_result());
+        EXPECT_FALSE(message->has_two_factor_challenge());
+        EXPECT_TRUE(client.isTwoFactorCompleted());
+    }, true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// A temporary ID chosen by the client is not enough. The host must have announced itself as
+// portable when it connected; another temp host stays unreachable.
+TEST_F(ClientOperatorTest, QuickSupportSessionRefusesANonPortableHost)
+{
+    const HostId host_id = kMinTempHostId;
+    SharedHosts::instance().add(host_id, QVersionNumber(), "127.0.0.1:8050", "ordinary", false);
+
+    withClient<ClientQsClient>(proto::router::SESSION_TYPE_OPERATOR,
+                               [host_id](ClientQsClient& client, LoopbackChannel* channel)
+    {
+        client.start();
+        channel->clearSent();
+
+        channel->receive(proto::router::CHANNEL_ID_CLIENT, connectionRequest(1, host_id));
+
+        const std::optional<proto::router::RouterToClient> message =
+            lastMessage<proto::router::RouterToClient>(channel, proto::router::CHANNEL_ID_CLIENT);
+        ASSERT_TRUE(message.has_value());
+        ASSERT_TRUE(message->has_connection_offer());
+        EXPECT_EQ(message->connection_offer().error_code(), proto::router::kErrorAccessDenied);
+    });
+
+    SharedHosts::instance().remove(host_id);
+}
+
+//--------------------------------------------------------------------------------------------------
+// The ID must also be from the temporary range even when the host there is portable.
+TEST_F(ClientOperatorTest, QuickSupportSessionRefusesAPermanentHost)
+{
+    const HostId host_id = kMinTempHostId - 1;
+    SharedHosts::instance().add(host_id, QVersionNumber(), "127.0.0.1:8050", "portable", true);
+
+    withClient<ClientQsClient>(proto::router::SESSION_TYPE_OPERATOR,
+                               [host_id](ClientQsClient& client, LoopbackChannel* channel)
+    {
+        client.start();
+        channel->clearSent();
+
+        channel->receive(proto::router::CHANNEL_ID_CLIENT, connectionRequest(1, host_id));
+
+        const std::optional<proto::router::RouterToClient> message =
+            lastMessage<proto::router::RouterToClient>(channel, proto::router::CHANNEL_ID_CLIENT);
+        ASSERT_TRUE(message.has_value());
+        ASSERT_TRUE(message->has_connection_offer());
+        EXPECT_EQ(message->connection_offer().error_code(), proto::router::kErrorAccessDenied);
+    });
+
+    SharedHosts::instance().remove(host_id);
 }

@@ -27,6 +27,8 @@ list(APPEND SOURCE_ROUTER_CORE
     client_manager.h
     client_operator.cc
     client_operator.h
+    client_qs_client.cc
+    client_qs_client.h
     database.cc
     database.h
     database_device_tokens.cc

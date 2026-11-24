@@ -50,6 +50,22 @@ const char kOpenHost[] = "open_host:";
 
 } // namespace
 
+bool Application::is_quick_support_ = false;
+
+//--------------------------------------------------------------------------------------------------
+// static
+void Application::setQuickSupportMode(bool enable)
+{
+    is_quick_support_ = enable;
+}
+
+//--------------------------------------------------------------------------------------------------
+// static
+bool Application::isQuickSupportMode()
+{
+    return is_quick_support_;
+}
+
 //--------------------------------------------------------------------------------------------------
 Application::Application(int& argc, char* argv[])
     : GuiApplication(argc, argv)
@@ -134,19 +150,25 @@ Application::Application(int& argc, char* argv[])
     setLocale(locale);
     setTheme(settings.theme());
 
-    const DatabaseMigration::Result migration = DatabaseMigration::migrate(
-        DatabaseMigration::oldFilePath(), Database::directoryPath());
-    if (migration == DatabaseMigration::Result::FAILED)
+    // A portable Quick Support client keeps its own address book next to the executable. It must
+    // not pick up the full client's old database from the user profile.
+    if (!isQuickSupportMode())
     {
-        LOG(ERROR) << "Unable to migrate the old address book";
-        migration_failed_ = true;
-        return;
+        const DatabaseMigration::Result migration = DatabaseMigration::migrate(
+            DatabaseMigration::oldFilePath(), Database::directoryPath());
+        if (migration == DatabaseMigration::Result::FAILED)
+        {
+            LOG(ERROR) << "Unable to migrate the old address book";
+            migration_failed_ = true;
+            return;
+        }
     }
 
     addWorker(std::make_unique<RouterWorker>());
 
 #if !defined(ASPIA_GOOGLE_PLAY)
-    addWorker(std::make_unique<UpdateWorker>());
+    if (!isQuickSupportMode())
+        addWorker(std::make_unique<UpdateWorker>());
 #endif // !defined(ASPIA_GOOGLE_PLAY)
 
 #if defined(Q_OS_ANDROID)

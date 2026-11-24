@@ -70,9 +70,38 @@ bool ensureSchema(SqlDatabase& db)
              "\"otp_secret\" BLOB NOT NULL DEFAULT X'',"
              "\"otp_counter\" INTEGER NOT NULL DEFAULT 0,"
              "\"email\" TEXT NOT NULL DEFAULT '',"
+             "\"type\" INTEGER NOT NULL DEFAULT 0,"
              "PRIMARY KEY(\"id\" AUTOINCREMENT))"))
     {
         return false;
+    }
+
+    // The Quick Support marker used to be bit 32 of the sessions mask. Bring databases created by
+    // older builds up to the separate type column and clear that bit, so no other code has to keep
+    // interpreting a session-mask bit as an account kind.
+    {
+        SqlQuery columns(db, "PRAGMA table_info(\"users\")");
+        bool has_type = false;
+
+        for (;;)
+        {
+            const SqlQuery::StepResult step = columns.next();
+            if (step == SqlQuery::StepResult::DONE)
+                break;
+            if (step == SqlQuery::StepResult::FAILED)
+                return false;
+            if (columns.columnText(1) == QLatin1String("type"))
+                has_type = true;
+        }
+
+        if (!has_type)
+        {
+            if (!run("ALTER TABLE \"users\" ADD COLUMN \"type\" INTEGER NOT NULL DEFAULT 0"))
+                return false;
+            if (!run("UPDATE \"users\" SET \"type\"=1, \"sessions\"=(\"sessions\" & ~32) "
+                     "WHERE (\"sessions\" & 32) != 0"))
+                return false;
+        }
     }
 
     // workspace_id == 0 means the host is not yet assigned to any workspace; group_id == 0

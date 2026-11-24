@@ -18,6 +18,7 @@
 
 #include "client/desktop/management/router_user_dialog.h"
 
+#include <QComboBox>
 #include <QLineEdit>
 #include <QTest>
 #include <QTreeWidget>
@@ -62,6 +63,16 @@ public:
     }
 
     static int tokenCount(const RouterUserDialog& dialog) { return dialog.tokens_.size(); }
+
+    static proto::router::SessionType desiredAccessLevel(const RouterUserDialog& dialog)
+    {
+        return dialog.model_.desiredAccessLevel();
+    }
+
+    static proto::router::UserType desiredUserType(const RouterUserDialog& dialog)
+    {
+        return dialog.model_.desiredUserType();
+    }
 };
 
 //--------------------------------------------------------------------------------------------------
@@ -86,6 +97,30 @@ TEST(RouterUserDialogTest, TypingTheNameKeepsTheEnteredPassword)
 
     EXPECT_EQ(password->password().toString(), QString("Secret1"));
     EXPECT_EQ(password_retry->password().toString(), QString("Secret1"));
+}
+
+//--------------------------------------------------------------------------------------------------
+// The fourth choice is a kind of operator, not a new level. An unmodified router still sees the
+// operator access level on the wire; only the stored account type restricts this session.
+TEST(RouterUserDialogTest, QuickSupportChoiceIsOperatorWithTheRestrictedType)
+{
+    RouterController controller;
+
+    RouterUserDialog dialog(0, nullptr);
+    dialog.show();
+
+    auto* combo = dialog.findChild<QComboBox*>("combo_access_level");
+    ASSERT_TRUE(combo);
+    ASSERT_EQ(combo->count(), 4);
+    EXPECT_EQ(combo->itemText(3), QStringLiteral("Quick Support"));
+
+    combo->setCurrentIndex(3);
+    emit combo->activated(3);
+
+    EXPECT_EQ(RouterUserDialogTestPeer::desiredAccessLevel(dialog),
+              proto::router::SESSION_TYPE_OPERATOR);
+    EXPECT_EQ(RouterUserDialogTestPeer::desiredUserType(dialog),
+              proto::router::USER_TYPE_QUICK_SUPPORT);
 }
 
 //--------------------------------------------------------------------------------------------------

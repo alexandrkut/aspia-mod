@@ -205,6 +205,11 @@ QString UserListModel::textAt(const RouterUser& user, Column column) const
 
         case Column::SESSIONS:
         {
+            // A Quick Support account is stored as an operator in the session mask, but its kind
+            // wins over the mask here and is shown as its own account type.
+            if (user.user_type == proto::router::USER_TYPE_QUICK_SUPPORT)
+                return tr("Quick Support");
+
             QStringList sessions;
 
             if (user.sessions & proto::router::SESSION_TYPE_ADMIN)

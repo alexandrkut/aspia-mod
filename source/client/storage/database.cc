@@ -33,8 +33,14 @@
 
 namespace {
 
-QString g_test_dir_path;
+QString g_directory_path_override;
 QString g_selected_id;
+bool g_quick_support_mode = false;
+
+// SQLite URI for one shared in-memory database. It is the same for every thread-local connection,
+// so the router config written by the GUI is visible to the router and network workers.
+const char kQuickSupportDatabasePath[] =
+    "file:aspia-qs-client?mode=memory&cache=shared";
 
 //--------------------------------------------------------------------------------------------------
 QString filePathOf(const QString& id)
@@ -64,8 +70,8 @@ Database& Database::instance()
 // static
 QString Database::directoryPath()
 {
-    if (!g_test_dir_path.isEmpty())
-        return g_test_dir_path;
+    if (!g_directory_path_override.isEmpty())
+        return g_directory_path_override;
 
     QString dir_path = BasePaths::appUserDataDir();
     if (dir_path.isEmpty())
@@ -78,6 +84,9 @@ QString Database::directoryPath()
 // static
 QString Database::filePath()
 {
+    if (g_quick_support_mode)
+        return QString::fromLatin1(kQuickSupportDatabasePath);
+
     return filePathOf(g_selected_id);
 }
 
@@ -155,7 +164,8 @@ bool Database::open(const QString& file_path)
 {
     LOG(INFO) << (!QFileInfo::exists(file_path) ? "Creating" : "Opening") << "database:" << file_path;
 
-    if (!db_.open(file_path))
+    if (!db_.open(file_path, g_quick_support_mode ?
+                  SqlDatabase::OpenMode::SHARED_MEMORY : SqlDatabase::OpenMode::READ_WRITE))
         return false;
 
     if (!db_.exec("PRAGMA secure_delete = ON"))
@@ -486,7 +496,16 @@ bool Database::reencryptAll(const QList<LocalHostConfig>& local_hosts,
 // static
 void Database::setDirectoryPathForTesting(const QString& dir_path)
 {
-    g_test_dir_path = dir_path;
+    g_directory_path_override = dir_path;
+}
+
+//--------------------------------------------------------------------------------------------------
+// static
+void Database::setQuickSupportMode()
+{
+    g_quick_support_mode = true;
+    g_directory_path_override.clear();
+    g_selected_id = QStringLiteral("qs-client");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -607,6 +626,9 @@ bool Database::openDatabase()
         LOG(ERROR) << "Invalid file path";
         return false;
     }
+
+    if (g_quick_support_mode)
+        return open(file_path);
 
     QString dir_path = QFileInfo(file_path).path();
 

@@ -174,6 +174,12 @@ void ClientOperator::onSessionMessage(quint8 channel_id, const QByteArray& buffe
         return;
     }
 
+    if (!isMessageAllowed(message))
+    {
+        CLOG(ERROR) << "Message is not allowed for session type" << sessionType();
+        return;
+    }
+
     if (message.has_connection_request())
     {
         readConnectionRequest(message.connection_request());
@@ -394,10 +400,36 @@ void ClientOperator::sendTwoFactorEmail(const TwoFactorHandler::Result& result)
 }
 
 //--------------------------------------------------------------------------------------------------
+bool ClientOperator::isMessageAllowed(const proto::router::ClientToRouter& /* message */) const
+{
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+bool ClientOperator::isHostIdAllowed(HostId /* host_id */) const
+{
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
 void ClientOperator::readConnectionRequest(const proto::router::ConnectionRequest& request)
 {
     CLOG(INFO) << "New connection request (host_id:" << request.host_id() << "session_type:"
                << request.session_type() << ")";
+
+    if (!isHostIdAllowed(request.host_id()))
+    {
+        CLOG(ERROR) << "Connection to host" << request.host_id() << "is not allowed for"
+                    << userName();
+
+        proto::router::RouterToClient message;
+        proto::router::ConnectionOffer* offer = message.mutable_connection_offer();
+        offer->set_request_id(request.request_id());
+        offer->set_error_code(proto::router::kErrorAccessDenied);
+        sendMessage(proto::router::CHANNEL_ID_CLIENT, serialize(message));
+        return;
+    }
+
     sendConnectionOffer(request);
 }
 

@@ -94,7 +94,9 @@ list(APPEND SOURCE_CLIENT_TESTS
 if (WIN32)
     list(APPEND SOURCE_CLIENT_CORE
         audio_output_win.cc
-        audio_output_win.h)
+        audio_output_win.h
+        win/portable_package.cc
+        win/portable_package.h)
     list(APPEND SOURCE_CLIENT client.rc)
     # The shell icon comes from common/resources/aspia.ico: without this
     # dependency Ninja does not recompile the resource when the icon changes

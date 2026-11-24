@@ -20,4 +20,8 @@ collect_sources(SOURCE_CLIENT_WIN
     audio_util_win.cc
     audio_util_win.h
     scoped_mmcss_registration.cc
-    scoped_mmcss_registration.h)
+    scoped_mmcss_registration.h
+    ../desktop/qs_client_export_dialog.cc
+    ../desktop/qs_client_export_dialog.h
+    ../desktop/qs_client_window.cc
+    ../desktop/qs_client_window.h)

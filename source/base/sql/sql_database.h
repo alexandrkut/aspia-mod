@@ -39,7 +39,8 @@ public:
     enum class OpenMode
     {
         READ_WRITE = 0,
-        READ_ONLY = 1
+        READ_ONLY = 1,
+        SHARED_MEMORY = 2 // |file_path| is an SQLite URI to a process-wide in-memory database.
     };
 
     // Opens the database at |file_path|. In READ_WRITE mode a missing file is created, in READ_ONLY

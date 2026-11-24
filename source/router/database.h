@@ -117,9 +117,10 @@ public:
     std::string_view addUser(const RouterUser& user);
 
     // Updates a user record. Empty salt/verifier keep the stored credentials, a zero session mask
-    // keeps the stored level, an empty address keeps the stored one. A password rotation revokes
-    // every device token of the user. |password_changed| and |sessions_changed|, if not null,
-    // report whether the rotation and the level change happened. Returns a proto::router error code.
+    // keeps the stored level and the stored account type, an empty address keeps the stored one. A
+    // password rotation revokes every device token of the user. |password_changed| and
+    // |sessions_changed|, if not null, report whether the rotation and the access change (level or
+    // account type) happened. Returns a proto::router error code.
     std::string_view modifyUser(const RouterUser& user, bool* password_changed = nullptr,
                                 bool* sessions_changed = nullptr);
 

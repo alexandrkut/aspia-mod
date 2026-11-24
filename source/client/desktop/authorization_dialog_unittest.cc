@@ -407,11 +407,21 @@ TEST_F(AuthorizationDialogTest, OneTimePasswordOnlyLocksTheOtherModes)
         QRadioButton* one_time = oneTimePasswordButton(dialog);
         QRadioButton* saved = savedCredentialsButton(dialog);
         QRadioButton* user_password = dialog.findChild<QRadioButton*>("radio_user_password");
+        QLineEdit* username = userNameEdit(dialog);
+        QLineEdit* password = dialog.findChild<QLineEdit*>("edit_password");
+        QLineEdit* one_time_password = dialog.findChild<QLineEdit*>("edit_one_time_password");
         ASSERT_TRUE(one_time && saved && user_password);
+        ASSERT_TRUE(username && password && one_time_password);
 
         EXPECT_TRUE(one_time->isChecked());
         EXPECT_FALSE(user_password->isEnabled());
         EXPECT_FALSE(saved->isEnabled());
+        EXPECT_FALSE(user_password->isVisible());
+        EXPECT_FALSE(saved->isVisible());
+        EXPECT_FALSE(username->isVisible());
+        EXPECT_FALSE(password->isVisible());
+        EXPECT_TRUE(one_time_password->isVisible());
+        EXPECT_FALSE(credentialCombo(dialog)->isVisible());
         EXPECT_TRUE(dialog.userName().isEmpty());
     }
 

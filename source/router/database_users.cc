@@ -49,6 +49,7 @@ RouterUser readUser(const SqlQuery& query)
     user.otp_secret  = query.columnBlob(7);
     user.otp_counter = query.columnUInt64(8);
     user.email       = query.columnText(9);
+    user.user_type   = static_cast<proto::router::UserType>(query.columnInt64(10));
     return user;
 }
 
@@ -76,7 +77,7 @@ std::string_view Database::userList(qint64 offset, qint64 count, std::vector<Rou
     // The page has to name the same records every time it is asked for, so the order is fixed
     // here instead of being left to the query planner.
     const char kSql[] =
-        "SELECT id, name, \"group\", salt, verifier, sessions, flags, otp_secret, otp_counter, email "
+        "SELECT id, name, \"group\", salt, verifier, sessions, flags, otp_secret, otp_counter, email, type "
         "FROM users ORDER BY id LIMIT ? OFFSET ?";
     SqlQuery query(db_, kSql);
     query.addInt64(count);
@@ -170,8 +171,8 @@ std::string_view Database::addUser(const RouterUser& user)
     }
 
     const char kSql[] =
-        "INSERT INTO users (id, name, \"group\", salt, verifier, sessions, flags, email) "
-        "VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)";
+        "INSERT INTO users (id, name, \"group\", salt, verifier, sessions, flags, email, type) "
+        "VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)";
     SqlQuery query(db_, kSql);
     query.addText(user.name);
     query.addText(user.group);
@@ -180,6 +181,7 @@ std::string_view Database::addUser(const RouterUser& user)
     query.addInt64(RouterUser::expandSessionTypes(user.sessions));
     query.addInt64(user.flags);
     query.addText(user.email);
+    query.addInt64(static_cast<qint64>(user.user_type));
 
     if (!query.exec())
     {
@@ -250,9 +252,10 @@ std::string_view Database::modifyUser(const RouterUser& user, bool* password_cha
     QByteArray old_verifier;
     quint32 old_sessions = 0;
     QString old_email;
+    proto::router::UserType old_type = proto::router::USER_TYPE_REGULAR;
     bool user_found = false;
     {
-        SqlQuery select(db_, "SELECT salt, verifier, sessions, email FROM users WHERE id=?");
+        SqlQuery select(db_, "SELECT salt, verifier, sessions, email, type FROM users WHERE id=?");
         select.addInt64(user.entry_id);
 
         if (!select.isValid())
@@ -277,6 +280,7 @@ std::string_view Database::modifyUser(const RouterUser& user, bool* password_cha
             old_verifier = select.columnBlob(1);
             old_sessions = static_cast<quint32>(select.columnInt64(2));
             old_email = select.columnText(3);
+            old_type = static_cast<proto::router::UserType>(select.columnInt64(4));
         }
     }
 
@@ -286,6 +290,12 @@ std::string_view Database::modifyUser(const RouterUser& user, bool* password_cha
     const quint32 sessions =
         user.sessions ? RouterUser::expandSessionTypes(user.sessions) : old_sessions;
     const QString email = user.email.isEmpty() ? old_email : user.email;
+
+    // The type is set together with the access level. A modify request that omits the level keeps
+    // the stored type, so an edit of a Quick Support account's email or password cannot turn it
+    // into an ordinary operator by omission.
+    const proto::router::UserType user_type =
+        user.sessions ? user.user_type : old_type;
 
     if (has_credentials)
     {
@@ -309,7 +319,7 @@ std::string_view Database::modifyUser(const RouterUser& user, bool* password_cha
         }
 
         const char kSql[] =
-            "UPDATE users SET name=?, \"group\"=?, salt=?, verifier=?, sessions=?, flags=?, email=? "
+            "UPDATE users SET name=?, \"group\"=?, salt=?, verifier=?, sessions=?, flags=?, email=?, type=? "
             "WHERE id=?";
         SqlQuery query(db_, kSql);
         query.addText(user.name);
@@ -319,6 +329,7 @@ std::string_view Database::modifyUser(const RouterUser& user, bool* password_cha
         query.addInt64(sessions);
         query.addInt64(user.flags);
         query.addText(email);
+        query.addInt64(static_cast<qint64>(user_type));
         query.addInt64(user.entry_id);
 
         if (!query.exec())
@@ -329,10 +340,11 @@ std::string_view Database::modifyUser(const RouterUser& user, bool* password_cha
     }
     else
     {
-        SqlQuery query(db_, "UPDATE users SET sessions=?, flags=?, email=? WHERE id=?");
+        SqlQuery query(db_, "UPDATE users SET sessions=?, flags=?, email=?, type=? WHERE id=?");
         query.addInt64(sessions);
         query.addInt64(user.flags);
         query.addText(email);
+        query.addInt64(static_cast<qint64>(user_type));
         query.addInt64(user.entry_id);
 
         if (!query.exec())
@@ -346,8 +358,10 @@ std::string_view Database::modifyUser(const RouterUser& user, bool* password_cha
         (old_salt != user.salt || old_verifier != user.verifier);
     if (password_changed)
         *password_changed = rotated;
+    // A change of the account type changes what the session may do just as a change of the level
+    // does, so live sessions of this user have to be stopped in both cases.
     if (sessions_changed)
-        *sessions_changed = sessions != old_sessions;
+        *sessions_changed = sessions != old_sessions || user_type != old_type;
 
     if (rotated)
     {
@@ -448,7 +462,7 @@ std::string_view Database::findUser(const QString& username, RouterUser* user) c
     }
 
     const char kSql[] =
-        "SELECT id, name, \"group\", salt, verifier, sessions, flags, otp_secret, otp_counter, email "
+        "SELECT id, name, \"group\", salt, verifier, sessions, flags, otp_secret, otp_counter, email, type "
         "FROM users WHERE casefold(name)=casefold(?)";
     SqlQuery query(db_, kSql);
     query.addText(username);
@@ -484,7 +498,7 @@ std::string_view Database::findUser(qint64 entry_id, RouterUser* user) const
     }
 
     const char kSql[] =
-        "SELECT id, name, \"group\", salt, verifier, sessions, flags, otp_secret, otp_counter, email "
+        "SELECT id, name, \"group\", salt, verifier, sessions, flags, otp_secret, otp_counter, email, type "
         "FROM users WHERE id=?";
     SqlQuery query(db_, kSql);
     query.addInt64(entry_id);

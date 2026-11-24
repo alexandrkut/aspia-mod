@@ -1188,6 +1188,10 @@
         <source>&quot;%1&quot; is both the name of a host and the ID of another. Connect by the record ID of the host you mean.</source>
         <translation>«%1» — это и имя хоста, и ID другого. Подключайтесь по ID записи нужного хоста.</translation>
     </message>
+<message>
+        <source>Unable to determine the location of the Quick Support client.</source>
+        <translation>Не удалось определить расположение клиента Quick Support.</translation>
+    </message>
 </context>
 <context>
     <name>ClientListModel</name>
@@ -1225,6 +1229,14 @@
         <location filename="../client/desktop/management/client_list_model.cc" line="160"/>
         <source>Operating System</source>
         <translation>Операционная система</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Тип</translation>
+    </message>
+    <message>
+        <source>Quick Support</source>
+        <translation>Quick Support</translation>
     </message>
 </context>
 <context>
@@ -8761,6 +8773,10 @@ Sections: %2. Users in file: %3.</source>
         <source>Never</source>
         <translation>Никогда</translation>
     </message>
+    <message>
+        <source>Quick Support</source>
+        <translation>Быстрая поддержка</translation>
+    </message>
 </context>
 <context>
     <name>RouterUsersWidget</name>
@@ -9930,6 +9946,10 @@ Sections: %2. Users in file: %3.</source>
         <location filename="../client/desktop/settings_tab.cc" line="1439"/>
         <source>Unable to save profile.</source>
         <translation>Не удалось сохранить профиль.</translation>
+    </message>
+    <message>
+        <source>Export Quick Support Client</source>
+        <translation>Экспорт клиента Quick Support</translation>
     </message>
 </context>
 <context>
@@ -15676,6 +15696,128 @@ Delete the database?</source>
         <location filename="../client/workers/video_worker.cc" line="48"/>
         <source>An error occurred while writing the recording.</source>
         <translation>Произошла ошибка во время записи.</translation>
+    </message>
+</context>
+<context>
+    <name>QsClientExportDialog</name>
+    <message>
+        <source>Export Quick Support Client</source>
+        <translation>Экспорт клиента Quick Support</translation>
+    </message>
+    <message>
+        <source>A new account is created on the router for this client. The password is generated automatically and stored only in the exported file. The suffix "-qs" is added to the name.</source>
+        <translation>На роутере будет создана новая учётка для этого клиента. Пароль генерируется автоматически и сохраняется только в экспортированном файле. К имени добавляется суффикс «-qs».</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Имя:</translation>
+    </message>
+    <message>
+        <source>Router address:</source>
+        <translation>Адрес роутера:</translation>
+    </message>
+    <message>
+        <source>Export...</source>
+        <translation>Экспорт...</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Отмена</translation>
+    </message>
+    <message>
+        <source>An administrator session with the router is required.</source>
+        <translation>Требуется сессия администратора с роутером.</translation>
+    </message>
+    <message>
+        <source>The user name is invalid.</source>
+        <translation>Недопустимое имя пользователя.</translation>
+    </message>
+    <message>
+        <source>The router address is invalid.</source>
+        <translation>Недопустимый адрес роутера.</translation>
+    </message>
+    <message>
+        <source>The router did not answer the user lookup.</source>
+        <translation>Роутер не ответил на запрос пользователя.</translation>
+    </message>
+    <message>
+        <source>A user with this name already exists on the router.</source>
+        <translation>Пользователь с таким именем уже существует на роутере.</translation>
+    </message>
+    <message>
+        <source>Executable files (*.exe)</source>
+        <translation>Исполняемые файлы (*.exe)</translation>
+    </message>
+    <message>
+        <source>Failed to export the Quick Support client.</source>
+        <translation>Не удалось экспортировать клиент Quick Support.</translation>
+    </message>
+    <message>
+        <source>Failed to create the user on the router.</source>
+        <translation>Не удалось создать пользователя на роутере.</translation>
+    </message>
+    <message>
+        <source>The Quick Support client has been exported.</source>
+        <translation>Клиент Quick Support экспортирован.</translation>
+    </message>
+</context>
+<context>
+    <name>QsClientWindow</name>
+<message>
+        <source>123 456 789</source>
+        <translation>123 456 789</translation>
+    </message>
+    <message>
+        <source>Desktop</source>
+        <translation>Рабочий стол</translation>
+    </message>
+    <message>
+        <source>File transfer</source>
+        <translation>Передача файлов</translation>
+    </message>
+    <message>
+        <source>Connect</source>
+        <translation>Подключить</translation>
+    </message>
+    <message>
+        <source>Connecting to the router...</source>
+        <translation>Подключение к роутеру...</translation>
+    </message>
+    <message>
+        <source>Host ID:</source>
+        <translation>ID хоста:</translation>
+    </message>
+    <message>
+        <source>Session:</source>
+        <translation>Тип сессии:</translation>
+    </message>
+    <message>
+        <source>Enter the ID shown by the support host.</source>
+        <translation>Введите ID, который показывает хост поддержки.</translation>
+    </message>
+    <message>
+        <source>The router data is damaged.</source>
+        <translation>Данные роутера повреждены.</translation>
+    </message>
+    <message>
+        <source>Waiting for the two-factor code.</source>
+        <translation>Ожидание кода 2FA.</translation>
+    </message>
+    <message>
+        <source>The router is unavailable. Retrying...</source>
+        <translation>Роутер недоступен. Повторная попытка...</translation>
+    </message>
+    <message>
+        <source>Enter a valid Quick Support ID.</source>
+        <translation>Введите корректный ID Quick Support.</translation>
+    </message>
+    <message>
+        <source>The router is not connected yet.</source>
+        <translation>Роутер ещё не подключён.</translation>
+    </message>
+    <message>
+        <source>Quick Support %1</source>
+        <translation>Quick Support %1</translation>
     </message>
 </context>
 </TS>

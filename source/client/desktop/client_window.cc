@@ -30,6 +30,7 @@
 #include "base/version_constants.h"
 #include "base/peer/host_id.h"
 #include "base/threading/worker.h"
+#include "client/application.h"
 #include "client/session_keeper.h"
 #include "client/desktop/authorization_dialog.h"
 #include "client/desktop/status_overlay.h"
@@ -674,6 +675,10 @@ bool ClientWindow::askCredentials(HostConfig* host)
         LOG(ERROR) << "Unable to read credentials";
 
     auth_dialog->setSavedCredentials(credentials);
+
+    // The exported QS client enters a host only with the one-time password shown by that host.
+    // Hide the named-account fields so there is no way to type a login and password in it.
+    auth_dialog->setOneTimePasswordOnly(Application::isQuickSupportMode());
 
     if (auth_dialog->exec() == AuthorizationDialog::Rejected)
     {

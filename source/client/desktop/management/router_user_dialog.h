@@ -38,6 +38,7 @@ class UserResult;
 class UserTokenList;
 class UserTokenResult;
 enum SessionType : int;
+enum UserType : int;
 } // namespace proto::router
 
 class RouterUserDialog final : public QDialog
@@ -80,7 +81,7 @@ private:
     void setAccountChanged(bool changed);
     void updateLoadingState();
     void updateTokenTree();
-    void setAccessLevel(proto::router::SessionType session_type);
+    void setAccessLevel(proto::router::SessionType session_type, proto::router::UserType user_type);
     static QString sessionTypeToString(proto::router::SessionType session_type);
     static QString formatTimestamp(qint64 unix_seconds);
 

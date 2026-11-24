@@ -39,7 +39,8 @@ public:
         CONNECT_TIME,
         VERSION,
         ARCHITECTURE,
-        OS
+        OS,
+        CLIENT_TYPE
     };
 
     explicit ClientListModel(QObject* parent = nullptr);
