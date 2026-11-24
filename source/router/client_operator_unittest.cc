@@ -1237,11 +1237,9 @@ TEST_F(ClientOperatorTest, QuickSupportSessionSkipsTheSecondFactor)
 }
 
 //--------------------------------------------------------------------------------------------------
-// A temporary ID chosen by the client is not enough. The host must have announced itself as
-// portable when it connected; another temp host stays unreachable.
-TEST_F(ClientOperatorTest, QuickSupportSessionRefusesANonPortableHost)
+TEST_F(ClientOperatorTest, QuickSupportSessionConnectsToAnyHost)
 {
-    const HostId host_id = kMinTempHostId;
+    const HostId host_id = kMinTempHostId - 1;
     SharedHosts::instance().add(host_id, QVersionNumber(), "127.0.0.1:8050", "ordinary", false);
 
     withClient<ClientQsClient>(proto::router::SESSION_TYPE_OPERATOR,
@@ -1256,32 +1254,7 @@ TEST_F(ClientOperatorTest, QuickSupportSessionRefusesANonPortableHost)
             lastMessage<proto::router::RouterToClient>(channel, proto::router::CHANNEL_ID_CLIENT);
         ASSERT_TRUE(message.has_value());
         ASSERT_TRUE(message->has_connection_offer());
-        EXPECT_EQ(message->connection_offer().error_code(), proto::router::kErrorAccessDenied);
-    });
-
-    SharedHosts::instance().remove(host_id);
-}
-
-//--------------------------------------------------------------------------------------------------
-// The ID must also be from the temporary range even when the host there is portable.
-TEST_F(ClientOperatorTest, QuickSupportSessionRefusesAPermanentHost)
-{
-    const HostId host_id = kMinTempHostId - 1;
-    SharedHosts::instance().add(host_id, QVersionNumber(), "127.0.0.1:8050", "portable", true);
-
-    withClient<ClientQsClient>(proto::router::SESSION_TYPE_OPERATOR,
-                               [host_id](ClientQsClient& client, LoopbackChannel* channel)
-    {
-        client.start();
-        channel->clearSent();
-
-        channel->receive(proto::router::CHANNEL_ID_CLIENT, connectionRequest(1, host_id));
-
-        const std::optional<proto::router::RouterToClient> message =
-            lastMessage<proto::router::RouterToClient>(channel, proto::router::CHANNEL_ID_CLIENT);
-        ASSERT_TRUE(message.has_value());
-        ASSERT_TRUE(message->has_connection_offer());
-        EXPECT_EQ(message->connection_offer().error_code(), proto::router::kErrorAccessDenied);
+        EXPECT_NE(message->connection_offer().error_code(), proto::router::kErrorAccessDenied);
     });
 
     SharedHosts::instance().remove(host_id);

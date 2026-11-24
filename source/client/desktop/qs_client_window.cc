@@ -18,12 +18,16 @@
 
 #include "client/desktop/qs_client_window.h"
 
+#include "client/storage/database.h"
+
 #include <QComboBox>
 #include <QEvent>
 #include <QFormLayout>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+
+#include "common/desktop/about_dialog.h"
 #include <QPushButton>
 #include <QVBoxLayout>
 
@@ -78,6 +82,9 @@ QsClientWindow::QsClientWindow(QWidget* parent)
     buttons->addStretch(1);
     buttons->addWidget(button_connect_);
 
+    QPushButton* button_about = new QPushButton(tr("About"), this);
+    buttons->addWidget(button_about);
+
     auto* layout = new QVBoxLayout(this);
     layout->addWidget(label_status_);
     layout->addLayout(form);
@@ -87,6 +94,12 @@ QsClientWindow::QsClientWindow(QWidget* parent)
 
     connect(button_connect_, &QPushButton::clicked, this, &QsClientWindow::onConnect);
     connect(edit_id_, &QLineEdit::returnPressed, this, &QsClientWindow::onConnect);
+
+    connect(button_about, &QPushButton::clicked, this, [this]()
+    {
+        AboutDialog dialog(QStringLiteral("Клиент QS Aspia-mod"), this, user_name_);
+        dialog.exec();
+    });
     connect(&RouterController::instance(), &RouterController::sig_statusChanged,
             this, &QsClientWindow::onRouterStatusChanged);
     connect(&RouterController::instance(), &RouterController::sig_twoFactorRequired,
@@ -162,7 +175,7 @@ void QsClientWindow::onConnect()
 
     bool ok = false;
     const HostId host_id = digits.toULongLong(&ok);
-    if (!ok || !isTempHostId(host_id))
+    if (!ok)
     {
         MsgBox::warning(this, tr("Enter a valid Quick Support ID."));
         edit_id_->setFocus();
@@ -183,6 +196,8 @@ void QsClientWindow::onConnect()
     HostConfig host = HostConfig::forRouterHost(host_id, QString());
     host.setPortable(true);
 
+    const ProfileConfig profile = Database::instance().hostProfile(host);
+
     ClientWindow* client_window = nullptr;
     if (session_type == proto::peer::SESSION_TYPE_FILE_TRANSFER)
     {
@@ -190,13 +205,13 @@ void QsClientWindow::onConnect()
     }
     else
     {
-        client_window = new DesktopWindow(defaultDesktopConfig());
+        client_window = new DesktopWindow(profile.desktopConfig());
     }
 
     client_window->setWindowTitle(tr("Quick Support %1").arg(host.address()));
     client_window->setWindowIcon(windowIcon());
 
-    if (!client_window->connectToHost(host, ProfileConfig(), QString()))
+    if (!client_window->connectToHost(host, profile, QString()))
     {
         client_window->deleteLater();
         return;
@@ -204,6 +219,18 @@ void QsClientWindow::onConnect()
 
     client_window_ = client_window;
     client_window->installEventFilter(this);
+
+    connect(client_window, &ClientWindow::sig_fullscreenRequested, this,
+            [client_window](bool fullscreen)
+            {
+                if (fullscreen)
+                    client_window->showFullScreen();
+                else
+                    client_window->showNormal();
+            });
+    connect(client_window, &ClientWindow::sig_minimizeRequested, this,
+            [client_window]() { client_window->showMinimized(); });
+
     client_window->show();
     hide();
 }

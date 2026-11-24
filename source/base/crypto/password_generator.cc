@@ -47,6 +47,7 @@ SecureString PasswordGenerator::result() const
     constexpr QByteArrayView lower_case = "abcdefghijklmnopqrstuvwxyz";
     constexpr QByteArrayView upper_case = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     constexpr QByteArrayView digits = "0123456789";
+    constexpr QByteArrayView special = "!@#$%^&*()-_=+[]{}<>?.,:;";
 
     qsizetype table_length = 0;
 
@@ -59,6 +60,9 @@ SecureString PasswordGenerator::result() const
     if (characters_ & DIGITS)
         table_length += digits.length();
 
+    if (characters_ & SPECIAL)
+        table_length += special.length();
+
     QByteArray table;
     table.reserve(table_length);
 
@@ -70,6 +74,9 @@ SecureString PasswordGenerator::result() const
 
     if (characters_ & DIGITS)
         table.append(digits);
+
+    if (characters_ & SPECIAL)
+        table.append(special);
 
     Random::Generator<quint32> generator;
 

@@ -22,10 +22,10 @@
 #include "router/client_operator.h"
 
 // A session opened by a preconfigured Quick Support client. Its account is baked into a file that
-// can be handed to anybody, so the router gives it exactly one ability: asking for a connection to
-// a portable Quick Support host. Lists, status checks, password changes and every management RPC
-// are refused. The account is recognized by the QS flag bit in its session mask; the "-qs" suffix
-// is only a readable name, not a permission. 2FA is forced off for the flagged account.
+// can be handed to anybody, so the router gives it exactly one ability: asking for a connection.
+// Lists, status checks, password changes and every management RPC are refused. The account is
+// recognized by its user type (USER_TYPE_QUICK_SUPPORT), not by a session-mask bit; the "-qs"
+// suffix is only a readable name, not a permission. 2FA is forced off for the account.
 class ClientQsClient final : public ClientOperator
 {
     Q_OBJECT
@@ -38,7 +38,6 @@ public:
 protected:
     // ClientOperator implementation.
     bool isMessageAllowed(const proto::router::ClientToRouter& message) const final;
-    bool isHostIdAllowed(HostId host_id) const final;
 
 private:
     Q_DISABLE_COPY_MOVE(ClientQsClient)

@@ -32,6 +32,8 @@
 #include "base/gui_application.h"
 #include "base/logging.h"
 #include "base/time_types.h"
+#include "client/application.h"
+#include "client/config.h"
 #include "client/desktop/desktop/select_screen_action.h"
 #include "client/desktop/desktop/ui_desktop_toolbar.h"
 #include "common/desktop/msg_box.h"
@@ -1041,6 +1043,81 @@ void DesktopToolBar::createAdditionalMenu()
     updateScaleMenu();
 
     additional_menu_->addAction(ui->action_autoscroll);
+
+    // Quick Support only: a "Session settings" menu with checkable items. The regular
+    // client configures the session from SettingsTab instead.
+    if (Application::isQuickSupportMode())
+    {
+        session_settings_menu_ = additional_menu_->addMenu(tr("Session settings"));
+
+        action_session_clipboard_ = session_settings_menu_->addAction(tr("Clipboard"));
+        action_session_clipboard_->setCheckable(true);
+        action_session_audio_ = session_settings_menu_->addAction(tr("Audio"));
+        action_session_audio_->setCheckable(true);
+        action_session_cursor_shape_ = session_settings_menu_->addAction(tr("Cursor shape"));
+        action_session_cursor_shape_->setCheckable(true);
+        action_session_cursor_position_ = session_settings_menu_->addAction(tr("Cursor position"));
+        action_session_cursor_position_->setCheckable(true);
+        action_session_effects_ = session_settings_menu_->addAction(tr("Effects"));
+        action_session_effects_->setCheckable(true);
+        action_session_wallpaper_ = session_settings_menu_->addAction(tr("Wallpaper"));
+        action_session_wallpaper_->setCheckable(true);
+        action_session_block_input_ = session_settings_menu_->addAction(tr("Block input"));
+        action_session_block_input_->setCheckable(true);
+        action_session_lock_at_disconnect_ =
+            session_settings_menu_->addAction(tr("Lock at disconnect"));
+        action_session_lock_at_disconnect_->setCheckable(true);
+        action_session_key_combinations_ =
+            session_settings_menu_->addAction(tr("Enable keyboard shortcuts"));
+        action_session_key_combinations_->setCheckable(true);
+
+        session_quality_menu_ = session_settings_menu_->addMenu(tr("Quality"));
+        session_quality_group_ = new QActionGroup(session_quality_menu_);
+        session_quality_group_->setExclusive(true);
+        action_quality_auto_ = session_quality_menu_->addAction(tr("Auto"));
+        action_quality_auto_->setCheckable(true);
+        action_quality_low_ = session_quality_menu_->addAction(tr("Low"));
+        action_quality_low_->setCheckable(true);
+        action_quality_medium_ = session_quality_menu_->addAction(tr("Medium"));
+        action_quality_medium_->setCheckable(true);
+        action_quality_high_ = session_quality_menu_->addAction(tr("High"));
+        action_quality_high_->setCheckable(true);
+        session_quality_group_->addAction(action_quality_auto_);
+        session_quality_group_->addAction(action_quality_low_);
+        session_quality_group_->addAction(action_quality_medium_);
+        session_quality_group_->addAction(action_quality_high_);
+
+        connect(action_session_clipboard_, &QAction::toggled,
+                this, &DesktopToolBar::sig_clipboardChanged);
+        connect(action_session_audio_, &QAction::toggled,
+                this, &DesktopToolBar::sig_audioChanged);
+        connect(action_session_cursor_shape_, &QAction::toggled,
+                this, &DesktopToolBar::sig_cursorShapeChanged);
+        connect(action_session_cursor_position_, &QAction::toggled,
+                this, &DesktopToolBar::sig_cursorPositionChanged);
+        connect(action_session_effects_, &QAction::toggled,
+                this, &DesktopToolBar::sig_effectsChanged);
+        connect(action_session_wallpaper_, &QAction::toggled,
+                this, &DesktopToolBar::sig_wallpaperChanged);
+        connect(action_session_block_input_, &QAction::toggled,
+                this, &DesktopToolBar::sig_blockInputChanged);
+        connect(action_session_lock_at_disconnect_, &QAction::toggled,
+                this, &DesktopToolBar::sig_lockAtDisconnectChanged);
+        connect(action_session_key_combinations_, &QAction::toggled, this,
+                [this](bool checked) { emit sig_keyCombinationsEnabledChanged(checked); });
+        connect(session_quality_group_, &QActionGroup::triggered, this, [this](QAction* action)
+        {
+            quint32 quality = kAutoQuality;
+            if (action == action_quality_low_)
+                quality = kLowQuality;
+            else if (action == action_quality_medium_)
+                quality = kMediumQuality;
+            else if (action == action_quality_high_)
+                quality = kHighQuality;
+            emit sig_qualityChanged(quality);
+        });
+    }
+
     additional_menu_->addSeparator();
     additional_menu_->addAction(ui->action_screenshot);
     additional_menu_->addAction(ui->action_start_recording);
@@ -1120,6 +1197,43 @@ void DesktopToolBar::createAdditionalMenu()
     {
         startRecording(!is_recording_started_);
     });
+}
+
+//--------------------------------------------------------------------------------------------------
+void DesktopToolBar::setSessionSettings(const proto::control::Config& config)
+{
+    if (!session_settings_menu_)
+        return;
+
+    const QSignalBlocker blocker1(action_session_clipboard_);
+    const QSignalBlocker blocker2(action_session_audio_);
+    const QSignalBlocker blocker3(action_session_cursor_shape_);
+    const QSignalBlocker blocker4(action_session_cursor_position_);
+    const QSignalBlocker blocker5(action_session_effects_);
+    const QSignalBlocker blocker6(action_session_wallpaper_);
+    const QSignalBlocker blocker7(action_session_block_input_);
+    const QSignalBlocker blocker8(action_session_lock_at_disconnect_);
+    const QSignalBlocker blocker9(action_session_key_combinations_);
+    const QSignalBlocker blocker10(session_quality_group_);
+
+    action_session_clipboard_->setChecked(config.clipboard());
+    action_session_audio_->setChecked(config.audio());
+    action_session_cursor_shape_->setChecked(config.cursor_shape());
+    action_session_cursor_position_->setChecked(config.cursor_position());
+    action_session_effects_->setChecked(config.effects());
+    action_session_wallpaper_->setChecked(config.wallpaper());
+    action_session_block_input_->setChecked(config.block_input());
+    action_session_lock_at_disconnect_->setChecked(config.lock_at_disconnect());
+    action_session_key_combinations_->setChecked(!config.disable_key_combinations());
+
+    if (config.quality() == kLowQuality)
+        action_quality_low_->setChecked(true);
+    else if (config.quality() == kMediumQuality)
+        action_quality_medium_->setChecked(true);
+    else if (config.quality() == kHighQuality)
+        action_quality_high_->setChecked(true);
+    else
+        action_quality_auto_->setChecked(true);
 }
 
 //--------------------------------------------------------------------------------------------------

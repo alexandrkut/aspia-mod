@@ -147,6 +147,7 @@ int runQuickSupportClient(Application& application,
     RouterController::instance().reload();
 
     QsClientWindow window;
+    window.setUserName(settings.username);
     window.show();
 
     return application.exec();

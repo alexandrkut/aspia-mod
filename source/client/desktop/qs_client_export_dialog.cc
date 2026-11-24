@@ -61,6 +61,10 @@ namespace {
 
 constexpr int kRequestTimeoutMs = 15000;
 
+// The Quick Support client is handed to third parties, so its one-time password is longer and
+// uses the full printable set, including special characters.
+constexpr qsizetype kQsPasswordLength = 20;
+
 } // namespace
 
 //--------------------------------------------------------------------------------------------------
@@ -70,7 +74,7 @@ QsClientExportDialog::QsClientExportDialog(QWidget* parent)
 {
     LOG(INFO) << "Ctor";
 
-    setWindowTitle(tr("Export Quick Support Client"));
+    setWindowTitle(tr("Export Preconfigured QS Client"));
     setModal(true);
 
     ui->description = new QLabel(tr(
@@ -183,14 +187,20 @@ void QsClientExportDialog::onExport()
         QDir(desktop_path).filePath(QLatin1String("aspia-mod-qs-client.exe"));
 
     QString file_path = QFileDialog::getSaveFileName(
-        this, tr("Export Quick Support Client"), default_path, tr("Executable files (*.exe)"));
+        this, tr("Export Preconfigured QS Client"), default_path, tr("Executable files (*.exe)"));
     if (file_path.isEmpty())
         return;
 
     if (!file_path.endsWith(QLatin1String(".exe"), Qt::CaseInsensitive))
         file_path.append(QLatin1String(".exe"));
 
-    const SecureString password = PasswordGenerator().result();
+    PasswordGenerator generator;
+    generator.setLength(kQsPasswordLength);
+    generator.setCharacters(PasswordGenerator::UPPER_CASE |
+                            PasswordGenerator::LOWER_CASE |
+                            PasswordGenerator::DIGITS |
+                            PasswordGenerator::SPECIAL);
+    const SecureString password = generator.result();
 
     PortableClientPackage::Settings settings;
     settings.router_address = address;

@@ -32,7 +32,8 @@ class AboutDialog final : public QDialog
     Q_OBJECT
 
 public:
-    explicit AboutDialog(const QString& application_name, QWidget* parent = nullptr);
+    explicit AboutDialog(const QString& application_name, QWidget* parent = nullptr,
+                         const QString& user_name = QString());
     ~AboutDialog() final;
 
 private:

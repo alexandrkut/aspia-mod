@@ -56,6 +56,17 @@ bool hasDigit(const SecureString& str)
     return false;
 }
 
+bool hasSpecial(const SecureString& str)
+{
+    const QString special = QStringLiteral("!@#$%^&*()-_=+[]{}<>?.,:;");
+    for (int i = 0; i < str.size(); ++i)
+    {
+        if (special.contains(str.toString().at(i)))
+            return true;
+    }
+    return false;
+}
+
 } // namespace
 
 TEST(password_generator_test, default_params)
@@ -131,6 +142,49 @@ TEST(password_generator_test, only_digits)
         EXPECT_TRUE(hasDigit(res));
         EXPECT_FALSE(hasLower(res));
         EXPECT_FALSE(hasUpper(res));
+    }
+}
+
+
+TEST(password_generator_test, only_special_characters)
+{
+    PasswordGenerator gen;
+
+    gen.setLength(5);
+    gen.setCharacters(PasswordGenerator::SPECIAL);
+
+    const QString special = QStringLiteral("!@#$%^&*()-_=+[]{}<>?.,:;");
+
+    for (int i = 0; i < 10; ++i)
+    {
+        SecureString res = gen.result();
+
+        EXPECT_EQ(res.toString().length(), 5);
+        EXPECT_TRUE(hasSpecial(res));
+        EXPECT_FALSE(hasLower(res));
+        EXPECT_FALSE(hasUpper(res));
+        EXPECT_FALSE(hasDigit(res));
+
+        for (int j = 0; j < res.size(); ++j)
+            EXPECT_TRUE(special.contains(res.toString().at(j)));
+    }
+}
+
+TEST(password_generator_test, combined_characters)
+{
+    PasswordGenerator gen;
+
+    gen.setLength(20);
+    gen.setCharacters(PasswordGenerator::UPPER_CASE |
+                      PasswordGenerator::LOWER_CASE |
+                      PasswordGenerator::DIGITS |
+                      PasswordGenerator::SPECIAL);
+
+    for (int i = 0; i < 10; ++i)
+    {
+        SecureString res = gen.result();
+
+        EXPECT_EQ(res.toString().length(), 20);
     }
 }
 

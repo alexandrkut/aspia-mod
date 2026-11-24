@@ -93,7 +93,7 @@ QString createList(const QString& title, const char* array[], size_t array_size)
 } // namespace
 
 //--------------------------------------------------------------------------------------------------
-AboutDialog::AboutDialog(const QString& application_name, QWidget* parent)
+AboutDialog::AboutDialog(const QString& application_name, QWidget* parent, const QString& user_name)
     : QDialog(parent),
       ui(new Ui::AboutDialog())
 {
@@ -101,6 +101,13 @@ AboutDialog::AboutDialog(const QString& application_name, QWidget* parent)
     ui->setupUi(this);
 
     ui->label_name->setText(application_name);
+
+    if (!user_name.isEmpty())
+    {
+        QLabel* label_user = new QLabel(tr("User: %1").arg(user_name), this);
+        label_user->setAlignment(Qt::AlignCenter);
+        ui->verticalLayout_3->insertWidget(2, label_user);
+    }
     ui->label_version->setText(tr("Version: %1 (%2)")
         .arg(ASPIA_VERSION_STRING, QSysInfo::buildCpuArchitecture()));
 

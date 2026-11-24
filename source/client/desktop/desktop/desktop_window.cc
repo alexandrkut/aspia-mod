@@ -35,6 +35,7 @@
 
 #include "base/logging.h"
 #include "base/serialization.h"
+#include "client/application.h"
 #include "base/crypto/secure_memory.h"
 #include "base/crypto/secure_string.h"
 #include "base/desktop/mouse_cursor.h"
@@ -217,6 +218,70 @@ DesktopWindow::DesktopWindow(const proto::control::Config& desktop_config, QWidg
     connect(toolbar_, &DesktopToolBar::sig_switchToFullscreen, this, &DesktopWindow::sig_fullscreenRequested);
     connect(toolbar_, &DesktopToolBar::sig_actionsChanged, this, &DesktopWindow::sig_actionsChanged);
 
+    // Quick Support only: the "Session settings" toolbar menu drives the live config.
+    connect(toolbar_, &DesktopToolBar::sig_clipboardChanged, this, [this](bool enabled)
+    {
+        desktop_config_.set_clipboard(enabled);
+        onDesktopConfigChanged(desktop_config_);
+        saveQsDesktopConfig();
+    });
+    connect(toolbar_, &DesktopToolBar::sig_audioChanged, this, [this](bool enabled)
+    {
+        desktop_config_.set_audio(enabled);
+        onDesktopConfigChanged(desktop_config_);
+        saveQsDesktopConfig();
+    });
+    connect(toolbar_, &DesktopToolBar::sig_cursorShapeChanged, this, [this](bool enabled)
+    {
+        desktop_config_.set_cursor_shape(enabled);
+        onDesktopConfigChanged(desktop_config_);
+        saveQsDesktopConfig();
+    });
+    connect(toolbar_, &DesktopToolBar::sig_cursorPositionChanged, this, [this](bool enabled)
+    {
+        desktop_config_.set_cursor_position(enabled);
+        onDesktopConfigChanged(desktop_config_);
+        saveQsDesktopConfig();
+    });
+    connect(toolbar_, &DesktopToolBar::sig_effectsChanged, this, [this](bool enabled)
+    {
+        desktop_config_.set_effects(enabled);
+        onDesktopConfigChanged(desktop_config_);
+        saveQsDesktopConfig();
+    });
+    connect(toolbar_, &DesktopToolBar::sig_wallpaperChanged, this, [this](bool enabled)
+    {
+        desktop_config_.set_wallpaper(enabled);
+        onDesktopConfigChanged(desktop_config_);
+        saveQsDesktopConfig();
+    });
+    connect(toolbar_, &DesktopToolBar::sig_blockInputChanged, this, [this](bool enabled)
+    {
+        desktop_config_.set_block_input(enabled);
+        onDesktopConfigChanged(desktop_config_);
+        saveQsDesktopConfig();
+    });
+    connect(toolbar_, &DesktopToolBar::sig_lockAtDisconnectChanged, this, [this](bool enabled)
+    {
+        desktop_config_.set_lock_at_disconnect(enabled);
+        onDesktopConfigChanged(desktop_config_);
+        saveQsDesktopConfig();
+    });
+    connect(toolbar_, &DesktopToolBar::sig_keyCombinationsEnabledChanged, this, [this](bool enabled)
+    {
+        desktop_config_.set_disable_key_combinations(!enabled);
+        onDesktopConfigChanged(desktop_config_);
+        saveQsDesktopConfig();
+    });
+    connect(toolbar_, &DesktopToolBar::sig_qualityChanged, this, [this](quint32 quality)
+    {
+        desktop_config_.set_quality(quality);
+        onDesktopConfigChanged(desktop_config_);
+        saveQsDesktopConfig();
+    });
+
+    toolbar_->setSessionSettings(desktop_config_);
+
     desktop_->installEventFilter(this);
     scroll_area_->viewport()->installEventFilter(this);
 
@@ -290,6 +355,8 @@ void DesktopWindow::applySettings()
         resize_timer_->stop();
     else if (!had_preferred_size && !screen_size_.isEmpty())
         onResizeTimer();
+
+    toolbar_->setSessionSettings(desktop_config_);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1411,7 +1478,54 @@ void DesktopWindow::onDesktopConfigChanged(const proto::control::Config& config)
 {
     desktop_config_ = config;
     emit sig_cursorConfig(desktop_config_.cursor_shape(), desktop_config_.cursor_position());
+    desktop_->enableKeyCombinations(!desktop_config_.disable_key_combinations());
+    desktop_->enableRemoteCursorPosition(desktop_config_.cursor_position());
+    if (!desktop_config_.cursor_shape())
+        desktop_->setCursorShape(QPixmap(), QPoint());
+    setClipboardEnabled(desktop_config_.clipboard());
     sendConfig(desktop_config_);
+}
+
+//--------------------------------------------------------------------------------------------------
+void DesktopWindow::setClipboardEnabled(bool enable)
+{
+    if (static_cast<bool>(clipboard_) == enable)
+        return;
+
+    if (!enable)
+    {
+        clipboard_.reset();
+        return;
+    }
+
+    clipboard_.reset(Clipboard::create(this));
+    if (clipboard_)
+    {
+        connect(clipboard_, &Clipboard::sig_clipboardEvent, this, &DesktopWindow::onClipboardEvent);
+        connect(clipboard_, &Clipboard::sig_localFileListChanged,
+                this, &DesktopWindow::onClipboardLocalFileListChanged);
+        connect(clipboard_, &Clipboard::sig_fileDataRequest,
+                this, &DesktopWindow::onClipboardFileDataRequest);
+        clipboard_->start();
+
+        if (clipboard_file_transfer_)
+        {
+            connect(clipboard_file_transfer_, &ClipboardFileTransfer::sig_fileDataChunk,
+                    clipboard_, &Clipboard::addFileData);
+        }
+    }
+}
+
+//--------------------------------------------------------------------------------------------------
+void DesktopWindow::saveQsDesktopConfig()
+{
+    if (!Application::isQuickSupportMode())
+        return;
+
+    ProfileConfig profile = Database::instance().defaultProfile();
+    profile.setDesktopConfig(desktop_config_);
+    if (!Database::instance().modifyProfile(profile))
+        LOG(ERROR) << "Unable to save the Quick Support desktop config";
 }
 
 //--------------------------------------------------------------------------------------------------

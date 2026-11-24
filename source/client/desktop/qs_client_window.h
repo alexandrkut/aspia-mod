@@ -42,6 +42,8 @@ public:
     explicit QsClientWindow(QWidget* parent = nullptr);
     ~QsClientWindow() final;
 
+    void setUserName(const QString& value) { user_name_ = value; }
+
 private slots:
     void onConnect();
     void onRouterStatusChanged(RouterStatus status);
@@ -56,6 +58,8 @@ private:
     QPushButton* button_connect_ = nullptr;
     QLabel* label_status_ = nullptr;
     QPointer<ClientWindow> client_window_;
+
+    QString user_name_;
 
     Q_DISABLE_COPY_MOVE(QsClientWindow)
 };

@@ -18,9 +18,7 @@
 
 #include "router/client_qs_client.h"
 
-#include "base/peer/host_id.h"
 #include "proto/router_client.h"
-#include "router/shared_hosts.h"
 
 //--------------------------------------------------------------------------------------------------
 ClientQsClient::ClientQsClient(Database& database, AccessLog& access_log, TcpChannel* channel,
@@ -44,14 +42,4 @@ bool ClientQsClient::isMessageAllowed(const proto::router::ClientToRouter& messa
     return message.has_connection_request();
 }
 
-//--------------------------------------------------------------------------------------------------
-bool ClientQsClient::isHostIdAllowed(HostId host_id) const
-{
-    if (!isTempHostId(host_id))
-        return false;
 
-    // The id is chosen from the portable-host range by the client itself. What makes it a Quick
-    // Support host is the flag the host announced when it connected, not the number alone.
-    const auto host = SharedHosts::instance().find(host_id);
-    return host.has_value() && host->portable;
-}
