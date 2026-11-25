@@ -7599,29 +7599,38 @@ Credentials replaced: %2</source>
 Updates from our server will no longer be offered.
 When the original Aspia releases a version newer than the installed one, the hosts will update to the original build; host settings and IDs are kept.
 This is a one-way switch: to return to the mod, the server and key must be entered again, and hosts may need reinstalling.
-Works only on hosts with version fallback support (our next release); on older builds a host may see &quot;no updates&quot; forever.
 
 Hosts to be changed: %1.</source>
-        <translation>Хосты будут проверять обновления на https://aspia.org/updates по публичному ключу оригинального Aspia.\n\nОбновления с нашего сервера больше предлагаться не будут.\nКогда оригинальный Aspia выпустит версию новее установленной, хосты обновятся до оригинальной сборки; настройки и ID хостов сохраняются.\nЭто односторонний переход: чтобы вернуться на мод, сервер и ключ придётся прописать заново, а хосты, возможно, переустановить.\nРаботает только на хостах с поддержкой фолбэка версий (наш ближайший релиз); на старых сборках хост может навсегда видеть «нет обновлений».\n\nБудет изменено хостов: %1.</translation>
+        <translation>Хосты будут проверять обновления по https://aspia.org/updates с публичным ключом оригинальной Aspia.
+
+Обновления с нашего сервера больше не будут предлагаться.
+Когда оригинальная Aspia выпустит версию новее установленной, хосты обновятся до оригинальной сборки; настройки и ID хостов сохранятся.
+Это одностороннее переключение: чтобы вернуться к моду, нужно снова указать сервер и ключ, а хосты, возможно, придётся переустановить.
+
+Хосты, которые будут изменены: %1.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="127"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="126"/>
         <source>Clear server and key</source>
         <translation>Очистить сервер и ключ</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="133"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="132"/>
         <source>Clear update server and key</source>
         <translation>Очистить сервер обновлений и ключ</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="134"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="133"/>
         <source>Hosts will use the built-in update server and public key of this build.
 
 The channel, auto-update setting and check frequency are not changed.
 
 Hosts to be changed: %1.</source>
-        <translation>Хосты вернутся к встроенному серверу обновлений и публичному ключу этой сборки.\n\nКанал, автообновление и частота проверки не изменятся.\n\nХосты, которые будут изменены: %1.</translation>
+        <translation>Хосты вернутся к встроенному серверу обновлений и публичному ключу этой сборки.
+
+Канал, автообновление и частота проверки не изменятся.
+
+Хосты, которые будут изменены: %1.</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="226"/>
@@ -7926,28 +7935,35 @@ Detail: %1</source>
 
 Updates from our server will no longer be offered.
 When the original Aspia releases a version newer than the installed one, the host will update to the original build; host settings and ID are kept.
-This is a one-way switch: to return to the mod, the server and key must be entered again, and the host may need reinstalling.
-Works only on hosts with version fallback support (our next release); on older builds the host may see &quot;no updates&quot; forever.</source>
-        <translation>Хост будет проверять обновления на https://aspia.org/updates по публичному ключу оригинального Aspia.\n\nОбновления с нашего сервера больше предлагаться не будут.\nКогда оригинальный Aspia выпустит версию новее установленной, хост обновится до оригинальной сборки; настройки и ID хоста сохраняются.\nЭто односторонний переход: чтобы вернуться на мод, сервер и ключ придётся прописать заново, а хост, возможно, переустановить.\nРаботает только на хостах с поддержкой фолбэка версий (наш ближайший релиз); на старых сборках хост может навсегда видеть «нет обновлений».</translation>
+This is a one-way switch: to return to the mod, the server and key must be entered again, and the host may need reinstalling.</source>
+        <translation>Хост будет проверять обновления по https://aspia.org/updates с публичным ключом оригинальной Aspia.
+
+Обновления с нашего сервера больше не будут предлагаться.
+Когда оригинальная Aspia выпустит версию новее установленной, хост обновится до оригинальной сборки; настройки и ID хоста сохранятся.
+Это одностороннее переключение: чтобы вернуться к моду, нужно снова указать сервер и ключ, а хост, возможно, придётся переустановить.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="117"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="116"/>
         <source>Clear server and key</source>
         <translation>Очистить сервер и ключ</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="123"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="122"/>
         <source>Clear update server and key</source>
         <translation>Очистить сервер обновлений и ключ</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="124"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="123"/>
         <source>The host will use the built-in update server and public key of this build.
 
 The channel, auto-update setting and check frequency are not changed.
 
 Clear the server and key?</source>
-        <translation>Хост вернётся к встроенному серверу обновлений и публичному ключу этой сборки.\n\nКанал, автообновление и частота проверки не изменятся.\n\nОчистить сервер и ключ?</translation>
+        <translation>Хост вернётся к встроенному серверу обновлений и публичному ключу этой сборки.
+
+Канал, автообновление и частота проверки не изменятся.
+
+Очистить сервер и ключ?</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_host_config_dialog.cc" line="152"/>

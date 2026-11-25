@@ -98,19 +98,18 @@ RouterHostConfigDialog::RouterHostConfigDialog(qint64 host_id, QWidget* parent)
 
     connect(button_original, &QPushButton::clicked, this, [this]()
     {
-        const int answer = QMessageBox::question(
-            this, tr("Switch to the original update server"),
-            tr("The host will check for updates at https://aspia.org/updates using the "
+        MsgBox box(QMessageBox::Question,
+                   tr("Switch to the original update server"),
+                   tr("The host will check for updates at https://aspia.org/updates using the "
                "public key of the original Aspia.\n\n"
                "Updates from our server will no longer be offered.\n"
                "When the original Aspia releases a version newer than the installed one, "
                "the host will update to the original build; host settings and ID are kept.\n"
                "This is a one-way switch: to return to the mod, the server and key must be "
-               "entered again, and the host may need reinstalling.\n"
-               "Works only on hosts with version fallback support (our next release); on older "
-               "builds the host may see \"no updates\" forever."),
-            QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
-        if (answer == QMessageBox::Yes)
+               "entered again, and the host may need reinstalling."),
+                   QMessageBox::Yes | QMessageBox::No, this);
+        box.setDefaultButton(QMessageBox::No);
+        if (box.exec() == QMessageBox::Yes)
             applyOriginalServerPreset();
     });
 
@@ -119,13 +118,14 @@ RouterHostConfigDialog::RouterHostConfigDialog(qint64 host_id, QWidget* parent)
 
     connect(button_clear, &QPushButton::clicked, this, [this]()
     {
-        const int answer = QMessageBox::question(
-            this, tr("Clear update server and key"),
-            tr("The host will use the built-in update server and public key of this build.\n\n"
+        MsgBox box(QMessageBox::Question,
+                   tr("Clear update server and key"),
+                   tr("The host will use the built-in update server and public key of this build.\n\n"
                "The channel, auto-update setting and check frequency are not changed.\n\n"
                "Clear the server and key?"),
-            QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
-        if (answer == QMessageBox::Yes)
+                   QMessageBox::Yes | QMessageBox::No, this);
+        box.setDefaultButton(QMessageBox::No);
+        if (box.exec() == QMessageBox::Yes)
             clearServerAndKey();
     });
 
