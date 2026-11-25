@@ -1173,12 +1173,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1602"/>
+        <location filename="../client/desktop/main_window.cc" line="1597"/>
         <source>Several hosts are named &quot;%1&quot;. Use the ID of the one you mean.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1625"/>
+        <location filename="../client/desktop/main_window.cc" line="1620"/>
         <source>&quot;%1&quot; is both the name of a host and the ID of another. Connect by the record ID of the host you mean.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2758,7 +2758,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="233"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1038"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1053"/>
         <source>Scale</source>
         <translation>縮放</translation>
     </message>
@@ -2848,7 +2848,7 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="435"/>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="438"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="626"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="641"/>
         <source>Start recording</source>
         <translation>開始錄製</translation>
     </message>
@@ -2870,97 +2870,97 @@ Credentials replaced: %2</source>
         <translation>切換工作階段</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="413"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="428"/>
         <source>Resolution selection</source>
         <translation>選擇解析度</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1051"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1066"/>
         <source>Session settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1053"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1068"/>
         <source>Clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1055"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1070"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1057"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1072"/>
         <source>Cursor shape</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1059"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1074"/>
         <source>Cursor position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1061"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1076"/>
         <source>Effects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1063"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1078"/>
         <source>Wallpaper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1065"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1080"/>
         <source>Block input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1068"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1083"/>
         <source>Lock at disconnect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1071"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1086"/>
         <source>Enable keyboard shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1074"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1089"/>
         <source>Quality</source>
         <translation type="unfinished">畫質</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1077"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1092"/>
         <source>Auto</source>
         <translation type="unfinished">自動</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1079"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1094"/>
         <source>Low</source>
         <translation type="unfinished">低</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1081"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1096"/>
         <source>Medium</source>
         <translation type="unfinished">中</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1083"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1098"/>
         <source>High</source>
         <translation type="unfinished">高</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1325"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1340"/>
         <source>Session %1</source>
         <translation>工作階段 %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1325"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1340"/>
         <source>Session %1 (%2)</source>
         <translation>工作階段 %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="621"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="636"/>
         <source>Stop recording</source>
         <translation>停止錄製</translation>
     </message>
@@ -2971,49 +2971,49 @@ Credentials replaced: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="526"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="541"/>
         <source>Scripts</source>
         <translation>指令碼</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="589"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="604"/>
         <source>Are you sure you want to run &quot;%1&quot; on the remote computer?</source>
         <translation>確定要在遠端電腦上執行指令碼「%1」嗎？</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="853"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="868"/>
         <source>Are you sure you want to shutdown the remote computer?</source>
         <translation>確定要關閉遠端電腦嗎？</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="868"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="901"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="883"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="916"/>
         <source>Confirmation</source>
         <translation>確認</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="869"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="884"/>
         <source>Are you sure you want to reboot the remote computer?</source>
         <translation>確定要重新啟動遠端電腦嗎？</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="877"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="910"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="892"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="925"/>
         <source>Wait for host</source>
         <translation>等待主機</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="902"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="917"/>
         <source>Are you sure you want to reboot the remote computer in Safe Mode?</source>
         <translation>確定要以安全模式重新啟動遠端電腦嗎？</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="934"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="949"/>
         <source>Are you sure you want to end the user session on the remote computer?</source>
         <translation>確定要結束遠端電腦上的使用者工作階段嗎？</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="949"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="964"/>
         <source>Are you sure you want to lock the user session on the remote computer?</source>
         <translation>確定要鎖定遠端電腦上的使用者工作階段嗎？</translation>
     </message>
@@ -3054,37 +3054,37 @@ Credentials replaced: %2</source>
 <context>
     <name>DesktopWindow</name>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1243"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1254"/>
         <source>Save File</source>
         <translation>儲存檔案</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1244"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1255"/>
         <source>PNG Image (*.png);;BMP Image (*.bmp)</source>
         <translation>PNG 影像 (*.png);;BMP 影像 (*.bmp)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1275"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1286"/>
         <source>Could not save image</source>
         <translation>無法儲存影像</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1578"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1589"/>
         <source>Invalid user name or password.</source>
         <translation>使用者名稱或密碼錯誤。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1581"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1592"/>
         <source>The password has expired.</source>
         <translation>密碼已過期。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1584"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1595"/>
         <source>The account is locked out.</source>
         <translation>帳戶已遭鎖定。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1587"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1598"/>
         <source>The account is disabled.</source>
         <translation>帳戶已停用。</translation>
     </message>
@@ -5252,32 +5252,32 @@ Credentials replaced: %2</source>
         <translation>請關閉所有對話方塊以鎖定應用程式。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="961"/>
+        <location filename="../client/desktop/main_window.cc" line="956"/>
         <source>Unknown application</source>
         <translation>未知應用程式</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="964"/>
+        <location filename="../client/desktop/main_window.cc" line="959"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>MCP 連接器。已連線：%1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="965"/>
+        <location filename="../client/desktop/main_window.cc" line="960"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - AI 已連線</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1451"/>
+        <location filename="../client/desktop/main_window.cc" line="1446"/>
         <source>A host named by its address has no record of it in the address book, and there are no stored credentials to use. Give the user name and the password with --username and --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1783"/>
+        <location filename="../client/desktop/main_window.cc" line="1778"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1789"/>
+        <location filename="../client/desktop/main_window.cc" line="1784"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6028,7 +6028,7 @@ Credentials replaced: %2</source>
 <context>
     <name>NetworkWorker</name>
     <message>
-        <location filename="../client/workers/network_worker.cc" line="390"/>
+        <location filename="../client/workers/network_worker.cc" line="391"/>
         <source>Failed to connect to the relay server</source>
         <translation>無法連線到中繼伺服器</translation>
     </message>
@@ -6667,78 +6667,151 @@ Credentials replaced: %2</source>
 <context>
     <name>QsClientExportDialog</name>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="73"/>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="186"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="88"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="404"/>
         <source>Export Preconfigured QS Client</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="76"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="91"/>
         <source>A new account is created on the router for this client. The password is generated automatically and stored only in the exported file. The suffix &quot;-qs&quot; is added to the name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="93"/>
-        <source>Name:</source>
-        <translation type="unfinished">名稱：</translation>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="97"/>
+        <source>Create new user</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="94"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="98"/>
+        <source>Use existing user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="120"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="207"/>
+        <source>Show</source>
+        <translation type="unfinished">顯示</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="121"/>
+        <source>Generate password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="130"/>
+        <source>The password must match the password of this account on the router. The password on the router is not changed - if it differs, the QS client will not connect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="148"/>
+        <source>User:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="149"/>
+        <source>Password:</source>
+        <translation type="unfinished">密碼：</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="150"/>
         <source>Router address:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="96"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="152"/>
         <source>Export...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="97"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="153"/>
         <source>Cancel</source>
         <translation type="unfinished">取消</translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="126"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="179"/>
+        <source>A new account is created on the router for this client. The password is stored only in the exported file. The suffix &quot;-qs&quot; is added to the name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="185"/>
+        <source>An existing account is used. The account is not created or changed; only the password is sealed into the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="202"/>
+        <source>Hide</source>
+        <translation type="unfinished">隱藏</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="228"/>
+        <source>Loading users...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="258"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="306"/>
+        <source>No Quick Support users found on the router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="269"/>
+        <source>No router session.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="285"/>
         <source>An administrator session with the router is required.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="133"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="297"/>
         <source>The user name is invalid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="142"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="316"/>
         <source>The router address is invalid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="169"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="324"/>
+        <source>The password must be 8 to 64 characters long.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="353"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="387"/>
         <source>The router did not answer the user lookup.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="175"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="359"/>
         <source>A user with this name already exists on the router.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="186"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="393"/>
+        <source>The selected user no longer exists on the router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="404"/>
         <source>Executable files (*.exe)</source>
         <translation type="unfinished">執行檔 (*.exe)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="202"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="418"/>
         <source>Failed to export the Quick Support client.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="237"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="453"/>
         <source>Failed to create the user on the router.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/qs_client_export_dialog.cc" line="241"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="458"/>
         <source>The Quick Support client has been exported.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7379,82 +7452,104 @@ Credentials replaced: %2</source>
 <context>
     <name>RouterHostBulkConfigDialog</name>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="53"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="56"/>
         <source>Update configuration on hosts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="65"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="70"/>
         <source>Update server:</source>
         <translation type="unfinished">更新伺服器：</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="67"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="72"/>
         <source>https://... (empty = default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="70"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="75"/>
         <source>Public key:</source>
         <translation type="unfinished">公開金鑰：</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="72"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="77"/>
         <source>32 bytes hex (empty = default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="75"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="80"/>
         <source>Channel:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="82"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="87"/>
         <source>Auto-update:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="83"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="88"/>
         <source>Enabled</source>
         <translation type="unfinished">已啟用</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="86"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="91"/>
         <source>Check frequency:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="88"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="93"/>
         <source>Once a day</source>
         <translation type="unfinished">每天一次</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="89"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="94"/>
         <source>Once a week</source>
         <translation type="unfinished">每週一次</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="90"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="95"/>
         <source>Once a month</source>
         <translation type="unfinished">每月一次</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="95"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="100"/>
         <source>Unchecked fields are left unchanged on every host. A checked field with an empty value resets it to the default.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="166"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="105"/>
+        <source>Use the original aspia.org server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="111"/>
+        <source>Switch to the original update server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="112"/>
+        <source>Hosts will check for updates at https://aspia.org/updates using the public key of the original Aspia.
+
+Updates from our server will no longer be offered.
+When the original Aspia releases a version newer than the installed one, the hosts will update to the original build; host settings and IDs are kept.
+This is a one-way switch: to return to the mod, the server and key must be entered again, and hosts may need reinstalling.
+Works only on hosts with version fallback support (our next release); on older builds a host may see &quot;no updates&quot; forever.
+
+Hosts to be changed: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="202"/>
         <source>Invalid server URL.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="172"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="208"/>
         <source>Invalid public key (must be 32 bytes hex).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="180"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="216"/>
         <source>A public key without a server is not allowed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7666,103 +7761,123 @@ Detail: %1</source>
 <context>
     <name>RouterHostConfigDialog</name>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="62"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="64"/>
         <source>Host update configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="68"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="70"/>
         <source>https://... (empty = default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="69"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="71"/>
         <source>Update server:</source>
         <translation type="unfinished">更新伺服器：</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="72"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="74"/>
         <source>32 bytes hex (empty = default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="73"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="75"/>
         <source>Public key:</source>
         <translation type="unfinished">公開金鑰：</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="79"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="81"/>
         <source>Channel:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="81"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="83"/>
         <source>Auto-update enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="85"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="87"/>
         <source>Once a day</source>
         <translation type="unfinished">每天一次</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="86"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="88"/>
         <source>Once a week</source>
         <translation type="unfinished">每週一次</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="87"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="89"/>
         <source>Once a month</source>
         <translation type="unfinished">每月一次</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="89"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="91"/>
         <source>Check frequency:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="91"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="93"/>
         <source>Loading current settings...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="114"/>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="180"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="96"/>
+        <source>Use the original aspia.org server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="102"/>
+        <source>Switch to the original update server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="103"/>
+        <source>The host will check for updates at https://aspia.org/updates using the public key of the original Aspia.
+
+Updates from our server will no longer be offered.
+When the original Aspia releases a version newer than the installed one, the host will update to the original build; host settings and ID are kept.
+This is a one-way switch: to return to the mod, the server and key must be entered again, and the host may need reinstalling.
+Works only on hosts with version fallback support (our next release); on older builds the host may see &quot;no updates&quot; forever.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="137"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="203"/>
         <source>No session to router.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="126"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="149"/>
         <source>Failed to read telemetry: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="134"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="157"/>
         <source>Telemetry is not JSON.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="152"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="175"/>
         <source>Current settings loaded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="160"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="183"/>
         <source>Invalid server URL.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="165"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="188"/>
         <source>Invalid public key (must be 32 bytes hex).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="204"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="227"/>
         <source>Configuration applied successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="209"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="232"/>
         <source>Failed to apply: %1</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1173,12 +1173,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1602"/>
+        <location filename="../client/desktop/main_window.cc" line="1597"/>
         <source>Several hosts are named &quot;%1&quot;. Use the ID of the one you mean.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1625"/>
+        <location filename="../client/desktop/main_window.cc" line="1620"/>
         <source>&quot;%1&quot; is both the name of a host and the ID of another. Connect by the record ID of the host you mean.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3205,37 +3205,37 @@ Credentials replaced: %2</source>
         <translation>예</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1243"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1254"/>
         <source>Save File</source>
         <translation>파일 저장</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1244"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1255"/>
         <source>PNG Image (*.png);;BMP Image (*.bmp)</source>
         <translation>PNG 이미지 (*.png);;BMP 이미지 (*.bmp)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1275"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1286"/>
         <source>Could not save image</source>
         <translation>이미지를 저장할 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1578"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1589"/>
         <source>Invalid user name or password.</source>
         <translation>사용자 이름 또는 암호가 잘못되었습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1581"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1592"/>
         <source>The password has expired.</source>
         <translation>암호가 만료되었습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1584"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1595"/>
         <source>The account is locked out.</source>
         <translation>계정이 잠겨 있습니다.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1587"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1598"/>
         <source>The account is disabled.</source>
         <translation>계정이 사용 안 함 상태입니다.</translation>
     </message>
@@ -5252,32 +5252,32 @@ Credentials replaced: %2</source>
         <translation>응용 프로그램을 잠그려면 모든 대화 상자를 닫으십시오.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="961"/>
+        <location filename="../client/desktop/main_window.cc" line="956"/>
         <source>Unknown application</source>
         <translation>알 수 없는 응용 프로그램</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="964"/>
+        <location filename="../client/desktop/main_window.cc" line="959"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>MCP 커넥터. 연결됨: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="965"/>
+        <location filename="../client/desktop/main_window.cc" line="960"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - AI 연결됨</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1451"/>
+        <location filename="../client/desktop/main_window.cc" line="1446"/>
         <source>A host named by its address has no record of it in the address book, and there are no stored credentials to use. Give the user name and the password with --username and --password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1783"/>
+        <location filename="../client/desktop/main_window.cc" line="1778"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1789"/>
+        <location filename="../client/desktop/main_window.cc" line="1784"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7452,82 +7452,104 @@ Credentials replaced: %2</source>
 <context>
     <name>RouterHostBulkConfigDialog</name>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="53"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="56"/>
         <source>Update configuration on hosts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="65"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="70"/>
         <source>Update server:</source>
         <translation type="unfinished">업데이트 서버:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="67"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="72"/>
         <source>https://... (empty = default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="70"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="75"/>
         <source>Public key:</source>
         <translation type="unfinished">공개 키:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="72"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="77"/>
         <source>32 bytes hex (empty = default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="75"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="80"/>
         <source>Channel:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="82"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="87"/>
         <source>Auto-update:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="83"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="88"/>
         <source>Enabled</source>
         <translation type="unfinished">사용</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="86"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="91"/>
         <source>Check frequency:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="88"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="93"/>
         <source>Once a day</source>
         <translation type="unfinished">하루에 한 번</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="89"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="94"/>
         <source>Once a week</source>
         <translation type="unfinished">일주일에 한 번</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="90"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="95"/>
         <source>Once a month</source>
         <translation type="unfinished">한 달에 한 번</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="95"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="100"/>
         <source>Unchecked fields are left unchanged on every host. A checked field with an empty value resets it to the default.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="166"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="105"/>
+        <source>Use the original aspia.org server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="111"/>
+        <source>Switch to the original update server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="112"/>
+        <source>Hosts will check for updates at https://aspia.org/updates using the public key of the original Aspia.
+
+Updates from our server will no longer be offered.
+When the original Aspia releases a version newer than the installed one, the hosts will update to the original build; host settings and IDs are kept.
+This is a one-way switch: to return to the mod, the server and key must be entered again, and hosts may need reinstalling.
+Works only on hosts with version fallback support (our next release); on older builds a host may see &quot;no updates&quot; forever.
+
+Hosts to be changed: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="202"/>
         <source>Invalid server URL.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="172"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="208"/>
         <source>Invalid public key (must be 32 bytes hex).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="180"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="216"/>
         <source>A public key without a server is not allowed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7739,103 +7761,123 @@ Detail: %1</source>
 <context>
     <name>RouterHostConfigDialog</name>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="62"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="64"/>
         <source>Host update configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="68"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="70"/>
         <source>https://... (empty = default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="69"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="71"/>
         <source>Update server:</source>
         <translation type="unfinished">업데이트 서버:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="72"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="74"/>
         <source>32 bytes hex (empty = default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="73"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="75"/>
         <source>Public key:</source>
         <translation type="unfinished">공개 키:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="79"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="81"/>
         <source>Channel:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="81"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="83"/>
         <source>Auto-update enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="85"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="87"/>
         <source>Once a day</source>
         <translation type="unfinished">하루에 한 번</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="86"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="88"/>
         <source>Once a week</source>
         <translation type="unfinished">일주일에 한 번</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="87"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="89"/>
         <source>Once a month</source>
         <translation type="unfinished">한 달에 한 번</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="89"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="91"/>
         <source>Check frequency:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="91"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="93"/>
         <source>Loading current settings...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="114"/>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="180"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="96"/>
+        <source>Use the original aspia.org server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="102"/>
+        <source>Switch to the original update server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="103"/>
+        <source>The host will check for updates at https://aspia.org/updates using the public key of the original Aspia.
+
+Updates from our server will no longer be offered.
+When the original Aspia releases a version newer than the installed one, the host will update to the original build; host settings and ID are kept.
+This is a one-way switch: to return to the mod, the server and key must be entered again, and the host may need reinstalling.
+Works only on hosts with version fallback support (our next release); on older builds the host may see &quot;no updates&quot; forever.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="137"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="203"/>
         <source>No session to router.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="126"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="149"/>
         <source>Failed to read telemetry: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="134"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="157"/>
         <source>Telemetry is not JSON.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="152"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="175"/>
         <source>Current settings loaded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="160"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="183"/>
         <source>Invalid server URL.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="165"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="188"/>
         <source>Invalid public key (must be 32 bytes hex).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="204"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="227"/>
         <source>Configuration applied successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="209"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="232"/>
         <source>Failed to apply: %1</source>
         <translation type="unfinished"></translation>
     </message>

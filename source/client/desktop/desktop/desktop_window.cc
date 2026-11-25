@@ -331,7 +331,7 @@ void DesktopWindow::applySettings()
     LOG(INFO) << "Apply client settings";
 
     const bool had_preferred_size = !desktop_config_.disable_preferred_size();
-    const bool was_view_only = desktop_config_.view_only();
+    const bool was_view_only = sessionState() ? sessionState()->viewOnly() : desktop_config_.view_only();
 
     const ProfileConfig profile = Database::instance().hostProfile(sessionState()->host());
     sessionState()->setProfile(profile);
@@ -511,7 +511,18 @@ void DesktopWindow::onSessionStarted()
     toolbar_->enableTerminal(true);
     toolbar_->enableSystemInfo(true);
 
-    toolbar_->setViewOnly(desktop_config_.view_only());
+    if (sessionState() && sessionState()->viewOnly())
+    {
+        applyViewOnlyOverrides(desktop_config_);
+        toolbar_->setViewOnly(true);
+        // Re-affirm the view-only cursor on every (re)connect.
+        desktop_->enableRemoteCursorPosition(true);
+        LOG(INFO) << "View-only session started (reconnect re-affirmed)";
+    }
+    else
+    {
+        toolbar_->setViewOnly(desktop_config_.view_only());
+    }
 
     sendCapabilities();
 }

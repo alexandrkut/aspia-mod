@@ -84,6 +84,11 @@ that is asking.
 - A migration barrier, where a version can only be updated through an intermediate one, is written
   as a literal version and is not moved by later releases: `2.6.0 -> 3.0.0`.
 
+Fallback: when no entry matches the running version exactly and the running version has more than
+three parts, the check is retried once with the build number (the fourth part) stripped. This lets
+a build of a line find the rule written for the three-segment line version. The exact match always
+wins when both are present, and a three-segment running version is never retried.
+
 What an application makes of it:
 
 | Case                                                 | Result                             |

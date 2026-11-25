@@ -1179,12 +1179,12 @@
         <translation>Нет базы данных, соответствующей «%1».</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1602"/>
+        <location filename="../client/desktop/main_window.cc" line="1597"/>
         <source>Several hosts are named &quot;%1&quot;. Use the ID of the one you mean.</source>
         <translation>Несколько хостов имеют имя «%1». Укажите ID нужного.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1625"/>
+        <location filename="../client/desktop/main_window.cc" line="1620"/>
         <source>&quot;%1&quot; is both the name of a host and the ID of another. Connect by the record ID of the host you mean.</source>
         <translation>«%1» — это и имя хоста, и ID другого. Подключайтесь по ID записи нужного хоста.</translation>
     </message>
@@ -3076,37 +3076,37 @@ Credentials replaced: %2</source>
 <context>
     <name>DesktopWindow</name>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1243"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1254"/>
         <source>Save File</source>
         <translation>Сохранить файл</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1244"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1255"/>
         <source>PNG Image (*.png);;BMP Image (*.bmp)</source>
         <translation>PNG изображение (*.png);;BMP изображение (*.bmp)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1275"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1286"/>
         <source>Could not save image</source>
         <translation>Не удалось сохранить изображение</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1578"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1589"/>
         <source>Invalid user name or password.</source>
         <translation>Неправильное имя пользователя или пароль.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1581"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1592"/>
         <source>The password has expired.</source>
         <translation>Срок действия пароля истек.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1584"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1595"/>
         <source>The account is locked out.</source>
         <translation>Учетная запись заблокирована.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1587"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1598"/>
         <source>The account is disabled.</source>
         <translation>Учетная запись отключена.</translation>
     </message>
@@ -5298,32 +5298,32 @@ Credentials replaced: %2</source>
         <translation>Закройте все диалоги, чтобы заблокировать приложение.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="961"/>
+        <location filename="../client/desktop/main_window.cc" line="956"/>
         <source>Unknown application</source>
         <translation>Неизвестное приложение</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="964"/>
+        <location filename="../client/desktop/main_window.cc" line="959"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>MCP-коннектор. Подключено: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="965"/>
+        <location filename="../client/desktop/main_window.cc" line="960"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - ИИ подключен</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1451"/>
+        <location filename="../client/desktop/main_window.cc" line="1446"/>
         <source>A host named by its address has no record of it in the address book, and there are no stored credentials to use. Give the user name and the password with --username and --password.</source>
         <translation>У хоста, названного по адресу, нет записи в адресной книге, и сохранённых учётных данных взять неоткуда. Задайте логин и пароль ключами --username и --password.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1783"/>
+        <location filename="../client/desktop/main_window.cc" line="1778"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
         <translation>Хост с ID %1 не найден: его нет ни в адресной книге, ни в книге роутера, а роутер не ответил.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="1789"/>
+        <location filename="../client/desktop/main_window.cc" line="1784"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
         <translation>Хост с ID %1 не найден: его нет ни в адресной книге, ни в книге роутера.</translation>
     </message>
@@ -6787,7 +6787,7 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../client/desktop/qs_client_export_dialog.cc" line="179"/>
         <source>A new account is created on the router for this client. The password is stored only in the exported file. The suffix &quot;-qs&quot; is added to the name.</source>
-        <translation>На роутере создаётся новая учётная запись для этого клиента. Пароль сохраняется только в экспортируемом файле. К имени добавляется суффикс "-qs".</translation>
+        <translation>На роутере создаётся новая учётная запись для этого клиента. Пароль сохраняется только в экспортируемом файле. К имени добавляется суффикс &quot;-qs&quot;.</translation>
     </message>
     <message>
         <location filename="../client/desktop/qs_client_export_dialog.cc" line="185"/>
@@ -7518,82 +7518,104 @@ Credentials replaced: %2</source>
 <context>
     <name>RouterHostBulkConfigDialog</name>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="53"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="56"/>
         <source>Update configuration on hosts</source>
         <translation>Настройка обновлений на хостах</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="65"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="70"/>
         <source>Update server:</source>
         <translation>Сервер обновлений:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="67"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="72"/>
         <source>https://... (empty = default)</source>
         <translation>https://... (пусто — по умолчанию)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="70"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="75"/>
         <source>Public key:</source>
         <translation>Публичный ключ:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="72"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="77"/>
         <source>32 bytes hex (empty = default)</source>
         <translation>32 байта hex (пусто — по умолчанию)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="75"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="80"/>
         <source>Channel:</source>
         <translation>Канал:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="82"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="87"/>
         <source>Auto-update:</source>
         <translation>Автообновление:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="83"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="88"/>
         <source>Enabled</source>
         <translation>Включено</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="86"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="91"/>
         <source>Check frequency:</source>
         <translation>Частота проверки:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="88"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="93"/>
         <source>Once a day</source>
         <translation>Раз в день</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="89"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="94"/>
         <source>Once a week</source>
         <translation>Раз в неделю</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="90"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="95"/>
         <source>Once a month</source>
         <translation>Раз в месяц</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="95"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="100"/>
         <source>Unchecked fields are left unchanged on every host. A checked field with an empty value resets it to the default.</source>
         <translation>Неотмеченные поля остаются без изменений на каждом хосте. Отмеченное поле с пустым значением сбрасывается в дефолт.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="166"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="105"/>
+        <source>Use the original aspia.org server</source>
+        <translation>Прописать оригинальный сервер aspia.org</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="111"/>
+        <source>Switch to the original update server</source>
+        <translation>Переход на оригинальный сервер обновлений</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="112"/>
+        <source>Hosts will check for updates at https://aspia.org/updates using the public key of the original Aspia.
+
+Updates from our server will no longer be offered.
+When the original Aspia releases a version newer than the installed one, the hosts will update to the original build; host settings and IDs are kept.
+This is a one-way switch: to return to the mod, the server and key must be entered again, and hosts may need reinstalling.
+Works only on hosts with version fallback support (our next release); on older builds a host may see &quot;no updates&quot; forever.
+
+Hosts to be changed: %1.</source>
+        <translation>Хосты будут проверять обновления на https://aspia.org/updates по публичному ключу оригинального Aspia.\n\nОбновления с нашего сервера больше предлагаться не будут.\nКогда оригинальный Aspia выпустит версию новее установленной, хосты обновятся до оригинальной сборки; настройки и ID хостов сохраняются.\nЭто односторонний переход: чтобы вернуться на мод, сервер и ключ придётся прописать заново, а хосты, возможно, переустановить.\nРаботает только на хостах с поддержкой фолбэка версий (наш ближайший релиз); на старых сборках хост может навсегда видеть «нет обновлений».\n\nБудет изменено хостов: %1.</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="202"/>
         <source>Invalid server URL.</source>
         <translation>Некорректный адрес сервера.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="172"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="208"/>
         <source>Invalid public key (must be 32 bytes hex).</source>
         <translation>Некорректный публичный ключ (нужно 32 байта hex).</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="180"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="216"/>
         <source>A public key without a server is not allowed.</source>
         <translation>Ключ без сервера недопустим.</translation>
     </message>
@@ -7810,103 +7832,123 @@ Detail: %1</source>
 <context>
     <name>RouterHostConfigDialog</name>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="62"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="64"/>
         <source>Host update configuration</source>
         <translation>Настройка обновлений хоста</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="68"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="70"/>
         <source>https://... (empty = default)</source>
         <translation>https://... (пусто — по умолчанию)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="69"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="71"/>
         <source>Update server:</source>
         <translation>Сервер обновлений:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="72"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="74"/>
         <source>32 bytes hex (empty = default)</source>
         <translation>32 байта hex (пусто — по умолчанию)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="73"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="75"/>
         <source>Public key:</source>
         <translation>Публичный ключ:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="79"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="81"/>
         <source>Channel:</source>
         <translation>Канал:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="81"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="83"/>
         <source>Auto-update enabled</source>
         <translation>Включить автообновление</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="85"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="87"/>
         <source>Once a day</source>
         <translation>Раз в день</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="86"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="88"/>
         <source>Once a week</source>
         <translation>Раз в неделю</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="87"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="89"/>
         <source>Once a month</source>
         <translation>Раз в месяц</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="89"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="91"/>
         <source>Check frequency:</source>
         <translation>Частота проверки:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="91"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="93"/>
         <source>Loading current settings...</source>
         <translation>Загрузка текущих настроек...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="114"/>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="180"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="96"/>
+        <source>Use the original aspia.org server</source>
+        <translation>Прописать оригинальный сервер aspia.org</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="102"/>
+        <source>Switch to the original update server</source>
+        <translation>Переход на оригинальный сервер обновлений</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="103"/>
+        <source>The host will check for updates at https://aspia.org/updates using the public key of the original Aspia.
+
+Updates from our server will no longer be offered.
+When the original Aspia releases a version newer than the installed one, the host will update to the original build; host settings and ID are kept.
+This is a one-way switch: to return to the mod, the server and key must be entered again, and the host may need reinstalling.
+Works only on hosts with version fallback support (our next release); on older builds the host may see &quot;no updates&quot; forever.</source>
+        <translation>Хост будет проверять обновления на https://aspia.org/updates по публичному ключу оригинального Aspia.\n\nОбновления с нашего сервера больше предлагаться не будут.\nКогда оригинальный Aspia выпустит версию новее установленной, хост обновится до оригинальной сборки; настройки и ID хоста сохраняются.\nЭто односторонний переход: чтобы вернуться на мод, сервер и ключ придётся прописать заново, а хост, возможно, переустановить.\nРаботает только на хостах с поддержкой фолбэка версий (наш ближайший релиз); на старых сборках хост может навсегда видеть «нет обновлений».</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="137"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="203"/>
         <source>No session to router.</source>
         <translation>Нет подключения к роутеру.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="126"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="149"/>
         <source>Failed to read telemetry: %1</source>
         <translation>Не удалось прочитать телеметрию: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="134"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="157"/>
         <source>Telemetry is not JSON.</source>
         <translation>Телеметрия — не JSON.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="152"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="175"/>
         <source>Current settings loaded.</source>
         <translation>Текущие настройки загружены.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="160"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="183"/>
         <source>Invalid server URL.</source>
         <translation>Некорректный адрес сервера.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="165"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="188"/>
         <source>Invalid public key (must be 32 bytes hex).</source>
         <translation>Некорректный публичный ключ (нужно 32 байта hex).</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="204"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="227"/>
         <source>Configuration applied successfully.</source>
         <translation>Настройки успешно применены.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="209"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="232"/>
         <source>Failed to apply: %1</source>
         <translation>Не удалось применить: %1</translation>
     </message>

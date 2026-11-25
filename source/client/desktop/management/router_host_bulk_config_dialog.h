@@ -29,7 +29,7 @@ class RouterHostBulkConfigDialog final : public QDialog
     Q_OBJECT
 
 public:
-    explicit RouterHostBulkConfigDialog(const QString& fleet_summary, QWidget* parent = nullptr);
+    explicit RouterHostBulkConfigDialog(const QString& fleet_summary, int host_count = 0, QWidget* parent = nullptr);
     ~RouterHostBulkConfigDialog() final;
 
     bool changeServer() const;
@@ -49,6 +49,7 @@ private slots:
 
 private:
     bool validate() const;
+    void applyOriginalServerPreset();
 
     QCheckBox* check_server_ = nullptr;
     QLineEdit* edit_server_ = nullptr;
@@ -60,6 +61,8 @@ private:
     QCheckBox* edit_auto_ = nullptr;
     QCheckBox* check_frequency_ = nullptr;
     QComboBox* combo_frequency_ = nullptr;
+
+    int host_count_ = 0;
 
     Q_DISABLE_COPY_MOVE(RouterHostBulkConfigDialog)
 };

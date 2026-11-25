@@ -139,6 +139,63 @@ TEST(UpdateInfoTest, SourceIsComparedAsVersion)
 }
 
 //--------------------------------------------------------------------------------------------------
+// An exact rule for a four-segment version wins over the three-segment fallback when both are present.
+TEST(UpdateInfoTest, ExactRuleBeatsFallback)
+{
+    QByteArray rules = R"({
+        "format": 1,
+        "updates": [
+            { "source": "3.0.0", "target": "3.0.6" },
+            { "source": "3.0.0.5", "target": "3.0.7" }
+        ]
+    })";
+
+    EXPECT_EQ(UpdateInfo::targetVersion(rules, QVersionNumber({3, 0, 0, 5})),
+              QVersionNumber(3, 0, 7));
+}
+
+//--------------------------------------------------------------------------------------------------
+// No exact rule for a four-segment current version: fall back once to the three-segment line version.
+TEST(UpdateInfoTest, FallbackForFourSegmentVersion)
+{
+    QByteArray rules = R"({
+        "format": 1,
+        "updates": [ { "source": "3.0.0", "target": "3.0.6" } ]
+    })";
+
+    EXPECT_EQ(UpdateInfo::targetVersion(rules, QVersionNumber({3, 0, 0, 5})),
+              QVersionNumber(3, 0, 6));
+}
+
+//--------------------------------------------------------------------------------------------------
+// A three-segment current version is never retried: a missing rule stays a clean "no update".
+TEST(UpdateInfoTest, NoFallbackForThreeSegmentVersion)
+{
+    QByteArray rules = R"({
+        "format": 1,
+        "updates": [ { "source": "3.0.0", "target": "3.0.6" } ]
+    })";
+
+    std::optional<QVersionNumber> result =
+        UpdateInfo::targetVersion(rules, QVersionNumber(2, 7, 0));
+    ASSERT_TRUE(result.has_value());
+    EXPECT_TRUE(result->isNull());
+}
+
+//--------------------------------------------------------------------------------------------------
+// The fourth segment of the target does not confuse QVersionNumber parsing.
+TEST(UpdateInfoTest, FourSegmentTargetParses)
+{
+    QByteArray rules = R"({
+        "format": 1,
+        "updates": [ { "source": "3.0.0", "target": "3.0.6.1" } ]
+    })";
+
+    EXPECT_EQ(UpdateInfo::targetVersion(rules, QVersionNumber(3, 0, 0)),
+              QVersionNumber({3, 0, 6, 1}));
+}
+
+//--------------------------------------------------------------------------------------------------
 TEST(UpdateInfoTest, BrokenRulesAreRejected)
 {
     const char* kAnswers[] =

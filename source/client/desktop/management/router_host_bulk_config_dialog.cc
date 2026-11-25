@@ -20,10 +20,13 @@
 #include <QFormLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QPushButton>
+#include <QMessageBox>
 #include <QUrl>
 #include <QVBoxLayout>
 
 #include "common/desktop/msg_box.h"
+#include "client/desktop/management/update_server_presets.h"
 
 namespace {
 
@@ -47,11 +50,13 @@ bool isValidKeyHex(const QString& hex)
 } // namespace
 
 //--------------------------------------------------------------------------------------------------
-RouterHostBulkConfigDialog::RouterHostBulkConfigDialog(const QString& fleet_summary, QWidget* parent)
+RouterHostBulkConfigDialog::RouterHostBulkConfigDialog(const QString& fleet_summary, int host_count, QWidget* parent)
     : QDialog(parent)
 {
     setWindowTitle(tr("Update configuration on hosts"));
     setMinimumWidth(480);
+
+    host_count_ = host_count;
 
     auto* layout = new QVBoxLayout(this);
 
@@ -96,6 +101,28 @@ RouterHostBulkConfigDialog::RouterHostBulkConfigDialog(const QString& fleet_summ
            "A checked field with an empty value resets it to the default."), this);
     hint->setWordWrap(true);
     layout->addWidget(hint);
+
+    auto* button_original = new QPushButton(tr("Use the original aspia.org server"), this);
+    layout->addWidget(button_original);
+
+    connect(button_original, &QPushButton::clicked, this, [this]()
+    {
+        const int answer = QMessageBox::question(
+            this, tr("Switch to the original update server"),
+            tr("Hosts will check for updates at https://aspia.org/updates using the public key "
+               "of the original Aspia.\n\n"
+               "Updates from our server will no longer be offered.\n"
+               "When the original Aspia releases a version newer than the installed one, "
+               "the hosts will update to the original build; host settings and IDs are kept.\n"
+               "This is a one-way switch: to return to the mod, the server and key must be "
+               "entered again, and hosts may need reinstalling.\n"
+               "Works only on hosts with version fallback support (our next release); on older "
+               "builds a host may see \"no updates\" forever.\n\n"
+               "Hosts to be changed: %1.").arg(host_count_),
+            QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+        if (answer == QMessageBox::Yes)
+            applyOriginalServerPreset();
+    });
 
     auto* buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     layout->addWidget(buttons);
@@ -145,6 +172,15 @@ void RouterHostBulkConfigDialog::onButtonClicked(QAbstractButton* button)
         return;
 
     accept();
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostBulkConfigDialog::applyOriginalServerPreset()
+{
+    check_server_->setChecked(true);
+    edit_server_->setText(QString::fromLatin1(kOriginalUpdateServer));
+    check_key_->setChecked(true);
+    edit_key_->setText(QString::fromLatin1(kOriginalUpdatePublicKey));
 }
 
 //--------------------------------------------------------------------------------------------------

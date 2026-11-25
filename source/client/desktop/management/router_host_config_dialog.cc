@@ -22,11 +22,13 @@
 #include <QJsonObject>
 #include <QLabel>
 #include <QLineEdit>
+#include <QPushButton>
 #include <QMessageBox>
 #include <QUrl>
 #include <QVBoxLayout>
 
 #include "base/logging.h"
+#include "client/desktop/management/update_server_presets.h"
 #include "client/router/router_controller.h"
 #include "client/router/router_session.h"
 #include "common/desktop/msg_box.h"
@@ -90,6 +92,27 @@ RouterHostConfigDialog::RouterHostConfigDialog(qint64 host_id, QWidget* parent)
 
     label_status_ = new QLabel(tr("Loading current settings..."), this);
     layout->addRow("", label_status_);
+
+    auto* button_original = new QPushButton(tr("Use the original aspia.org server"), this);
+    layout->addRow(button_original);
+
+    connect(button_original, &QPushButton::clicked, this, [this]()
+    {
+        const int answer = QMessageBox::question(
+            this, tr("Switch to the original update server"),
+            tr("The host will check for updates at https://aspia.org/updates using the "
+               "public key of the original Aspia.\n\n"
+               "Updates from our server will no longer be offered.\n"
+               "When the original Aspia releases a version newer than the installed one, "
+               "the host will update to the original build; host settings and ID are kept.\n"
+               "This is a one-way switch: to return to the mod, the server and key must be "
+               "entered again, and the host may need reinstalling.\n"
+               "Works only on hosts with version fallback support (our next release); on older "
+               "builds the host may see \"no updates\" forever."),
+            QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+        if (answer == QMessageBox::Yes)
+            applyOriginalServerPreset();
+    });
 
     auto* buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     connect(buttons, &QDialogButtonBox::accepted, this, &RouterHostConfigDialog::onApply);
@@ -208,4 +231,11 @@ void RouterHostConfigDialog::applyResult(const proto::router::HostResult& result
     {
         MsgBox::warning(this, tr("Failed to apply: %1").arg(QString::fromStdString(result.error_code())));
     }
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostConfigDialog::applyOriginalServerPreset()
+{
+    edit_server_->setText(QString::fromLatin1(kOriginalUpdateServer));
+    edit_public_key_->setText(QString::fromLatin1(kOriginalUpdatePublicKey));
 }

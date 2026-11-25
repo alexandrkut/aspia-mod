@@ -454,13 +454,14 @@ void NetworkWorker::startConnection()
             const proto::peer::SessionType st = session_state_->sessionType();
             if (st == proto::peer::SESSION_TYPE_FILE_TRANSFER)
                 notify_suppressed = !files;
-            else if (SessionState::nextNotifySuppressed())
+            else if (session_state_->viewOnly())
                 notify_suppressed = !view;
             else
                 notify_suppressed = !control;
         }
         auth->setNotifySuppressed(notify_suppressed);
-        auth->setViewOnly(SessionState::nextNotifySuppressed());
+        LOG(INFO) << "Authenticating with view_only=" << session_state_->viewOnly();
+        auth->setViewOnly(session_state_->viewOnly());
         auth->setDisplayName(session_state_->displayName());
     };
 

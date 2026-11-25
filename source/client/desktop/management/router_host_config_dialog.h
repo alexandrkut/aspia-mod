@@ -47,6 +47,7 @@ private:
     void requestTelemetry();
     void applyResult(const proto::router::HostResult& result);
     bool validate() const;
+    void applyOriginalServerPreset();
 
     qint64 host_id_ = 0;
 

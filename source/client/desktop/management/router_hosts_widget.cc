@@ -1563,7 +1563,7 @@ void RouterHostsWidget::onHostsUpdateConfig()
         .arg(freqs.isEmpty() ? tr("(unknown)") : freq_list.join(", "));
 
     AutoQPointer<RouterHostBulkConfigDialog> input(
-        new RouterHostBulkConfigDialog(summary, this));
+        new RouterHostBulkConfigDialog(summary, run_count, this));
     if (input->exec() != QDialog::Accepted)
         return;
 

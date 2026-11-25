@@ -706,12 +706,7 @@ void MainWindow::onConnect(const HostConfig& host, proto::peer::SessionType sess
                 if (management_tab->consumeViewOnlyPending())
                 {
                     applyViewOnlyOverrides(desktop_config);
-                    SessionState::setNextNotifySuppressed(true);
                     view_only_session = true;
-                }
-                else
-                {
-                    SessionState::setNextNotifySuppressed(false);
                 }
             }
 
@@ -768,7 +763,7 @@ void MainWindow::onConnect(const HostConfig& host, proto::peer::SessionType sess
     client_window->setWindowIcon(icon);
     client_window->setParent(this);
 
-    if (!client_window->connectToHost(host, profile, display_name))
+    if (!client_window->connectToHost(host, profile, display_name, view_only_session))
     {
         client_window->deleteLater();
         return;

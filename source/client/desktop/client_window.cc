@@ -136,7 +136,7 @@ ClientWindow::~ClientWindow()
 }
 
 //--------------------------------------------------------------------------------------------------
-bool ClientWindow::connectToHost(HostConfig host, const ProfileConfig& profile, const QString& display_name)
+bool ClientWindow::connectToHost(HostConfig host, const ProfileConfig& profile, const QString& display_name, bool view_only)
 {
     LOG(INFO) << "Connecting to host";
     setClientTitle(host, session_type_);
@@ -158,7 +158,7 @@ bool ClientWindow::connectToHost(HostConfig host, const ProfileConfig& profile, 
             return false;
     }
 
-    startConnection(host, profile, display_name);
+    startConnection(host, profile, display_name, view_only);
     return true;
 }
 
@@ -724,7 +724,7 @@ void ClientWindow::askCredentialsAgain()
 }
 
 //--------------------------------------------------------------------------------------------------
-void ClientWindow::startConnection(HostConfig host, const ProfileConfig& profile, const QString& display_name)
+void ClientWindow::startConnection(HostConfig host, const ProfileConfig& profile, const QString& display_name, bool view_only)
 {
     // When connecting with a one-time password, the username must be in the following format: #host_id.
     if (host.username().isEmpty())
@@ -733,7 +733,7 @@ void ClientWindow::startConnection(HostConfig host, const ProfileConfig& profile
         host.setUsername(u"#" + host.address());
     }
 
-    session_state_ = std::make_shared<SessionState>(host, profile, session_type_, display_name);
+    session_state_ = std::make_shared<SessionState>(host, profile, session_type_, display_name, view_only);
 
     LOG(INFO) << "Start client";
     connection_timeout_timer_->start(kConnectionAttemptTimeout);
