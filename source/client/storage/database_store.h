@@ -31,6 +31,7 @@ public:
     static constexpr char kSettingBackupKeep[] = "backup_retention";
     static constexpr char kSettingLockTimeout[] = "lock_timeout";
     static constexpr char kSettingProxy[] = "proxy";
+    static constexpr char kSettingHostsPerPage[] = "hosts_per_page";
     static constexpr char kSettingSalt[] = "master_password_salt";
     static constexpr char kSettingVerifier[] = "master_password_verifier";
     static constexpr char kSettingVersion[] = "master_password_version";

@@ -34,6 +34,11 @@ public:
     static Result migrate(const QString& old_file_path, const QString& dir_path);
     static bool finish(Database& db, const QString& old_file_path);
 
+    // One-time migration of legacy host_notify keys (router-prefixed or id-prefixed) to the
+    // single-router canonical form, run on every open. Idempotent: a failure leaves the legacy
+    // rows in place for the next open.
+    static bool migrateHostNotifySettings(SqlDatabase& db);
+
 private:
     static bool build(const QString& old_file_path, const QString& dir_path);
     static bool buildDatabase(SqlDatabase& old_db, const QString& file_path, qint64 router_id,

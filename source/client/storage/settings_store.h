@@ -50,6 +50,9 @@ public:
     // way and answers INCOMPLETE.
     Database::ReadResult proxyConfig(ProxyConfig* proxy) const;
     bool setProxyConfig(const ProxyConfig& proxy);
+
+    qint64 hostsPerPage() const;
+    bool setHostsPerPage(qint64 value);
 };
 
 #endif // CLIENT_STORAGE_SETTINGS_STORE_H

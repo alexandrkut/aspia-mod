@@ -98,3 +98,28 @@ TEST_F(SettingsStoreTest, ProxyIsNotReadAsAbsentWhileTheBaseIsLocked)
     EXPECT_EQ(settings_store_.proxyConfig(&reread), Database::ReadResult::FAILED);
     EXPECT_FALSE(reread.settings().enabled);
 }
+
+//--------------------------------------------------------------------------------------------------
+// The page size of the router host lists: absent means the default the lists shipped with, a stored
+// value is kept (including one an old database already has), and anything a caller could store by
+// mistake falls back to that default instead of ever reaching the lists.
+TEST_F(SettingsStoreTest, HostsPerPageDefaultsTo100AndClampsWhatItIsGiven)
+{
+    EXPECT_EQ(settings_store_.hostsPerPage(), 100);
+
+    ASSERT_TRUE(settings_store_.setHostsPerPage(500));
+    EXPECT_EQ(settings_store_.hostsPerPage(), 500);
+
+    Database reopened;
+    ASSERT_TRUE(reopened.open(file_path_));
+    EXPECT_EQ(SettingsStore(reopened).hostsPerPage(), 500);
+
+    ASSERT_TRUE(settings_store_.setHostsPerPage(50));
+    EXPECT_EQ(settings_store_.hostsPerPage(), 50);
+
+    ASSERT_TRUE(settings_store_.setHostsPerPage(0));
+    EXPECT_EQ(settings_store_.hostsPerPage(), 100);
+
+    ASSERT_TRUE(settings_store_.setHostsPerPage(-10));
+    EXPECT_EQ(settings_store_.hostsPerPage(), 100);
+}

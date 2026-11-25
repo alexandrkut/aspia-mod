@@ -214,3 +214,19 @@ TEST_F(UserSettingsTest, McpSessionTypesAreAllUntilChosen)
     UserSettings().setMcpSessionTypes(0);
     EXPECT_EQ(UserSettings().mcpSessionTypes(), 0u);
 }
+
+//--------------------------------------------------------------------------------------------------
+// The in-memory store keeps what the portable QS client writes without touching the disk: unknown
+// keys read back their default, written keys read back what was written.
+TEST(UserSettingsStoreTest, InMemoryStoreKeepsValuesWithoutDisk)
+{
+    UserSettingsStore store(true);
+
+    EXPECT_EQ(store.value("missing", QString("default")).toString(), QString("default"));
+
+    store.setValue("key", QString("value"));
+    EXPECT_EQ(store.value("key").toString(), QString("value"));
+
+    store.setValue("key", 42);
+    EXPECT_EQ(store.value("key").toInt(), 42);
+}

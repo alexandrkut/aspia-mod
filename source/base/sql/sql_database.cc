@@ -148,6 +148,9 @@ bool SqlDatabase::open(const QString& file_path, OpenMode mode, MilliSeconds bus
     else
         flags |= SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE;
 
+    if (mode == OpenMode::SHARED_MEMORY)
+        flags |= SQLITE_OPEN_URI;
+
     const int result = sqlite3_open_v2(utf8_path.constData(), &db_, flags, nullptr);
     if (result != SQLITE_OK)
     {

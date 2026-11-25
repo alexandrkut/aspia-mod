@@ -29,6 +29,7 @@
 #include "base/sql/sql_query.h"
 #include "base/sql/sql_transaction.h"
 #include "client/storage/credential_store.h"
+#include "client/storage/database_migration.h"
 #include "client/storage/local_group_store.h"
 #include "client/storage/local_host_store.h"
 #include "client/storage/profile_store.h"
@@ -42,6 +43,12 @@ namespace {
 
 QString g_test_dir_path;
 QString g_selected_id;
+bool g_quick_support_mode = false;
+
+// SQLite URI for one shared in-memory database. It is the same for every thread-local connection,
+// so the router config written by the GUI is visible to the router and network workers.
+const char kQuickSupportDatabasePath[] =
+    "file:aspia-qs-client?mode=memory&cache=shared";
 
 //--------------------------------------------------------------------------------------------------
 QString filePathOf(const QString& id)
@@ -178,6 +185,9 @@ QString Database::directoryPath()
 // static
 QString Database::filePath()
 {
+    if (g_quick_support_mode)
+        return QString::fromLatin1(kQuickSupportDatabasePath);
+
     return filePathOf(g_selected_id);
 }
 
@@ -273,7 +283,8 @@ bool Database::open(const QString& file_path)
 {
     LOG(INFO) << (!QFileInfo::exists(file_path) ? "Creating" : "Opening") << "database:" << file_path;
 
-    if (!db_.open(file_path))
+    if (!db_.open(file_path, g_quick_support_mode ?
+                  SqlDatabase::OpenMode::SHARED_MEMORY : SqlDatabase::OpenMode::READ_WRITE))
         return false;
 
     if (!db_.exec("PRAGMA secure_delete = ON"))
@@ -298,6 +309,11 @@ bool Database::open(const QString& file_path)
         db_.close();
         return false;
     }
+
+    // One-time migration of legacy host_notify keys to the single-router canonical form.
+    // Non-fatal: a failure leaves the legacy rows in place (idempotent on next open).
+    if (!DatabaseMigration::migrateHostNotifySettings(db_))
+        LOG(WARNING) << "host_notify settings migration failed";
 
     if (!db_.exec("PRAGMA foreign_keys = ON"))
     {
@@ -587,6 +603,15 @@ bool Database::Reencryption::commit(const QByteArray& salt, const QByteArray& ve
 
 //--------------------------------------------------------------------------------------------------
 // static
+void Database::setQuickSupportMode()
+{
+    g_quick_support_mode = true;
+    g_test_dir_path.clear();
+    g_selected_id = QStringLiteral("qs-client");
+}
+
+//--------------------------------------------------------------------------------------------------
+// static
 void Database::setDirectoryPathForTesting(const QString& dir_path)
 {
     g_test_dir_path = dir_path;
@@ -730,6 +755,9 @@ bool Database::openDatabase()
         LOG(ERROR) << "Invalid file path";
         return false;
     }
+
+    if (g_quick_support_mode)
+        return open(file_path);
 
     QString dir_path = QFileInfo(file_path).path();
 

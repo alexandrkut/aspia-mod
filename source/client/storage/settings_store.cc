@@ -157,3 +157,28 @@ bool SettingsStore::setProxyConfig(const ProxyConfig& proxy)
 
     return writeSetting(kSettingProxy, QString::fromLatin1(encrypted_data->toBase64()));
 }
+
+//--------------------------------------------------------------------------------------------------
+qint64 SettingsStore::hostsPerPage() const
+{
+    // The mod keeps the page size of the router host lists here, where the old database kept it.
+    // An old database that already has the key is read as it is.
+    const QString value = readSetting(kSettingHostsPerPage);
+    if (value.isEmpty())
+        return 100;
+
+    bool ok = false;
+    const qint64 result = value.toLongLong(&ok);
+    if (!ok || result <= 0)
+        return 100;
+
+    return result;
+}
+
+//--------------------------------------------------------------------------------------------------
+bool SettingsStore::setHostsPerPage(qint64 value)
+{
+    if (value <= 0)
+        value = 100;
+    return writeSetting(kSettingHostsPerPage, QString::number(value));
+}

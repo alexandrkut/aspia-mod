@@ -60,6 +60,10 @@ public:
     static bool moveToTrash(const QString& id);
     static bool remove(const QString& id);
 
+    // Keeps the address book in a shared in-memory SQLite database. Used by the portable Quick
+    // Support client, which has no settings or files of its own. Must be called before instance().
+    static void setQuickSupportMode();
+
     // Opens (creating when absent) the database at |file_path| and ensures the schema. instance()
     // opens the per-thread connection at filePath(); this entry exists so the tests can run every
     // path against an isolated temporary database.

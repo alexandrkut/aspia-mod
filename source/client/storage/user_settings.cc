@@ -21,6 +21,7 @@
 #include <QLocale>
 #include <QVersionNumber>
 
+#include <memory>
 #include <mutex>
 
 #include "version.h"
@@ -28,6 +29,8 @@
 #include "proto/peer.h"
 
 namespace {
+
+bool g_quick_support_mode = false;
 
 const QString kVersionParam = "version";
 const QString kLocaleParam = "locale";
@@ -57,8 +60,36 @@ const QString kMcpSessionTypesParam = "mcp_session_types";
 } // namespace
 
 //--------------------------------------------------------------------------------------------------
+UserSettingsStore::UserSettingsStore(bool in_memory)
+{
+    if (!in_memory)
+    {
+        settings_ = std::make_unique<QSettings>(
+            QSettings::IniFormat, QSettings::UserScope, "aspia", "client");
+    }
+}
+
+//--------------------------------------------------------------------------------------------------
+QVariant UserSettingsStore::value(const QString& key, const QVariant& default_value) const
+{
+    if (settings_)
+        return settings_->value(key, default_value);
+
+    return values_.value(key, default_value);
+}
+
+//--------------------------------------------------------------------------------------------------
+void UserSettingsStore::setValue(const QString& key, const QVariant& value)
+{
+    if (settings_)
+        settings_->setValue(key, value);
+    else
+        values_.insert(key, value);
+}
+
+//--------------------------------------------------------------------------------------------------
 UserSettings::UserSettings()
-    : settings_(QSettings::IniFormat, QSettings::UserScope, "aspia", "client")
+    : settings_(g_quick_support_mode)
 {
     static std::once_flag version_flag;
     std::call_once(version_flag, [this]()
@@ -71,6 +102,13 @@ UserSettings::UserSettings()
 
 //--------------------------------------------------------------------------------------------------
 UserSettings::~UserSettings() = default;
+
+//--------------------------------------------------------------------------------------------------
+// static
+void UserSettings::setQuickSupportMode()
+{
+    g_quick_support_mode = true;
+}
 
 //--------------------------------------------------------------------------------------------------
 QString UserSettings::locale() const
