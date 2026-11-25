@@ -40,6 +40,39 @@ bool isValidName(std::string_view name)
 
 } // namespace
 
+namespace {
+
+//--------------------------------------------------------------------------------------------------
+// Re-points the scalar workspace_id/group_id of |host_id| at the primary membership (the first
+// row added). Used after a cascade removes membership rows; the join table is the source of
+// truth and the scalar columns only mirror it for old readers.
+void refreshPrimaryMembership(SqlDatabase& db, qint64 host_id)
+{
+    qint64 workspace_id = 0;
+    qint64 group_id = 0;
+    {
+        SqlQuery primary(db,
+            "SELECT workspace_id, group_id FROM host_workspaces WHERE host_id=? "
+            "ORDER BY rowid LIMIT 1");
+        primary.addInt64(host_id);
+        if (primary.next() == SqlQuery::StepResult::ROW)
+        {
+            workspace_id = primary.columnInt64(0);
+            group_id = primary.columnInt64(1);
+        }
+    }
+
+    SqlQuery update(db, "UPDATE hosts SET workspace_id=?, group_id=? WHERE id=?");
+    update.addInt64(workspace_id);
+    update.addInt64(group_id);
+    update.addInt64(host_id);
+
+    if (!update.exec())
+        LOG(ERROR) << "Unable to execute query:" << db.lastError();
+}
+
+} // namespace
+
 //--------------------------------------------------------------------------------------------------
 WorkspaceStore::WorkspaceStore(Database& db)
     : DatabaseStore(db)
@@ -576,14 +609,28 @@ std::string_view WorkspaceStore::remove(qint64 entry_id)
     if (exists_check.columnInt64(0) == 0)
         return proto::router::kErrorNotFound;
 
-    SqlQuery release_hosts(db(),
-        "UPDATE hosts SET revision=revision+1, workspace_id=0, group_id=0 WHERE workspace_id=?");
-    release_hosts.addInt64(entry_id);
-
-    if (!release_hosts.exec())
+    // The workspace rows go away with the workspace (FK cascade). Collect the hosts that had a
+    // membership there first: a host shared with another workspace keeps that membership, and a
+    // host without one left falls back to "not assigned" when the scalar is refreshed.
+    std::vector<qint64> affected_hosts;
     {
-        LOG(ERROR) << "Unable to execute query:" << db().lastError();
-        return proto::router::kErrorInternalError;
+        SqlQuery affected(db(), "SELECT host_id FROM host_workspaces WHERE workspace_id=?");
+        affected.addInt64(entry_id);
+
+        for (;;)
+        {
+            const SqlQuery::StepResult step = affected.next();
+            if (step != SqlQuery::StepResult::ROW)
+            {
+                if (step == SqlQuery::StepResult::FAILED)
+                {
+                    LOG(ERROR) << "Unable to execute query:" << db().lastError();
+                    return proto::router::kErrorInternalError;
+                }
+                break;
+            }
+            affected_hosts.emplace_back(affected.columnInt64(0));
+        }
     }
 
     SqlQuery delete_workspace(db(), "DELETE FROM workspaces WHERE id=?");
@@ -593,6 +640,20 @@ std::string_view WorkspaceStore::remove(qint64 entry_id)
     {
         LOG(ERROR) << "Unable to execute query:" << db().lastError();
         return proto::router::kErrorInternalError;
+    }
+
+    for (qint64 host_id : affected_hosts)
+    {
+        SqlQuery touch(db(), "UPDATE hosts SET revision=revision+1 WHERE id=?");
+        touch.addInt64(host_id);
+
+        if (!touch.exec())
+        {
+            LOG(ERROR) << "Unable to execute query:" << db().lastError();
+            return proto::router::kErrorInternalError;
+        }
+
+        refreshPrimaryMembership(db(), host_id);
     }
 
     if (!transaction.commit())

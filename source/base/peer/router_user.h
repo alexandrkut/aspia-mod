@@ -23,6 +23,7 @@
 
 namespace proto::router {
 class User;
+enum UserType : int;
 } // namespace proto::router
 
 class RouterUser final : public User
@@ -55,6 +56,10 @@ public:
     quint64 otp_counter = 0;
     QString email;
     QString guid;
+
+    // The account kind is stored separately from the access level: a Quick Support account is an
+    // operator as far as an unmodified router is concerned, but the modified router restricts it.
+    proto::router::UserType user_type = static_cast<proto::router::UserType>(0);
 };
 
 #endif // BASE_PEER_ROUTER_USER_H

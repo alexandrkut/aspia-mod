@@ -561,3 +561,256 @@ TEST(HostStoreFreshTest, AddHostBeforeAnyAutoincrementInsert)
     ASSERT_EQ(store.findByKey("hash-1", &host_id), proto::router::kErrorOk);
     EXPECT_EQ(host_id, HostId(1));
 }
+//--------------------------------------------------------------------------------------------------
+// The scalar mirror points at the FIRST membership added, and follows the removals. Adding twice
+// is idempotent; a missing workspace is a conflict, not a silent dangling row.
+TEST_F(HostStoreTest, MembershipPrimaryFollowsTheFirstAdded)
+{
+    const qint64 ws1 = addWorkspace("one");
+    const qint64 ws2 = addWorkspace("two");
+    ASSERT_GT(ws1, 0);
+    ASSERT_GT(ws2, 0);
+
+    const HostId host_id = addHost("hash-1");
+    ASSERT_NE(host_id, kInvalidHostId);
+
+    ASSERT_EQ(hosts_.addMembership(host_id, ws1, 0), proto::router::kErrorOk);
+    ASSERT_EQ(hosts_.addMembership(host_id, ws2, 0), proto::router::kErrorOk);
+    ASSERT_EQ(hosts_.addMembership(host_id, ws2, 0), proto::router::kErrorOk);
+
+    // First added stays primary even though ws2 was written last.
+    EXPECT_EQ(findHost(host_id).workspace_id(), ws1);
+    ASSERT_EQ(hosts_.workspaceIds(host_id).size(), 2);
+
+    // The host is listed in both workspaces.
+    proto::router::HostList in_second;
+    hosts_.list(ws2, -1, 0, proto::router::kMaxHostPageSize, &in_second);
+    ASSERT_EQ(in_second.error_code(), proto::router::kErrorOk);
+    EXPECT_EQ(in_second.host_size(), 1);
+
+    // Removing the primary hands the baton to the next membership.
+    ASSERT_EQ(hosts_.removeMembership(host_id, ws1), proto::router::kErrorOk);
+    EXPECT_EQ(findHost(host_id).workspace_id(), ws2);
+
+    // Removing the last one releases the host entirely.
+    ASSERT_EQ(hosts_.removeMembership(host_id, ws2), proto::router::kErrorOk);
+    EXPECT_EQ(findHost(host_id).workspace_id(), 0);
+    EXPECT_TRUE(hosts_.workspaceIds(host_id).empty());
+
+    EXPECT_EQ(hosts_.addMembership(host_id, 12345), proto::router::kErrorConflict);
+    EXPECT_EQ(hosts_.addMembership(kInvalidHostId, ws1), proto::router::kErrorInvalidData);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Deleting a workspace takes only its membership rows: a host shared with another workspace stays
+// there, a host without one left becomes unassigned.
+TEST_F(HostStoreTest, RemovingAWorkspaceKeepsHostsOfTheOthers)
+{
+    const qint64 ws1 = addWorkspace("one");
+    const qint64 ws2 = addWorkspace("two");
+    ASSERT_GT(ws1, 0);
+    ASSERT_GT(ws2, 0);
+
+    const HostId shared = addHost("hash-1");
+    const HostId only_first = addHost("hash-2");
+    ASSERT_NE(shared, kInvalidHostId);
+    ASSERT_NE(only_first, kInvalidHostId);
+
+    ASSERT_EQ(hosts_.addMembership(shared, ws1, 0), proto::router::kErrorOk);
+    ASSERT_EQ(hosts_.addMembership(shared, ws2, 0), proto::router::kErrorOk);
+    ASSERT_EQ(hosts_.addMembership(only_first, ws1, 0), proto::router::kErrorOk);
+
+    ASSERT_EQ(workspaces_.remove(ws1), proto::router::kErrorOk);
+
+    EXPECT_EQ(findHost(shared).workspace_id(), ws2);
+    EXPECT_EQ(findHost(only_first).workspace_id(), 0);
+
+    std::vector<qint64> remaining = hosts_.workspaceIds(shared);
+    ASSERT_EQ(remaining.size(), 1);
+    EXPECT_EQ(remaining[0], ws2);
+
+    proto::router::HostList still_listed;
+    hosts_.list(ws2, -1, 0, proto::router::kMaxHostPageSize, &still_listed);
+    ASSERT_EQ(still_listed.error_code(), proto::router::kErrorOk);
+    EXPECT_EQ(still_listed.host_size(), 1);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Deleting a group clears the group only on the memberships of ITS workspace.
+TEST_F(HostStoreTest, RemovingAGroupClearsOnlyItsWorkspace)
+{
+    const qint64 ws1 = addWorkspace("one");
+    const qint64 ws2 = addWorkspace("two");
+    ASSERT_GT(ws1, 0);
+    ASSERT_GT(ws2, 0);
+
+    qint64 group1 = -1;
+    qint64 group2 = -1;
+    ASSERT_EQ(groups_.add(ws1, 0, "g1", std::string_view(), &group1), proto::router::kErrorOk);
+    ASSERT_EQ(groups_.add(ws2, 0, "g2", std::string_view(), &group2), proto::router::kErrorOk);
+
+    const HostId host_id = addHost("hash-1");
+    ASSERT_NE(host_id, kInvalidHostId);
+    ASSERT_EQ(hosts_.addMembership(host_id, ws1, group1), proto::router::kErrorOk);
+    ASSERT_EQ(hosts_.addMembership(host_id, ws2, group2), proto::router::kErrorOk);
+
+    ASSERT_EQ(groups_.remove(ws1, group1), proto::router::kErrorOk);
+
+    const proto::router::Host stored = findHost(host_id);
+    EXPECT_EQ(stored.workspace_id(), ws1);
+    EXPECT_EQ(stored.group_id(), 0);
+
+    proto::router::HostList in_other_group;
+    hosts_.list(ws2, group2, 0, proto::router::kMaxHostPageSize, &in_other_group);
+    ASSERT_EQ(in_other_group.error_code(), proto::router::kErrorOk);
+    EXPECT_EQ(in_other_group.host_size(), 1);
+}
+
+//--------------------------------------------------------------------------------------------------
+// A full membership list in an edit synchronizes the join: a workspace asked for but missing is
+// added, a membership present but not asked for is dropped, and the primary stays the first row
+// that survived.
+TEST_F(HostStoreTest, ModifyHostSynchronizesTheMembershipList)
+{
+    const qint64 ws1 = addWorkspace("one");
+    const qint64 ws2 = addWorkspace("two");
+    const qint64 ws3 = addWorkspace("three");
+    ASSERT_GT(ws1, 0);
+    ASSERT_GT(ws2, 0);
+    ASSERT_GT(ws3, 0);
+
+    const HostId host_id = addHost("hash-1");
+    ASSERT_NE(host_id, kInvalidHostId);
+    ASSERT_EQ(hosts_.addMembership(host_id, ws1, 0), proto::router::kErrorOk);
+    ASSERT_EQ(hosts_.addMembership(host_id, ws2, 0), proto::router::kErrorOk);
+
+    const proto::router::Host current = findHost(host_id);
+    const std::vector<std::pair<qint64, qint64>> requested = { { ws1, 0 }, { ws3, 0 } };
+    ASSERT_EQ(hosts_.modify(host_id, current.revision(), ws1, 0, current.display_name(),
+                            current.comment(), requested),
+              proto::router::kErrorOk);
+
+    std::vector<qint64> after = hosts_.workspaceIds(host_id);
+    ASSERT_EQ(after.size(), 2);
+    EXPECT_EQ(after[0], ws1);  // kept row, same rowid - still the primary
+    EXPECT_EQ(after[1], ws3);  // appended
+    EXPECT_EQ(findHost(host_id).workspace_id(), ws1);
+
+    proto::router::HostList dropped_scope;
+    hosts_.list(ws2, -1, 0, proto::router::kMaxHostPageSize, &dropped_scope);
+    EXPECT_EQ(dropped_scope.host_size(), 0);
+}
+
+//--------------------------------------------------------------------------------------------------
+// A page carries every membership of each host, fetched in one query, while the scalar fields
+// keep naming the primary one.
+TEST_F(HostStoreTest, HostListAttachesEveryMembership)
+{
+    const qint64 ws1 = addWorkspace("one");
+    const qint64 ws2 = addWorkspace("two");
+    ASSERT_GT(ws1, 0);
+    ASSERT_GT(ws2, 0);
+
+    qint64 group2 = -1;
+    ASSERT_EQ(groups_.add(ws2, 0, "g2", std::string_view(), &group2), proto::router::kErrorOk);
+
+    const HostId host_id = addHost("hash-1");
+    ASSERT_NE(host_id, kInvalidHostId);
+    ASSERT_EQ(hosts_.addMembership(host_id, ws1, 0), proto::router::kErrorOk);
+    ASSERT_EQ(hosts_.addMembership(host_id, ws2, group2), proto::router::kErrorOk);
+
+    proto::router::HostList list;
+    hosts_.list(proto::router::HostFilter(), 0, proto::router::kMaxHostPageSize, &list);
+    ASSERT_EQ(list.error_code(), proto::router::kErrorOk);
+    ASSERT_EQ(list.host_size(), 1);
+
+    const proto::router::Host& host = list.host(0);
+    EXPECT_EQ(host.workspace_id(), ws1);  // scalar still the primary
+    ASSERT_EQ(host.memberships_size(), 2);
+    EXPECT_EQ(host.memberships(0).workspace_id(), ws1);
+    EXPECT_EQ(host.memberships(0).group_id(), 0);
+    EXPECT_EQ(host.memberships(1).workspace_id(), ws2);
+    EXPECT_EQ(host.memberships(1).group_id(), group2);
+}
+
+//--------------------------------------------------------------------------------------------------
+// hostsOutside is the complement of one workspace's membership: the other workspaces' hosts and
+// the hosts with no workspace at all. Its count uses exactly the same scope.
+TEST_F(HostStoreTest, HostsOutsideAndCountOutsideExcludeTheMembers)
+{
+    const qint64 ws1 = addWorkspace("one");
+    const qint64 ws2 = addWorkspace("two");
+    ASSERT_GT(ws1, 0);
+    ASSERT_GT(ws2, 0);
+
+    const HostId in_first = addHost("hash-1");
+    const HostId in_second = addHost("hash-2");
+    const HostId unassigned = addHost("hash-3");
+    ASSERT_EQ(hosts_.addMembership(in_first, ws1, 0), proto::router::kErrorOk);
+    ASSERT_EQ(hosts_.addMembership(in_second, ws2, 0), proto::router::kErrorOk);
+
+    qint64 count = 0;
+    ASSERT_EQ(hosts_.countOutside(ws1, &count), proto::router::kErrorOk);
+    EXPECT_EQ(count, 2);
+
+    proto::router::HostList outside;
+    hosts_.hostsOutside(ws1, 0, proto::router::kMaxHostPageSize, &outside);
+    ASSERT_EQ(outside.error_code(), proto::router::kErrorOk);
+    ASSERT_EQ(outside.host_size(), 2);
+    EXPECT_EQ(outside.host(0).host_id(), in_second);
+    EXPECT_EQ(outside.host(1).host_id(), unassigned);
+}
+
+//--------------------------------------------------------------------------------------------------
+// A shared host matches a search over both workspaces once, not once per membership row.
+TEST_F(HostStoreTest, SearchReturnsASharedHostOnce)
+{
+    const qint64 ws1 = addWorkspace("one");
+    const qint64 ws2 = addWorkspace("two");
+    ASSERT_GT(ws1, 0);
+    ASSERT_GT(ws2, 0);
+
+    const HostId host_id = addHost("hash-1");
+    ASSERT_NE(host_id, kInvalidHostId);
+    ASSERT_EQ(hosts_.addMembership(host_id, ws1, 0), proto::router::kErrorOk);
+    ASSERT_EQ(hosts_.addMembership(host_id, ws2, 0), proto::router::kErrorOk);
+
+    const qint64 revision = findHost(host_id).revision();
+    ASSERT_EQ(hosts_.modify(host_id, revision, ws1, 0, "shared host", std::string_view()),
+              proto::router::kErrorOk);
+
+    proto::router::HostSearchResult result;
+    hosts_.search("shared", { ws1, ws2 }, 0, proto::router::kMaxHostPageSize, &result);
+    ASSERT_EQ(result.error_code(), proto::router::kErrorOk);
+    EXPECT_EQ(result.total_count(), 1);
+    EXPECT_EQ(result.host_size(), 1);
+    ASSERT_EQ(result.host(0).memberships_size(), 2);
+}
+
+//--------------------------------------------------------------------------------------------------
+// A membership change bumps the revision, so an edit built on the earlier snapshot is stale and
+// must not move the host back into the workspace the operator took it from.
+TEST_F(HostStoreTest, StaleRevisionCannotChangeMembership)
+{
+    const qint64 ws1 = addWorkspace("one");
+    const qint64 ws2 = addWorkspace("two");
+    ASSERT_GT(ws1, 0);
+    ASSERT_GT(ws2, 0);
+
+    const HostId host_id = addHost("hash-1");
+    ASSERT_NE(host_id, kInvalidHostId);
+    const proto::router::Host snapshot = findHost(host_id);
+
+    ASSERT_EQ(hosts_.addMembership(host_id, ws1, 0), proto::router::kErrorOk);
+    EXPECT_GT(findHost(host_id).revision(), snapshot.revision());
+
+    EXPECT_EQ(hosts_.modify(host_id, snapshot.revision(), ws2, 0, "stale", "note"),
+              proto::router::kErrorConflict);
+    EXPECT_EQ(findHost(host_id).workspace_id(), ws1);
+    EXPECT_TRUE(findHost(host_id).comment().empty());
+
+    ASSERT_EQ(hosts_.removeMembership(host_id, ws1), proto::router::kErrorOk);
+    EXPECT_EQ(hosts_.modify(host_id, snapshot.revision(), ws2, 0, "stale", "note"),
+              proto::router::kErrorConflict);
+    EXPECT_EQ(findHost(host_id).workspace_id(), 0);
+}

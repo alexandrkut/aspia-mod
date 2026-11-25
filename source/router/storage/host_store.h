@@ -20,6 +20,8 @@
 #define ROUTER_STORAGE_HOST_STORE_H
 
 #include <set>
+#include <utility>
+#include <vector>
 
 #include "base/peer/host_id.h"
 #include "router/storage/database_store.h"
@@ -63,6 +65,34 @@ public:
     // answer could not be read. Used to validate user access before edits.
     std::string_view workspaceId(HostId host_id, qint64* workspace_id) const;
 
+    // Every workspace the host belongs to, in membership order (the first row added first).
+    // Empty when the host has no memberships or the database cannot be read.
+    std::vector<qint64> workspaceIds(HostId host_id) const;
+
+    // Adds a membership of the host in the workspace (insert is idempotent: an existing
+    // membership keeps its group). Bumps revision and last_modify. group_id == 0 places the host
+    // at the workspace root. Returns a proto::router error code.
+    std::string_view addMembership(HostId host_id, qint64 workspace_id, qint64 group_id = 0);
+
+    // Drops the membership of the host in the workspace and refreshes the primary membership
+    // (the host may stay in the workspace through another membership, and keeps its other
+    // workspaces). Bumps revision and last_modify. Returns a proto::router error code.
+    std::string_view removeMembership(HostId host_id, qint64 workspace_id);
+
+    // Re-points the scalar workspace_id/group_id columns of |hosts| at the primary membership -
+    // the first row added, i.e. the lowest rowid. No rows left means "not assigned" (0/0).
+    // Does not touch revision or last_modify.
+    void refreshPrimaryMembership(HostId host_id);
+
+    // Appends the hosts that are NOT members of |workspace_id| (> 0) to |out|: the hosts of the
+    // other workspaces together with the hosts no workspace claimed, whatever group they sit
+    // in. The page rules are the same as in the overload above; this scope has no group
+    // dimension.
+    void hostsOutside(qint64 workspace_id, qint64 offset, qint64 count,
+        proto::router::HostList* out) const;
+
+    std::string_view countOutside(qint64 workspace_id, qint64* count) const;
+
     // Updates the admin/manager-editable fields of a host. workspace_id is the workspace the host
     // ends up in: 0 releases it, and the group it carried within the workspace goes with it; the
     // note is the host's own and is stored as given whether the host is in a workspace or not.
@@ -72,8 +102,13 @@ public:
     // ownership). Also bumps last_modify. |base_revision| is the revision the edit was built on:
     // a stale one answers kErrorConflict instead of silently overwriting a concurrent edit.
     // Returns a proto::router error code.
+    // |memberships| is the full set of workspaces the host should belong to with the group it has
+    // in each; an empty list keeps the old single-membership behaviour and moves only the primary
+    // membership. When non-empty the rows are synchronized to it in place, so the rowid - and with
+    // it the "first added" primary - of kept rows survives.
     std::string_view modify(HostId host_id, qint64 base_revision, qint64 workspace_id,
-        qint64 group_id, std::string_view display_name, std::string_view comment);
+        qint64 group_id, std::string_view display_name, std::string_view comment,
+        const std::vector<std::pair<qint64, qint64>>& memberships = {});
 
     // Appends every host in the database (admin-only call site) that passes |filter| to |out| and
     // sets its error_code, reading rows straight into the protobuf message. A filter with more
@@ -116,6 +151,13 @@ public:
     // its row - and with it its id - forever; after the grace period the record is gone for good
     // and the same machine has to be approved anew. Returns false only on a database error.
     bool pruneExpiredRemovals();
+
+private:
+    // Reads the membership rows of |host_ids| in one query and appends them to the matching
+    // hosts of |list|. The scalar workspace_id/group_id stay the primary membership; this fills
+    // the repeated memberships field for the client. Call once the page is collected.
+    template <typename List>
+    void attachMemberships(const std::vector<quint64>& host_ids, List* list) const;
 };
 
 #endif // ROUTER_STORAGE_HOST_STORE_H

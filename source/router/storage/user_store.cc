@@ -51,6 +51,7 @@ RouterUser readUser(const SqlQuery& query)
     user.otp_counter = query.columnUInt64(8);
     user.email       = query.columnText(9);
     user.guid        = query.columnText(10);
+    user.user_type   = static_cast<proto::router::UserType>(query.columnInt64(11));
     return user;
 }
 
@@ -85,7 +86,7 @@ std::string_view UserStore::list(qint64 offset, qint64 count, std::vector<Router
     // The page has to name the same records every time it is asked for, so the order is fixed
     // here instead of being left to the query planner.
     const char kSql[] =
-        "SELECT id, name, \"group\", salt, verifier, sessions, flags, otp_secret, otp_counter, email, guid "
+        "SELECT id, name, \"group\", salt, verifier, sessions, flags, otp_secret, otp_counter, email, guid, type "
         "FROM users ORDER BY id LIMIT ? OFFSET ?";
     SqlQuery query(db(), kSql);
     query.addInt64(count);
@@ -179,8 +180,8 @@ std::string_view UserStore::add(const RouterUser& user)
     }
 
     const char kSql[] =
-        "INSERT INTO users (id, name, \"group\", salt, verifier, sessions, flags, email, guid) "
-        "VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)";
+        "INSERT INTO users (id, name, \"group\", salt, verifier, sessions, flags, email, guid, type) "
+        "VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     SqlQuery query(db(), kSql);
     query.addText(user.name);
     query.addText(user.group);
@@ -190,6 +191,7 @@ std::string_view UserStore::add(const RouterUser& user)
     query.addInt64(user.flags);
     query.addText(user.email);
     query.addText(QUuid::createUuid().toString(QUuid::WithoutBraces));
+    query.addInt64(static_cast<qint64>(user.user_type));
 
     if (!query.exec())
     {
@@ -259,9 +261,10 @@ std::string_view UserStore::modify(const RouterUser& user, bool* password_change
     QByteArray old_verifier;
     quint32 old_sessions = 0;
     QString old_email;
+    proto::router::UserType old_type = proto::router::USER_TYPE_REGULAR;
     bool user_found = false;
     {
-        SqlQuery select(db(), "SELECT salt, verifier, sessions, email FROM users WHERE id=?");
+        SqlQuery select(db(), "SELECT salt, verifier, sessions, email, type FROM users WHERE id=?");
         select.addInt64(user.entry_id);
 
         if (!select.isValid())
@@ -286,6 +289,7 @@ std::string_view UserStore::modify(const RouterUser& user, bool* password_change
             old_verifier = select.columnBlob(1);
             old_sessions = static_cast<quint32>(select.columnInt64(2));
             old_email = select.columnText(3);
+            old_type = static_cast<proto::router::UserType>(select.columnInt64(4));
         }
     }
 
@@ -295,6 +299,11 @@ std::string_view UserStore::modify(const RouterUser& user, bool* password_change
     const quint32 sessions =
         user.sessions ? RouterUser::expandSessionTypes(user.sessions) : old_sessions;
     const QString email = user.email.isEmpty() ? old_email : user.email;
+
+    // The type is saved with the access level. A modify that omits the level keeps the stored
+    // type, so an edit of a Quick Support account's email or password cannot turn it into an
+    // ordinary operator by omission.
+    const proto::router::UserType user_type = user.sessions ? user.user_type : old_type;
 
     if (has_credentials)
     {
@@ -318,7 +327,7 @@ std::string_view UserStore::modify(const RouterUser& user, bool* password_change
         }
 
         const char kSql[] =
-            "UPDATE users SET name=?, \"group\"=?, salt=?, verifier=?, sessions=?, flags=?, email=? "
+            "UPDATE users SET name=?, \"group\"=?, salt=?, verifier=?, sessions=?, flags=?, email=?, type=? "
             "WHERE id=?";
         SqlQuery query(db(), kSql);
         query.addText(user.name);
@@ -328,6 +337,7 @@ std::string_view UserStore::modify(const RouterUser& user, bool* password_change
         query.addInt64(sessions);
         query.addInt64(user.flags);
         query.addText(email);
+        query.addInt64(static_cast<qint64>(user_type));
         query.addInt64(user.entry_id);
 
         if (!query.exec())
@@ -338,10 +348,11 @@ std::string_view UserStore::modify(const RouterUser& user, bool* password_change
     }
     else
     {
-        SqlQuery query(db(), "UPDATE users SET sessions=?, flags=?, email=? WHERE id=?");
+        SqlQuery query(db(), "UPDATE users SET sessions=?, flags=?, email=?, type=? WHERE id=?");
         query.addInt64(sessions);
         query.addInt64(user.flags);
         query.addText(email);
+        query.addInt64(static_cast<qint64>(user_type));
         query.addInt64(user.entry_id);
 
         if (!query.exec())
@@ -355,8 +366,10 @@ std::string_view UserStore::modify(const RouterUser& user, bool* password_change
         (old_salt != user.salt || old_verifier != user.verifier);
     if (password_changed)
         *password_changed = rotated;
+    // A change of the account type changes what the session may do just as a change of the level
+    // does, so live sessions of this user have to be stopped in both cases.
     if (sessions_changed)
-        *sessions_changed = sessions != old_sessions;
+        *sessions_changed = sessions != old_sessions || user_type != old_type;
 
     if (rotated)
     {
@@ -457,7 +470,7 @@ std::string_view UserStore::find(const QString& username, RouterUser* user) cons
     }
 
     const char kSql[] =
-        "SELECT id, name, \"group\", salt, verifier, sessions, flags, otp_secret, otp_counter, email, guid "
+        "SELECT id, name, \"group\", salt, verifier, sessions, flags, otp_secret, otp_counter, email, guid, type "
         "FROM users WHERE casefold(name)=casefold(?)";
     SqlQuery query(db(), kSql);
     query.addText(username);
@@ -493,7 +506,7 @@ std::string_view UserStore::find(qint64 entry_id, RouterUser* user) const
     }
 
     const char kSql[] =
-        "SELECT id, name, \"group\", salt, verifier, sessions, flags, otp_secret, otp_counter, email, guid "
+        "SELECT id, name, \"group\", salt, verifier, sessions, flags, otp_secret, otp_counter, email, guid, type "
         "FROM users WHERE id=?";
     SqlQuery query(db(), kSql);
     query.addInt64(entry_id);
@@ -527,7 +540,7 @@ std::string_view UserStore::findByGuid(const QString& guid, RouterUser* user) co
     }
 
     const char kSql[] =
-        "SELECT id, name, \"group\", salt, verifier, sessions, flags, otp_secret, otp_counter, email, guid "
+        "SELECT id, name, \"group\", salt, verifier, sessions, flags, otp_secret, otp_counter, email, guid, type "
         "FROM users WHERE guid=?";
     SqlQuery query(db(), kSql);
     query.addText(guid);

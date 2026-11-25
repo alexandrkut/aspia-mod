@@ -110,12 +110,19 @@ message HostStatus
     peer.Version version = 3;
 }
 
+message HostMembership
+{
+    int64 workspace_id = 1;
+    int64 group_id     = 2;
+}
+
 message Host
 {
     int64 revision       = 1;
     uint64 host_id       = 2;  // hosts.id - the dialable host identifier.
     int64 workspace_id   = 3;  // 0 means the host is not assigned to any workspace.
     int64 group_id       = 4;  // 0 means the host is at the workspace root.
+    repeated HostMembership memberships = 15;
     string display_name  = 5;  // Display label, editable from a manager or admin session.
     string computer_name = 6;  // Plain OS hostname reported by the host.
     string cpu_arch      = 7;  // CPU architecture reported by the host.

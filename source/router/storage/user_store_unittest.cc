@@ -430,3 +430,37 @@ TEST_F(UserStoreTest, DuplicateUserNameIsAlreadyExists)
     EXPECT_EQ(users_.modify(renamed), proto::router::kErrorAlreadyExists);
     EXPECT_TRUE(findUser("alice").isValid());
 }
+//--------------------------------------------------------------------------------------------------
+// The account type is saved next to the level. A modify of an unrelated field must not change it;
+// only a request that also names a level may change the type.
+TEST_F(UserStoreTest, QuickSupportTypeIsStoredAndKeptWithoutALevel)
+{
+    RouterUser user = makeUser("support-qs", proto::router::SESSION_TYPE_OPERATOR);
+    user.user_type = proto::router::USER_TYPE_QUICK_SUPPORT;
+    ASSERT_EQ(users_.add(user), proto::router::kErrorOk);
+
+    const RouterUser stored = findUser("support-qs");
+    EXPECT_EQ(stored.user_type, proto::router::USER_TYPE_QUICK_SUPPORT);
+    EXPECT_EQ(stored.sessions, proto::router::SESSION_TYPE_OPERATOR);
+
+    RouterUser email_only;
+    email_only.entry_id = stored.entry_id;
+    email_only.flags = User::ENABLED;
+    email_only.email = "support@example.com";
+    bool access_changed = true;
+    ASSERT_EQ(users_.modify(email_only, nullptr, &access_changed), proto::router::kErrorOk);
+    EXPECT_FALSE(access_changed);
+    EXPECT_EQ(findUser(stored.entry_id).user_type, proto::router::USER_TYPE_QUICK_SUPPORT);
+
+    // Leaving the Quick Support type stops the live sessions of the account just as a change of
+    // the level does, because those sessions were opened with only the portable-host channels.
+    RouterUser promoted;
+    promoted.entry_id = stored.entry_id;
+    promoted.sessions = proto::router::SESSION_TYPE_OPERATOR;
+    promoted.flags = User::ENABLED;
+    promoted.user_type = proto::router::USER_TYPE_REGULAR;
+    access_changed = false;
+    ASSERT_EQ(users_.modify(promoted, nullptr, &access_changed), proto::router::kErrorOk);
+    EXPECT_TRUE(access_changed);
+    EXPECT_EQ(findUser(stored.entry_id).user_type, proto::router::USER_TYPE_REGULAR);
+}

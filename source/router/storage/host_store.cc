@@ -18,10 +18,14 @@
 
 #include "router/storage/host_store.h"
 
+#include <algorithm>
+#include <unordered_map>
+
 #include "base/logging.h"
 #include "base/string_util.h"
 #include "base/sql/sql_query.h"
 #include "base/sql/sql_transaction.h"
+#include "base/time_types.h"
 #include "proto/router_client.h"
 #include "proto/router_constants.h"
 
@@ -105,7 +109,37 @@ std::string hostFilterClause(const proto::router::HostFilter& filter)
     std::vector<std::string> conditions;
 
     if (filter.workspace_id_size() > 0)
-        conditions.emplace_back(strCat({"workspace_id IN (", placeholders(filter.workspace_id_size()), ")"}));
+    {
+        // Membership lives in host_workspaces. A zero means "not assigned to any workspace"
+        // (the pool an administrator picks from), anything else matches when ANY membership is
+        // in the list. EXISTS keeps one row per host, so no dedup is needed downstream.
+        // bindHostFilter() binds only the non-zero ids, in this order.
+        std::vector<qint64> assigned_ids;
+        bool wants_unassigned = false;
+        for (qint64 workspace_id : filter.workspace_id())
+        {
+            if (workspace_id == 0)
+                wants_unassigned = true;
+            else
+                assigned_ids.emplace_back(workspace_id);
+        }
+
+        std::vector<std::string> parts;
+        if (!assigned_ids.empty())
+        {
+            parts.emplace_back(strCat({"EXISTS (SELECT 1 FROM host_workspaces hw "
+                "WHERE hw.host_id = hosts.id AND hw.workspace_id IN (",
+                placeholders(static_cast<int>(assigned_ids.size())), "))"}));
+        }
+        if (wants_unassigned)
+            parts.emplace_back(
+                "NOT EXISTS (SELECT 1 FROM host_workspaces hw WHERE hw.host_id = hosts.id)");
+
+        if (parts.size() == 2)
+            conditions.emplace_back("(" + parts[0] + " OR " + parts[1] + ")");
+        else
+            conditions.emplace_back(std::move(parts.front()));
+    }
     if (!filter.address().empty())
         conditions.emplace_back("address LIKE ? ESCAPE '\\'");
     if (!filter.os_name().empty())
@@ -130,8 +164,13 @@ void bindHostFilter(const proto::router::HostFilter& filter, SqlQuery* query)
 {
     CHECK(query);
 
+    // Zero ids ask for the unassigned hosts and leave no placeholder in the clause built by
+    // hostFilterClause(); the rest bind in list order.
     for (qint64 workspace_id : filter.workspace_id())
-        query->addInt64(workspace_id);
+    {
+        if (workspace_id != 0)
+            query->addInt64(workspace_id);
+    }
 
     if (!filter.address().empty())
         query->addText(substringPattern(filter.address()));
@@ -466,7 +505,8 @@ std::string_view HostStore::workspaceId(HostId host_id, qint64* workspace_id) co
 
 //--------------------------------------------------------------------------------------------------
 std::string_view HostStore::modify(HostId host_id, qint64 base_revision, qint64 workspace_id,
-    qint64 group_id, std::string_view display_name, std::string_view comment)
+    qint64 group_id, std::string_view display_name, std::string_view comment,
+    const std::vector<std::pair<qint64, qint64>>& memberships)
 {
     if (!isValid())
     {
@@ -487,7 +527,7 @@ std::string_view HostStore::modify(HostId host_id, qint64 base_revision, qint64 
         return proto::router::kErrorInternalError;
     }
 
-    SqlQuery current(db(), "SELECT revision FROM hosts WHERE id=?");
+    SqlQuery current(db(), "SELECT revision, workspace_id FROM hosts WHERE id=?");
     current.addUInt64(host_id);
 
     const SqlQuery::StepResult current_step = current.next();
@@ -503,6 +543,8 @@ std::string_view HostStore::modify(HostId host_id, qint64 base_revision, qint64 
         LOG(ERROR) << "Host not found:" << host_id;
         return proto::router::kErrorNotFound;
     }
+
+    const qint64 old_workspace_id = current.columnInt64(1);
 
     if (current.columnInt64(0) != base_revision)
     {
@@ -556,6 +598,140 @@ std::string_view HostStore::modify(HostId host_id, qint64 base_revision, qint64 
         return proto::router::kErrorInternalError;
     }
 
+    // Move the primary membership with the edit; every other membership of the host stays
+    // untouched - an edit changes only the primary membership (an old client sees one workspace).
+    if (workspace_id > 0)
+    {
+        if (old_workspace_id > 0)
+        {
+            SqlQuery move(db(),
+                "UPDATE host_workspaces SET workspace_id=?, group_id=? "
+                "WHERE host_id=? AND workspace_id=?");
+            move.addInt64(workspace_id);
+            move.addInt64(group_id);
+            move.addUInt64(host_id);
+            move.addInt64(old_workspace_id);
+
+            if (!move.exec())
+            {
+                LOG(ERROR) << "Unable to execute query:" << db().lastError();
+                return proto::router::kErrorInternalError;
+            }
+        }
+        else
+        {
+            SqlQuery claim(db(),
+                "INSERT INTO host_workspaces (host_id, workspace_id, group_id) VALUES (?, ?, ?)");
+            claim.addUInt64(host_id);
+            claim.addInt64(workspace_id);
+            claim.addInt64(group_id);
+
+            if (!claim.exec())
+            {
+                LOG(ERROR) << "Unable to execute query:" << db().lastError();
+                return proto::router::kErrorInternalError;
+            }
+        }
+    }
+    else
+    {
+        // Released: the host leaves every workspace.
+        SqlQuery drop(db(), "DELETE FROM host_workspaces WHERE host_id=?");
+        drop.addUInt64(host_id);
+
+        if (!drop.exec())
+        {
+            LOG(ERROR) << "Unable to execute query:" << db().lastError();
+            return proto::router::kErrorInternalError;
+        }
+    }
+
+    // A non-empty membership list synchronizes the join as a whole: rows asked for but missing
+    // are added, rows not asked for are dropped, and the group of a kept row is updated in place.
+    if (!memberships.empty())
+    {
+        std::vector<std::pair<qint64, qint64>> stored;
+        {
+            SqlQuery rows(db(),
+                "SELECT workspace_id, group_id FROM host_workspaces WHERE host_id=? ORDER BY rowid");
+            rows.addUInt64(host_id);
+
+            for (;;)
+            {
+                const SqlQuery::StepResult step = rows.next();
+                if (step != SqlQuery::StepResult::ROW)
+                {
+                    if (step == SqlQuery::StepResult::FAILED)
+                    {
+                        LOG(ERROR) << "Unable to execute query:" << db().lastError();
+                        return proto::router::kErrorInternalError;
+                    }
+                    break;
+                }
+                stored.emplace_back(rows.columnInt64(0), rows.columnInt64(1));
+            }
+        }
+
+        for (const auto& stored_row : stored)
+        {
+            const auto requested = std::find_if(
+                memberships.begin(), memberships.end(),
+                [&](const std::pair<qint64, qint64>& item) { return item.first == stored_row.first; });
+
+            if (requested == memberships.end())
+            {
+                SqlQuery drop_row(db(),
+                    "DELETE FROM host_workspaces WHERE host_id=? AND workspace_id=?");
+                drop_row.addUInt64(host_id);
+                drop_row.addInt64(stored_row.first);
+
+                if (!drop_row.exec())
+                {
+                    LOG(ERROR) << "Unable to execute query:" << db().lastError();
+                    return proto::router::kErrorInternalError;
+                }
+            }
+            else if (requested->second != stored_row.second)
+            {
+                SqlQuery move_group(db(),
+                    "UPDATE host_workspaces SET group_id=? WHERE host_id=? AND workspace_id=?");
+                move_group.addInt64(requested->second);
+                move_group.addUInt64(host_id);
+                move_group.addInt64(stored_row.first);
+
+                if (!move_group.exec())
+                {
+                    LOG(ERROR) << "Unable to execute query:" << db().lastError();
+                    return proto::router::kErrorInternalError;
+                }
+            }
+        }
+
+        for (const auto& requested : memberships)
+        {
+            const bool exists = std::any_of(
+                stored.begin(), stored.end(),
+                [&](const std::pair<qint64, qint64>& item) { return item.first == requested.first; });
+
+            if (!exists)
+            {
+                SqlQuery add_row(db(),
+                    "INSERT INTO host_workspaces (host_id, workspace_id, group_id) VALUES (?, ?, ?)");
+                add_row.addUInt64(host_id);
+                add_row.addInt64(requested.first);
+                add_row.addInt64(requested.second);
+
+                if (!add_row.exec())
+                {
+                    LOG(ERROR) << "Unable to execute query:" << db().lastError();
+                    return proto::router::kErrorInternalError;
+                }
+            }
+        }
+    }
+
+    refreshPrimaryMembership(host_id);
+
     if (!transaction.commit())
     {
         LOG(ERROR) << "Unable to commit transaction:" << db().lastError();
@@ -608,6 +784,9 @@ void HostStore::list(const proto::router::HostFilter& filter, qint64 offset, qin
     query.addInt64(count);
     query.addInt64(offset);
 
+    std::vector<quint64> page_ids;
+    page_ids.reserve(static_cast<size_t>(count));
+
     for (;;)
     {
         const SqlQuery::StepResult step = query.next();
@@ -637,7 +816,10 @@ void HostStore::list(const proto::router::HostFilter& filter, qint64 offset, qin
         host->set_comment(query.columnTextView(10));
         host->set_last_connect(query.columnInt64(11));
         host->set_last_modify(query.columnInt64(12));
+        page_ids.emplace_back(host->host_id());
     }
+
+    attachMemberships(page_ids, out);
 
     out->set_error_code(proto::router::kErrorOk);
 }
@@ -660,13 +842,24 @@ void HostStore::list(qint64 workspace_id, qint64 group_id, qint64 offset,
         return;
     }
     // A negative group_id asks for the hosts of the workspace whatever group they sit in.
+    // Workspace 0 asks for the hosts no workspace claimed: they exist without membership rows,
+    // so the scope flips from "has a membership" to "has none".
     const bool any_group = group_id < 0;
-    const std::string sql = strCat({
-        "SELECT id, revision, workspace_id, group_id, display_name, computer_name, cpu_arch, "
-        "version, os_name, address, comment, last_connect, last_modify "
-        "FROM hosts WHERE workspace_id=?",
-        any_group ? "" : " AND group_id=?",
-        " ORDER BY id LIMIT ? OFFSET ?"});
+    const bool unassigned = workspace_id == 0;
+    const std::string sql = unassigned
+        ? strCat({
+            "SELECT id, revision, workspace_id, group_id, display_name, computer_name, cpu_arch, "
+            "version, os_name, address, comment, last_connect, last_modify FROM hosts "
+            "WHERE NOT EXISTS (SELECT 1 FROM host_workspaces hw WHERE hw.host_id = hosts.id)",
+            any_group ? "" : " AND group_id = ?",
+            " ORDER BY id LIMIT ? OFFSET ?"})
+        : strCat({
+            "SELECT id, revision, workspace_id, group_id, display_name, computer_name, cpu_arch, "
+            "version, os_name, address, comment, last_connect, last_modify FROM hosts "
+            "WHERE EXISTS (SELECT 1 FROM host_workspaces hw WHERE hw.host_id = hosts.id AND "
+            "hw.workspace_id = ?",
+            any_group ? "" : " AND hw.group_id = ?",
+            ") ORDER BY id LIMIT ? OFFSET ?"});
 
     SqlQuery query(db(), sql);
     if (!query.isValid())
@@ -676,11 +869,16 @@ void HostStore::list(qint64 workspace_id, qint64 group_id, qint64 offset,
         return;
     }
 
-    query.addInt64(workspace_id);
+    // The unassigned scope has no workspace placeholder in the SQL above.
+    if (!unassigned)
+        query.addInt64(workspace_id);
     if (!any_group)
         query.addInt64(group_id);
     query.addInt64(count);
     query.addInt64(offset);
+
+    std::vector<quint64> page_ids;
+    page_ids.reserve(static_cast<size_t>(count));
 
     for (;;)
     {
@@ -711,7 +909,10 @@ void HostStore::list(qint64 workspace_id, qint64 group_id, qint64 offset,
         host->set_comment(query.columnTextView(10));
         host->set_last_connect(query.columnInt64(11));
         host->set_last_modify(query.columnInt64(12));
+        page_ids.emplace_back(host->host_id());
     }
+
+    attachMemberships(page_ids, out);
 
     out->set_error_code(proto::router::kErrorOk);
 }
@@ -770,11 +971,19 @@ std::string_view HostStore::count(qint64 workspace_id, qint64 group_id, qint64* 
     }
 
     // Same scope as the matching list() overload, including the "any group" reading of a
-    // negative group_id.
+    // negative group_id and the "no membership at all" reading of workspace 0.
     const bool any_group = group_id < 0;
-    const std::string sql = strCat({
-        "SELECT COUNT(*) FROM hosts WHERE workspace_id=?",
-        any_group ? "" : " AND group_id=?"});
+    const bool unassigned = workspace_id == 0;
+    const std::string sql = unassigned
+        ? strCat({
+            "SELECT COUNT(*) FROM hosts WHERE NOT EXISTS "
+            "(SELECT 1 FROM host_workspaces hw WHERE hw.host_id = hosts.id)",
+            any_group ? "" : " AND group_id = ?"})
+        : strCat({
+            "SELECT COUNT(*) FROM hosts WHERE EXISTS (SELECT 1 FROM host_workspaces hw WHERE "
+            "hw.host_id = hosts.id AND hw.workspace_id = ?",
+            any_group ? "" : " AND hw.group_id = ?",
+            ")"});
 
     SqlQuery query(db(), sql);
     if (!query.isValid())
@@ -783,7 +992,9 @@ std::string_view HostStore::count(qint64 workspace_id, qint64 group_id, qint64* 
         return proto::router::kErrorInternalError;
     }
 
-    query.addInt64(workspace_id);
+    // The unassigned scope has no workspace placeholder in the SQL above.
+    if (!unassigned)
+        query.addInt64(workspace_id);
     if (!any_group)
         query.addInt64(group_id);
 
@@ -852,7 +1063,8 @@ void HostStore::search(std::string_view query_text, const std::set<qint64>& work
     // The predicate is written once and used by both statements, so the count and the page can
     // never disagree about what a match is.
     const std::string where =
-        " FROM hosts WHERE workspace_id IN (" + placeholders + ") "
+        " FROM hosts WHERE EXISTS (SELECT 1 FROM host_workspaces hw WHERE hw.host_id = hosts.id "
+        "AND hw.workspace_id IN (" + placeholders + ")) "
         "AND (casefold(display_name) LIKE casefold(?) ESCAPE '\\' "
         "OR casefold(comment) LIKE casefold(?) ESCAPE '\\' "
         "OR CAST(id AS TEXT) LIKE ? ESCAPE '\\')";
@@ -906,6 +1118,9 @@ void HostStore::search(std::string_view query_text, const std::set<qint64>& work
     query.addInt64(count);
     query.addInt64(offset);
 
+    std::vector<quint64> page_ids;
+    page_ids.reserve(static_cast<size_t>(count));
+
     for (;;)
     {
         const SqlQuery::StepResult step = query.next();
@@ -937,7 +1152,10 @@ void HostStore::search(std::string_view query_text, const std::set<qint64>& work
         host->set_comment(query.columnTextView(10));
         host->set_last_connect(query.columnInt64(11));
         host->set_last_modify(query.columnInt64(12));
+        page_ids.emplace_back(host->host_id());
     }
+
+    attachMemberships(page_ids, out);
 
     out->set_error_code(proto::router::kErrorOk);
 }
@@ -1086,4 +1304,359 @@ bool HostStore::pruneExpiredRemovals()
         LOG(INFO) << "Dropped" << count << "host removals nobody acknowledged";
 
     return true;
+}
+//--------------------------------------------------------------------------------------------------
+std::vector<qint64> HostStore::workspaceIds(HostId host_id) const
+{
+    std::vector<qint64> workspace_ids;
+
+    if (!isValid())
+    {
+        LOG(ERROR) << "Database is not valid";
+        return workspace_ids;
+    }
+
+    SqlQuery query(db(), "SELECT workspace_id FROM host_workspaces WHERE host_id=? ORDER BY rowid");
+    query.addUInt64(host_id);
+
+    for (;;)
+    {
+        const SqlQuery::StepResult step = query.next();
+        if (step != SqlQuery::StepResult::ROW)
+        {
+            if (step == SqlQuery::StepResult::FAILED)
+                LOG(ERROR) << "Unable to execute query:" << db().lastError();
+            break;
+        }
+        workspace_ids.emplace_back(query.columnInt64(0));
+    }
+
+    return workspace_ids;
+}
+
+//--------------------------------------------------------------------------------------------------
+std::string_view HostStore::addMembership(HostId host_id, qint64 workspace_id, qint64 group_id)
+{
+    if (!isValid())
+    {
+        LOG(ERROR) << "Database is not valid";
+        return proto::router::kErrorInternalError;
+    }
+
+    if (host_id == kInvalidHostId || workspace_id <= 0 || group_id < 0)
+    {
+        LOG(ERROR) << "Invalid membership add:" << host_id << workspace_id << group_id;
+        return proto::router::kErrorInvalidData;
+    }
+
+    SqlTransaction transaction(db());
+    if (!transaction.begin(SqlTransaction::Mode::IMMEDIATE))
+    {
+        LOG(ERROR) << "Unable to start transaction:" << db().lastError();
+        return proto::router::kErrorInternalError;
+    }
+
+    SqlQuery workspace_check(db(), "SELECT 1 FROM workspaces WHERE id=?");
+    workspace_check.addInt64(workspace_id);
+
+    const SqlQuery::StepResult check_step = workspace_check.next();
+    if (check_step == SqlQuery::StepResult::FAILED)
+    {
+        LOG(ERROR) << "Unable to execute query:" << db().lastError();
+        return proto::router::kErrorInternalError;
+    }
+
+    if (check_step != SqlQuery::StepResult::ROW)
+    {
+        LOG(ERROR) << "Workspace not found:" << workspace_id;
+        return proto::router::kErrorConflict;
+    }
+
+    // An existing membership keeps its group: adding is idempotent, moving the group is a
+    // separate edit of the place within one workspace.
+    SqlQuery insert(db(),
+        "INSERT OR IGNORE INTO host_workspaces (host_id, workspace_id, group_id) VALUES (?, ?, ?)");
+    insert.addUInt64(host_id);
+    insert.addInt64(workspace_id);
+    insert.addInt64(group_id);
+
+    if (!insert.exec())
+    {
+        LOG(ERROR) << "Unable to execute query:" << db().lastError();
+        return proto::router::kErrorInternalError;
+    }
+
+    refreshPrimaryMembership(host_id);
+
+    SqlQuery touch(db(), "UPDATE hosts SET revision=revision+1, last_modify=? WHERE id=?");
+    touch.addInt64(secondsSinceEpoch());
+    touch.addUInt64(host_id);
+
+    if (!touch.exec())
+    {
+        LOG(ERROR) << "Unable to execute query:" << db().lastError();
+        return proto::router::kErrorInternalError;
+    }
+
+    if (!transaction.commit())
+    {
+        LOG(ERROR) << "Unable to commit transaction:" << db().lastError();
+        return proto::router::kErrorInternalError;
+    }
+
+    return proto::router::kErrorOk;
+}
+
+//--------------------------------------------------------------------------------------------------
+std::string_view HostStore::removeMembership(HostId host_id, qint64 workspace_id)
+{
+    if (!isValid())
+    {
+        LOG(ERROR) << "Database is not valid";
+        return proto::router::kErrorInternalError;
+    }
+
+    if (host_id == kInvalidHostId || workspace_id <= 0)
+    {
+        LOG(ERROR) << "Invalid membership remove:" << host_id << workspace_id;
+        return proto::router::kErrorInvalidData;
+    }
+
+    SqlTransaction transaction(db());
+    if (!transaction.begin(SqlTransaction::Mode::IMMEDIATE))
+    {
+        LOG(ERROR) << "Unable to start transaction:" << db().lastError();
+        return proto::router::kErrorInternalError;
+    }
+
+    SqlQuery del(db(), "DELETE FROM host_workspaces WHERE host_id=? AND workspace_id=?");
+    del.addUInt64(host_id);
+    del.addInt64(workspace_id);
+
+    if (!del.exec())
+    {
+        LOG(ERROR) << "Unable to execute query:" << db().lastError();
+        return proto::router::kErrorInternalError;
+    }
+
+    refreshPrimaryMembership(host_id);
+
+    SqlQuery touch(db(), "UPDATE hosts SET revision=revision+1, last_modify=? WHERE id=?");
+    touch.addInt64(secondsSinceEpoch());
+    touch.addUInt64(host_id);
+
+    if (!touch.exec())
+    {
+        LOG(ERROR) << "Unable to execute query:" << db().lastError();
+        return proto::router::kErrorInternalError;
+    }
+
+    if (!transaction.commit())
+    {
+        LOG(ERROR) << "Unable to commit transaction:" << db().lastError();
+        return proto::router::kErrorInternalError;
+    }
+
+    return proto::router::kErrorOk;
+}
+
+//--------------------------------------------------------------------------------------------------
+void HostStore::refreshPrimaryMembership(HostId host_id)
+{
+    // The scalar columns on |hosts| mirror the primary membership - the first row added, the
+    // lowest rowid - so scalar-based reads and an old client keep seeing a single workspace.
+    // Revision and last_modify belong to the caller: only operator edits and the cascades that
+    // touch those fields move them.
+    qint64 workspace_id = 0;
+    qint64 group_id = 0;
+
+    SqlQuery primary(db(),
+        "SELECT workspace_id, group_id FROM host_workspaces WHERE host_id=? ORDER BY rowid LIMIT 1");
+    primary.addUInt64(host_id);
+
+    if (primary.next() == SqlQuery::StepResult::ROW)
+    {
+        workspace_id = primary.columnInt64(0);
+        group_id = primary.columnInt64(1);
+    }
+
+    SqlQuery update(db(), "UPDATE hosts SET workspace_id=?, group_id=? WHERE id=?");
+    update.addInt64(workspace_id);
+    update.addInt64(group_id);
+    update.addUInt64(host_id);
+
+    if (!update.exec())
+        LOG(ERROR) << "Unable to execute query:" << db().lastError();
+}
+
+//--------------------------------------------------------------------------------------------------
+template <typename List>
+void HostStore::attachMemberships(const std::vector<quint64>& host_ids, List* list) const
+{
+    if (host_ids.empty() || !list)
+        return;
+
+    std::string placeholders;
+    placeholders.reserve(host_ids.size() * 2);
+    for (size_t i = 0; i < host_ids.size(); ++i)
+        placeholders += i ? ",?" : "?";
+
+    // One query for the whole page instead of one per host.
+    SqlQuery query(db(),
+        "SELECT host_id, workspace_id, group_id FROM host_workspaces WHERE host_id IN (" +
+        placeholders + ") ORDER BY host_id, rowid");
+    for (quint64 host_id : host_ids)
+        query.addUInt64(host_id);
+
+    std::unordered_map<quint64, std::vector<std::pair<qint64, qint64>>> memberships;
+    for (;;)
+    {
+        const SqlQuery::StepResult step = query.next();
+        if (step != SqlQuery::StepResult::ROW)
+        {
+            if (step == SqlQuery::StepResult::FAILED)
+                LOG(ERROR) << "Unable to execute query:" << db().lastError();
+            break;
+        }
+        memberships[query.columnUInt64(0)].emplace_back(query.columnInt64(1),
+                                                       query.columnInt64(2));
+    }
+
+    // The scalar workspace_id/group_id on each host stay the primary membership; this fills the
+    // repeated memberships with every workspace the host belongs to.
+    auto* hosts = list->mutable_host();
+    for (int i = 0; i < hosts->size(); ++i)
+    {
+        proto::router::Host* host = hosts->Mutable(i);
+        const auto it = memberships.find(host->host_id());
+        if (it == memberships.end())
+            continue;
+
+        for (const auto& membership : it->second)
+        {
+            proto::router::HostMembership* added = host->add_memberships();
+            added->set_workspace_id(membership.first);
+            added->set_group_id(membership.second);
+        }
+    }
+}
+
+template void HostStore::attachMemberships<proto::router::HostList>(
+    const std::vector<quint64>& host_ids, proto::router::HostList* list) const;
+template void HostStore::attachMemberships<proto::router::HostSearchResult>(
+    const std::vector<quint64>& host_ids, proto::router::HostSearchResult* list) const;
+
+//--------------------------------------------------------------------------------------------------
+std::string_view HostStore::countOutside(qint64 workspace_id, qint64* count) const
+{
+    CHECK(count);
+
+    *count = 0;
+
+    if (!isValid())
+    {
+        LOG(ERROR) << "Database is not valid";
+        return proto::router::kErrorInternalError;
+    }
+
+    // Same scope as the matching hostsOutside() overload.
+    const std::string sql =
+        "SELECT COUNT(*) FROM hosts WHERE NOT EXISTS (SELECT 1 FROM host_workspaces hw WHERE "
+        "hw.host_id = hosts.id AND hw.workspace_id = ?)";
+
+    SqlQuery query(db(), sql);
+    if (!query.isValid())
+    {
+        LOG(ERROR) << "Unable to execute query:" << db().lastError();
+        return proto::router::kErrorInternalError;
+    }
+
+    query.addInt64(workspace_id);
+
+    // A missing row is an error, not an empty scope.
+    if (query.next() != SqlQuery::StepResult::ROW)
+    {
+        LOG(ERROR) << "Unable to execute query:" << db().lastError();
+        return proto::router::kErrorInternalError;
+    }
+
+    *count = query.columnInt64(0);
+    return proto::router::kErrorOk;
+}
+
+//--------------------------------------------------------------------------------------------------
+void HostStore::hostsOutside(qint64 workspace_id, qint64 offset, qint64 count,
+    proto::router::HostList* out) const
+{
+    if (!isValid())
+    {
+        LOG(ERROR) << "Database is not valid";
+        out->set_error_code(proto::router::kErrorInternalError);
+        return;
+    }
+
+    if (!isPageValid(offset, count, proto::router::kMaxHostPageSize))
+    {
+        LOG(ERROR) << "Invalid host list page: offset" << offset << "count" << count;
+        out->set_error_code(proto::router::kErrorInvalidRequest);
+        return;
+    }
+
+    // The complement of the membership scope: a host qualifies when no membership row ties it
+    // to the workspace. That reads from one workspace's point of view as "everywhere else".
+    const std::string sql =
+        "SELECT id, revision, workspace_id, group_id, display_name, computer_name, cpu_arch, "
+        "version, os_name, address, comment, last_connect, last_modify FROM hosts "
+        "WHERE NOT EXISTS (SELECT 1 FROM host_workspaces hw WHERE hw.host_id = hosts.id AND "
+        "hw.workspace_id = ?) ORDER BY id LIMIT ? OFFSET ?";
+
+    SqlQuery query(db(), sql);
+    if (!query.isValid())
+    {
+        LOG(ERROR) << "Unable to execute query:" << db().lastError();
+        out->set_error_code(proto::router::kErrorInternalError);
+        return;
+    }
+
+    query.addInt64(workspace_id);
+    query.addInt64(count);
+    query.addInt64(offset);
+
+    std::vector<quint64> page_ids;
+    page_ids.reserve(static_cast<size_t>(count));
+
+    for (;;)
+    {
+        const SqlQuery::StepResult step = query.next();
+        if (step == SqlQuery::StepResult::FAILED)
+        {
+            LOG(ERROR) << "Unable to execute query:" << db().lastError();
+            out->clear_host();
+            out->set_error_code(proto::router::kErrorInternalError);
+            return;
+        }
+
+        if (step == SqlQuery::StepResult::DONE)
+            break;
+
+        proto::router::Host* host = out->add_host();
+        host->set_host_id(query.columnUInt64(0));
+        host->set_revision(query.columnInt64(1));
+        host->set_workspace_id(query.columnInt64(2));
+        host->set_group_id(query.columnInt64(3));
+        host->set_display_name(query.columnTextView(4));
+        host->set_computer_name(query.columnTextView(5));
+        host->set_cpu_arch(query.columnTextView(6));
+        host->set_version(query.columnTextView(7));
+        host->set_os_name(query.columnTextView(8));
+        host->set_address(query.columnTextView(9));
+        host->set_comment(query.columnTextView(10));
+        host->set_last_connect(query.columnInt64(11));
+        host->set_last_modify(query.columnInt64(12));
+        page_ids.emplace_back(host->host_id());
+    }
+
+    attachMemberships(page_ids, out);
+
+    out->set_error_code(proto::router::kErrorOk);
 }

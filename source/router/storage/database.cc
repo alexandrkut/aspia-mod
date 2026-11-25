@@ -72,7 +72,57 @@ bool ensureSchema(SqlDatabase& db)
              "\"otp_counter\" INTEGER NOT NULL DEFAULT 0,"
              "\"email\" TEXT NOT NULL DEFAULT '',"
              "\"guid\" TEXT NOT NULL DEFAULT '',"
+             "\"type\" INTEGER NOT NULL DEFAULT 0,"
              "PRIMARY KEY(\"id\" AUTOINCREMENT))"))
+    {
+        return false;
+    }
+
+    // The Quick Support marker used to be bit 32 of the sessions mask. Bring databases created
+    // before the separate type column up to it and clear the bit, so no other code has to keep
+    // interpreting a session-mask bit as an account kind. The column check keeps this idempotent
+    // for databases that already have it (the CREATE above is a no-op on them).
+    {
+        SqlQuery columns(db, "PRAGMA table_info(\"users\")");
+        bool has_type = false;
+
+        for (;;)
+        {
+            const SqlQuery::StepResult step = columns.next();
+            if (step == SqlQuery::StepResult::DONE)
+                break;
+            if (step == SqlQuery::StepResult::FAILED)
+                return false;
+            if (columns.columnText(1) == QLatin1String("type"))
+                has_type = true;
+        }
+
+        if (!has_type)
+        {
+            if (!run("ALTER TABLE \"users\" ADD COLUMN \"type\" INTEGER NOT NULL DEFAULT 0"))
+                return false;
+            if (!run("UPDATE \"users\" SET \"type\"=1, \"sessions\"=(\"sessions\" & ~32) "
+                     "WHERE (\"sessions\" & 32) != 0"))
+                return false;
+        }
+    }
+
+    // Many-to-many host membership. The scalar workspace_id/group_id on hosts mirror the primary
+    // membership (the first row added) for old clients and scalar-based reads. Foreign keys drop
+    // the rows with their host or workspace; the application keeps the scalar mirror in step.
+    if (!run("CREATE TABLE IF NOT EXISTS \"host_workspaces\" ("
+             "\"host_id\" INTEGER NOT NULL,"
+             "\"workspace_id\" INTEGER NOT NULL,"
+             "\"group_id\" INTEGER NOT NULL DEFAULT 0,"
+             "PRIMARY KEY(\"host_id\", \"workspace_id\"),"
+             "FOREIGN KEY(\"host_id\") REFERENCES \"hosts\"(\"id\") ON DELETE CASCADE,"
+             "FOREIGN KEY(\"workspace_id\") REFERENCES \"workspaces\"(\"id\") ON DELETE CASCADE)"))
+    {
+        return false;
+    }
+
+    if (!run("CREATE INDEX IF NOT EXISTS \"host_workspaces_workspace\" "
+             "ON \"host_workspaces\"(\"workspace_id\", \"group_id\")"))
     {
         return false;
     }
@@ -129,6 +179,17 @@ bool ensureSchema(SqlDatabase& db)
              "PRIMARY KEY(\"workspace_id\", \"user_id\"),"
              "FOREIGN KEY(\"workspace_id\") REFERENCES \"workspaces\"(\"id\") ON DELETE CASCADE,"
              "FOREIGN KEY(\"user_id\") REFERENCES \"users\"(\"id\") ON DELETE CASCADE)"))
+    {
+        return false;
+    }
+
+    // Seed from the single-membership era: hosts that carry a scalar workspace but no membership
+    // rows yet. The empty-table guard keeps a deliberate release from being resurrected on reopen.
+    if (!run("INSERT INTO \"host_workspaces\" (\"host_id\", \"workspace_id\", \"group_id\") "
+             "SELECT \"id\", \"workspace_id\", \"group_id\" FROM \"hosts\" "
+             "WHERE \"workspace_id\" > 0 "
+             "  AND EXISTS (SELECT 1 FROM \"workspaces\" w WHERE w.\"id\" = \"hosts\".\"workspace_id\") "
+             "  AND (SELECT COUNT(*) FROM \"host_workspaces\") = 0"))
     {
         return false;
     }

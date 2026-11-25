@@ -26,7 +26,7 @@ namespace proto::router {
 
 // Page bounds of the list replies.
 [[maybe_unused]] constexpr int kMaxClientPageSize = 100;
-[[maybe_unused]] constexpr int kMaxHostPageSize = 100;
+[[maybe_unused]] constexpr int kMaxHostPageSize = 500;
 [[maybe_unused]] constexpr int kMaxTempHostPageSize = 100;
 [[maybe_unused]] constexpr int kMaxUserPageSize = 100;
 [[maybe_unused]] constexpr int kMaxAccessLogPageSize = 100;

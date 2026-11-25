@@ -56,6 +56,7 @@ message ClientInfo
     string computer_name = 6;
     string architecture  = 7;
     string user_name     = 8;
+    UserType user_type   = 9;
 }
 
 message RelayRequest
@@ -126,6 +127,7 @@ message User
     uint32 flags    = 7;
     bool otp_active = 8; // Read-only.
     string email    = 9; // Empty in a modify request keeps the stored address.
+    UserType user_type = 10; // Only meaningful together with a non-empty sessions mask.
 }
 
 // Either a page of the user list (|offset| and |count|, a zero count is refused, as is one over

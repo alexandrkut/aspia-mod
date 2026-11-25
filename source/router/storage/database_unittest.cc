@@ -30,7 +30,9 @@
 #include "base/sql/sql_query.h"
 #include "proto/router.h"
 #include "proto/router_constants.h"
+#include "router/storage/host_store.h"
 #include "router/storage/user_store.h"
+#include "router/storage/workspace_store.h"
 
 namespace {
 
@@ -120,4 +122,93 @@ TEST_F(RouterDatabaseTest, UsersTableOf342GainsTheGuidColumn)
     SqlQuery version(raw, "PRAGMA user_version");
     ASSERT_EQ(version.next(), SqlQuery::StepResult::ROW);
     EXPECT_EQ(version.columnInt64(0), 1);
+}
+//--------------------------------------------------------------------------------------------------
+// A regular account is the default: a client that does not send a type still gets an ordinary
+// router account, and a new user inherits the column default of zero.
+TEST_F(RouterDatabaseTest, UsersTypeDefaultsToRegular)
+{
+    UserStore store(db_);
+
+    RouterUser admin;
+    ASSERT_EQ(store.find("admin", &admin), proto::router::kErrorOk);
+    EXPECT_EQ(admin.user_type, proto::router::USER_TYPE_REGULAR);
+
+    ASSERT_EQ(store.add(makeUser("bob", proto::router::SESSION_TYPE_OPERATOR)), proto::router::kErrorOk);
+    RouterUser bob;
+    ASSERT_EQ(store.find("bob", &bob), proto::router::kErrorOk);
+    EXPECT_EQ(bob.user_type, proto::router::USER_TYPE_REGULAR);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Accounts exported by older builds carry bit 32 in the session mask. Opening such a database
+// once lifts that marker into the type column and clears the bit, so no reader has to know it.
+TEST(RouterDatabaseLegacyTest, QuickSupportBitBecomesTheAccountType)
+{
+    QTemporaryDir dir;
+    ASSERT_TRUE(dir.isValid());
+    const QString file_path = dir.path() + "/router.db3";
+
+    {
+        SqlDatabase raw;
+        ASSERT_TRUE(raw.open(file_path));
+        ASSERT_TRUE(raw.exec(
+            "CREATE TABLE \"users\" ("
+            "\"id\" INTEGER NOT NULL,"
+            "\"name\" TEXT NOT NULL UNIQUE,"
+            "\"group\" TEXT NOT NULL DEFAULT '',"
+            "\"salt\" BLOB NOT NULL,"
+            "\"verifier\" BLOB NOT NULL,"
+            "\"sessions\" INTEGER NOT NULL DEFAULT 0,"
+            "\"flags\" INTEGER NOT NULL DEFAULT 0,"
+            "\"otp_secret\" BLOB NOT NULL DEFAULT X'',"
+            "\"otp_counter\" INTEGER NOT NULL DEFAULT 0,"
+            "\"email\" TEXT NOT NULL DEFAULT '',"
+            "PRIMARY KEY(\"id\" AUTOINCREMENT))"));
+        ASSERT_TRUE(raw.exec(
+            "INSERT INTO users (name, \"group\", salt, verifier, sessions, flags, email) "
+            "VALUES ('legacy-qs', '', X'01', X'02', 34, 1, '')"));
+    }
+
+    Database db;
+    ASSERT_TRUE(db.open(file_path));
+
+    RouterUser user;
+    ASSERT_EQ(UserStore(db).find(QStringLiteral("legacy-qs"), &user), proto::router::kErrorOk);
+    EXPECT_EQ(user.user_type, proto::router::USER_TYPE_QUICK_SUPPORT);
+    EXPECT_EQ(user.sessions, proto::router::SESSION_TYPE_OPERATOR);
+}
+
+//--------------------------------------------------------------------------------------------------
+// A host of the single-membership era has only the scalar columns. Opening the database seeds
+// host_workspaces from them, and a second open must not resurrect a membership that was removed.
+TEST_F(RouterDatabaseTest, MigrationSeedsMembershipsOnce)
+{
+    WorkspaceStore workspaces(db_);
+    HostStore hosts(db_);
+
+    qint64 workspace_id = -1;
+    ASSERT_EQ(workspaces.add("alpha", std::string_view(), {admin_.entry_id}, &workspace_id),
+              proto::router::kErrorOk);
+    ASSERT_GT(workspace_id, 0);
+
+    ASSERT_TRUE(hosts.add("hash-1", "hwid"));
+    HostId host_id = kInvalidHostId;
+    ASSERT_EQ(hosts.findByKey("hash-1", &host_id), proto::router::kErrorOk);
+    ASSERT_TRUE(execRaw(QString("UPDATE hosts SET workspace_id=%1, group_id=0 WHERE id=%2")
+                            .arg(workspace_id)
+                            .arg(host_id)));
+
+    Database reopened;
+    ASSERT_TRUE(reopened.open(file_path_));
+    HostStore reopened_hosts(reopened);
+    std::vector<qint64> seeded = reopened_hosts.workspaceIds(host_id);
+    ASSERT_EQ(seeded.size(), 1);
+    EXPECT_EQ(seeded[0], workspace_id);
+
+    // A second open leaves the seeded row as it is: a membership already present is never
+    // duplicated by the scalar fallback.
+    Database opened_again;
+    ASSERT_TRUE(opened_again.open(file_path_));
+    EXPECT_EQ(HostStore(opened_again).workspaceIds(host_id), std::vector<qint64>{ workspace_id });
 }

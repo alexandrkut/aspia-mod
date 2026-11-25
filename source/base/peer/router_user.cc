@@ -72,6 +72,7 @@ RouterUser RouterUser::parseFrom(const proto::router::User& serialized_user)
     user.sessions = serialized_user.sessions();
     user.flags    = serialized_user.flags();
     user.email    = QString::fromStdString(serialized_user.email());
+    user.user_type = serialized_user.user_type();
 
     return user;
 }
@@ -89,6 +90,7 @@ proto::router::User RouterUser::serialize() const
     user.set_sessions(sessions);
     user.set_flags(flags);
     user.set_email(email.toStdString());
+    user.set_user_type(user_type);
 
     return user;
 }
