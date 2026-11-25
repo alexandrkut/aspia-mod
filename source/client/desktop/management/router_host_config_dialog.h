@@ -48,6 +48,7 @@ private:
     void applyResult(const proto::router::HostResult& result);
     bool validate() const;
     void applyOriginalServerPreset();
+    void clearServerAndKey();
 
     qint64 host_id_ = 0;
 

@@ -114,6 +114,21 @@ RouterHostConfigDialog::RouterHostConfigDialog(qint64 host_id, QWidget* parent)
             applyOriginalServerPreset();
     });
 
+    auto* button_clear = new QPushButton(tr("Clear server and key"), this);
+    layout->addRow(button_clear);
+
+    connect(button_clear, &QPushButton::clicked, this, [this]()
+    {
+        const int answer = QMessageBox::question(
+            this, tr("Clear update server and key"),
+            tr("The host will use the built-in update server and public key of this build.\n\n"
+               "The channel, auto-update setting and check frequency are not changed.\n\n"
+               "Clear the server and key?"),
+            QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+        if (answer == QMessageBox::Yes)
+            clearServerAndKey();
+    });
+
     auto* buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     connect(buttons, &QDialogButtonBox::accepted, this, &RouterHostConfigDialog::onApply);
     connect(buttons, &QDialogButtonBox::rejected, this, &QDialog::reject);
@@ -238,4 +253,11 @@ void RouterHostConfigDialog::applyOriginalServerPreset()
 {
     edit_server_->setText(QString::fromLatin1(kOriginalUpdateServer));
     edit_public_key_->setText(QString::fromLatin1(kOriginalUpdatePublicKey));
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostConfigDialog::clearServerAndKey()
+{
+    edit_server_->clear();
+    edit_public_key_->clear();
 }

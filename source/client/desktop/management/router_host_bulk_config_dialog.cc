@@ -124,6 +124,21 @@ RouterHostBulkConfigDialog::RouterHostBulkConfigDialog(const QString& fleet_summ
             applyOriginalServerPreset();
     });
 
+    auto* button_clear = new QPushButton(tr("Clear server and key"), this);
+    layout->addWidget(button_clear);
+
+    connect(button_clear, &QPushButton::clicked, this, [this]()
+    {
+        const int answer = QMessageBox::question(
+            this, tr("Clear update server and key"),
+            tr("Hosts will use the built-in update server and public key of this build.\n\n"
+               "The channel, auto-update setting and check frequency are not changed.\n\n"
+               "Hosts to be changed: %1.").arg(host_count_),
+            QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+        if (answer == QMessageBox::Yes)
+            clearServerAndKey();
+    });
+
     auto* buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     layout->addWidget(buttons);
 
@@ -181,6 +196,15 @@ void RouterHostBulkConfigDialog::applyOriginalServerPreset()
     edit_server_->setText(QString::fromLatin1(kOriginalUpdateServer));
     check_key_->setChecked(true);
     edit_key_->setText(QString::fromLatin1(kOriginalUpdatePublicKey));
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostBulkConfigDialog::clearServerAndKey()
+{
+    check_server_->setChecked(true);
+    edit_server_->clear();
+    check_key_->setChecked(true);
+    edit_key_->clear();
 }
 
 //--------------------------------------------------------------------------------------------------

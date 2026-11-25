@@ -50,6 +50,7 @@ private slots:
 private:
     bool validate() const;
     void applyOriginalServerPreset();
+    void clearServerAndKey();
 
     QCheckBox* check_server_ = nullptr;
     QLineEdit* edit_server_ = nullptr;

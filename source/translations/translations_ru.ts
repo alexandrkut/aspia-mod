@@ -7605,17 +7605,36 @@ Hosts to be changed: %1.</source>
         <translation>Хосты будут проверять обновления на https://aspia.org/updates по публичному ключу оригинального Aspia.\n\nОбновления с нашего сервера больше предлагаться не будут.\nКогда оригинальный Aspia выпустит версию новее установленной, хосты обновятся до оригинальной сборки; настройки и ID хостов сохраняются.\nЭто односторонний переход: чтобы вернуться на мод, сервер и ключ придётся прописать заново, а хосты, возможно, переустановить.\nРаботает только на хостах с поддержкой фолбэка версий (наш ближайший релиз); на старых сборках хост может навсегда видеть «нет обновлений».\n\nБудет изменено хостов: %1.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="202"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="127"/>
+        <source>Clear server and key</source>
+        <translation>Очистить сервер и ключ</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="133"/>
+        <source>Clear update server and key</source>
+        <translation>Очистить сервер обновлений и ключ</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="134"/>
+        <source>Hosts will use the built-in update server and public key of this build.
+
+The channel, auto-update setting and check frequency are not changed.
+
+Hosts to be changed: %1.</source>
+        <translation>Хосты вернутся к встроенному серверу обновлений и публичному ключу этой сборки.\n\nКанал, автообновление и частота проверки не изменятся.\n\nХосты, которые будут изменены: %1.</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="226"/>
         <source>Invalid server URL.</source>
         <translation>Некорректный адрес сервера.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="208"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="232"/>
         <source>Invalid public key (must be 32 bytes hex).</source>
         <translation>Некорректный публичный ключ (нужно 32 байта hex).</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="216"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="240"/>
         <source>A public key without a server is not allowed.</source>
         <translation>Ключ без сервера недопустим.</translation>
     </message>
@@ -7912,43 +7931,62 @@ Works only on hosts with version fallback support (our next release); on older b
         <translation>Хост будет проверять обновления на https://aspia.org/updates по публичному ключу оригинального Aspia.\n\nОбновления с нашего сервера больше предлагаться не будут.\nКогда оригинальный Aspia выпустит версию новее установленной, хост обновится до оригинальной сборки; настройки и ID хоста сохраняются.\nЭто односторонний переход: чтобы вернуться на мод, сервер и ключ придётся прописать заново, а хост, возможно, переустановить.\nРаботает только на хостах с поддержкой фолбэка версий (наш ближайший релиз); на старых сборках хост может навсегда видеть «нет обновлений».</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="137"/>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="203"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="117"/>
+        <source>Clear server and key</source>
+        <translation>Очистить сервер и ключ</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="123"/>
+        <source>Clear update server and key</source>
+        <translation>Очистить сервер обновлений и ключ</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="124"/>
+        <source>The host will use the built-in update server and public key of this build.
+
+The channel, auto-update setting and check frequency are not changed.
+
+Clear the server and key?</source>
+        <translation>Хост вернётся к встроенному серверу обновлений и публичному ключу этой сборки.\n\nКанал, автообновление и частота проверки не изменятся.\n\nОчистить сервер и ключ?</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="152"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="218"/>
         <source>No session to router.</source>
         <translation>Нет подключения к роутеру.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="149"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="164"/>
         <source>Failed to read telemetry: %1</source>
         <translation>Не удалось прочитать телеметрию: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="157"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="172"/>
         <source>Telemetry is not JSON.</source>
         <translation>Телеметрия — не JSON.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="175"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="190"/>
         <source>Current settings loaded.</source>
         <translation>Текущие настройки загружены.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="183"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="198"/>
         <source>Invalid server URL.</source>
         <translation>Некорректный адрес сервера.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="188"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="203"/>
         <source>Invalid public key (must be 32 bytes hex).</source>
         <translation>Некорректный публичный ключ (нужно 32 байта hex).</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="227"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="242"/>
         <source>Configuration applied successfully.</source>
         <translation>Настройки успешно применены.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="232"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="247"/>
         <source>Failed to apply: %1</source>
         <translation>Не удалось применить: %1</translation>
     </message>

@@ -7605,17 +7605,36 @@ Hosts to be changed: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="202"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="127"/>
+        <source>Clear server and key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="133"/>
+        <source>Clear update server and key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="134"/>
+        <source>Hosts will use the built-in update server and public key of this build.
+
+The channel, auto-update setting and check frequency are not changed.
+
+Hosts to be changed: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="226"/>
         <source>Invalid server URL.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="208"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="232"/>
         <source>Invalid public key (must be 32 bytes hex).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="216"/>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="240"/>
         <source>A public key without a server is not allowed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7909,43 +7928,62 @@ Works only on hosts with version fallback support (our next release); on older b
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="137"/>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="203"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="117"/>
+        <source>Clear server and key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="123"/>
+        <source>Clear update server and key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="124"/>
+        <source>The host will use the built-in update server and public key of this build.
+
+The channel, auto-update setting and check frequency are not changed.
+
+Clear the server and key?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="152"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="218"/>
         <source>No session to router.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="149"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="164"/>
         <source>Failed to read telemetry: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="157"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="172"/>
         <source>Telemetry is not JSON.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="175"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="190"/>
         <source>Current settings loaded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="183"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="198"/>
         <source>Invalid server URL.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="188"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="203"/>
         <source>Invalid public key (must be 32 bytes hex).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="227"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="242"/>
         <source>Configuration applied successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="232"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="247"/>
         <source>Failed to apply: %1</source>
         <translation type="unfinished"></translation>
     </message>
