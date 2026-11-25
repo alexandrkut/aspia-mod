@@ -2,6 +2,7 @@
 <Include>
     <?define Manufacturer="Dmitry Chapyshev"?>
     <?define Version="$(env.ASPIA_VERSION)"?>
+    <?define Language="$(env.ASPIA_LANGUAGE)"?>
     <?define SourceFiles="$(env.ASPIA_BIN_DIR)"?>
     <?if $(sys.BUILDARCH)="x86"?>
         <?define Minimum_Version="100"?>

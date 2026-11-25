@@ -11,12 +11,29 @@
 <?define ServiceDescription="Assigns identifiers to peers and routes traffic to bypass NAT."?>
 
 <!-- Product description -->
-<Product Id="*" Name="!(loc.ProductName)" Language="1033" Version="$(var.Version)" Manufacturer="$(var.Manufacturer)" UpgradeCode="{45182562-182B-44E9-ACFD-698062C06E54}">
+<Product Id="*" Name="!(loc.ProductName)" Language="$(var.Language)" Version="$(var.Version)" Manufacturer="$(var.Manufacturer)" UpgradeCode="{45182562-182B-44E9-ACFD-698062C06E54}">
     <Package Id="*" InstallerVersion="405" Compressed="yes" Manufacturer="$(var.Manufacturer)" InstallPrivileges="elevated" InstallScope="perMachine" />
 
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
 
-    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeErrorMessage)" Schedule="afterInstallInitialize" AllowDowngrades="no" AllowSameVersionUpgrades="no" Disallow="no" />
+    <!-- Any installed copy of this program, whatever its version, is an older one: the
+         package replaces it. The version of the package is compared only by the list of the
+         installed programs, and a build of another line or of the upstream carries a version
+         the plain MajorUpgrade rule would not recognise as a predecessor. -->
+    <Upgrade Id="{45182562-182B-44E9-ACFD-698062C06E54}">
+        <UpgradeVersion Minimum="0.0.0" IncludeMinimum="yes" OnlyDetect="no"
+                        Property="WIX_UPGRADE_DETECTED" />
+    </Upgrade>
+
+    <!-- A package that finds this very product already installed was started to install it
+         again: the files of the product are written anew rather than the maintenance screen
+         with its "Change, repair or remove" question being shown. -->
+    <CustomAction Id="SetReinstallAll" Property="REINSTALL" Value="ALL" />
+
+    <InstallExecuteSequence>
+        <RemoveExistingProducts After="InstallInitialize" />
+        <Custom Action="SetReinstallAll" Before="InstallValidate">Installed</Custom>
+    </InstallExecuteSequence>
 
     <!-- Windows version checking -->
     <Condition Message="This application is only supported on Windows 7, Windows Server 2008 R2, or higher.">
@@ -32,6 +49,18 @@
 
     <Icon Id="aspia.ico" SourceFile="resources/aspia.ico" />
     <Property Id="ARPPRODUCTICON" Value="aspia.ico" />
+
+    <!-- The installer always overwrites: a package that finds the files of an older copy
+         must not fall into the maintenance mode with its "Repair" question, and the files
+         that are already there are rewritten rather than kept. -->
+    <Property Id="REINSTALLMODE" Value="amus" />
+
+    <!-- The router may be running when it is removed, and a running program keeps its image
+         on the disk: the file is left behind until the machine is restarted. Closing the
+         program before the removal takes the file with it. -->
+    <util:CloseApplication Id="CloseRouterOnRemove" Target="aspia_router.exe"
+                           ElevatedEndSessionMessage="yes" Timeout="5" TerminateProcess="0"
+                           RebootPrompt="no" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">
         <Directory Id="$(var.Program_Files)">
@@ -89,6 +118,11 @@
     <UI Id="InstallerUI">
         <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg" Order="10">LicenseAccepted = "1"</Publish>
         <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="LicenseAgreementDlg" Order="10">NOT Installed</Publish>
+
+        <!-- The same for the wizard: the page that asks whether to change, repair or remove
+             is skipped, and the wizard goes straight to the confirmation of the install. -->
+        <Publish Dialog="MaintenanceWelcomeDlg" Control="Next" Event="NewDialog"
+                 Value="VerifyReadyDlg" Order="2" />
 
         <Property Id="WIXUI_INSTALLDIR" Value="InstallLocation" />
         <UIRef Id="WixUI_InstallDir" />
