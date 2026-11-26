@@ -1166,7 +1166,7 @@
     </message>
     <message>
         <location filename="../client/connect_request.cc" line="279"/>
-        <source>--username and --password need a host to connect to (--connect or an aspia:// link).</source>
+        <source>--username and --password need a host to connect to (--connect &lt;ID&gt;).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

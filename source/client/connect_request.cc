@@ -278,7 +278,7 @@ bool ConnectRequest::parse(const QStringList& arguments, ConnectRequest* request
         {
             *error = QCoreApplication::translate(
                 "Client", "--username and --password need a host to connect to "
-                           "(--connect or an aspia:// link).");
+                           "(--connect <ID>).");
         }
         return false;
     }

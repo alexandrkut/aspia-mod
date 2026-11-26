@@ -1169,8 +1169,8 @@
     </message>
     <message>
         <location filename="../client/connect_request.cc" line="279"/>
-        <source>--username and --password need a host to connect to (--connect or an aspia:// link).</source>
-        <translation>--username ╨╕ --password ╤В╤А╨╡╨▒╤Г╤О╤В ╤Е╨╛╤Б╤В╨░ ╨┤╨╗╤П ╨┐╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╤П (--connect ╨╕╨╗╨╕ ╤Б╤Б╤Л╨╗╨║╤Г aspia://).</translation>
+        <source>--username and --password need a host to connect to (--connect &lt;ID&gt;).</source>
+        <translation>--username ╨╕ --password ╤В╤А╨╡╨▒╤Г╤О╤В ╤Е╨╛╤Б╤В╨░ ╨┤╨╗╤П ╨┐╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╤П (--connect &lt;ID&gt;).</translation>
     </message>
 </context>
 <context>
