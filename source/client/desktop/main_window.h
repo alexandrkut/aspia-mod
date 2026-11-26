@@ -23,8 +23,11 @@
 #include <QMainWindow>
 #include <QPointer>
 
+#include <functional>
 #include <memory>
 
+#include "base/crypto/secure_string.h"
+#include "base/peer/host_id.h"
 #include "client/desktop/tab.h"
 #include "client/mcp/mcp_controller.h"
 
@@ -112,6 +115,23 @@ private slots:
     void onLockRequested();
 
 private:
+    // What a host named on the command line resolves to in the local address book.
+    struct ConnectTarget
+    {
+        qint64 entry_id = 0;
+        HostId host_id = kInvalidHostId;
+        QString name;
+        QString address;
+    };
+
+    bool resolveTarget(const QString& identifier, ConnectTarget* target,
+                       QString* error = nullptr) const;
+    void connectToRouterHost(const QString& identifier, proto::peer::SessionType session_type,
+                             const QString& username, const SecureString& password);
+    void reportUnknownHost(const QString& identifier, bool router_offline = false);
+    void runWhenRouterOnline(std::function<void()> action,
+                             std::function<void()> on_timeout = std::function<void()>());
+
     void saveWindowState();
     void addTab(Tab* tab, const QString& title, const QIcon& icon);
     bool tabBarHitTest(const QPoint& global_pos) const;

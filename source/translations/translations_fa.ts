@@ -1166,6 +1166,16 @@
         <source>--username and --password need a host to connect to (--connect &lt;ID&gt;).</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="533"/>
+        <source>Several hosts are named &quot;%1&quot;. Use the ID of the one you mean.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="559"/>
+        <source>&quot;%1&quot; is both the name of a host and the ID of another. Connect by the record ID of the host you mean.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ClientListModel</name>
@@ -5103,7 +5113,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../client/desktop/main_window.ui" line="20"/>
-        <location filename="../client/desktop/main_window.cc" line="639"/>
+        <location filename="../client/desktop/main_window.cc" line="907"/>
         <source>Aspia-mod Client</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5193,77 +5203,82 @@ Credentials replaced: %2</source>
         <translation>همیشه در بالا</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="131"/>
+        <location filename="../client/desktop/main_window.cc" line="143"/>
         <source>Search...</source>
         <translation>جستجو...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="222"/>
+        <location filename="../client/desktop/main_window.cc" line="234"/>
         <source>The MCP connector is already in use by another window of the application.</source>
         <translation>کانکتور MCP هم‌اکنون توسط پنجره دیگری از برنامه در حال استفاده است.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="224"/>
+        <location filename="../client/desktop/main_window.cc" line="236"/>
         <source>Unable to turn on the MCP connector.</source>
         <translation>فعال‌سازی کانکتور MCP ممکن نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="247"/>
+        <location filename="../client/desktop/main_window.cc" line="259"/>
         <source>Management</source>
         <translation>مدیریت</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="290"/>
+        <location filename="../client/desktop/main_window.cc" line="302"/>
         <source>Are you sure you want to close the application?</source>
         <translation>آیا مطمئن هستید که می‌خواهید برنامه را ببندید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="498"/>
-        <source>&quot;%1&quot; is neither a host ID nor a host address.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="594"/>
+        <location filename="../client/desktop/main_window.cc" line="862"/>
         <source>Close all sessions to change the database.</source>
         <translation>برای تعویض پایگاه داده، همه نشست‌ها را ببندید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="600"/>
+        <location filename="../client/desktop/main_window.cc" line="868"/>
         <source>Close all dialogs to change the database.</source>
         <translation>برای تعویض پایگاه داده، همه پنجره‌های محاوره‌ای را ببندید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="615"/>
+        <location filename="../client/desktop/main_window.cc" line="883"/>
         <source>Close all sessions to lock the application.</source>
         <translation>برای قفل کردن برنامه، همه نشست‌ها را ببندید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="621"/>
+        <location filename="../client/desktop/main_window.cc" line="889"/>
         <source>Close all dialogs to lock the application.</source>
         <translation>برای قفل کردن برنامه، همه پنجره‌های محاوره‌ای را ببندید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="995"/>
+        <location filename="../client/desktop/main_window.cc" line="1263"/>
         <source>Unknown application</source>
         <translation>برنامه ناشناخته</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="998"/>
+        <location filename="../client/desktop/main_window.cc" line="1266"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>کانکتور MCP. متصل: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="999"/>
+        <location filename="../client/desktop/main_window.cc" line="1267"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - هوش مصنوعی متصل است</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="541"/>
+        <location filename="../client/desktop/main_window.cc" line="809"/>
         <source>Credentials</source>
         <translation>اطلاعات ورود</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="584"/>
+        <location filename="../client/desktop/main_window.cc" line="660"/>
+        <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="666"/>
+        <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="852"/>
         <source>Settings</source>
         <translation>تنظیمات</translation>
     </message>

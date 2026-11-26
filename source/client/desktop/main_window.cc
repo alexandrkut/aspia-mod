@@ -26,11 +26,13 @@
 #include <QSignalBlocker>
 #include <QStyle>
 #include <QTabBar>
+#include <QTimer>
 #include <QToolButton>
 #include <QUrl>
 #include <QWindow>
 
 #include "base/auto_qpointer.h"
+#include "base/peer/host_id.h"
 #include "base/gui_application.h"
 #include "base/logging.h"
 #include "base/update/update_info.h"
@@ -55,7 +57,12 @@
 #include "client/desktop/sys_info/system_info_window.h"
 #include "client/desktop/terminal/terminal_window.h"
 #include "client/mcp/mcp_worker.h"
+#include "client/router/router_controller.h"
+#include "client/router/router_types.h"
 #include "client/storage/instance_settings.h"
+#include "client/storage/local_host_store.h"
+#include "client/storage/router_host_store.h"
+#include "client/storage/router_store.h"
 #include "client/storage/profile_store.h"
 #include "client/storage/settings_store.h"
 #include "client/storage/system_settings.h"
@@ -72,6 +79,11 @@ namespace {
 
 // The search field is the last thing on the toolbar and ends up against its edge.
 constexpr int kSearchFieldMarginPx = 5;
+
+// The router of a host asked from the command line may still be connecting when the request
+// arrives; give it this long to come online, and this long to answer the host lookup.
+constexpr int kRouterWaitTimeout = 60000;
+constexpr int kRouterSearchTimeout = 30000;
 
 //--------------------------------------------------------------------------------------------------
 QString escapeTabTitle(const QString& title)
@@ -442,6 +454,251 @@ bool MainWindow::mcpAsksCredentials() const
 }
 
 //--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+bool MainWindow::resolveTarget(const QString& identifier, ConnectTarget* target, QString* error) const
+{
+    std::optional<ConnectTarget> id_candidate;
+
+    bool number_ok = false;
+    const qint64 id_value = identifier.toLongLong(&number_ok);
+    if (number_ok && id_value > 0)
+    {
+        LocalHostConfig entry;
+        if (LocalHostStore().find(id_value, &entry) == Database::FindResult::FOUND)
+        {
+            ConnectTarget candidate;
+            candidate.entry_id = entry.id();
+            id_candidate = candidate;
+        }
+    }
+
+    QList<LocalHostConfig> local_hosts;
+    if (LocalHostStore().all(LocalHostStore::Scope::VISIBLE, &local_hosts) == Database::ReadResult::OK)
+    {
+        if (!id_candidate)
+        {
+            for (const LocalHostConfig& host : std::as_const(local_hosts))
+            {
+                if (host.address().compare(identifier, Qt::CaseInsensitive) == 0)
+                {
+                    LOG(INFO) << "Host ID" << identifier << "belongs to the address book record"
+                              << host.id() << "(" << host.name() << ")";
+                    ConnectTarget candidate;
+                    candidate.entry_id = host.id();
+                    id_candidate = candidate;
+                    break;
+                }
+            }
+        }
+    }
+
+    QList<RouterHostConfig> router_hosts;
+    if (RouterHostStore().list(&router_hosts) == Database::ReadResult::OK)
+    {
+        if (!id_candidate)
+        {
+            for (const RouterHostConfig& host : std::as_const(router_hosts))
+            {
+                if (hostIdToString(host.hostId()) != identifier)
+                    continue;
+                LOG(INFO) << "Host ID" << identifier << "belongs to the book of the router";
+                ConnectTarget candidate;
+                candidate.host_id = host.hostId();
+                id_candidate = candidate;
+                break;
+            }
+        }
+    }
+
+    QList<ConnectTarget> name_candidates;
+    for (const LocalHostConfig& host : std::as_const(local_hosts))
+    {
+        if (host.name().compare(identifier, Qt::CaseInsensitive) != 0)
+            continue;
+        ConnectTarget candidate;
+        candidate.entry_id = host.id();
+        candidate.name = host.name();
+        name_candidates.append(candidate);
+    }
+
+    if (name_candidates.size() > 1)
+    {
+        QSet<qint64> distinct_ids;
+        for (const ConnectTarget& candidate : std::as_const(name_candidates))
+            distinct_ids.insert(candidate.entry_id);
+        if (distinct_ids.size() > 1)
+        {
+            if (error)
+            {
+                *error = QApplication::translate(
+                    "Client", "Several hosts are named \"%1\". Use the ID of the one you mean.")
+                    .arg(identifier);
+            }
+            return false;
+        }
+    }
+
+    const bool has_name = !name_candidates.isEmpty();
+    const ConnectTarget name_candidate = has_name ? name_candidates.first() : ConnectTarget();
+
+    auto same_host = [](const ConnectTarget& a, const ConnectTarget& b)
+    {
+        if (a.entry_id != 0 && a.entry_id == b.entry_id)
+            return true;
+        if (a.host_id != kInvalidHostId && a.host_id == b.host_id)
+            return true;
+        return false;
+    };
+
+    if (id_candidate && has_name)
+    {
+        if (!same_host(*id_candidate, name_candidate))
+        {
+            if (error)
+            {
+                *error = QApplication::translate(
+                    "Client", "\"%1\" is both the name of a host and the ID of another. Connect "
+                              "by the record ID of the host you mean.").arg(identifier);
+            }
+            return false;
+        }
+        *target = *id_candidate;
+        if (target->name.isEmpty())
+            target->name = name_candidate.name;
+        return true;
+    }
+
+    if (id_candidate)
+    {
+        *target = *id_candidate;
+        return true;
+    }
+
+    if (has_name)
+    {
+        *target = name_candidate;
+        return true;
+    }
+
+    if (ConnectRequest::isHostAddress(identifier))
+    {
+        LOG(INFO) << "Connecting to the host at the address" << identifier << "directly";
+        *target = ConnectTarget();
+        target->address = identifier;
+        return true;
+    }
+
+    LOG(ERROR) << "No local record and no router host holds the ID" << identifier;
+    return false;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MainWindow::connectToRouterHost(const QString& identifier, proto::peer::SessionType session_type,
+                                     const QString& username, const SecureString& password)
+{
+    RouterConfig router;
+    if (RouterStore().find(&router) != Database::FindResult::FOUND)
+    {
+        LOG(ERROR) << "No router to ask for the host" << identifier;
+        reportUnknownHost(identifier);
+        return;
+    }
+
+    LOG(INFO) << "Nothing stored holds the ID" << identifier << ", asking the router for it";
+
+    runWhenRouterOnline([this, identifier, session_type, username, password]
+    {
+        RouterSession* session = RouterController::session();
+        if (!session)
+        {
+            LOG(ERROR) << "The router has no session to ask for the host";
+            reportUnknownHost(identifier);
+            return;
+        }
+
+        const HostId wanted = stringToHostId(identifier);
+        session->searchHosts(identifier, 0, proto::router::kMaxHostPageSize,
+            { this, [this, identifier, session_type, username, password, wanted]
+              (const RouterHostList& list)
+        {
+            for (const RouterHost& entry : list.hosts)
+            {
+                if (entry.host_id != wanted)
+                    continue;
+
+                LOG(INFO) << "The router has the host" << identifier;
+                HostConfig host = HostConfig::forRouterHost(
+                    entry.host_id,
+                    entry.display_name.isEmpty() ? entry.computer_name : entry.display_name);
+
+                if (!username.isEmpty())
+                {
+                    host.setUsername(username);
+                    host.setPassword(password);
+                }
+
+                if (ManagementTab* management_tab = managementTab())
+                    management_tab->connectRouterHost(host, session_type);
+                return;
+            }
+
+            LOG(ERROR) << "The router has no host with the ID" << identifier;
+            reportUnknownHost(identifier);
+        } });
+    }, [this, identifier]()
+    {
+        LOG(ERROR) << "The router did not come online, the host is left unconnected";
+        reportUnknownHost(identifier, true);
+    });
+}
+
+//--------------------------------------------------------------------------------------------------
+void MainWindow::reportUnknownHost(const QString& identifier, bool router_offline)
+{
+    if (router_offline)
+    {
+        MsgBox::warning(this, tr("The host with the ID %1 is not found: it is in neither the "
+                                  "address book nor the book of a router, and the router did not "
+                                  "answer.").arg(identifier));
+        return;
+    }
+
+    MsgBox::warning(this, tr("The host with the ID %1 is not found: it is in neither the address "
+                              "book nor the book of a router.").arg(identifier));
+}
+
+//--------------------------------------------------------------------------------------------------
+void MainWindow::runWhenRouterOnline(std::function<void()> action,
+                                     std::function<void()> on_timeout)
+{
+    if (RouterController::status() == RouterStatus::ONLINE)
+    {
+        action();
+        return;
+    }
+
+    LOG(INFO) << "The router of the host is not online yet, waiting for it";
+
+    auto done = std::make_shared<bool>(false);
+    QTimer::singleShot(kRouterWaitTimeout, this, [done, on_timeout]()
+    {
+        if (*done)
+            return;
+        *done = true;
+        if (on_timeout)
+            on_timeout();
+    });
+
+    QObject::connect(&RouterController::instance(), &RouterController::sig_statusChanged, this,
+                     [action, done](RouterStatus status)
+    {
+        if (*done || status != RouterStatus::ONLINE)
+            return;
+        *done = true;
+        action();
+    });
+}
+
 void MainWindow::connectToLocalHost(const QString& identifier, int session_type,
                                     const QString& username, const QString& password)
 {
@@ -456,35 +713,45 @@ void MainWindow::connectToLocalHost(const QString& identifier, int session_type,
 
     const proto::peer::SessionType type = static_cast<proto::peer::SessionType>(session_type);
 
-    bool is_number = !identifier.isEmpty();
-    for (QChar character : identifier)
+    ConnectTarget target;
+    QString resolve_error;
+    if (!resolveTarget(identifier, &target, &resolve_error))
     {
-        if (!character.isDigit())
+        if (!resolve_error.isEmpty())
         {
-            is_number = false;
-            break;
-        }
-    }
-
-    if (is_number)
-    {
-        bool number_ok = false;
-        const qint64 entry_id = identifier.toLongLong(&number_ok);
-        if (number_ok && entry_id > 0)
-        {
-            management_tab->connectLocalHost(entry_id, type);
+            // A name collision or an ID/name conflict is a definite answer, not a miss: tell the
+            // user and do not fall back to asking the routers.
+            MsgBox::warning(this, resolve_error);
             return;
         }
+
+        // Nothing stored holds this ID. The routers know hosts that were never fetched here, so
+        // ask them before giving up.
+        connectToRouterHost(identifier, type, username, SecureString(password));
+        return;
     }
 
-    if (ConnectRequest::isHostAddress(identifier))
+    if (target.host_id != kInvalidHostId)
+    {
+        // A host of the router that was once fetched into the local book.
+        HostConfig host = HostConfig::forRouterHost(target.host_id, target.name);
+        if (!username.isEmpty())
+        {
+            host.setUsername(username);
+            host.setPassword(SecureString(password));
+        }
+        management_tab->connectRouterHost(host, type);
+        return;
+    }
+
+    if (!target.address.isEmpty())
     {
         // A host named by its address has no address-book record, so the credentials from the
         // command line are the only ones available.
         LocalHostConfig entry;
         entry.setId(0);
-        entry.setName(identifier);
-        entry.setAddress(identifier);
+        entry.setName(target.address);
+        entry.setAddress(target.address);
         if (!username.isEmpty())
             entry.setUsername(username);
         if (!password.isEmpty())
@@ -495,7 +762,8 @@ void MainWindow::connectToLocalHost(const QString& identifier, int session_type,
         return;
     }
 
-    MsgBox::warning(this, tr("\"%1\" is neither a host ID nor a host address.").arg(identifier));
+    if (target.entry_id > 0)
+        management_tab->connectLocalHost(target.entry_id, type);
 }
 
 //--------------------------------------------------------------------------------------------------

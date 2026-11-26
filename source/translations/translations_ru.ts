@@ -1172,6 +1172,16 @@
         <source>--username and --password need a host to connect to (--connect &lt;ID&gt;).</source>
         <translation>--username ╨╕ --password ╤В╤А╨╡╨▒╤Г╤О╤В ╤Е╨╛╤Б╤В╨░ ╨┤╨╗╤П ╨┐╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╤П (--connect &lt;ID&gt;).</translation>
     </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="533"/>
+        <source>Several hosts are named &quot;%1&quot;. Use the ID of the one you mean.</source>
+        <translation>╨Э╨╡╤Б╨║╨╛╨╗╤М╨║╨╛ ╤Е╨╛╤Б╤В╨╛╨▓ ╨╕╨╝╨╡╤О╤В ╨╕╨╝╤П ┬л%1┬╗. ╨г╨║╨░╨╢╨╕╤В╨╡ ID ╨╜╤Г╨╢╨╜╨╛╨│╨╛.</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="559"/>
+        <source>&quot;%1&quot; is both the name of a host and the ID of another. Connect by the record ID of the host you mean.</source>
+        <translation>┬л%1┬╗ тАФ ╤Н╤В╨╛ ╨╕ ╨╕╨╝╤П ╤Е╨╛╤Б╤В╨░, ╨╕ ID ╨┤╤А╤Г╨│╨╛╨│╨╛. ╨Я╨╛╨┤╨║╨╗╤О╤З╨░╨╣╤В╨╡╤Б╤М ╨┐╨╛ ID ╨╖╨░╨┐╨╕╤Б╨╕ ╨╜╤Г╨╢╨╜╨╛╨│╨╛ ╤Е╨╛╤Б╤В╨░.</translation>
+    </message>
 </context>
 <context>
     <name>ClientListModel</name>
@@ -5144,7 +5154,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../client/desktop/main_window.ui" line="20"/>
-        <location filename="../client/desktop/main_window.cc" line="639"/>
+        <location filename="../client/desktop/main_window.cc" line="907"/>
         <source>Aspia-mod Client</source>
         <translation>╨Ъ╨╗╨╕╨╡╨╜╤В Aspia-mod</translation>
     </message>
@@ -5239,77 +5249,82 @@ Credentials replaced: %2</source>
         <translation>Параметры...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="131"/>
+        <location filename="../client/desktop/main_window.cc" line="143"/>
         <source>Search...</source>
         <translation>Поиск...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="222"/>
+        <location filename="../client/desktop/main_window.cc" line="234"/>
         <source>The MCP connector is already in use by another window of the application.</source>
         <translation>MCP-коннектор уже используется другим окном приложения.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="224"/>
+        <location filename="../client/desktop/main_window.cc" line="236"/>
         <source>Unable to turn on the MCP connector.</source>
         <translation>Не удалось включить MCP-коннектор.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="247"/>
+        <location filename="../client/desktop/main_window.cc" line="259"/>
         <source>Management</source>
         <translation>Управление</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="290"/>
+        <location filename="../client/desktop/main_window.cc" line="302"/>
         <source>Are you sure you want to close the application?</source>
         <translation>Вы действительно хотите закрыть приложение?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="498"/>
-        <source>&quot;%1&quot; is neither a host ID nor a host address.</source>
-        <translation>&quot;%1&quot; не является ни ID хоста, ни адресом хоста.</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/main_window.cc" line="594"/>
+        <location filename="../client/desktop/main_window.cc" line="862"/>
         <source>Close all sessions to change the database.</source>
         <translation>Закройте все сессии, чтобы сменить базу данных.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="600"/>
+        <location filename="../client/desktop/main_window.cc" line="868"/>
         <source>Close all dialogs to change the database.</source>
         <translation>Закройте все диалоги, чтобы сменить базу данных.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="615"/>
+        <location filename="../client/desktop/main_window.cc" line="883"/>
         <source>Close all sessions to lock the application.</source>
         <translation>Закройте все сессии, чтобы заблокировать приложение.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="621"/>
+        <location filename="../client/desktop/main_window.cc" line="889"/>
         <source>Close all dialogs to lock the application.</source>
         <translation>Закройте все диалоги, чтобы заблокировать приложение.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="995"/>
+        <location filename="../client/desktop/main_window.cc" line="1263"/>
         <source>Unknown application</source>
         <translation>Неизвестное приложение</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="998"/>
+        <location filename="../client/desktop/main_window.cc" line="1266"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>MCP-коннектор. Подключено: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="999"/>
+        <location filename="../client/desktop/main_window.cc" line="1267"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - ИИ подключен</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="541"/>
+        <location filename="../client/desktop/main_window.cc" line="809"/>
         <source>Credentials</source>
         <translation>Учетные данные</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="584"/>
+        <location filename="../client/desktop/main_window.cc" line="660"/>
+        <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
+        <translation>╨е╨╛╤Б╤В ╤Б ID %1 ╨╜╨╡ ╨╜╨░╨╣╨┤╨╡╨╜: ╨╡╨│╨╛ ╨╜╨╡╤В ╨╜╨╕ ╨▓ ╨░╨┤╤А╨╡╤Б╨╜╨╛╨╣ ╨║╨╜╨╕╨│╨╡, ╨╜╨╕ ╨▓ ╨║╨╜╨╕╨│╨╡ ╤А╨╛╤Г╤В╨╡╤А╨░, ╨░ ╤А╨╛╤Г╤В╨╡╤А ╨╜╨╡ ╨╛╤В╨▓╨╡╤В╨╕╨╗.</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="666"/>
+        <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
+        <translation>╨е╨╛╤Б╤В ╤Б ID %1 ╨╜╨╡ ╨╜╨░╨╣╨┤╨╡╨╜: ╨╡╨│╨╛ ╨╜╨╡╤В ╨╜╨╕ ╨▓ ╨░╨┤╤А╨╡╤Б╨╜╨╛╨╣ ╨║╨╜╨╕╨│╨╡, ╨╜╨╕ ╨▓ ╨║╨╜╨╕╨│╨╡ ╤А╨╛╤Г╤В╨╡╤А╨░.</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/main_window.cc" line="852"/>
         <source>Settings</source>
         <translation>Параметры</translation>
     </message>
