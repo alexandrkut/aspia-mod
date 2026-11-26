@@ -50,6 +50,7 @@ public:
 signals:
     void sig_desktopConfigChanged();
     void sig_lockTimeoutChanged();
+    void sig_hostsPerPageChanged(qint64 page_size);
     void sig_routerChanged();
 
 protected:
@@ -74,6 +75,7 @@ private slots:
     void onProfilesChanged();
     void onDesktopFeatureChanged();
     void onSelectRecordingPath();
+    void onHostsPerPageChanged();
     void onMcpEnabledChanged();
     void onMcpAutoConfirmChanged();
     void onMcpSignInChanged();

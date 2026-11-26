@@ -447,6 +447,17 @@ void ManagementTab::searchTextChanged(const QString& text)
 }
 
 //--------------------------------------------------------------------------------------------------
+void ManagementTab::setHostsPerPage(qint64 page_size)
+{
+    // Both host lists of this tab follow the setting: the workspace/group view and the
+    // approved hosts view. Each resets to its first page and refetches.
+    if (router_group_widget_)
+        router_group_widget_->setHostsPageSize(page_size);
+    if (router_hosts_widget_)
+        router_hosts_widget_->setHostsPageSize(page_size);
+}
+
+//--------------------------------------------------------------------------------------------------
 void ManagementTab::reloadRouter()
 {
     ui->sidebar->reloadRouter();
@@ -1194,17 +1205,37 @@ void ManagementTab::onHostContextMenu(const QPoint& pos, int column)
         {
             router_hosts_widget_->onHostUpdateConfig();
         });
-    }
 
-    QAction* bulk_config = menu->addAction(QIcon(":/img/computer-update.svg"),
-                                           tr("Bulk update configuration..."));
-    connect(bulk_config, &QAction::triggered, this, [this]()
-    {
-        router_hosts_widget_->onHostsUpdateConfig();
-    });
+        QAction* action_users = menu->addAction(QIcon(":/img/user.svg"), tr("Host users..."));
+        connect(action_users, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostUsers();
+        });
+    }
 
     if (!is_single)
     {
+        menu->addSeparator();
+
+        QAction* bulk_add = menu->addAction(QIcon(":/img/user-add.svg"), tr("Bulk add user..."));
+        connect(bulk_add, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostsAddUser();
+        });
+
+        QAction* bulk_remove = menu->addAction(QIcon(":/img/user-delete.svg"), tr("Bulk remove user..."));
+        connect(bulk_remove, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostsRemoveUser();
+        });
+
+        QAction* bulk_config = menu->addAction(QIcon(":/img/computer-update.svg"),
+                                               tr("Bulk update configuration..."));
+        connect(bulk_config, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostsUpdateConfig();
+        });
+
         menu->exec(pos);
         return;
     }

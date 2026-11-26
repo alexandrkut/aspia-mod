@@ -1,4 +1,4 @@
-//
+﻿//
 // Aspia Project
 // Copyright (C) 2016-2026 Dmitry Chapyshev <dmitry@aspia.ru>
 //
@@ -20,9 +20,11 @@
 #define CLIENT_DESKTOP_MANAGEMENT_ROUTER_WORKSPACE_DIALOG_H
 
 #include <QDialog>
+#include <QHash>
 
 #include <memory>
 
+#include "base/shared_pointer.h"
 #include "client/page_model.h"
 #include "client/desktop/management/workspace_edit_model.h"
 #include "client/router/router_types.h"
@@ -60,6 +62,7 @@ private slots:
     void onWorkspaceListReceived(const RouterWorkspaceList& list);
     void onUserListReceived(const proto::router::UserList& list);
     void onHostListReceived(const RouterHostList& list);
+    void onHostsOutsideListReceived(const RouterHostList& list);
     void onHostResultReceived(const proto::router::HostResult& result);
     void onWorkspaceResultReceived(const proto::router::WorkspaceResult& result);
     void onButtonBoxClicked(QAbstractButton* button);
@@ -76,8 +79,8 @@ private:
     // one and apply right away, so a host operation needs a workspace to move the host into. In
     // create mode the first one creates the workspace from the name of the form and runs after
     // the reply.
-    void moveHost(const RouterHost& host, qint64 workspace_id);
-    void runPendingHostMove();
+    void moveHosts(const QList<RouterHost>& hosts, qint64 workspace_id);
+    void runPendingHostMoves();
 
     // The record of the host of a list, empty when the pages no longer carry it.
     RouterHost hostById(quint64 host_id) const;
@@ -93,6 +96,7 @@ private:
     void updateButtonsState();
     void updateLoadingState();
     void updateArrowIcons();
+    void updateHostSummary();
 
     // The name of the form, checked the way the router checks it. Empty when it is not usable.
     QString validatedName();
@@ -105,19 +109,47 @@ private:
 
     PageModel users_page_;
     PageModel hosts_in_page_;
-    PageModel hosts_free_page_;
+    // The hosts outside this workspace: the hosts of the other workspaces together with the
+    // hosts no workspace claimed. A router that predates the outside mode answers the old
+    // free-hosts request instead (see onHostsOutsideListReceived).
+    PageModel hosts_out_page_;
 
     // The pages of hosts as they arrived; the hosts are not part of the model, because a host
     // operation is applied by the router before it is shown.
     QList<RouterHost> hosts_in_;
-    QList<RouterHost> hosts_free_;
+    QList<RouterHost> hosts_out_;
 
-    // The host operation waiting for the workspace of a create-mode dialog to be created.
-    RouterHost pending_host_;
-    qint64 pending_host_workspace_id_ = 0;
+    // Staged membership changes for the hosts tab in modify mode: host id -> becomes member.
+    // Empty means nothing pending; while non-empty pagination/auto-refresh are blocked.
+    QHash<quint64, bool> staged_;
+
+    // A batch of host operations waiting for the workspace of a create-mode dialog to be created,
+    // or currently in flight.
+    struct PendingHostMove
+    {
+        RouterHost host;
+        qint64 workspace_id = 0;
+    };
+    QList<PendingHostMove> pending_host_moves_;
     bool pending_host_move_ = false;
 
+    struct HostMoveBatch
+    {
+        int pending = 0;
+        int failed = 0;
+        int total = 0;
+        std::string error_code;
+    };
+    SharedPointer<HostMoveBatch> host_move_batch_;
+
     bool closing_ = false;
+
+    bool saving_ = false;
+
+    // Modify-mode OK chain: save the record first, then send the staged host batch.
+    bool apply_hosts_on_save_ = false;
+    // Close the dialog after the staged host batch started from OK finishes.
+    bool close_dialog_after_host_batch_ = false;
 
     Q_DISABLE_COPY_MOVE(RouterWorkspaceDialog)
 };

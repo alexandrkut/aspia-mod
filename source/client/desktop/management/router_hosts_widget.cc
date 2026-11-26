@@ -34,6 +34,7 @@
 #include <QLineEdit>
 #include <QMenu>
 #include <QMouseEvent>
+#include <QPointer>
 #include <QProgressDialog>
 #include <QRegularExpressionValidator>
 #include <QSet>
@@ -47,6 +48,7 @@
 
 #include "base/auto_qpointer.h"
 #include "base/logging.h"
+#include "base/peer/router_user.h"
 #include "base/shared_pointer.h"
 #include "base/time_types.h"
 #include "base/peer/host_id.h"
@@ -57,8 +59,11 @@
 #include "client/desktop/management/router_host_bulk.h"
 #include "client/desktop/management/router_host_bulk_config_dialog.h"
 #include "client/desktop/management/router_host_config_dialog.h"
+#include "client/desktop/management/router_host_user_dialog.h"
+#include "client/desktop/management/router_host_users_dialog.h"
 #include "client/desktop/management/ui_router_hosts_widget.h"
 #include "client/router/router_controller.h"
+#include "client/storage/settings_store.h"
 #include "common/desktop/icon_text_button.h"
 #include "common/desktop/msg_box.h"
 #include "common/desktop/router_error.h"
@@ -89,6 +94,122 @@ QString bulkHostLabel(const RouterHost& host)
 QString newBulkId()
 {
     return "bulk-" + QUuid::createUuid().toString(QUuid::WithoutBraces);
+}
+
+// Bulk targets are online hosts only: the router answers a command for a disconnected
+// host no sooner than its per-host timeout, which would stall the whole sequence.
+// Offline hosts stay in the preview as skipped rows.
+QList<RouterHostBulkTarget> bulkOnlineTargets(const QList<RouterHost>& hosts)
+{
+    QList<RouterHostBulkTarget> targets;
+    for (const RouterHost& host : hosts)
+    {
+        if (host.online)
+            targets.append({host.host_id, bulkHostLabel(host)});
+    }
+    return targets;
+}
+
+// Hosts without the mod never answer get_host_users: asking only burns the per-host
+// timeout. A mod host is identified by the -mod suffix the router substitutes into
+// hosts.version from its telemetry; before the first telemetry the version is numeric
+// and a fresh mod host counts as "no mod" - it then shows up as unreadable and is
+// served on the next attempt, once the telemetry has landed.
+QSet<HostId> noModHosts(const QList<RouterHost>& hosts)
+{
+    QSet<HostId> result;
+    for (const RouterHost& host : hosts)
+    {
+        if (!host.version.isEmpty() && !host.version.contains(QLatin1String("-mod")))
+            result.insert(host.host_id);
+    }
+    return result;
+}
+
+// Read-only bulk fetch of get_host_users, fired in parallel: one slow host costs its
+// own latency instead of stalling every host in turn. Hosts in |no_mod| are never
+// asked; their placeholder keeps an empty status, which callers already treat exactly
+// like a failed read (unreadable in the pick dialog, excluded from the preview).
+// Results stay aligned with |targets|.
+QList<RouterHostBulkResult> fetchUserListsParallel(
+    const QList<RouterHostBulkTarget>& targets,
+    const QSet<HostId>& no_mod,
+    QWidget* parent)
+{
+    struct FetchState
+    {
+        QList<RouterHostBulkResult> results;
+        int pending = 0;
+    };
+
+    SharedPointer<FetchState> state(new FetchState());
+    state->results.reserve(targets.size());
+    for (const RouterHostBulkTarget& target : targets)
+    {
+        RouterHostBulkResult placeholder;
+        placeholder.host_id = target.host_id;
+        placeholder.display = target.display;
+        state->results.append(placeholder); // status stays empty: not "ok" = host excluded
+        if (!no_mod.contains(target.host_id))
+            ++state->pending;
+    }
+
+    RouterSession* session = RouterController::session();
+    if (!session || state->pending == 0)
+        return state->results;
+
+    QEventLoop loop;
+    QTimer::singleShot(30000, &loop, &QEventLoop::quit); // safety net, replies are bounded by the per-host timeout
+
+    QProgressDialog progress(RouterHostsWidget::tr("Reading user lists..."),
+                             RouterHostsWidget::tr("Cancel"), 0, state->pending, parent);
+    progress.setWindowModality(Qt::WindowModal);
+    progress.setMinimumDuration(0);
+    progress.setValue(0);
+
+    // The loop and the dialog die when this function returns (cancel or safety timeout):
+    // a late reply must not touch them, so every callback holds a guard instead.
+    QPointer<QEventLoop> loop_guard(&loop);
+    QPointer<QProgressDialog> progress_guard(&progress);
+    QObject::connect(&progress, &QProgressDialog::canceled, &loop, [loop_guard]()
+    {
+        if (loop_guard)
+            loop_guard->quit();
+    });
+
+    for (int i = 0; i < targets.size(); ++i)
+    {
+        if (no_mod.contains(targets[i].host_id))
+            continue;
+
+        session->setHostConfig(targets[i].host_id, "get_host_users", "{}",
+                               {parent, [state, i, progress_guard, loop_guard](
+                                   const proto::router::HostResult& result)
+        {
+            RouterHostBulkResult& entry = state->results[i];
+            if (result.error_code() == proto::router::kErrorOk)
+            {
+                entry.status = "ok";
+                entry.raw = QString::fromStdString(result.result());
+            }
+            else
+            {
+                entry.status = (result.error_code() == proto::router::kErrorHostOffline) ?
+                    QStringLiteral("offline") : QStringLiteral("failed");
+                entry.detail = QString::fromStdString(result.error_code());
+            }
+
+            if (progress_guard)
+                progress_guard->setValue(progress_guard->value() + 1);
+            if (--state->pending <= 0 && loop_guard)
+                loop_guard->quit();
+        }});
+    }
+
+    loop.exec();
+    if (progress_guard)
+        progress_guard->setValue(progress_guard->maximum());
+    return state->results;
 }
 
 struct BulkTeleInfo
@@ -206,17 +327,12 @@ RouterHostsWidget::RouterHostsWidget(QWidget* parent)
     ui->tree_hosts->installEventFilter(this);
     ui->tree_hosts->viewport()->installEventFilter(this);
 
-    // The largest entry is the largest page the router serves (kMaxHostPageSize).
-    ui->combo_hosts_page_size->addItem("25", QVariant::fromValue<qint64>(25));
-    ui->combo_hosts_page_size->addItem("50", QVariant::fromValue<qint64>(50));
-    ui->combo_hosts_page_size->addItem("100", QVariant::fromValue<qint64>(100));
-    ui->combo_hosts_page_size->setCurrentIndex(2);
-    hosts_page_.setPageSize(ui->combo_hosts_page_size->currentData().toLongLong());
+    // The page size comes from the settings (hosts per page): one source of truth for every
+    // host list. The local 25/50/100 combo is gone with it.
+    hosts_page_.setPageSize(SettingsStore().hostsPerPage());
 
     ui->button_hosts_next->setIconOnRight(true);
 
-    connect(ui->combo_hosts_page_size, &QComboBox::currentIndexChanged,
-            this, &RouterHostsWidget::onHostsPageSizeChanged);
     connect(ui->combo_hosts_page, &QComboBox::currentIndexChanged,
             this, &RouterHostsWidget::onHostsPageChanged);
     connect(ui->button_hosts_prev, &QToolButton::clicked, this, &RouterHostsWidget::onHostsPrevClicked);
@@ -743,6 +859,19 @@ void RouterHostsWidget::onHostListReceived(const RouterHostList& list)
         return;
     }
 
+    // Same page-cap adaptation as RouterGroupWidget: the model counts pages at the router's
+    // cap so everything past the first page stays reachable.
+    if (RouterSession* session = RouterController::session())
+    {
+        const qint64 limit = session->hostPageLimit();
+        if (limit > 0 && limit < hosts_page_.pageSize())
+        {
+            LOG(INFO) << "Approved hosts page sized to the router cap:" << limit;
+            hosts_page_.setPageSize(limit);
+            hosts_page_.setCurrentPage(0);
+        }
+    }
+
     const QList<RouterHost> selected = selectedHosts();
     const RouterHost* current = model_->hostAt(ui->tree_hosts->currentIndex().row());
     const HostId current_host_id = current ? current->host_id : kInvalidHostId;
@@ -832,10 +961,19 @@ void RouterHostsWidget::onHeaderContextMenu(const QPoint& pos)
 }
 
 //--------------------------------------------------------------------------------------------------
-void RouterHostsWidget::onHostsPageSizeChanged(int /* index */)
+void RouterHostsWidget::setHostsPageSize(qint64 page_size)
 {
-    hosts_page_.setPageSize(ui->combo_hosts_page_size->currentData().toLongLong());
+    if (page_size <= 0 || page_size == hosts_page_.pageSize())
+        return;
+
+    hosts_page_.setPageSize(page_size);
     hosts_page_.setCurrentPage(0);
+
+    // The cached pages were fetched with the old size: their keys never match again, but they
+    // would sit in the cache until the session ends.
+    if (RouterSession* session = RouterController::session())
+        session->invalidateHostLists();
+
     fetchHosts();
 }
 
@@ -1003,7 +1141,16 @@ void RouterHostsWidget::updateHostsPagination()
 //--------------------------------------------------------------------------------------------------
 void RouterHostsWidget::updateCountLabel()
 {
-    ui->label_hosts_count->setText(tr("%n host(s)", "", model_->rowCount()));
+    int online_count = 0;
+    const int row_count = model_->rowCount();
+    for (int row = 0; row < row_count; ++row)
+    {
+        const RouterHost* host = model_->hostAt(row);
+        if (host && host->online)
+            ++online_count;
+    }
+    ui->label_hosts_count->setText(
+        tr("%n host(s) (%1 online)", "", row_count).arg(online_count));
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1020,12 +1167,12 @@ void RouterHostsWidget::startDrag()
         return;
 
     RouterHostDrag drag(this);
-    drag.setHosts(hosts, mime_type_);
+    drag.setHosts(/*source_workspace_id=*/0, hosts, mime_type_);
 
     const QIcon icon = index.siblingAtColumn(0).data(Qt::DecorationRole).value<QIcon>();
     drag.setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
 
-    drag.exec(Qt::MoveAction);
+    drag.exec(Qt::MoveAction | Qt::CopyAction);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1180,3 +1327,248 @@ void RouterHostsWidget::sendHostRequests(const QList<RouterHost>& hosts, HostReq
         }});
     }
 }
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostsWidget::onHostUsers()
+{
+    const QList<RouterHost> hosts = selectedHosts();
+    if (hosts.size() != 1)
+    {
+        LOG(INFO) << "No single selected host";
+        return;
+    }
+
+    const RouterHost& host = hosts.front();
+
+    LOG(INFO) << "[ACTION] Host users requested by user";
+    AutoQPointer<RouterHostUsersDialog> dialog(new RouterHostUsersDialog(host.host_id, this));
+    dialog->exec();
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostsWidget::onHostsAddUser()
+{
+    const QList<RouterHost> hosts = selectedHosts();
+    if (hosts.isEmpty())
+        return;
+
+    AutoQPointer<RouterHostUserDialog> input(new RouterHostUserDialog(
+        0, QString(), static_cast<quint32>(proto::peer::SESSION_TYPE_ALL),
+        User::ENABLED, QStringList(), this));
+    if (input->exec() != QDialog::Accepted)
+        return;
+
+    RouterUser user = RouterUser::create(input->userName(), input->password());
+    if (!user.isValid())
+    {
+        MsgBox::warning(this, tr("Failed to create user credentials."));
+        return;
+    }
+    user.sessions = input->sessions();
+    user.flags = input->flags();
+
+    const QString bulk_id = newBulkId();
+    QJsonObject user_params;
+    user_params["name"] = user.name;
+    user_params["group"] = user.group;
+    user_params["salt"] = QString::fromLatin1(user.salt.toHex());
+    user_params["verifier"] = QString::fromLatin1(user.verifier.toHex());
+    user_params["sessions"] = static_cast<qint64>(user.sessions);
+    user_params["flags"] = static_cast<qint64>(user.flags);
+    user_params["bulk_id"] = bulk_id;
+
+    const QList<RouterHostBulkTarget> targets = bulkOnlineTargets(hosts);
+    const QList<RouterHostBulkResult> fetched =
+        fetchUserListsParallel(targets, noModHosts(hosts), this);
+
+    QList<RouterHostBulkTarget> apply_targets;
+    QList<RouterHostBulkPreviewRow> preview;
+    int fetched_index = 0;
+    for (int i = 0; i < hosts.size(); ++i)
+    {
+        RouterHostBulkPreviewRow row;
+        row.host = bulkHostLabel(hosts[i]);
+        row.action = tr("Add user \"%1\"").arg(user.name);
+        if (!hosts[i].online)
+        {
+            row.will_run = false;
+            row.detail = tr("Host is offline.");
+            preview.append(row);
+            continue;
+        }
+        if (fetched_index >= fetched.size())
+            break;
+        const int target_index = fetched_index++;
+        const RouterHostBulkResult& f = fetched[target_index];
+        if (f.status != "ok")
+        {
+            row.will_run = true;
+            row.target_index = apply_targets.size();
+            row.detail = tr("List unreadable (%1), will try anyway.").arg(f.detail);
+            apply_targets.append(targets[target_index]);
+        }
+        else
+        {
+            bool exists = false;
+            QJsonDocument doc = QJsonDocument::fromJson(f.raw.toUtf8());
+            if (doc.isArray())
+            {
+                for (const QJsonValue& v : doc.array())
+                {
+                    if (v.toObject().value("name").toString().compare(
+                            user.name, Qt::CaseInsensitive) == 0)
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+            }
+            if (exists)
+            {
+                row.will_run = false;
+                row.detail = tr("Already exists, skipped.");
+            }
+            else
+            {
+                row.will_run = true;
+                row.target_index = apply_targets.size();
+                apply_targets.append(targets[target_index]);
+            }
+        }
+        preview.append(row);
+    }
+
+    AutoQPointer<RouterHostBulkRunner> runner(new RouterHostBulkRunner(
+        apply_targets, "add_user",
+        [user_params](HostId) { return user_params; }, this));
+    AutoQPointer<RouterHostBulkDialog> dialog(
+        new RouterHostBulkDialog(tr("Add user on hosts"), this));
+    dialog->execBulk(runner, preview);
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostsWidget::onHostsRemoveUser()
+{
+    const QList<RouterHost> hosts = selectedHosts();
+    if (hosts.isEmpty())
+        return;
+
+    const QList<RouterHostBulkTarget> targets = bulkOnlineTargets(hosts);
+    const QList<RouterHostBulkResult> fetched =
+        fetchUserListsParallel(targets, noModHosts(hosts), this);
+
+    AutoQPointer<RouterHostBulkUserPickDialog> pick(
+        new RouterHostBulkUserPickDialog(hosts, fetched, this));
+    if (pick->exec() != QDialog::Accepted)
+        return;
+
+    const QStringList names = pick->selectedNames();
+    if (names.isEmpty())
+        return;
+
+    const bool force = pick->force();
+    const QString bulk_id = newBulkId();
+
+    // Build preview: one row per (host x selected name) that actually exists.
+    // apply_targets / apply_names / apply_entry_ids stay aligned with each other
+    // and with the will_run rows of the preview (hosts outer, names inner).
+    QList<RouterHostBulkTarget> apply_targets;
+    QVector<QString> apply_names;
+    QVector<qint64> apply_entry_ids;
+
+    QList<RouterHostBulkPreviewRow> preview;
+    int fetched_index = 0;
+    for (int i = 0; i < hosts.size(); ++i)
+    {
+        // Only hosts the removal is ready to run on get a row: offline hosts, hosts whose
+        // user list could not be read and hosts without any of the selected users are left
+        // out entirely - the pick dialog already reports the offline/unreadable counts.
+        if (!hosts[i].online)
+            continue;
+        if (fetched_index >= fetched.size())
+            break;
+        const int target_index = fetched_index++;
+        const RouterHostBulkResult& f = fetched[target_index];
+
+        if (f.status != "ok")
+            continue;
+
+        // Parse user list for this host.
+        QMap<QString, qint64> entry_by_name; // lower name -> entry_id
+        int enabled_total = 0;
+        QJsonDocument doc = QJsonDocument::fromJson(f.raw.toUtf8());
+        if (doc.isArray())
+        {
+            for (const QJsonValue& v : doc.array())
+            {
+                const QJsonObject o = v.toObject();
+                if (o.value("flags").toInteger() & User::ENABLED)
+                    ++enabled_total;
+                entry_by_name.insert(
+                    o.value("name").toString().toLower(),
+                    o.value("entry_id").toInteger(-1));
+            }
+        }
+
+        for (const QString& name : names)
+        {
+            const qint64 entry_id = entry_by_name.value(name.toLower(), -1);
+            if (entry_id < 0)
+                continue;
+
+            RouterHostBulkPreviewRow nrow;
+            nrow.host = bulkHostLabel(hosts[i]);
+            nrow.action = tr("Remove user \"%1\"").arg(name);
+            nrow.will_run = true;
+            nrow.target_index = apply_targets.size();
+
+            // enabled check for this specific user
+            bool enabled = false;
+            if (doc.isArray())
+            {
+                for (const QJsonValue& v : doc.array())
+                {
+                    const QJsonObject o = v.toObject();
+                    if (o.value("name").toString().compare(name, Qt::CaseInsensitive) == 0)
+                    {
+                        enabled = o.value("flags").toInteger() & User::ENABLED;
+                        break;
+                    }
+                }
+            }
+            if (enabled && enabled_total <= 1)
+                nrow.detail = tr("Last enabled user, the host will refuse.");
+
+            preview.append(nrow);
+
+            apply_targets.append(targets[target_index]);
+            apply_names.append(name);
+            apply_entry_ids.append(entry_id);
+        }
+    }
+
+    // Params function: aligned with apply_targets order via a mutable counter.
+    int apply_index = -1;
+    AutoQPointer<RouterHostBulkRunner> runner(new RouterHostBulkRunner(
+        apply_targets, "remove_user",
+        [&](HostId /*host_id*/)
+        {
+            ++apply_index;
+            QJsonObject params;
+            if (apply_index >= 0 && apply_index < apply_entry_ids.size())
+            {
+                if (apply_entry_ids[apply_index] >= 0)
+                    params["entry_id"] = apply_entry_ids[apply_index];
+                params["name"] = apply_names[apply_index];
+            }
+            if (force)
+                params["force"] = true;
+            params["bulk_id"] = bulk_id;
+            return params;
+        }, this));
+
+    AutoQPointer<RouterHostBulkDialog> dialog(
+        new RouterHostBulkDialog(tr("Remove user from hosts"), this));
+    dialog->execBulk(runner, preview, true);
+}
+

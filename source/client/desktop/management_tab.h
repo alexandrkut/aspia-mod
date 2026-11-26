@@ -70,6 +70,9 @@ public:
 
     void reloadRouter();
     void connectLocalHost(qint64 entry_id, proto::peer::SessionType session_type);
+
+    // Applies the hosts-per-page setting to the host lists of this tab.
+    void setHostsPerPage(qint64 page_size);
     void connectRouterHost(const HostConfig& host, proto::peer::SessionType session_type);
 
 private slots:

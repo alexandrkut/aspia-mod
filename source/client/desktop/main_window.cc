@@ -498,6 +498,12 @@ void MainWindow::onSettings()
         app_lock_->setTimeout(SettingsStore().lockTimeout());
     });
 
+    connect(settings_tab, &SettingsTab::sig_hostsPerPageChanged, this, [this](qint64 page_size)
+    {
+        if (ManagementTab* management_tab = managementTab())
+            management_tab->setHostsPerPage(page_size);
+    });
+
     connect(settings_tab, &SettingsTab::sig_routerChanged, this, [this]()
     {
         if (ManagementTab* management_tab = managementTab())

@@ -211,6 +211,13 @@ SettingsTab::SettingsTab(QWidget* parent)
     ui->combo_backup_retention->setCurrentIndex(
         ui->combo_backup_retention->findData(static_cast<int>(store.backupRetention())));
 
+    // The page size of the host lists. The values are the ones the router serves as a whole
+    // page; a stored value outside the set (written by hand) falls back to the default index.
+    for (qint64 page_size : { 50, 100, 500 })
+        ui->combo_hosts_per_page->addItem(QString::number(page_size), page_size);
+    int page_index = ui->combo_hosts_per_page->findData(store.hostsPerPage());
+    ui->combo_hosts_per_page->setCurrentIndex(page_index >= 0 ? page_index : 1);
+
     ui->combo_router_session_type->addItem(tr("Administrator"), proto::router::SESSION_TYPE_ADMIN);
     ui->combo_router_session_type->addItem(tr("Manager"), proto::router::SESSION_TYPE_MANAGER);
     ui->combo_router_session_type->addItem(tr("Operator"), proto::router::SESSION_TYPE_OPERATOR);
@@ -355,6 +362,8 @@ SettingsTab::SettingsTab(QWidget* parent)
 
     connect(ui->spinbox_proxy_port, QOverload<int>::of(&QSpinBox::valueChanged),
             this, &SettingsTab::onGeneralChanged);
+    connect(ui->combo_hosts_per_page, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, &SettingsTab::onHostsPerPageChanged);
     connect(ui->combo_proxy_type, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &SettingsTab::onProxyTypeChanged);
     connect(ui->checkbox_auto_unlock, &QCheckBox::toggled, this, &SettingsTab::onAutoUnlockToggled);
@@ -554,6 +563,18 @@ void SettingsTab::onSelectBackupPath()
 
     LOG(INFO) << "[ACTION] Backup path selected:" << path;
     ui->edit_backup_dir->setText(path);
+}
+
+//--------------------------------------------------------------------------------------------------
+void SettingsTab::onHostsPerPageChanged()
+{
+    const qint64 page_size = ui->combo_hosts_per_page->currentData().toLongLong();
+    if (page_size <= 0)
+        return;
+
+    LOG(INFO) << "[ACTION] Hosts per page changed:" << page_size;
+    SettingsStore().setHostsPerPage(page_size);
+    emit sig_hostsPerPageChanged(page_size);
 }
 
 //--------------------------------------------------------------------------------------------------

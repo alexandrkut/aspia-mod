@@ -70,6 +70,10 @@ collect_sources(SOURCE_CLIENT_CORE_DESKTOP_MANAGEMENT_TAB
     router_host_bulk_config_dialog.h
     router_host_config_dialog.cc
     router_host_config_dialog.h
+    router_host_user_dialog.cc
+    router_host_user_dialog.h
+    router_host_users_dialog.cc
+    router_host_users_dialog.h
     update_server_presets.h
     router_hosts_widget.cc
     router_hosts_widget.h
