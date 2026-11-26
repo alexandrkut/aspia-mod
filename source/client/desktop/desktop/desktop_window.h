@@ -153,6 +153,8 @@ private:
     void sendMouseEvent(const proto::input::MouseEvent& event);
     void sendText(const QString& text);
     void onDesktopConfigChanged(const proto::control::Config& config);
+    void setClipboardEnabled(bool enable);
+    void saveQsDesktopConfig();
     void readCapabilities(const proto::control::Capabilities& capabilities);
     void readClipboardEvent(const proto::clipboard::Event& event);
     void readCredentialsRequest(const proto::control::CredentialsRequest& credentials_request);

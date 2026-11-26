@@ -32,6 +32,7 @@ class DesktopToolBar;
 } // namespace Ui
 
 namespace proto::control {
+class Config;
 class SessionList;
 } // namespace proto::control
 
@@ -75,6 +76,10 @@ public:
     QString scriptName(qint32 script_id) const;
     void startRecording(bool enable);
 
+    // Quick Support only: checkable session settings. No-op in the regular client
+    // (the menu is not created there).
+    void setSessionSettings(const proto::control::Config& config);
+
     // Switches the toolbar between floating mode (used in a top-level desktop window) and tabbed
     // mode (used when the session is embedded in MainWindow's tab widget). In tabbed mode the
     // floating panel stays hidden and never reacts to hover; the actions remain valid and are
@@ -115,6 +120,18 @@ signals:
     void sig_showHidePanel();
     void sig_recordingStateChanged(bool enable);
     void sig_switchSession(quint32 session_id);
+
+    // Quick Support session settings (emitted only by the QS-only menu).
+    void sig_clipboardChanged(bool enabled);
+    void sig_audioChanged(bool enabled);
+    void sig_cursorShapeChanged(bool enabled);
+    void sig_cursorPositionChanged(bool enabled);
+    void sig_effectsChanged(bool enabled);
+    void sig_wallpaperChanged(bool enabled);
+    void sig_blockInputChanged(bool enabled);
+    void sig_lockAtDisconnectChanged(bool enabled);
+    void sig_keyCombinationsEnabledChanged(bool enabled);
+    void sig_qualityChanged(quint32 quality);
 
     // Emitted when the set of actions exposed via tabActionGroups() may have changed (e.g. a
     // new screen list arrived from the host and screen_actions_ was rebuilt).
@@ -169,6 +186,24 @@ private:
     QMenu* sessions_menu_ = nullptr;
     QActionGroup* sessions_group_ = nullptr;
     QList<QAction*> sessions_actions_;
+
+    // Quick Support only ("Session settings" menu, created on demand).
+    QMenu* session_settings_menu_ = nullptr;
+    QAction* action_session_clipboard_ = nullptr;
+    QAction* action_session_audio_ = nullptr;
+    QAction* action_session_cursor_shape_ = nullptr;
+    QAction* action_session_cursor_position_ = nullptr;
+    QAction* action_session_effects_ = nullptr;
+    QAction* action_session_wallpaper_ = nullptr;
+    QAction* action_session_block_input_ = nullptr;
+    QAction* action_session_lock_at_disconnect_ = nullptr;
+    QAction* action_session_key_combinations_ = nullptr;
+    QMenu* session_quality_menu_ = nullptr;
+    QActionGroup* session_quality_group_ = nullptr;
+    QAction* action_quality_auto_ = nullptr;
+    QAction* action_quality_low_ = nullptr;
+    QAction* action_quality_medium_ = nullptr;
+    QAction* action_quality_high_ = nullptr;
 
     QTimer* hide_timer_ = nullptr;
 

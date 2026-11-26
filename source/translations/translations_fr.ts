@@ -143,6 +143,10 @@
         <source>Version Information</source>
         <translation>Informations de version</translation>
     </message>
+    <message>
+        <source>User: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutWidget</name>
@@ -1647,6 +1651,30 @@
         <source>Remove</source>
         <translation>Retirer</translation>
     </message>
+    <message>
+        <source>Export Installer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The exported installer carries the settings of this host: the connection to the router and the users. By default they are imported on the first installation only, and the data of a host that is already installed is left alone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite the old data on install</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Quick Support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The exported package connects to the same router as this host and accepts the one-time password. The users of this host can be exported with it: they will be able to connect to the exported host with their own login and password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export the users of this host</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ConnectConfirmDialog</name>
@@ -2771,6 +2799,66 @@ Identifiants remplacés: %2</translation>
         <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="940"/>
         <source>Are you sure you want to lock the user session on the remote computer?</source>
         <translation>Voulez-vous vraiment verrouiller la session de l&apos;utilisateur sur l&apos;ordinateur distant?</translation>
+    </message>
+    <message>
+        <source>Session settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cursor shape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cursor position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Effects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wallpaper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Block input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lock at disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable keyboard shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8910,6 +8998,10 @@ Identifiants remplacés: %2</translation>
         <source>Unable to save profile.</source>
         <translation>Impossible d&apos;enregistrer le profil.</translation>
     </message>
+    <message>
+        <source>Export Preconfigured QS Client</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsUtil</name>
@@ -14609,6 +14701,188 @@ Supprimer la base de données?</translation>
         <location filename="../client/workers/video_worker.cc" line="48"/>
         <source>An error occurred while writing the recording.</source>
         <translation>Une erreur s&apos;est produite lors de l&apos;écriture de l&apos;enregistrement.</translation>
+    </message>
+</context>
+<context>
+    <name>QsClientExportDialog</name>
+    <message>
+        <source>Export Preconfigured QS Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A new account is created on the router for this client. The password is generated automatically and stored only in the exported file. The suffix &quot;-qs&quot; is added to the name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use existing user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Generate password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The password must match the password of this account on the router. The password on the router is not changed - if it differs, the QS client will not connect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Router address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A new account is created on the router for this client. The password is stored only in the exported file. The suffix &quot;-qs&quot; is added to the name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An existing account is used. The account is not created or changed; only the password is sealed into the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loading users...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No Quick Support users found on the router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No router session.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An administrator session with the router is required.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The user name is invalid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The router address is invalid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The password must be 8 to 64 characters long.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The router did not answer the user lookup.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A user with this name already exists on the router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The selected user no longer exists on the router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Executable files (*.exe)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to export the Quick Support client.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to create the user on the router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Quick Support client has been exported.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QsClientWindow</name>
+    <message>
+        <source>123 456 789</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Desktop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting to the router...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Host ID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Session:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the ID shown by the host.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The router data is damaged.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waiting for the two-factor code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The router is unavailable. Retrying...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter a valid Quick Support ID.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The router is not connected yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quick Support %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

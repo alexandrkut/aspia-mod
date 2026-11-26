@@ -50,6 +50,9 @@
 #include "base/peer/user.h"
 #include "client/application.h"
 #include "client/mcp/mcp_worker.h"
+#if defined(Q_OS_WINDOWS)
+#include "client/desktop/qs_client_export_dialog.h"
+#endif
 #include "client/desktop/ui_settings_tab.h"
 #include "client/desktop/update_server_dialog.h"
 #include "client/router/router_controller.h"
@@ -355,6 +358,9 @@ SettingsTab::SettingsTab(QWidget* parent)
     connect(ui->checkbox_router_enabled, &QCheckBox::toggled, this, &SettingsTab::onRouterEnabledChanged);
     connect(ui->checkbox_router_sync, &QCheckBox::toggled, this, &SettingsTab::onRouterChanged);
     connect(ui->button_router_sync_reset, &QPushButton::clicked, this, &SettingsTab::onResetSyncClicked);
+#if defined(Q_OS_WINDOWS)
+    connect(ui->button_export_qs_client, &QPushButton::clicked, this, &SettingsTab::onExportQsClient);
+#endif
     connect(&RouterController::instance(), &RouterController::sig_statusChanged,
             this, &SettingsTab::onRouterStatusChanged);
     connect(&RouterController::instance(), &RouterController::sig_profilesChanged,
@@ -967,6 +973,17 @@ void SettingsTab::onUpdateChannelChanged()
     LOG(INFO) << "[ACTION] Update channel changed:" << channel;
     UserSettings().setUpdateChannel(channel);
 }
+
+#if defined(Q_OS_WINDOWS)
+//--------------------------------------------------------------------------------------------------
+void SettingsTab::onExportQsClient()
+{
+    LOG(INFO) << "[ACTION] Export Quick Support client";
+
+    QsClientExportDialog dialog(this);
+    dialog.exec();
+}
+#endif // defined(Q_OS_WINDOWS)
 
 //--------------------------------------------------------------------------------------------------
 void SettingsTab::onCheckForUpdatesClicked()

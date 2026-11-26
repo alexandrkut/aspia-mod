@@ -49,6 +49,10 @@ public:
     static const size_t kMaxSaltSize = 128;
     static const size_t kMaxVerifierSize = 1024;
 
+    // The name an exported Quick Support client carries. The suffix is only a display hint for a
+    // router that does not report the account type; it never grants or restricts a session.
+    static bool isQuickSupportName(const QString& username);
+
     static bool isValidUserName(const QString& username);
     static bool isValidPassword(const SecureString& password);
     static bool isSafePassword(const SecureString& password);

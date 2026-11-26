@@ -86,6 +86,9 @@ private slots:
     void onUpdateChannelChanged();
     void onCheckForUpdatesClicked();
     void onUpdateServerClicked();
+#if defined(Q_OS_WINDOWS)
+    void onExportQsClient();
+#endif
 
 private:
     void loadUpdateServer();

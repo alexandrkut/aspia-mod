@@ -20,6 +20,7 @@
 
 #include "version.h"
 #include "base/logging.h"
+#include "base/crypto/data_cryptor.h"
 #include "base/sys_info.h"
 #include "client/application.h"
 
@@ -40,6 +41,17 @@
 #include <QProcess>
 
 #include <functional>
+
+#if defined(Q_OS_WINDOWS)
+#include <QCryptographicHash>
+
+#include "client/config.h"
+#include "client/desktop/qs_client_window.h"
+#include "client/router/router_controller.h"
+#include "client/storage/router_store.h"
+#include "client/win/portable_package.h"
+#include "proto/router.h"
+#endif // defined(Q_OS_WINDOWS)
 
 #include "client/desktop/app_lock.h"
 #include "client/desktop/main_window.h"
@@ -102,6 +114,37 @@ void backupOnStartup()
     }
 }
 
+#if defined(Q_OS_WINDOWS)
+//--------------------------------------------------------------------------------------------------
+int runQuickSupportClient(Application& application,
+                          const PortableClientPackage::Settings& settings)
+{
+    // The address book is a shared in-memory SQLite database, so the router config reaches every
+    // worker without a file in the user profile or next to the executable.
+    RouterConfig router;
+    router.setAddress(settings.router_address.toString());
+    router.setUsername(settings.username);
+    router.setPassword(settings.password);
+    router.setSessionType(proto::router::SESSION_TYPE_OPERATOR);
+    router.setEnabled(true);
+
+    if (!RouterStore().save(router))
+    {
+        LOG(ERROR) << "Unable to store the router of the portable QS client";
+        return 1;
+    }
+
+    new RouterController(&application);
+    RouterController::instance().reload();
+
+    QsClientWindow window;
+    window.setUserName(settings.username);
+    window.show();
+
+    return application.exec();
+}
+#endif // defined(Q_OS_WINDOWS)
+
 } // namespace
 #endif // !defined(Q_OS_ANDROID)
 
@@ -133,7 +176,35 @@ int main(int argc, char* argv[])
     Q_INIT_RESOURCE(common);
     Q_INIT_RESOURCE(common_translations);
 
+#if defined(Q_OS_WINDOWS)
+    // A Quick Support client carries its settings in a resource of its own executable. Nothing about
+    // it is written to disk: the address book and the settings live only in memory, and logging does
+    // not open a file.
+    std::optional<PortableClientPackage::Settings> qs_settings =
+        PortableClientPackage::builtInSettings();
+    if (qs_settings.has_value())
+    {
+        Application::setQuickSupportMode(true);
+        Database::setQuickSupportMode();
+        UserSettings::setQuickSupportMode();
+
+        // The QS client has no master password and its address book lives only in this process.
+        // The storage still seals every record, so give the process-wide cryptor a fixed key
+        // derived from a product constant. Nothing encrypted this way reaches the disk.
+        DataCryptor::instance().setKey(SecureByteArray(QCryptographicHash::hash(
+            QByteArrayLiteral("aspia-mod-qs-client-storage-key"), QCryptographicHash::Sha256)));
+    }
+#endif // defined(Q_OS_WINDOWS)
+
     LoggingSettings logging_settings;
+
+#if defined(Q_OS_WINDOWS)
+    if (Application::isQuickSupportMode())
+    {
+        logging_settings.destination = LOG_TO_STDOUT;
+        logging_settings.log_dir.clear();
+    }
+#endif // defined(Q_OS_WINDOWS)
 
 #if defined(Q_OS_ANDROID)
     // Android defaults to logcat only (LOG_TO_STDOUT). Also write a log file so it can be pulled from
@@ -252,6 +323,11 @@ int main(int argc, char* argv[])
 #endif // defined(Q_OS_ANDROID)
         return 1;
     }
+
+#if defined(Q_OS_WINDOWS)
+    if (qs_settings.has_value())
+        return runQuickSupportClient(application, *qs_settings);
+#endif // defined(Q_OS_WINDOWS)
 
 #if defined(Q_OS_ANDROID)
     AndroidMainWindow main_window;

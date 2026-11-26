@@ -43,6 +43,22 @@ const char kActivateWindow[] = "activate_window";
 
 } // namespace
 
+bool Application::is_quick_support_ = false;
+
+//--------------------------------------------------------------------------------------------------
+// static
+void Application::setQuickSupportMode(bool enable)
+{
+    is_quick_support_ = enable;
+}
+
+//--------------------------------------------------------------------------------------------------
+// static
+bool Application::isQuickSupportMode()
+{
+    return is_quick_support_;
+}
+
 //--------------------------------------------------------------------------------------------------
 Application::Application(int& argc, char* argv[])
     : GuiApplication(argc, argv)
@@ -84,21 +100,32 @@ Application::Application(int& argc, char* argv[])
     setLocale(locale);
     setTheme(settings.theme());
 
-    const DatabaseMigration::Result migration = DatabaseMigration::migrate(
-        DatabaseMigration::oldFilePath(), Database::directoryPath());
-    if (migration == DatabaseMigration::Result::FAILED)
+    // A portable Quick Support client keeps its own address book next to the executable. It must
+    // not pick up the full client's old database from the user profile.
+    if (!isQuickSupportMode())
     {
-        LOG(ERROR) << "Unable to migrate the old address book";
-        migration_failed_ = true;
-        return;
+        const DatabaseMigration::Result migration = DatabaseMigration::migrate(
+            DatabaseMigration::oldFilePath(), Database::directoryPath());
+        if (migration == DatabaseMigration::Result::FAILED)
+        {
+            LOG(ERROR) << "Unable to migrate the old address book";
+            migration_failed_ = true;
+            return;
+        }
     }
 
     addWorker(std::make_unique<RouterWorker>());
-    addWorker(std::make_unique<SyncWorker>());
+
+    // The exported client carries its account in the executable and has no other device to sync
+    // with or to download a package from.
+    if (!isQuickSupportMode())
+    {
+        addWorker(std::make_unique<SyncWorker>());
 
 #if !defined(ASPIA_GOOGLE_PLAY)
-    addWorker(std::make_unique<UpdateWorker>());
+        addWorker(std::make_unique<UpdateWorker>());
 #endif // !defined(ASPIA_GOOGLE_PLAY)
+    }
 
 #if defined(Q_OS_ANDROID)
     const QList<Database::Info> list = Database::list();

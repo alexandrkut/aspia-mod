@@ -143,6 +143,10 @@
         <source>Version Information</source>
         <translation>Информация о версиях</translation>
     </message>
+    <message>
+        <source>User: %1</source>
+        <translation>Пользователь: %1</translation>
+    </message>
 </context>
 <context>
     <name>AboutWidget</name>
@@ -1657,6 +1661,30 @@
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
+    <message>
+        <source>Export Installer</source>
+        <translation>Экспорт инсталлера</translation>
+    </message>
+    <message>
+        <source>The exported installer carries the settings of this host: the connection to the router and the users. By default they are imported on the first installation only, and the data of a host that is already installed is left alone.</source>
+        <translation>Выгруженный инсталлер несёт настройки этого хоста: подключение к роутеру и пользователей. По умолчанию они импортируются только при первой установке, а данные уже установленного хоста не трогаются.</translation>
+    </message>
+    <message>
+        <source>Overwrite the old data on install</source>
+        <translation>Затирать старые данные при установке</translation>
+    </message>
+    <message>
+        <source>Export Quick Support</source>
+        <translation>Экспорт Quick Support</translation>
+    </message>
+    <message>
+        <source>The exported package connects to the same router as this host and accepts the one-time password. The users of this host can be exported with it: they will be able to connect to the exported host with their own login and password.</source>
+        <translation>Выгруженный пакет подключается к тому же роутеру, что и этот хост, и принимает одноразовый пароль. Пользователей этого хоста можно выгрузить вместе с ним: они смогут подключаться к выгруженному хосту со своим логином и паролем.</translation>
+    </message>
+    <message>
+        <source>Export the users of this host</source>
+        <translation>Выгружать пользователей этого хоста</translation>
+    </message>
 </context>
 <context>
     <name>ConnectConfirmDialog</name>
@@ -2795,6 +2823,66 @@ Credentials replaced: %2</source>
         <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="955"/>
         <source>Are you sure you want to lock the user session on the remote computer?</source>
         <translation>Вы действительно хотите заблокировать сеанс пользователя на удаленном компьютере?</translation>
+    </message>
+    <message>
+        <source>Session settings</source>
+        <translation>Настройки сеанса</translation>
+    </message>
+    <message>
+        <source>Clipboard</source>
+        <translation>Буфер обмена</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation>Аудио</translation>
+    </message>
+    <message>
+        <source>Cursor shape</source>
+        <translation>Форма курсора</translation>
+    </message>
+    <message>
+        <source>Cursor position</source>
+        <translation>Позиция курсора</translation>
+    </message>
+    <message>
+        <source>Effects</source>
+        <translation>Эффекты</translation>
+    </message>
+    <message>
+        <source>Wallpaper</source>
+        <translation>Обои</translation>
+    </message>
+    <message>
+        <source>Block input</source>
+        <translation>Блокировать ввод</translation>
+    </message>
+    <message>
+        <source>Lock at disconnect</source>
+        <translation>Блокировать при отключении</translation>
+    </message>
+    <message>
+        <source>Enable keyboard shortcuts</source>
+        <translation>Включить сочетания клавиш</translation>
+    </message>
+    <message>
+        <source>Quality</source>
+        <translation>Качество</translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation>Авто</translation>
+    </message>
+    <message>
+        <source>Low</source>
+        <translation>Низкое</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>Среднее</translation>
+    </message>
+    <message>
+        <source>High</source>
+        <translation>Высокое</translation>
     </message>
 </context>
 <context>
@@ -9861,6 +9949,10 @@ Clear the server and key?</source>
         <source>Unable to save profile.</source>
         <translation>Не удалось сохранить профиль.</translation>
     </message>
+    <message>
+        <source>Export Preconfigured QS Client</source>
+        <translation>Экспорт преднастроенного клиента QS</translation>
+    </message>
 </context>
 <context>
     <name>SettingsUtil</name>
@@ -15605,6 +15697,188 @@ Delete the database?</source>
         <location filename="../client/workers/video_worker.cc" line="48"/>
         <source>An error occurred while writing the recording.</source>
         <translation>Произошла ошибка во время записи.</translation>
+    </message>
+</context>
+<context>
+    <name>QsClientExportDialog</name>
+    <message>
+        <source>Export Preconfigured QS Client</source>
+        <translation>Экспорт преднастроенного клиента QS</translation>
+    </message>
+    <message>
+        <source>A new account is created on the router for this client. The password is generated automatically and stored only in the exported file. The suffix &quot;-qs&quot; is added to the name.</source>
+        <translation>На роутере будет создана новая учётка для этого клиента. Пароль генерируется автоматически и сохраняется только в экспортированном файле. К имени добавляется суффикс «-qs».</translation>
+    </message>
+    <message>
+        <source>Create new user</source>
+        <translation>Создать нового пользователя</translation>
+    </message>
+    <message>
+        <source>Use existing user</source>
+        <translation>Использовать существующего</translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation>Показать</translation>
+    </message>
+    <message>
+        <source>Generate password</source>
+        <translation>Сгенерировать пароль</translation>
+    </message>
+    <message>
+        <source>The password must match the password of this account on the router. The password on the router is not changed - if it differs, the QS client will not connect.</source>
+        <translation>Пароль должен совпадать с паролем этой учётной записи на роутере. Пароль на роутере не меняется - если он другой, QS-клиент не подключится.</translation>
+    </message>
+    <message>
+        <source>User:</source>
+        <translation>Пользователь:</translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation>Пароль:</translation>
+    </message>
+    <message>
+        <source>Router address:</source>
+        <translation>Адрес роутера:</translation>
+    </message>
+    <message>
+        <source>Export...</source>
+        <translation>Экспорт...</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Отмена</translation>
+    </message>
+    <message>
+        <source>A new account is created on the router for this client. The password is stored only in the exported file. The suffix &quot;-qs&quot; is added to the name.</source>
+        <translation>На роутере создаётся новая учётная запись для этого клиента. Пароль сохраняется только в экспортируемом файле. К имени добавляется суффикс &quot;-qs&quot;.</translation>
+    </message>
+    <message>
+        <source>An existing account is used. The account is not created or changed; only the password is sealed into the file.</source>
+        <translation>Используется существующая учётная запись. Учётная запись не создаётся и не меняется; в файл запечатывается только пароль.</translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation>Скрыть</translation>
+    </message>
+    <message>
+        <source>Loading users...</source>
+        <translation>Загрузка пользователей...</translation>
+    </message>
+    <message>
+        <source>No Quick Support users found on the router.</source>
+        <translation>QS-пользователи на роутере не найдены.</translation>
+    </message>
+    <message>
+        <source>No router session.</source>
+        <translation>Нет сессии с роутером.</translation>
+    </message>
+    <message>
+        <source>An administrator session with the router is required.</source>
+        <translation>Требуется сессия администратора с роутером.</translation>
+    </message>
+    <message>
+        <source>The user name is invalid.</source>
+        <translation>Недопустимое имя пользователя.</translation>
+    </message>
+    <message>
+        <source>The router address is invalid.</source>
+        <translation>Недопустимый адрес роутера.</translation>
+    </message>
+    <message>
+        <source>The password must be 8 to 64 characters long.</source>
+        <translation>Пароль должен быть от 8 до 64 символов.</translation>
+    </message>
+    <message>
+        <source>The router did not answer the user lookup.</source>
+        <translation>Роутер не ответил на запрос пользователя.</translation>
+    </message>
+    <message>
+        <source>A user with this name already exists on the router.</source>
+        <translation>Пользователь с таким именем уже существует на роутере.</translation>
+    </message>
+    <message>
+        <source>The selected user no longer exists on the router.</source>
+        <translation>Выбранный пользователь больше не существует на роутере.</translation>
+    </message>
+    <message>
+        <source>Executable files (*.exe)</source>
+        <translation>Исполняемые файлы (*.exe)</translation>
+    </message>
+    <message>
+        <source>Failed to export the Quick Support client.</source>
+        <translation>Не удалось экспортировать клиент Quick Support.</translation>
+    </message>
+    <message>
+        <source>Failed to create the user on the router.</source>
+        <translation>Не удалось создать пользователя на роутере.</translation>
+    </message>
+    <message>
+        <source>The Quick Support client has been exported.</source>
+        <translation>Клиент Quick Support экспортирован.</translation>
+    </message>
+</context>
+<context>
+    <name>QsClientWindow</name>
+    <message>
+        <source>123 456 789</source>
+        <translation>123 456 789</translation>
+    </message>
+    <message>
+        <source>Desktop</source>
+        <translation>Рабочий стол</translation>
+    </message>
+    <message>
+        <source>File transfer</source>
+        <translation>Передача файлов</translation>
+    </message>
+    <message>
+        <source>Connect</source>
+        <translation>Подключить</translation>
+    </message>
+    <message>
+        <source>Connecting to the router...</source>
+        <translation>Подключение к роутеру...</translation>
+    </message>
+    <message>
+        <source>Host ID:</source>
+        <translation>ID хоста:</translation>
+    </message>
+    <message>
+        <source>Session:</source>
+        <translation>Тип сессии:</translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation>О программе</translation>
+    </message>
+    <message>
+        <source>Enter the ID shown by the host.</source>
+        <translation>Введите ID, который показывает хост.</translation>
+    </message>
+    <message>
+        <source>The router data is damaged.</source>
+        <translation>Данные роутера повреждены.</translation>
+    </message>
+    <message>
+        <source>Waiting for the two-factor code.</source>
+        <translation>Ожидание кода 2FA.</translation>
+    </message>
+    <message>
+        <source>The router is unavailable. Retrying...</source>
+        <translation>Роутер недоступен. Повторная попытка...</translation>
+    </message>
+    <message>
+        <source>Enter a valid Quick Support ID.</source>
+        <translation>Введите корректный ID Quick Support.</translation>
+    </message>
+    <message>
+        <source>The router is not connected yet.</source>
+        <translation>Роутер ещё не подключён.</translation>
+    </message>
+    <message>
+        <source>Quick Support %1</source>
+        <translation>Quick Support %1</translation>
     </message>
 </context>
 </TS>

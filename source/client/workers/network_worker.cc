@@ -25,6 +25,7 @@
 #include "base/net/udp_channel.h"
 #include "base/peer/client_authenticator.h"
 #include "base/peer/relay_peer.h"
+#include "client/application.h"
 #include "client/udp_attempt.h"
 #include "client/storage/database.h"
 #include "client/router/router_controller.h"
@@ -565,7 +566,9 @@ void NetworkWorker::tcpChannelReady()
     session_state_->setHostVersion(host_version);
 
     const QVersionNumber& client_version = kCurrentVersion;
-    if (host_version > client_version)
+    // QS client is portable and cannot be updated in the field, so it must work with newer hosts;
+    // the version-mismatch protection is kept for the regular client.
+    if (!Application::isQuickSupportMode() && host_version > client_version)
     {
         LOG(ERROR) << "Version mismatch. Host:" << host_version << "Client:" << client_version;
         emit sig_statusChanged(Status::VERSION_MISMATCH);

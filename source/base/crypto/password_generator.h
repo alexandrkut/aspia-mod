@@ -33,7 +33,8 @@ public:
     {
         UPPER_CASE = 1,
         LOWER_CASE = 2,
-        DIGITS     = 4
+        DIGITS     = 4,
+        SPECIAL    = 8
     };
 
     static const quint32 kDefaultCharacters;
