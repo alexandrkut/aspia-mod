@@ -568,7 +568,10 @@ void NetworkWorker::tcpChannelReady()
     const QVersionNumber& client_version = kCurrentVersion;
     // QS client is portable and cannot be updated in the field, so it must work with newer hosts;
     // the version-mismatch protection is kept for the regular client.
-    if (!Application::isQuickSupportMode() && host_version > client_version)
+    // The number of the build of the line of the versions tells nothing about the compatibility,
+    // so the versions are compared by the three numbers that matter.
+    if (!Application::isQuickSupportMode() &&
+        compatibilityVersion(host_version) > compatibilityVersion(client_version))
     {
         LOG(ERROR) << "Version mismatch. Host:" << host_version << "Client:" << client_version;
         emit sig_statusChanged(Status::VERSION_MISMATCH);

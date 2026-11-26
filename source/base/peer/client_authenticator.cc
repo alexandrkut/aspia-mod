@@ -599,7 +599,7 @@ bool ClientAuthenticator::readSessionChallenge(const QByteArray& buffer)
                 << "os:" << peerOsName() << "cores:" << challenge.cpu_cores()
                 << "arch:" << peerArch() << "display_name:" << peerDisplayName() << ")";
 
-    if (peerVersion() < kMinimumSupportedVersion)
+    if (compatibilityVersion(peerVersion()) < kMinimumSupportedVersion)
     {
         finish(FROM_HERE, ErrorCode::VERSION_ERROR);
         return false;

@@ -649,7 +649,7 @@ void ServerAuthenticator::onSessionResponse(const QByteArray& buffer)
                 << "arch:" << peerArch() << "display_name:" << peerDisplayName()
                 << "probe:" << is_probe_ << ")";
 
-    if (peerVersion() < kMinimumSupportedVersion)
+    if (compatibilityVersion(peerVersion()) < kMinimumSupportedVersion)
     {
         finish(FROM_HERE, ErrorCode::VERSION_ERROR);
         return;

@@ -87,11 +87,18 @@ private:
 };
 
 //--------------------------------------------------------------------------------------------------
+// The number of the build of the current line. The running program always carries it.
+int currentBuild()
+{
+    return kCurrentVersion.segmentCount() > 3 ? kCurrentVersion.segments().at(3) : 0;
+}
+
+//--------------------------------------------------------------------------------------------------
 // A release ahead of this build, so what the rules offer is always an update.
 QVersionNumber nextVersion()
 {
-    return QVersionNumber(kCurrentVersion.majorVersion(), kCurrentVersion.minorVersion(),
-                          kCurrentVersion.microVersion() + 1);
+    return QVersionNumber({ kCurrentVersion.majorVersion(), kCurrentVersion.minorVersion(),
+                            kCurrentVersion.microVersion(), currentBuild() + 1 });
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -134,11 +141,12 @@ QByteArray manifest()
 }
 
 //--------------------------------------------------------------------------------------------------
-// Our own releases carry a build number as the fourth part of the version.
+// Our own releases carry a build number as the fourth part of the version. It must be ahead of
+// this build, or the check has nothing to offer.
 QVersionNumber modVersion()
 {
     return QVersionNumber({ kCurrentVersion.majorVersion(), kCurrentVersion.minorVersion(),
-                            kCurrentVersion.microVersion(), 1 });
+                            kCurrentVersion.microVersion(), currentBuild() + 1 });
 }
 
 QByteArray modRules()
@@ -520,4 +528,36 @@ TEST(UpdateCheckerTest, MaximumNotNewerThanCurrentVersionIsNotChecked)
     ASSERT_TRUE(spy.wait(15000));
     EXPECT_TRUE(failed.isEmpty());
     EXPECT_FALSE(spy.takeFirst().at(0).value<UpdateInfo>().isValid());
+}
+
+//--------------------------------------------------------------------------------------------------
+// The line of the versions is what the published rules are written against. A running binary
+// carries the build number as its fourth part, so its exact version has no rule: the check must
+// strip that number once and match the rule of the three-segment line.
+TEST(UpdateCheckerTest, BuildNumberFallsBackToLineRule)
+{
+    ASSERT_EQ(kCurrentVersion.segmentCount(), 4);
+
+    const QVersionNumber line_version(kCurrentVersion.majorVersion(),
+                                      kCurrentVersion.minorVersion(),
+                                      kCurrentVersion.microVersion());
+    QByteArray fallback_rules = QString(R"({
+        "format": 1,
+        "targets": { "latest": "%1" },
+        "updates": [ { "source": "%2", "target": "@latest" } ]
+    })").arg(nextVersion().toString(), line_version.toString()).toUtf8();
+
+    FileServer server(withSignatures(
+        { { "/stable.json", fallback_rules },
+          { QString("/versions/%1.json").arg(nextVersion().toString()), manifest() } }));
+
+    std::unique_ptr<UpdateChecker> checker = checkerFor(server);
+    QSignalSpy spy(checker.get(), &UpdateChecker::sig_checkFinished);
+    QSignalSpy failed(checker.get(), &UpdateChecker::sig_checkFailed);
+
+    checker->start();
+
+    ASSERT_TRUE(spy.wait(15000));
+    EXPECT_TRUE(failed.isEmpty());
+    EXPECT_EQ(spy.takeFirst().at(0).value<UpdateInfo>().version(), nextVersion());
 }

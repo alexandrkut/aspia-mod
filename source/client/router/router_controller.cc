@@ -394,7 +394,9 @@ void RouterController::onRouterAuthenticated(const QVersionNumber& peer_version)
     if (!context_ || !context_->two_factor)
         return;
 
-    if (peer_version > kCurrentVersion)
+    // The number of the build of the line of the versions tells nothing about the compatibility,
+    // so the versions are compared by the three numbers that matter.
+    if (compatibilityVersion(peer_version) > compatibilityVersion(kCurrentVersion))
     {
         LOG(WARNING) << "Version mismatch (router:" << peer_version << "client:" << kCurrentVersion << ")";
 

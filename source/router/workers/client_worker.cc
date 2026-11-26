@@ -301,7 +301,9 @@ void ClientWorker::onNewConnection()
 
         LOG(INFO) << "New client session:" << session_type << "(" << channel->peerAddress() << ")";
 
-        if (kCurrentVersion > channel->peerVersion())
+        // The number of the build of the line of the versions tells nothing about the
+        // compatibility, so the versions are compared by the three numbers that matter.
+        if (compatibilityVersion(kCurrentVersion) > compatibilityVersion(channel->peerVersion()))
         {
             LOG(WARNING) << "Version mismatch (router:" << kCurrentVersion << "client:"
                          << channel->peerVersion() << "). Rejected";
