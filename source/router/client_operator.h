@@ -36,6 +36,7 @@ struct RequestResult;
 namespace proto::router {
 class ChangePasswordRequest;
 class CheckHostStatus;
+class ClientToRouter;
 class ConnectionRequest;
 class GroupListRequest;
 class HostListRequest;
@@ -44,6 +45,7 @@ class TempHostListRequest;
 class TwoFactorResponse;
 class WorkspaceListRequest;
 enum SessionType : int;
+enum UserType : int;
 } // namespace proto::router
 
 class ClientOperator : public QObject
@@ -54,7 +56,12 @@ public:
     // |database| is the connection of the thread the session runs in; it outlives every session
     // of that thread. Passing it instead of reaching for the per-thread singleton is what lets a
     // session be driven against a temporary database in a test.
-    ClientOperator(Database& database, AccessLog& access_log, TcpChannel* channel, QObject* parent);
+    // |two_factor_required| says whether the role this session opened as has to answer a code
+    // on top of the password. It defaults to true so that every other caller - the tests, and
+    // any session this build opens without asking - keeps the second factor rather than losing
+    // it by omission.
+    ClientOperator(Database& database, AccessLog& access_log, TcpChannel* channel, QObject* parent,
+                   bool two_factor_required = true);
     virtual ~ClientOperator() override;
 
     void start();
@@ -79,6 +86,11 @@ public:
     bool isTwoFactorCompleted() const { return two_factor_completed_; }
     bool isSyncUsed() const { return sync_storage_.isValid(); }
 
+    // The kind of the account behind the session, as stored on the router. Reported to admins in
+    // the client list; it is not taken from anything the client sends.
+    void setUserType(proto::router::UserType type) { user_type_ = type; }
+    proto::router::UserType userType() const { return user_type_; }
+
     // Router-side row id of the device token bound to this session, either the one it presented
     // or the one just issued to it; 0 when no token backs the session. Lets the admin channel
     // tear down the live connection when its token is revoked.
@@ -99,6 +111,12 @@ protected:
     AccessLog& accessLog() const { return access_log_; }
 
     virtual void onSessionMessage(quint8 channel_id, const QByteArray& buffer);
+
+    // Hooks for sessions that may use only part of the client protocol. The defaults allow
+    // everything; a restricted session narrows them rather than duplicating the dispatch.
+    virtual bool isMessageAllowed(const proto::router::ClientToRouter& message) const;
+    virtual bool isHostIdAllowed(HostId host_id) const;
+    virtual bool isSyncAllowed() const;
 
     // The identity the request handlers work with. Taken from the authenticated channel, never
     // from the request itself.
@@ -150,6 +168,8 @@ private:
 
     TwoFactorHandler two_factor_;
     bool two_factor_completed_ = false;
+    bool two_factor_required_ = true;
+    proto::router::UserType user_type_ = static_cast<proto::router::UserType>(0);
     qint64 token_id_ = 0;
 
     QString user_guid_;

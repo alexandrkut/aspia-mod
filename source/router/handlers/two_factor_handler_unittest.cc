@@ -1270,3 +1270,18 @@ TEST_F(TwoFactorHandlerTest, ClockJumpBackDoesNotStretchTheBlock)
     TwoFactorHandler after;
     EXPECT_EQ(start(after, jumped_back + full).challenge.blocked_seconds, 0);
 }
+
+//--------------------------------------------------------------------------------------------------
+// A role configured to pass on its password alone opens the stage without asking anything: no
+// challenge, no token issued and no state kept for the user.
+TEST_F(TwoFactorHandlerTest, RoleWithoutTheSecondFactorIsAcceptedImmediately)
+{
+    TwoFactorHandler handler;
+    const TwoFactorHandler::Result result = handler.start(db_, caller_, kNow, false);
+
+    EXPECT_EQ(result.action, TwoFactorHandler::Action::ACCEPT);
+    EXPECT_TRUE(result.new_token.empty());
+    EXPECT_EQ(result.token_id, 0);
+    EXPECT_EQ(result.event, TwoFactorHandler::Event::NONE);
+    EXPECT_FALSE(TwoFactorHandlerTestPeer::hasUserState(admin_.entry_id));
+}

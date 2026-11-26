@@ -35,6 +35,7 @@ class ClientRequest;
 
 class ClientOperator;
 class Database;
+class RouterUser;
 class TcpServer;
 
 class ClientWorker final : public Worker
@@ -76,6 +77,11 @@ public:
     // which the caller reports as an invalid entry id.
     static std::vector<qint64> sessionsToStop(const std::vector<qint64>& session_ids,
                                               qint64 entry_id, qint64 requesting_session_id);
+
+    // Whether the authenticated account must be served by the restricted Quick Support session.
+    // The account type wins over the login role: an administrator or a manager account of that type
+    // still gets the one-purpose session. Neither the name nor a session-mask bit is consulted.
+    static bool isQuickSupportAccount(const RouterUser& account);
 
 signals:
     // Emitted when the first client of a kind passes the two-factor stage or the last one

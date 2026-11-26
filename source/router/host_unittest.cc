@@ -174,6 +174,58 @@ TEST_F(HostTest, NewHostGetsATemporaryIdAndIsAnnounced)
 }
 
 //--------------------------------------------------------------------------------------------------
+// A remote configuration command reaches the host as a HostCommand with its name and its JSON
+// params intact.
+TEST_F(HostTest, ConfigCommandCarriesNameAndParams)
+{
+    withHost([](Host& host, LoopbackChannel* channel)
+    {
+        const std::string params = R"({"channel":"beta","initiator":"admin"})";
+        host.sendConfigCommand(proto::router::kCommandHostSetUpdateConfig, params);
+
+        const std::optional<proto::router::RouterToHost> message = lastMessage(channel);
+        ASSERT_TRUE(message.has_value());
+        ASSERT_TRUE(message->has_host_command());
+        EXPECT_EQ(message->host_command().command_name(),
+                  proto::router::kCommandHostSetUpdateConfig);
+        EXPECT_EQ(message->host_command().params(), params);
+    });
+}
+
+//--------------------------------------------------------------------------------------------------
+// The answer a host sends back is delivered to the worker as a configuration result.
+TEST_F(HostTest, ConfigResultFromHostIsForwarded)
+{
+    withHost([](Host& host, LoopbackChannel* channel)
+    {
+        host.start();
+
+        std::string reported_command;
+        std::string reported_error;
+        std::string reported_result;
+        QObject::connect(&host, &Host::sig_hostConfigResult, &host,
+            [&](const std::string& command_name, const std::string& error_code,
+                const std::string& result)
+            {
+                reported_command = command_name;
+                reported_error = error_code;
+                reported_result = result;
+            });
+
+        proto::router::HostToRouter message;
+        proto::router::HostConfigResult* result = message.mutable_host_config_result();
+        result->set_command_name(proto::router::kCommandHostApplyFullConfig);
+        result->set_error_code(proto::router::kErrorOk);
+        result->set_result(R"({"applied":true})");
+        channel->receive(0, serialize(message));
+
+        EXPECT_EQ(reported_command, proto::router::kCommandHostApplyFullConfig);
+        EXPECT_EQ(reported_error, proto::router::kErrorOk);
+        EXPECT_EQ(reported_result, R"({"applied":true})");
+    });
+}
+
+//--------------------------------------------------------------------------------------------------
 // An approved host presents its key and gets the id that was issued to it.
 TEST_F(HostTest, ApprovedHostGetsItsPermanentIdAndIsAnnounced)
 {

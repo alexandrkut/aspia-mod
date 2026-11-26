@@ -49,10 +49,10 @@ std::optional<SharedHosts::Host> SharedHosts::find(HostId host_id) const
 
 //--------------------------------------------------------------------------------------------------
 void SharedHosts::add(HostId host_id, const QVersionNumber& version, const std::string& address,
-                      const std::string& computer_name)
+                      const std::string& computer_name, bool portable)
 {
     std::unique_lock lock(lock_);
-    hosts_.insert_or_assign(host_id, Host{version, address, computer_name});
+    hosts_.insert_or_assign(host_id, Host{version, address, computer_name, portable});
 }
 
 //--------------------------------------------------------------------------------------------------

@@ -23,6 +23,8 @@
 
 #include <gtest/gtest.h>
 
+#include "proto/router.h"
+
 class RouterSettingsTest : public testing::Test
 {
 protected:
@@ -150,4 +152,134 @@ TEST_F(RouterSettingsTest, SmtpSecurityReadBack)
         writeConfig(QByteArray("[smtp]\nsecurity=") + test_case.value + "\n");
         EXPECT_EQ(Settings().smtpSecurity(), test_case.security) << test_case.value;
     }
+}
+
+//--------------------------------------------------------------------------------------------------
+// The three switches are independent: switching one role off must not carry the other two with it.
+TEST_F(RouterSettingsTest, TwoFactorRolesAreSwitchedOffOneByOne)
+{
+    writeConfig("[router]\ntwo_factor_manager=false\n");
+
+    const Settings settings;
+
+    EXPECT_TRUE(settings.isTwoFactorForAdminEnabled());
+    EXPECT_FALSE(settings.isTwoFactorForManagerEnabled());
+    EXPECT_TRUE(settings.isTwoFactorForOperatorEnabled());
+
+    writeConfig("[router]\ntwo_factor_admin=false\ntwo_factor_operator=false\n");
+
+    const Settings second;
+
+    EXPECT_FALSE(second.isTwoFactorForAdminEnabled());
+    EXPECT_TRUE(second.isTwoFactorForManagerEnabled());
+    EXPECT_FALSE(second.isTwoFactorForOperatorEnabled());
+}
+
+//--------------------------------------------------------------------------------------------------
+// Both the hand written spelling and the 1/0 the ini writer produces have to mean the same thing.
+TEST_F(RouterSettingsTest, TwoFactorValuesAreReadInBothSpellings)
+{
+    writeConfig("[router]\ntwo_factor_admin=true\ntwo_factor_manager=0\n"
+                "two_factor_operator=false\n");
+
+    const Settings settings;
+
+    EXPECT_TRUE(settings.isTwoFactorForAdminEnabled());
+    EXPECT_FALSE(settings.isTwoFactorForManagerEnabled());
+    EXPECT_FALSE(settings.isTwoFactorForOperatorEnabled());
+}
+
+//--------------------------------------------------------------------------------------------------
+// A value that is neither true nor false is not a request to let anybody in.
+TEST_F(RouterSettingsTest, UnreadableTwoFactorValueKeepsTheRoleProtected)
+{
+    writeConfig("[router]\ntwo_factor_admin=yes\ntwo_factor_manager=\ntwo_factor_operator=2\n");
+
+    const Settings settings;
+
+    EXPECT_TRUE(settings.isTwoFactorForAdminEnabled());
+    EXPECT_TRUE(settings.isTwoFactorForManagerEnabled());
+    EXPECT_TRUE(settings.isTwoFactorForOperatorEnabled());
+}
+
+//--------------------------------------------------------------------------------------------------
+// The role a session opens as is the value the switch is looked up by.
+TEST_F(RouterSettingsTest, TheSessionRoleDecidesTheTwoFactorValue)
+{
+    writeConfig("[router]\ntwo_factor_operator=false\n");
+
+    const Settings settings;
+
+    EXPECT_TRUE(settings.isTwoFactorEnabledFor(proto::router::SESSION_TYPE_ADMIN));
+    EXPECT_TRUE(settings.isTwoFactorEnabledFor(proto::router::SESSION_TYPE_MANAGER));
+    EXPECT_FALSE(settings.isTwoFactorEnabledFor(proto::router::SESSION_TYPE_OPERATOR));
+}
+
+//--------------------------------------------------------------------------------------------------
+// A role this build does not name keeps its second factor.
+TEST_F(RouterSettingsTest, UnknownRoleKeepsTheSecondFactor)
+{
+    const Settings settings;
+
+    EXPECT_TRUE(settings.isTwoFactorEnabledFor(proto::router::SESSION_TYPE_UNKNOWN));
+    EXPECT_TRUE(settings.isTwoFactorEnabledFor(9999));
+}
+
+//--------------------------------------------------------------------------------------------------
+// What the router writes has to be what it reads back.
+TEST_F(RouterSettingsTest, WrittenTwoFactorValuesAreReadBack)
+{
+    {
+        Settings settings;
+        settings.setTwoFactorForAdmin(false);
+        settings.setTwoFactorForManager(true);
+        settings.setTwoFactorForOperator(false);
+        ASSERT_TRUE(settings.sync());
+    }
+
+    const Settings reread;
+
+    EXPECT_FALSE(reread.isTwoFactorForAdminEnabled());
+    EXPECT_TRUE(reread.isTwoFactorForManagerEnabled());
+    EXPECT_FALSE(reread.isTwoFactorForOperatorEnabled());
+}
+
+//--------------------------------------------------------------------------------------------------
+// A fresh configuration carries the protected values for every role.
+TEST_F(RouterSettingsTest, FreshConfigurationProtectsEveryRole)
+{
+    {
+        Settings settings;
+        settings.reset();
+        ASSERT_TRUE(settings.sync());
+    }
+
+    const Settings reread;
+
+    EXPECT_TRUE(reread.isTwoFactorForAdminEnabled());
+    EXPECT_TRUE(reread.isTwoFactorForManagerEnabled());
+    EXPECT_TRUE(reread.isTwoFactorForOperatorEnabled());
+}
+
+//--------------------------------------------------------------------------------------------------
+// The three keys have to be present in the file the router writes itself.
+TEST_F(RouterSettingsTest, ResetWritesTheThreeTwoFactorKeysIntoTheFile)
+{
+    {
+        Settings settings;
+        settings.reset();
+        ASSERT_TRUE(settings.sync());
+    }
+
+    QFile file(file_path_);
+    ASSERT_TRUE(file.open(QIODevice::ReadOnly));
+    const QString written = QString::fromUtf8(file.readAll());
+
+    EXPECT_TRUE(written.contains(QStringLiteral("two_factor_admin")));
+    EXPECT_TRUE(written.contains(QStringLiteral("two_factor_manager")));
+    EXPECT_TRUE(written.contains(QStringLiteral("two_factor_operator")));
+
+    EXPECT_TRUE(Settings().isTwoFactorEnabledFor(proto::router::SESSION_TYPE_ADMIN));
+    EXPECT_TRUE(Settings().isTwoFactorEnabledFor(proto::router::SESSION_TYPE_MANAGER));
+    EXPECT_TRUE(Settings().isTwoFactorEnabledFor(proto::router::SESSION_TYPE_OPERATOR));
 }

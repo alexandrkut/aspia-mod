@@ -21,6 +21,7 @@
 #include <algorithm>
 
 #include "base/logging.h"
+#include "base/peer/router_user.h"
 #include "base/scoped_qpointer.h"
 #include "base/serialization.h"
 #include "base/version_constants.h"
@@ -37,6 +38,7 @@
 #include "router/client_admin.h"
 #include "router/client_manager.h"
 #include "router/client_operator.h"
+#include "router/client_qs_client.h"
 #include "router/router_user_list.h"
 #include "router/settings.h"
 #include "router/storage/sync_storage.h"
@@ -313,29 +315,57 @@ void ClientWorker::onNewConnection()
         }
 
         ClientOperator* client = nullptr;
-        switch (session_type)
+
+        // The exported client logs in as an operator, the type an unmodified router understands.
+        // What makes the session restricted is the account type stored on this router, never the
+        // name: a name ending in "-qs" can be typed by anybody allowed to create users.
+        RouterUser account;
+        const bool account_found =
+            UserStore(Database::instance()).find(channel->peerUserId(), &account) == proto::router::kErrorOk;
+
+        if (isQuickSupportAccount(account_found ? account : RouterUser()))
         {
-            case proto::router::SESSION_TYPE_OPERATOR:
-                client = new ClientOperator(Database::instance(), access_log_, channel.release(), this);
-                break;
-
-            case proto::router::SESSION_TYPE_MANAGER:
-                client = new ClientManager(Database::instance(), access_log_, channel.release(), this);
-                break;
-
-            case proto::router::SESSION_TYPE_ADMIN:
-            {
-                ClientAdmin* admin = new ClientAdmin(Database::instance(), access_log_, channel.release(), this);
-                connect(admin, &ClientAdmin::sig_clientListRequest, this, &ClientWorker::onClientListRequest);
-                connect(admin, &ClientAdmin::sig_clientRequest, this, &ClientWorker::onClientRequest);
-                client = admin;
-                break;
-            }
-
-            default:
-                LOG(ERROR) << "Unsupported client session type:" << session_type;
-                break;
+            // A baked-in account has nobody to enter a code on a phone, so its session never asks
+            // for the second factor even when the operator role is protected on this router.
+            client = new ClientQsClient(Database::instance(), access_log_, channel.release(), this, false);
         }
+        else
+        {
+            // Whether the role of this session has to answer a code is a per role setting of the
+            // configuration, and the session is opened as one role only, so it is read once here
+            // and handed over together with the session rather than looked up inside the handler.
+            const bool two_factor_required = Settings().isTwoFactorEnabledFor(session_type);
+
+            switch (session_type)
+            {
+                case proto::router::SESSION_TYPE_OPERATOR:
+                    client = new ClientOperator(Database::instance(), access_log_, channel.release(), this,
+                                                two_factor_required);
+                    break;
+
+                case proto::router::SESSION_TYPE_MANAGER:
+                    client = new ClientManager(Database::instance(), access_log_, channel.release(), this,
+                                               two_factor_required);
+                    break;
+
+                case proto::router::SESSION_TYPE_ADMIN:
+                {
+                    ClientAdmin* admin = new ClientAdmin(Database::instance(), access_log_, channel.release(), this,
+                                                          two_factor_required);
+                    connect(admin, &ClientAdmin::sig_clientListRequest, this, &ClientWorker::onClientListRequest);
+                    connect(admin, &ClientAdmin::sig_clientRequest, this, &ClientWorker::onClientRequest);
+                    client = admin;
+                    break;
+                }
+
+                default:
+                    LOG(ERROR) << "Unsupported client session type:" << session_type;
+                    break;
+            }
+        }
+
+        if (client)
+            client->setUserType(account_found ? account.user_type : proto::router::USER_TYPE_REGULAR);
 
         if (!client)
         {
@@ -450,6 +480,7 @@ void ClientWorker::onClientListRequest(const proto::router::ClientListRequest& r
         item->set_computer_name(client->computerName());
         item->set_architecture(client->architecture());
         item->set_user_name(client->userName());
+        item->set_user_type(client->userType());
     }
 
     session->sendMessage(proto::router::CHANNEL_ID_ADMIN, serialize(message));
@@ -607,6 +638,13 @@ bool ClientWorker::stopClient(qint64 client_id)
     }
 
     return false;
+}
+
+//--------------------------------------------------------------------------------------------------
+// static
+bool ClientWorker::isQuickSupportAccount(const RouterUser& account)
+{
+    return account.user_type == proto::router::USER_TYPE_QUICK_SUPPORT;
 }
 
 //--------------------------------------------------------------------------------------------------

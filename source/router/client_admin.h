@@ -42,8 +42,14 @@ class ClientAdmin final : public ClientManager
     Q_OBJECT
 
 public:
-    ClientAdmin(Database& database, AccessLog& access_log, TcpChannel* channel, QObject* parent);
+    ClientAdmin(Database& database, AccessLog& access_log, TcpChannel* channel, QObject* parent,
+                bool two_factor_required = true);
     ~ClientAdmin() final;
+
+    // Puts the authenticated administrator's name into a config command's JSON params. Any
+    // "initiator" supplied by the client is replaced, never trusted. Exposed for the tests that
+    // check the author of a command cannot be forged.
+    static std::string paramsWithInitiator(const std::string& params, const std::string& user_name);
 
 signals:
     void sig_clientListRequest(const proto::router::ClientListRequest& request);

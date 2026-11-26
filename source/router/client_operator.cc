@@ -58,12 +58,14 @@ qint64 createClientId()
 } // namespace
 
 //--------------------------------------------------------------------------------------------------
-ClientOperator::ClientOperator(Database& database, AccessLog& access_log, TcpChannel* channel, QObject* parent)
+ClientOperator::ClientOperator(Database& database, AccessLog& access_log, TcpChannel* channel, QObject* parent,
+                               bool two_factor_required)
     : QObject(parent),
       database_(database),
       access_log_(access_log),
       session_id_(createClientId()),
-      tcp_channel_(channel)
+      tcp_channel_(channel),
+      two_factor_required_(two_factor_required)
 {
     CDCHECK(tcp_channel_);
     tcp_channel_->setParent(this);
@@ -156,6 +158,12 @@ void ClientOperator::onSessionMessage(quint8 channel_id, const QByteArray& buffe
 {
     if (channel_id == proto::router::CHANNEL_ID_SYNC)
     {
+        if (!isSyncAllowed())
+        {
+            CLOG(ERROR) << "Sync messages are not allowed for this session";
+            return;
+        }
+
         readSyncMessage(buffer);
         return;
     }
@@ -176,6 +184,12 @@ void ClientOperator::onSessionMessage(quint8 channel_id, const QByteArray& buffe
             readTwoFactorResponse(message.two_factor_response());
         else
             CLOG(ERROR) << "Unexpected message before 2FA completion";
+        return;
+    }
+
+    if (!isMessageAllowed(message))
+    {
+        CLOG(ERROR) << "Message is not allowed for session type" << sessionType();
         return;
     }
 
@@ -260,7 +274,8 @@ void ClientOperator::onStarted()
 //--------------------------------------------------------------------------------------------------
 void ClientOperator::doTwoFactorChallenge()
 {
-    applyTwoFactorResult(two_factor_.start(database_, requestCaller(), secondsSinceEpoch()));
+    applyTwoFactorResult(two_factor_.start(database_, requestCaller(), secondsSinceEpoch(),
+                                            two_factor_required_));
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -295,6 +310,11 @@ void ClientOperator::applyTwoFactorResult(TwoFactorHandler::Result&& result)
         return;
 
         case TwoFactorHandler::Action::ACCEPT:
+            // The pause goes out with the challenge on the path that asks for it. A login let
+            // in without the second factor sends no question, so the pause the channel inherited
+            // from the finished handshake is lowered here, or the client would hold an open
+            // session that never reads a thing but its own login result.
+            tcp_channel_->setPaused(false);
             token_id_ = result.token_id;
             // Every accepted login writes user state: the token path refreshes the row of its
             // token, a code issues a fresh one, an enrollment stores the secret. The user lists
@@ -393,10 +413,42 @@ void ClientOperator::sendTwoFactorEmail(const TwoFactorHandler::Result& result)
 }
 
 //--------------------------------------------------------------------------------------------------
+bool ClientOperator::isMessageAllowed(const proto::router::ClientToRouter& /* message */) const
+{
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+bool ClientOperator::isHostIdAllowed(HostId /* host_id */) const
+{
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+bool ClientOperator::isSyncAllowed() const
+{
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
 void ClientOperator::readConnectionRequest(const proto::router::ConnectionRequest& request)
 {
     CLOG(INFO) << "New connection request (host_id:" << request.host_id() << "session_type:"
                << request.session_type() << ")";
+
+    if (!isHostIdAllowed(request.host_id()))
+    {
+        CLOG(ERROR) << "Connection to host" << request.host_id() << "is not allowed for"
+                    << userName();
+
+        proto::router::RouterToClient message;
+        proto::router::ConnectionOffer* offer = message.mutable_connection_offer();
+        offer->set_request_id(request.request_id());
+        offer->set_error_code(proto::router::kErrorAccessDenied);
+        sendMessage(proto::router::CHANNEL_ID_CLIENT, serialize(message));
+        return;
+    }
+
     sendConnectionOffer(request);
 }
 

@@ -25,6 +25,8 @@ list(APPEND SOURCE_ROUTER_CORE
     client_manager.h
     client_operator.cc
     client_operator.h
+    client_qs_client.cc
+    client_qs_client.h
     email_messages.cc
     email_messages.h
     host.cc
@@ -48,6 +50,7 @@ list(APPEND SOURCE_ROUTER
     main.cc)
 
 list(APPEND SOURCE_ROUTER_TESTS
+    client_admin_unittest.cc
     client_operator_unittest.cc
     host_lifecycle_unittest.cc
     host_unittest.cc

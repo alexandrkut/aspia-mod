@@ -26,7 +26,9 @@
 #include "proto/router_sync.h"
 #include "router/client_admin.h"
 #include "router/client_manager.h"
+#include "router/client_qs_client.h"
 #include "router/loopback_channel.h"
+#include "router/shared_hosts.h"
 #include "router/router_test_base.h"
 #include "router/router_test_worker.h"
 #include "router/handlers/two_factor_handler.h"
@@ -57,14 +59,16 @@ protected:
     // channel belongs to the session, so it goes away with it.
     template <typename ClientT>
     void withClient(const RouterUser& user, quint32 session_type,
-                    const std::function<void(ClientT&, LoopbackChannel*)>& body)
+                    const std::function<void(ClientT&, LoopbackChannel*)>& body,
+                    bool two_factor_required = true)
     {
         worker_->invoke([&]()
         {
             LoopbackChannel channel(user, kUserPassword, session_type);
             ASSERT_NE(channel.routerEnd(), nullptr);
 
-            ClientT client(worker_->database(), worker_->accessLog(), channel.routerEnd(), nullptr);
+            ClientT client(worker_->database(), worker_->accessLog(), channel.routerEnd(), nullptr,
+                           two_factor_required);
             body(client, &channel);
         });
     }
@@ -72,9 +76,10 @@ protected:
     // The common case: the session of the built-in administrator.
     template <typename ClientT>
     void withClient(quint32 session_type,
-                    const std::function<void(ClientT&, LoopbackChannel*)>& body)
+                    const std::function<void(ClientT&, LoopbackChannel*)>& body,
+                    bool two_factor_required = true)
     {
-        withClient<ClientT>(admin_, session_type, body);
+        withClient<ClientT>(admin_, session_type, body, two_factor_required);
     }
 
     // The reply the session sent last, parsed as |MessageT|.
@@ -1430,4 +1435,67 @@ TEST_F(ClientOperatorTest, SyncStorageKeyRequestOfUnknownModeIsRefused)
         EXPECT_EQ(message->storage_info().request_id(), 1);
         EXPECT_EQ(message->storage_info().error_code(), proto::router::kErrorInvalidRequest);
     });
+}
+
+//--------------------------------------------------------------------------------------------------
+// A role whose second factor is switched off goes straight to the login result: no challenge goes
+// out, and the pause inherited from the handshake is lifted. Without the unpause the client would
+// hold a session that never reads anything.
+TEST_F(ClientOperatorTest, LoginWithoutTheSecondFactorSkipsChallengeAndUnpausesTheChannel)
+{
+    withClient<ClientOperator>(proto::router::SESSION_TYPE_OPERATOR,
+        [](ClientOperator& client, LoopbackChannel* channel)
+        {
+            ASSERT_TRUE(channel->isPaused());
+
+            client.start();
+
+            const std::optional<proto::router::RouterToClient> message =
+                lastMessage<proto::router::RouterToClient>(channel, proto::router::CHANNEL_ID_CLIENT);
+            ASSERT_TRUE(message.has_value());
+            EXPECT_TRUE(message->has_login_result());
+            EXPECT_FALSE(message->has_two_factor_challenge());
+            EXPECT_TRUE(client.isTwoFactorCompleted());
+            EXPECT_FALSE(channel->isPaused());
+        }, false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// The account of an exported client is handed to strangers, so the session answers one question
+// only. Everything else the ordinary client protocol can ask is dropped without a reply.
+TEST_F(ClientOperatorTest, QuickSupportSessionServesOnlyConnectionRequests)
+{
+    withClient<ClientQsClient>(proto::router::SESSION_TYPE_OPERATOR,
+                               [](ClientQsClient& client, LoopbackChannel* channel)
+    {
+        client.start();
+        channel->clearSent();
+
+        channel->receive(proto::router::CHANNEL_ID_CLIENT, workspaceListRequest(1));
+        channel->receive(proto::router::CHANNEL_ID_CLIENT, checkHostStatusRequest(2, kMinTempHostId));
+        channel->receive(proto::router::CHANNEL_ID_CLIENT, tempHostListRequest(3, true));
+        channel->receive(proto::router::CHANNEL_ID_SYNC, QByteArray("not a sync request"));
+
+        EXPECT_TRUE(channel->nothingSent());
+    });
+}
+
+//--------------------------------------------------------------------------------------------------
+// Even a caller that constructs the session as if the role required a code gets straight through:
+// there is nobody to enter it on a baked-in account.
+TEST_F(ClientOperatorTest, QuickSupportSessionSkipsTheSecondFactor)
+{
+    withClient<ClientQsClient>(proto::router::SESSION_TYPE_OPERATOR,
+                               [](ClientQsClient& client, LoopbackChannel* channel)
+    {
+        client.start();
+
+        const std::optional<proto::router::RouterToClient> message =
+            lastMessage<proto::router::RouterToClient>(channel, proto::router::CHANNEL_ID_CLIENT);
+        ASSERT_TRUE(message.has_value());
+        EXPECT_TRUE(message->has_login_result());
+        EXPECT_FALSE(message->has_two_factor_challenge());
+        EXPECT_TRUE(client.isTwoFactorCompleted());
+        EXPECT_FALSE(channel->isPaused());
+    }, true);
 }

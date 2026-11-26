@@ -40,13 +40,14 @@ public:
         QVersionNumber version;
         std::string address;
         std::string computer_name;
+        bool portable = false;
     };
 
     bool contains(HostId host_id) const;
     std::optional<Host> find(HostId host_id) const;
 
     void add(HostId host_id, const QVersionNumber& version, const std::string& address,
-             const std::string& computer_name);
+             const std::string& computer_name, bool portable = false);
     void remove(HostId host_id);
     void clear();
 

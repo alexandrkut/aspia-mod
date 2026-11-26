@@ -85,6 +85,22 @@ public:
     void setEnableStun(bool enable);
     bool isStunEnabled() const;
 
+    // Whether the second factor is asked on top of the password, separately for the
+    // administrator, the manager and the operator. All three default to true: a configuration
+    // that never mentioned them keeps the accounts protected.
+    void setTwoFactorForAdmin(bool enabled);
+    bool isTwoFactorForAdminEnabled() const;
+
+    void setTwoFactorForManager(bool enabled);
+    bool isTwoFactorForManagerEnabled() const;
+
+    void setTwoFactorForOperator(bool enabled);
+    bool isTwoFactorForOperatorEnabled() const;
+
+    // The value for one role, given as the proto::router::SessionType that carries it. A role
+    // this build does not know is answered as protected.
+    bool isTwoFactorEnabledFor(quint32 session_type) const;
+
     void setStunPort(quint16 port);
     quint16 stunPort() const;
 
