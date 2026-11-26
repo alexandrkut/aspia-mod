@@ -81,8 +81,17 @@ void UpdateWorker::onCheckUpdates()
     storage.setUpdateCheckResult(QString());
     storage.setUpdateInstallVersion(QString());
 
+    SystemSettings settings;
+
+    // The router-version guard is an upstream rule for updates from the original server. Our own
+    // server publishes builds of the same protocol line, and a router reports only the three
+    // handshake numbers, so applying the guard here would stop a mod host from ever seeing its own
+    // updates. UpdateChecker skips the guard for our server too; skip this early return as well.
+    const bool upstream_server =
+        settings.updateServer().trimmed() == QString(kOriginalUpdateServer);
+
     QVersionNumber router_version;
-    if (Database::instance().isRouterEnabled())
+    if (upstream_server && Database::instance().isRouterEnabled())
     {
         router_version = storage.routerVersion();
         if (router_version <= kCurrentVersion)
@@ -94,7 +103,6 @@ void UpdateWorker::onCheckUpdates()
         }
     }
 
-    SystemSettings settings;
     QByteArray public_key = settings.updatePublicKey();
 
     update_checker_ = new UpdateChecker(settings.updateChannel(), kHostUpdatePackage, this);

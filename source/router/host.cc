@@ -20,6 +20,10 @@
 
 #include <set>
 
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QRegularExpression>
+
 #include "base/serialization.h"
 #include "base/crypto/generic_hash.h"
 #include "base/crypto/random.h"
@@ -344,10 +348,30 @@ void Host::readHostTelemetry(const proto::router::HostTelemetry& host_telemetry,
         return;
     }
 
-    if (!HostStore(database_).updateTelemetry(host_id_, telemetry))
+    HostStore host_store(database_);
+    if (!host_store.updateTelemetry(host_id_, telemetry))
     {
         CLOG(WARNING) << "Failed to update telemetry for host_id:" << host_id_;
         return;
+    }
+
+    // The host reports its full version string (with the build number and the mod mark) in the
+    // telemetry JSON. Store it in the "version" column so the admin console shows it, while the
+    // handshake version (three numbers) stays untouched and keeps driving every comparison.
+    QJsonDocument json_doc = QJsonDocument::fromJson(QByteArray::fromStdString(telemetry));
+    if (json_doc.isObject())
+    {
+        const QJsonObject obj = json_doc.object();
+        const QString version_string = obj.value("version_string").toString();
+        if (!version_string.isEmpty() && version_string.size() <= 32)
+        {
+            static const QRegularExpression pattern(R"(^\d+\.\d+\.\d+(\.\d+)?(-mod)?$)");
+            if (pattern.match(version_string).hasMatch())
+            {
+                host_store.updateVersion(host_id_, version_string.toStdString());
+                emit sig_notifyChanged(ClientWorker::NOTIFY_HOSTS);
+            }
+        }
     }
 
     telemetry_ = telemetry;

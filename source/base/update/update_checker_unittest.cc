@@ -134,6 +134,30 @@ QByteArray manifest()
 }
 
 //--------------------------------------------------------------------------------------------------
+// Our own releases carry a build number as the fourth part of the version.
+QVersionNumber modVersion()
+{
+    return QVersionNumber({ kCurrentVersion.majorVersion(), kCurrentVersion.minorVersion(),
+                            kCurrentVersion.microVersion(), 1 });
+}
+
+QByteArray modRules()
+{
+    return QString(R"({
+        "format": 1,
+        "targets": { "latest": "%1" },
+        "updates": [ { "source": "%2", "target": "@latest" } ]
+    })").arg(modVersion().toString(), kCurrentVersion.toString()).toUtf8();
+}
+
+QByteArray modManifest()
+{
+    return QByteArray(manifest()).replace(
+        QString("\"version\": \"%1\"").arg(nextVersion().toString()).toUtf8(),
+        QString("\"version\": \"%1\"").arg(modVersion().toString()).toUtf8());
+}
+
+//--------------------------------------------------------------------------------------------------
 // The key of the tests. Test vector 1 of RFC 8032, section 7.1, so that nothing here depends on
 // randomness.
 SecureByteArray privateKey()
@@ -455,6 +479,28 @@ TEST(UpdateCheckerTest, UpdateNewerThanMaximumIsNotOffered)
     ASSERT_TRUE(spy.wait(15000));
     EXPECT_TRUE(failed.isEmpty());
     EXPECT_FALSE(spy.takeFirst().at(0).value<UpdateInfo>().isValid());
+}
+
+//--------------------------------------------------------------------------------------------------
+// Our server publishes four-segment builds. The upstream router guard is kept, but a target the
+// guard allows must still be offered with all four parts intact.
+TEST(UpdateCheckerTest, FourSegmentModTargetIsOfferedUnderGuard)
+{
+    FileServer server(withSignatures(
+        { { "/stable.json", modRules() },
+          { QString("/versions/%1.json").arg(modVersion().toString()), modManifest() } }));
+
+    std::unique_ptr<UpdateChecker> checker = checkerFor(server);
+    checker->setMaximumVersion(modVersion());
+
+    QSignalSpy spy(checker.get(), &UpdateChecker::sig_checkFinished);
+    QSignalSpy failed(checker.get(), &UpdateChecker::sig_checkFailed);
+
+    checker->start();
+
+    ASSERT_TRUE(spy.wait(15000));
+    EXPECT_TRUE(failed.isEmpty());
+    EXPECT_EQ(spy.takeFirst().at(0).value<UpdateInfo>().version(), modVersion());
 }
 
 //--------------------------------------------------------------------------------------------------

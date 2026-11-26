@@ -151,7 +151,13 @@ void UpdateChecker::run()
 //--------------------------------------------------------------------------------------------------
 void UpdateChecker::check()
 {
-    if (!maximum_version_.isNull() && maximum_version_ <= kCurrentVersion)
+    // The router-version guard comes from upstream: a host must not update to a version its router
+    // cannot speak. Our own server publishes builds of the same protocol line (with a build number
+    // the handshake does not carry), so the guard would block every update from it. Keep the guard
+    // for the original server and for any server configured by hand, but not for our own one.
+    const bool router_guard = server_ != QString(kUpdateServer) && !maximum_version_.isNull();
+
+    if (router_guard && maximum_version_ <= kCurrentVersion)
     {
         LOG(INFO) << "Version" << kCurrentVersion << "is limited to version" << maximum_version_;
         emit sig_checkFinished(UpdateInfo());
@@ -218,7 +224,7 @@ void UpdateChecker::check()
         return;
     }
 
-    if (!maximum_version_.isNull() && *target_version > maximum_version_)
+    if (router_guard && *target_version > maximum_version_)
     {
         LOG(INFO) << "Version" << *target_version << "is newer than allowed version" << maximum_version_;
         emit sig_checkFinished(UpdateInfo());

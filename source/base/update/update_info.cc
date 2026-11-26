@@ -81,38 +81,74 @@ std::optional<QVersionNumber> UpdateInfo::targetVersion(
         return std::nullopt;
 
     const QJsonArray rules = root.value("updates").toArray();
-    for (const QJsonValue& item : rules)
+
+    // Resolve a rule whose source matches the given current version. Returns an empty optional
+    // when no matching rule exists, and a null optional on a hard error (unknown label / bad
+    // target), so the caller can distinguish "no rule" from "broken manifest".
+    auto resolve = [&](const QVersionNumber& needle, bool* hard_error) -> std::optional<QVersionNumber>
     {
-        QJsonObject rule = item.toObject();
-        QVersionNumber source = QVersionNumber::fromString(rule.value("source").toString());
-
-        if (source.normalized() != current.normalized())
-            continue;
-
-        QString target = rule.value("target").toString();
-
-        // A rule may name a label instead of a version. The label is the only place where the
-        // current version is written down, so a release moves it and leaves the rules alone.
-        if (target.startsWith('@'))
+        *hard_error = false;
+        for (const QJsonValue& item : rules)
         {
-            QString label = target.mid(1);
+            QJsonObject rule = item.toObject();
+            QVersionNumber source = QVersionNumber::fromString(rule.value("source").toString());
 
-            target = root.value("targets").toObject().value(label).toString();
-            if (target.isEmpty())
+            if (source.normalized() != needle.normalized())
+                continue;
+
+            QString target = rule.value("target").toString();
+
+            // A rule may name a label instead of a version. The label is the only place where the
+            // current version is written down, so a release moves it and leaves the rules alone.
+            if (target.startsWith('@'))
             {
-                LOG(ERROR) << "Unknown label:" << label;
+                QString label = target.mid(1);
+
+                target = root.value("targets").toObject().value(label).toString();
+                if (target.isEmpty())
+                {
+                    LOG(ERROR) << "Unknown label:" << label;
+                    *hard_error = true;
+                    return std::nullopt;
+                }
+            }
+
+            QVersionNumber version = QVersionNumber::fromString(target);
+            if (version.isNull())
+            {
+                LOG(ERROR) << "Invalid target version:" << target;
+                *hard_error = true;
                 return std::nullopt;
             }
+
+            return version;
         }
 
-        QVersionNumber version = QVersionNumber::fromString(target);
-        if (version.isNull())
-        {
-            LOG(ERROR) << "Invalid target version:" << target;
+        return std::nullopt;
+    };
+
+    bool hard_error = false;
+    auto result = resolve(current, &hard_error);
+    if (hard_error)
+        return std::nullopt;
+    if (result.has_value())
+        return result;
+
+    // Fallback: a four-segment client version (build number) has no exact rule, but the release
+    // rules are written against the three-segment line. Try once with the build number stripped.
+    // A three-segment current version is never retried, so a missing rule stays a clean "no update".
+    if (current.segmentCount() > 3)
+    {
+        QVersionNumber trimmed(current.segments().mid(0, 3));
+        LOG(INFO) << "No rule for version" << current.toString()
+                  << ", falling back to" << trimmed.toString();
+
+        bool fallback_error = false;
+        auto fallback = resolve(trimmed, &fallback_error);
+        if (fallback_error)
             return std::nullopt;
-        }
-
-        return version;
+        if (fallback.has_value())
+            return fallback;
     }
 
     LOG(INFO) << "No rule for version" << current.toString();

@@ -275,6 +275,45 @@ TEST_F(HostTest, TelemetryOfAnApprovedHostIsStored)
 }
 
 //--------------------------------------------------------------------------------------------------
+// The full version string (build number and mod mark) from telemetry is stored in the host row, so
+// the admin host list can show it. The handshake version stays the one every comparison uses.
+TEST_F(HostTest, ModVersionFromTelemetryIsStoredInHostRow)
+{
+    const HostId host_id = addHost(toStdString(keyHash(kHostKey)));
+    ASSERT_NE(host_id, kInvalidHostId);
+
+    withHost([&](Host& host, LoopbackChannel* channel)
+    {
+        host.start();
+        channel->receive(0, idRequest(proto::router::HostIdRequest::EXISTING_ID, kHostKey));
+        channel->receive(0, telemetry(
+            R"({"version":1,"version_string":"3.5.2.1-mod","update":{"channel":"stable"}})"));
+    });
+
+    EXPECT_EQ(countRaw(QString("SELECT COUNT(*) FROM hosts WHERE id=%1 AND version='3.5.2.1-mod'")
+                           .arg(host_id)), 1);
+}
+
+//--------------------------------------------------------------------------------------------------
+// A version string that is not a plain release version is not written into the host row.
+TEST_F(HostTest, MalformedVersionFromTelemetryIsIgnored)
+{
+    const HostId host_id = addHost(toStdString(keyHash(kHostKey)));
+    ASSERT_NE(host_id, kInvalidHostId);
+
+    withHost([&](Host& host, LoopbackChannel* channel)
+    {
+        host.start();
+        channel->receive(0, idRequest(proto::router::HostIdRequest::EXISTING_ID, kHostKey));
+        channel->receive(0, telemetry(
+            R"({"version":1,"version_string":"3.5.2.1-mod<script>","update":{"channel":"stable"}})"));
+    });
+
+    EXPECT_EQ(countRaw(QString("SELECT COUNT(*) FROM hosts WHERE id=%1 AND "
+                               "version='3.5.2.1-mod<script>'").arg(host_id)), 0);
+}
+
+//--------------------------------------------------------------------------------------------------
 // A report that repeats the one already stored over the same connection is not written again.
 TEST_F(HostTest, RepeatedTelemetryIsNotWrittenAgain)
 {

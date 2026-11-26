@@ -25,7 +25,11 @@
 #include <array>
 
 inline constexpr QLatin1StringView kDefaultLocale("en");
-inline constexpr QLatin1StringView kUpdateServer("https://aspia.org/updates");
+inline constexpr QLatin1StringView kUpdateServer("https://aspia.kn1ght.ru:8888/updates");
+
+// The upstream server. The router-version guard protects against builds from there; our own server
+// publishes builds of the same protocol line, so it must not stop a host from updating from it.
+inline constexpr QLatin1StringView kOriginalUpdateServer("https://aspia.org/updates");
 
 // Update channels, each with a directory of its own on the update server.
 inline constexpr QLatin1StringView kStableUpdateChannel("stable");

@@ -34,6 +34,7 @@
 #include "host/host_config_applier.h"
 #include "host/host_storage.h"
 #include "host/system_settings.h"
+#include "version.h"
 #include "proto/key_exchange.h"
 #include "proto/router_constants.h"
 #include "proto/router_host.h"
@@ -532,6 +533,7 @@ void RouterManager::sendTelemetry()
     QJsonObject update;
     update.insert("channel", settings.updateChannel());
     update.insert("address", settings.updateServer());
+    update.insert("public_key", QString::fromLatin1(settings.updatePublicKey().toHex()));
 #if !defined(Q_OS_ANDROID)
     // The mobile host checks for updates only on request.
     update.insert("auto_update", settings.isAutoUpdateEnabled());
@@ -565,6 +567,7 @@ void RouterManager::sendTelemetry()
 
     QJsonObject telemetry;
     telemetry.insert("version", proto::router::kTelemetryVersion);
+    telemetry.insert("version_string", ASPIA_VERSION_STRING);
     telemetry.insert("general", general);
     telemetry.insert("connects", connects);
     telemetry.insert("router", router);

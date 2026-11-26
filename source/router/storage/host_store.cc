@@ -417,6 +417,28 @@ bool HostStore::updateTelemetry(HostId host_id, std::string_view telemetry)
 }
 
 //--------------------------------------------------------------------------------------------------
+bool HostStore::updateVersion(HostId host_id, std::string_view version)
+{
+    if (!isValid())
+    {
+        LOG(ERROR) << "Database is not valid";
+        return false;
+    }
+
+    SqlQuery query(db(), "UPDATE hosts SET version=? WHERE id=?");
+    query.addText(version);
+    query.addUInt64(host_id);
+
+    if (!query.exec())
+    {
+        LOG(ERROR) << "Unable to execute query:" << db().lastError();
+        return false;
+    }
+
+    return db().changes() > 0;
+}
+
+//--------------------------------------------------------------------------------------------------
 std::string_view HostStore::telemetry(HostId host_id, std::string* telemetry) const
 {
     CHECK(telemetry);

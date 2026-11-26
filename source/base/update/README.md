@@ -70,8 +70,12 @@ that is asking.
 
 - `format` is the version of the schema and is 1. A file with anything else is not read.
 - `source` is an exact version, one entry per released version. There are no version masks.
-- A version here has three parts. The fourth part of `3.0.5.8006` is the build number and takes no
-  part in any comparison.
+- A version may have four parts: the fourth is the build number of the line of the versions. The
+  running version carries it as well, so a release inside one line (`3.2.2.1` to `3.2.2.2`) is
+  offered, and `source` and `target` are compared by every part present. The build number of the
+  program must never be zero: the trailing zero parts are dropped when versions are compared, so
+  `3.2.2.0` and `3.2.2` are the same version then, and a machine would be offered a release it
+  is already running.
 - `target` is a version or a label written as `@name`; the keys of `targets` are written without
   the `@`. The prefix is what makes a typo visible: a version can never begin with `@`, so a
   misspelled label cannot be mistaken for a version.
@@ -79,6 +83,11 @@ that is asking.
   and leaves the entries alone, and moving the label back withdraws a release.
 - A migration barrier, where a version can only be updated through an intermediate one, is written
   as a literal version and is not moved by later releases: `2.6.0 -> 3.0.0`.
+
+Fallback: when no entry matches the running version exactly and the running version has more than
+three parts, the check is retried once with the build number (the fourth part) stripped. This lets
+a build of a line find the rule written for the three-segment line version. The exact match always
+wins when both are present, and a three-segment running version is never retried.
 
 What an application makes of it:
 

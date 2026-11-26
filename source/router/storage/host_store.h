@@ -51,6 +51,10 @@ public:
     // Replaces the telemetry the host reported last.
     bool updateTelemetry(HostId host_id, std::string_view telemetry);
 
+    // Replaces the version shown for the host with the full version string it reports in telemetry.
+    // The handshake version stays untouched: it still drives every compatibility comparison.
+    bool updateVersion(HostId host_id, std::string_view version);
+
     // Reads the telemetry the host reported last. Returns kErrorNotFound for an unknown host and
     // kErrorInternalError when the read failed.
     std::string_view telemetry(HostId host_id, std::string* telemetry) const;
