@@ -964,6 +964,17 @@
         <source>Clear</source>
         <translation>Очистить</translation>
     </message>
+    <message>
+        <location filename="../client/desktop/chat/chat_window.cc" line="90"/>
+        <location filename="../client/desktop/chat/chat_window.cc" line="101"/>
+        <source>Enable forced chat</source>
+        <translation>Включить принудительный чат</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/chat/chat_window.cc" line="100"/>
+        <source>*** Forced chat enabled! ***</source>
+        <translation>*** Принудительный чат включен! ***</translation>
+    </message>
 </context>
 <context>
     <name>CheckPasswordDialog</name>

@@ -78,6 +78,7 @@ private:
         TimePoint start_time;
         QString stun_host;
         quint16 stun_port = 0;
+        bool via_router = false;
     };
 
     void startConfirmation(PendingConfirmation& pending);

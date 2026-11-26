@@ -60,6 +60,10 @@ public:
     void setChatEnabled(bool enable);
     void setToolsButtonVisible(bool visible);
 
+    void setForced(bool forced);
+    bool isForced() const;
+    void showForced();
+
     QList<QAction*> tabActions() const;
 
     // The messages that the list shows and the line under it, for example that the other side is typing.
@@ -80,6 +84,7 @@ protected:
     bool eventFilter(QObject* object, QEvent* event) final;
     void changeEvent(QEvent* event) final;
     void closeEvent(QCloseEvent* event) final;
+    void moveEvent(QMoveEvent* event) final;
     void resizeEvent(QResizeEvent* event) final;
     void showEvent(QShowEvent* event) final;
 
@@ -117,6 +122,11 @@ private:
     QString display_name_;
     QString history_id_;
     bool history_enabled_ = false;
+
+    bool forced_ = false;
+    bool forced_resizing_ = false;
+    bool forced_moving_ = false;
+    QSize forced_reference_size_;
 
     QVector<HistoryMessage> history_messages_;
     QTimer* status_clear_timer_;

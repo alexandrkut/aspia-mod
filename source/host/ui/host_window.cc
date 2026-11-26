@@ -657,7 +657,27 @@ void HostWindow::onChat(const proto::chat::Chat& chat)
     }
     else if (chat.has_chat_status())
     {
-        chat_widget_->readStatus(chat.chat_status());
+        const proto::chat::Status& status = chat.chat_status();
+        if (status.code() == proto::chat::Status::CODE_FORCED_CHAT_ENABLE)
+        {
+            chat_widget_->setForced(true);
+            chat_widget_->showForced();
+        }
+        else if (status.code() == proto::chat::Status::CODE_FORCED_CHAT_DISABLE)
+        {
+            chat_widget_->setForced(false);
+        }
+        else if (status.code() == proto::chat::Status::CODE_STOPPED)
+        {
+            // The operator's chat session ended: leave forced mode even if the toggle was
+            // never switched off. The status itself is still shown as before.
+            chat_widget_->setForced(false);
+            chat_widget_->readStatus(status);
+        }
+        else
+        {
+            chat_widget_->readStatus(status);
+        }
     }
     else
     {

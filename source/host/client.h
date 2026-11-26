@@ -68,6 +68,10 @@ public:
     QString displayName() const;
     QString architecture() const;
     QString userName() const;
+
+    // Whether this session reached the host through the router (relay); false for a direct
+    // connection. Stored here for the forced-chat gate to read.
+    bool via_router = false;
     qint64 pendingBytes() const;
 
     proto::desktop::Overflow::State overflowState(TimePoint now) const;

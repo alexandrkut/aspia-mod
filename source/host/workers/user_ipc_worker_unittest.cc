@@ -34,13 +34,14 @@ public:
         // Nothing
     }
 
-    void connectClient(quint32 client_id)
+    void connectClient(quint32 client_id, bool via_router = false)
     {
         invoke([&]()
         {
             proto::user::ConnectEvent event;
             event.set_client_id(client_id);
             event.set_session_type(proto::peer::SESSION_TYPE_DESKTOP);
+            event.set_via_router(via_router);
             worker_->onConnectEvent(event);
         });
     }
@@ -102,4 +103,33 @@ TEST(user_ipc_worker_test, clients_of_lost_service_are_forgotten)
 
     ASSERT_EQ(last_list.size(), 1);
     EXPECT_EQ(last_list.front().client_id, 2u);
+}
+
+//--------------------------------------------------------------------------------------------------
+// The router flag travels with the client list: a relay connection reports via_router = true and a
+// direct one keeps the default false.
+TEST(user_ipc_worker_test, via_router_flag_is_carried)
+{
+    WorkerManager workers;
+
+    auto owned_worker = std::make_unique<UserIpcWorker>();
+    UserIpcWorker* worker = owned_worker.get();
+    workers.add(std::move(owned_worker));
+    workers.start();
+
+    UserIpcWorker::ClientList last_list;
+    QObject::connect(worker, &UserIpcWorker::sig_clientListChanged, worker,
+                     [&](const UserIpcWorker::ClientList& clients) { last_list = clients; },
+                     Qt::DirectConnection);
+
+    UserIpcWorkerTestPeer peer(worker);
+
+    peer.connectClient(1, true);
+    ASSERT_EQ(last_list.size(), 1);
+    EXPECT_TRUE(last_list.front().via_router);
+
+    peer.loseService();
+    peer.connectClient(2);
+    ASSERT_EQ(last_list.size(), 1);
+    EXPECT_FALSE(last_list.front().via_router);
 }

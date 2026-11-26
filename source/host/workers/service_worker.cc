@@ -317,6 +317,7 @@ void ServiceWorker::onNewRelayConnection()
         pending.start_time = Clock::now();
         pending.stun_host = connection->stun_host;
         pending.stun_port = connection->stun_port;
+        pending.via_router = true;
         startConfirmation(pending);
     }
 }
@@ -360,7 +361,8 @@ void ServiceWorker::onUserSessionAttached()
                 QString display_name = client->displayName();
                 quint32 client_id = client->clientId();
 
-                user_session_->sendConnectEvent(client_id, session_type, computer_name, display_name);
+                user_session_->sendConnectEvent(client_id, session_type, computer_name, display_name,
+                               client->via_router);
             }
             break;
 
@@ -523,6 +525,19 @@ void ServiceWorker::onChatClientMessage(const proto::chat::Chat& chat)
     CHECK(sender_client);
 
     quint32 sender_client_id = sender_client->clientId();
+
+    // A forced-chat toggle is honored only for sessions that reached the host through the
+    // router; direct sessions are not allowed to force the host's chat window.
+    if (chat.has_chat_status())
+    {
+        const proto::chat::Status::Code code = chat.chat_status().code();
+        if ((code == proto::chat::Status::CODE_FORCED_CHAT_ENABLE ||
+             code == proto::chat::Status::CODE_FORCED_CHAT_DISABLE) &&
+            !sender_client->via_router)
+        {
+            return;
+        }
+    }
 
     if (user_session_->state() == UserSession::State::DETTACHED && chat.has_chat_message())
         sender_client->onSendStatus(proto::chat::Status::CODE_USER_DISCONNECTED);
@@ -772,6 +787,7 @@ void ServiceWorker::startClient(const PendingConfirmation& pending)
     if (router_manager_)
         router_manager_->onTelemetryChanged();
 
+    client_to_start->via_router = pending.via_router;
     clients_.append(client_to_start);
     client_to_start->start(pending.stun_host, pending.stun_port);
 }
