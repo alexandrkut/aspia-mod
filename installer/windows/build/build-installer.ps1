@@ -28,11 +28,14 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-$root   = 'C:\Projects\aspia-mod'
-$wix    = Join-Path $root 'tools\wix3'
-$srcDir = Join-Path $root "aspia\installer\windows"
-$build  = if ($BuildDir) { $BuildDir } else { Join-Path $root 'aspia\builds\local-win-x64\Release' }
-$stage  = Join-Path $root "aspia\builds\msi-$Product-$Architecture"
+# The script lives in <tree>/installer/windows/build, so the tree is derived from
+# its own path: this works in a worktree as well as in the main checkout. WiX is
+# taken from the tree when it has one, otherwise from the main checkout.
+$tree    = (Resolve-Path (Join-Path $PSScriptRoot '..\..\..')).Path
+$wix     = if (Test-Path (Join-Path $tree 'tools\wix3')) { Join-Path $tree 'tools\wix3' } else { 'C:\Projects\aspia-mod\tools\wix3' }
+$srcDir  = Join-Path $tree 'installer\windows'
+$build   = if ($BuildDir) { $BuildDir } else { Join-Path $tree 'builds\local-win-x64\Release' }
+$stage   = Join-Path $tree "builds\msi-$Product-$Architecture"
 
 # The name of the program in the list of the installed programs and the name of the shortcut in
 # the menu "Start" come from the translation of the package. The client and the host of the mod
@@ -53,7 +56,7 @@ $languageId = if ($Language -eq 'ru-ru') { '1049' } else { '1033' }
 # same version, so the number is raised by hand with every release.
 if (-not $Version)
 {
-    $cmake = Get-Content (Join-Path $root 'aspia\CMakeLists.txt') -Raw
+    $cmake = Get-Content (Join-Path $tree 'CMakeLists.txt') -Raw
 
     $parts = @('MAJOR', 'MINOR', 'PATCH', 'BUILD') | ForEach-Object {
         if ($cmake -match "set\(ASPIA_VERSION_$_ (\d+)\)") { $Matches[1] } else { throw "the version is not in the sources" }
@@ -67,7 +70,7 @@ if (-not $Version)
 # The mark of a modified build goes into the name of the file and not into the version of the
 # package: the version of the package is a number, and the installer compares it with the
 # version of the package that is installed.
-$cmake = Get-Content (Join-Path $root 'aspia\CMakeLists.txt') -Raw
+$cmake = Get-Content (Join-Path $tree 'CMakeLists.txt') -Raw
 if ($cmake -match 'set\(ASPIA_VERSION_SUFFIX "([^"]*)"\)') { $Suffix = $Matches[1] } else { $Suffix = '' }
 
 $executable = "aspia_$Product.exe"
