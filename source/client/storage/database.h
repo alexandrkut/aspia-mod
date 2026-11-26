@@ -75,6 +75,10 @@ public:
     // Reads a raw value from the settings table. Used for the per-host notification switches.
     QString readSetting(const QString& name, bool* found = nullptr) const;
 
+    // Writes a raw value into the settings table. The counterpart of readSetting(), used by the
+    // per-host notification switches in the Edit host dialog.
+    bool writeSetting(const QString& name, const QString& value);
+
     enum class ReadResult { OK, INCOMPLETE, FAILED };
     Q_ENUM(ReadResult)
 

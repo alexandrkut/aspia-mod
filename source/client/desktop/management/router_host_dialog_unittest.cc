@@ -20,6 +20,8 @@
 
 #include <QCheckBox>
 #include <QComboBox>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QCoreApplication>
 #include <QLineEdit>
 #include <QTemporaryDir>
@@ -48,6 +50,12 @@ public:
     // What the Ok button does with the credentials and the profile of the host. The button itself
     // needs a session with the router, which this stand does not have.
     static bool save(RouterHostDialog& dialog) { return dialog.saveCredentials() && dialog.saveProfile(); }
+
+    // The notification switches are created by the dialog itself, not by the .ui file.
+    static QCheckBox* notifyView(RouterHostDialog& dialog) { return dialog.checkbox_notify_view_; }
+    static QCheckBox* notifyControl(RouterHostDialog& dialog) { return dialog.checkbox_notify_control_; }
+    static QCheckBox* notifyFiles(RouterHostDialog& dialog) { return dialog.checkbox_notify_files_; }
+    static void saveNotify(RouterHostDialog& dialog) { dialog.saveNotifySettings(); }
 };
 
 namespace {
@@ -258,6 +266,43 @@ TEST_F(RouterHostDialogTest, ChangeThatCameWhileTheDialogIsOpenStaysWhenTheFormI
 
     EXPECT_EQ(storedHost().username(), QString("laptop"));
     EXPECT_EQ(unsyncedHostCount(), 0);
+}
+
+//--------------------------------------------------------------------------------------------------
+// The switches in the Edit host dialog and the per-host settings they write must agree: the client
+// reads the same JSON back when it decides whether to suppress a connection notification.
+TEST_F(RouterHostDialogTest, NotifySettingsSurviveTheDialogRoundTrip)
+{
+    const HostConfig stored = HostConfig::forRouterHost(kHostId, QString());
+    const QString key = stored.notifySettingsKeys().front();
+
+    QJsonObject written;
+    written.insert("view", false);
+    written.insert("control", true);
+    written.insert("files", false);
+    ASSERT_TRUE(Database::instance().writeSetting(
+        key, QString::fromUtf8(QJsonDocument(written).toJson(QJsonDocument::Compact))));
+
+    RouterHostDialog dialog(routerHost(), nullptr);
+    load(dialog);
+
+    ASSERT_TRUE(RouterHostDialogTestPeer::notifyView(dialog));
+    ASSERT_TRUE(RouterHostDialogTestPeer::notifyControl(dialog));
+    ASSERT_TRUE(RouterHostDialogTestPeer::notifyFiles(dialog));
+    EXPECT_FALSE(RouterHostDialogTestPeer::notifyView(dialog)->isChecked());
+    EXPECT_TRUE(RouterHostDialogTestPeer::notifyControl(dialog)->isChecked());
+    EXPECT_FALSE(RouterHostDialogTestPeer::notifyFiles(dialog)->isChecked());
+
+    RouterHostDialogTestPeer::notifyView(dialog)->setChecked(true);
+    RouterHostDialogTestPeer::notifyControl(dialog)->setChecked(false);
+    RouterHostDialogTestPeer::notifyFiles(dialog)->setChecked(true);
+    RouterHostDialogTestPeer::saveNotify(dialog);
+
+    const QJsonObject read =
+        QJsonDocument::fromJson(Database::instance().readSetting(key).toUtf8()).object();
+    EXPECT_TRUE(read.value("view").toBool());
+    EXPECT_FALSE(read.value("control").toBool());
+    EXPECT_TRUE(read.value("files").toBool());
 }
 
 //--------------------------------------------------------------------------------------------------

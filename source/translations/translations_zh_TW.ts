@@ -9,142 +9,132 @@
         <translation>關於</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="60"/>
+        <location filename="../common/desktop/about_dialog.ui" line="64"/>
         <source>General</source>
         <translation>一般</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="90"/>
+        <location filename="../common/desktop/about_dialog.ui" line="94"/>
         <source>Service Information</source>
         <translation>服務詳細資訊</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="112"/>
-        <source>Donate!</source>
-        <translation>捐贈！</translation>
-    </message>
-    <message>
-        <location filename="../common/desktop/about_dialog.ui" line="136"/>
+        <location filename="../common/desktop/about_dialog.ui" line="129"/>
         <source>Close</source>
         <translation>關閉</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="123"/>
+        <location filename="../common/desktop/about_dialog.cc" line="112"/>
         <source>Version: %1 (%2)</source>
         <translation>版本：%1 (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="128"/>
-        <source>Aspia is free software released under GNU General Public License 3.</source>
-        <translation>Aspia 是依 GNU General Public License 3 發布的自由軟體。</translation>
-    </message>
-    <message>
-        <location filename="../common/desktop/about_dialog.cc" line="129"/>
+        <location filename="../common/desktop/about_dialog.cc" line="118"/>
         <source>You can get a copy of license here:</source>
         <translation>您可以在這裡取得授權副本：</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="134"/>
+        <location filename="../common/desktop/about_dialog.cc" line="123"/>
         <source>You can also get a translation of GNU GPL license here:</source>
         <translation>您也可以在這裡取得 GNU GPL 授權的翻譯：</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="138"/>
+        <location filename="../common/desktop/about_dialog.cc" line="127"/>
         <source>Links</source>
         <translation>連結</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="139"/>
+        <location filename="../common/desktop/about_dialog.cc" line="133"/>
         <source>Home page:</source>
         <translation>首頁：</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="140"/>
-        <source>GitHub page:</source>
-        <translation>GitHub 頁面：</translation>
+        <location filename="../common/desktop/about_dialog.cc" line="117"/>
+        <source>Aspia-mod is free software released under GNU General Public License 3.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="143"/>
-        <source>Developers</source>
-        <translation>開發人員</translation>
+        <location filename="../common/desktop/about_dialog.cc" line="128"/>
+        <source>Fork home page:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="145"/>
-        <source>Translators</source>
-        <translation>翻譯人員</translation>
+        <location filename="../common/desktop/about_dialog.cc" line="131"/>
+        <source>Original software developer:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="147"/>
+        <location filename="../common/desktop/about_dialog.cc" line="135"/>
         <source>Third-party components</source>
         <translation>第三方元件</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="149"/>
+        <location filename="../common/desktop/about_dialog.cc" line="137"/>
         <source>Graphics and images</source>
         <translation>圖形與影像</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="150"/>
+        <location filename="../common/desktop/about_dialog.cc" line="138"/>
         <source>Icons by %1</source>
         <translation>圖示由 %1 提供</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="177"/>
+        <location filename="../common/desktop/about_dialog.cc" line="164"/>
         <source>Application</source>
         <translation>應用程式</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="178"/>
+        <location filename="../common/desktop/about_dialog.cc" line="165"/>
         <source>Path: %1</source>
         <translation>路徑：%1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="179"/>
+        <location filename="../common/desktop/about_dialog.cc" line="166"/>
         <source>Logging directory: %1</source>
         <translation>記錄資料夾：%1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="181"/>
+        <location filename="../common/desktop/about_dialog.cc" line="168"/>
         <source>Logging file: %1</source>
         <translation>記錄檔：%1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="186"/>
+        <location filename="../common/desktop/about_dialog.cc" line="173"/>
         <source>Build Information</source>
         <translation>組建資訊</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="187"/>
+        <location filename="../common/desktop/about_dialog.cc" line="174"/>
         <source>Git branch: %1</source>
         <translation>Git 分支：%1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="189"/>
+        <location filename="../common/desktop/about_dialog.cc" line="176"/>
         <source>Git commit: %1</source>
         <translation>Git 提交：%1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="194"/>
+        <location filename="../common/desktop/about_dialog.cc" line="181"/>
         <source>Compilation</source>
         <translation>編譯</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="195"/>
+        <location filename="../common/desktop/about_dialog.cc" line="182"/>
         <source>Compilation date: %1</source>
         <translation>編譯日期：%1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="196"/>
+        <location filename="../common/desktop/about_dialog.cc" line="183"/>
         <source>Compilation time: %1</source>
         <translation>編譯時間：%1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="225"/>
+        <location filename="../common/desktop/about_dialog.cc" line="212"/>
         <source>Version Information</source>
         <translation>版本資訊</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="118"/>
+        <location filename="../common/desktop/about_dialog.cc" line="108"/>
         <source>User: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7919,62 +7909,77 @@ Clear the server and key?</source>
         <translation>註解：</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="167"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="211"/>
         <source>Failed to get list of spaces.</source>
         <translation>無法取得空間清單。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="279"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="323"/>
         <source>Not assigned</source>
         <translation>未指派</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="264"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="308"/>
         <source>Failed to get list of groups.</source>
         <translation>無法取得群組清單。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="199"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="100"/>
+        <source>Notify about viewing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="101"/>
+        <source>Notify about control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="102"/>
+        <source>Notify about files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="243"/>
         <source>Spaces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="252"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="296"/>
         <source>Spaces... (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="337"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="381"/>
         <source>Enter both the user name and the password, or leave both empty.</source>
         <translation>請同時輸入使用者名稱和密碼，或兩者都留空。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="368"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="412"/>
         <source>Failed to save the credentials.</source>
         <translation>無法儲存認證。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="374"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="418"/>
         <source>Failed to save the profile.</source>
         <translation>無法儲存設定檔。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="397"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="442"/>
         <source>Failed to read the list of profiles.</source>
         <translation>無法讀取設定檔清單。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="421"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="466"/>
         <source>Failed to read the list of credentials.</source>
         <translation>無法讀取認證清單。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="455"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="500"/>
         <source>Failed to read the credentials of the host.</source>
         <translation>無法讀取主機的認證。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="460"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="505"/>
         <source>The credentials of the host are damaged. Enter them again.</source>
         <translation>主機的認證已損壞。請重新輸入。</translation>
     </message>

@@ -43,21 +43,11 @@ namespace {
 const char kGplLink[] = "https://www.gnu.org/licenses/gpl.html";
 const char kGplTranslationLink[] = "https://www.gnu.org/licenses/translations.html";
 const char kHomeLink[] = "https://aspia.org";
-const char kGitHubLink[] = "https://github.com/dchapyshev/aspia";
+
+// The home page of this fork: its sources and the description of its changes.
+const char kModificationsLink[] = "https://github.com/alexandrkut/aspia-mod";
 
 const char* kDevelopers[] = { "Dmitry Chapyshev (dmitry@aspia.ru)" };
-
-const char* kTranslators[] =
-{
-    "Dmitry Chapyshev (Russian)",
-    "Felipe Borela (Portuguese Brazilian)",
-    "Giuseppe Bogetti (Italian)",
-    "Gregor Doroschenko (German)",
-    "Lyhyrda Myhaylo (Ukrainian)",
-    "Mark Jansen (Dutch)",
-    "Shun-An Lee (Chinese (Taiwan))",
-    "Wang Qiang (Chinese (China))"
-};
 
 const char* kThirdParty[] =
 {
@@ -119,13 +109,12 @@ AboutDialog::AboutDialog(const QString& application_name, QWidget* parent, const
         label_user->setAlignment(Qt::AlignCenter);
         ui->verticalLayout_3->insertWidget(2, label_user);
     }
-
     ui->label_version->setText(tr("Version: %1 (%2)")
         .arg(ASPIA_VERSION_STRING, QSysInfo::buildCpuArchitecture()));
 
     QString license =
         QString("%1<br>%2<br><a href='%3'>%3</a>")
-        .arg(tr("Aspia is free software released under GNU General Public License 3."),
+        .arg(tr("Aspia-mod is free software released under GNU General Public License 3."),
              tr("You can get a copy of license here:"),
              kGplLink);
 
@@ -134,15 +123,14 @@ AboutDialog::AboutDialog(const QString& application_name, QWidget* parent, const
         .arg(tr("You can also get a translation of GNU GPL license here:"), kGplTranslationLink);
 
     QString links =
-        QString("<b>%1</b><br>%2 <a href='%3'>%3</a><br>%4 <a href='%5'>%5</a>")
+        QString("<b>%1</b><br>%2 <a href='%3'>%3</a>")
         .arg(tr("Links"),
-             tr("Home page:"), kHomeLink,
-             tr("GitHub page:"), kGitHubLink);
+             tr("Fork home page:"), kModificationsLink);
 
     QString developers =
-        createList(tr("Developers"), kDevelopers, std::size(kDevelopers));
-    QString translators =
-        createList(tr("Translators"), kTranslators, std::size(kTranslators));
+        createList(tr("Original software developer:"), kDevelopers, std::size(kDevelopers)) +
+        QString("<br>%1 <a href='%2'>%2</a>")
+            .arg(tr("Home page:"), kHomeLink);
     QString third_party =
         createList(tr("Third-party components"), kThirdParty, std::size(kThirdParty));
     QString icons =
@@ -156,7 +144,6 @@ AboutDialog::AboutDialog(const QString& application_name, QWidget* parent, const
     html += "<p>" + license_translation + "</p>";
     html += "<p>" + links + "</p>";
     html += "<p>" + developers + "</p>";
-    html += "<p>" + translators + "</p>";
     html += "<p>" + third_party + "</p>";
     html += "<p>" + icons + "</p>";
     html += "</body><html>";
@@ -185,9 +172,9 @@ AboutDialog::AboutDialog(const QString& application_name, QWidget* parent, const
 #if defined(GIT_CURRENT_BRANCH) && defined(GIT_COMMIT_HASH)
     service_html += "<p><b>" + tr("Build Information") + "</b><br>"
         + QString("&bull; %1<br>").arg(tr("Git branch: %1")
-            .arg(QString("<a href='%1/tree/%2'>%2</a>").arg(kGitHubLink, GIT_CURRENT_BRANCH)))
+            .arg(QString("<a href='%1/tree/%2'>%2</a>").arg(kModificationsLink, GIT_CURRENT_BRANCH)))
         + QString("&bull; %1").arg(tr("Git commit: %1")
-            .arg(QString("<a href='%1/commit/%2'>%2</a>").arg(kGitHubLink, GIT_COMMIT_HASH)))
+            .arg(QString("<a href='%1/commit/%2'>%2</a>").arg(kModificationsLink, GIT_COMMIT_HASH)))
         + "</p>";
 #endif
 
@@ -227,12 +214,6 @@ AboutDialog::AboutDialog(const QString& application_name, QWidget* parent, const
     service_html += "</body></html>";
 
     service->setHtml(service_html);
-
-    connect(ui->push_button_donate, &QPushButton::clicked, this, []()
-    {
-        LOG(INFO) << "[ACTION] Donate button clicked";
-        QDesktopServices::openUrl(QUrl("https://aspia.org/donate"));
-    });
 
     connect(ui->push_button_close, &QPushButton::clicked, this, [this]()
     {

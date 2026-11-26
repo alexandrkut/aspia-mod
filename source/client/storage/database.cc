@@ -362,6 +362,28 @@ QString Database::readSetting(const QString& name, bool* found) const
 }
 
 //--------------------------------------------------------------------------------------------------
+bool Database::writeSetting(const QString& name, const QString& value)
+{
+    if (!isValid())
+    {
+        LOG(ERROR) << "Database is not valid";
+        return false;
+    }
+
+    SqlQuery query(db_, "INSERT OR REPLACE INTO settings (name, value) VALUES (?, ?)");
+    query.addText(name);
+    query.addText(value);
+
+    if (!query.exec())
+    {
+        LOG(ERROR) << "Unable to execute query:" << db_.lastError();
+        return false;
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
 bool Database::import(const std::optional<RouterConfig>& router,
                       const QList<LocalGroupConfig>& local_groups,
                       const QList<LocalHostConfig>& local_hosts,

@@ -9,142 +9,132 @@
         <translation>バージョン情報</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="60"/>
+        <location filename="../common/desktop/about_dialog.ui" line="64"/>
         <source>General</source>
         <translation>全般</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="90"/>
+        <location filename="../common/desktop/about_dialog.ui" line="94"/>
         <source>Service Information</source>
         <translation>サービス情報</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="112"/>
-        <source>Donate!</source>
-        <translation>寄付する！</translation>
-    </message>
-    <message>
-        <location filename="../common/desktop/about_dialog.ui" line="136"/>
+        <location filename="../common/desktop/about_dialog.ui" line="129"/>
         <source>Close</source>
         <translation>閉じる</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="123"/>
+        <location filename="../common/desktop/about_dialog.cc" line="112"/>
         <source>Version: %1 (%2)</source>
         <translation>バージョン: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="128"/>
-        <source>Aspia is free software released under GNU General Public License 3.</source>
-        <translation>Aspia は GNU General Public License 3 の下で公開されているフリー ソフトウェアです。</translation>
-    </message>
-    <message>
-        <location filename="../common/desktop/about_dialog.cc" line="129"/>
+        <location filename="../common/desktop/about_dialog.cc" line="118"/>
         <source>You can get a copy of license here:</source>
         <translation>ライセンスのコピーはこちらで入手できます:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="134"/>
+        <location filename="../common/desktop/about_dialog.cc" line="123"/>
         <source>You can also get a translation of GNU GPL license here:</source>
         <translation>GNU GPL ライセンスの翻訳はこちらでも入手できます:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="138"/>
+        <location filename="../common/desktop/about_dialog.cc" line="127"/>
         <source>Links</source>
         <translation>リンク</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="139"/>
+        <location filename="../common/desktop/about_dialog.cc" line="133"/>
         <source>Home page:</source>
         <translation>ホーム ページ:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="140"/>
-        <source>GitHub page:</source>
-        <translation>GitHub ページ:</translation>
+        <location filename="../common/desktop/about_dialog.cc" line="117"/>
+        <source>Aspia-mod is free software released under GNU General Public License 3.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="143"/>
-        <source>Developers</source>
-        <translation>開発者</translation>
+        <location filename="../common/desktop/about_dialog.cc" line="128"/>
+        <source>Fork home page:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="145"/>
-        <source>Translators</source>
-        <translation>翻訳者</translation>
+        <location filename="../common/desktop/about_dialog.cc" line="131"/>
+        <source>Original software developer:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="147"/>
+        <location filename="../common/desktop/about_dialog.cc" line="135"/>
         <source>Third-party components</source>
         <translation>サードパーティ コンポーネント</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="149"/>
+        <location filename="../common/desktop/about_dialog.cc" line="137"/>
         <source>Graphics and images</source>
         <translation>グラフィックと画像</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="150"/>
+        <location filename="../common/desktop/about_dialog.cc" line="138"/>
         <source>Icons by %1</source>
         <translation>アイコン提供: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="177"/>
+        <location filename="../common/desktop/about_dialog.cc" line="164"/>
         <source>Application</source>
         <translation>アプリケーション</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="178"/>
+        <location filename="../common/desktop/about_dialog.cc" line="165"/>
         <source>Path: %1</source>
         <translation>パス: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="179"/>
+        <location filename="../common/desktop/about_dialog.cc" line="166"/>
         <source>Logging directory: %1</source>
         <translation>ログ ディレクトリ: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="181"/>
+        <location filename="../common/desktop/about_dialog.cc" line="168"/>
         <source>Logging file: %1</source>
         <translation>ログ ファイル: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="186"/>
+        <location filename="../common/desktop/about_dialog.cc" line="173"/>
         <source>Build Information</source>
         <translation>ビルド情報</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="187"/>
+        <location filename="../common/desktop/about_dialog.cc" line="174"/>
         <source>Git branch: %1</source>
         <translation>Git ブランチ: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="189"/>
+        <location filename="../common/desktop/about_dialog.cc" line="176"/>
         <source>Git commit: %1</source>
         <translation>Git コミット: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="194"/>
+        <location filename="../common/desktop/about_dialog.cc" line="181"/>
         <source>Compilation</source>
         <translation>コンパイル</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="195"/>
+        <location filename="../common/desktop/about_dialog.cc" line="182"/>
         <source>Compilation date: %1</source>
         <translation>コンパイル日: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="196"/>
+        <location filename="../common/desktop/about_dialog.cc" line="183"/>
         <source>Compilation time: %1</source>
         <translation>コンパイル時刻: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="225"/>
+        <location filename="../common/desktop/about_dialog.cc" line="212"/>
         <source>Version Information</source>
         <translation>バージョン情報</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="118"/>
+        <location filename="../common/desktop/about_dialog.cc" line="108"/>
         <source>User: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7919,62 +7909,77 @@ Clear the server and key?</source>
         <translation>コメント:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="167"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="211"/>
         <source>Failed to get list of spaces.</source>
         <translation>スペースの一覧を取得できませんでした。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="279"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="323"/>
         <source>Not assigned</source>
         <translation>未割り当て</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="264"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="308"/>
         <source>Failed to get list of groups.</source>
         <translation>グループの一覧を取得できませんでした。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="199"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="100"/>
+        <source>Notify about viewing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="101"/>
+        <source>Notify about control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="102"/>
+        <source>Notify about files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="243"/>
         <source>Spaces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="252"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="296"/>
         <source>Spaces... (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="337"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="381"/>
         <source>Enter both the user name and the password, or leave both empty.</source>
         <translation>ユーザー名とパスワードの両方を入力するか、両方とも空欄のままにしてください。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="368"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="412"/>
         <source>Failed to save the credentials.</source>
         <translation>資格情報を保存できませんでした。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="374"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="418"/>
         <source>Failed to save the profile.</source>
         <translation>プロファイルを保存できませんでした。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="397"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="442"/>
         <source>Failed to read the list of profiles.</source>
         <translation>プロファイルの一覧を読み取れませんでした。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="421"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="466"/>
         <source>Failed to read the list of credentials.</source>
         <translation>資格情報の一覧を読み取れませんでした。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="455"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="500"/>
         <source>Failed to read the credentials of the host.</source>
         <translation>ホストの資格情報を読み取れませんでした。</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="460"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="505"/>
         <source>The credentials of the host are damaged. Enter them again.</source>
         <translation>ホストの資格情報が破損しています。もう一度入力してください。</translation>
     </message>

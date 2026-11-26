@@ -19,9 +19,13 @@
 #include "client/desktop/management/router_host_dialog.h"
 
 #include <QAbstractButton>
+#include <QCheckBox>
 #include <QDialogButtonBox>
+#include <QGridLayout>
 #include <QHash>
 #include <QIcon>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QLabel>
 #include <QListWidget>
 #include <QPushButton>
@@ -34,9 +38,11 @@
 #include "base/logging.h"
 #include "base/crypto/secure_string.h"
 #include "base/peer/host_id.h"
+#include "client/config.h"
 #include "client/desktop/management/group_combo_box.h"
 #include "client/desktop/management/ui_router_host_dialog.h"
 #include "client/router/router_controller.h"
+#include "client/storage/database.h"
 #include "client/storage/router_host_store.h"
 #include "client/storage/user_settings.h"
 #include "common/desktop/dialog_button_box.h"
@@ -89,6 +95,44 @@ RouterHostDialog::RouterHostDialog(const RouterHost& host, QWidget* parent)
         ui->edit_comment->setReadOnly(true);
         ui->combo_group->setEnabled(false);
     }
+
+    // Notify options (per host), visible only for ADMIN router sessions.
+    checkbox_notify_view_ = new QCheckBox(tr("Notify about viewing"), this);
+    checkbox_notify_control_ = new QCheckBox(tr("Notify about control"), this);
+    checkbox_notify_files_ = new QCheckBox(tr("Notify about files"), this);
+
+    checkbox_notify_view_->setChecked(false);
+    checkbox_notify_control_->setChecked(true);
+    checkbox_notify_files_->setChecked(true);
+
+    // Load stored values.
+    {
+        HostConfig notify_host = HostConfig::forRouterHost(host_.host_id, host_.computer_name);
+        QString value;
+        for (const QString& key : notify_host.notifySettingsKeys())
+        {
+            value = Database::instance().readSetting(key);
+            if (!value.isEmpty())
+                break;
+        }
+        QJsonDocument doc = QJsonDocument::fromJson(value.toUtf8());
+        QJsonObject obj = doc.isObject() ? doc.object() : QJsonObject();
+        if (obj.contains("view")) checkbox_notify_view_->setChecked(obj.value("view").toBool());
+        if (obj.contains("control")) checkbox_notify_control_->setChecked(obj.value("control").toBool());
+        if (obj.contains("files")) checkbox_notify_files_->setChecked(obj.value("files").toBool());
+    }
+
+    bool is_admin = session && session->config().sessionType() == proto::router::SESSION_TYPE_ADMIN;
+    checkbox_notify_view_->setVisible(is_admin);
+    checkbox_notify_control_->setVisible(is_admin);
+    checkbox_notify_files_->setVisible(is_admin);
+
+    // The form occupies rows 0-7; the switches go below it, spanning both columns.
+    QGridLayout* grid = ui->gridLayout;
+    int row = 8;
+    grid->addWidget(checkbox_notify_view_, row++, 0, 1, 2);
+    grid->addWidget(checkbox_notify_control_, row++, 0, 1, 2);
+    grid->addWidget(checkbox_notify_files_, row++, 0, 1, 2);
 
     // A temporary host id is handed out at random and comes back for another machine, so what was
     // saved under it would be sent to a host the user never gave it to. Such a host is edited like
@@ -376,6 +420,7 @@ void RouterHostDialog::onButtonBoxClicked(QAbstractButton* button)
     }
 
     RouterController::startSyncRecordExchange();
+    saveNotifySettings();
 
     if (session->config().sessionType() == proto::router::SESSION_TYPE_OPERATOR)
     {
@@ -520,6 +565,30 @@ void RouterHostDialog::fetchGroups()
     ui->button_box->button(QDialogButtonBox::Ok)->setEnabled(false);
     session->listGroups(RouterSession::CachePolicy::RELOAD, workspace_id,
                         { this, &RouterHostDialog::onGroupListReceived });
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostDialog::saveNotifySettings()
+{
+    QJsonObject obj;
+    obj.insert("view", checkbox_notify_view_ ? checkbox_notify_view_->isChecked() : false);
+    obj.insert("control", checkbox_notify_control_ ? checkbox_notify_control_->isChecked() : true);
+    obj.insert("files", checkbox_notify_files_ ? checkbox_notify_files_->isChecked() : true);
+    QJsonDocument doc(obj);
+
+    HostConfig notify_host = HostConfig::forRouterHost(host_.host_id, host_.computer_name);
+    const QStringList keys = notify_host.notifySettingsKeys();
+    if (keys.isEmpty())
+    {
+        LOG(ERROR) << "No key for the notification settings of host" << host_.host_id;
+        return;
+    }
+
+    if (!Database::instance().writeSetting(keys.front(),
+                                           QString::fromUtf8(doc.toJson(QJsonDocument::Compact))))
+    {
+        LOG(ERROR) << "Unable to save the notification settings of host" << host_.host_id;
+    }
 }
 
 //--------------------------------------------------------------------------------------------------

@@ -20,6 +20,7 @@
 #define CLIENT_DESKTOP_MANAGEMENT_ROUTER_HOST_DIALOG_H
 
 #include <QDialog>
+#include <QCheckBox>
 
 #include <memory>
 
@@ -71,6 +72,7 @@ private:
     bool saveCredentials();
     bool saveProfile();
     void setCredentialsEnabled(bool enable);
+    void saveNotifySettings();
 
     std::unique_ptr<Ui::RouterHostDialog> ui;
     RouterHost host_;
@@ -83,6 +85,10 @@ private:
     // between the popup and the submit.
     QList<RouterWorkspace> workspaces_;
     QList<qint64> checked_workspace_ids_;
+
+    QCheckBox* checkbox_notify_view_ = nullptr;
+    QCheckBox* checkbox_notify_control_ = nullptr;
+    QCheckBox* checkbox_notify_files_ = nullptr;
 
     friend class RouterHostDialogTestPeer;
     Q_DISABLE_COPY_MOVE(RouterHostDialog)

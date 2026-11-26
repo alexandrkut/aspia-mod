@@ -23,7 +23,7 @@
       </font>
      </property>
      <property name="text">
-      <string notr="true">Aspia</string>
+      <string notr="true">Aspia-mod</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -43,7 +43,11 @@
    <item>
     <widget class="QLabel" name="label_copyright">
      <property name="text">
-      <string notr="true">© 2016-2026 Dmitry Chapyshev</string>
+      <string notr="true">Форк проекта https://aspia.org/
+автор оригинального ПО никакого отношения к этому форку не имеет</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -106,17 +110,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="push_button_donate">
-       <property name="text">
-        <string>Donate!</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../resources/common.qrc">
-         <normaloff>:/img/love.svg</normaloff>:/img/love.svg</iconset>
-       </property>
-      </widget>
-     </item>
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">

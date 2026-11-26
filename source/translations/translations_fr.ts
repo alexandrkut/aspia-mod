@@ -9,142 +9,132 @@
         <translation>A propos de</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="60"/>
+        <location filename="../common/desktop/about_dialog.ui" line="64"/>
         <source>General</source>
         <translation>Général</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="90"/>
+        <location filename="../common/desktop/about_dialog.ui" line="94"/>
         <source>Service Information</source>
         <translation>Informations sur les services</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.ui" line="112"/>
-        <source>Donate!</source>
-        <translation>Faites un don!</translation>
-    </message>
-    <message>
-        <location filename="../common/desktop/about_dialog.ui" line="136"/>
+        <location filename="../common/desktop/about_dialog.ui" line="129"/>
         <source>Close</source>
         <translation>Fermer</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="123"/>
+        <location filename="../common/desktop/about_dialog.cc" line="112"/>
         <source>Version: %1 (%2)</source>
         <translation>Version: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="128"/>
-        <source>Aspia is free software released under GNU General Public License 3.</source>
-        <translation>Aspia est un logiciel libre publié sous la licence GNU General Public License 3.</translation>
-    </message>
-    <message>
-        <location filename="../common/desktop/about_dialog.cc" line="129"/>
+        <location filename="../common/desktop/about_dialog.cc" line="118"/>
         <source>You can get a copy of license here:</source>
         <translation>Vous pouvez obtenir une copie de la licence ici:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="134"/>
+        <location filename="../common/desktop/about_dialog.cc" line="123"/>
         <source>You can also get a translation of GNU GPL license here:</source>
         <translation>Vous pouvez également obtenir une traduction de la licence GNU GPL ici:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="138"/>
+        <location filename="../common/desktop/about_dialog.cc" line="127"/>
         <source>Links</source>
         <translation>Liens</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="139"/>
+        <location filename="../common/desktop/about_dialog.cc" line="133"/>
         <source>Home page:</source>
         <translation>Page d&apos;accueil:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="140"/>
-        <source>GitHub page:</source>
-        <translation>Page GitHub:</translation>
+        <location filename="../common/desktop/about_dialog.cc" line="117"/>
+        <source>Aspia-mod is free software released under GNU General Public License 3.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="143"/>
-        <source>Developers</source>
-        <translation>Développeurs</translation>
+        <location filename="../common/desktop/about_dialog.cc" line="128"/>
+        <source>Fork home page:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="145"/>
-        <source>Translators</source>
-        <translation>Traducteurs</translation>
+        <location filename="../common/desktop/about_dialog.cc" line="131"/>
+        <source>Original software developer:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="147"/>
+        <location filename="../common/desktop/about_dialog.cc" line="135"/>
         <source>Third-party components</source>
         <translation>Composants tiers</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="149"/>
+        <location filename="../common/desktop/about_dialog.cc" line="137"/>
         <source>Graphics and images</source>
         <translation>Graphiques et images</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="150"/>
+        <location filename="../common/desktop/about_dialog.cc" line="138"/>
         <source>Icons by %1</source>
         <translation>Icônes de %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="177"/>
+        <location filename="../common/desktop/about_dialog.cc" line="164"/>
         <source>Application</source>
         <translation>Application</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="178"/>
+        <location filename="../common/desktop/about_dialog.cc" line="165"/>
         <source>Path: %1</source>
         <translation>Chemin: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="179"/>
+        <location filename="../common/desktop/about_dialog.cc" line="166"/>
         <source>Logging directory: %1</source>
         <translation>Répertoire des journaux: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="181"/>
+        <location filename="../common/desktop/about_dialog.cc" line="168"/>
         <source>Logging file: %1</source>
         <translation>Fichier journal: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="186"/>
+        <location filename="../common/desktop/about_dialog.cc" line="173"/>
         <source>Build Information</source>
         <translation>Informations de compilation</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="187"/>
+        <location filename="../common/desktop/about_dialog.cc" line="174"/>
         <source>Git branch: %1</source>
         <translation>Branche Git: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="189"/>
+        <location filename="../common/desktop/about_dialog.cc" line="176"/>
         <source>Git commit: %1</source>
         <translation>Commit Git: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="194"/>
+        <location filename="../common/desktop/about_dialog.cc" line="181"/>
         <source>Compilation</source>
         <translation>Compilation</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="195"/>
+        <location filename="../common/desktop/about_dialog.cc" line="182"/>
         <source>Compilation date: %1</source>
         <translation>Date de compilation: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="196"/>
+        <location filename="../common/desktop/about_dialog.cc" line="183"/>
         <source>Compilation time: %1</source>
         <translation>Heure de compilation: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="225"/>
+        <location filename="../common/desktop/about_dialog.cc" line="212"/>
         <source>Version Information</source>
         <translation>Informations de version</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="118"/>
+        <location filename="../common/desktop/about_dialog.cc" line="108"/>
         <source>User: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7953,62 +7943,77 @@ Clear the server and key?</source>
         <translation>Commentaire:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="167"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="211"/>
         <source>Failed to get list of spaces.</source>
         <translation>Impossible d&apos;obtenir la liste des espaces.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="279"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="323"/>
         <source>Not assigned</source>
         <translation>Non affecté</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="264"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="308"/>
         <source>Failed to get list of groups.</source>
         <translation>Impossible d&apos;obtenir la liste des groupes.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="199"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="100"/>
+        <source>Notify about viewing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="101"/>
+        <source>Notify about control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="102"/>
+        <source>Notify about files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="243"/>
         <source>Spaces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="252"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="296"/>
         <source>Spaces... (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="337"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="381"/>
         <source>Enter both the user name and the password, or leave both empty.</source>
         <translation>Saisissez à la fois le nom d&apos;utilisateur et le mot de passe, ou laissez les deux vides.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="368"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="412"/>
         <source>Failed to save the credentials.</source>
         <translation>Impossible d&apos;enregistrer les identifiants.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="374"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="418"/>
         <source>Failed to save the profile.</source>
         <translation>Impossible d&apos;enregistrer le profil.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="397"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="442"/>
         <source>Failed to read the list of profiles.</source>
         <translation>Impossible de lire la liste des profils.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="421"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="466"/>
         <source>Failed to read the list of credentials.</source>
         <translation>Impossible de lire la liste des identifiants.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="455"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="500"/>
         <source>Failed to read the credentials of the host.</source>
         <translation>Impossible de lire les identifiants de l&apos;hôte.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="460"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="505"/>
         <source>The credentials of the host are damaged. Enter them again.</source>
         <translation>Les identifiants de l&apos;hôte sont endommagés. Saisissez-les à nouveau.</translation>
     </message>
