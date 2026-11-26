@@ -302,23 +302,12 @@ void ClientWorker::onNewConnection()
         LOG(INFO) << "New client session:" << session_type << "(" << channel->peerAddress() << ")";
 
         // The number of the build of the line of the versions tells nothing about the
-        // compatibility, so the versions are compared by the three numbers that matter. Only
-        // clients older than the oldest accepted mod line are rejected. A client at or above that
-        // line is let in even when the router is newer: mod 3.4.3.x clients connect to a 3.5.2
-        // router. Sync messages are only sent to clients that asked for sync, so an older client
-        // never receives traffic it cannot understand.
-        const QVersionNumber client_version = compatibilityVersion(channel->peerVersion());
-        if (!isClientVersionAccepted(channel->peerVersion()))
+        // compatibility, so the versions are compared by the three numbers that matter.
+        if (compatibilityVersion(kCurrentVersion) > compatibilityVersion(channel->peerVersion()))
         {
             LOG(WARNING) << "Version mismatch (router:" << kCurrentVersion << "client:"
                          << channel->peerVersion() << "). Rejected";
             continue;
-        }
-
-        if (client_version < compatibilityVersion(kCurrentVersion))
-        {
-            LOG(WARNING) << "Client is older than the router (router:" << kCurrentVersion
-                         << "client:" << channel->peerVersion() << "). Accepted";
         }
 
         if (isUserLimitReached(channel->peerUserId()))

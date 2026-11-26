@@ -27,7 +27,6 @@
 #include <memory>
 
 #include "base/serialization.h"
-#include "base/version_constants.h"
 #include "base/crypto/totp.h"
 #include "proto/router_sync.h"
 #include "router/client_admin.h"
@@ -96,27 +95,6 @@ TEST(ClientWorkerTest, UnknownSessionSelectsNothing)
 {
     EXPECT_TRUE(ClientWorker::sessionsToStop(kSessions, 12345, kAdminSession).empty());
     EXPECT_TRUE(ClientWorker::sessionsToStop({}, 1, kAdminSession).empty());
-}
-
-//--------------------------------------------------------------------------------------------------
-// A mod 3.4.3.x client is old enough to be behind a 3.5.2 router, but it still speaks the same
-// protocol: its third number is at the minimum, and the fourth build number is ignored.
-TEST(ClientWorkerTest, OlderModClientIsAccepted)
-{
-    EXPECT_TRUE(isClientVersionAccepted(QVersionNumber({ 3, 4, 3, 4 })));
-    EXPECT_TRUE(isClientVersionAccepted(QVersionNumber(3, 4, 3)));
-    EXPECT_TRUE(isClientVersionAccepted(QVersionNumber(3, 5, 2)));
-}
-
-//--------------------------------------------------------------------------------------------------
-// A client older than the oldest accepted mod line is rejected. Sync traffic is only sent to
-// clients that asked for it, so letting the older ones in would be unsafe.
-TEST(ClientWorkerTest, ClientOlderThanTheMinimumIsRejected)
-{
-    EXPECT_FALSE(isClientVersionAccepted(QVersionNumber(3, 0, 0)));
-    EXPECT_FALSE(isClientVersionAccepted(QVersionNumber(3, 2, 0)));
-    EXPECT_FALSE(isClientVersionAccepted(QVersionNumber(3, 4, 2)));
-    EXPECT_FALSE(isClientVersionAccepted(QVersionNumber(2, 7, 0)));
 }
 
 // The list of live sessions, the stop command and the timer are private to the worker; the peer

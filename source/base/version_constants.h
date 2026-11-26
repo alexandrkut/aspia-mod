@@ -23,12 +23,6 @@
 
 extern const QVersionNumber kCurrentVersion;
 extern const QVersionNumber kMinimumSupportedVersion;
-
-// The oldest mod client a router of this line still accepts. A client of an older line is rejected
-// even if its three compatibility numbers are formally supported, because the router cannot
-// guarantee the protocol it speaks. Clients at or above this version are let in even when they are
-// older than the router: mod 3.4.3.x clients talk to a 3.5.2 router without a problem.
-extern const QVersionNumber kMinimumSupportedClientVersion;
 extern const QVersionNumber kVersion_3_0_0;
 extern const QVersionNumber kVersion_3_0_34;
 
@@ -37,10 +31,6 @@ extern const QVersionNumber kVersion_3_0_34;
 // versions, and it tells nothing about the compatibility: the builds of the same line of the
 // versions work with each other.
 QVersionNumber compatibilityVersion(const QVersionNumber& version);
-
-// A router accepts a client whose compatibility version is at least the oldest accepted mod line.
-// The fourth number of the client version is ignored: 3.4.3.4 and 3.4.3 are the same line here.
-bool isClientVersionAccepted(const QVersionNumber& client_version);
 extern const QVersionNumber kVersion_3_2_0;
 extern const QVersionNumber kVersion_3_3_0;
 
