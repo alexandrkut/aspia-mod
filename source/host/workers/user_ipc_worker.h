@@ -55,6 +55,8 @@ public:
               computer_name(QString::fromStdString(event.computer_name())),
               display_name(QString::fromStdString(event.display_name())),
               session_type(event.session_type()),
+              notify_suppressed(event.notify_suppressed()),
+              view_only(event.view_only()),
               via_router(event.via_router())
         {
             // Nothing
@@ -64,6 +66,8 @@ public:
         QString computer_name;
         QString display_name;
         proto::peer::SessionType session_type;
+        bool notify_suppressed = false;
+        bool view_only = false;
         bool via_router = false;
     };
 

@@ -257,7 +257,7 @@ protected:
     // Opens a client channel and starts the handshake. Returns once the connect is under way, not
     // once it has completed.
     void connectClient(quint16 port, const QString& user_name, const QString& password,
-                       quint32 session_type)
+                       quint32 session_type, bool notify_suppressed = false)
     {
         worker_->invoke([&]()
         {
@@ -266,6 +266,7 @@ protected:
             authenticator->setUserName(user_name);
             authenticator->setPassword(SecureString(password));
             authenticator->setSessionType(session_type);
+            authenticator->setNotifySuppressed(notify_suppressed);
 
             client_channel_ = new TcpChannelNative(TcpChannel::Type::DIRECT, authenticator);
 
@@ -431,6 +432,36 @@ TEST_F(TcpChannelTest, HandshakeCompletesAndCarriesTheIdentity)
         EXPECT_FALSE(server_channel_->peerVersion().isNull());
         EXPECT_FALSE(server_channel_->peerOsName().empty());
         EXPECT_FALSE(server_channel_->peerComputerName().empty());
+    });
+}
+
+//--------------------------------------------------------------------------------------------------
+// A client may ask to hide its session from the host notifier, but the request is only honoured
+// when the router marked the caller as an administrator in the connection offer. The mark arrives
+// after the handshake, so the gate is evaluated at read time on the server channel.
+TEST_F(TcpChannelTest, NotifySuppressedIsHonouredOnlyForAnAdminCaller)
+{
+    const quint16 port = startServer();
+    ASSERT_NE(port, 0);
+
+    connectClient(port, QLatin1String(kUserName), QLatin1String(kPassword),
+                  kAllowedSessionType, /*notify_suppressed=*/true);
+
+    ASSERT_TRUE(client_authenticated_.wait(1, kWaitTimeout));
+    ASSERT_TRUE(accepted_.wait(1, kWaitTimeout));
+    ASSERT_NE(server_channel_, nullptr);
+
+    worker_->invoke([this]()
+    {
+        // An ordinary session cannot suppress its notification: the offer carried no admin mark.
+        server_channel_->setCallerIsAdmin(false);
+        EXPECT_FALSE(server_channel_->peerCallerIsAdmin());
+        EXPECT_FALSE(server_channel_->peerNotifySuppressed());
+
+        // The router stamps admin sessions in the offer. Only then does suppression take effect.
+        server_channel_->setCallerIsAdmin(true);
+        EXPECT_TRUE(server_channel_->peerCallerIsAdmin());
+        EXPECT_TRUE(server_channel_->peerNotifySuppressed());
     });
 }
 

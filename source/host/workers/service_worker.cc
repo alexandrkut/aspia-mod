@@ -318,6 +318,8 @@ void ServiceWorker::onNewRelayConnection()
         pending.stun_host = connection->stun_host;
         pending.stun_port = connection->stun_port;
         pending.via_router = true;
+        if (connection->tcp_channel)
+            connection->tcp_channel->setCallerIsAdmin(connection->caller_is_admin);
         startConfirmation(pending);
     }
 }
@@ -362,6 +364,8 @@ void ServiceWorker::onUserSessionAttached()
                 quint32 client_id = client->clientId();
 
                 user_session_->sendConnectEvent(client_id, session_type, computer_name, display_name,
+                               client->tcpChannel()->peerNotifySuppressed(),
+                               client->tcpChannel()->peerViewOnly(),
                                client->via_router);
             }
             break;
@@ -803,6 +807,19 @@ void ServiceWorker::connectToRouter(const Location& location)
 
     LOG(INFO) << "Connecting to router from" << location;
     router_manager_ = new RouterManager(std::make_unique<DatabaseConfigProvider>(Database::instance()), this);
+    connect(router_manager_, &RouterManager::sig_checkUserSessions, this,
+        [this](const QString& username, bool* result)
+        {
+            *result = false;
+            for (auto* client : clients_)
+            {
+                if (client && client->userName() == username.toStdString())
+                {
+                    *result = true;
+                    break;
+                }
+            }
+        }, Qt::DirectConnection);
 
     connect(router_manager_, &RouterManager::sig_routerStateChanged, user_session_, &UserSession::onRouterStateChanged);
     connect(router_manager_, &RouterManager::sig_credentialsChanged, user_session_, &UserSession::onUpdateCredentials);

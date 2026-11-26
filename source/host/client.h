@@ -131,6 +131,11 @@ private:
 
     bool finished_emitted_ = false;
     TcpChannel* tcp_channel_ = nullptr;
+
+public:
+    TcpChannel* tcpChannel() const { return tcp_channel_; }
+
+private:
     UdpState udp_state_ = UdpState::DISCONNECTED;
     ScopedQPointer<UdpChannel> udp_channel_;
 

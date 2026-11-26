@@ -156,6 +156,13 @@ public:
     const std::string& peerUserName() const { return user_name_; }
     qint64 peerUserId() const { return user_id_; }
     quint32 peerSessionType() const { return session_type_; }
+    // The admin mark from the offer can only be set after the authentication is over, so the
+    // gate is evaluated here, at read time: suppression works only for an admin caller.
+    bool peerNotifySuppressed() const { return notify_suppressed_ && caller_is_admin_; }
+    bool peerViewOnly() const { return view_only_; }
+    bool peerCallerIsAdmin() const { return caller_is_admin_; }
+    bool callerIsAdmin() const { return caller_is_admin_; }
+    void setCallerIsAdmin(bool value) { caller_is_admin_ = value; }
 
 signals:
     void sig_connected();
@@ -268,6 +275,9 @@ private:
     std::string user_name_;
     qint64 user_id_ = 0;
     quint32 session_type_ = 0;
+    bool notify_suppressed_ = false;
+    bool view_only_ = false;
+    bool caller_is_admin_ = false;
 
     qint64 total_tx_ = 0;
     qint64 total_rx_ = 0;
