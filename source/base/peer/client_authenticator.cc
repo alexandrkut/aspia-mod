@@ -615,10 +615,15 @@ void ClientAuthenticator::sendSessionResponse()
     response.set_session_type(session_type_);
 
     proto::peer::Version* version = response.mutable_version();
-    version->set_major(ASPIA_VERSION_MAJOR);
-    version->set_minor(ASPIA_VERSION_MINOR);
-    version->set_patch(ASPIA_VERSION_PATCH);
-    version->set_revision(GIT_COMMIT_COUNT);
+    // The router compares the three compatibility numbers only, and the build number of this line
+    // of the versions does not take part in that comparison. Report the three numbers, with the
+    // revision left empty, so a four-segment client is seen by the router as its three-segment
+    // line.
+    const QVersionNumber client_version = compatibilityVersion(kCurrentVersion);
+    version->set_major(client_version.majorVersion());
+    version->set_minor(client_version.minorVersion());
+    version->set_patch(client_version.microVersion());
+    version->set_revision(0);
 
     response.set_os_name(SysInfo::operatingSystemName().toStdString());
     response.set_computer_name(SysInfo::computerName().toStdString());
