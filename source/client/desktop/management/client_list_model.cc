@@ -24,11 +24,13 @@
 
 #include <algorithm>
 
+#include "base/peer/user.h"
 #include "proto/peer.h"
+#include "proto/router_admin.h"
 
 namespace {
 
-constexpr int kColumnCount = 7;
+constexpr int kColumnCount = 8;
 
 } // namespace
 
@@ -157,6 +159,9 @@ QVariant ClientListModel::headerData(int section, Qt::Orientation orientation, i
 
         case Column::OS:
             return tr("Operating System");
+
+        case Column::CLIENT_TYPE:
+            return tr("Type");
     }
 
     return QVariant();
@@ -232,6 +237,13 @@ QString ClientListModel::textAt(const proto::router::ClientInfo& client, Column 
 
         case Column::OS:
             return QString::fromStdString(client.os_name());
+
+        case Column::CLIENT_TYPE:
+            // The account type comes from the router. The name suffix stays as a display fallback
+            // for an older router that does not send the type; neither one grants access here.
+            return client.user_type() == proto::router::USER_TYPE_QUICK_SUPPORT ||
+                   User::isQuickSupportName(QString::fromStdString(client.user_name()))
+                ? tr("Quick Support") : QString();
     }
 
     return QString();

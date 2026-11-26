@@ -25,6 +25,7 @@
 
 namespace proto::router {
 enum SessionType : int;
+enum UserType : int;
 } // namespace proto::router
 
 class UserEditModel
@@ -54,6 +55,7 @@ public:
 
     bool snapshotEnabled() const;
     proto::router::SessionType snapshotAccessLevel() const;
+    proto::router::UserType snapshotUserType() const;
     QString snapshotEmail() const;
 
     //----------------------------------------------------------------------------------------------
@@ -71,6 +73,9 @@ public:
     void setAccessLevelIntent(proto::router::SessionType level);
     proto::router::SessionType desiredAccessLevel() const;
 
+    void setUserTypeIntent(proto::router::UserType type);
+    proto::router::UserType desiredUserType() const;
+
     void setEmailIntent(const QString& email);
     QString desiredEmail() const;
     bool emailTouched() const { return email_intent_.has_value(); }
@@ -86,6 +91,7 @@ public:
 
     quint32 flagsForSave() const;
     quint32 sessionsForSave() const;
+    proto::router::UserType userTypeForSave() const;
     QString emailForSave() const;
 
 private:
@@ -94,6 +100,7 @@ private:
     RouterUser snapshot_;
     std::optional<bool> enabled_intent_;
     std::optional<proto::router::SessionType> access_level_intent_;
+    std::optional<proto::router::UserType> user_type_intent_;
     std::optional<QString> email_intent_;
     bool account_changed_ = true; // Create mode edits the account by definition.
     bool loaded_ = false;

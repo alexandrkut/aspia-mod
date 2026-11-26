@@ -26,6 +26,7 @@
 #include <memory>
 
 #include "proto/peer.h"
+#include "proto/router_admin.h"
 
 namespace {
 
@@ -146,7 +147,7 @@ private:
 TEST_F(ClientListModelTest, EmptyModelHasItsColumnsAndNoRows)
 {
     EXPECT_EQ(model()->rowCount(), 0);
-    EXPECT_EQ(model()->columnCount(), 7);
+    EXPECT_EQ(model()->columnCount(), 8);
     EXPECT_EQ(model()->clientAt(0), nullptr);
     EXPECT_EQ(model()->rowOf(1), -1);
 }
@@ -162,10 +163,12 @@ TEST_F(ClientListModelTest, HeaderNamesTheColumnOfItsSection)
               QString("Connect Time"));
     EXPECT_EQ(model()->headerData(6, Qt::Horizontal, Qt::DisplayRole).toString(),
               QString("Operating System"));
+    EXPECT_EQ(model()->headerData(7, Qt::Horizontal, Qt::DisplayRole).toString(),
+              QString("Type"));
 
     // A vertical header is not ours to fill, and a section outside the table has no name.
     EXPECT_FALSE(model()->headerData(0, Qt::Vertical, Qt::DisplayRole).isValid());
-    EXPECT_FALSE(model()->headerData(9, Qt::Horizontal, Qt::DisplayRole).isValid());
+    EXPECT_FALSE(model()->headerData(8, Qt::Horizontal, Qt::DisplayRole).isValid());
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -181,6 +184,34 @@ TEST_F(ClientListModelTest, RowShowsTheFieldsOfItsSession)
     EXPECT_EQ(textAt(model(), 0, Column::ARCHITECTURE), QString("x86_64"));
     EXPECT_EQ(textAt(model(), 0, Column::OS), QString("Windows 11"));
     EXPECT_FALSE(textAt(model(), 0, Column::CONNECT_TIME).isEmpty());
+}
+
+//--------------------------------------------------------------------------------------------------
+// The account type reported by the router is what the column shows, even for a name with no suffix.
+TEST_F(ClientListModelTest, QuickSupportIsShownInTheTypeColumn)
+{
+    proto::router::ClientList list;
+    addClient(&list, 1, "host", "support", 1000);
+    addClient(&list, 2, "host", "operator", 1000);
+    list.mutable_client(0)->set_user_type(proto::router::USER_TYPE_QUICK_SUPPORT);
+
+    model()->setClients(list);
+
+    EXPECT_EQ(textAt(model(), 0, Column::CLIENT_TYPE), QString("Quick Support"));
+    EXPECT_TRUE(textAt(model(), 1, Column::CLIENT_TYPE).isEmpty());
+}
+
+//--------------------------------------------------------------------------------------------------
+// An older router does not send the account type. The "-qs" suffix still identifies the session in
+// the list; the router, old or new, never decides access from that name.
+TEST_F(ClientListModelTest, NameSuffixIsTheFallbackForAnOldRouter)
+{
+    proto::router::ClientList list;
+    addClient(&list, 1, "host", "operator-qs", 1000);
+
+    model()->setClients(list);
+
+    EXPECT_EQ(textAt(model(), 0, Column::CLIENT_TYPE), QString("Quick Support"));
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -309,5 +340,5 @@ TEST_F(ClientListModelTest, ClearDropsTheRows)
     model()->clear();
 
     EXPECT_EQ(model()->rowCount(), 0);
-    EXPECT_EQ(model()->columnCount(), 7);
+    EXPECT_EQ(model()->columnCount(), 8);
 }

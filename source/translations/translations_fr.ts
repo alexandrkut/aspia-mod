@@ -1056,39 +1056,49 @@
 <context>
     <name>ClientListModel</name>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="141"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="143"/>
         <source>Computer Name</source>
         <translation>Nom de l&apos;ordinateur</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="144"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="146"/>
         <source>User Name</source>
         <translation>Nom d&apos;utilisateur</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="147"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="149"/>
         <source>IP Address</source>
         <translation>Adresse IP</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="150"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="152"/>
         <source>Connect Time</source>
         <translation>Heure de connexion</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="153"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="155"/>
         <source>Version</source>
         <translation>Version</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="156"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="158"/>
         <source>Architecture</source>
         <translation>Architecture</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="159"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="161"/>
         <source>Operating System</source>
         <translation>Système d&apos;exploitation</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/client_list_model.cc" line="164"/>
+        <source>Type</source>
+        <translation type="unfinished">Type</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/client_list_model.cc" line="246"/>
+        <source>Quick Support</source>
+        <translation type="unfinished">Assistance rapide</translation>
     </message>
 </context>
 <context>
@@ -6876,12 +6886,12 @@ Identifiants remplacés: %2</translation>
 <context>
     <name>Router2FA</name>
     <message>
-        <location filename="../client/router/router_2fa.cc" line="276"/>
+        <location filename="../client/router/router_2fa.cc" line="280"/>
         <source>Router %1 did not perform two-factor authentication. Signing in is not possible.</source>
         <translation>Le routeur %1 n&apos;a pas effectué l&apos;authentification à deux facteurs. La connexion est impossible.</translation>
     </message>
     <message>
-        <location filename="../client/router/router_2fa.cc" line="296"/>
+        <location filename="../client/router/router_2fa.cc" line="300"/>
         <source>Signed in as another user. Data synchronization has been turned off.</source>
         <translation>Connecté en tant qu&apos;autre utilisateur. La synchronisation des données a été désactivée.</translation>
     </message>
@@ -8799,57 +8809,62 @@ Clear the server and key?</source>
         <translation>Déconnecter toutes les sessions</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="333"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="359"/>
         <source>Resetting two-factor authentication will sign this user out of all sessions and force them to enroll again on next login. Continue?</source>
         <translation>La réinitialisation de l&apos;authentification à deux facteurs déconnectera cet utilisateur de toutes les sessions et l&apos;obligera à s&apos;inscrire à nouveau lors de la prochaine connexion. Continuer?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="385"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="411"/>
         <source>Are you sure you want to sign this user out of this session?</source>
         <translation>Voulez-vous vraiment déconnecter cet utilisateur de cette session?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="410"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="436"/>
         <source>Are you sure you want to sign this user out of all sessions?</source>
         <translation>Voulez-vous vraiment déconnecter cet utilisateur de toutes les sessions?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="524"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="550"/>
         <source>The passwords you entered do not match.</source>
         <translation>Les mots de passe saisis ne correspondent pas.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="202"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="228"/>
         <source>Failed to get list of users.</source>
         <translation>Impossible d&apos;obtenir la liste des utilisateurs.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="230"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="98"/>
+        <source>Quick Support</source>
+        <translation type="unfinished">Assistance rapide</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="256"/>
         <source>The user was deleted from another console.</source>
         <translation>L&apos;utilisateur a été supprimé depuis une autre console.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="331"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="357"/>
         <source>Resetting two-factor authentication will sign you out of all sessions and force you to enroll again on next login. Continue?</source>
         <translation>La réinitialisation de l&apos;authentification à deux facteurs vous déconnectera de toutes les sessions et vous obligera à vous inscrire à nouveau lors de la prochaine connexion. Continuer?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="384"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="410"/>
         <source>This is the token of your current session. Revoking it will disconnect you. Continue?</source>
         <translation>Ceci est le jeton de votre session actuelle. Sa révocation vous déconnectera. Continuer?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="496"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="522"/>
         <source>The email address is invalid.</source>
         <translation>L&apos;adresse e-mail n&apos;est pas valide.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="511"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="537"/>
         <source>The user name can not be empty and can contain only alphabet characters, numbers and _, -, ., @ characters. It can not consist of digits only.</source>
         <translation>Le nom d&apos;utilisateur ne peut pas être vide et ne peut contenir que des lettres, des chiffres et les caractères _, -, ., @. Il ne peut pas être composé uniquement de chiffres.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="535"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="561"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>Le mot de passe ne doit pas comporter moins de %n caractère.</numerusform>
@@ -8857,7 +8872,7 @@ Clear the server and key?</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="536"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="562"/>
         <source>The password can not be longer than %n characters.</source>
         <translation>
             <numerusform>Le mot de passe ne doit pas dépasser %n caractère.</numerusform>
@@ -8865,12 +8880,12 @@ Clear the server and key?</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="547"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="573"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>Le mot de passe saisi ne répond pas aux exigences de sécurité!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="548"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="574"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>Le mot de passe doit contenir des lettres minuscules et majuscules, des chiffres et ne doit pas comporter moins de %n caractère.</numerusform>
@@ -8878,52 +8893,52 @@ Clear the server and key?</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="552"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="578"/>
         <source>Do you want to enter a different password?</source>
         <translation>Voulez-vous saisir un autre mot de passe?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="555"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="581"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="575"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="601"/>
         <source>Unknown internal error when creating or modifying a user.</source>
         <translation>Erreur interne inconnue lors de la création ou de la modification d&apos;un utilisateur.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="637"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="665"/>
         <source>The user name you entered already exists.</source>
         <translation>Le nom d&apos;utilisateur saisi existe déjà.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="719"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="747"/>
         <source>Double-click to change</source>
         <translation>Double-cliquez pour modifier</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="772"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="800"/>
         <source>The token of your current session.</source>
         <translation>Le jeton de votre session actuelle.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="805"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="842"/>
         <source>Administrator</source>
         <translation>Administrateur</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="809"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="846"/>
         <source>Manager</source>
         <translation>Gestionnaire</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="813"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="850"/>
         <source>Operator</source>
         <translation>Opérateur</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="831"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="868"/>
         <source>Never</source>
         <translation>Jamais</translation>
     </message>
@@ -15813,16 +15828,21 @@ Supprimer la base de données?</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/user_list_model.cc" line="211"/>
+        <source>Quick Support</source>
+        <translation type="unfinished">Assistance rapide</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/user_list_model.cc" line="216"/>
         <source>Administrator</source>
         <translation>Administrateur</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/user_list_model.cc" line="213"/>
+        <location filename="../client/desktop/management/user_list_model.cc" line="218"/>
         <source>Manager</source>
         <translation>Gestionnaire</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/user_list_model.cc" line="215"/>
+        <location filename="../client/desktop/management/user_list_model.cc" line="220"/>
         <source>Operator</source>
         <translation>Opérateur</translation>
     </message>

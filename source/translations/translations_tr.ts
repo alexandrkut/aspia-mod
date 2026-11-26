@@ -1053,39 +1053,49 @@
 <context>
     <name>ClientListModel</name>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="141"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="143"/>
         <source>Computer Name</source>
         <translation>Bilgisayar Adı</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="144"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="146"/>
         <source>User Name</source>
         <translation>Kullanıcı Adı</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="147"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="149"/>
         <source>IP Address</source>
         <translation>IP Adresi</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="150"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="152"/>
         <source>Connect Time</source>
         <translation>Bağlantı Zamanı</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="153"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="155"/>
         <source>Version</source>
         <translation>Sürüm</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="156"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="158"/>
         <source>Architecture</source>
         <translation>Mimari</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="159"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="161"/>
         <source>Operating System</source>
         <translation>İşletim Sistemi</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/client_list_model.cc" line="164"/>
+        <source>Type</source>
+        <translation type="unfinished">Tür</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/client_list_model.cc" line="246"/>
+        <source>Quick Support</source>
+        <translation type="unfinished">Quick Support</translation>
     </message>
 </context>
 <context>
@@ -6848,12 +6858,12 @@ Değiştirilen kimlik bilgileri: %2</translation>
 <context>
     <name>Router2FA</name>
     <message>
-        <location filename="../client/router/router_2fa.cc" line="276"/>
+        <location filename="../client/router/router_2fa.cc" line="280"/>
         <source>Router %1 did not perform two-factor authentication. Signing in is not possible.</source>
         <translation>%1 yönlendiricisi iki faktörlü kimlik doğrulamayı gerçekleştirmedi. Oturum açılamıyor.</translation>
     </message>
     <message>
-        <location filename="../client/router/router_2fa.cc" line="296"/>
+        <location filename="../client/router/router_2fa.cc" line="300"/>
         <source>Signed in as another user. Data synchronization has been turned off.</source>
         <translation>Başka bir kullanıcı olarak oturum açıldı. Veri senkronizasyonu devre dışı bırakıldı.</translation>
     </message>
@@ -8752,128 +8762,133 @@ Clear the server and key?</source>
         <translation>Tüm oturumları kapat</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="333"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="359"/>
         <source>Resetting two-factor authentication will sign this user out of all sessions and force them to enroll again on next login. Continue?</source>
         <translation>İki faktörlü kimlik doğrulamanın sıfırlanması bu kullanıcının tüm oturumlarını kapatır ve bir sonraki oturum açışında yeniden kayıt olmasını zorunlu kılar. Devam edilsin mi?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="385"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="411"/>
         <source>Are you sure you want to sign this user out of this session?</source>
         <translation>Bu kullanıcının bu oturumunu kapatmak istediğinizden emin misiniz?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="410"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="436"/>
         <source>Are you sure you want to sign this user out of all sessions?</source>
         <translation>Bu kullanıcının tüm oturumlarını kapatmak istediğinizden emin misiniz?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="524"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="550"/>
         <source>The passwords you entered do not match.</source>
         <translation>Girdiğiniz parolalar eşleşmiyor.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="202"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="228"/>
         <source>Failed to get list of users.</source>
         <translation>Kullanıcı listesi alınamadı.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="230"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="98"/>
+        <source>Quick Support</source>
+        <translation type="unfinished">Quick Support</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="256"/>
         <source>The user was deleted from another console.</source>
         <translation>Kullanıcı başka bir konsoldan silindi.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="331"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="357"/>
         <source>Resetting two-factor authentication will sign you out of all sessions and force you to enroll again on next login. Continue?</source>
         <translation>İki faktörlü kimlik doğrulamanın sıfırlanması tüm oturumlarınızı kapatır ve bir sonraki oturum açışınızda yeniden kayıt olmanızı zorunlu kılar. Devam edilsin mi?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="384"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="410"/>
         <source>This is the token of your current session. Revoking it will disconnect you. Continue?</source>
         <translation>Bu, geçerli oturumunuzun belirtecidir. İptal edilmesi bağlantınızı keser. Devam edilsin mi?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="496"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="522"/>
         <source>The email address is invalid.</source>
         <translation>E-posta adresi geçersiz.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="511"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="537"/>
         <source>The user name can not be empty and can contain only alphabet characters, numbers and _, -, ., @ characters. It can not consist of digits only.</source>
         <translation>Kullanıcı adı boş olamaz ve yalnızca alfabe karakterleri, rakamlar ile _, -, ., @ karakterlerini içerebilir. Yalnızca rakamlardan oluşamaz.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="535"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="561"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>Parola %n karakterden kısa olmamalıdır.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="536"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="562"/>
         <source>The password can not be longer than %n characters.</source>
         <translation>
             <numerusform>Parola %n karakteri aşmamalıdır.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="547"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="573"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>Girdiğiniz parola güvenlik gereksinimlerini karşılamıyor!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="548"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="574"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>Parola küçük ve büyük harfler ile rakamlar içermeli ve %n karakterden kısa olmamalıdır.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="552"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="578"/>
         <source>Do you want to enter a different password?</source>
         <translation>Farklı bir parola girmek ister misiniz?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="555"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="581"/>
         <source>Warning</source>
         <translation>Uyarı</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="575"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="601"/>
         <source>Unknown internal error when creating or modifying a user.</source>
         <translation>Kullanıcı oluşturulurken veya değiştirilirken bilinmeyen iç hata.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="637"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="665"/>
         <source>The user name you entered already exists.</source>
         <translation>Girdiğiniz kullanıcı adı zaten var.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="719"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="747"/>
         <source>Double-click to change</source>
         <translation>Değiştirmek için çift tıklayın</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="772"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="800"/>
         <source>The token of your current session.</source>
         <translation>Geçerli oturumunuzun belirteci.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="805"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="842"/>
         <source>Administrator</source>
         <translation>Yönetici</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="809"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="846"/>
         <source>Manager</source>
         <translation>Sorumlu</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="813"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="850"/>
         <source>Operator</source>
         <translation>Operatör</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="831"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="868"/>
         <source>Never</source>
         <translation>Hiçbir zaman</translation>
     </message>
@@ -15743,16 +15758,21 @@ Veritabanı silinsin mi?</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/user_list_model.cc" line="211"/>
+        <source>Quick Support</source>
+        <translation type="unfinished">Quick Support</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/user_list_model.cc" line="216"/>
         <source>Administrator</source>
         <translation>Yönetici</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/user_list_model.cc" line="213"/>
+        <location filename="../client/desktop/management/user_list_model.cc" line="218"/>
         <source>Manager</source>
         <translation>Sorumlu</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/user_list_model.cc" line="215"/>
+        <location filename="../client/desktop/management/user_list_model.cc" line="220"/>
         <source>Operator</source>
         <translation>Operatör</translation>
     </message>

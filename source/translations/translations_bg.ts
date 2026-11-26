@@ -1056,39 +1056,49 @@
 <context>
     <name>ClientListModel</name>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="141"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="143"/>
         <source>Computer Name</source>
         <translation>Име на компютъра</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="144"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="146"/>
         <source>User Name</source>
         <translation>Потребителско име</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="147"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="149"/>
         <source>IP Address</source>
         <translation>IP адрес</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="150"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="152"/>
         <source>Connect Time</source>
         <translation>Час на свързване</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="153"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="155"/>
         <source>Version</source>
         <translation>Версия</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="156"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="158"/>
         <source>Architecture</source>
         <translation>Архитектура</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/client_list_model.cc" line="159"/>
+        <location filename="../client/desktop/management/client_list_model.cc" line="161"/>
         <source>Operating System</source>
         <translation>Операционна система</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/client_list_model.cc" line="164"/>
+        <source>Type</source>
+        <translation type="unfinished">Тип</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/client_list_model.cc" line="246"/>
+        <source>Quick Support</source>
+        <translation type="unfinished">Бърза поддръжка</translation>
     </message>
 </context>
 <context>
@@ -6876,12 +6886,12 @@ Credentials replaced: %2</source>
 <context>
     <name>Router2FA</name>
     <message>
-        <location filename="../client/router/router_2fa.cc" line="276"/>
+        <location filename="../client/router/router_2fa.cc" line="280"/>
         <source>Router %1 did not perform two-factor authentication. Signing in is not possible.</source>
         <translation>Рутерът %1 не извърши двуфакторно удостоверяване. Влизането е невъзможно.</translation>
     </message>
     <message>
-        <location filename="../client/router/router_2fa.cc" line="296"/>
+        <location filename="../client/router/router_2fa.cc" line="300"/>
         <source>Signed in as another user. Data synchronization has been turned off.</source>
         <translation>Извършен е вход като друг потребител. Синхронизацията на данни е изключена.</translation>
     </message>
@@ -8799,57 +8809,62 @@ Clear the server and key?</source>
         <translation>Излизане от всички</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="202"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="98"/>
+        <source>Quick Support</source>
+        <translation type="unfinished">Бърза поддръжка</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="228"/>
         <source>Failed to get list of users.</source>
         <translation>Неуспешно получаване на списъка с потребители.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="230"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="256"/>
         <source>The user was deleted from another console.</source>
         <translation>Потребителят е изтрит от друга конзола.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="331"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="357"/>
         <source>Resetting two-factor authentication will sign you out of all sessions and force you to enroll again on next login. Continue?</source>
         <translation>Нулирането на двуфакторното удостоверяване ще доведе до излизането ви от всички сесии и ще изисква ново регистриране при следващото влизане. Да се продължи ли?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="333"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="359"/>
         <source>Resetting two-factor authentication will sign this user out of all sessions and force them to enroll again on next login. Continue?</source>
         <translation>Нулирането на двуфакторното удостоверяване ще доведе до излизането на този потребител от всички сесии и ще изисква ново регистриране при следващото влизане. Да се продължи ли?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="384"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="410"/>
         <source>This is the token of your current session. Revoking it will disconnect you. Continue?</source>
         <translation>Това е токенът на текущата ви сесия. Отнемането му ще прекъсне връзката ви. Да се продължи ли?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="385"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="411"/>
         <source>Are you sure you want to sign this user out of this session?</source>
         <translation>Наистина ли искате да прекратите тази сесия на потребителя?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="410"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="436"/>
         <source>Are you sure you want to sign this user out of all sessions?</source>
         <translation>Наистина ли искате да прекратите всички сесии на този потребител?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="496"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="522"/>
         <source>The email address is invalid.</source>
         <translation>Имейл адресът е невалиден.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="511"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="537"/>
         <source>The user name can not be empty and can contain only alphabet characters, numbers and _, -, ., @ characters. It can not consist of digits only.</source>
         <translation>Потребителското име не може да бъде празно и може да съдържа само букви, цифри и знаците _, -, ., @. Не може да се състои само от цифри.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="524"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="550"/>
         <source>The passwords you entered do not match.</source>
         <translation>Въведените пароли не съвпадат.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="535"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="561"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>Паролата не може да бъде по-кратка от %n знак.</numerusform>
@@ -8857,7 +8872,7 @@ Clear the server and key?</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="536"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="562"/>
         <source>The password can not be longer than %n characters.</source>
         <translation>
             <numerusform>Паролата не може да бъде по-дълга от %n знак.</numerusform>
@@ -8865,12 +8880,12 @@ Clear the server and key?</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="547"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="573"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>Въведената парола не отговаря на изискванията за защита!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="548"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="574"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>Паролата трябва да съдържа малки и главни букви, цифри и не трябва да бъде по-кратка от %n знак.</numerusform>
@@ -8878,52 +8893,52 @@ Clear the server and key?</source>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="552"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="578"/>
         <source>Do you want to enter a different password?</source>
         <translation>Искате ли да въведете друга парола?</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="555"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="581"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="575"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="601"/>
         <source>Unknown internal error when creating or modifying a user.</source>
         <translation>Неизвестна вътрешна грешка при създаване или промяна на потребител.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="637"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="665"/>
         <source>The user name you entered already exists.</source>
         <translation>Въведеното потребителско име вече съществува.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="719"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="747"/>
         <source>Double-click to change</source>
         <translation>Щракнете двукратно за промяна</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="772"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="800"/>
         <source>The token of your current session.</source>
         <translation>Токенът на текущата ви сесия.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="805"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="842"/>
         <source>Administrator</source>
         <translation>Администратор</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="809"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="846"/>
         <source>Manager</source>
         <translation>Мениджър</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="813"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="850"/>
         <source>Operator</source>
         <translation>Оператор</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_user_dialog.cc" line="831"/>
+        <location filename="../client/desktop/management/router_user_dialog.cc" line="868"/>
         <source>Never</source>
         <translation>Никога</translation>
     </message>
@@ -15813,16 +15828,21 @@ Delete the database?</source>
     </message>
     <message>
         <location filename="../client/desktop/management/user_list_model.cc" line="211"/>
+        <source>Quick Support</source>
+        <translation type="unfinished">Бърза поддръжка</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/user_list_model.cc" line="216"/>
         <source>Administrator</source>
         <translation>Администратор</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/user_list_model.cc" line="213"/>
+        <location filename="../client/desktop/management/user_list_model.cc" line="218"/>
         <source>Manager</source>
         <translation>Мениджър</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/user_list_model.cc" line="215"/>
+        <location filename="../client/desktop/management/user_list_model.cc" line="220"/>
         <source>Operator</source>
         <translation>Оператор</translation>
     </message>

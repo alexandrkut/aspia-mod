@@ -45,6 +45,10 @@ namespace {
 // dialog does not offer a change that will be rejected.
 constexpr qint64 kBuiltInUserId = 1;
 
+// One choice in the user type box. Quick Support is a kind of operator: the router sees the
+// operator level on the wire, and only its stored account type restricts the session.
+enum class UserChoice { kAdmin, kManager, kOperator, kQuickSupport };
+
 //--------------------------------------------------------------------------------------------------
 // A leading '#' and an all-digit name are reserved for the names the program builds itself.
 bool isNameAllowed(const QString& username)
@@ -81,16 +85,18 @@ RouterUserDialog::RouterUserDialog(qint64 user_id, QWidget* parent)
     ui->checkbox_disable->setChecked(false);
 
     // The higher levels imply the lower ones (an administrator can also act as a manager and a
-    // client, a manager as a client), so a single level is stored instead of a set of types.
-    auto add_level = [&](proto::router::SessionType session_type)
+    // client, a manager as a client), so a single level is stored instead of a set of types. The
+    // fourth choice is the account kind, not a new level.
+    auto add_choice = [&](UserChoice choice, const QString& title)
     {
-        ui->combo_access_level->addItem(sessionTypeToString(session_type), QVariant(session_type));
+        ui->combo_access_level->addItem(title, QVariant(static_cast<int>(choice)));
     };
 
-    add_level(proto::router::SESSION_TYPE_ADMIN);
-    add_level(proto::router::SESSION_TYPE_MANAGER);
-    add_level(proto::router::SESSION_TYPE_OPERATOR);
-    setAccessLevel(model_.desiredAccessLevel());
+    add_choice(UserChoice::kAdmin, sessionTypeToString(proto::router::SESSION_TYPE_ADMIN));
+    add_choice(UserChoice::kManager, sessionTypeToString(proto::router::SESSION_TYPE_MANAGER));
+    add_choice(UserChoice::kOperator, sessionTypeToString(proto::router::SESSION_TYPE_OPERATOR));
+    add_choice(UserChoice::kQuickSupport, tr("Quick Support"));
+    setAccessLevel(model_.desiredAccessLevel(), model_.desiredUserType());
 
     connect(ui->buttonbox, &QDialogButtonBox::clicked, this, &RouterUserDialog::onButtonBoxClicked);
     connect(ui->edit_username, &QLineEdit::textEdited, this, [this]()
@@ -105,8 +111,28 @@ RouterUserDialog::RouterUserDialog(qint64 user_id, QWidget* parent)
 
     connect(ui->combo_access_level, &QComboBox::activated, this, [this](int index)
     {
-        model_.setAccessLevelIntent(static_cast<proto::router::SessionType>(
-            ui->combo_access_level->itemData(index).toInt()));
+        switch (static_cast<UserChoice>(ui->combo_access_level->itemData(index).toInt()))
+        {
+            case UserChoice::kAdmin:
+                model_.setAccessLevelIntent(proto::router::SESSION_TYPE_ADMIN);
+                model_.setUserTypeIntent(proto::router::USER_TYPE_REGULAR);
+                break;
+
+            case UserChoice::kManager:
+                model_.setAccessLevelIntent(proto::router::SESSION_TYPE_MANAGER);
+                model_.setUserTypeIntent(proto::router::USER_TYPE_REGULAR);
+                break;
+
+            case UserChoice::kQuickSupport:
+                model_.setAccessLevelIntent(proto::router::SESSION_TYPE_OPERATOR);
+                model_.setUserTypeIntent(proto::router::USER_TYPE_QUICK_SUPPORT);
+                break;
+
+            case UserChoice::kOperator:
+                model_.setAccessLevelIntent(proto::router::SESSION_TYPE_OPERATOR);
+                model_.setUserTypeIntent(proto::router::USER_TYPE_REGULAR);
+                break;
+        }
     });
 
     connect(ui->edit_email, &QLineEdit::textEdited, this, [this](const QString& text)
@@ -235,7 +261,7 @@ void RouterUserDialog::onUserListReceived(const proto::router::UserList& list)
     if (entry_id_ > 0)
     {
         ui->checkbox_disable->setChecked(!model_.desiredEnabled());
-        setAccessLevel(model_.desiredAccessLevel());
+        setAccessLevel(model_.desiredAccessLevel(), model_.desiredUserType());
         if (!model_.accountChanged() || initial_load)
             ui->edit_username->setText(model_.snapshot().name);
         if (!model_.emailTouched())
@@ -579,6 +605,7 @@ void RouterUserDialog::onButtonBoxClicked(QAbstractButton* button)
         request.sessions = model_.sessionsForSave();
         request.flags = model_.flagsForSave();
         request.email = model_.emailForSave();
+        request.user_type = model_.userTypeForSave();
 
         submitWithNameCheck(request, username);
         return;
@@ -593,6 +620,7 @@ void RouterUserDialog::onButtonBoxClicked(QAbstractButton* button)
     request.sessions = model_.sessionsForSave();
     request.flags = model_.flagsForSave();
     request.email = model_.emailForSave();
+    request.user_type = model_.userTypeForSave();
 
     submitUser(request);
 }
@@ -786,9 +814,18 @@ void RouterUserDialog::updateTokenTree()
 }
 
 //--------------------------------------------------------------------------------------------------
-void RouterUserDialog::setAccessLevel(proto::router::SessionType session_type)
+void RouterUserDialog::setAccessLevel(proto::router::SessionType session_type,
+                                      proto::router::UserType user_type)
 {
-    int index = ui->combo_access_level->findData(QVariant(session_type));
+    UserChoice choice = UserChoice::kOperator;
+    if (user_type == proto::router::USER_TYPE_QUICK_SUPPORT)
+        choice = UserChoice::kQuickSupport;
+    else if (session_type == proto::router::SESSION_TYPE_ADMIN)
+        choice = UserChoice::kAdmin;
+    else if (session_type == proto::router::SESSION_TYPE_MANAGER)
+        choice = UserChoice::kManager;
+
+    const int index = ui->combo_access_level->findData(QVariant(static_cast<int>(choice)));
     if (index >= 0)
         ui->combo_access_level->setCurrentIndex(index);
 }

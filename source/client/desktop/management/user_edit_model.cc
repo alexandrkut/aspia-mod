@@ -42,6 +42,8 @@ bool UserEditModel::applySnapshot(const RouterUser& record, bool record_found)
             enabled_intent_.reset();
         if (access_level_intent_.has_value() && *access_level_intent_ == snapshotAccessLevel())
             access_level_intent_.reset();
+        if (user_type_intent_.has_value() && *user_type_intent_ == snapshotUserType())
+            user_type_intent_.reset();
         if (email_intent_.has_value() && *email_intent_ == snapshotEmail())
             email_intent_.reset();
     }
@@ -64,6 +66,12 @@ proto::router::SessionType UserEditModel::snapshotAccessLevel() const
     if (snapshot_.sessions & proto::router::SESSION_TYPE_MANAGER)
         return proto::router::SESSION_TYPE_MANAGER;
     return proto::router::SESSION_TYPE_OPERATOR;
+}
+
+//--------------------------------------------------------------------------------------------------
+proto::router::UserType UserEditModel::snapshotUserType() const
+{
+    return snapshot_.user_type;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -117,6 +125,28 @@ proto::router::SessionType UserEditModel::desiredAccessLevel() const
 }
 
 //--------------------------------------------------------------------------------------------------
+void UserEditModel::setUserTypeIntent(proto::router::UserType type)
+{
+    if (isModifyMode() && type == snapshotUserType())
+    {
+        user_type_intent_.reset();
+        return;
+    }
+
+    user_type_intent_ = type;
+}
+
+//--------------------------------------------------------------------------------------------------
+proto::router::UserType UserEditModel::desiredUserType() const
+{
+    if (user_type_intent_.has_value())
+        return *user_type_intent_;
+    if (isModifyMode())
+        return snapshotUserType();
+    return proto::router::USER_TYPE_REGULAR;
+}
+
+//--------------------------------------------------------------------------------------------------
 void UserEditModel::setEmailIntent(const QString& email)
 {
     if (isModifyMode() && email == snapshotEmail())
@@ -142,7 +172,8 @@ QString UserEditModel::desiredEmail() const
 bool UserEditModel::isNoOpSave() const
 {
     return isModifyMode() && !account_changed_ && desiredEnabled() == snapshotEnabled() &&
-           desiredAccessLevel() == snapshotAccessLevel() && emailForSave().isEmpty();
+           desiredAccessLevel() == snapshotAccessLevel() &&
+           desiredUserType() == snapshotUserType() && emailForSave().isEmpty();
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -157,9 +188,20 @@ quint32 UserEditModel::flagsForSave() const
 //--------------------------------------------------------------------------------------------------
 quint32 UserEditModel::sessionsForSave() const
 {
-    if (isModifyMode() && !access_level_intent_.has_value())
+    // The type and the access level are saved together. A request without a level keeps the stored
+    // account type on the router as well, so an unrelated edit cannot change either by omission.
+    if (isModifyMode() && !access_level_intent_.has_value() && !user_type_intent_.has_value())
         return 0;
+
     return desiredAccessLevel();
+}
+
+//--------------------------------------------------------------------------------------------------
+proto::router::UserType UserEditModel::userTypeForSave() const
+{
+    if (isModifyMode() && !access_level_intent_.has_value() && !user_type_intent_.has_value())
+        return proto::router::USER_TYPE_REGULAR; // Ignored by the router when the mask is empty.
+    return desiredUserType();
 }
 
 //--------------------------------------------------------------------------------------------------
