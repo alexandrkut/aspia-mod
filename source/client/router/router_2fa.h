@@ -110,6 +110,7 @@ private:
     QPointer<RouterWorker> router_worker_;
     ScopedQPointer<TwoFactorPrompt> prompt_;
     bool response_sent_ = false;
+    bool challenge_received_ = false;
 
     Q_DISABLE_COPY_MOVE(Router2FA)
 };

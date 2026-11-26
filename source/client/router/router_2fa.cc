@@ -184,6 +184,10 @@ void Router2FA::sendTwoFactorResponse(proto::router::TwoFactorResponse&& respons
 //--------------------------------------------------------------------------------------------------
 void Router2FA::readTwoFactorChallenge(const proto::router::TwoFactorChallenge& challenge)
 {
+    // A challenge was actually asked in this login. A direct LoginResult without any challenge
+    // means the router has 2FA disabled for this role and must be allowed to complete.
+    challenge_received_ = true;
+
     switch (challenge.mode())
     {
         case proto::router::TWO_FACTOR_MODE_ACTIVE:
@@ -269,7 +273,7 @@ void Router2FA::readTwoFactorChallenge(const proto::router::TwoFactorChallenge& 
 //--------------------------------------------------------------------------------------------------
 void Router2FA::readLoginResult(const proto::router::LoginResult& result)
 {
-    if (!response_sent_)
+    if (challenge_received_ && !response_sent_)
     {
         LOG(ERROR) << "Login result without a two-factor response";
         RouterController::instance().addEvent(RouterEvent::Severity::CRITICAL,

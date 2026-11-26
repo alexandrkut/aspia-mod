@@ -335,6 +335,28 @@ TEST_F(Router2FATest, LoginResultWithoutAnAnswerIsRefused)
 }
 
 //--------------------------------------------------------------------------------------------------
+// A router with 2FA disabled for this role sends LoginResult straight away, with no challenge at
+// all. That is the mod behaviour: the login must complete instead of being refused as an answerless
+// result.
+TEST_F(Router2FATest, DirectLoginResultWithoutAChallengeCompletes)
+{
+    seedRecord();
+
+    Router2FATestPeer::start(login_, QVersionNumber(3, 0, 0));
+
+    proto::router::RouterToClient message;
+    message.mutable_login_result()->set_user_id(kUserId);
+    message.mutable_login_result()->set_user_guid(kUserGuid);
+    Router2FATestPeer::receive(login_, message);
+
+    EXPECT_EQ(logged_in_user_, kUserId);
+
+    const std::optional<RouterConfig> stored = findRouter(Database::instance());
+    ASSERT_TRUE(stored.has_value());
+    EXPECT_EQ(stored->userGuid(), QString(kUserGuid));
+}
+
+//--------------------------------------------------------------------------------------------------
 // The answer leaves towards the worker, which may already be on the next connection, so a
 // reconnect reported after it does not make the login forget that it has answered.
 TEST_F(Router2FATest, AnswerIsRememberedThroughAReconnect)
