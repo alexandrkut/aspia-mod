@@ -72,6 +72,9 @@ public:
     bool isValid() const;
     QString guid() const;
 
+    // Reads a raw value from the settings table. Used for the per-host notification switches.
+    QString readSetting(const QString& name, bool* found = nullptr) const;
+
     enum class ReadResult { OK, INCOMPLETE, FAILED };
     Q_ENUM(ReadResult)
 

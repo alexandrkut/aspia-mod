@@ -34,6 +34,7 @@
 #include "base/gui_application.h"
 #include "base/logging.h"
 #include "base/update/update_info.h"
+#include "client/config.h"
 #include "client/desktop/app_lock.h"
 #include "client/desktop/authorization_dialog.h"
 #include "client/desktop/client_tab.h"
@@ -671,12 +672,22 @@ void MainWindow::onConnect(const HostConfig& host, proto::peer::SessionType sess
 
     const ProfileConfig profile = ProfileStore().hostProfile(host);
     ClientWindow* client_window = nullptr;
+    bool view_only_session = false;
 
     switch (session_type)
     {
         case proto::peer::SESSION_TYPE_DESKTOP:
         {
             proto::control::Config desktop_config = profile.desktopConfig();
+
+            if (auto* management_tab = qobject_cast<ManagementTab*>(sender()))
+            {
+                if (management_tab->consumeViewOnlyPending())
+                {
+                    applyViewOnlyOverrides(desktop_config);
+                    view_only_session = true;
+                }
+            }
 
             if (!detached && !desktop_config.disable_preferred_size())
             {
@@ -720,11 +731,14 @@ void MainWindow::onConnect(const HostConfig& host, proto::peer::SessionType sess
     QString display_name = SettingsStore().displayName();
     QString computer_name = host.name().isEmpty() ? host.address() : host.name();
     QIcon icon = sessionIcon(session_type);
+    // A view session gets its own tab/window icon so it is told apart from a control session.
+    if (view_only_session)
+        icon = QIcon(QStringLiteral(":/img/view-monitor.svg"));
 
     client_window->setWindowIcon(icon);
     client_window->setParent(this);
 
-    if (!client_window->connectToHost(host, profile, display_name))
+    if (!client_window->connectToHost(host, profile, display_name, view_only_session))
     {
         client_window->deleteLater();
         return;

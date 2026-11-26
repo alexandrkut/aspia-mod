@@ -23,6 +23,7 @@
 #include <QComboBox>
 #include <QDateTime>
 #include <QEvent>
+#include <QEventLoop>
 #include <QHeaderView>
 #include <QIODevice>
 #include <QJsonArray>
@@ -33,11 +34,14 @@
 #include <QLineEdit>
 #include <QMenu>
 #include <QMouseEvent>
+#include <QProgressDialog>
 #include <QRegularExpressionValidator>
+#include <QSet>
 #include <QSaveFile>
 #include <QSignalBlocker>
 #include <QTimer>
 #include <QToolButton>
+#include <QUuid>
 
 #include <algorithm>
 
@@ -50,6 +54,9 @@
 #include "client/desktop/management/drag_and_drop.h"
 #include "client/desktop/management/host_telemetry_dialog.h"
 #include "client/desktop/management/router_host_dialog.h"
+#include "client/desktop/management/router_host_bulk.h"
+#include "client/desktop/management/router_host_bulk_config_dialog.h"
+#include "client/desktop/management/router_host_config_dialog.h"
 #include "client/desktop/management/ui_router_hosts_widget.h"
 #include "client/router/router_controller.h"
 #include "common/desktop/icon_text_button.h"
@@ -67,6 +74,78 @@ const qint64 kMaxHostCount = 500000;
 const qint64 kAllWorkspaces = -1;
 
 const char kColumnsKey[] = "columns";
+
+QString bulkHostLabel(const RouterHost& host)
+{
+    if (!host.display_name.isEmpty() && !host.computer_name.isEmpty())
+        return host.display_name + " (" + host.computer_name + ")";
+    if (!host.display_name.isEmpty())
+        return host.display_name;
+    if (!host.computer_name.isEmpty())
+        return host.computer_name;
+    return QString::number(host.host_id);
+}
+
+QString newBulkId()
+{
+    return "bulk-" + QUuid::createUuid().toString(QUuid::WithoutBraces);
+}
+
+struct BulkTeleInfo
+{
+    bool ok = false;
+    QString channel;
+    QString address;
+    QString key;
+    bool auto_update = false;
+    int frequency = 7;
+};
+
+// Telemetry is served from the router database cache, so this is fast and never blocks.
+QMap<HostId, BulkTeleInfo> fetchBulkTelemetries(
+    const QList<RouterHost>& hosts, QWidget* parent)
+{
+    QMap<HostId, BulkTeleInfo> out;
+
+    RouterSession* session = RouterController::session();
+    if (!session || hosts.isEmpty())
+        return out;
+
+    int pending = hosts.size();
+    QEventLoop loop;
+    QTimer::singleShot(15000, &loop, &QEventLoop::quit);
+
+    for (const RouterHost& host : hosts)
+    {
+        session->requestHostTelemetry(
+            host.host_id,
+            {parent, [&, host_id = host.host_id](const proto::router::HostTelemetryResult& result)
+             {
+                 BulkTeleInfo info;
+                 if (result.error_code() == proto::router::kErrorOk)
+                 {
+                     QJsonDocument doc =
+                         QJsonDocument::fromJson(QByteArray::fromStdString(result.json()));
+                     if (doc.isObject())
+                     {
+                         const QJsonObject update = doc.object().value("update").toObject();
+                         info.ok = true;
+                         info.channel = update.value("channel").toString();
+                         info.address = update.value("address").toString();
+                         info.key = update.value("public_key").toString();
+                         info.auto_update = update.value("auto_update").toBool();
+                         info.frequency = update.value("check_frequency").toInt(7);
+                     }
+                 }
+                 out[host_id] = info;
+                 if (--pending <= 0)
+                     loop.quit();
+             } });
+    }
+
+    loop.exec();
+    return out;
+}
 
 } // namespace
 
@@ -434,6 +513,182 @@ void RouterHostsWidget::onHostTelemetry()
     LOG(INFO) << "[ACTION] Host telemetry requested by user";
     AutoQPointer<HostTelemetryDialog> dialog(new HostTelemetryDialog(host, this));
     dialog->exec();
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostsWidget::onHostUpdateConfig()
+{
+    const QList<RouterHost> hosts = selectedHosts();
+    if (hosts.size() != 1)
+    {
+        LOG(INFO) << "No single selected host";
+        return;
+    }
+
+    const RouterHost& host = hosts.front();
+
+    LOG(INFO) << "[ACTION] Host update configuration requested by user";
+    AutoQPointer<RouterHostConfigDialog> dialog(new RouterHostConfigDialog(host.host_id, this));
+    dialog->exec();
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostsWidget::onHostsUpdateConfig()
+{
+    const QList<RouterHost> hosts = selectedHosts();
+    if (hosts.isEmpty())
+        return;
+
+    const QMap<HostId, BulkTeleInfo> telemetries = fetchBulkTelemetries(hosts, this);
+
+    QSet<QString> channels, servers;
+    int auto_on = 0, auto_known = 0;
+    QSet<int> freqs;
+    int run_count = 0;
+    for (const RouterHost& host : hosts)
+    {
+        if (!host.online)
+            continue;
+        ++run_count;
+        const BulkTeleInfo info = telemetries.value(host.host_id);
+        if (!info.ok)
+            continue;
+        channels.insert(info.channel.isEmpty() ? tr("(unknown)") : info.channel);
+        servers.insert(info.address.isEmpty() ? tr("(default)") : info.address);
+        ++auto_known;
+        if (info.auto_update)
+            ++auto_on;
+        freqs.insert(info.frequency);
+    }
+    QStringList channel_list(channels.values());
+    channel_list.sort();
+    QStringList server_list(servers.values());
+    server_list.sort();
+    QStringList freq_list;
+    for (int freq : freqs)
+        freq_list.append(QString::number(freq));
+    freq_list.sort();
+    const QString summary = tr("Hosts in run: %1. Channels: %2. Servers: %3. "
+                               "Auto-update on: %4 of %5. Frequencies (days): %6.")
+        .arg(run_count)
+        .arg(channels.isEmpty() ? tr("(unknown)") : channel_list.join(", "))
+        .arg(servers.isEmpty() ? tr("(unknown)") : server_list.join(", "))
+        .arg(auto_on).arg(auto_known)
+        .arg(freqs.isEmpty() ? tr("(unknown)") : freq_list.join(", "));
+
+    AutoQPointer<RouterHostBulkConfigDialog> input(
+        new RouterHostBulkConfigDialog(summary, run_count, this));
+    if (input->exec() != QDialog::Accepted)
+        return;
+
+    QJsonObject wanted;
+    if (input->changeServer())
+        wanted["update_server"] = input->server();
+    if (input->changePublicKey())
+        wanted["update_public_key"] = input->publicKey();
+    if (input->changeChannel())
+        wanted["update_channel"] = input->channel();
+    if (input->changeAutoUpdate())
+        wanted["auto_update_enabled"] = input->autoUpdate();
+    if (input->changeFrequency())
+        wanted["update_check_frequency"] = input->frequency();
+
+    if (wanted.isEmpty())
+    {
+        MsgBox::information(this, tr("No fields selected, nothing to do."));
+        return;
+    }
+
+    const QString bulk_id = newBulkId();
+
+    QList<RouterHostBulkTarget> apply_targets;
+    QList<RouterHostBulkPreviewRow> preview;
+    for (const RouterHost& host : hosts)
+    {
+        RouterHostBulkPreviewRow row;
+        row.host = bulkHostLabel(host);
+        if (!host.online)
+        {
+            row.will_run = false;
+            row.action = tr("Set selected fields.");
+            row.detail = tr("Host is offline.");
+            preview.append(row);
+            continue;
+        }
+        const BulkTeleInfo info = telemetries.value(host.host_id);
+        if (!info.ok)
+        {
+            row.will_run = true;
+            row.target_index = apply_targets.size();
+            row.action = tr("Set selected fields (current settings unknown).");
+            apply_targets.append({host.host_id, row.host});
+            preview.append(row);
+            continue;
+        }
+
+        QStringList changes;
+        if (wanted.contains("update_server") &&
+            wanted["update_server"].toString() != info.address)
+        {
+            changes.append(tr("server: %1 -> %2")
+                .arg(info.address.isEmpty() ? tr("(default)") : info.address,
+                     wanted["update_server"].toString().isEmpty() ?
+                         tr("(default)") : wanted["update_server"].toString()));
+        }
+        if (wanted.contains("update_public_key") &&
+            wanted["update_public_key"].toString().toLower() != info.key.toLower())
+        {
+            changes.append(tr("public key: %1 -> %2")
+                .arg(info.key.isEmpty() ? tr("(default)") : tr("(set)"),
+                     wanted["update_public_key"].toString().isEmpty() ?
+                         tr("(default)") : tr("(set)")));
+        }
+        if (wanted.contains("update_channel") &&
+            wanted["update_channel"].toString() != info.channel)
+        {
+            changes.append(tr("channel: %1 -> %2").arg(info.channel, wanted["update_channel"].toString()));
+        }
+        if (wanted.contains("auto_update_enabled") &&
+            wanted["auto_update_enabled"].toBool() != info.auto_update)
+        {
+            changes.append(tr("auto-update: %1 -> %2")
+                .arg(info.auto_update ? tr("on") : tr("off"),
+                     wanted["auto_update_enabled"].toBool() ? tr("on") : tr("off")));
+        }
+        if (wanted.contains("update_check_frequency") &&
+            wanted["update_check_frequency"].toInt() != info.frequency)
+        {
+            changes.append(tr("frequency: %1 -> %2")
+                .arg(info.frequency).arg(wanted["update_check_frequency"].toInt()));
+        }
+
+        if (changes.isEmpty())
+        {
+            row.will_run = false;
+            row.action = tr("No changes.");
+            row.detail = tr("Already matching, skipped.");
+        }
+        else
+        {
+            row.will_run = true;
+            row.target_index = apply_targets.size();
+            row.action = changes.join("; ");
+            apply_targets.append({host.host_id, row.host});
+        }
+        preview.append(row);
+    }
+
+    AutoQPointer<RouterHostBulkRunner> runner(new RouterHostBulkRunner(
+        apply_targets, "set_update_config",
+        [wanted, bulk_id](HostId)
+        {
+            QJsonObject params = wanted;
+            params["bulk_id"] = bulk_id;
+            return params;
+        }, this));
+    AutoQPointer<RouterHostBulkDialog> dialog(
+        new RouterHostBulkDialog(tr("Update configuration on hosts"), this));
+    dialog->execBulk(runner, preview);
 }
 
 //--------------------------------------------------------------------------------------------------

@@ -26,12 +26,17 @@
 #include "base/peer/client_authenticator.h"
 #include "base/peer/relay_peer.h"
 #include "client/udp_attempt.h"
+#include "client/storage/database.h"
+#include "client/router/router_controller.h"
 #include "client/storage/settings_store.h"
 #include "proto/key_exchange.h"
 #include "proto/peer.h"
 #include "proto/router_client.h"
 #include "proto/router_constants.h"
 #include "proto/router_peer.h"
+
+#include <QJsonDocument>
+#include <QJsonObject>
 
 // Registers NetworkWorker::Status so it can cross threads through the queued sig_statusChanged.
 static volatile auto g_statusType = qRegisterMetaType<NetworkWorker::Status>();
@@ -417,6 +422,45 @@ void NetworkWorker::startConnection()
         auth->setUserName(session_state_->hostUserName());
         auth->setPassword(SecureString(session_state_->hostPassword()));
         auth->setSessionType(static_cast<quint32>(session_state_->sessionType()));
+
+        // Compute notify_suppressed from per-host settings. Suppression is an administrator's
+        // privilege through a router: only an ADMIN router session honors the stored per-host
+        // notify switches; a manager/operator session and any direct connection always notify
+        // the host.
+        bool notify_suppressed = false;
+        const HostConfig& host = session_state_->host();
+        bool honor_notify_settings = false;
+        if (session_state_->isConnectionByHostId())
+        {
+            RouterSession* router_session = RouterController::session();
+            honor_notify_settings = router_session &&
+                router_session->config().sessionType() == proto::router::SESSION_TYPE_ADMIN;
+        }
+        if (honor_notify_settings)
+        {
+            QString value;
+            for (const QString& key : host.notifySettingsKeys())
+            {
+                value = Database::instance().readSetting(key);
+                if (!value.isEmpty())
+                    break;
+            }
+            QJsonDocument doc = QJsonDocument::fromJson(value.toUtf8());
+            QJsonObject obj = doc.isObject() ? doc.object() : QJsonObject();
+            bool view = obj.contains("view") ? obj.value("view").toBool() : false;
+            bool control = obj.contains("control") ? obj.value("control").toBool() : true;
+            bool files = obj.contains("files") ? obj.value("files").toBool() : true;
+            const proto::peer::SessionType st = session_state_->sessionType();
+            if (st == proto::peer::SESSION_TYPE_FILE_TRANSFER)
+                notify_suppressed = !files;
+            else if (session_state_->viewOnly())
+                notify_suppressed = !view;
+            else
+                notify_suppressed = !control;
+        }
+        auth->setNotifySuppressed(notify_suppressed);
+        LOG(INFO) << "Authenticating with view_only=" << session_state_->viewOnly();
+        auth->setViewOnly(session_state_->viewOnly());
         auth->setDisplayName(session_state_->displayName());
     };
 

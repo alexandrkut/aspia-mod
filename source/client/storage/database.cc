@@ -338,6 +338,30 @@ QString Database::guid() const
 }
 
 //--------------------------------------------------------------------------------------------------
+QString Database::readSetting(const QString& name, bool* found) const
+{
+    if (found)
+        *found = false;
+
+    if (!isValid())
+    {
+        LOG(ERROR) << "Database is not valid";
+        return QString();
+    }
+
+    SqlQuery query(db_, "SELECT value FROM settings WHERE name=?");
+    query.addText(name);
+
+    if (query.next() != SqlQuery::StepResult::ROW)
+        return QString();
+
+    if (found)
+        *found = true;
+
+    return query.columnText(0);
+}
+
+//--------------------------------------------------------------------------------------------------
 bool Database::import(const std::optional<RouterConfig>& router,
                       const QList<LocalGroupConfig>& local_groups,
                       const QList<LocalHostConfig>& local_hosts,

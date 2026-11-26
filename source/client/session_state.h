@@ -37,7 +37,8 @@ public:
     SessionState(const HostConfig& host,
                  const ProfileConfig& profile,
                  proto::peer::SessionType session_type,
-                 const QString& display_name);
+                 const QString& display_name,
+                 bool view_only = false);
     ~SessionState() = default;
 
     bool isConnectionByHostId() const;
@@ -70,6 +71,9 @@ public:
     void setProfile(const ProfileConfig& profile);
     ProfileConfig profile() const;
 
+    void setViewOnly(bool value);
+    bool viewOnly() const;
+
 private:
     const HostConfig host_;
     const proto::peer::SessionType session_type_;
@@ -82,6 +86,7 @@ private:
     proto::router::ConnectionOffer connection_offer_;
     bool auto_reconnect_ = false;
     bool reconnecting_ = false;
+    bool view_only_ = false;
 };
 
 #endif // CLIENT_SHARED_SESSION_STATE_H

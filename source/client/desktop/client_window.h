@@ -48,7 +48,8 @@ public:
 
     // Connects to a host. Asks for the missing credentials before the attempt and asks again if
     // the host refuses credentials that are not stored for it.
-    bool connectToHost(HostConfig host, const ProfileConfig& profile, const QString& display_name);
+    bool connectToHost(HostConfig host, const ProfileConfig& profile, const QString& display_name,
+                       bool view_only = false);
 
     qint64 clientId() const { return client_id_; }
     std::shared_ptr<SessionState> sessionState() { return session_state_; }
@@ -154,6 +155,11 @@ private slots:
     void onDragPoll();
     void onNetworkStatusChanged(NetworkWorker::Status status, const QVariant& data);
     void onNetworkConnected();
+    void onReconnectRequested();
+    void onConnectionAttemptTimedOut();
+    void onReconnectDelayElapsed();
+    void armReconnectDelay();
+    void updateCountdown();
 
 private:
     void saveHostCredentials(const HostConfig& host, qint64 credential_id);
@@ -161,7 +167,8 @@ private:
     void setClientTitle(const HostConfig& host, proto::peer::SessionType session_type);
     bool askCredentials(HostConfig* host);
     void askCredentialsAgain();
-    void startConnection(HostConfig host, const ProfileConfig& profile, const QString& display_name);
+    void startConnection(HostConfig host, const ProfileConfig& profile, const QString& display_name,
+                         bool view_only = false);
     void fetchConnectionOffer();
     void startNewSession();
 
@@ -174,6 +181,9 @@ private:
     StatusOverlay* status_overlay_ = nullptr;
     QTimer* drag_poll_timer_ = nullptr;
     QTimer* reconnect_timeout_timer_ = nullptr;
+    QTimer* connection_timeout_timer_ = nullptr;
+    QTimer* reconnect_delay_timer_ = nullptr;
+    QTimer* countdown_timer_ = nullptr;
     QList<QAction*> session_connect_actions_;
 
     std::unique_ptr<WorkerManager> worker_manager_;

@@ -71,6 +71,7 @@ list(APPEND SOURCE_CLIENT_TESTS
     desktop/management/profile_combo_box_unittest.cc
     desktop/management/relay_list_model_unittest.cc
     desktop/management/router_host_dialog_unittest.cc
+    desktop/management/update_server_presets_unittest.cc
     desktop/management/router_status_widget_unittest.cc
     desktop/management/router_user_dialog_unittest.cc
     desktop/management/search_result_model_unittest.cc
@@ -85,6 +86,7 @@ list(APPEND SOURCE_CLIENT_TESTS
     router/router_test_fixture.h
     page_model_unittest.cc
     search_page_model_unittest.cc
+    session_state_unittest.cc
     storage/auto_backup_unittest.cc
     storage/backup_unittest.cc
     storage/credential_file_unittest.cc

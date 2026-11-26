@@ -27,11 +27,13 @@
 SessionState::SessionState(const HostConfig& host,
                            const ProfileConfig& profile,
                            proto::peer::SessionType session_type,
-                           const QString& display_name)
+                           const QString& display_name,
+                           bool view_only)
     : host_(host),
       session_type_(session_type),
       display_name_(display_name),
-      profile_(profile)
+      profile_(profile),
+      view_only_(view_only)
 {
     // Nothing
 }
@@ -130,6 +132,20 @@ bool SessionState::isReconnecting() const
 {
     std::scoped_lock lock(lock_);
     return reconnecting_;
+}
+
+//--------------------------------------------------------------------------------------------------
+void SessionState::setViewOnly(bool enable)
+{
+    std::scoped_lock lock(lock_);
+    view_only_ = enable;
+}
+
+//--------------------------------------------------------------------------------------------------
+bool SessionState::viewOnly() const
+{
+    std::scoped_lock lock(lock_);
+    return view_only_;
 }
 
 //--------------------------------------------------------------------------------------------------

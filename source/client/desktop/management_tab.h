@@ -58,6 +58,8 @@ public:
     explicit ManagementTab(QWidget* parent = nullptr);
     ~ManagementTab() final;
 
+    bool consumeViewOnlyPending();
+
     // Tab implementation.
     QVariantMap saveState() final;
     void restoreState(const QVariantMap& state) final;
@@ -135,6 +137,7 @@ private:
     QPointer<QDialog> two_factor_dialog_;
     bool two_factor_dismissed_ = false;
     ContentWidget* current_content_ = nullptr;
+    bool view_only_pending_ = false;
     ContentWidget* previous_content_ = nullptr;
 
     LocalGroupWidget* local_group_widget_ = nullptr;

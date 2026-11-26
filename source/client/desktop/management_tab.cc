@@ -1186,6 +1186,23 @@ void ManagementTab::onHostContextMenu(const QPoint& pos, int column)
         menu->addAction(ui->action_host_telemetry);
     menu->addAction(ui->action_host_remove);
 
+    if (is_single)
+    {
+        QAction* action_config = menu->addAction(QIcon(":/img/computer-update.svg"),
+                                                 tr("Host update configuration..."));
+        connect(action_config, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostUpdateConfig();
+        });
+    }
+
+    QAction* bulk_config = menu->addAction(QIcon(":/img/computer-update.svg"),
+                                           tr("Bulk update configuration..."));
+    connect(bulk_config, &QAction::triggered, this, [this]()
+    {
+        router_hosts_widget_->onHostsUpdateConfig();
+    });
+
     if (!is_single)
     {
         menu->exec(pos);
@@ -1200,6 +1217,21 @@ void ManagementTab::onHostContextMenu(const QPoint& pos, int column)
         addProxy(ui->action_file_transfer_connect);
         addProxy(ui->action_chat_connect);
         addProxy(ui->action_system_info_connect);
+
+        // View is offered to every role of the router: without a right to connect to the host's
+        // desktop the session does not start anyway, so the entry costs nothing. Notification
+        // suppression stays an administrator's setting (NetworkWorker).
+        if (RouterController::session())
+        {
+            QAction* view_connect = menu->addAction(QIcon(":/img/view-monitor.svg"),
+                                                    tr("Connect for viewing..."));
+            connect(view_connect, &QAction::triggered, this, [this]()
+            {
+                view_only_pending_ = true;
+                onConnectAction(ui->action_desktop_connect);
+                view_only_pending_ = false;
+            });
+        }
     }
     menu->addSeparator();
 
@@ -1370,6 +1402,21 @@ void ManagementTab::onRouterGroupContextMenu(const QPoint& pos)
     addProxy(ui->action_file_transfer_connect);
     addProxy(ui->action_chat_connect);
     addProxy(ui->action_system_info_connect);
+
+    // The view-only entry mirrors onHostContextMenu: every role of the router. It resolves the
+    // host through the same onConnectAction path, which picks the selection of router_group_widget_
+    // (the content shown for a workspace/group in the sidebar).
+    if (RouterController::session())
+    {
+        QAction* view_connect = menu->addAction(QIcon(":/img/view-monitor.svg"),
+                                                tr("Connect for viewing..."));
+        connect(view_connect, &QAction::triggered, this, [this]()
+        {
+            view_only_pending_ = true;
+            onConnectAction(ui->action_desktop_connect);
+            view_only_pending_ = false;
+        });
+    }
 
     if (ui->action_edit_host->isVisible())
     {
@@ -2258,4 +2305,12 @@ void ManagementTab::removeItem(qint64 entry_id)
         local_group_widget_->removeItem(entry_id);
     else if (current_content_ == search_widget_)
         search_widget_->removeItem(entry_id);
+}
+
+//--------------------------------------------------------------------------------------------------
+bool ManagementTab::consumeViewOnlyPending()
+{
+    const bool value = view_only_pending_;
+    view_only_pending_ = false;
+    return value;
 }

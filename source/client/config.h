@@ -21,6 +21,7 @@
 
 #include <QByteArray>
 #include <QString>
+#include <QStringList>
 
 #include <optional>
 
@@ -403,6 +404,8 @@ public:
     const QString& address() const { return address_; }
     void setAddress(const QString& value) { address_ = value; }
 
+    QStringList notifySettingsKeys() const;
+
     const QString& name() const { return name_; }
     void setName(const QString& value) { name_ = value; }
 
@@ -433,5 +436,9 @@ proto::control::Config defaultDesktopConfig();
 
 // The directory chosen in |config|, or the default one when none is chosen.
 QString recordingPath(const proto::control::Config& config);
+
+// Applies the view-only session overrides on top of a desktop config: the session never alters
+// the host desktop and always shows the remote cursor, no matter what the user's settings say.
+void applyViewOnlyOverrides(proto::control::Config& config);
 
 #endif // CLIENT_CONFIG_H
