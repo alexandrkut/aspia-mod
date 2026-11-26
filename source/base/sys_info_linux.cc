@@ -41,7 +41,7 @@
 
 #include <algorithm>
 
-#include <drm/drm.h>
+#include <libdrm/drm.h>
 #include <fcntl.h>
 #include <grp.h>
 #include <lastlog.h>
