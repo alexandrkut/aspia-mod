@@ -1232,7 +1232,7 @@ void RouterWorkspaceDialog::updateHostSummary()
     }
 
     ui->label_host_summary->setText(
-        tr("╨С╤Г╨┤╨╡╤В ╨┐╤А╨╕╨╝╨╡╨╜╨╡╨╜╨╛: +%1 ╤Е╨╛╤Б╤В╨╛╨▓, -%2").arg(added).arg(removed));
+        tr("Будет применено: +%1 хостов, -%2").arg(added).arg(removed));
 }
 
 //--------------------------------------------------------------------------------------------------

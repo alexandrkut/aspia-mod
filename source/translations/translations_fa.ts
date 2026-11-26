@@ -29,121 +29,122 @@
         <translation>بستن</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="113"/>
+        <location filename="../common/desktop/about_dialog.cc" line="123"/>
         <source>Version: %1 (%2)</source>
         <translation>نسخه: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="118"/>
+        <location filename="../common/desktop/about_dialog.cc" line="128"/>
         <source>Aspia is free software released under GNU General Public License 3.</source>
         <translation>Aspia نرم‌افزاری آزاد است که تحت مجوز GNU General Public License 3 منتشر شده است.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="119"/>
+        <location filename="../common/desktop/about_dialog.cc" line="129"/>
         <source>You can get a copy of license here:</source>
         <translation>می‌توانید نسخه‌ای از مجوز را از اینجا دریافت کنید:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="124"/>
+        <location filename="../common/desktop/about_dialog.cc" line="134"/>
         <source>You can also get a translation of GNU GPL license here:</source>
         <translation>همچنین می‌توانید ترجمه مجوز GNU GPL را از اینجا دریافت کنید:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="128"/>
+        <location filename="../common/desktop/about_dialog.cc" line="138"/>
         <source>Links</source>
         <translation>پیوندها</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="129"/>
+        <location filename="../common/desktop/about_dialog.cc" line="139"/>
         <source>Home page:</source>
         <translation>صفحه اصلی:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="130"/>
+        <location filename="../common/desktop/about_dialog.cc" line="140"/>
         <source>GitHub page:</source>
         <translation>صفحه GitHub:</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="133"/>
+        <location filename="../common/desktop/about_dialog.cc" line="143"/>
         <source>Developers</source>
         <translation>توسعه‌دهندگان</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="135"/>
+        <location filename="../common/desktop/about_dialog.cc" line="145"/>
         <source>Translators</source>
         <translation>مترجمان</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="137"/>
+        <location filename="../common/desktop/about_dialog.cc" line="147"/>
         <source>Third-party components</source>
         <translation>اجزای شخص ثالث</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="139"/>
+        <location filename="../common/desktop/about_dialog.cc" line="149"/>
         <source>Graphics and images</source>
         <translation>گرافیک و تصاویر</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="140"/>
+        <location filename="../common/desktop/about_dialog.cc" line="150"/>
         <source>Icons by %1</source>
         <translation>آیکون‌ها از %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="167"/>
+        <location filename="../common/desktop/about_dialog.cc" line="177"/>
         <source>Application</source>
         <translation>برنامه</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="168"/>
+        <location filename="../common/desktop/about_dialog.cc" line="178"/>
         <source>Path: %1</source>
         <translation>مسیر: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="169"/>
+        <location filename="../common/desktop/about_dialog.cc" line="179"/>
         <source>Logging directory: %1</source>
         <translation>پوشه گزارش‌ها: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="171"/>
+        <location filename="../common/desktop/about_dialog.cc" line="181"/>
         <source>Logging file: %1</source>
         <translation>فایل گزارش: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="176"/>
+        <location filename="../common/desktop/about_dialog.cc" line="186"/>
         <source>Build Information</source>
         <translation>اطلاعات ساخت</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="177"/>
+        <location filename="../common/desktop/about_dialog.cc" line="187"/>
         <source>Git branch: %1</source>
         <translation>شاخه Git: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="179"/>
+        <location filename="../common/desktop/about_dialog.cc" line="189"/>
         <source>Git commit: %1</source>
         <translation>کامیت Git: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="184"/>
+        <location filename="../common/desktop/about_dialog.cc" line="194"/>
         <source>Compilation</source>
         <translation>کامپایل</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="185"/>
+        <location filename="../common/desktop/about_dialog.cc" line="195"/>
         <source>Compilation date: %1</source>
         <translation>تاریخ کامپایل: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="186"/>
+        <location filename="../common/desktop/about_dialog.cc" line="196"/>
         <source>Compilation time: %1</source>
         <translation>زمان کامپایل: %1</translation>
     </message>
     <message>
-        <location filename="../common/desktop/about_dialog.cc" line="215"/>
+        <location filename="../common/desktop/about_dialog.cc" line="225"/>
         <source>Version Information</source>
         <translation>اطلاعات نسخه</translation>
     </message>
     <message>
+        <location filename="../common/desktop/about_dialog.cc" line="118"/>
         <source>User: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -724,71 +725,71 @@
         <translation>···</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="134"/>
-        <location filename="../common/desktop/chat_widget.cc" line="348"/>
+        <location filename="../common/desktop/chat_widget.cc" line="136"/>
+        <location filename="../common/desktop/chat_widget.cc" line="358"/>
         <source>Save chat...</source>
         <translation>ذخیره چت...</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="135"/>
-        <location filename="../common/desktop/chat_widget.cc" line="349"/>
+        <location filename="../common/desktop/chat_widget.cc" line="137"/>
+        <location filename="../common/desktop/chat_widget.cc" line="359"/>
         <source>Clear chat</source>
         <translation>پاک کردن چت</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="206"/>
+        <location filename="../common/desktop/chat_widget.cc" line="208"/>
         <source>%1 is typing...</source>
         <translation>%1 در حال نوشتن است...</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="209"/>
+        <location filename="../common/desktop/chat_widget.cc" line="211"/>
         <source>User %1 has joined the chat (%2)</source>
         <translation>کاربر %1 به چت پیوست (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="212"/>
+        <location filename="../common/desktop/chat_widget.cc" line="214"/>
         <source>User %1 has left the chat (%2)</source>
         <translation>کاربر %1 چت را ترک کرد (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="215"/>
+        <location filename="../common/desktop/chat_widget.cc" line="217"/>
         <source>User %1 is logged in (%2)</source>
         <translation>کاربر %1 وارد سیستم شد (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="218"/>
+        <location filename="../common/desktop/chat_widget.cc" line="220"/>
         <source>User %1 is not logged in (%2)</source>
         <translation>کاربر %1 وارد سیستم نیست (%2)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="221"/>
+        <location filename="../common/desktop/chat_widget.cc" line="223"/>
         <source>There are no connected users (%1)</source>
         <translation>هیچ کاربر متصلی وجود ندارد (%1)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="470"/>
+        <location filename="../common/desktop/chat_widget.cc" line="576"/>
         <source>Unable to write file.</source>
         <translation>نوشتن فایل ممکن نیست.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../common/desktop/chat_widget.cc" line="486"/>
+        <location filename="../common/desktop/chat_widget.cc" line="592"/>
         <source>The message is too long. The maximum message length is %n characters.</source>
         <translation>
             <numerusform>پیام خیلی طولانی است. حداکثر طول پیام %n نویسه است.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="409"/>
+        <location filename="../common/desktop/chat_widget.cc" line="515"/>
         <source>Save File</source>
         <translation>ذخیره فایل</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="409"/>
+        <location filename="../common/desktop/chat_widget.cc" line="515"/>
         <source>TXT files (*.txt)</source>
         <translation>فایل‌های TXT (*.txt)</translation>
     </message>
     <message>
-        <location filename="../common/desktop/chat_widget.cc" line="422"/>
+        <location filename="../common/desktop/chat_widget.cc" line="528"/>
         <source>Could not open file for writing.</source>
         <translation>باز کردن فایل برای نوشتن ممکن نیست.</translation>
     </message>
@@ -1004,7 +1005,7 @@
 <context>
     <name>Client</name>
     <message>
-        <location filename="../client/main.cc" line="94"/>
+        <location filename="../client/main.cc" line="106"/>
         <source>Unable to create a backup. Some records of the database are damaged. Fix or delete them.</source>
         <translation>ایجاد نسخه پشتیبان ناموفق بود. برخی رکوردهای پایگاه داده آسیب دیده‌اند. آنها را اصلاح یا حذف کنید.</translation>
     </message>
@@ -1033,28 +1034,28 @@
         <translation>آیا می‌خواهید گذرواژه دیگری وارد کنید؟</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="88"/>
+        <location filename="../client/main.cc" line="100"/>
         <source>Unable to create a backup in the directory &quot;%1&quot;.</source>
         <translation>ایجاد نسخه پشتیبان در پوشه &quot;%1&quot; ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="100"/>
+        <location filename="../client/main.cc" line="112"/>
         <source>Unable to create a backup.</source>
         <translation>ایجاد نسخه پشتیبان ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="242"/>
+        <location filename="../client/main.cc" line="313"/>
         <source>Unable to move the address book into the new format. The old address book is not changed, and the next start tries again. The details are in the log.</source>
         <translation>انتقال دفترچه آدرس به قالب جدید ممکن نیست. دفترچه آدرس قبلی تغییر نکرده است و در راه‌اندازی بعدی دوباره تلاش می‌شود. جزئیات در گزارش موجود است.</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="249"/>
-        <location filename="../client/main.cc" line="266"/>
+        <location filename="../client/main.cc" line="320"/>
+        <location filename="../client/main.cc" line="342"/>
         <source>Aspia Client</source>
         <translation>کلاینت Aspia</translation>
     </message>
     <message>
-        <location filename="../client/main.cc" line="263"/>
+        <location filename="../client/main.cc" line="339"/>
         <source>Show the database selection dialog.</source>
         <translation>نمایش پنجره انتخاب پایگاه داده.</translation>
     </message>
@@ -1100,62 +1101,69 @@
 <context>
     <name>ClientWindow</name>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="279"/>
+        <location filename="../client/desktop/client_window.cc" line="416"/>
         <source>Session started.</source>
         <translation>نشست شروع شد.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="611"/>
+        <location filename="../client/desktop/client_window.cc" line="772"/>
         <source>The specified router is unavailable.</source>
         <translation>روتر مشخص‌شده در دسترس نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="613"/>
+        <location filename="../client/desktop/client_window.cc" line="774"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>داده‌های روتر آسیب دیده است. روتر را ویرایش کنید و دوباره آن را وارد کنید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="615"/>
+        <location filename="../client/desktop/client_window.cc" line="776"/>
         <source>The specified router is offline.</source>
         <translation>روتر مشخص‌شده آفلاین است.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="291"/>
+        <location filename="../client/desktop/client_window.cc" line="428"/>
         <source>Connecting to host %1...</source>
         <translation>در حال اتصال به میزبان %1...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="295"/>
+        <location filename="../client/desktop/client_window.cc" line="432"/>
         <source>Connecting to host %1:%2...</source>
         <translation>در حال اتصال به میزبان %1:%2...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="331"/>
+        <location filename="../client/desktop/client_window.cc" line="468"/>
         <source>Host is unavailable yet. Waiting to reconnect...</source>
         <translation>میزبان هنوز در دسترس نیست. در انتظار اتصال مجدد...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="105"/>
+        <location filename="../client/desktop/client_window.cc" line="113"/>
+        <location filename="../client/desktop/client_window.cc" line="237"/>
         <source>Timeout waiting for reconnection to host.</source>
         <translation>مهلت انتظار برای اتصال مجدد به میزبان به پایان رسید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="351"/>
+        <location filename="../client/desktop/client_window.cc" line="218"/>
+        <location filename="../client/desktop/client_window.cc" line="250"/>
+        <source>Connecting to host...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/client_window.cc" line="477"/>
         <source>The Host version is newer than the Client version (%1 &gt; %2). Please update the application.</source>
         <translation>نسخه میزبان از نسخه کلاینت جدیدتر است (%1 &gt; %2). لطفاً برنامه را به‌روزرسانی کنید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="622"/>
+        <location filename="../client/desktop/client_window.cc" line="786"/>
         <source>Requesting connection to the host...</source>
         <translation>در حال درخواست اتصال به میزبان...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="630"/>
+        <location filename="../client/desktop/client_window.cc" line="794"/>
         <source>Connection offer received.</source>
         <translation>پیشنهاد اتصال دریافت شد.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/client_window.cc" line="644"/>
+        <location filename="../client/desktop/client_window.cc" line="810"/>
         <source>Error requesting connection via router.</source>
         <translation>خطا در درخواست اتصال از طریق روتر.</translation>
     </message>
@@ -1165,7 +1173,7 @@
     <message>
         <location filename="../host/ui/config_dialog.ui" line="14"/>
         <location filename="../host/ui/config_dialog.ui" line="185"/>
-        <location filename="../host/ui/config_dialog.cc" line="138"/>
+        <location filename="../host/ui/config_dialog.cc" line="139"/>
         <source>Settings</source>
         <translation>تنظیمات</translation>
     </message>
@@ -1393,282 +1401,288 @@
         <translation>بررسی به‌روزرسانی‌ها:</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="140"/>
+        <location filename="../host/ui/config_dialog.cc" line="141"/>
         <source>Installer</source>
         <translation>نصب‌کننده</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="142"/>
+        <location filename="../host/ui/config_dialog.cc" line="143"/>
         <source>Quick Support</source>
         <translation>پشتیبانی سریع</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="149"/>
+        <location filename="../host/ui/config_dialog.cc" line="150"/>
         <source>Once a day</source>
         <translation>روزی یک بار</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="150"/>
+        <location filename="../host/ui/config_dialog.cc" line="151"/>
         <source>Once a week</source>
         <translation>هفته‌ای یک بار</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="151"/>
+        <location filename="../host/ui/config_dialog.cc" line="152"/>
         <source>Once a month</source>
         <translation>ماهی یک بار</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="153"/>
+        <location filename="../host/ui/config_dialog.cc" line="154"/>
         <source>Stable</source>
         <translation>پایدار</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="154"/>
+        <location filename="../host/ui/config_dialog.cc" line="155"/>
         <source>Beta</source>
         <translation>بتا</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="155"/>
+        <location filename="../host/ui/config_dialog.cc" line="156"/>
         <source>Alpha</source>
         <translation>آلفا</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="199"/>
+        <location filename="../host/ui/config_dialog.cc" line="200"/>
         <source>Default</source>
         <translation>پیش‌فرض</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="233"/>
+        <location filename="../host/ui/config_dialog.cc" line="234"/>
         <source>No proxy</source>
         <translation>بدون سرور پروکسی</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="270"/>
+        <location filename="../host/ui/config_dialog.cc" line="271"/>
         <source>On reboot</source>
         <translation>هنگام راه‌اندازی مجدد</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="271"/>
+        <location filename="../host/ui/config_dialog.cc" line="272"/>
         <source>Every 5 minutes</source>
         <translation>هر 5 دقیقه</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="272"/>
+        <location filename="../host/ui/config_dialog.cc" line="273"/>
         <source>Every 30 minutes</source>
         <translation>هر 30 دقیقه</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="273"/>
+        <location filename="../host/ui/config_dialog.cc" line="274"/>
         <source>Every 1 hour</source>
         <translation>هر 1 ساعت</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="274"/>
+        <location filename="../host/ui/config_dialog.cc" line="275"/>
         <source>Every 6 hours</source>
         <translation>هر 6 ساعت</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="275"/>
+        <location filename="../host/ui/config_dialog.cc" line="276"/>
         <source>Every 12 hours</source>
         <translation>هر 12 ساعت</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="283"/>
+        <location filename="../host/ui/config_dialog.cc" line="284"/>
         <source>Letters and digits</source>
         <translation>حروف و ارقام</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="286"/>
+        <location filename="../host/ui/config_dialog.cc" line="287"/>
         <source>Letters</source>
         <translation>حروف</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="288"/>
+        <location filename="../host/ui/config_dialog.cc" line="289"/>
         <source>Digits</source>
         <translation>ارقام</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="305"/>
+        <location filename="../host/ui/config_dialog.cc" line="306"/>
         <source>Never</source>
         <translation>هرگز</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="306"/>
+        <location filename="../host/ui/config_dialog.cc" line="307"/>
         <source>15 seconds</source>
         <translation>15 ثانیه</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="307"/>
+        <location filename="../host/ui/config_dialog.cc" line="308"/>
         <source>30 seconds</source>
         <translation>30 ثانیه</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="308"/>
+        <location filename="../host/ui/config_dialog.cc" line="309"/>
         <source>45 seconds</source>
         <translation>45 ثانیه</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="309"/>
+        <location filename="../host/ui/config_dialog.cc" line="310"/>
         <source>60 seconds</source>
         <translation>60 ثانیه</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="317"/>
+        <location filename="../host/ui/config_dialog.cc" line="318"/>
         <source>Accept connection</source>
         <translation>پذیرش اتصال</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="318"/>
+        <location filename="../host/ui/config_dialog.cc" line="319"/>
         <source>Reject connection</source>
         <translation>رد اتصال</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="518"/>
+        <location filename="../host/ui/config_dialog.cc" line="519"/>
         <source>Are you sure you want to delete user &quot;%1&quot;?</source>
         <translation>آیا مطمئن هستید که می‌خواهید کاربر &quot;%1&quot; را حذف کنید؟</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="546"/>
-        <location filename="../host/ui/config_dialog.cc" line="580"/>
+        <location filename="../host/ui/config_dialog.cc" line="547"/>
+        <location filename="../host/ui/config_dialog.cc" line="581"/>
         <source>An error occurred while processing the password.</source>
         <translation>هنگام پردازش گذرواژه خطایی رخ داد.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="563"/>
+        <location filename="../host/ui/config_dialog.cc" line="564"/>
         <source>Settings storage is unavailable.</source>
         <translation>محل ذخیره تنظیمات در دسترس نیست.</translation>
     </message>
     <message>
         <location filename="../host/ui/config_dialog.ui" line="204"/>
-        <location filename="../host/ui/config_dialog.cc" line="594"/>
+        <location filename="../host/ui/config_dialog.cc" line="595"/>
         <source>Import</source>
         <translation>وارد کردن</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="594"/>
-        <location filename="../host/ui/config_dialog.cc" line="611"/>
+        <location filename="../host/ui/config_dialog.cc" line="595"/>
+        <location filename="../host/ui/config_dialog.cc" line="612"/>
         <source>JSON-files (*.json)</source>
         <translation>فایل‌های JSON (*.json)</translation>
     </message>
     <message>
         <location filename="../host/ui/config_dialog.ui" line="211"/>
-        <location filename="../host/ui/config_dialog.cc" line="611"/>
-        <location filename="../host/ui/config_dialog.cc" line="636"/>
-        <location filename="../host/ui/config_dialog.cc" line="671"/>
+        <location filename="../host/ui/config_dialog.cc" line="612"/>
+        <location filename="../host/ui/config_dialog.cc" line="660"/>
+        <location filename="../host/ui/config_dialog.cc" line="716"/>
         <source>Export</source>
         <translation>صادر کردن</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="636"/>
+        <location filename="../host/ui/config_dialog.cc" line="660"/>
         <source>MSI-files (*.msi)</source>
         <translation>فایل‌های MSI (*.msi)</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="646"/>
+        <location filename="../host/ui/config_dialog.cc" line="670"/>
         <source>The installer was successfully exported.</source>
         <translation>نصب‌کننده با موفقیت صادر شد.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="650"/>
+        <location filename="../host/ui/config_dialog.cc" line="674"/>
         <source>The installed host package was not found.</source>
         <translation>پکیج نصب‌شده میزبان پیدا نشد.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="654"/>
+        <location filename="../host/ui/config_dialog.cc" line="678"/>
         <source>The installed version of the host does not support exporting the installer.</source>
         <translation>نسخه نصب‌شده میزبان از صادر کردن نصب‌کننده پشتیبانی نمی‌کند.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="658"/>
+        <location filename="../host/ui/config_dialog.cc" line="682"/>
         <source>Unable to export the installer.</source>
         <translation>صادر کردن نصب‌کننده ممکن نیست.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="671"/>
+        <location filename="../host/ui/config_dialog.cc" line="716"/>
         <source>Executable files (*.exe)</source>
         <translation>فایل‌های اجرایی (*.exe)</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="681"/>
+        <location filename="../host/ui/config_dialog.cc" line="726"/>
         <source>The portable version was successfully exported.</source>
         <translation>نسخه قابل‌حمل با موفقیت صادر شد.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="685"/>
+        <location filename="../host/ui/config_dialog.cc" line="730"/>
         <source>The portable version works only through a router. Set up the connection to the router and save the settings.</source>
         <translation>نسخه قابل‌حمل فقط از طریق روتر کار می‌کند. اتصال به روتر را تنظیم کنید و تنظیمات را ذخیره کنید.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="689"/>
+        <location filename="../host/ui/config_dialog.cc" line="734"/>
         <source>Unable to export the portable version.</source>
         <translation>صادر کردن نسخه قابل‌حمل ممکن نیست.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="710"/>
+        <location filename="../host/ui/config_dialog.cc" line="755"/>
         <source>The configuration can not be written. Make sure that you have sufficient rights to write.</source>
         <translation>پیکربندی قابل نوشتن نیست. مطمئن شوید که مجوز کافی برای نوشتن دارید.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="726"/>
+        <location filename="../host/ui/config_dialog.cc" line="771"/>
         <source>An invalid update server address was entered.</source>
         <translation>آدرس سرور به‌روزرسانی واردشده نامعتبر است.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="734"/>
+        <location filename="../host/ui/config_dialog.cc" line="779"/>
         <source>Enter the update server address.</source>
         <translation>آدرس سرور به‌روزرسانی را وارد کنید.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="744"/>
+        <location filename="../host/ui/config_dialog.cc" line="789"/>
         <source>An invalid public key was entered.</source>
         <translation>کلید عمومی واردشده نامعتبر است.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="763"/>
+        <location filename="../host/ui/config_dialog.cc" line="808"/>
         <source>Incorrect proxy address entered.</source>
         <translation>آدرس سرور پروکسی به‌درستی وارد نشده است.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="775"/>
+        <location filename="../host/ui/config_dialog.cc" line="820"/>
         <source>Incorrect router address entered.</source>
         <translation>آدرس روتر به‌درستی وارد نشده است.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="785"/>
+        <location filename="../host/ui/config_dialog.cc" line="830"/>
         <source>Incorrect router public key entered.</source>
         <translation>کلید عمومی روتر به‌درستی وارد نشده است.</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="957"/>
+        <location filename="../host/ui/config_dialog.cc" line="1002"/>
         <source>Install</source>
         <translation>نصب</translation>
     </message>
     <message>
-        <location filename="../host/ui/config_dialog.cc" line="962"/>
+        <location filename="../host/ui/config_dialog.cc" line="1007"/>
         <source>Remove</source>
         <translation>حذف</translation>
     </message>
     <message>
+        <location filename="../host/ui/config_dialog.cc" line="641"/>
         <source>Export Installer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../host/ui/config_dialog.cc" line="642"/>
         <source>The exported installer carries the settings of this host: the connection to the router and the users. By default they are imported on the first installation only, and the data of a host that is already installed is left alone.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../host/ui/config_dialog.cc" line="648"/>
         <source>Overwrite the old data on install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../host/ui/config_dialog.cc" line="698"/>
         <source>Export Quick Support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../host/ui/config_dialog.cc" line="699"/>
         <source>The exported package connects to the same router as this host and accepts the one-time password. The users of this host can be exported with it: they will be able to connect to the exported host with their own login and password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../host/ui/config_dialog.cc" line="704"/>
         <source>Export the users of this host</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2611,7 +2625,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="233"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1029"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1062"/>
         <source>Scale</source>
         <translation>مقیاس</translation>
     </message>
@@ -2701,7 +2715,7 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="435"/>
         <location filename="../client/desktop/desktop/desktop_toolbar.ui" line="438"/>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="629"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="662"/>
         <source>Start recording</source>
         <translation>شروع ضبط</translation>
     </message>
@@ -2723,129 +2737,150 @@ Credentials replaced: %2</source>
         <translation>تعویض نشست</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="400"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="433"/>
         <source>Resolution selection</source>
         <translation>انتخاب وضوح</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1204"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1349"/>
         <source>Session %1</source>
         <translation>نشست %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1204"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1349"/>
         <source>Session %1 (%2)</source>
         <translation>نشست %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="624"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="657"/>
         <source>Stop recording</source>
         <translation>توقف ضبط</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="513"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="107"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="111"/>
+        <source>View only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="546"/>
         <source>Scripts</source>
         <translation>اسکریپت‌ها</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="576"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="609"/>
         <source>Are you sure you want to run &quot;%1&quot; on the remote computer?</source>
         <translation>آیا مطمئن هستید که می‌خواهید اسکریپت &quot;%1&quot; را در رایانه راه دور اجرا کنید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="844"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="877"/>
         <source>Are you sure you want to shutdown the remote computer?</source>
         <translation>آیا مطمئن هستید که می‌خواهید رایانه راه دور را خاموش کنید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="859"/>
         <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="892"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="925"/>
         <source>Confirmation</source>
         <translation>تأیید</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="860"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="893"/>
         <source>Are you sure you want to reboot the remote computer?</source>
         <translation>آیا مطمئن هستید که می‌خواهید رایانه راه دور را راه‌اندازی مجدد کنید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="868"/>
         <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="901"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="934"/>
         <source>Wait for host</source>
         <translation>انتظار برای میزبان</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="893"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="926"/>
         <source>Are you sure you want to reboot the remote computer in Safe Mode?</source>
         <translation>آیا مطمئن هستید که می‌خواهید رایانه راه دور را در حالت امن راه‌اندازی مجدد کنید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="925"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="958"/>
         <source>Are you sure you want to end the user session on the remote computer?</source>
         <translation>آیا مطمئن هستید که می‌خواهید نشست کاربر را در رایانه راه دور پایان دهید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="940"/>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="973"/>
         <source>Are you sure you want to lock the user session on the remote computer?</source>
         <translation>آیا مطمئن هستید که می‌خواهید نشست کاربر را در رایانه راه دور قفل کنید؟</translation>
     </message>
     <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1075"/>
         <source>Session settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1077"/>
         <source>Clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1079"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1081"/>
         <source>Cursor shape</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1083"/>
         <source>Cursor position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1085"/>
         <source>Effects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1087"/>
         <source>Wallpaper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1089"/>
         <source>Block input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1092"/>
         <source>Lock at disconnect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1095"/>
         <source>Enable keyboard shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1098"/>
         <source>Quality</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">کیفیت</translation>
     </message>
     <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1101"/>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">خودکار</translation>
     </message>
     <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1103"/>
         <source>Low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1105"/>
         <source>Medium</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">متوسط</translation>
     </message>
     <message>
+        <location filename="../client/desktop/desktop/desktop_toolbar.cc" line="1107"/>
         <source>High</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2853,32 +2888,32 @@ Credentials replaced: %2</source>
 <context>
     <name>DesktopWidget</name>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="627"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="648"/>
         <source>The session was paused by a remote user</source>
         <translation>نشست توسط کاربر راه دور موقتاً متوقف شد</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="630"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="651"/>
         <source>The session is temporarily unavailable</source>
         <translation>نشست موقتاً در دسترس نیست</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="633"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="654"/>
         <source>The session is permanently unavailable</source>
         <translation>نشست برای همیشه در دسترس نیست</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="636"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="657"/>
         <source>Waiting for the remote user to confirm screen capture</source>
         <translation>در انتظار تأیید تصویربرداری از صفحه توسط کاربر راه دور</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="639"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="660"/>
         <source>The remote device screen is locked</source>
         <translation>صفحه‌نمایش دستگاه راه دور قفل است</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_widget.cc" line="642"/>
+        <location filename="../client/desktop/desktop/desktop_widget.cc" line="663"/>
         <source>Error while receiving video stream: %1</source>
         <translation>خطا هنگام دریافت جریان ویدئو: %1</translation>
     </message>
@@ -2886,52 +2921,52 @@ Credentials replaced: %2</source>
 <context>
     <name>DesktopWindow</name>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1171"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1275"/>
         <source>Save File</source>
         <translation>ذخیره فایل</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1172"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1276"/>
         <source>PNG Image (*.png);;BMP Image (*.bmp)</source>
         <translation>تصویر PNG (*.png);;تصویر BMP (*.bmp)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1203"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1307"/>
         <source>Could not save image</source>
         <translation>ذخیره تصویر ممکن نیست</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1456"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1610"/>
         <source>Invalid user name or password.</source>
         <translation>نام کاربری یا گذرواژه اشتباه است.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1459"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1613"/>
         <source>The password has expired.</source>
         <translation>گذرواژه منقضی شده است.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1462"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1616"/>
         <source>The account is locked out.</source>
         <translation>حساب کاربری قفل شده است.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1465"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1619"/>
         <source>The account is disabled.</source>
         <translation>حساب کاربری غیرفعال است.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1516"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1670"/>
         <source>Unable to run the script on the remote computer.</source>
         <translation>اجرای اسکریپت در رایانه راه دور ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1519"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1673"/>
         <source>Another script is running on the remote computer. Wait for it to finish and try again.</source>
         <translation>اسکریپت دیگری هم‌اکنون در رایانه راه دور در حال اجرا است. صبر کنید تا به پایان برسد و دوباره تلاش کنید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/desktop/desktop_window.cc" line="1545"/>
+        <location filename="../client/desktop/desktop/desktop_window.cc" line="1699"/>
         <source>Script</source>
         <translation>اسکریپت</translation>
     </message>
@@ -4092,9 +4127,9 @@ Credentials replaced: %2</source>
     <name>HostWindow</name>
     <message>
         <location filename="../host/ui/host_window.ui" line="26"/>
-        <location filename="../host/ui/host_window.cc" line="644"/>
-        <location filename="../host/ui/host_window.cc" line="889"/>
-        <location filename="../host/ui/host_window.cc" line="1167"/>
+        <location filename="../host/ui/host_window.cc" line="661"/>
+        <location filename="../host/ui/host_window.cc" line="926"/>
+        <location filename="../host/ui/host_window.cc" line="1204"/>
         <source>Aspia Host</source>
         <translation>میزبان Aspia</translation>
     </message>
@@ -4110,7 +4145,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="198"/>
-        <location filename="../host/ui/host_window.cc" line="1119"/>
+        <location filename="../host/ui/host_window.cc" line="1156"/>
         <source>Router is disabled</source>
         <translation>روتر غیرفعال است</translation>
     </message>
@@ -4181,7 +4216,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="335"/>
-        <location filename="../host/ui/host_window.cc" line="850"/>
+        <location filename="../host/ui/host_window.cc" line="887"/>
         <source>Hide</source>
         <translation>پنهان کردن</translation>
     </message>
@@ -4222,74 +4257,74 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../host/ui/host_window.cc" line="180"/>
-        <location filename="../host/ui/host_window.cc" line="644"/>
-        <location filename="../host/ui/host_window.cc" line="1167"/>
+        <location filename="../host/ui/host_window.cc" line="661"/>
+        <location filename="../host/ui/host_window.cc" line="1204"/>
         <source>Aspia Quick Support</source>
         <translation>پشتیبانی سریع Aspia</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.cc" line="339"/>
-        <location filename="../host/ui/host_window.cc" line="845"/>
+        <location filename="../host/ui/host_window.cc" line="882"/>
         <source>Show</source>
         <translation>نمایش</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="633"/>
+        <location filename="../host/ui/host_window.cc" line="650"/>
         <source>Screen recording has started.</source>
         <translation>ضبط صفحه شروع شد.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="635"/>
+        <location filename="../host/ui/host_window.cc" line="652"/>
         <source>Screen recording stopped.</source>
         <translation>ضبط صفحه متوقف شد.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="834"/>
+        <location filename="../host/ui/host_window.cc" line="871"/>
         <source>Settings storage is unavailable.</source>
         <translation>محل ذخیره تنظیمات در دسترس نیست.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="900"/>
+        <location filename="../host/ui/host_window.cc" line="937"/>
         <source>Aspia Host will be removed from this computer. The settings of the host will be kept. Do you really want to uninstall the application?</source>
         <translation>میزبان Aspia از این رایانه حذف خواهد شد. تنظیمات میزبان حفظ خواهند شد. آیا واقعاً می‌خواهید برنامه را حذف نصب کنید؟</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="912"/>
+        <location filename="../host/ui/host_window.cc" line="949"/>
         <source>Unable to uninstall the application.</source>
         <translation>حذف نصب برنامه ممکن نیست.</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="939"/>
+        <location filename="../host/ui/host_window.cc" line="976"/>
         <source>If you exit from Aspia, it will not be possible to connect to this computer until you turn on the computer or Aspia again manually. Do you really want to exit the application?</source>
         <translation>اگر از Aspia خارج شوید، تا زمانی که رایانه یا Aspia را دوباره به‌صورت دستی روشن کنید، اتصال به این رایانه ممکن نخواهد بود. آیا واقعاً می‌خواهید از برنامه خارج شوید؟</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1111"/>
+        <location filename="../host/ui/host_window.cc" line="1148"/>
         <source>Not connected to service</source>
         <translation>عدم اتصال به سرویس</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1124"/>
+        <location filename="../host/ui/host_window.cc" line="1161"/>
         <source>Connecting to router...</source>
         <translation>در حال اتصال به روتر...</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1129"/>
+        <location filename="../host/ui/host_window.cc" line="1166"/>
         <source>Connected to router</source>
         <translation>متصل به روتر</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1134"/>
+        <location filename="../host/ui/host_window.cc" line="1171"/>
         <source>Connection error</source>
         <translation>خطای اتصال</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1212"/>
+        <location filename="../host/ui/host_window.cc" line="1249"/>
         <source>IP addresses:</source>
         <translation>آدرس‌های IP:</translation>
     </message>
     <message>
-        <location filename="../host/ui/host_window.cc" line="1168"/>
+        <location filename="../host/ui/host_window.cc" line="1205"/>
         <source>ID: %1</source>
         <translation>ID: %1</translation>
     </message>
@@ -4961,7 +4996,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../client/desktop/main_window.ui" line="20"/>
-        <location filename="../client/desktop/main_window.cc" line="574"/>
+        <location filename="../client/desktop/main_window.cc" line="581"/>
         <source>Aspia Client</source>
         <translation>کلاینت Aspia</translation>
     </message>
@@ -5041,72 +5076,72 @@ Credentials replaced: %2</source>
         <translation>همیشه در بالا</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="129"/>
+        <location filename="../client/desktop/main_window.cc" line="130"/>
         <source>Search...</source>
         <translation>جستجو...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="220"/>
+        <location filename="../client/desktop/main_window.cc" line="221"/>
         <source>The MCP connector is already in use by another window of the application.</source>
         <translation>کانکتور MCP هم‌اکنون توسط پنجره دیگری از برنامه در حال استفاده است.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="222"/>
+        <location filename="../client/desktop/main_window.cc" line="223"/>
         <source>Unable to turn on the MCP connector.</source>
         <translation>فعال‌سازی کانکتور MCP ممکن نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="245"/>
+        <location filename="../client/desktop/main_window.cc" line="246"/>
         <source>Management</source>
         <translation>مدیریت</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="288"/>
+        <location filename="../client/desktop/main_window.cc" line="289"/>
         <source>Are you sure you want to close the application?</source>
         <translation>آیا مطمئن هستید که می‌خواهید برنامه را ببندید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="529"/>
+        <location filename="../client/desktop/main_window.cc" line="536"/>
         <source>Close all sessions to change the database.</source>
         <translation>برای تعویض پایگاه داده، همه نشست‌ها را ببندید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="535"/>
+        <location filename="../client/desktop/main_window.cc" line="542"/>
         <source>Close all dialogs to change the database.</source>
         <translation>برای تعویض پایگاه داده، همه پنجره‌های محاوره‌ای را ببندید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="550"/>
+        <location filename="../client/desktop/main_window.cc" line="557"/>
         <source>Close all sessions to lock the application.</source>
         <translation>برای قفل کردن برنامه، همه نشست‌ها را ببندید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="556"/>
+        <location filename="../client/desktop/main_window.cc" line="563"/>
         <source>Close all dialogs to lock the application.</source>
         <translation>برای قفل کردن برنامه، همه پنجره‌های محاوره‌ای را ببندید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="917"/>
+        <location filename="../client/desktop/main_window.cc" line="937"/>
         <source>Unknown application</source>
         <translation>برنامه ناشناخته</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="920"/>
+        <location filename="../client/desktop/main_window.cc" line="940"/>
         <source>MCP Connector. Connected: %1</source>
         <translation>کانکتور MCP. متصل: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="921"/>
+        <location filename="../client/desktop/main_window.cc" line="941"/>
         <source>%1 - AI is connected</source>
         <translation>%1 - هوش مصنوعی متصل است</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="482"/>
+        <location filename="../client/desktop/main_window.cc" line="483"/>
         <source>Credentials</source>
         <translation>اطلاعات ورود</translation>
     </message>
     <message>
-        <location filename="../client/desktop/main_window.cc" line="519"/>
+        <location filename="../client/desktop/main_window.cc" line="526"/>
         <source>Settings</source>
         <translation>تنظیمات</translation>
     </message>
@@ -5145,7 +5180,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../client/desktop/management_tab.ui" line="110"/>
-        <location filename="../client/desktop/management_tab.cc" line="1945"/>
+        <location filename="../client/desktop/management_tab.cc" line="2023"/>
         <source>Delete Host</source>
         <translation>حذف میزبان</translation>
     </message>
@@ -5282,277 +5317,308 @@ Credentials replaced: %2</source>
         <translation>به‌روزرسانی خودکار وضعیت</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1041"/>
+        <location filename="../client/desktop/management_tab.cc" line="1052"/>
         <source>(copy)</source>
         <translation>(کپی)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1011"/>
-        <location filename="../client/desktop/management_tab.cc" line="1090"/>
-        <location filename="../client/desktop/management_tab.cc" line="2161"/>
+        <location filename="../client/desktop/management_tab.cc" line="1022"/>
+        <location filename="../client/desktop/management_tab.cc" line="1101"/>
+        <location filename="../client/desktop/management_tab.cc" line="2239"/>
         <source>Failed to retrieve host information from the local database.</source>
         <translation>دریافت اطلاعات میزبان از پایگاه داده محلی ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="843"/>
+        <location filename="../client/desktop/management_tab.cc" line="854"/>
         <source>The &quot;%1&quot; session type is not available for Quick Support.</source>
         <translation>نوع نشست &quot;%1&quot; برای پشتیبانی سریع در دسترس نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1046"/>
+        <location filename="../client/desktop/management_tab.cc" line="1057"/>
         <source>Failed to add the host to the local database.</source>
         <translation>افزودن میزبان به پایگاه داده محلی ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1108"/>
+        <location filename="../client/desktop/management_tab.cc" line="1119"/>
         <source>Are you sure you want to delete host &quot;%1&quot;?</source>
         <translation>آیا مطمئن هستید که می‌خواهید میزبان &quot;%1&quot; را حذف کنید؟</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management_tab.cc" line="1110"/>
+        <location filename="../client/desktop/management_tab.cc" line="1121"/>
         <source>Are you sure you want to delete %n hosts?</source>
         <translation>
             <numerusform>آیا مطمئن هستید که می‌خواهید %n میزبان را حذف کنید؟</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1139"/>
+        <location filename="../client/desktop/management_tab.cc" line="1150"/>
         <source>Unable to remove host</source>
         <translation>حذف میزبان ممکن نیست</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management_tab.cc" line="1141"/>
+        <location filename="../client/desktop/management_tab.cc" line="1152"/>
         <source>Failed to delete %n of the selected hosts.</source>
         <translation>
             <numerusform>حذف %n میزبان از میزبان‌های انتخاب‌شده ناموفق بود.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1207"/>
-        <location filename="../client/desktop/management_tab.cc" line="1284"/>
-        <location filename="../client/desktop/management_tab.cc" line="1317"/>
-        <location filename="../client/desktop/management_tab.cc" line="1340"/>
+        <location filename="../client/desktop/management_tab.cc" line="1203"/>
+        <source>Host update configuration...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1209"/>
+        <source>Host users...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1220"/>
+        <source>Bulk add user...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1226"/>
+        <source>Bulk remove user...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1233"/>
+        <source>Bulk update configuration...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1258"/>
+        <location filename="../client/desktop/management_tab.cc" line="1443"/>
+        <source>Connect for viewing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management_tab.cc" line="1270"/>
+        <location filename="../client/desktop/management_tab.cc" line="1347"/>
+        <location filename="../client/desktop/management_tab.cc" line="1380"/>
+        <location filename="../client/desktop/management_tab.cc" line="1403"/>
         <source>Copy Row</source>
         <translation>کپی سطر</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1208"/>
-        <location filename="../client/desktop/management_tab.cc" line="1285"/>
-        <location filename="../client/desktop/management_tab.cc" line="1318"/>
-        <location filename="../client/desktop/management_tab.cc" line="1341"/>
+        <location filename="../client/desktop/management_tab.cc" line="1271"/>
+        <location filename="../client/desktop/management_tab.cc" line="1348"/>
+        <location filename="../client/desktop/management_tab.cc" line="1381"/>
+        <location filename="../client/desktop/management_tab.cc" line="1404"/>
         <source>Copy Value</source>
         <translation>کپی مقدار</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1575"/>
+        <location filename="../client/desktop/management_tab.cc" line="1653"/>
         <source>Failed to delete the group.</source>
         <translation>حذف گروه ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1613"/>
-        <location filename="../client/desktop/management_tab.cc" line="1669"/>
+        <location filename="../client/desktop/management_tab.cc" line="1691"/>
+        <location filename="../client/desktop/management_tab.cc" line="1747"/>
         <source>The database is not available.</source>
         <translation>پایگاه داده در دسترس نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1619"/>
+        <location filename="../client/desktop/management_tab.cc" line="1697"/>
         <source>Create Backup</source>
         <translation>ایجاد نسخه پشتیبان</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1651"/>
+        <location filename="../client/desktop/management_tab.cc" line="1729"/>
         <source>Router exported</source>
         <translation>روتر صادر شد</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1689"/>
+        <location filename="../client/desktop/management_tab.cc" line="1767"/>
         <source>Everything stored now is deleted and replaced with what the backup holds. The synchronized data on the router and on the other devices of the account saved in the backup will be replaced as well. Continue?</source>
         <translation>همه داده‌های ذخیره‌شده فعلی حذف و با محتوای نسخه پشتیبان جایگزین می‌شود. داده‌های همگام‌سازی‌شده در روتر و در دیگر دستگاه‌های حساب کاربری ذخیره‌شده در نسخه پشتیبان نیز جایگزین خواهند شد. ادامه می‌دهید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1756"/>
+        <location filename="../client/desktop/management_tab.cc" line="1834"/>
         <source>Router imported</source>
         <translation>روتر وارد شد</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2004"/>
+        <location filename="../client/desktop/management_tab.cc" line="2082"/>
         <source>Delete Hosts</source>
         <translation>حذف میزبان‌ها</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2156"/>
+        <location filename="../client/desktop/management_tab.cc" line="2234"/>
         <source>The data of the host is damaged. Edit the host and enter it again.</source>
         <translation>داده‌های میزبان آسیب دیده است. میزبان را ویرایش کنید و دوباره آن را وارد کنید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2176"/>
+        <location filename="../client/desktop/management_tab.cc" line="2254"/>
         <source>The data of the router is damaged. Edit the router and enter it again.</source>
         <translation>داده‌های روتر آسیب دیده است. روتر را ویرایش کنید و دوباره آن را وارد کنید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2182"/>
+        <location filename="../client/desktop/management_tab.cc" line="2260"/>
         <source>The host is reached through a router, but no router is set. Add a router or enter the address of the host instead of its ID.</source>
         <translation>اتصال به میزبان از طریق روتر انجام می‌شود، اما هیچ روتری تنظیم نشده است. یک روتر اضافه کنید یا به‌جای ID میزبان، آدرس آن را وارد کنید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2189"/>
+        <location filename="../client/desktop/management_tab.cc" line="2267"/>
         <source>Failed to read the router.</source>
         <translation>خواندن روتر ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2195"/>
+        <location filename="../client/desktop/management_tab.cc" line="2273"/>
         <source>The router is turned off. Turn it on in the router settings to connect to this host.</source>
         <translation>روتر غیرفعال است. برای اتصال به این میزبان، آن را در تنظیمات روتر فعال کنید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1644"/>
+        <location filename="../client/desktop/management_tab.cc" line="1722"/>
         <source>Failed to create the backup.</source>
         <translation>ایجاد نسخه پشتیبان ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1648"/>
+        <location filename="../client/desktop/management_tab.cc" line="1726"/>
         <source>Export completed successfully.</source>
         <translation>صادر کردن با موفقیت انجام شد.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1653"/>
+        <location filename="../client/desktop/management_tab.cc" line="1731"/>
         <source>Router hosts exported: %1</source>
         <translation>میزبان‌های روتر صادرشده: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1654"/>
+        <location filename="../client/desktop/management_tab.cc" line="1732"/>
         <source>Local groups exported: %1</source>
         <translation>گروه‌های محلی صادرشده: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1655"/>
+        <location filename="../client/desktop/management_tab.cc" line="1733"/>
         <source>Local hosts exported: %1</source>
         <translation>میزبان‌های محلی صادرشده: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1656"/>
+        <location filename="../client/desktop/management_tab.cc" line="1734"/>
         <source>Credentials exported: %1</source>
         <translation>اطلاعات ورود صادرشده: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1657"/>
+        <location filename="../client/desktop/management_tab.cc" line="1735"/>
         <source>Profiles exported: %1</source>
         <translation>پروفایل‌های صادرشده: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1675"/>
-        <location filename="../client/desktop/management_tab.cc" line="1710"/>
+        <location filename="../client/desktop/management_tab.cc" line="1753"/>
+        <location filename="../client/desktop/management_tab.cc" line="1788"/>
         <source>Restore from Backup</source>
         <translation>بازیابی از نسخه پشتیبان</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1692"/>
+        <location filename="../client/desktop/management_tab.cc" line="1770"/>
         <source>Everything stored now is deleted and replaced with what the backup holds. Continue?</source>
         <translation>همه داده‌های ذخیره‌شده فعلی حذف و با محتوای نسخه پشتیبان جایگزین می‌شود. ادامه می‌دهید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1712"/>
+        <location filename="../client/desktop/management_tab.cc" line="1790"/>
         <source>The backup was made on another installation. Enter the master password used there.</source>
         <translation>این نسخه پشتیبان روی نصب دیگری از برنامه ساخته شده است. گذرواژه اصلی همان نصب را وارد کنید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1737"/>
+        <location filename="../client/desktop/management_tab.cc" line="1815"/>
         <source>The backup carries no data, so nothing was changed.</source>
         <translation>این نسخه پشتیبان حاوی داده‌ای نیست، بنابراین چیزی تغییر نکرد.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1745"/>
+        <location filename="../client/desktop/management_tab.cc" line="1823"/>
         <source>The file is not a valid backup.</source>
         <translation>این فایل یک نسخه پشتیبان معتبر نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1749"/>
+        <location filename="../client/desktop/management_tab.cc" line="1827"/>
         <source>Failed to restore from the backup.</source>
         <translation>بازیابی از نسخه پشتیبان ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1753"/>
+        <location filename="../client/desktop/management_tab.cc" line="1831"/>
         <source>Import completed successfully.</source>
         <translation>وارد کردن با موفقیت انجام شد.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1758"/>
+        <location filename="../client/desktop/management_tab.cc" line="1836"/>
         <source>Router hosts imported: %1</source>
         <translation>میزبان‌های روتر واردشده: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1759"/>
+        <location filename="../client/desktop/management_tab.cc" line="1837"/>
         <source>Local groups imported: %1</source>
         <translation>گروه‌های محلی واردشده: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1760"/>
+        <location filename="../client/desktop/management_tab.cc" line="1838"/>
         <source>Local hosts imported: %1</source>
         <translation>میزبان‌های محلی واردشده: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1761"/>
+        <location filename="../client/desktop/management_tab.cc" line="1839"/>
         <source>Credentials imported: %1</source>
         <translation>اطلاعات ورود واردشده: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1762"/>
+        <location filename="../client/desktop/management_tab.cc" line="1840"/>
         <source>Profiles imported: %1</source>
         <translation>پروفایل‌های واردشده: %1</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1620"/>
-        <location filename="../client/desktop/management_tab.cc" line="1676"/>
+        <location filename="../client/desktop/management_tab.cc" line="1698"/>
+        <location filename="../client/desktop/management_tab.cc" line="1754"/>
         <source>Aspia Backup (*.aspia-backup);;All files (*)</source>
         <translation>پشتیبان Aspia (*.aspia-backup);;همه فایل‌ها (*)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1636"/>
+        <location filename="../client/desktop/management_tab.cc" line="1714"/>
         <source>Unable to write the file.</source>
         <translation>نوشتن فایل ممکن نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1741"/>
+        <location filename="../client/desktop/management_tab.cc" line="1819"/>
         <source>Unable to read the file.</source>
         <translation>خواندن فایل ممکن نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1440"/>
+        <location filename="../client/desktop/management_tab.cc" line="1518"/>
         <source>Are you sure you want to delete space &quot;%1&quot;?</source>
         <translation>آیا مطمئن هستید که می‌خواهید فضای &quot;%1&quot; را حذف کنید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1460"/>
+        <location filename="../client/desktop/management_tab.cc" line="1538"/>
         <source>Failed to delete the space.</source>
         <translation>حذف فضا ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1557"/>
+        <location filename="../client/desktop/management_tab.cc" line="1635"/>
         <source>Are you sure you want to delete the group &quot;%1&quot;? Hosts assigned to this group or its subgroups will be moved to the space root.</source>
         <translation>آیا مطمئن هستید که می‌خواهید گروه &quot;%1&quot; را حذف کنید؟ میزبان‌های اختصاص‌یافته به این گروه یا زیرگروه‌های آن به ریشه فضا منتقل خواهند شد.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1640"/>
+        <location filename="../client/desktop/management_tab.cc" line="1718"/>
         <source>Some records of the database are damaged. Fix or delete them and try again.</source>
         <translation>برخی رکوردهای پایگاه داده آسیب دیده‌اند. آنها را اصلاح یا حذف کنید و دوباره تلاش کنید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1729"/>
+        <location filename="../client/desktop/management_tab.cc" line="1807"/>
         <source>Unable to decrypt the file with the specified password.</source>
         <translation>رمزگشایی فایل با گذرواژه مشخص‌شده ممکن نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="1733"/>
+        <location filename="../client/desktop/management_tab.cc" line="1811"/>
         <source>Unsupported file format version.</source>
         <translation>نسخه قالب فایل پشتیبانی نمی‌شود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2202"/>
+        <location filename="../client/desktop/management_tab.cc" line="2280"/>
         <source>The host has an invalid host ID.</source>
         <translation>ID میزبان نامعتبر است.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management_tab.cc" line="2211"/>
+        <location filename="../client/desktop/management_tab.cc" line="2289"/>
         <source>The host has an incorrect address.</source>
         <translation>آدرس میزبان نادرست است.</translation>
     </message>
@@ -5811,7 +5877,7 @@ Credentials replaced: %2</source>
 <context>
     <name>NetworkWorker</name>
     <message>
-        <location filename="../client/workers/network_worker.cc" line="384"/>
+        <location filename="../client/workers/network_worker.cc" line="390"/>
         <source>Failed to connect to the relay server</source>
         <translation>اتصال به سرور رله ناموفق بود</translation>
     </message>
@@ -5820,7 +5886,7 @@ Credentials replaced: %2</source>
     <name>NotifierWindow</name>
     <message>
         <location filename="../host/ui/notifier_window.ui" line="345"/>
-        <location filename="../host/ui/notifier_window.cc" line="314"/>
+        <location filename="../host/ui/notifier_window.cc" line="319"/>
         <source>Pause</source>
         <translation>توقف موقت</translation>
     </message>
@@ -5831,38 +5897,38 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../host/ui/notifier_window.ui" line="293"/>
-        <location filename="../host/ui/notifier_window.cc" line="298"/>
+        <location filename="../host/ui/notifier_window.cc" line="303"/>
         <source>Lock mouse</source>
         <translation>قفل کردن ماوس</translation>
     </message>
     <message>
         <location filename="../host/ui/notifier_window.ui" line="319"/>
-        <location filename="../host/ui/notifier_window.cc" line="306"/>
+        <location filename="../host/ui/notifier_window.cc" line="311"/>
         <source>Lock keyboard</source>
         <translation>قفل کردن صفحه‌کلید</translation>
     </message>
     <message>
-        <location filename="../host/ui/notifier_window.cc" line="265"/>
+        <location filename="../host/ui/notifier_window.cc" line="270"/>
         <source>Disconnect</source>
         <translation>قطع اتصال</translation>
     </message>
     <message>
-        <location filename="../host/ui/notifier_window.cc" line="298"/>
+        <location filename="../host/ui/notifier_window.cc" line="303"/>
         <source>Unlock mouse</source>
         <translation>باز کردن قفل ماوس</translation>
     </message>
     <message>
-        <location filename="../host/ui/notifier_window.cc" line="306"/>
+        <location filename="../host/ui/notifier_window.cc" line="311"/>
         <source>Unlock keyboard</source>
         <translation>باز کردن قفل صفحه‌کلید</translation>
     </message>
     <message>
-        <location filename="../host/ui/notifier_window.cc" line="314"/>
+        <location filename="../host/ui/notifier_window.cc" line="319"/>
         <source>Resume</source>
         <translation>ازسرگیری</translation>
     </message>
     <message>
-        <location filename="../host/ui/notifier_window.cc" line="566"/>
+        <location filename="../host/ui/notifier_window.cc" line="571"/>
         <source>Aspia Host</source>
         <translation>میزبان Aspia</translation>
     </message>
@@ -6458,6 +6524,237 @@ Credentials replaced: %2</source>
     </message>
 </context>
 <context>
+    <name>QsClientExportDialog</name>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="88"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="404"/>
+        <source>Export Preconfigured QS Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="91"/>
+        <source>A new account is created on the router for this client. The password is generated automatically and stored only in the exported file. The suffix &quot;-qs&quot; is added to the name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="97"/>
+        <source>Create new user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="98"/>
+        <source>Use existing user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="120"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="207"/>
+        <source>Show</source>
+        <translation type="unfinished">نمایش</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="121"/>
+        <source>Generate password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="130"/>
+        <source>The password must match the password of this account on the router. The password on the router is not changed - if it differs, the QS client will not connect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="148"/>
+        <source>User:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="149"/>
+        <source>Password:</source>
+        <translation type="unfinished">گذرواژه:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="150"/>
+        <source>Router address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="152"/>
+        <source>Export...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="153"/>
+        <source>Cancel</source>
+        <translation type="unfinished">لغو</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="179"/>
+        <source>A new account is created on the router for this client. The password is stored only in the exported file. The suffix &quot;-qs&quot; is added to the name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="185"/>
+        <source>An existing account is used. The account is not created or changed; only the password is sealed into the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="202"/>
+        <source>Hide</source>
+        <translation type="unfinished">پنهان کردن</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="228"/>
+        <source>Loading users...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="258"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="306"/>
+        <source>No Quick Support users found on the router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="269"/>
+        <source>No router session.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="285"/>
+        <source>An administrator session with the router is required.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="297"/>
+        <source>The user name is invalid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="316"/>
+        <source>The router address is invalid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="324"/>
+        <source>The password must be 8 to 64 characters long.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="353"/>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="387"/>
+        <source>The router did not answer the user lookup.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="359"/>
+        <source>A user with this name already exists on the router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="393"/>
+        <source>The selected user no longer exists on the router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="404"/>
+        <source>Executable files (*.exe)</source>
+        <translation type="unfinished">فایل‌های اجرایی (*.exe)</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="418"/>
+        <source>Failed to export the Quick Support client.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="453"/>
+        <source>Failed to create the user on the router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_export_dialog.cc" line="458"/>
+        <source>The Quick Support client has been exported.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QsClientWindow</name>
+    <message>
+        <location filename="../client/desktop/qs_client_window.cc" line="62"/>
+        <source>123 456 789</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_window.cc" line="66"/>
+        <source>Desktop</source>
+        <translation type="unfinished">دسکتاپ</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_window.cc" line="67"/>
+        <source>File transfer</source>
+        <translation type="unfinished">انتقال فایل</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_window.cc" line="69"/>
+        <source>Connect</source>
+        <translation type="unfinished">اتصال</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_window.cc" line="73"/>
+        <location filename="../client/desktop/qs_client_window.cc" line="132"/>
+        <source>Connecting to the router...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_window.cc" line="77"/>
+        <source>Host ID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_window.cc" line="78"/>
+        <source>Session:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_window.cc" line="84"/>
+        <source>About</source>
+        <translation type="unfinished">درباره</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_window.cc" line="122"/>
+        <source>Enter the ID shown by the host.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_window.cc" line="127"/>
+        <source>The router data is damaged.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_window.cc" line="137"/>
+        <source>Waiting for the two-factor code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_window.cc" line="143"/>
+        <source>The router is unavailable. Retrying...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_window.cc" line="179"/>
+        <source>Enter a valid Quick Support ID.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_window.cc" line="186"/>
+        <source>The router is not connected yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/qs_client_window.cc" line="210"/>
+        <source>Quick Support %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QuickConnectDialog</name>
     <message>
         <location filename="../client/desktop/quick_connect_dialog.ui" line="14"/>
@@ -6774,7 +7071,7 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../client/router/router_controller.cc" line="257"/>
         <location filename="../client/router/router_controller.cc" line="282"/>
-        <location filename="../client/router/router_controller.cc" line="481"/>
+        <location filename="../client/router/router_controller.cc" line="483"/>
         <source>Connecting to router %1...</source>
         <translation>در حال اتصال به روتر %1...</translation>
     </message>
@@ -6804,47 +7101,47 @@ Credentials replaced: %2</source>
         <translation>اتصال به روتر %1 برقرار شد.</translation>
     </message>
     <message>
-        <location filename="../client/router/router_controller.cc" line="407"/>
+        <location filename="../client/router/router_controller.cc" line="409"/>
         <source>The version of router %1 is newer than the client version (%2 &gt; %3). Update the client.</source>
         <translation>نسخه روتر %1 از نسخه کلاینت جدیدتر است (%2 &gt; %3). کلاینت را به‌روزرسانی کنید.</translation>
     </message>
     <message>
-        <location filename="../client/router/router_controller.cc" line="441"/>
+        <location filename="../client/router/router_controller.cc" line="443"/>
         <source>Network error: %1</source>
         <translation>خطای شبکه: %1</translation>
     </message>
     <message>
-        <location filename="../client/router/router_controller.cc" line="455"/>
+        <location filename="../client/router/router_controller.cc" line="457"/>
         <source>Disconnected from router %1.</source>
         <translation>اتصال به روتر %1 قطع شد.</translation>
     </message>
     <message>
-        <location filename="../client/router/router_controller.cc" line="569"/>
+        <location filename="../client/router/router_controller.cc" line="571"/>
         <source>Data synchronization is on.</source>
         <translation>همگام‌سازی داده‌ها روشن است.</translation>
     </message>
     <message>
-        <location filename="../client/router/router_controller.cc" line="574"/>
+        <location filename="../client/router/router_controller.cc" line="576"/>
         <source>The synchronization key cannot be opened with the password of the account. Sign in with the current password on a device that is already synchronized.</source>
         <translation>کلید همگام‌سازی با گذرواژه حساب کاربری باز نمی‌شود. با گذرواژه فعلی در دستگاهی که قبلاً همگام‌سازی شده است وارد شوید.</translation>
     </message>
     <message>
-        <location filename="../client/router/router_controller.cc" line="580"/>
+        <location filename="../client/router/router_controller.cc" line="582"/>
         <source>Synchronization error: %1</source>
         <translation>خطای همگام‌سازی: %1</translation>
     </message>
     <message>
-        <location filename="../client/router/router_controller.cc" line="585"/>
+        <location filename="../client/router/router_controller.cc" line="587"/>
         <source>The router returned an invalid answer to the synchronization.</source>
         <translation>روتر پاسخ نامعتبری به همگام‌سازی برگرداند.</translation>
     </message>
     <message>
-        <location filename="../client/router/router_controller.cc" line="590"/>
+        <location filename="../client/router/router_controller.cc" line="592"/>
         <source>Synchronization stopped because of an error on this device.</source>
         <translation>همگام‌سازی به دلیل خطا در این دستگاه متوقف شد.</translation>
     </message>
     <message>
-        <location filename="../client/router/router_controller.cc" line="650"/>
+        <location filename="../client/router/router_controller.cc" line="652"/>
         <source>Unable to save the user of router %1. Data synchronization does not work in this connection.</source>
         <translation>ذخیره کاربر روتر %1 ممکن نشد. همگام‌سازی داده‌ها در این اتصال کار نمی‌کند.</translation>
     </message>
@@ -7072,13 +7369,6 @@ Credentials replaced: %2</source>
 </context>
 <context>
     <name>RouterGroupWidget</name>
-    <message numerus="yes">
-        <location filename="../client/desktop/management/router_group_widget.cc" line="414"/>
-        <source>%n host(s)</source>
-        <translation>
-            <numerusform>%n میزبان</numerusform>
-        </translation>
-    </message>
     <message>
         <location filename="../client/desktop/management/router_group_widget.ui" line="62"/>
         <source>Previous page</source>
@@ -7099,10 +7389,481 @@ Credentials replaced: %2</source>
         <source>Next</source>
         <translation>بعدی</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_group_widget.cc" line="442"/>
+        <source>%n host(s) (%1 online)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostBulkConfigDialog</name>
     <message>
-        <location filename="../client/desktop/management/router_group_widget.ui" line="97"/>
-        <source>Items per page:</source>
-        <translation>موارد در هر صفحه:</translation>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="56"/>
+        <source>Update configuration on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="70"/>
+        <source>Update server:</source>
+        <translation type="unfinished">سرور به‌روزرسانی:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="72"/>
+        <source>https://... (empty = default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="75"/>
+        <source>Public key:</source>
+        <translation type="unfinished">کلید عمومی:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="77"/>
+        <source>32 bytes hex (empty = default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="80"/>
+        <source>Channel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="87"/>
+        <source>Auto-update:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="88"/>
+        <source>Enabled</source>
+        <translation type="unfinished">فعال</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="91"/>
+        <source>Check frequency:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="93"/>
+        <source>Once a day</source>
+        <translation type="unfinished">روزی یک بار</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="94"/>
+        <source>Once a week</source>
+        <translation type="unfinished">هفته‌ای یک بار</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="95"/>
+        <source>Once a month</source>
+        <translation type="unfinished">ماهی یک بار</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="100"/>
+        <source>Unchecked fields are left unchanged on every host. A checked field with an empty value resets it to the default.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="105"/>
+        <source>Use the original aspia.org server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="111"/>
+        <source>Switch to the original update server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="112"/>
+        <source>Hosts will check for updates at https://aspia.org/updates using the public key of the original Aspia.
+
+Updates from our server will no longer be offered.
+When the original Aspia releases a version newer than the installed one, the hosts will update to the original build; host settings and IDs are kept.
+This is a one-way switch: to return to the mod, the server and key must be entered again, and hosts may need reinstalling.
+
+Hosts to be changed: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="126"/>
+        <source>Clear server and key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="132"/>
+        <source>Clear update server and key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="133"/>
+        <source>Hosts will use the built-in update server and public key of this build.
+
+The channel, auto-update setting and check frequency are not changed.
+
+Hosts to be changed: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="226"/>
+        <source>Invalid server URL.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="232"/>
+        <source>Invalid public key (must be 32 bytes hex).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk_config_dialog.cc" line="240"/>
+        <source>A public key without a server is not allowed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostBulkDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="44"/>
+        <source>Done</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="46"/>
+        <source>Skipped</source>
+        <translation type="unfinished">صرف‌نظرشده</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="48"/>
+        <source>Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="50"/>
+        <source>Offline</source>
+        <translation type="unfinished">آفلاین</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="52"/>
+        <source>Cancelled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="54"/>
+        <source>Running...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="201"/>
+        <source>Host</source>
+        <translation type="unfinished">میزبان</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="201"/>
+        <source>Planned action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="201"/>
+        <source>Result</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="201"/>
+        <source>Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="211"/>
+        <source>Details:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="223"/>
+        <source>Apply</source>
+        <translation type="unfinished">اعمال</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="258"/>
+        <source>Pending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="277"/>
+        <source>Nothing to do.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="282"/>
+        <source>%n host(s) selected.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="288"/>
+        <source>Confirm the deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="303"/>
+        <source>Cancel</source>
+        <translation type="unfinished">لغو</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="332"/>
+        <source>Cancelling, waiting for the current host...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="353"/>
+        <source>%1 of %2 done.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="379"/>
+        <source>Done: %1, failed: %2, offline: %3, skipped: %4, cancelled: %5.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="381"/>
+        <source>Close</source>
+        <translation type="unfinished">بستن</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="416"/>
+        <source>Host: %1
+Planned: %2
+Result: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="418"/>
+        <source>
+Detail: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostBulkFullConfigDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="427"/>
+        <source>Full configuration on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="437"/>
+        <source>Warning: without the checkbox below, every host switches to the router, port and access settings from the file. Make sure the file comes from a host of this router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="445"/>
+        <source>Keep router connection, port and access settings (apply only system settings and users)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostBulkUserPickDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="480"/>
+        <source>Remove user from hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="553"/>
+        <source>Queried hosts: %1, offline: %2, unreadable: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="561"/>
+        <source>User</source>
+        <translation type="unfinished">کاربر</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="561"/>
+        <source>Hosts</source>
+        <translation type="unfinished">میزبان‌ها</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="561"/>
+        <source>Status</source>
+        <translation type="unfinished">وضعیت</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="577"/>
+        <source>%1 of %2</source>
+        <translation type="unfinished">%1 از %2</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="584"/>
+        <source>enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="586"/>
+        <source>disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="588"/>
+        <source>enabled on some hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="594"/>
+        <source>Warning: removing a user is irreversible. The password cannot be restored, only recreated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="601"/>
+        <source>Force (remove even with live sessions; last enabled user is still protected)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_bulk.cc" line="607"/>
+        <source>Next step</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostConfigDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="64"/>
+        <source>Host update configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="70"/>
+        <source>https://... (empty = default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="71"/>
+        <source>Update server:</source>
+        <translation type="unfinished">سرور به‌روزرسانی:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="74"/>
+        <source>32 bytes hex (empty = default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="75"/>
+        <source>Public key:</source>
+        <translation type="unfinished">کلید عمومی:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="81"/>
+        <source>Channel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="83"/>
+        <source>Auto-update enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="87"/>
+        <source>Once a day</source>
+        <translation type="unfinished">روزی یک بار</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="88"/>
+        <source>Once a week</source>
+        <translation type="unfinished">هفته‌ای یک بار</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="89"/>
+        <source>Once a month</source>
+        <translation type="unfinished">ماهی یک بار</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="91"/>
+        <source>Check frequency:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="93"/>
+        <source>Loading current settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="96"/>
+        <source>Use the original aspia.org server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="102"/>
+        <source>Switch to the original update server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="103"/>
+        <source>The host will check for updates at https://aspia.org/updates using the public key of the original Aspia.
+
+Updates from our server will no longer be offered.
+When the original Aspia releases a version newer than the installed one, the host will update to the original build; host settings and ID are kept.
+This is a one-way switch: to return to the mod, the server and key must be entered again, and the host may need reinstalling.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="116"/>
+        <source>Clear server and key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="122"/>
+        <source>Clear update server and key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="123"/>
+        <source>The host will use the built-in update server and public key of this build.
+
+The channel, auto-update setting and check frequency are not changed.
+
+Clear the server and key?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="152"/>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="218"/>
+        <source>No session to router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="164"/>
+        <source>Failed to read telemetry: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="172"/>
+        <source>Telemetry is not JSON.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="190"/>
+        <source>Current settings loaded.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="198"/>
+        <source>Invalid server URL.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="203"/>
+        <source>Invalid public key (must be 32 bytes hex).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="242"/>
+        <source>Configuration applied successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_config_dialog.cc" line="247"/>
+        <source>Failed to apply: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7113,98 +7874,107 @@ Credentials replaced: %2</source>
         <translation>ویژگی‌های میزبان</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.ui" line="39"/>
+        <location filename="../client/desktop/management/router_host_dialog.ui" line="25"/>
+        <source>Spaces...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.ui" line="32"/>
         <source>Group:</source>
         <translation>گروه:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.ui" line="53"/>
+        <location filename="../client/desktop/management/router_host_dialog.ui" line="46"/>
         <source>Display Name:</source>
         <translation>نام نمایشی:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.ui" line="84"/>
+        <location filename="../client/desktop/management/router_host_dialog.ui" line="77"/>
         <source>User Name:</source>
         <translation>نام کاربری:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.ui" line="94"/>
+        <location filename="../client/desktop/management/router_host_dialog.ui" line="87"/>
         <source>Password:</source>
         <translation>گذرواژه:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.ui" line="25"/>
-        <source>Space:</source>
-        <translation>فضا:</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_host_dialog.ui" line="77"/>
+        <location filename="../client/desktop/management/router_host_dialog.ui" line="70"/>
         <source>Use saved credentials</source>
         <translation>استفاده از اطلاعات ورود ذخیره‌شده</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.ui" line="104"/>
+        <location filename="../client/desktop/management/router_host_dialog.ui" line="97"/>
         <source>Credentials:</source>
         <translation>اطلاعات ورود:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.ui" line="63"/>
+        <location filename="../client/desktop/management/router_host_dialog.ui" line="56"/>
         <source>Profile:</source>
         <translation>پروفایل:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.ui" line="120"/>
+        <location filename="../client/desktop/management/router_host_dialog.ui" line="113"/>
         <source>Comment:</source>
         <translation>توضیح:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="147"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="167"/>
         <source>Failed to get list of spaces.</source>
         <translation>دریافت فهرست فضاها ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="155"/>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="199"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="279"/>
         <source>Not assigned</source>
         <translation>اختصاص‌نیافته</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="184"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="264"/>
         <source>Failed to get list of groups.</source>
         <translation>دریافت فهرست گروه‌ها ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="257"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="199"/>
+        <source>Spaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="252"/>
+        <source>Spaces... (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="337"/>
         <source>Enter both the user name and the password, or leave both empty.</source>
         <translation>نام کاربری و گذرواژه را هر دو وارد کنید، یا هر دو را خالی بگذارید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="272"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="368"/>
         <source>Failed to save the credentials.</source>
         <translation>ذخیره اطلاعات ورود ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="278"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="374"/>
         <source>Failed to save the profile.</source>
         <translation>ذخیره پروفایل ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="301"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="397"/>
         <source>Failed to read the list of profiles.</source>
         <translation>خواندن فهرست پروفایل‌ها ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="325"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="421"/>
         <source>Failed to read the list of credentials.</source>
         <translation>خواندن فهرست اطلاعات ورود ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="359"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="455"/>
         <source>Failed to read the credentials of the host.</source>
         <translation>خواندن اطلاعات ورود میزبان ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_host_dialog.cc" line="364"/>
+        <location filename="../client/desktop/management/router_host_dialog.cc" line="460"/>
         <source>The credentials of the host are damaged. Enter them again.</source>
         <translation>اطلاعات ورود میزبان آسیب دیده است. دوباره آن را وارد کنید.</translation>
     </message>
@@ -7272,6 +8042,181 @@ Credentials replaced: %2</source>
     </message>
 </context>
 <context>
+    <name>RouterHostUserDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="71"/>
+        <source>User Properties</source>
+        <translation type="unfinished">ویژگی‌های کاربر</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="78"/>
+        <source>User Name:</source>
+        <translation type="unfinished">نام کاربری:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="81"/>
+        <source>Password:</source>
+        <translation type="unfinished">گذرواژه:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="84"/>
+        <source>Password (repeat):</source>
+        <translation type="unfinished">گذرواژه (تکرار):</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="86"/>
+        <source>Disable User Account</source>
+        <translation type="unfinished">غیرفعال کردن حساب کاربری</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="92"/>
+        <source>Allowed Session Types:</source>
+        <translation type="unfinished">انواع نشست مجاز:</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="96"/>
+        <source>Check all</source>
+        <translation type="unfinished">انتخاب همه</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="97"/>
+        <source>Uncheck all</source>
+        <translation type="unfinished">لغو انتخاب همه</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="252"/>
+        <source>The user name can not be empty and can contain only alphabet characters, numbers and _, -, ., @ characters. It can not consist of digits only.</source>
+        <translation type="unfinished">نام کاربری نمی‌تواند خالی باشد و فقط می‌تواند شامل حروف الفبا، اعداد و نویسه‌های _، -، .، @ باشد. نمی‌تواند فقط از ارقام تشکیل شده باشد.</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="269"/>
+        <source>The username you entered already exists.</source>
+        <translation type="unfinished">نام کاربری واردشده از قبل وجود دارد.</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="277"/>
+        <source>The passwords you entered do not match.</source>
+        <translation type="unfinished">گذرواژه‌هایی که وارد کردید مطابقت ندارند.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="286"/>
+        <source>The password can not be shorter than %n characters.</source>
+        <translation type="unfinished">
+            <numerusform>گذرواژه نباید کوتاه‌تر از %n نویسه باشد.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="288"/>
+        <source>The password can not be longer than %n characters.</source>
+        <translation type="unfinished">
+            <numerusform>گذرواژه نباید بیش از %n نویسه باشد.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="300"/>
+        <source>Password you entered does not meet the security requirements!</source>
+        <translation type="unfinished">گذرواژه واردشده الزامات امنیتی را برآورده نمی‌کند!</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="303"/>
+        <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
+        <translation type="unfinished">
+            <numerusform>گذرواژه باید شامل حروف کوچک و بزرگ و اعداد باشد و نباید کوتاه‌تر از %n نویسه باشد.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="307"/>
+        <source>Do you want to enter a different password?</source>
+        <translation type="unfinished">آیا می‌خواهید گذرواژه دیگری وارد کنید؟</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="310"/>
+        <source>Warning</source>
+        <translation type="unfinished">هشدار</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_user_dialog.cc" line="349"/>
+        <source>Double-click to change</source>
+        <translation type="unfinished">برای تغییر دوبار کلیک کنید</translation>
+    </message>
+</context>
+<context>
+    <name>RouterHostUsersDialog</name>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="63"/>
+        <source>Host users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="72"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="189"/>
+        <source>Add</source>
+        <translation type="unfinished">افزودن</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="73"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="241"/>
+        <source>Edit</source>
+        <translation type="unfinished">ویرایش</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="74"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="275"/>
+        <source>Remove</source>
+        <translation type="unfinished">حذف</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="75"/>
+        <source>Close</source>
+        <translation type="unfinished">بستن</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="104"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="181"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="233"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="267"/>
+        <source>No session to router.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="120"/>
+        <source>Failed to get users: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="145"/>
+        <source> (disabled)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="163"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="222"/>
+        <source>Failed to create user credentials.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="200"/>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="252"/>
+        <source>Select a user first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="258"/>
+        <source>Remove user &quot;%1&quot;?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="285"/>
+        <source>%1: success.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_host_users_dialog.cc" line="289"/>
+        <source>%1 failed: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RouterHostsWidget</name>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.ui" line="65"/>
@@ -7329,89 +8274,235 @@ Credentials replaced: %2</source>
         <translation>بعدی</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.ui" line="245"/>
-        <source>Items per page:</source>
-        <translation>موارد در هر صفحه:</translation>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="164"/>
+        <source>Reading user lists...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="148"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="165"/>
+        <source>Cancel</source>
+        <translation type="unfinished">لغو</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="343"/>
         <source>All spaces</source>
         <translation>همه فضاها</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="149"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="344"/>
         <source>Not in any space</source>
         <translation>بدون فضا</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="356"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="551"/>
         <source>Are you sure you want to disconnect host &quot;%1&quot;?</source>
         <translation>آیا مطمئن هستید که می‌خواهید اتصال میزبان &quot;%1&quot; را قطع کنید؟</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="358"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="553"/>
         <source>Are you sure you want to disconnect %n hosts?</source>
         <translation>
             <numerusform>آیا مطمئن هستید که می‌خواهید اتصال %n میزبان را قطع کنید؟</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="369"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="564"/>
         <source>Failed to disconnect %n of the selected hosts.</source>
         <translation>
             <numerusform>قطع اتصال %n میزبان از میزبان‌های انتخاب‌شده ناموفق بود.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="385"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="580"/>
         <source>Deleting a host will result in all its configuration for connecting to the router being deleted, and the application will be uninstalled on the host. This operation is irreversible. Are you sure you want to do this?</source>
         <translation>حذف میزبان باعث می‌شود همه پیکربندی آن برای اتصال به روتر حذف شود و برنامه از روی میزبان حذف نصب گردد. این عملیات برگشت‌ناپذیر است. آیا مطمئن هستید که می‌خواهید این کار را انجام دهید؟</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="390"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="585"/>
         <source>%n hosts will be deleted.</source>
         <translation>
             <numerusform>%n میزبان حذف خواهد شد.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="401"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="596"/>
         <source>Failed to remove %n of the selected hosts.</source>
         <translation>
             <numerusform>حذف %n میزبان از میزبان‌های انتخاب‌شده ناموفق بود.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="418"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="613"/>
         <source>Failed to check for updates on %n of the selected hosts.</source>
         <translation>
             <numerusform>بررسی به‌روزرسانی‌ها در %n میزبان از میزبان‌های انتخاب‌شده ناموفق بود.</numerusform>
         </translation>
     </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="672"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="690"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="691"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="693"/>
+        <source>(unknown)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="673"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="750"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="752"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="758"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="760"/>
+        <source>(default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="687"/>
+        <source>Hosts in run: %1. Channels: %2. Servers: %3. Auto-update on: %4 of %5. Frequencies (days): %6.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="714"/>
+        <source>No fields selected, nothing to do.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="729"/>
+        <source>Set selected fields.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="730"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1395"/>
+        <source>Host is offline.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="739"/>
+        <source>Set selected fields (current settings unknown).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="749"/>
+        <source>server: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="757"/>
+        <source>public key: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="758"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="760"/>
+        <source>(set)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="765"/>
+        <source>channel: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="770"/>
+        <source>auto-update: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="771"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="772"/>
+        <source>on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="771"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="772"/>
+        <source>off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="777"/>
+        <source>frequency: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="784"/>
+        <source>No changes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="785"/>
+        <source>Already matching, skipped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="806"/>
+        <source>Update configuration on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="751"/>
-        <source>%n host(s)</source>
-        <translation>
-            <numerusform>%n میزبان</numerusform>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1153"/>
+        <source>%n host(s) (%1 online)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="815"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1364"/>
+        <source>Failed to create user credentials.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1391"/>
+        <source>Add user &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1407"/>
+        <source>List unreadable (%1), will try anyway.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1429"/>
+        <source>Already exists, skipped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1445"/>
+        <source>Add user on hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1521"/>
+        <source>Remove user &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1540"/>
+        <source>Last enabled user, the host will refuse.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1571"/>
+        <source>Remove user from hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1217"/>
         <source>Save File</source>
         <translation>ذخیره فایل</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="815"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1217"/>
         <source>JSON files (*.json)</source>
         <translation>فایل‌های JSON (*.json)</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="826"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1228"/>
         <source>Could not open file for writing.</source>
         <translation>باز کردن فایل برای نوشتن ممکن نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_hosts_widget.cc" line="873"/>
+        <location filename="../client/desktop/management/router_hosts_widget.cc" line="1275"/>
         <source>Unable to write file.</source>
         <translation>نوشتن فایل ممکن نیست.</translation>
     </message>
@@ -7481,7 +8572,7 @@ Credentials replaced: %2</source>
 <context>
     <name>RouterSession</name>
     <message>
-        <location filename="../client/router/router_session.cc" line="153"/>
+        <location filename="../client/router/router_session.cc" line="155"/>
         <source>The router accepted the new password, but the record was not updated.</source>
         <translation>روتر گذرواژه جدید را پذیرفت، اما رکورد به‌روزرسانی نشد.</translation>
     </message>
@@ -7888,6 +8979,11 @@ Credentials replaced: %2</source>
         <translation>کاربران دارای دسترسی</translation>
     </message>
     <message>
+        <location filename="../client/desktop/management/router_workspace_dialog.ui" line="215"/>
+        <source>Hosts outside the space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../client/desktop/management/router_workspace_dialog.ui" line="300"/>
         <source>Move the selected host into the space</source>
         <translation>انتقال میزبان انتخاب‌شده به فضا</translation>
@@ -7942,42 +9038,61 @@ Credentials replaced: %2</source>
         <translation>میزبان‌ها</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.ui" line="215"/>
-        <source>Unassigned hosts</source>
-        <translation>میزبان‌های اختصاص‌نیافته</translation>
-    </message>
-    <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="225"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="236"/>
         <source>Failed to get list of spaces.</source>
         <translation>دریافت فهرست فضاها ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="252"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="263"/>
         <source>The space was deleted from another console.</source>
         <translation>این فضا از کنسول دیگری حذف شده است.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="290"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="301"/>
         <source>Failed to get list of users.</source>
         <translation>دریافت فهرست کاربران ناموفق بود.</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="428"/>
+        <source>Failed to move %n of %1 hosts.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="409"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="566"/>
         <source>The space was changed from another console. The lists are being refreshed - check the changes and save again.</source>
         <translation>فضا از کنسول دیگری تغییر کرده است. فهرست‌ها در حال تازه‌سازی هستند - تغییرات را بررسی کنید و دوباره ذخیره کنید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="513"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="621"/>
+        <source>Saving...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="710"/>
         <source>Are you sure you want to remove the host from the space?</source>
         <translation>آیا مطمئن هستید که می‌خواهید میزبان را از فضا حذف کنید؟</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="718"/>
+        <source>Are you sure you want to remove %n hosts from the space?</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="893"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1235"/>
+        <source>Будет применено: +%1 хостов, -%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1288"/>
         <source>Space name cannot be empty.</source>
         <translation>نام فضا نمی‌تواند خالی باشد.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="904"/>
+        <location filename="../client/desktop/management/router_workspace_dialog.cc" line="1299"/>
         <source>A space with the specified name already exists.</source>
         <translation>فضایی با نام مشخص‌شده از قبل وجود دارد.</translation>
     </message>
@@ -8267,49 +9382,49 @@ Credentials replaced: %2</source>
         <translation>درخواست تأیید هنگام بستن برنامه</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="380"/>
+        <location filename="../client/desktop/settings_tab.ui" line="387"/>
         <source>Backup</source>
         <translation>نسخه پشتیبان</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="386"/>
+        <location filename="../client/desktop/settings_tab.ui" line="393"/>
         <source>Create backups on application startup</source>
         <translation>ایجاد نسخه‌های پشتیبان هنگام راه‌اندازی برنامه</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="393"/>
+        <location filename="../client/desktop/settings_tab.ui" line="400"/>
         <source>Directory:</source>
         <translation>پوشه:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="416"/>
+        <location filename="../client/desktop/settings_tab.ui" line="423"/>
         <source>Keep backups for:</source>
         <translation>نگهداری نسخه‌های پشتیبان به مدت:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="307"/>
+        <location filename="../client/desktop/settings_tab.ui" line="314"/>
         <source>Proxy</source>
         <translation>سرور پروکسی</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="313"/>
+        <location filename="../client/desktop/settings_tab.ui" line="320"/>
         <source>Type:</source>
         <translation>نوع:</translation>
     </message>
     <message>
         <location filename="../client/desktop/settings_tab.ui" line="221"/>
-        <location filename="../client/desktop/settings_tab.ui" line="327"/>
+        <location filename="../client/desktop/settings_tab.ui" line="334"/>
         <source>Address:</source>
         <translation>آدرس:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="337"/>
+        <location filename="../client/desktop/settings_tab.ui" line="344"/>
         <source>Port:</source>
         <translation>پورت:</translation>
     </message>
     <message>
         <location filename="../client/desktop/settings_tab.ui" line="252"/>
-        <location filename="../client/desktop/settings_tab.ui" line="357"/>
+        <location filename="../client/desktop/settings_tab.ui" line="364"/>
         <source>User Name:</source>
         <translation>نام کاربری:</translation>
     </message>
@@ -8335,7 +9450,7 @@ Credentials replaced: %2</source>
     </message>
     <message>
         <location filename="../client/desktop/settings_tab.ui" line="266"/>
-        <location filename="../client/desktop/settings_tab.ui" line="367"/>
+        <location filename="../client/desktop/settings_tab.ui" line="374"/>
         <source>Password:</source>
         <translation>گذرواژه:</translation>
     </message>
@@ -8345,72 +9460,72 @@ Credentials replaced: %2</source>
         <translation>فعال</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="543"/>
+        <location filename="../client/desktop/settings_tab.ui" line="564"/>
         <source>Save Settings</source>
         <translation>ذخیره تنظیمات</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="612"/>
+        <location filename="../client/desktop/settings_tab.ui" line="633"/>
         <source>Add...</source>
         <translation>افزودن...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="625"/>
+        <location filename="../client/desktop/settings_tab.ui" line="646"/>
         <source>Rename...</source>
         <translation>تغییر نام...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="638"/>
+        <location filename="../client/desktop/settings_tab.ui" line="659"/>
         <source>Delete</source>
         <translation>حذف</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="653"/>
+        <location filename="../client/desktop/settings_tab.ui" line="674"/>
         <source>Desktop Features</source>
         <translation>ویژگی‌های دسکتاپ</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="731"/>
+        <location filename="../client/desktop/settings_tab.ui" line="752"/>
         <source>Desktop Screen</source>
         <translation>صفحه‌نمایش دسکتاپ</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="793"/>
+        <location filename="../client/desktop/settings_tab.ui" line="814"/>
         <source>Desktop Recording</source>
         <translation>ضبط دسکتاپ</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="843"/>
+        <location filename="../client/desktop/settings_tab.ui" line="864"/>
         <source>UDP Connections</source>
         <translation>اتصال‌های UDP</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="849"/>
+        <location filename="../client/desktop/settings_tab.ui" line="870"/>
         <source>Allow direct connections</source>
         <translation>اجازه به اتصال‌های مستقیم</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="856"/>
+        <location filename="../client/desktop/settings_tab.ui" line="877"/>
         <source>Allow UDP Hole Punching</source>
         <translation>اجازه به UDP Hole Punching</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="863"/>
+        <location filename="../client/desktop/settings_tab.ui" line="884"/>
         <source>Allow PCP protocol</source>
         <translation>اجازه به پروتکل PCP</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="870"/>
+        <location filename="../client/desktop/settings_tab.ui" line="891"/>
         <source>Allow NAT-PMP protocol</source>
         <translation>اجازه به پروتکل NAT-PMP</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="877"/>
+        <location filename="../client/desktop/settings_tab.ui" line="898"/>
         <source>Allow UPnP protocol</source>
         <translation>اجازه به پروتکل UPnP</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="433"/>
+        <location filename="../client/desktop/settings_tab.ui" line="454"/>
         <source>Security</source>
         <translation>امنیت</translation>
     </message>
@@ -8425,529 +9540,535 @@ Credentials replaced: %2</source>
         <translation>بازنشانی همگام‌سازی...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="439"/>
+        <location filename="../client/desktop/settings_tab.ui" line="437"/>
+        <source>Hosts per page:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/settings_tab.ui" line="460"/>
         <source>Lock after inactivity:</source>
         <translation>قفل کردن پس از عدم فعالیت:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="453"/>
+        <location filename="../client/desktop/settings_tab.ui" line="474"/>
         <source>Unlock automatically on startup</source>
         <translation>باز کردن خودکار قفل هنگام راه‌اندازی</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="460"/>
+        <location filename="../client/desktop/settings_tab.ui" line="481"/>
         <source>Change Master Password...</source>
         <translation>تغییر گذرواژه اصلی...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="659"/>
+        <location filename="../client/desktop/settings_tab.ui" line="680"/>
         <source>Enable audio</source>
         <translation>فعال‌سازی صدا</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="666"/>
+        <location filename="../client/desktop/settings_tab.ui" line="687"/>
         <source>Enable clipboard</source>
         <translation>فعال‌سازی کلیپ‌بورد</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="673"/>
+        <location filename="../client/desktop/settings_tab.ui" line="694"/>
         <source>Show shape of remote cursor</source>
         <translation>نمایش شکل نشانگر راه دور</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="680"/>
+        <location filename="../client/desktop/settings_tab.ui" line="701"/>
         <source>Show position of remote cursor</source>
         <translation>نمایش موقعیت نشانگر راه دور</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="687"/>
+        <location filename="../client/desktop/settings_tab.ui" line="708"/>
         <source>Disable desktop effects</source>
         <translation>غیرفعال کردن جلوه‌های دسکتاپ</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="694"/>
+        <location filename="../client/desktop/settings_tab.ui" line="715"/>
         <source>Disable desktop wallpaper</source>
         <translation>غیرفعال کردن تصویر زمینه دسکتاپ</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="701"/>
+        <location filename="../client/desktop/settings_tab.ui" line="722"/>
         <source>Lock computer at disconnect</source>
         <translation>قفل کردن رایانه هنگام قطع اتصال</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="708"/>
+        <location filename="../client/desktop/settings_tab.ui" line="729"/>
         <source>Block remote input</source>
         <translation>مسدود کردن ورودی راه دور</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="715"/>
+        <location filename="../client/desktop/settings_tab.ui" line="736"/>
         <source>Send key combinations</source>
         <translation>ارسال کلیدهای ترکیبی</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="737"/>
+        <location filename="../client/desktop/settings_tab.ui" line="758"/>
         <source>Preferred resolution:</source>
         <translation>وضوح ترجیحی:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="757"/>
+        <location filename="../client/desktop/settings_tab.ui" line="778"/>
         <source>Quality:</source>
         <translation>کیفیت:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="777"/>
+        <location filename="../client/desktop/settings_tab.ui" line="798"/>
         <source>Scale image to window size on the host side</source>
         <translation>مقیاس‌بندی تصویر به اندازه پنجره در سمت میزبان</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="799"/>
+        <location filename="../client/desktop/settings_tab.ui" line="820"/>
         <source>Automatically start recording sessions on connection</source>
         <translation>شروع خودکار ضبط نشست‌ها هنگام اتصال</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="808"/>
+        <location filename="../client/desktop/settings_tab.ui" line="829"/>
         <source>Write path:</source>
         <translation>مسیر نوشتن:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="948"/>
+        <location filename="../client/desktop/settings_tab.ui" line="969"/>
         <source>MCP Connector</source>
         <translation>کانکتور MCP</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="954"/>
+        <location filename="../client/desktop/settings_tab.ui" line="975"/>
         <source>Allow the use of MCP</source>
         <translation>اجازه به استفاده از MCP</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="961"/>
+        <location filename="../client/desktop/settings_tab.ui" line="982"/>
         <source>Add this command to the MCP servers of the AI application:</source>
         <translation>این دستور را به سرورهای MCP برنامه هوش مصنوعی اضافه کنید:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="984"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1005"/>
         <source>Copy</source>
         <translation>کپی</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1000"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1021"/>
         <source>Allowed Session Types</source>
         <translation>انواع نشست مجاز</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1014"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1035"/>
         <source>Actions</source>
         <translation>عملیات</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1020"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1041"/>
         <source>Confirm actions automatically</source>
         <translation>تأیید خودکار عملیات</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1027"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1048"/>
         <source>Allow signing in with saved credentials</source>
         <translation>اجازه به ورود با اطلاعات ورود ذخیره‌شده</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1098"/>
-        <location filename="../client/desktop/settings_tab.cc" line="151"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1119"/>
+        <location filename="../client/desktop/settings_tab.cc" line="154"/>
         <source>Update</source>
         <translation>به‌روزرسانی</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1104"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1125"/>
         <source>Check for updates on startup</source>
         <translation>بررسی به‌روزرسانی‌ها هنگام راه‌اندازی</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1113"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1134"/>
         <source>Update channel:</source>
         <translation>کانال به‌روزرسانی:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1127"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1148"/>
         <source>Update server:</source>
         <translation>سرور به‌روزرسانی:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1141"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1162"/>
         <source>Public key:</source>
         <translation>کلید عمومی:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1159"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1180"/>
         <source>Change Update Server...</source>
         <translation>تغییر سرور به‌روزرسانی...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.ui" line="1179"/>
+        <location filename="../client/desktop/settings_tab.ui" line="1200"/>
         <source>Check for updates</source>
         <translation>بررسی به‌روزرسانی‌ها</translation>
     </message>
     <message>
         <location filename="../client/desktop/settings_tab.ui" line="144"/>
-        <location filename="../client/desktop/settings_tab.cc" line="148"/>
+        <location filename="../client/desktop/settings_tab.cc" line="151"/>
         <source>General</source>
         <translation>کلی</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="149"/>
+        <location filename="../client/desktop/settings_tab.cc" line="152"/>
         <source>Profiles</source>
         <translation>پروفایل‌ها</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="206"/>
+        <location filename="../client/desktop/settings_tab.cc" line="209"/>
         <source>1 week</source>
         <translation>1 هفته</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="207"/>
+        <location filename="../client/desktop/settings_tab.cc" line="210"/>
         <source>2 weeks</source>
         <translation>2 هفته</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="208"/>
+        <location filename="../client/desktop/settings_tab.cc" line="211"/>
         <source>1 month</source>
         <translation>1 ماه</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="209"/>
+        <location filename="../client/desktop/settings_tab.cc" line="212"/>
         <source>6 months</source>
         <translation>6 ماه</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="210"/>
+        <location filename="../client/desktop/settings_tab.cc" line="213"/>
         <source>1 year</source>
         <translation>1 سال</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="224"/>
+        <location filename="../client/desktop/settings_tab.cc" line="234"/>
         <source>Do not lock</source>
         <translation>قفل نکردن</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="225"/>
+        <location filename="../client/desktop/settings_tab.cc" line="235"/>
         <source>1 minute</source>
         <translation>1 دقیقه</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="226"/>
+        <location filename="../client/desktop/settings_tab.cc" line="236"/>
         <source>5 minutes</source>
         <translation>5 دقیقه</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="227"/>
+        <location filename="../client/desktop/settings_tab.cc" line="237"/>
         <source>10 minutes</source>
         <translation>10 دقیقه</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="228"/>
+        <location filename="../client/desktop/settings_tab.cc" line="238"/>
         <source>30 minutes</source>
         <translation>30 دقیقه</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="229"/>
+        <location filename="../client/desktop/settings_tab.cc" line="239"/>
         <source>1 hour</source>
         <translation>1 ساعت</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="244"/>
+        <location filename="../client/desktop/settings_tab.cc" line="254"/>
         <source>No proxy</source>
         <translation>بدون سرور پروکسی</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="265"/>
+        <location filename="../client/desktop/settings_tab.cc" line="275"/>
         <source>None</source>
         <translation>هیچ‌کدام</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="270"/>
+        <location filename="../client/desktop/settings_tab.cc" line="280"/>
         <source>Automatic</source>
         <translation>خودکار</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="271"/>
+        <location filename="../client/desktop/settings_tab.cc" line="281"/>
         <source>Low</source>
         <translation>پایین</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="272"/>
+        <location filename="../client/desktop/settings_tab.cc" line="282"/>
         <source>Medium</source>
         <translation>متوسط</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="273"/>
+        <location filename="../client/desktop/settings_tab.cc" line="283"/>
         <source>High</source>
         <translation>بالا</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="310"/>
+        <location filename="../client/desktop/settings_tab.cc" line="320"/>
         <source>Stable</source>
         <translation>پایدار</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="311"/>
+        <location filename="../client/desktop/settings_tab.cc" line="321"/>
         <source>Beta</source>
         <translation>بتا</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="312"/>
+        <location filename="../client/desktop/settings_tab.cc" line="322"/>
         <source>Alpha</source>
         <translation>آلفا</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="656"/>
+        <location filename="../client/desktop/settings_tab.cc" line="683"/>
         <source>Failed to save the settings.</source>
         <translation>ذخیره تنظیمات ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="673"/>
+        <location filename="../client/desktop/settings_tab.cc" line="700"/>
         <source>The new language will be applied after the application is restarted.</source>
         <translation>زبان جدید پس از راه‌اندازی مجدد برنامه اعمال خواهد شد.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="546"/>
-        <location filename="../client/desktop/settings_tab.cc" line="809"/>
+        <location filename="../client/desktop/settings_tab.cc" line="561"/>
+        <location filename="../client/desktop/settings_tab.cc" line="836"/>
         <source>Choose path</source>
         <translation>انتخاب مسیر</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="458"/>
+        <location filename="../client/desktop/settings_tab.cc" line="473"/>
         <source>The settings have unsaved changes. Close the tab without saving?</source>
         <translation>تنظیمات تغییرات ذخیره‌نشده دارد. زبانه بدون ذخیره بسته شود؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="527"/>
+        <location filename="../client/desktop/settings_tab.cc" line="542"/>
         <source>The synchronized data on the router and on the other devices of the account will be replaced with the data of this device. Reset the synchronization?</source>
         <translation>داده‌های همگام‌سازی‌شده در روتر و در دیگر دستگاه‌های حساب کاربری با داده‌های این دستگاه جایگزین خواهد شد. همگام‌سازی بازنشانی شود؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="537"/>
+        <location filename="../client/desktop/settings_tab.cc" line="552"/>
         <source>Failed to reset the synchronization.</source>
         <translation>بازنشانی همگام‌سازی ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="688"/>
+        <location filename="../client/desktop/settings_tab.cc" line="715"/>
         <source>Add Profile</source>
         <translation>افزودن پروفایل</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="698"/>
+        <location filename="../client/desktop/settings_tab.cc" line="725"/>
         <source>Unable to add profile.</source>
         <translation>افزودن پروفایل ممکن نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="720"/>
-        <location filename="../client/desktop/settings_tab.cc" line="731"/>
-        <location filename="../client/desktop/settings_tab.cc" line="1351"/>
+        <location filename="../client/desktop/settings_tab.cc" line="747"/>
+        <location filename="../client/desktop/settings_tab.cc" line="758"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1389"/>
         <source>Failed to read the profile.</source>
         <translation>خواندن پروفایل ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="724"/>
+        <location filename="../client/desktop/settings_tab.cc" line="751"/>
         <source>Rename Profile</source>
         <translation>تغییر نام پروفایل</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="739"/>
+        <location filename="../client/desktop/settings_tab.cc" line="766"/>
         <source>Unable to rename profile.</source>
         <translation>تغییر نام پروفایل ممکن نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="757"/>
+        <location filename="../client/desktop/settings_tab.cc" line="784"/>
         <source>Are you sure you want to delete profile &quot;%1&quot;?</source>
         <translation>آیا مطمئن هستید که می‌خواهید پروفایل &quot;%1&quot; را حذف کنید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="765"/>
+        <location filename="../client/desktop/settings_tab.cc" line="792"/>
         <source>Unable to delete profile.</source>
         <translation>حذف پروفایل ممکن نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="837"/>
+        <location filename="../client/desktop/settings_tab.cc" line="864"/>
         <source>The settings will be applied after the application is restarted.</source>
         <translation>تنظیمات پس از راه‌اندازی مجدد برنامه اعمال خواهند شد.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="884"/>
+        <location filename="../client/desktop/settings_tab.cc" line="911"/>
         <source>Change Master Password</source>
         <translation>تغییر گذرواژه اصلی</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="886"/>
+        <location filename="../client/desktop/settings_tab.cc" line="913"/>
         <source>Enter your current password and choose a new one.</source>
         <translation>گذرواژه فعلی خود را وارد کرده و گذرواژه جدیدی انتخاب کنید.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/settings_tab.cc" line="894"/>
+        <location filename="../client/desktop/settings_tab.cc" line="921"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>گذرواژه نباید کوتاه‌تر از %n نویسه باشد.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="901"/>
+        <location filename="../client/desktop/settings_tab.cc" line="928"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>گذرواژه واردشده الزامات امنیتی را برآورده نمی‌کند!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/settings_tab.cc" line="902"/>
+        <location filename="../client/desktop/settings_tab.cc" line="929"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>گذرواژه باید شامل حروف کوچک و بزرگ و اعداد باشد و نباید کوتاه‌تر از %n نویسه باشد.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="905"/>
+        <location filename="../client/desktop/settings_tab.cc" line="932"/>
         <source>Do you want to enter a different password?</source>
         <translation>آیا می‌خواهید گذرواژه دیگری وارد کنید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="918"/>
+        <location filename="../client/desktop/settings_tab.cc" line="945"/>
         <source>Invalid current password.</source>
         <translation>گذرواژه فعلی نامعتبر است.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="922"/>
+        <location filename="../client/desktop/settings_tab.cc" line="949"/>
         <source>Some records of the database are damaged. Fix or delete them and try again.</source>
         <translation>برخی رکوردهای پایگاه داده آسیب دیده‌اند. آنها را اصلاح یا حذف کنید و دوباره تلاش کنید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="926"/>
+        <location filename="../client/desktop/settings_tab.cc" line="953"/>
         <source>Unable to change the password.</source>
         <translation>تغییر گذرواژه ممکن نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="959"/>
+        <location filename="../client/desktop/settings_tab.cc" line="997"/>
         <source>Unable to read the proxy settings.</source>
         <translation>خواندن تنظیمات سرور پروکسی ممکن نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1073"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1111"/>
         <source>The key of the database will be stored on this computer. Any program running under your account will be able to read it, even when the application is not running.</source>
         <translation>کلید پایگاه داده در این رایانه ذخیره خواهد شد. هر برنامه‌ای که با حساب کاربری شما اجرا شود می‌تواند آن را بخواند، حتی زمانی که برنامه اجرا نمی‌شود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1076"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1114"/>
         <source>Do you want to continue?</source>
         <translation>آیا می‌خواهید ادامه دهید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1087"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1125"/>
         <source>Unlock Automatically</source>
         <translation>باز کردن خودکار قفل</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1089"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1127"/>
         <source>Enter the master password to unlock the application automatically on startup.</source>
         <translation>برای باز کردن خودکار قفل برنامه هنگام راه‌اندازی، گذرواژه اصلی را وارد کنید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1099"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1137"/>
         <source>Invalid master password.</source>
         <translation>گذرواژه اصلی نامعتبر است.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1103"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1141"/>
         <source>Unable to unlock the database.</source>
         <translation>باز کردن قفل پایگاه داده ممکن نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1117"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1155"/>
         <source>Unable to turn on the automatic unlock.</source>
         <translation>فعال‌سازی باز کردن خودکار قفل ممکن نیست.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1133"/>
-        <location filename="../client/desktop/settings_tab.cc" line="1176"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1171"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1214"/>
         <source>Failed to read the router.</source>
         <translation>خواندن روتر ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1185"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1223"/>
         <source>An invalid router address was entered.</source>
         <translation>آدرس روتر واردشده نامعتبر است.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1193"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1231"/>
         <source>The user name can not be empty and can contain only alphabet characters, numbers and _, -, . characters.</source>
         <translation>نام کاربری نمی‌تواند خالی باشد و فقط می‌تواند شامل حروف الفبا، اعداد و نویسه‌های _، -، . باشد.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1201"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1239"/>
         <source>Password cannot be empty.</source>
         <translation>گذرواژه نمی‌تواند خالی باشد.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1228"/>
-        <location filename="../client/desktop/settings_tab.cc" line="1252"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1266"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1290"/>
         <source>Failed to save the router.</source>
         <translation>ذخیره روتر ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="214"/>
+        <location filename="../client/desktop/settings_tab.cc" line="224"/>
         <source>Administrator</source>
         <translation>مدیر</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="215"/>
+        <location filename="../client/desktop/settings_tab.cc" line="225"/>
         <source>Manager</source>
         <translation>سرپرست</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="216"/>
+        <location filename="../client/desktop/settings_tab.cc" line="226"/>
         <source>Operator</source>
         <translation>اپراتور</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1241"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1279"/>
         <source>The synchronized data of this device will be sent to the storage of the account &quot;%1&quot;. Continue?</source>
         <translation>داده‌های همگام‌سازی‌شده این دستگاه به محل ذخیره حساب کاربری &quot;%1&quot; ارسال خواهد شد. ادامه می‌دهید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1288"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1326"/>
         <source>Failed to read the list of profiles.</source>
         <translation>خواندن فهرست پروفایل‌ها ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1299"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1337"/>
         <source>Default</source>
         <translation>پیش‌فرض</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1349"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1387"/>
         <source>The profile is damaged. Fix or delete it.</source>
         <translation>پروفایل آسیب دیده است. آن را اصلاح یا حذف کنید.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1451"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1489"/>
         <source>Name:</source>
         <translation>نام:</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1462"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1500"/>
         <source>Name cannot be empty.</source>
         <translation>نام نمی‌تواند خالی باشد.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/settings_tab.cc" line="1469"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1507"/>
         <source>Too long name. The maximum length of the name is %n characters.</source>
         <translation>
             <numerusform>نام خیلی طولانی است. حداکثر طول نام %n نویسه است.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1487"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1525"/>
         <source>A profile with this name already exists.</source>
         <translation>پروفایلی با این نام از قبل وجود دارد.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/settings_tab.cc" line="1518"/>
+        <location filename="../client/desktop/settings_tab.cc" line="1556"/>
         <source>Unable to save profile.</source>
         <translation>ذخیره پروفایل ممکن نیست.</translation>
     </message>
     <message>
+        <location filename="../client/desktop/settings_tab.ui" line="304"/>
         <source>Export Preconfigured QS Client</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9298,109 +10419,121 @@ Credentials replaced: %2</source>
     <name>Sidebar</name>
     <message>
         <location filename="../client/desktop/management/search_widget.cc" line="109"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="151"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="236"/>
         <source>Local</source>
         <translation>محلی</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="176"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="231"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="292"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="261"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="316"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="377"/>
         <source>Failed to read data. The list may be out of date.</source>
         <translation>خواندن داده‌ها ناموفق بود. ممکن است فهرست قدیمی باشد.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="563"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="648"/>
         <source>Change Password</source>
         <translation>تغییر گذرواژه</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="571"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="656"/>
         <source>The password can not be shorter than %n characters.</source>
         <translation>
             <numerusform>گذرواژه نباید کوتاه‌تر از %n نویسه باشد.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="572"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="657"/>
         <source>The password can not be longer than %n characters.</source>
         <translation>
             <numerusform>گذرواژه نباید بیش از %n نویسه باشد.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="580"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="665"/>
         <source>Password you entered does not meet the security requirements!</source>
         <translation>گذرواژه واردشده الزامات امنیتی را برآورده نمی‌کند!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="581"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="666"/>
         <source>The password must contain lowercase and uppercase characters, numbers and should not be shorter than %n characters.</source>
         <translation>
             <numerusform>گذرواژه باید شامل حروف کوچک و بزرگ و اعداد باشد و نباید کوتاه‌تر از %n نویسه باشد.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="584"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="669"/>
         <source>Do you want to enter a different password?</source>
         <translation>آیا می‌خواهید گذرواژه دیگری وارد کنید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="607"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="692"/>
         <source>Changing the password. Waiting for the session to sign in again...</source>
         <translation>در حال تغییر گذرواژه. در انتظار ورود مجدد نشست...</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="813"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="898"/>
         <source>Are you sure you want to delete group &quot;%1&quot;?</source>
         <translation>آیا مطمئن هستید که می‌خواهید گروه &quot;%1&quot; را حذف کنید؟</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="823"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="908"/>
         <source>Unable to remove group</source>
         <translation>حذف گروه ممکن نیست</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1515"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1629"/>
         <source>A group with this name already exists in the selected parent group.</source>
         <translation>گروهی با این نام از قبل در گروه والد انتخاب‌شده وجود دارد.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="1625"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1739"/>
         <source>%n of the selected hosts were not moved because hosts with the same names already exist in the selected group.</source>
         <translation>
             <numerusform>%n میزبان از میزبان‌های انتخاب‌شده منتقل نشد، زیرا میزبان‌هایی با همین نام‌ها از قبل در گروه انتخاب‌شده وجود دارند.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../client/desktop/management/sidebar.cc" line="1633"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1825"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1747"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1961"/>
         <source>Failed to move %n of the selected hosts.</source>
         <translation>
             <numerusform>انتقال %n میزبان از میزبان‌های انتخاب‌شده ناموفق بود.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1505"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1524"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1728"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1953"/>
+        <source>Failed to remove the host from the space.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../client/desktop/management/sidebar.cc" line="1954"/>
+        <source>Failed to remove %n of the selected hosts from the space.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/management/sidebar.cc" line="1619"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1638"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1842"/>
         <source>Failed to move the group.</source>
         <translation>جابه‌جایی گروه ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1588"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1702"/>
         <source>Failed to move the hosts to the selected group.</source>
         <translation>انتقال میزبان‌ها به گروه انتخاب‌شده ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1624"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1738"/>
         <source>A host with this name already exists in the selected group.</source>
         <translation>میزبانی با این نام از قبل در گروه انتخاب‌شده وجود دارد.</translation>
     </message>
     <message>
-        <location filename="../client/desktop/management/sidebar.cc" line="1587"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1632"/>
-        <location filename="../client/desktop/management/sidebar.cc" line="1824"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1701"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1746"/>
+        <location filename="../client/desktop/management/sidebar.cc" line="1960"/>
         <source>Failed to move the host to the selected group.</source>
         <translation>انتقال میزبان به گروه انتخاب‌شده ناموفق بود.</translation>
     </message>
@@ -9496,9 +10629,24 @@ Credentials replaced: %2</source>
 <context>
     <name>StatusOverlay</name>
     <message>
-        <location filename="../client/desktop/status_overlay.cc" line="46"/>
+        <location filename="../client/desktop/status_overlay.cc" line="51"/>
         <source>Close</source>
         <translation>بستن</translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="54"/>
+        <source>Reconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="140"/>
+        <source>Retry in: %1 s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../client/desktop/status_overlay.cc" line="141"/>
+        <source>Time left: %1 s</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14638,188 +15786,6 @@ Delete the database?</source>
         <location filename="../client/workers/video_worker.cc" line="48"/>
         <source>An error occurred while writing the recording.</source>
         <translation>هنگام نوشتن فایل ضبط خطایی رخ داد.</translation>
-    </message>
-</context>
-<context>
-    <name>QsClientExportDialog</name>
-    <message>
-        <source>Export Preconfigured QS Client</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A new account is created on the router for this client. The password is generated automatically and stored only in the exported file. The suffix &quot;-qs&quot; is added to the name.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create new user</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use existing user</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Generate password</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The password must match the password of this account on the router. The password on the router is not changed - if it differs, the QS client will not connect.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>User:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Password:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Router address:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A new account is created on the router for this client. The password is stored only in the exported file. The suffix &quot;-qs&quot; is added to the name.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>An existing account is used. The account is not created or changed; only the password is sealed into the file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loading users...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No Quick Support users found on the router.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No router session.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>An administrator session with the router is required.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The user name is invalid.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The router address is invalid.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The password must be 8 to 64 characters long.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The router did not answer the user lookup.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A user with this name already exists on the router.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The selected user no longer exists on the router.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Executable files (*.exe)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to export the Quick Support client.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to create the user on the router.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The Quick Support client has been exported.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QsClientWindow</name>
-    <message>
-        <source>123 456 789</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Desktop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File transfer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Connect</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Connecting to the router...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Host ID:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Session:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter the ID shown by the host.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The router data is damaged.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waiting for the two-factor code.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The router is unavailable. Retrying...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter a valid Quick Support ID.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The router is not connected yet.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quick Support %1</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
