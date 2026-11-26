@@ -35,6 +35,7 @@
 #include "base/logging.h"
 #include "base/update/update_info.h"
 #include "client/config.h"
+#include "client/connect_request.h"
 #include "client/desktop/app_lock.h"
 #include "client/desktop/authorization_dialog.h"
 #include "client/desktop/client_tab.h"
@@ -441,6 +442,63 @@ bool MainWindow::mcpAsksCredentials() const
 }
 
 //--------------------------------------------------------------------------------------------------
+void MainWindow::connectToLocalHost(const QString& identifier, int session_type,
+                                    const QString& username, const QString& password)
+{
+    LOG(INFO) << "Connect to host from the command line:" << identifier
+              << "(session type:" << session_type << ")";
+
+    showAndActivate();
+
+    ManagementTab* management_tab = managementTab();
+    if (!management_tab)
+        return;
+
+    const proto::peer::SessionType type = static_cast<proto::peer::SessionType>(session_type);
+
+    bool is_number = !identifier.isEmpty();
+    for (QChar character : identifier)
+    {
+        if (!character.isDigit())
+        {
+            is_number = false;
+            break;
+        }
+    }
+
+    if (is_number)
+    {
+        bool number_ok = false;
+        const qint64 entry_id = identifier.toLongLong(&number_ok);
+        if (number_ok && entry_id > 0)
+        {
+            management_tab->connectLocalHost(entry_id, type);
+            return;
+        }
+    }
+
+    if (ConnectRequest::isHostAddress(identifier))
+    {
+        // A host named by its address has no address-book record, so the credentials from the
+        // command line are the only ones available.
+        LocalHostConfig entry;
+        entry.setId(0);
+        entry.setName(identifier);
+        entry.setAddress(identifier);
+        if (!username.isEmpty())
+            entry.setUsername(username);
+        if (!password.isEmpty())
+            entry.setPassword(SecureString(password));
+
+        HostConfig host = HostConfig::forLocalHost(entry);
+        management_tab->connectRouterHost(host, type);
+        return;
+    }
+
+    MsgBox::warning(this, tr("\"%1\" is neither a host ID nor a host address.").arg(identifier));
+}
+
+//--------------------------------------------------------------------------------------------------
 void MainWindow::mcpConnectLocalHost(qint64 entry_id, proto::peer::SessionType session_type)
 {
     if (ManagementTab* management_tab = managementTab())
@@ -578,7 +636,7 @@ void MainWindow::onHelp()
 void MainWindow::onAbout()
 {
     LOG(INFO) << "[ACTION] About clicked";
-    AutoQPointer<AboutDialog> dialog(new AboutDialog(tr("Aspia Client"), this));
+    AutoQPointer<AboutDialog> dialog(new AboutDialog(tr("Aspia-mod Client"), this));
     dialog->exec();
 }
 

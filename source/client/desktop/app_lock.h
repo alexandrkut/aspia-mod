@@ -22,6 +22,7 @@
 #include <QObject>
 #include <QPointer>
 
+#include "base/crypto/secure_string.h"
 #include "base/time_types.h"
 
 class MainWindow;
@@ -36,14 +37,14 @@ class AppLock final : public QObject
     Q_OBJECT
 
 public:
-    enum class Result { UNLOCKED, CANCELLED };
+    enum class Result { UNLOCKED, CANCELLED, FAILED };
 
     explicit AppLock(MainWindow* main_window);
     ~AppLock() final;
 
     // Shows the unlock dialog. At the |startup| the user chooses the database, later the dialog asks
     // for the one already open.
-    static Result unlock(bool startup);
+    static Result unlock(bool startup, const SecureString& password = SecureString());
 
     // Tells the user what is wrong with |password| as a new master password. Returns false when
     // another one has to be entered.

@@ -177,7 +177,7 @@ HostWindow::HostWindow(QWidget* parent)
 #if defined(Q_OS_WINDOWS)
     if (PortableHost::isActive())
     {
-        setWindowTitle(tr("Aspia Quick Support"));
+        setWindowTitle(tr("Aspia-mod Quick Support"));
         setWindowFlag(Qt::WindowStaysOnTopHint);
 
         ui->action_terminal->setChecked(false);
@@ -658,7 +658,7 @@ void HostWindow::onRecordingStateChanged(bool started)
 
     if (tray_icon_)
     {
-        tray_icon_->showMessage(portable ? tr("Aspia Quick Support") : tr("Aspia Host"), message,
+        tray_icon_->showMessage(portable ? tr("Aspia-mod Quick Support") : tr("Aspia-mod Host"), message,
                                 QIcon(portable ? ":/img/aspia-qs.ico" : ":/img/aspia.ico"), 1200);
     }
 }
@@ -923,7 +923,7 @@ void HostWindow::onAboutSystem()
 void HostWindow::onAbout()
 {
     LOG(INFO) << "[ACTION] About";
-    AutoQPointer<AboutDialog> dialog(new AboutDialog(tr("Aspia Host"), this));
+    AutoQPointer<AboutDialog> dialog(new AboutDialog(tr("Aspia-mod Host"), this));
     dialog->exec();
 }
 
@@ -934,7 +934,7 @@ void HostWindow::onUninstall()
     LOG(INFO) << "[ACTION] Uninstall";
 
     if (MsgBox::importantQuestion(this,
-            tr("Aspia Host will be removed from this computer. The settings of the host will be kept. "
+            tr("Aspia-mod Host will be removed from this computer. The settings of the host will be kept. "
                "Do you really want to uninstall the application?"), Seconds(10)) != MsgBox::Yes)
     {
         LOG(INFO) << "[ACTION] User rejected uninstall";
@@ -1201,7 +1201,7 @@ void HostWindow::updateTrayIconTooltip()
 #endif // defined(Q_OS_WINDOWS)
 
     QString tooltip;
-    tooltip += (portable ? tr("Aspia Quick Support") : tr("Aspia Host")) + "\n\n";
+    tooltip += (portable ? tr("Aspia-mod Quick Support") : tr("Aspia-mod Host")) + "\n\n";
     tooltip += tr("ID: %1").arg(ui->edit_id->text());
 
     if (!portable)

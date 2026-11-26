@@ -59,6 +59,10 @@ public:
 public slots:
     void showAndActivate();
 
+    // Connects to the host named by the command line: a record ID or a host address.
+    void connectToLocalHost(const QString& identifier, int session_type, const QString& username,
+                            const QString& password);
+
 signals:
     // The state of the window is saved by then, and the window is expected to be destroyed.
     void sig_lockRequested();

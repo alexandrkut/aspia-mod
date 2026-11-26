@@ -1211,6 +1211,13 @@ void ManagementTab::onHostContextMenu(const QPoint& pos, int column)
         {
             router_hosts_widget_->onHostUsers();
         });
+
+        QAction* action_full_config = menu->addAction(QIcon(":/img/import.svg"),
+                                                      tr("Host full configuration (from file)..."));
+        connect(action_full_config, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostFullConfig();
+        });
     }
 
     if (!is_single)
@@ -1234,6 +1241,13 @@ void ManagementTab::onHostContextMenu(const QPoint& pos, int column)
         connect(bulk_config, &QAction::triggered, this, [this]()
         {
             router_hosts_widget_->onHostsUpdateConfig();
+        });
+
+        QAction* bulk_full = menu->addAction(QIcon(":/img/import.svg"),
+                                             tr("Bulk full configuration (from file)..."));
+        connect(bulk_full, &QAction::triggered, this, [this]()
+        {
+            router_hosts_widget_->onHostsFullConfig();
         });
 
         menu->exec(pos);

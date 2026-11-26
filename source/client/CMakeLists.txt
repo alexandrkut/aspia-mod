@@ -21,6 +21,8 @@
 list(APPEND SOURCE_CLIENT_CORE
     application.cc
     application.h
+    connect_request.cc
+    connect_request.h
     audio_output.cc
     audio_output.h
     audio_player.cc
@@ -59,6 +61,7 @@ list(APPEND SOURCE_CLIENT_TESTS
     ../router/storage/sync_storage.cc
     ../router/storage/sync_storage.h
     config_unittest.cc
+    connect_request_unittest.cc
     desktop/authorization_dialog_unittest.cc
     desktop/credentials/credential_combo_box_unittest.cc
     desktop/credentials/credential_list_model_unittest.cc

@@ -56,8 +56,21 @@ AppLock::~AppLock() = default;
 
 //--------------------------------------------------------------------------------------------------
 // static
-AppLock::Result AppLock::unlock(bool startup)
+AppLock::Result AppLock::unlock(bool startup, const SecureString& password)
 {
+    // A password from the command line unlocks without showing the dialog. It belongs to a script
+    // and never to an interactive shell, and it is masked in the command-line log by main().
+    if (!password.isEmpty())
+    {
+        if (!MasterPassword::isSet() || MasterPassword::unlock(password) != MasterPassword::Result::SUCCESS)
+        {
+            LOG(ERROR) << "Unable to unlock the database with the password from the command line";
+            return Result::FAILED;
+        }
+        LOG(INFO) << "Database unlocked with the password from the command line";
+        return Result::UNLOCKED;
+    }
+
     AutoQPointer<UnlockDialog> dialog(
         new UnlockDialog(startup ? UnlockDialog::Mode::STARTUP : UnlockDialog::Mode::LOCK, nullptr));
 

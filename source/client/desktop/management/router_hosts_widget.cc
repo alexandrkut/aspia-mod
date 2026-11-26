@@ -24,6 +24,8 @@
 #include <QDateTime>
 #include <QEvent>
 #include <QEventLoop>
+#include <QFile>
+#include <QFileDialog>
 #include <QHeaderView>
 #include <QIODevice>
 #include <QJsonArray>
@@ -808,6 +810,174 @@ void RouterHostsWidget::onHostsUpdateConfig()
 }
 
 //--------------------------------------------------------------------------------------------------
+void RouterHostsWidget::onHostsFullConfig()
+{
+    const QList<RouterHost> hosts = selectedHosts();
+    if (hosts.isEmpty())
+        return;
+
+    const QString file_name = QFileDialog::getOpenFileName(
+        this, tr("Open host configuration file"), QString(),
+        tr("JSON files (*.json);;All files (*)"));
+    if (file_name.isEmpty())
+        return;
+
+    QFile file(file_name);
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        MsgBox::warning(this, tr("Cannot open file: %1").arg(file.errorString()));
+        return;
+    }
+    const QByteArray data = file.readAll();
+    file.close();
+
+    QJsonParseError parse_error;
+    QJsonDocument doc = QJsonDocument::fromJson(data, &parse_error);
+    if (parse_error.error != QJsonParseError::NoError || !doc.isObject())
+    {
+        MsgBox::warning(this, tr("Invalid JSON: %1").arg(parse_error.errorString()));
+        return;
+    }
+    const QJsonObject cfg = doc.object();
+    if (cfg.isEmpty() || (!cfg.contains("system") && !cfg.contains("database")))
+    {
+        MsgBox::warning(this, tr("Not a host configuration file (no system/database sections)."));
+        return;
+    }
+
+    int file_users = -1;
+    if (cfg.contains("database") && cfg["database"].isObject() &&
+        cfg["database"].toObject().contains("users"))
+    {
+        file_users = cfg["database"].toObject()["users"].toArray().size();
+    }
+    QStringList file_sections;
+    if (cfg.contains("system"))
+        file_sections.append("system");
+    if (cfg.contains("database"))
+        file_sections.append("database");
+
+    AutoQPointer<RouterHostBulkFullConfigDialog> input(new RouterHostBulkFullConfigDialog(
+        tr("File: %1\nSections: %2. Users in file: %3.")
+            .arg(file_name, file_sections.join(", "),
+                 file_users < 0 ? tr("(kept)") : QString::number(file_users)),
+        this));
+    if (input->exec() != QDialog::Accepted)
+        return;
+
+    QJsonArray keep_local;
+    if (input->keepRouter())
+        keep_local.append("database");
+
+    const QString bulk_id = newBulkId();
+    const QString config_json = QString::fromUtf8(QJsonDocument(cfg).toJson(QJsonDocument::Compact));
+
+    QList<RouterHostBulkTarget> targets;
+    for (const RouterHost& host : hosts)
+    {
+        if (!host.online)
+            continue;
+        targets.append({host.host_id, bulkHostLabel(host)});
+    }
+
+    // Dry run first: the router reports what would change without writing anything.
+    AutoQPointer<RouterHostBulkRunner> dry(new RouterHostBulkRunner(
+        targets, "apply_full_config",
+        [config_json, keep_local, bulk_id](HostId)
+        {
+            QJsonObject params;
+            params["config_json"] = config_json;
+            params["keep_local"] = keep_local;
+            params["dry_run"] = true;
+            params["bulk_id"] = bulk_id;
+            return params;
+        }, this));
+    {
+        QProgressDialog progress(tr("Dry run on hosts..."), tr("Cancel"), 0,
+                                 dry->targetCount(), this);
+        progress.setWindowModality(Qt::WindowModal);
+        progress.setMinimumDuration(0);
+        QEventLoop loop;
+        QObject::connect(dry, &RouterHostBulkRunner::resultReady, &progress, [&](int index)
+        {
+            progress.setValue(index + 1);
+            if (progress.wasCanceled())
+                dry->cancel();
+        });
+        QObject::connect(dry, &RouterHostBulkRunner::finished, &loop, &QEventLoop::quit);
+        dry->start();
+        if (dry->isRunning())
+            loop.exec();
+    }
+    const QList<RouterHostBulkResult> dried = dry->results();
+
+    QList<RouterHostBulkTarget> apply_targets;
+    QList<RouterHostBulkPreviewRow> preview;
+    int dried_index = 0;
+    for (const RouterHost& host : hosts)
+    {
+        RouterHostBulkPreviewRow row;
+        row.host = bulkHostLabel(host);
+        if (!host.online)
+        {
+            row.will_run = false;
+            row.action = tr("Apply full config.");
+            row.detail = tr("Host is offline.");
+            preview.append(row);
+            continue;
+        }
+        if (dried_index >= dried.size())
+            break;
+        const RouterHostBulkResult& d = dried[dried_index++];
+        if (d.status != "ok")
+        {
+            row.will_run = true;
+            row.target_index = apply_targets.size();
+            row.action = tr("Apply full config (dry run %1, will try anyway).").arg(d.detail);
+            apply_targets.append({host.host_id, row.host});
+        }
+        else
+        {
+            QJsonDocument diff_doc = QJsonDocument::fromJson(d.raw.toUtf8());
+            QStringList parts;
+            if (diff_doc.isObject())
+            {
+                const QJsonObject diff = diff_doc.object();
+                if (diff.contains("users"))
+                {
+                    const QJsonObject users = diff["users"].toObject();
+                    parts.append(tr("users: %1 -> %2")
+                        .arg(users.value("old_count").toInteger())
+                        .arg(users.value("new_count").toInteger()));
+                }
+                if (diff.contains("system"))
+                    parts.append(tr("system: %1").arg(diff["system"].toObject().keys().join(", ")));
+            }
+            row.will_run = true;
+            row.target_index = apply_targets.size();
+            row.action = parts.isEmpty() ? tr("Apply full config (no visible diff).") : parts.join("; ");
+            apply_targets.append({host.host_id, row.host});
+        }
+        preview.append(row);
+    }
+
+    AutoQPointer<RouterHostBulkRunner> runner(new RouterHostBulkRunner(
+        apply_targets, "apply_full_config",
+        [config_json, keep_local, bulk_id](HostId)
+        {
+            QJsonObject params;
+            params["config_json"] = config_json;
+            params["keep_local"] = keep_local;
+            params["dry_run"] = false;
+            params["bulk_id"] = bulk_id;
+            return params;
+        }, this));
+    AutoQPointer<RouterHostBulkDialog> dialog(
+        new RouterHostBulkDialog(tr("Full configuration on hosts"), this));
+    dialog->execBulk(runner, preview);
+}
+
+//--------------------------------------------------------------------------------------------------
 bool RouterHostsWidget::eventFilter(QObject* watched, QEvent* event)
 {
     if (watched == ui->tree_hosts && event->type() == QEvent::KeyPress)
@@ -1343,6 +1513,66 @@ void RouterHostsWidget::onHostUsers()
     LOG(INFO) << "[ACTION] Host users requested by user";
     AutoQPointer<RouterHostUsersDialog> dialog(new RouterHostUsersDialog(host.host_id, this));
     dialog->exec();
+}
+
+//--------------------------------------------------------------------------------------------------
+void RouterHostsWidget::onHostFullConfig()
+{
+    const QList<RouterHost> hosts = selectedHosts();
+    if (hosts.size() != 1)
+    {
+        LOG(INFO) << "No single selected host";
+        return;
+    }
+
+    const RouterHost& host = hosts.front();
+
+    const QString file_name = QFileDialog::getOpenFileName(
+        this, tr("Open host configuration file"), QString(),
+        tr("JSON files (*.json);;All files (*)"));
+    if (file_name.isEmpty())
+        return;
+
+    QFile file(file_name);
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        MsgBox::warning(this, tr("Cannot open file: %1").arg(file.errorString()));
+        return;
+    }
+
+    const QByteArray data = file.readAll();
+    file.close();
+
+    QJsonParseError parse_error;
+    QJsonDocument doc = QJsonDocument::fromJson(data, &parse_error);
+    if (parse_error.error != QJsonParseError::NoError || !doc.isObject())
+    {
+        MsgBox::warning(this, tr("Invalid JSON: %1").arg(parse_error.errorString()));
+        return;
+    }
+
+    RouterSession* session = RouterController::session();
+    if (!session)
+    {
+        MsgBox::warning(this, tr("No session to router."));
+        return;
+    }
+
+    QJsonObject params;
+    params["config_json"] = QString::fromUtf8(QJsonDocument(doc).toJson(QJsonDocument::Compact));
+    params["keep_local"] = QJsonArray();
+    params["dry_run"] = false;
+
+    const QString params_json = QString::fromUtf8(QJsonDocument(params).toJson(QJsonDocument::Compact));
+    session->setHostConfig(host.host_id, "apply_full_config", params_json.toStdString(),
+                          {this, [this](const proto::router::HostResult& result)
+                          {
+                              if (result.error_code() == proto::router::kErrorOk)
+                                  MsgBox::information(this, tr("Configuration applied successfully."));
+                              else
+                                  MsgBox::warning(this, tr("Failed to apply: %1")
+                                      .arg(QString::fromStdString(result.error_code())));
+                          }});
 }
 
 //--------------------------------------------------------------------------------------------------
