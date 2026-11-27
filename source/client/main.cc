@@ -558,10 +558,19 @@ int main(int argc, char* argv[])
             return 2;
         }
 
-        // The database is already selected; LOCK mode asks only for the master password and never
-        // shows the database list.
-        if (AppLock::unlock(false, master_password) != AppLock::Result::UNLOCKED)
+        // A remembered master password opens this database without a dialog, the same way the
+        // single-database startup path does. A password from the command line takes precedence:
+        // AppLock handles it directly and auto-unlock must not be tried first.
+        if (master_password.isEmpty() && MasterPassword::autoUnlock())
+        {
+            LOG(INFO) << "Database unlocked with the remembered master password";
+        }
+        else if (AppLock::unlock(false, master_password) != AppLock::Result::UNLOCKED)
+        {
+            // The database is already selected; LOCK mode asks only for the master password and
+            // never shows the database list.
             return 0;
+        }
     }
     else if (parser.isSet(select_database_option) || !openOnlyDatabase())
     {
