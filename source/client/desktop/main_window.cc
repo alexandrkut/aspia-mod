@@ -500,7 +500,7 @@ bool MainWindow::resolveTarget(const QString& identifier, ConnectTarget* target,
         {
             for (const RouterHostConfig& host : std::as_const(router_hosts))
             {
-                if (hostIdToString(host.hostId()) != identifier)
+                if (hostIdToString(host.hostId()).compare(identifier, Qt::CaseInsensitive) != 0)
                     continue;
                 LOG(INFO) << "Host ID" << identifier << "belongs to the book of the router";
                 ConnectTarget candidate;
@@ -622,17 +622,15 @@ void MainWindow::connectToRouterHost(const QString& identifier, proto::peer::Ses
             { this, [this, identifier, session_type, username, password, wanted]
               (const RouterHostList& list)
         {
-            // A command-line value may name a host by its ID, by its display name or by its
-            // computer name; the router search matches all three fields. Keep the distinct hosts
-            // that match, so an ID that is also another host's name is not silently resolved to
-            // the wrong one.
+            // A command-line value may name a host by its ID or by its display name; the router
+            // search matches those. Keep the distinct hosts that match, so an ID that is also
+            // another host's name is not silently resolved to the wrong one.
             QList<RouterHost> matches;
             QSet<HostId> seen;
             for (const RouterHost& entry : list.hosts)
             {
                 if (entry.host_id != wanted &&
-                    entry.display_name.compare(identifier, Qt::CaseInsensitive) != 0 &&
-                    entry.computer_name.compare(identifier, Qt::CaseInsensitive) != 0)
+                    entry.display_name.compare(identifier, Qt::CaseInsensitive) != 0)
                 {
                     continue;
                 }
@@ -710,21 +708,35 @@ void MainWindow::runWhenRouterOnline(std::function<void()> action,
     LOG(INFO) << "The router of the host is not online yet, waiting for it";
 
     auto done = std::make_shared<bool>(false);
-    QTimer::singleShot(kRouterWaitTimeout, this, [done, on_timeout]()
+    auto connection = std::make_shared<QMetaObject::Connection>();
+
+    // Once the wait ends, the connection to the router is no longer needed: drop it so the window
+    // does not keep a dead lambda for every command-line connection it ever waited for.
+    auto disconnect = [connection]()
+    {
+        if (*connection)
+            QObject::disconnect(*connection);
+        *connection = QMetaObject::Connection();
+    };
+
+    QTimer::singleShot(kRouterWaitTimeout, this, [done, on_timeout, disconnect]()
     {
         if (*done)
             return;
         *done = true;
+        disconnect();
         if (on_timeout)
             on_timeout();
     });
 
-    QObject::connect(&RouterController::instance(), &RouterController::sig_statusChanged, this,
-                     [action, done](RouterStatus status)
+    *connection = QObject::connect(&RouterController::instance(),
+                                   &RouterController::sig_statusChanged, this,
+                                   [action, done, disconnect](RouterStatus status)
     {
         if (*done || status != RouterStatus::ONLINE)
             return;
         *done = true;
+        disconnect();
         action();
     });
 }

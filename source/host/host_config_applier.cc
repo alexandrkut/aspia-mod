@@ -820,9 +820,9 @@ HostConfigApplier::Result HostConfigApplier::applyFullConfig(const QJsonObject& 
     }
     else
     {
-        if (cfg.contains("system") && cfg["system"].isObject())
+        if (params.contains("system") && params["system"].isObject())
             cfg["system"] = params["system"].toObject();
-        if (cfg.contains("database") && cfg["database"].isObject())
+        if (params.contains("database") && params["database"].isObject())
             cfg["database"] = params["database"].toObject();
     }
 
