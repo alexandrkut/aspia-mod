@@ -161,47 +161,37 @@ TEST(ConnectRequestTest, UnknownSessionTypeIsRefused)
 }
 
 //--------------------------------------------------------------------------------------------------
-// A record ID is a positive number. Zero, a negative number and an option without its value are
-// all refused instead of connecting to nothing. A word is a name of a host now, and a host named
-// by its address is connected to directly.
+// A record ID is a positive number. Zero, a negative number, an option without its value and
+// every name of a host are all refused instead of connecting to nothing. Only an IP literal names
+// a host that is not in the address book.
 TEST(ConnectRequestTest, BadIdentifiersAreRefused)
 {
     EXPECT_TRUE(fails({ QStringLiteral("--connect=0") }));
     EXPECT_TRUE(fails({ QStringLiteral("--connect=-1") }));
     EXPECT_TRUE(fails({ QStringLiteral("--connect=") }));
     EXPECT_TRUE(fails({ QStringLiteral("--connect") }));
-}
 
-//--------------------------------------------------------------------------------------------------
-// A display name of a router host is a word with spaces and non-ASCII letters, and it is accepted
-// as an identifier. The resolution to a host happens later, once the database is open.
-TEST(ConnectRequestTest, DisplayNamesAreAccepted)
-{
     const QStringList names = {
         QStringLiteral("My PC"),
-        QString::fromUtf8("Офис 2") };
+        QString::fromUtf8("\u041e\u0444\u0438\u0441 2"),
+        QStringLiteral("myhost"),
+        QStringLiteral("myhost.local"),
+        QStringLiteral("host-one"),
+        QStringLiteral("office-pc"),
+        QStringLiteral("host/name") };
 
     for (const QString& name : names)
-    {
-        const ConnectRequest request = parse({ QStringLiteral("--connect"), name });
-
-        EXPECT_FALSE(request.isEmpty()) << name.toStdString();
-        EXPECT_EQ(request.identifier(), name) << name.toStdString();
-    }
+        EXPECT_TRUE(fails({ QStringLiteral("--connect"), name })) << name.toStdString();
 }
 
 //--------------------------------------------------------------------------------------------------
-// A host of no book is named by its address, and the client connects to it directly. An address
-// may carry a port of its own, and a name of a host is an address as well.
+// A host of no book is named by its IP address, and the client connects to it directly. An
+// address may carry a port of its own. DNS host names are not accepted.
 TEST(ConnectRequestTest, AddressIsAccepted)
 {
     const QStringList addresses = {
         QStringLiteral("192.168.1.5"),
         QStringLiteral("192.168.1.5:8050"),
-        QStringLiteral("myhost.local"),
-        QStringLiteral("myhost"),
-        QStringLiteral("host-one"),
-        QStringLiteral("12.5"),
         QStringLiteral("[::1]") };
 
     for (const QString& address : addresses)

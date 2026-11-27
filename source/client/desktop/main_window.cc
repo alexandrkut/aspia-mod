@@ -458,6 +458,8 @@ bool MainWindow::mcpAsksCredentials() const
 //--------------------------------------------------------------------------------------------------
 bool MainWindow::resolveTarget(const QString& identifier, ConnectTarget* target, QString* error) const
 {
+    Q_UNUSED(error);
+
     std::optional<ConnectTarget> id_candidate;
 
     bool number_ok = false;
@@ -511,73 +513,9 @@ bool MainWindow::resolveTarget(const QString& identifier, ConnectTarget* target,
         }
     }
 
-    QList<ConnectTarget> name_candidates;
-    for (const LocalHostConfig& host : std::as_const(local_hosts))
-    {
-        if (host.name().compare(identifier, Qt::CaseInsensitive) != 0)
-            continue;
-        ConnectTarget candidate;
-        candidate.entry_id = host.id();
-        candidate.name = host.name();
-        name_candidates.append(candidate);
-    }
-
-    if (name_candidates.size() > 1)
-    {
-        QSet<qint64> distinct_ids;
-        for (const ConnectTarget& candidate : std::as_const(name_candidates))
-            distinct_ids.insert(candidate.entry_id);
-        if (distinct_ids.size() > 1)
-        {
-            if (error)
-            {
-                *error = QApplication::translate(
-                    "Client", "Several hosts are named \"%1\". Use the ID of the one you mean.")
-                    .arg(identifier);
-            }
-            return false;
-        }
-    }
-
-    const bool has_name = !name_candidates.isEmpty();
-    const ConnectTarget name_candidate = has_name ? name_candidates.first() : ConnectTarget();
-
-    auto same_host = [](const ConnectTarget& a, const ConnectTarget& b)
-    {
-        if (a.entry_id != 0 && a.entry_id == b.entry_id)
-            return true;
-        if (a.host_id != kInvalidHostId && a.host_id == b.host_id)
-            return true;
-        return false;
-    };
-
-    if (id_candidate && has_name)
-    {
-        if (!same_host(*id_candidate, name_candidate))
-        {
-            if (error)
-            {
-                *error = QApplication::translate(
-                    "Client", "\"%1\" is both the name of a host and the ID of another. Connect "
-                              "by the record ID of the host you mean.").arg(identifier);
-            }
-            return false;
-        }
-        *target = *id_candidate;
-        if (target->name.isEmpty())
-            target->name = name_candidate.name;
-        return true;
-    }
-
     if (id_candidate)
     {
         *target = *id_candidate;
-        return true;
-    }
-
-    if (has_name)
-    {
-        *target = name_candidate;
         return true;
     }
 
@@ -618,60 +556,42 @@ void MainWindow::connectToRouterHost(const QString& identifier, proto::peer::Ses
         }
 
         const HostId wanted = stringToHostId(identifier);
+        if (wanted == kInvalidHostId)
+        {
+            // Only a host ID can name a host of the router; a display name is not a command-line
+            // identifier anymore. Do not ask the router for something it cannot find.
+            LOG(ERROR) << "The value" << identifier << "is not a host ID";
+            reportUnknownHost(identifier);
+            return;
+        }
+
         session->searchHosts(identifier, 0, proto::router::kMaxHostPageSize,
             { this, [this, identifier, session_type, username, password, wanted]
               (const RouterHostList& list)
         {
-            // A command-line value may name a host by its ID or by its display name; the router
-            // search matches those. Keep the distinct hosts that match, so an ID that is also
-            // another host's name is not silently resolved to the wrong one.
-            QList<RouterHost> matches;
-            QSet<HostId> seen;
             for (const RouterHost& entry : list.hosts)
             {
-                if (entry.host_id != wanted &&
-                    entry.display_name.compare(identifier, Qt::CaseInsensitive) != 0)
-                {
+                if (entry.host_id != wanted)
                     continue;
+
+                LOG(INFO) << "The router has the host" << identifier;
+                HostConfig host = HostConfig::forRouterHost(
+                    entry.host_id,
+                    entry.display_name.isEmpty() ? entry.computer_name : entry.display_name);
+
+                if (!username.isEmpty())
+                {
+                    host.setUsername(username);
+                    host.setPassword(password);
                 }
 
-                if (seen.contains(entry.host_id))
-                    continue;
-
-                seen.insert(entry.host_id);
-                matches.append(entry);
-            }
-
-            if (matches.size() > 1)
-            {
-                LOG(ERROR) << "The value" << identifier << "matches" << matches.size()
-                           << "hosts on the router";
-                MsgBox::warning(this, tr("\"%1\" matches more than one host on the router. Use "
-                                          "the host ID to choose the one you mean.").arg(identifier));
+                if (ManagementTab* management_tab = managementTab())
+                    management_tab->connectRouterHost(host, session_type);
                 return;
             }
 
-            if (matches.isEmpty())
-            {
-                LOG(ERROR) << "The router has no host with the ID or name" << identifier;
-                reportUnknownHost(identifier);
-                return;
-            }
-
-            const RouterHost& entry = matches.first();
-            LOG(INFO) << "The router has the host" << identifier;
-            HostConfig host = HostConfig::forRouterHost(
-                entry.host_id,
-                entry.display_name.isEmpty() ? entry.computer_name : entry.display_name);
-
-            if (!username.isEmpty())
-            {
-                host.setUsername(username);
-                host.setPassword(password);
-            }
-
-            if (ManagementTab* management_tab = managementTab())
-                management_tab->connectRouterHost(host, session_type);
+            LOG(ERROR) << "The router has no host with the ID" << identifier;
+            reportUnknownHost(identifier);
         } });
     }, [this, identifier]()
     {

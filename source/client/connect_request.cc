@@ -20,7 +20,9 @@
 
 #include <optional>
 
+#include <QAbstractSocket>
 #include <QCoreApplication>
+#include <QHostAddress>
 #include <QStringLiteral>
 
 #include "base/build_config.h"
@@ -48,9 +50,9 @@ constexpr SessionTypeName kSessionTypes[] = {
 
 //--------------------------------------------------------------------------------------------------
 // What identifies a host on the command line. It is either a number, which is a record ID of the
-// address book or a host ID, or a name or address of a host. The value is not checked against the
-// database here - the client may be starting before it was unlocked - so only its shape is
-// checked.
+// address book or a host ID, or an IP address (with an optional port) of a host. Names are not
+// accepted. The value is not checked against the database here - the client may be starting before
+// it was unlocked - so only its shape is checked.
 std::optional<QString> identifierFromString(const QString& str)
 {
     const QString trimmed = str.trimmed();
@@ -82,14 +84,12 @@ std::optional<QString> identifierFromString(const QString& str)
         return trimmed;
     }
 
-    // Anything else is a name or an address of a host. Both are resolved later: a value that looks
-    // like an address is connected to directly, a word is looked up in the address book and then in
-    // the book of the router (a display name of a router host). The shape is all that is decided
-    // here, because the database may not be unlocked yet.
-    if (trimmed.startsWith('-'))
-        return std::nullopt;
+    // Anything else must be an IP literal, optionally with a port. Names, display names and DNS
+    // host names are not accepted.
+    if (ConnectRequest::isHostAddress(trimmed))
+        return trimmed;
 
-    return trimmed;
+    return std::nullopt;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -311,11 +311,15 @@ bool ConnectRequest::isHostAddress(const QString& str)
     if (number)
         return false;
 
-    // The name of a host cannot begin with a hyphen, so a negative number is not an address
-    // either, and a name that reads as no address at all is not one.
+    // Only an IP literal is an address here, with an optional port. Address::fromString() also
+    // accepts DNS host names, so the parsed host is checked to be a real IPv4 or IPv6 address.
     const Address address = Address::fromString(trimmed, kDefaultHostTcpPort);
+    if (!address.isValid())
+        return false;
 
-    return address.isValid() && !address.host().startsWith('-');
+    const QHostAddress ip(address.host());
+    return ip.protocol() == QAbstractSocket::IPv4Protocol ||
+           ip.protocol() == QAbstractSocket::IPv6Protocol;
 }
 
 //--------------------------------------------------------------------------------------------------
