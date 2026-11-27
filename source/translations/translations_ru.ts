@@ -1073,7 +1073,7 @@
     <message>
         <location filename="../client/main.cc" line="394"/>
         <source>Kind of the session to open: desktop, file, info, chat or terminal.</source>
-        <translation>Тип сеанса: рабочий стол, файлы, сведения, чат или терминал.</translation>
+        <translation>??? ??????: desktop, file, info, chat ??? terminal.</translation>
     </message>
     <message>
         <location filename="../client/main.cc" line="396"/>
