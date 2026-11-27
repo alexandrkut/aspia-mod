@@ -733,14 +733,24 @@ void MainWindow::connectToLocalHost(const QString& identifier, int session_type,
 
     if (target.host_id != kInvalidHostId)
     {
-        // A host of the router that was once fetched into the local book.
-        HostConfig host = HostConfig::forRouterHost(target.host_id, target.name);
-        if (!username.isEmpty())
+        // A host of the router that was once fetched into the local book. A command-line request
+        // arrives while the client is still starting, so wait for the router before connecting.
+        const HostId host_id = target.host_id;
+        const QString name = target.name;
+        const SecureString forced_password(password);
+        const bool with_credentials = !username.isEmpty();
+
+        runWhenRouterOnline([this, host_id, name, type, username, forced_password, with_credentials]
         {
-            host.setUsername(username);
-            host.setPassword(SecureString(password));
-        }
-        management_tab->connectRouterHost(host, type);
+            HostConfig host = HostConfig::forRouterHost(host_id, name);
+            if (with_credentials)
+            {
+                host.setUsername(username);
+                host.setPassword(forced_password);
+            }
+            if (ManagementTab* tab = managementTab())
+                tab->connectRouterHost(host, type);
+        });
         return;
     }
 
@@ -763,7 +773,15 @@ void MainWindow::connectToLocalHost(const QString& identifier, int session_type,
     }
 
     if (target.entry_id > 0)
-        management_tab->connectLocalHost(target.entry_id, type);
+    {
+        // The record may belong to a router that has not connected yet during startup.
+        const qint64 entry_id = target.entry_id;
+        runWhenRouterOnline([this, entry_id, type]
+        {
+            if (ManagementTab* tab = managementTab())
+                tab->connectLocalHost(entry_id, type);
+        });
+    }
 }
 
 //--------------------------------------------------------------------------------------------------
