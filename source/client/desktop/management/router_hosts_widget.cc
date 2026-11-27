@@ -27,6 +27,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QHeaderView>
+#include <QStandardPaths>
 #include <QIODevice>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -817,7 +818,8 @@ void RouterHostsWidget::onHostsFullConfig()
         return;
 
     const QString file_name = QFileDialog::getOpenFileName(
-        this, tr("Open host configuration file"), QString(),
+        this, tr("Open host configuration file"),
+        QStandardPaths::writableLocation(QStandardPaths::DesktopLocation),
         tr("JSON files (*.json);;All files (*)"));
     if (file_name.isEmpty())
         return;
@@ -1528,7 +1530,8 @@ void RouterHostsWidget::onHostFullConfig()
     const RouterHost& host = hosts.front();
 
     const QString file_name = QFileDialog::getOpenFileName(
-        this, tr("Open host configuration file"), QString(),
+        this, tr("Open host configuration file"),
+        QStandardPaths::writableLocation(QStandardPaths::DesktopLocation),
         tr("JSON files (*.json);;All files (*)"));
     if (file_name.isEmpty())
         return;
