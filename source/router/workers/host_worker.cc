@@ -104,6 +104,19 @@ void HostWorker::setHostConfig(HostId host_id, const std::string& command_name, 
             return;
         }
 
+        // A second command for the same host while one is still waiting would overwrite the first
+        // callback and lose its reply. Reject the newcomer instead; the caller gets a defined
+        // answer and the first command keeps its slot.
+        if (pending_config_callbacks_.find(host_id) != pending_config_callbacks_.end())
+        {
+            LOG(WARNING) << "A configuration command is already pending for host" << host_id;
+            QMetaObject::invokeMethod(context, [callback = std::move(callback)]()
+            {
+                callback(proto::router::kErrorConflict, "");
+            }, Qt::QueuedConnection);
+            return;
+        }
+
         // Store the pending callback keyed by host id. Commands are serialized per host, so a
         // single pending slot is enough.
         pending_config_callbacks_[host_id] = { QPointer<QObject>(context), std::move(callback) };

@@ -184,12 +184,13 @@ bool ensureSchema(SqlDatabase& db)
     }
 
     // Seed from the single-membership era: hosts that carry a scalar workspace but no membership
-    // rows yet. The empty-table guard keeps a deliberate release from being resurrected on reopen.
+    // rows yet. The per-host guard keeps a deliberate release from being resurrected on reopen and
+    // still backfills a database that already has memberships for some hosts.
     if (!run("INSERT INTO \"host_workspaces\" (\"host_id\", \"workspace_id\", \"group_id\") "
              "SELECT \"id\", \"workspace_id\", \"group_id\" FROM \"hosts\" "
              "WHERE \"workspace_id\" > 0 "
              "  AND EXISTS (SELECT 1 FROM \"workspaces\" w WHERE w.\"id\" = \"hosts\".\"workspace_id\") "
-             "  AND (SELECT COUNT(*) FROM \"host_workspaces\") = 0"))
+             "  AND NOT EXISTS (SELECT 1 FROM \"host_workspaces\" hw WHERE hw.\"host_id\" = \"hosts\".\"id\")"))
     {
         return false;
     }

@@ -374,6 +374,80 @@ TEST_F(HostRequestHandlerTest, MemberCannotMoveHostBetweenWorkspaces)
 }
 
 //--------------------------------------------------------------------------------------------------
+// A member of one workspace of a host can edit the host but must not retarget another membership:
+// the caller is in alpha only, while the host is also in beta, and beta has a group of its own.
+TEST_F(HostRequestHandlerTest, MemberCannotRetargetGroupOfAnotherWorkspace)
+{
+    const RouterUser client = addUser("client", proto::router::SESSION_TYPE_OPERATOR);
+    ASSERT_TRUE(client.isValid());
+
+    ASSERT_EQ(workspaces_.modify(workspace_id_, 1, "alpha", std::string_view(),
+                                 {admin_.entry_id, client.entry_id}),
+              proto::router::kErrorOk);
+
+    const qint64 other_id = addWorkspace("beta");
+    ASSERT_GT(other_id, 0);
+    const qint64 other_group = addGroup(other_id, "servers");
+    ASSERT_GT(other_group, 0);
+
+    ASSERT_EQ(hosts_.addMembership(host_id_, other_id, 0), proto::router::kErrorOk);
+
+    setCaller(client, proto::router::SESSION_TYPE_OPERATOR);
+
+    proto::router::HostRequest request = makeRequest(host_id_, 0, "display");
+    proto::router::HostMembership* alpha = request.mutable_host()->add_memberships();
+    alpha->set_workspace_id(workspace_id_);
+    proto::router::HostMembership* beta = request.mutable_host()->add_memberships();
+    beta->set_workspace_id(other_id);
+    beta->set_group_id(other_group);
+
+    const RequestResult result = handle(request);
+
+    EXPECT_EQ(result.error_code, proto::router::kErrorAccessDenied);
+    EXPECT_EQ(result.notify_flags, 0u);
+    EXPECT_TRUE(findHost(host_id_).display_name().empty());
+}
+
+//--------------------------------------------------------------------------------------------------
+// A membership may name a group only if the group exists in that same workspace. The caller here
+// is a member of both workspaces, so only the group check can refuse the edit.
+TEST_F(HostRequestHandlerTest, MembershipGroupMustBelongToTheSameWorkspace)
+{
+    const RouterUser client = addUser("client", proto::router::SESSION_TYPE_OPERATOR);
+    ASSERT_TRUE(client.isValid());
+
+    ASSERT_EQ(workspaces_.modify(workspace_id_, 1, "alpha", std::string_view(),
+                                 {admin_.entry_id, client.entry_id}),
+              proto::router::kErrorOk);
+
+    const qint64 other_id = addWorkspace("beta");
+    ASSERT_GT(other_id, 0);
+    ASSERT_EQ(workspaces_.modify(other_id, 1, "beta", std::string_view(),
+                                 {admin_.entry_id, client.entry_id}),
+              proto::router::kErrorOk);
+
+    const qint64 foreign_group = addGroup(workspace_id_, "servers");
+    ASSERT_GT(foreign_group, 0);
+
+    ASSERT_EQ(hosts_.addMembership(host_id_, other_id, 0), proto::router::kErrorOk);
+
+    setCaller(client, proto::router::SESSION_TYPE_OPERATOR);
+
+    proto::router::HostRequest request = makeRequest(host_id_, 0, "display");
+    proto::router::HostMembership* alpha = request.mutable_host()->add_memberships();
+    alpha->set_workspace_id(workspace_id_);
+    proto::router::HostMembership* beta = request.mutable_host()->add_memberships();
+    beta->set_workspace_id(other_id);
+    beta->set_group_id(foreign_group);
+
+    const RequestResult result = handle(request);
+
+    EXPECT_EQ(result.error_code, proto::router::kErrorInvalidData);
+    EXPECT_EQ(result.notify_flags, 0u);
+    EXPECT_TRUE(findHost(host_id_).display_name().empty());
+}
+
+//--------------------------------------------------------------------------------------------------
 // The group of the request belongs to the workspace the host ends up in, not to the one it is
 // leaving.
 TEST_F(HostRequestHandlerTest, GroupIsCheckedAgainstTheTargetWorkspace)

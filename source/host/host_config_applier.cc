@@ -713,7 +713,12 @@ HostConfigApplier::Result HostConfigApplier::applyReplaceUsers(const QJsonObject
         u.salt = QByteArray::fromHex(o.value("salt").toString().toLatin1());
         u.verifier = QByteArray::fromHex(o.value("verifier").toString().toLatin1());
         u.sessions = static_cast<quint32>(o.value("sessions").toInteger());
+        // A record with no flags (or with zero) is an enabled user, the same rule applyFullConfig()
+        // and applyAddUser() follow: the caller that leaves the field out must not accidentally
+        // store a disabled account.
         u.flags = static_cast<quint32>(o.value("flags").toInteger());
+        if (u.flags == 0)
+            u.flags = User::ENABLED;
 
         if (!u.isValid() || u.name.isEmpty() || u.name.startsWith('#') ||
             !validateGroup(u.group) || !validateSessionMask(u.sessions))
@@ -840,9 +845,19 @@ HostConfigApplier::Result HostConfigApplier::applyFullConfig(const QJsonObject& 
     if (!keep.contains("users") && cfg.contains("database") && cfg["database"].isObject())
     {
         const QJsonObject db_obj = cfg["database"].toObject();
-        if (db_obj.contains("users"))
+        // Absent "users" leaves the list alone; a present array, even an empty one, replaces it.
+        // The empty array is the explicit "remove every user" request, so it is not an error; a
+        // present non-array value is a malformed request.
+        const QJsonValue users_value = db_obj.value("users");
+        if (!users_value.isUndefined())
         {
-            const QJsonArray arr = db_obj["users"].toArray();
+            if (!users_value.isArray())
+            {
+                result.error_code = kInvalidData;
+                return result;
+            }
+
+            const QJsonArray arr = users_value.toArray();
             int enabled = 0;
             for (const QJsonValue& v : arr)
             {
@@ -993,9 +1008,18 @@ HostConfigApplier::Result HostConfigApplier::applyFullConfig(const QJsonObject& 
     if (!keep.contains("users") && cfg.contains("database") && cfg["database"].isObject())
     {
         const QJsonObject db_obj = cfg["database"].toObject();
-        if (db_obj.contains("users"))
+        // Same rule as the validation above: absent leaves the users, a present array (empty
+        // included) replaces them exactly, and a non-array value is malformed.
+        const QJsonValue users_value = db_obj.value("users");
+        if (!users_value.isUndefined())
         {
-            const QJsonArray arr = db_obj["users"].toArray();
+            if (!users_value.isArray())
+            {
+                result.error_code = kInvalidData;
+                return result;
+            }
+
+            const QJsonArray arr = users_value.toArray();
             QVector<User> new_users;
             for (const QJsonValue& v : arr)
             {

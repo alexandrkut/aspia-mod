@@ -144,6 +144,37 @@ RequestResult handleHostRequest(Database& database, const RequestCaller& caller,
                 return result;
             }
         }
+
+        // The group of every membership must be reachable by the caller. Being a member of one
+        // workspace of the host does not let a user point another workspace's membership at one of
+        // its groups; every group must also exist in the workspace it names.
+        for (const auto& membership : memberships)
+        {
+            const qint64 member_workspace_id = membership.first;
+            const qint64 member_group_id = membership.second;
+
+            if (WorkspaceStore(database).checkAccess(caller.user_id, member_workspace_id) !=
+                proto::router::kErrorOk)
+            {
+                LOG(ERROR) << "User" << caller.user_id << "has no access to workspace"
+                           << member_workspace_id << "of host" << host_id;
+                result.error_code = proto::router::kErrorAccessDenied;
+                return result;
+            }
+
+            if (member_group_id != 0)
+            {
+                Group group;
+                if (GroupStore(database).find(member_workspace_id, member_group_id, &group) !=
+                    proto::router::kErrorOk)
+                {
+                    LOG(ERROR) << "Group" << member_group_id << "not found in workspace"
+                               << member_workspace_id;
+                    result.error_code = proto::router::kErrorInvalidData;
+                    return result;
+                }
+            }
+        }
     }
 
     // group_id == 0 keeps the host at the workspace root; any other value must reference a group

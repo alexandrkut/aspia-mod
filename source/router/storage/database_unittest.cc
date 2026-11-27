@@ -206,9 +206,26 @@ TEST_F(RouterDatabaseTest, MigrationSeedsMembershipsOnce)
     ASSERT_EQ(seeded.size(), 1);
     EXPECT_EQ(seeded[0], workspace_id);
 
+    // A host of the single-membership era that appears after the first migration must also be
+    // backfilled: the guard is per host, not "the membership table is empty".
+    ASSERT_TRUE(reopened_hosts.add("hash-2", "hwid"));
+    HostId late_host_id = kInvalidHostId;
+    ASSERT_EQ(reopened_hosts.findByKey("hash-2", &late_host_id), proto::router::kErrorOk);
+    ASSERT_TRUE(execRaw(QString("UPDATE hosts SET workspace_id=%1, group_id=0 WHERE id=%2")
+                            .arg(workspace_id)
+                            .arg(late_host_id)));
+
+    Database reopened_late;
+    ASSERT_TRUE(reopened_late.open(file_path_));
+    HostStore late_hosts(reopened_late);
+    EXPECT_EQ(late_hosts.workspaceIds(late_host_id), std::vector<qint64>{ workspace_id });
+    EXPECT_EQ(late_hosts.workspaceIds(host_id), std::vector<qint64>{ workspace_id });
+
     // A second open leaves the seeded row as it is: a membership already present is never
     // duplicated by the scalar fallback.
     Database opened_again;
     ASSERT_TRUE(opened_again.open(file_path_));
     EXPECT_EQ(HostStore(opened_again).workspaceIds(host_id), std::vector<qint64>{ workspace_id });
+    EXPECT_EQ(HostStore(opened_again).workspaceIds(late_host_id),
+              std::vector<qint64>{ workspace_id });
 }
