@@ -21,7 +21,7 @@ Remote desktop, file transfer and system information tool.
 публикуется по адресу https://aspia.org/changelog , а ниже — только
 изменения мода.
 
-Актуальная версия — [v3.4.3.4](https://github.com/alexandrkut/aspia-mod/releases/tag/v3.4.3.4).
+Актуальная версия — [v3.5.2.1](https://github.com/alexandrkut/aspia-mod/releases/tag/v3.5.2.1).
 
 ## Совместимость с оригиниалом и миграция
 
