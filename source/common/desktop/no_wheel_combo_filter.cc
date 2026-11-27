@@ -18,10 +18,12 @@
 
 #include "common/desktop/no_wheel_combo_filter.h"
 
+#include <QAbstractScrollArea>
 #include <QComboBox>
 #include <QCoreApplication>
 #include <QEvent>
 #include <QString>
+#include <QWidget>
 
 namespace {
 
@@ -37,8 +39,29 @@ public:
 protected:
     bool eventFilter(QObject* watched, QEvent* event) override
     {
-        if (event->type() == QEvent::Wheel && qobject_cast<QComboBox*>(watched))
-            return true;
+        if (event->type() == QEvent::Wheel)
+        {
+            QComboBox* combo = qobject_cast<QComboBox*>(watched);
+            if (combo)
+            {
+                // The combo must not change its current item from a stray wheel, but the page
+                // around it has to scroll. Forward the same event to the viewport of the nearest
+                // enclosing scroll area; its target is the viewport, not the combo, so the filter
+                // does not see it as a combo event again.
+                for (QWidget* widget = combo->parentWidget(); widget;
+                     widget = widget->parentWidget())
+                {
+                    QAbstractScrollArea* scroll_area = qobject_cast<QAbstractScrollArea*>(widget);
+                    if (!scroll_area || !scroll_area->viewport())
+                        continue;
+
+                    QCoreApplication::sendEvent(scroll_area->viewport(), event);
+                    break;
+                }
+
+                return true;
+            }
+        }
 
         return QObject::eventFilter(watched, event);
     }

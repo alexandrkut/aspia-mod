@@ -30,6 +30,7 @@
 #include "client/router/router_controller.h"
 #include "client/router/router_session.h"
 #include "common/desktop/msg_box.h"
+#include "common/desktop/router_error.h"
 #include "proto/peer.h"
 
 namespace {
@@ -117,7 +118,7 @@ void RouterHostUsersDialog::onUsersReceived(const proto::router::HostResult& res
 {
     if (result.error_code() != proto::router::kErrorOk)
     {
-        MsgBox::warning(this, tr("Failed to get users: %1").arg(QString::fromStdString(result.error_code())));
+        MsgBox::warning(this, tr("Failed to get users: %1").arg(routerErrorText(result.error_code())));
         return;
     }
 
@@ -286,7 +287,7 @@ void RouterHostUsersDialog::showResult(const proto::router::HostResult& result, 
     }
     else
     {
-        MsgBox::warning(this, tr("%1 failed: %2").arg(action, QString::fromStdString(result.error_code())));
+        MsgBox::warning(this, tr("%1 failed: %2").arg(action, routerErrorText(result.error_code())));
     }
 }
 

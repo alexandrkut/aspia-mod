@@ -7525,7 +7525,22 @@ Credentials replaced: %2</source>
         <translation>Достигнуто ограничение на количество записей.</translation>
     </message>
     <message>
-        <location filename="../common/desktop/router_error.cc" line="61"/>
+        <location filename="../common/desktop/router_error.cc" line="64"/>
+        <source>Cannot remove the last enabled user of the host.</source>
+        <translation>Нельзя удалить последнего включённого пользователя хоста.</translation>
+    </message>
+    <message>
+        <location filename="../common/desktop/router_error.cc" line="66"/>
+        <source>The user has active sessions and cannot be removed.</source>
+        <translation>У пользователя есть активные сессии, удалить его нельзя.</translation>
+    </message>
+    <message>
+        <location filename="../common/desktop/router_error.cc" line="69"/>
+        <source>The host does not support this operation.</source>
+        <translation>Хост не поддерживает эту операцию.</translation>
+    </message>
+    <message>
+        <location filename="../common/desktop/router_error.cc" line="71"/>
         <source>Unknown error type.</source>
         <translation>Неизвестный тип ошибки.</translation>
     </message>

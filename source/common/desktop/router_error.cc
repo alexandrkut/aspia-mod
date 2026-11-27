@@ -57,6 +57,16 @@ QString routerErrorText(std::string_view error_code)
         message = QT_TRANSLATE_NOOP("RouterError", "Too many connection requests. Try again later.");
     else if (error_code == proto::router::kErrorLimitExceeded)
         message = QT_TRANSLATE_NOOP("RouterError", "The limit on the number of records has been reached.");
+    // Codes of the host config applier (source/host/host_config_applier.cc). Its other four codes -
+    // invalid_request, invalid_data, not_found, already_exists - spell the same values as the
+    // router codes above and are answered there.
+    else if (error_code == "last_enabled_user")
+        message = QT_TRANSLATE_NOOP("RouterError", "Cannot remove the last enabled user of the host.");
+    else if (error_code == "user_has_sessions")
+        message = QT_TRANSLATE_NOOP(
+            "RouterError", "The user has active sessions and cannot be removed.");
+    else if (error_code == "not_supported")
+        message = QT_TRANSLATE_NOOP("RouterError", "The host does not support this operation.");
     else
         message = QT_TRANSLATE_NOOP("RouterError", "Unknown error type.");
 
