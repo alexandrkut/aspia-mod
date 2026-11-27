@@ -30,6 +30,7 @@
 #include "base/version_constants.h"
 #include "base/peer/host_id.h"
 #include "base/threading/worker.h"
+#include "client/application.h"
 #include "client/session_keeper.h"
 #include "client/desktop/authorization_dialog.h"
 #include "client/desktop/status_overlay.h"
@@ -683,11 +684,18 @@ bool ClientWindow::askCredentials(HostConfig* host)
 
     AutoQPointer<AuthorizationDialog> auth_dialog(new AuthorizationDialog(this));
 
+    // A Quick Support host may have a user of its own: the mod exports the users of the host
+    // with the package, and such a host is entered with a login and a password. The one-time
+    // password stays the way that is offered first, but the other ways are not taken away.
     auth_dialog->setOneTimePasswordEnabled(isHostId(host->address()));
-    auth_dialog->setOneTimePasswordOnly(host->isPortable());
+    auth_dialog->setOneTimePasswordPreferred(host->isPortable());
     auth_dialog->setSaveCredentialsVisible(can_save_credentials);
     auth_dialog->setUserName(host->username());
     auth_dialog->setPassword(host->password());
+
+    // The exported QS client enters a host only with the one-time password shown by that host.
+    // Hide the named-account fields so there is no way to type a login and password in it.
+    auth_dialog->setOneTimePasswordOnly(Application::isQuickSupportMode());
 
     if (auth_dialog->exec() == AuthorizationDialog::Rejected)
     {
