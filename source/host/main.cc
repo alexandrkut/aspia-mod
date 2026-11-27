@@ -32,6 +32,7 @@
 #include "base/threading/asio_event_dispatcher.h"
 #include "base/threading/worker.h"
 #include "common/desktop/msg_box.h"
+#include "common/desktop/no_wheel_combo_filter.h"
 #include "host/agent_main.h"
 #include "host/database.h"
 #include "host/host_constants.h"
@@ -471,6 +472,7 @@ int main(int argc, char* argv[])
 #endif // defined(Q_OS_WINDOWS)
 
     Application application(argc, argv, ui_channel_id);
+    installNoWheelComboFilter(&application);
     Application::setQuitOnLastWindowClosed(false);
 
 #if defined(Q_OS_LINUX)

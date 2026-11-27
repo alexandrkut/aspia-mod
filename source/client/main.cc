@@ -68,6 +68,7 @@
 #include "client/storage/system_settings.h"
 #include "client/storage/user_settings.h"
 #include "common/desktop/msg_box.h"
+#include "common/desktop/no_wheel_combo_filter.h"
 #include "common/desktop/update_dialog.h"
 #include "proto/peer.h"
 #endif // defined(Q_OS_ANDROID)
@@ -320,6 +321,7 @@ int main(int argc, char* argv[])
 #endif // !defined(Q_OS_ANDROID)
 
     Application application(argc, argv);
+    installNoWheelComboFilter(&application);
 
     LOG(INFO) << "Version:" << ASPIA_VERSION_STRING << "(arch:" << QSysInfo::buildCpuArchitecture() << ")";
 #if defined(GIT_CURRENT_BRANCH) && defined(GIT_COMMIT_HASH)

@@ -49,6 +49,8 @@ collect_sources(SOURCE_COMMON_DESKTOP
     language_action.h
     msg_box.cc
     msg_box.h
+    no_wheel_combo_filter.cc
+    no_wheel_combo_filter.h
     password_edit.cc
     password_edit.h
     plain_text_edit.cc
