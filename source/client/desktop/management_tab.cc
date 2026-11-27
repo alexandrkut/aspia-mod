@@ -491,6 +491,7 @@ void ManagementTab::connectLocalHost(qint64 entry_id, proto::peer::SessionType s
     {
         host.setUsername(username);
         host.setPassword(password);
+        host.setForcedCredentials(true);
     }
 
     if (!validateHostForConnect(host))

@@ -142,7 +142,8 @@ bool ClientWindow::connectToHost(HostConfig host, const ProfileConfig& profile, 
     LOG(INFO) << "Connecting to host";
     setClientTitle(host, session_type_);
 
-    std::optional<std::pair<QString, SecureString>> credentials = storedCredentials(host);
+    std::optional<std::pair<QString, SecureString>> credentials =
+        host.hasForcedCredentials() ? std::nullopt : storedCredentials(host);
     if (credentials.has_value())
     {
         LOG(INFO) << "Using stored credentials of host" << host.address();
@@ -719,6 +720,11 @@ bool ClientWindow::askCredentials(HostConfig* host)
 void ClientWindow::askCredentialsAgain()
 {
     HostConfig host = session_state_->host();
+
+    // Credentials given on the command line are not stored anywhere, so there is nothing to ask
+    // about: they are the ones the session was started with.
+    if (host.hasForcedCredentials())
+        return;
 
     // Stored credentials are changed in the host editor, not here.
     const std::optional<std::pair<QString, SecureString>> stored = storedCredentials(host);

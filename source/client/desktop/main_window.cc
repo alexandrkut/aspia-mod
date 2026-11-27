@@ -583,6 +583,7 @@ void MainWindow::connectToRouterHost(const QString& identifier, proto::peer::Ses
                 {
                     host.setUsername(username);
                     host.setPassword(password);
+                    host.setForcedCredentials(true);
                 }
 
                 if (ManagementTab* management_tab = managementTab())
@@ -709,6 +710,7 @@ void MainWindow::connectToLocalHost(const QString& identifier, int session_type,
             {
                 host.setUsername(username);
                 host.setPassword(forced_password);
+                host.setForcedCredentials(true);
             }
             if (ManagementTab* tab = managementTab())
                 tab->connectRouterHost(host, type);
@@ -730,6 +732,8 @@ void MainWindow::connectToLocalHost(const QString& identifier, int session_type,
             entry.setPassword(SecureString(password));
 
         HostConfig host = HostConfig::forLocalHost(entry);
+        if (!username.isEmpty())
+            host.setForcedCredentials(true);
         management_tab->connectRouterHost(host, type);
         return;
     }
