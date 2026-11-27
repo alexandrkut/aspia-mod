@@ -22,6 +22,7 @@
 #include <QDesktopServices>
 #include <QLineEdit>
 #include <QScreen>
+#include <QSet>
 #include <QShortcut>
 #include <QSignalBlocker>
 #include <QStyle>
@@ -621,29 +622,58 @@ void MainWindow::connectToRouterHost(const QString& identifier, proto::peer::Ses
             { this, [this, identifier, session_type, username, password, wanted]
               (const RouterHostList& list)
         {
+            // A command-line value may name a host by its ID, by its display name or by its
+            // computer name; the router search matches all three fields. Keep the distinct hosts
+            // that match, so an ID that is also another host's name is not silently resolved to
+            // the wrong one.
+            QList<RouterHost> matches;
+            QSet<HostId> seen;
             for (const RouterHost& entry : list.hosts)
             {
-                if (entry.host_id != wanted)
-                    continue;
-
-                LOG(INFO) << "The router has the host" << identifier;
-                HostConfig host = HostConfig::forRouterHost(
-                    entry.host_id,
-                    entry.display_name.isEmpty() ? entry.computer_name : entry.display_name);
-
-                if (!username.isEmpty())
+                if (entry.host_id != wanted &&
+                    entry.display_name.compare(identifier, Qt::CaseInsensitive) != 0 &&
+                    entry.computer_name.compare(identifier, Qt::CaseInsensitive) != 0)
                 {
-                    host.setUsername(username);
-                    host.setPassword(password);
+                    continue;
                 }
 
-                if (ManagementTab* management_tab = managementTab())
-                    management_tab->connectRouterHost(host, session_type);
+                if (seen.contains(entry.host_id))
+                    continue;
+
+                seen.insert(entry.host_id);
+                matches.append(entry);
+            }
+
+            if (matches.size() > 1)
+            {
+                LOG(ERROR) << "The value" << identifier << "matches" << matches.size()
+                           << "hosts on the router";
+                MsgBox::warning(this, tr("\"%1\" matches more than one host on the router. Use "
+                                          "the host ID to choose the one you mean.").arg(identifier));
                 return;
             }
 
-            LOG(ERROR) << "The router has no host with the ID" << identifier;
-            reportUnknownHost(identifier);
+            if (matches.isEmpty())
+            {
+                LOG(ERROR) << "The router has no host with the ID or name" << identifier;
+                reportUnknownHost(identifier);
+                return;
+            }
+
+            const RouterHost& entry = matches.first();
+            LOG(INFO) << "The router has the host" << identifier;
+            HostConfig host = HostConfig::forRouterHost(
+                entry.host_id,
+                entry.display_name.isEmpty() ? entry.computer_name : entry.display_name);
+
+            if (!username.isEmpty())
+            {
+                host.setUsername(username);
+                host.setPassword(password);
+            }
+
+            if (ManagementTab* management_tab = managementTab())
+                management_tab->connectRouterHost(host, session_type);
         } });
     }, [this, identifier]()
     {
