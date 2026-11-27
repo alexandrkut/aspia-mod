@@ -68,6 +68,17 @@ UnlockDialog::UnlockDialog(Mode mode, QWidget* parent)
     ui->edit_confirm->setShowPasswordButtonVisible(true);
     ui->combo_database->setEnabled(mode_ == Mode::STARTUP);
 
+    if (mode_ == Mode::LOCK)
+    {
+        // In LOCK mode the database has already been chosen by the caller. Hide the list and its
+        // management buttons: only the password prompt is left to the user. reload() and unlock()
+        // still use the combo internally, so the selected database keeps working.
+        ui->combo_database->setVisible(false);
+        ui->button_create->setVisible(false);
+        ui->button_rename->setVisible(false);
+        ui->button_delete->setVisible(false);
+    }
+
     connect(ui->combo_database, &QComboBox::currentIndexChanged, ui->edit_password, &QLineEdit::clear);
     connect(ui->combo_database, &QComboBox::currentIndexChanged, this, &UnlockDialog::onDatabaseChanged);
     connect(ui->button_create, &QToolButton::clicked, this, &UnlockDialog::onCreate);
