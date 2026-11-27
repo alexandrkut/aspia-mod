@@ -47,6 +47,8 @@
 
 #if defined(Q_OS_WINDOWS)
 #include <QCryptographicHash>
+#include <io.h>
+#include <qt_windows.h>
 
 #include "client/config.h"
 #include "client/desktop/qs_client_window.h"
@@ -77,7 +79,7 @@ namespace {
 bool openOnlyDatabase()
 {
     const QList<Database::Info> list = Database::list();
-    if (list.size() != 1 || !list.first().auto_unlock)
+    if (list.size() != 1)
         return false;
 
     Database::select(list.first().id);
@@ -428,6 +430,46 @@ int main(int argc, char* argv[])
 
     if (parser.isSet(list_databases_option))
     {
+#if defined(Q_OS_WINDOWS)
+        // A GUI-subsystem binary gets no standard handles from an interactive console, so the
+        // list would go nowhere. Attach to the console of the shell that started us and point
+        // stdout at it; under a redirection the handles are valid and are left alone.
+        if (GetFileType(GetStdHandle(STD_OUTPUT_HANDLE)) == FILE_TYPE_UNKNOWN)
+        {
+            if (AttachConsole(ATTACH_PARENT_PROCESS))
+            {
+                FILE* stream = nullptr;
+                freopen_s(&stream, "CONOUT$", "w", stdout);
+                fputs("\n", stdout);
+                fflush(stdout);
+            }
+        }
+
+        // QTextStream writes UTF-8 while an interactive console renders its own
+        // code page, so a Russian database name came out as gibberish. A console
+        // handle takes the Unicode line as is; a pipe or a file rejects
+        // WriteConsoleW and leaves nothing behind, so the UTF-8 output below
+        // stays byte for byte what it was.
+        const HANDLE console_handle =
+            reinterpret_cast<HANDLE>(_get_osfhandle(_fileno(stdout)));
+        if (console_handle != INVALID_HANDLE_VALUE)
+        {
+            bool wrote_all = true;
+            for (const Database::Info& info : Database::list())
+            {
+                const QString line = info.id + QChar('\t') + info.name + QStringLiteral("\r\n");
+                DWORD written = 0;
+                if (!WriteConsoleW(console_handle, line.constData(),
+                                   static_cast<DWORD>(line.size()), &written, nullptr))
+                {
+                    wrote_all = false; // a failed call writes nothing
+                    break;
+                }
+            }
+            if (wrote_all)
+                return 0;
+        }
+#endif
         QTextStream out(stdout);
         for (const Database::Info& info : Database::list())
             out << info.id << '\t' << info.name << Qt::endl;
@@ -441,6 +483,42 @@ int main(int argc, char* argv[])
         LOG(ERROR) << "Invalid command line:" << parse_error;
         MsgBox::warning(nullptr, parse_error);
         return 2;
+    }
+
+    // A plain --connect without an explicit database must reach a client that is already running,
+    // without showing the database selection dialog. Among the open databases prefer the last one
+    // the user worked with.
+    if (!parser.isSet(database_option) && !parser.isSet(select_database_option))
+    {
+        QString found_id;
+        const QString last_id = UserSettings().lastDatabase();
+        const QList<Database::Info> databases = Database::list();
+        for (const Database::Info& info : databases)
+        {
+            if (!application.hasInstance(info.id))
+                continue;
+            if (found_id.isEmpty() || info.id == last_id)
+                found_id = info.id;
+        }
+
+        if (!found_id.isEmpty())
+        {
+            LOG(INFO) << "A client is already running, forwarding the command line request to"
+                      << found_id;
+            application.setInstanceKey(found_id);
+
+            if (!connect_request.isEmpty())
+            {
+                const int session_type =
+                    connect_request.sessionType() == proto::peer::SESSION_TYPE_UNKNOWN ?
+                        proto::peer::SESSION_TYPE_DESKTOP : connect_request.sessionType();
+                application.openHost(connect_request.identifier(), session_type,
+                                     connect_request.username(),
+                                     connect_request.password().toString());
+            }
+            application.activateWindow();
+            return 0;
+        }
     }
 
     // A named database opens its own instance, and a command-line request is handed to it.
