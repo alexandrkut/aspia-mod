@@ -697,7 +697,7 @@
     <message>
         <location filename="../common/desktop/chat_widget.ui" line="20"/>
         <source>Aspia-mod Chat</source>
-        <translation>╨з╨░╤В Aspia-mod</translation>
+        <translation>Чат Aspia-mod</translation>
     </message>
     <message>
         <location filename="../common/desktop/chat_widget.ui" line="159"/>
@@ -1078,7 +1078,7 @@
     <message>
         <location filename="../client/main.cc" line="392"/>
         <source>type</source>
-        <translation>╤В╨╕╨┐</translation>
+        <translation>тип</translation>
     </message>
     <message>
         <location filename="../client/main.cc" line="395"/>
@@ -1089,7 +1089,7 @@
         <location filename="../client/main.cc" line="396"/>
         <location filename="../client/main.cc" line="403"/>
         <source>name</source>
-        <translation>╨╕╨╝╤П</translation>
+        <translation>имя</translation>
     </message>
     <message>
         <location filename="../client/main.cc" line="398"/>
@@ -1100,12 +1100,12 @@
         <location filename="../client/main.cc" line="399"/>
         <location filename="../client/main.cc" line="407"/>
         <source>password</source>
-        <translation>╨┐╨░╤А╨╛╨╗╤М</translation>
+        <translation>пароль</translation>
     </message>
     <message>
         <location filename="../client/main.cc" line="401"/>
         <source>Open the database with this name or ID instead of the selection dialog.</source>
-        <translation>╨Ю╤В╨║╤А╤Л╤В╤М ╨▒╨░╨╖╤Г ╨┤╨░╨╜╨╜╤Л╤Е ╤Б ╤Н╤В╨╕╨╝ ╨╕╨╝╨╡╨╜╨╡╨╝ ╨╕╨╗╨╕ ID ╨▓╨╝╨╡╤Б╤В╨╛ ╨┤╨╕╨░╨╗╨╛╨│╨░ ╨▓╤Л╨▒╨╛╤А╨░.</translation>
+        <translation>Открыть базу данных с этим именем или ID вместо диалога выбора.</translation>
     </message>
     <message>
         <location filename="../client/main.cc" line="405"/>
@@ -1115,42 +1115,42 @@
     <message>
         <location filename="../client/main.cc" line="409"/>
         <source>Print the ID and the name of every database and exit.</source>
-        <translation>╨Э╨░╨┐╨╡╤З╨░╤В╨░╤В╤М ID ╨╕ ╨╕╨╝╤П ╨║╨░╨╢╨┤╨╛╨╣ ╨▒╨░╨╖╤Л ╨┤╨░╨╜╨╜╤Л╤Е ╨╕ ╨▓╤Л╨╣╤В╨╕.</translation>
+        <translation>Напечатать ID и имя каждой базы данных и выйти.</translation>
     </message>
     <message>
         <location filename="../client/main.cc" line="478"/>
         <source>Unable to open the database &quot;%1&quot;.</source>
-        <translation>╨Э╨╡ ╤Г╨┤╨░╤С╤В╤Б╤П ╨╛╤В╨║╤А╤Л╤В╤М ╨▒╨░╨╖╤Г ╨┤╨░╨╜╨╜╤Л╤Е ┬л%1┬╗.</translation>
+        <translation>Не удаётся открыть базу данных «%1».</translation>
     </message>
     <message>
         <location filename="../client/connect_request.cc" line="148"/>
         <source>&quot;%1&quot; is neither a host ID nor a record ID nor a host address.</source>
-        <translation>┬л%1┬╗ ╨╜╨╡ ╤П╨▓╨╗╤П╨╡╤В╤Б╤П ╨╜╨╕ ID ╤Е╨╛╤Б╤В╨░, ╨╜╨╕ ID ╨╖╨░╨┐╨╕╤Б╨╕, ╨╜╨╕ ╨░╨┤╤А╨╡╤Б╨╛╨╝ ╤Е╨╛╤Б╤В╨░.</translation>
+        <translation>«%1» не является ни ID хоста, ни ID записи, ни адресом хоста.</translation>
     </message>
     <message>
         <location filename="../client/connect_request.cc" line="151"/>
         <source>The host ID of --connect is missing.</source>
-        <translation>╨Э╨╡ ╤Г╨║╨░╨╖╨░╨╜ ID ╤Е╨╛╤Б╤В╨░ ╨┤╨╗╤П --connect.</translation>
+        <translation>Не указан ID хоста для --connect.</translation>
     </message>
     <message>
         <location filename="../client/connect_request.cc" line="173"/>
         <source>&quot;%1&quot; is not a valid session type. Use desktop, file, info, chat or terminal.</source>
-        <translation>&amp;quot;%1&amp;quot; ╨╜╨╡ ╤П╨▓╨╗╤П╨╡╤В╤Б╤П ╨┤╨╛╨┐╤Г╤Б╤В╨╕╨╝╤Л╨╝ ╤В╨╕╨┐╨╛╨╝ ╤Б╨╡╤Б╤Б╨╕╨╕. ╨Ш╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╣╤В╨╡ desktop, file, info, chat ╨╕╨╗╨╕ terminal.</translation>
+        <translation>&amp;quot;%1&amp;quot; не является допустимым типом сессии. Используйте desktop, file, info, chat или terminal.</translation>
     </message>
     <message>
         <location filename="../client/connect_request.cc" line="176"/>
         <source>The session type of --session-type is missing.</source>
-        <translation>╨Э╨╡ ╤Г╨║╨░╨╖╨░╨╜ ╤В╨╕╨┐ ╤Б╨╡╤Б╤Б╨╕╨╕ ╨┤╨╗╤П --session-type.</translation>
+        <translation>Не указан тип сессии для --session-type.</translation>
     </message>
     <message>
         <location filename="../client/connect_request.cc" line="193"/>
         <source>The user name of --username is missing.</source>
-        <translation>╨Э╨╡ ╤Г╨║╨░╨╖╨░╨╜╨╛ ╨╕╨╝╤П ╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╤В╨╡╨╗╤П ╨┤╨╗╤П --username.</translation>
+        <translation>Не указано имя пользователя для --username.</translation>
     </message>
     <message>
         <location filename="../client/connect_request.cc" line="209"/>
         <source>The password of --password is missing.</source>
-        <translation>╨Э╨╡ ╤Г╨║╨░╨╖╨░╨╜ ╨┐╨░╤А╨╛╨╗╤М ╨┤╨╗╤П --password.</translation>
+        <translation>Не указан пароль для --password.</translation>
     </message>
     <message>
         <location filename="../client/connect_request.cc" line="248"/>
@@ -1160,27 +1160,27 @@
     <message>
         <location filename="../client/connect_request.cc" line="266"/>
         <source>--username requires --password as well.</source>
-        <translation>--username ╤В╤А╨╡╨▒╤Г╨╡╤В ╤В╨░╨║╨╢╨╡ --password.</translation>
+        <translation>--username требует также --password.</translation>
     </message>
     <message>
         <location filename="../client/connect_request.cc" line="268"/>
         <source>--password requires --username as well.</source>
-        <translation>--password ╤В╤А╨╡╨▒╤Г╨╡╤В ╤В╨░╨║╨╢╨╡ --username.</translation>
+        <translation>--password требует также --username.</translation>
     </message>
     <message>
         <location filename="../client/connect_request.cc" line="279"/>
         <source>--username and --password need a host to connect to (--connect &lt;ID&gt;).</source>
-        <translation>--username ╨╕ --password ╤В╤А╨╡╨▒╤Г╤О╤В ╤Е╨╛╤Б╤В╨░ ╨┤╨╗╤П ╨┐╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╤П (--connect &lt;ID&gt;).</translation>
+        <translation>--username и --password требуют хоста для подключения (--connect &lt;ID&gt;).</translation>
     </message>
     <message>
         <location filename="../client/desktop/main_window.cc" line="533"/>
         <source>Several hosts are named &quot;%1&quot;. Use the ID of the one you mean.</source>
-        <translation>╨Э╨╡╤Б╨║╨╛╨╗╤М╨║╨╛ ╤Е╨╛╤Б╤В╨╛╨▓ ╨╕╨╝╨╡╤О╤В ╨╕╨╝╤П ┬л%1┬╗. ╨г╨║╨░╨╢╨╕╤В╨╡ ID ╨╜╤Г╨╢╨╜╨╛╨│╨╛.</translation>
+        <translation>Несколько хостов имеют имя «%1». Укажите ID нужного.</translation>
     </message>
     <message>
         <location filename="../client/desktop/main_window.cc" line="559"/>
         <source>&quot;%1&quot; is both the name of a host and the ID of another. Connect by the record ID of the host you mean.</source>
-        <translation>┬л%1┬╗ тАФ ╤Н╤В╨╛ ╨╕ ╨╕╨╝╤П ╤Е╨╛╤Б╤В╨░, ╨╕ ID ╨┤╤А╤Г╨│╨╛╨│╨╛. ╨Я╨╛╨┤╨║╨╗╤О╤З╨░╨╣╤В╨╡╤Б╤М ╨┐╨╛ ID ╨╖╨░╨┐╨╕╤Б╨╕ ╨╜╤Г╨╢╨╜╨╛╨│╨╛ ╤Е╨╛╤Б╤В╨░.</translation>
+        <translation>«%1» — это и имя хоста, и ID другого. Подключайтесь по ID записи нужного хоста.</translation>
     </message>
 </context>
 <context>
@@ -4288,7 +4288,7 @@ Credentials replaced: %2</source>
         <location filename="../host/ui/host_window.cc" line="926"/>
         <location filename="../host/ui/host_window.cc" line="1204"/>
         <source>Aspia-mod Host</source>
-        <translation>╨е╨╛╤Б╤В Aspia-mod</translation>
+        <translation>Хост Aspia-mod</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.ui" line="72"/>
@@ -4438,7 +4438,7 @@ Credentials replaced: %2</source>
         <location filename="../host/ui/host_window.cc" line="661"/>
         <location filename="../host/ui/host_window.cc" line="1204"/>
         <source>Aspia-mod Quick Support</source>
-        <translation>╨С╤Л╤Б╤В╤А╨░╤П ╨┐╨╛╨┤╨┤╨╡╤А╨╢╨║╨░ Aspia-mod</translation>
+        <translation>Быстрая поддержка Aspia-mod</translation>
     </message>
     <message>
         <location filename="../host/ui/host_window.cc" line="937"/>
@@ -5156,7 +5156,7 @@ Credentials replaced: %2</source>
         <location filename="../client/desktop/main_window.ui" line="20"/>
         <location filename="../client/desktop/main_window.cc" line="907"/>
         <source>Aspia-mod Client</source>
-        <translation>╨Ъ╨╗╨╕╨╡╨╜╤В Aspia-mod</translation>
+        <translation>Клиент Aspia-mod</translation>
     </message>
     <message>
         <location filename="../client/desktop/main_window.ui" line="94"/>
@@ -5316,12 +5316,12 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../client/desktop/main_window.cc" line="660"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router, and the router did not answer.</source>
-        <translation>╨е╨╛╤Б╤В ╤Б ID %1 ╨╜╨╡ ╨╜╨░╨╣╨┤╨╡╨╜: ╨╡╨│╨╛ ╨╜╨╡╤В ╨╜╨╕ ╨▓ ╨░╨┤╤А╨╡╤Б╨╜╨╛╨╣ ╨║╨╜╨╕╨│╨╡, ╨╜╨╕ ╨▓ ╨║╨╜╨╕╨│╨╡ ╤А╨╛╤Г╤В╨╡╤А╨░, ╨░ ╤А╨╛╤Г╤В╨╡╤А ╨╜╨╡ ╨╛╤В╨▓╨╡╤В╨╕╨╗.</translation>
+        <translation>Хост с ID %1 не найден: его нет ни в адресной книге, ни в книге роутера, а роутер не ответил.</translation>
     </message>
     <message>
         <location filename="../client/desktop/main_window.cc" line="666"/>
         <source>The host with the ID %1 is not found: it is in neither the address book nor the book of a router.</source>
-        <translation>╨е╨╛╤Б╤В ╤Б ID %1 ╨╜╨╡ ╨╜╨░╨╣╨┤╨╡╨╜: ╨╡╨│╨╛ ╨╜╨╡╤В ╨╜╨╕ ╨▓ ╨░╨┤╤А╨╡╤Б╨╜╨╛╨╣ ╨║╨╜╨╕╨│╨╡, ╨╜╨╕ ╨▓ ╨║╨╜╨╕╨│╨╡ ╤А╨╛╤Г╤В╨╡╤А╨░.</translation>
+        <translation>Хост с ID %1 не найден: его нет ни в адресной книге, ни в книге роутера.</translation>
     </message>
     <message>
         <location filename="../client/desktop/main_window.cc" line="852"/>
@@ -5681,7 +5681,7 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../client/desktop/management_tab.cc" line="1216"/>
         <source>Host full configuration (from file)...</source>
-        <translation>╨Я╨╛╨╗╨╜╨░╤П ╨║╨╛╨╜╤Д╨╕╨│╤Г╤А╨░╤Ж╨╕╤П ╤Е╨╛╤Б╤В╨░ (╨╕╨╖ ╤Д╨░╨╣╨╗╨░)...</translation>
+        <translation>Полная конфигурация хоста (из файла)...</translation>
     </message>
     <message>
         <location filename="../client/desktop/management_tab.cc" line="1227"/>
@@ -5701,7 +5701,7 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../client/desktop/management_tab.cc" line="1247"/>
         <source>Bulk full configuration (from file)...</source>
-        <translation>╨Я╨╛╨╗╨╜╤Л╨╣ ╨║╨╛╨╜╤Д╨╕╨│ ╨╜╨░ ╤Е╨╛╤Б╤В╨░╤Е (╨╕╨╖ ╤Д╨░╨╣╨╗╨░)...</translation>
+        <translation>Полный конфиг на хостах (из файла)...</translation>
     </message>
     <message>
         <location filename="../client/desktop/management_tab.cc" line="1272"/>
@@ -6131,7 +6131,7 @@ Credentials replaced: %2</source>
     <message>
         <location filename="../host/ui/notifier_window.cc" line="571"/>
         <source>Aspia-mod Host</source>
-        <translation>╨е╨╛╤Б╤В Aspia-mod</translation>
+        <translation>Хост Aspia-mod</translation>
     </message>
 </context>
 <context>
@@ -8712,62 +8712,62 @@ Clear the server and key?</source>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="820"/>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="1531"/>
         <source>Open host configuration file</source>
-        <translation>╨Ю╤В╨║╤А╤Л╤В╤М ╤Д╨░╨╣╨╗ ╨║╨╛╨╜╤Д╨╕╨│╤Г╤А╨░╤Ж╨╕╨╕ ╤Е╨╛╤Б╤В╨░</translation>
+        <translation>Открыть файл конфигурации хоста</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="821"/>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="1532"/>
         <source>JSON files (*.json);;All files (*)</source>
-        <translation>JSON-╤Д╨░╨╣╨╗╤Л (*.json);;╨Т╤Б╨╡ ╤Д╨░╨╣╨╗╤Л (*)</translation>
+        <translation>JSON-файлы (*.json);;Все файлы (*)</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="828"/>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="1539"/>
         <source>Cannot open file: %1</source>
-        <translation>╨Э╨╡ ╤Г╨┤╨░╨╗╨╛╤Б╤М ╨╛╤В╨║╤А╤Л╤В╤М ╤Д╨░╨╣╨╗: %1</translation>
+        <translation>Не удалось открыть файл: %1</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="838"/>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="1550"/>
         <source>Invalid JSON: %1</source>
-        <translation>╨Э╨╡╨║╨╛╤А╤А╨╡╨║╤В╨╜╤Л╨╣ JSON: %1</translation>
+        <translation>Некорректный JSON: %1</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="844"/>
         <source>Not a host configuration file (no system/database sections).</source>
-        <translation>╨Э╨╡ ╤Д╨░╨╣╨╗ ╨║╨╛╨╜╤Д╨╕╨│╤Г╤А╨░╤Ж╨╕╨╕ ╤Е╨╛╤Б╤В╨░ (╨╜╨╡╤В ╤Б╨╡╨║╤Ж╨╕╨╣ system/database).</translation>
+        <translation>Не файл конфигурации хоста (нет секций system/database).</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="861"/>
         <source>File: %1
 Sections: %2. Users in file: %3.</source>
-        <translation>╨д╨░╨╣╨╗: %1
-╨а╨░╨╖╨┤╨╡╨╗╤Л: %2. ╨о╨╖╨╡╤А╨╛╨▓ ╨▓ ╤Д╨░╨╣╨╗╨╡: %3.</translation>
+        <translation>Файл: %1
+Разделы: %2. Юзеров в файле: %3.</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="863"/>
         <source>(kept)</source>
-        <translation>(╨╜╨╡ ╤В╤А╨╛╨│╨░╨╡╨╝)</translation>
+        <translation>(не трогаем)</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="896"/>
         <source>Dry run on hosts...</source>
-        <translation>╨Я╤А╨╛╨▒╨╜╤Л╨╣ ╨┐╤А╨╛╨│╨╛╨╜ ╨╜╨░ ╤Е╨╛╤Б╤В╨░╤Е...</translation>
+        <translation>Пробный прогон на хостах...</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="924"/>
         <source>Apply full config.</source>
-        <translation>╨Я╤А╨╕╨╝╨╡╨╜╨╕╤В╤М ╨┐╨╛╨╗╨╜╤Л╨╣ ╨║╨╛╨╜╤Д╨╕╨│.</translation>
+        <translation>Применить полный конфиг.</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="936"/>
         <source>Apply full config (dry run %1, will try anyway).</source>
-        <translation>╨Я╤А╨╕╨╝╨╡╨╜╨╕╤В╤М ╨┐╨╛╨╗╨╜╤Л╨╣ ╨║╨╛╨╜╤Д╨╕╨│ (╨┐╤А╨╛╨▒╨░: %1, ╨┐╨╛╨┐╤А╨╛╨▒╤Г╨╡╨╝ ╨▓╤Б╤С ╤А╨░╨▓╨╜╨╛).</translation>
+        <translation>Применить полный конфиг (проба: %1, попробуем всё равно).</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="949"/>
         <source>users: %1 -&gt; %2</source>
-        <translation>╤О╨╖╨╡╤А╤Л: %1 тЖТ %2</translation>
+        <translation>юзеры: %1 → %2</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="954"/>
@@ -8777,12 +8777,12 @@ Sections: %2. Users in file: %3.</source>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="958"/>
         <source>Apply full config (no visible diff).</source>
-        <translation>╨Я╤А╨╕╨╝╨╡╨╜╨╕╤В╤М ╨┐╨╛╨╗╨╜╤Л╨╣ ╨║╨╛╨╜╤Д╨╕╨│ (╨▓╨╕╨┤╨╕╨╝╤Л╤Е ╨╛╤В╨╗╨╕╤З╨╕╨╣ ╨╜╨╡╤В).</translation>
+        <translation>Применить полный конфиг (видимых отличий нет).</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="976"/>
         <source>Full configuration on hosts</source>
-        <translation>╨Я╨╛╨╗╨╜╤Л╨╣ ╨║╨╛╨╜╤Д╨╕╨│ ╨╜╨░ ╤Е╨╛╤Б╤В╨░╤Е</translation>
+        <translation>Полный конфиг на хостах</translation>
     </message>
     <message numerus="yes">
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="1323"/>
@@ -8796,17 +8796,17 @@ Sections: %2. Users in file: %3.</source>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="1557"/>
         <source>No session to router.</source>
-        <translation>╨Э╨╡╤В ╨┐╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╤П ╨║ ╤А╨╛╤Г╤В╨╡╤А╤Г.</translation>
+        <translation>Нет подключения к роутеру.</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="1571"/>
         <source>Configuration applied successfully.</source>
-        <translation>╨Э╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╤Г╤Б╨┐╨╡╤И╨╜╨╛ ╨┐╤А╨╕╨╝╨╡╨╜╨╡╨╜╤Л.</translation>
+        <translation>Настройки успешно применены.</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="1573"/>
         <source>Failed to apply: %1</source>
-        <translation>╨Э╨╡ ╤Г╨┤╨░╨╗╨╛╤Б╤М ╨┐╤А╨╕╨╝╨╡╨╜╨╕╤В╤М: %1</translation>
+        <translation>Не удалось применить: %1</translation>
     </message>
     <message>
         <location filename="../client/desktop/management/router_hosts_widget.cc" line="1594"/>
