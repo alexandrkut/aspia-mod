@@ -816,13 +816,27 @@ void MainWindow::connectToLocalHost(const QString& identifier, int session_type,
 
     if (target.entry_id > 0)
     {
-        // The record may belong to a router that has not connected yet during startup.
+        // Only a record that reaches its host through a router has something to wait for. A direct
+        // address connects at once; waiting for a router that is not configured would just delay
+        // it by the 60 s timeout.
+        LocalHostConfig entry;
+        const bool router_backed =
+            LocalHostStore().find(target.entry_id, &entry) == Database::FindResult::FOUND &&
+            isHostId(entry.address());
+
         const qint64 entry_id = target.entry_id;
-        runWhenRouterOnline([this, entry_id, type]
+        const SecureString forced_password(password);
+
+        auto connect = [this, entry_id, type, username, forced_password]()
         {
             if (ManagementTab* tab = managementTab())
-                tab->connectLocalHost(entry_id, type);
-        });
+                tab->connectLocalHost(entry_id, type, username, forced_password);
+        };
+
+        if (router_backed)
+            runWhenRouterOnline(connect);
+        else
+            connect();
     }
 }
 

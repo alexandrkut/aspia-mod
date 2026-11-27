@@ -71,6 +71,11 @@ public:
     void reloadRouter();
     void connectLocalHost(qint64 entry_id, proto::peer::SessionType session_type);
 
+    // The same, with credentials from the command line replacing the stored ones for this session.
+    // Empty |username| keeps the stored pair.
+    void connectLocalHost(qint64 entry_id, proto::peer::SessionType session_type,
+                          const QString& username, const SecureString& password);
+
     // Applies the hosts-per-page setting to the host lists of this tab.
     void setHostsPerPage(qint64 page_size);
     void connectRouterHost(const HostConfig& host, proto::peer::SessionType session_type);

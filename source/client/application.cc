@@ -22,6 +22,10 @@
 #include <QLocale>
 #include <QUuid>
 
+#if defined(Q_OS_WINDOWS)
+#include <qt_windows.h>
+#endif // defined(Q_OS_WINDOWS)
+
 #include "version.h"
 #include "base/build_config.h"
 #include "base/logging.h"
@@ -206,6 +210,13 @@ void Application::loadSettings()
 void Application::openHost(const QString& identifier, int session_type, const QString& username,
                            const QString& password)
 {
+    // The process that talks to the shell that just ran the command line holds the right to bring
+    // a window to the foreground; the background instance that receives the request does not, and
+    // its SetForegroundWindow would be refused. Hand the right over before asking.
+#if defined(Q_OS_WINDOWS)
+    AllowSetForegroundWindow(ASFW_ANY);
+#endif
+
     const QByteArray payload =
         identifier.toUtf8().toBase64() + ':' +
         QByteArray::number(session_type) + ':' +
@@ -218,5 +229,10 @@ void Application::openHost(const QString& identifier, int session_type, const QS
 //--------------------------------------------------------------------------------------------------
 void Application::activateWindow()
 {
+    // See openHost(): the foreground right belongs to the process the user just ran.
+#if defined(Q_OS_WINDOWS)
+    AllowSetForegroundWindow(ASFW_ANY);
+#endif
+
     sendMessage(kActivateWindow);
 }

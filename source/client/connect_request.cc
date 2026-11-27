@@ -48,10 +48,9 @@ constexpr SessionTypeName kSessionTypes[] = {
 
 //--------------------------------------------------------------------------------------------------
 // What identifies a host on the command line. It is either a number, which is a record ID of the
-// address book or a host ID, or an address, which names a host that is connected to directly. The
-// value is not checked against the database here - the client may be starting before it was
-// unlocked - so only its shape is checked, and a misspelt identifier is refused with a reason
-// instead of being looked up in vain.
+// address book or a host ID, or a name or address of a host. The value is not checked against the
+// database here - the client may be starting before it was unlocked - so only its shape is
+// checked.
 std::optional<QString> identifierFromString(const QString& str)
 {
     const QString trimmed = str.trimmed();
@@ -83,12 +82,14 @@ std::optional<QString> identifierFromString(const QString& str)
         return trimmed;
     }
 
-    // Everything else is an address, and the client connects to such a host directly, the way it
-    // does for a host of the address book that has no router of its own.
-    if (ConnectRequest::isHostAddress(trimmed))
-        return trimmed;
+    // Anything else is a name or an address of a host. Both are resolved later: a value that looks
+    // like an address is connected to directly, a word is looked up in the address book and then in
+    // the book of the router (a display name of a router host). The shape is all that is decided
+    // here, because the database may not be unlocked yet.
+    if (trimmed.startsWith('-'))
+        return std::nullopt;
 
-    return std::nullopt;
+    return trimmed;
 }
 
 //--------------------------------------------------------------------------------------------------

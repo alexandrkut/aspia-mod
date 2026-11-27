@@ -487,6 +487,18 @@ int main(int argc, char* argv[])
         return 2;
     }
 
+    // A master password given with the selection dialog names no database: there is nothing to
+    // apply it to, and guessing one would unlock an arbitrary database. Refuse the combination.
+    if (!master_password.isEmpty() && parser.isSet(select_database_option))
+    {
+        const QString message = QApplication::translate(
+            "Client", "--master-password cannot be used with --select-database: the database is "
+                       "not chosen yet.");
+        LOG(ERROR) << message;
+        MsgBox::warning(nullptr, message);
+        return 2;
+    }
+
     // A plain --connect without an explicit database must reach a client that is already running,
     // without showing the database selection dialog. Among the open databases prefer the last one
     // the user worked with.
@@ -570,14 +582,15 @@ int main(int argc, char* argv[])
         else if (AppLock::unlock(false, master_password) != AppLock::Result::UNLOCKED)
         {
             // The database is already selected; LOCK mode asks only for the master password and
-            // never shows the database list.
-            return 0;
+            // never shows the database list. A bad password from the command line is an error of
+            // the caller, not a quiet exit of the application.
+            return master_password.isEmpty() ? 0 : 2;
         }
     }
     else if (parser.isSet(select_database_option) || !openOnlyDatabase())
     {
         if (AppLock::unlock(true, master_password) != AppLock::Result::UNLOCKED)
-            return 0;
+            return master_password.isEmpty() ? 0 : 2;
     }
 
     Database& db = Database::instance();

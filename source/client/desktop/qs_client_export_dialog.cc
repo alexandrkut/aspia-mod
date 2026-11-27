@@ -28,6 +28,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QPointer>
 #include <QPushButton>
 #include <QRadioButton>
 #include <QStandardPaths>
@@ -35,6 +36,7 @@
 #include <QVBoxLayout>
 
 #include <functional>
+#include <memory>
 
 #include "base/build_config.h"
 #include "base/crypto/password_generator.h"
@@ -75,6 +77,25 @@ namespace {
 
 constexpr int kRequestTimeoutMs = 15000;
 constexpr int kMaxUsersToLoad = 500;
+
+// The blocking round trips below put their answer and their loop on the heap: the callback may
+// arrive after the 15 s timeout, when the stack of the dialog function is gone. The loop is held
+// through a QPointer, so a late callback cannot touch a destroyed QEventLoop.
+struct UserListSync
+{
+    proto::router::UserList reply;
+    bool replied = false;
+    bool done = false;
+    QPointer<QEventLoop> loop;
+};
+
+struct UserResultSync
+{
+    proto::router::UserResult result;
+    bool replied = false;
+    bool done = false;
+    QPointer<QEventLoop> loop;
+};
 
 } // namespace
 
@@ -330,31 +351,38 @@ void QsClientExportDialog::onExport()
     {
         // Every export creates a fresh account. Rotating an existing one would cut off the clients
         // that were already handed out, so refuse a name that is taken before writing the file.
-        bool name_checked = false;
-        proto::router::UserList name_reply;
+        auto name_sync = std::make_shared<UserListSync>();
+
         QEventLoop name_loop;
+        name_sync->loop = &name_loop;
         QTimer name_timeout;
         name_timeout.setSingleShot(true);
         connect(&name_timeout, &QTimer::timeout, &name_loop, &QEventLoop::quit);
 
         session->findUser(user_name, RouterCallback<proto::router::UserList>(
-            this, [&](const proto::router::UserList& reply)
+            this, [name_sync](const proto::router::UserList& reply)
         {
-            name_reply = reply;
-            name_checked = true;
-            name_loop.quit();
+            if (name_sync->done)
+                return;
+
+            name_sync->reply = reply;
+            name_sync->replied = true;
+            name_sync->done = true;
+            if (name_sync->loop)
+                name_sync->loop->quit();
         }));
 
         name_timeout.start(kRequestTimeoutMs);
         name_loop.exec();
+        name_sync->done = true;
 
-        if (!name_checked)
+        if (!name_sync->replied)
         {
             MsgBox::warning(this, tr("The router did not answer the user lookup."));
             return;
         }
 
-        if (name_reply.user_size() > 0)
+        if (name_sync->reply.user_size() > 0)
         {
             MsgBox::warning(this, tr("A user with this name already exists on the router."));
             ui->edit_name->setFocus();
@@ -364,31 +392,38 @@ void QsClientExportDialog::onExport()
     else
     {
         // Make sure the selected account still exists; do not modify it.
-        bool found_checked = false;
-        proto::router::UserList found_reply;
+        auto found_sync = std::make_shared<UserListSync>();
+
         QEventLoop found_loop;
+        found_sync->loop = &found_loop;
         QTimer found_timeout;
         found_timeout.setSingleShot(true);
         connect(&found_timeout, &QTimer::timeout, &found_loop, &QEventLoop::quit);
 
         session->findUser(user_name, RouterCallback<proto::router::UserList>(
-            this, [&](const proto::router::UserList& reply)
+            this, [found_sync](const proto::router::UserList& reply)
         {
-            found_reply = reply;
-            found_checked = true;
-            found_loop.quit();
+            if (found_sync->done)
+                return;
+
+            found_sync->reply = reply;
+            found_sync->replied = true;
+            found_sync->done = true;
+            if (found_sync->loop)
+                found_sync->loop->quit();
         }));
 
         found_timeout.start(kRequestTimeoutMs);
         found_loop.exec();
+        found_sync->done = true;
 
-        if (!found_checked)
+        if (!found_sync->replied)
         {
             MsgBox::warning(this, tr("The router did not answer the user lookup."));
             return;
         }
 
-        if (found_reply.user_size() == 0)
+        if (found_sync->reply.user_size() == 0)
         {
             MsgBox::warning(this, tr("The selected user no longer exists on the router."));
             return;
@@ -426,30 +461,37 @@ void QsClientExportDialog::onExport()
         user.flags = User::ENABLED;
         user.user_type = proto::router::USER_TYPE_QUICK_SUPPORT;
 
-        bool finished = false;
-        proto::router::UserResult result;
+        auto result_sync = std::make_shared<UserResultSync>();
 
         QEventLoop loop;
+        result_sync->loop = &loop;
         QTimer timeout;
         timeout.setSingleShot(true);
         connect(&timeout, &QTimer::timeout, &loop, &QEventLoop::quit);
 
         session->addUser(user.serialize(), RouterCallback<proto::router::UserResult>(
-            this, [&](const proto::router::UserResult& reply)
+            this, [result_sync](const proto::router::UserResult& reply)
         {
-            result = reply;
-            finished = true;
-            loop.quit();
+            if (result_sync->done)
+                return;
+
+            result_sync->result = reply;
+            result_sync->replied = true;
+            result_sync->done = true;
+            if (result_sync->loop)
+                result_sync->loop->quit();
         }));
 
         timeout.start(kRequestTimeoutMs);
         loop.exec();
+        result_sync->done = true;
 
-        if (!finished || result.error_code() != proto::router::kErrorOk)
+        if (!result_sync->replied || result_sync->result.error_code() != proto::router::kErrorOk)
         {
             QFile::remove(file_path);
-            LOG(ERROR) << "Unable to create the QS account on the router:"
-                       << (finished ? result.error_code() : "timeout");
+            const std::string error_code =
+                result_sync->replied ? result_sync->result.error_code() : "timeout";
+            LOG(ERROR) << "Unable to create the QS account on the router:" << error_code;
             MsgBox::warning(this, tr("Failed to create the user on the router."));
             return;
         }

@@ -18,6 +18,7 @@
 
 #include "client/desktop/app_lock.h"
 
+#include <QApplication>
 #include <QEvent>
 #include <QFileDialog>
 #include <QThread>
@@ -65,6 +66,7 @@ AppLock::Result AppLock::unlock(bool startup, const SecureString& password)
         if (!MasterPassword::isSet() || MasterPassword::unlock(password) != MasterPassword::Result::SUCCESS)
         {
             LOG(ERROR) << "Unable to unlock the database with the password from the command line";
+            MsgBox::warning(nullptr, QApplication::translate("Client", "Invalid master password."));
             return Result::FAILED;
         }
         LOG(INFO) << "Database unlocked with the password from the command line";

@@ -479,6 +479,28 @@ void ManagementTab::connectLocalHost(qint64 entry_id, proto::peer::SessionType s
 }
 
 //--------------------------------------------------------------------------------------------------
+void ManagementTab::connectLocalHost(qint64 entry_id, proto::peer::SessionType session_type,
+                                     const QString& username, const SecureString& password)
+{
+    LocalHostConfig entry;
+    if (!readLocalHost(entry_id, &entry))
+        return;
+
+    HostConfig host = HostConfig::forLocalHost(entry);
+    if (!username.isEmpty())
+    {
+        host.setUsername(username);
+        host.setPassword(password);
+    }
+
+    if (!validateHostForConnect(host))
+        return;
+
+    setHostConnectTime(entry_id);
+    emit sig_connectRequested(host, session_type);
+}
+
+//--------------------------------------------------------------------------------------------------
 void ManagementTab::connectRouterHost(const HostConfig& host, proto::peer::SessionType session_type)
 {
     if (validateHostForConnect(host))

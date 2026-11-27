@@ -229,22 +229,36 @@ struct BulkTeleInfo
 QMap<HostId, BulkTeleInfo> fetchBulkTelemetries(
     const QList<RouterHost>& hosts, QWidget* parent)
 {
-    QMap<HostId, BulkTeleInfo> out;
+    // The state lives on the heap and is captured by value: a reply that arrives after the 15 s
+    // timeout must not touch the stack of this function, whose loop and containers are gone by then.
+    struct State
+    {
+        QMap<HostId, BulkTeleInfo> out;
+        int pending = 0;
+        bool done = false;
+        QPointer<QEventLoop> loop;
+    };
+
+    auto state = std::make_shared<State>();
 
     RouterSession* session = RouterController::session();
     if (!session || hosts.isEmpty())
-        return out;
+        return state->out;
 
-    int pending = hosts.size();
+    state->pending = hosts.size();
     QEventLoop loop;
+    state->loop = &loop;
     QTimer::singleShot(15000, &loop, &QEventLoop::quit);
 
     for (const RouterHost& host : hosts)
     {
         session->requestHostTelemetry(
             host.host_id,
-            {parent, [&, host_id = host.host_id](const proto::router::HostTelemetryResult& result)
+            {parent, [state, host_id = host.host_id](const proto::router::HostTelemetryResult& result)
              {
+                 if (state->done)
+                     return;
+
                  BulkTeleInfo info;
                  if (result.error_code() == proto::router::kErrorOk)
                  {
@@ -261,14 +275,19 @@ QMap<HostId, BulkTeleInfo> fetchBulkTelemetries(
                          info.frequency = update.value("check_frequency").toInt(7);
                      }
                  }
-                 out[host_id] = info;
-                 if (--pending <= 0)
-                     loop.quit();
+                 state->out[host_id] = info;
+                 if (--state->pending <= 0)
+                 {
+                     state->done = true;
+                     if (state->loop)
+                         state->loop->quit();
+                 }
              } });
     }
 
     loop.exec();
-    return out;
+    state->done = true;
+    return state->out;
 }
 
 } // namespace

@@ -170,7 +170,24 @@ TEST(ConnectRequestTest, BadIdentifiersAreRefused)
     EXPECT_TRUE(fails({ QStringLiteral("--connect=-1") }));
     EXPECT_TRUE(fails({ QStringLiteral("--connect=") }));
     EXPECT_TRUE(fails({ QStringLiteral("--connect") }));
-    EXPECT_TRUE(fails({ QStringLiteral("host/name") }));
+}
+
+//--------------------------------------------------------------------------------------------------
+// A display name of a router host is a word with spaces and non-ASCII letters, and it is accepted
+// as an identifier. The resolution to a host happens later, once the database is open.
+TEST(ConnectRequestTest, DisplayNamesAreAccepted)
+{
+    const QStringList names = {
+        QStringLiteral("My PC"),
+        QString::fromUtf8("Офис 2") };
+
+    for (const QString& name : names)
+    {
+        const ConnectRequest request = parse({ QStringLiteral("--connect"), name });
+
+        EXPECT_FALSE(request.isEmpty()) << name.toStdString();
+        EXPECT_EQ(request.identifier(), name) << name.toStdString();
+    }
 }
 
 //--------------------------------------------------------------------------------------------------

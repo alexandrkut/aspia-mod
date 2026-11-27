@@ -22,6 +22,20 @@
 
 #include "base/logging.h"
 #include "base/sql/sql_query.h"
+#include "proto/router_constants.h"
+
+namespace {
+
+// The router serves a host list in pages of these sizes; a value outside the range would make the
+// page request fail, so a stored or edited one is brought back to what the router accepts.
+qint64 clampHostsPerPage(qint64 value)
+{
+    if (value <= 0)
+        return 100;
+    return qBound<qint64>(50, value, static_cast<qint64>(proto::router::kMaxHostPageSize));
+}
+
+} // namespace
 
 //--------------------------------------------------------------------------------------------------
 SettingsStore::SettingsStore(Database& db)
@@ -169,16 +183,14 @@ qint64 SettingsStore::hostsPerPage() const
 
     bool ok = false;
     const qint64 result = value.toLongLong(&ok);
-    if (!ok || result <= 0)
+    if (!ok)
         return 100;
 
-    return result;
+    return clampHostsPerPage(result);
 }
 
 //--------------------------------------------------------------------------------------------------
 bool SettingsStore::setHostsPerPage(qint64 value)
 {
-    if (value <= 0)
-        value = 100;
-    return writeSetting(kSettingHostsPerPage, QString::number(value));
+    return writeSetting(kSettingHostsPerPage, QString::number(clampHostsPerPage(value)));
 }
